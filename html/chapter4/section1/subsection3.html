@@ -1,0 +1,711 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>4.1.3 
+    Evaluator Data Structures
+  </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+  
+  <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+    In addition to defining the external syntax of expressions, the
+    evaluator implementation must also define the data structures that the
+    evaluator manipulates internally, as part of the execution of a
+    program, such as the representation of
+    functions
+    and environments and
+    the representation of true and false.
+  </p></div>
+
+  \subsubsection{
+    Testing of predicates
+  
+
+
+  
+
+  <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+    <SPLIT>
+      
+      
+	To enter the consequent of a conditional, 
+	we expect the predicate to evaluate to the value
+	{\lstinline[mathescape=true]$true$}, and thus
+	we define the evaluator function
+	{\lstinline[mathescape=true]$is_true$} as follows:
+      
+    </SPLIT>
+
+    
+    
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_true(x) {
+    return x === true;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgJxAUwBQAeAlIgN4BQiVimOUImSBiAvG4lrgNzkC+QA}{\usebox\lstbox}
+
+
+
+    
+    
+    With the definition of the function
+    {\lstinline[mathescape=true]$eval_conditional_expression$}
+    of section~\ref{sec:core-of-evaluator}, this means
+    that our evaluator evaluates the alternative statement
+    for any predicate value other than
+    {\lstinline[mathescape=true]$true$}.
+  </p></div>
+
+  \subsubsection{
+    Representing
+    functions
+  
+
+  
+
+  <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+    To handle primitives,
+    we assume that we have available the
+    following
+    functions:
+
+    <UL>
+      <LI>
+	
+	
+	  
+	  
+	    {\lstinline[mathescape=true]$apply_primitive_function($}
+	    $\textit{fun}$, $\textit{args}$
+	    {\lstinline[mathescape=true]$)$}
+	  
+	
+	
+
+	applies the given primitive
+	function
+	to the argument values in the
+	list
+	$\textit{args}$
+	and returns the result of the application.
+
+      </LI>
+      <LI>
+	
+        {\lstinline[mathescape=true]$is_primitive_function($}$\textit{fun}${\lstinline[mathescape=true]$)$}
+	
+
+	tests whether 
+        
+        $\textit{fun}$
+        is a primitive
+        
+          
+          function.
+        
+      </LI>
+    </UL>
+
+    These mechanisms for handling primitives
+    are further described in
+    section~\ref{sec:running-eval}.
+  </p></div>
+
+  <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+    Compound
+    functions
+    are constructed from parameters,
+    function
+    bodies, and environments using the constructor 
+    
+    {\lstinline[mathescape=true]$make_compound_function$}:
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_compound_function(parameters, body, env) {
+    return list("compound_function",
+                parameters, body, env);
+}
+function is_compound_function(f) {
+    return is_tagged_list(f, "compound_function");
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9CdkAOc4AJtqJLAgBQGoBOqymUm9AzgDSIBGcJAT26YwANwCUiAN4AoRPMT0WIekgA2MdlGoAiPIWJgyFaPDA7OchdZsK6jZqw7c+g4WPEBuGQF8ZJqiRNXHwiUnJwUxpgSVlrJSgVIPZsKFQAc3TMMg0tamBuPVDDY0jAnS9ffzKzRACzbHsmFjZ2fNireQSkxFyobCVgfO4ARkq-eoQ6moRsVwF26U7FZVVezX7B4cQAJnHqylrJsGwRURh6BGYwbRil+NX1DYHMIYLEAGZxoA}{\usebox\lstbox}!*/
+}
+function function_parameters(f) {
+    return list_ref(f, 1);
+}
+function function_body(f) {
+    return list_ref(f, 2);
+}
+function function_environment(f) {
+    return list_ref(f, 3);
+}
+
+\end{JavaScriptClickable}
+
+
+
+
+    
+  </p></div>
+
+  <SPLIT>
+
+    
+      
+      \subsubsection{
+	Representing return values
+      
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+	We saw in section~\ref{sec:core-of-evaluator}
+	that the evaluation of sequences terminates with the
+	first return statement encountered, and that the evaluation
+	of function applications needs to return the value
+	{\lstinline[mathescape=true]$undefined$} if the
+	evaluation of the function body does not encounter a
+	{\lstinline[mathescape=true]$return$} statement. In
+	order to identify the evaluation of
+	{\lstinline[mathescape=true]$return$} statements, we
+	introduce       {\lstinline[mathescape=true]$return$}
+	values as evaluator data structures.
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_return_value(content) {
+    return list("return_value", content);
+}
+function is_return_value(value) {
+    return is_tagged_list(value,"return_value");
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ATpqEXMbAN1QBsRMAKCBKTMKASkQG8AoRHxfQ4ogowAzlBoAifkRLkqmCQBpE9Zk1YBuTgF9OoSLASJReAjLKVqNOdTZdefM4JNRUAczeYAJtmFjrlpiKUk6ygRIsWrr60PBI0sQW8tiqjMwB8nbcvAlIABaYqF40rjAUGbaROkA}{\usebox\lstbox}!*/
+function return_value_content(value) {
+    return head(tail(value));
+}
+
+\end{JavaScriptClickable}
+
+
+
+	
+
+      </p></div>
+    
+  </SPLIT>
+
+  \subsubsection{
+    Operations on Environments
+  
+
+  
+  
+  <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+    The evaluator needs operations for manipulating environments.  As
+    explained in section~\ref{sec:environment-model}, an environment is a
+    sequence of frames, where each frame is a table of bindings that
+    associate
+    names
+    with their corresponding values.  We use
+    the following operations for manipulating environments:
+
+    <SPLIT>
+      
+      
+	<UL>
+	  
+	  <LI>
+	    {\lstinline[mathescape=true]$lookup_name_value($}
+	    $\textit{name}$,
+	    $\textit{env}$
+	    {\lstinline[mathescape=true]$)$}
+	  
+
+	  returns the value that is bound to the symbol
+	  $\textit{name}$ in the
+	  environment env,
+	  or signals an error if the name is unbound.
+	  </LI>
+	  <LI>
+	    
+	    {\lstinline[mathescape=true]$extend_environment($}
+	    $\textit{names}$, $\textit{values}$,
+	    $\textit{base-env}$
+	    {\lstinline[mathescape=true]$)$}
+	    
+
+	    returns a new environment, consisting of a new frame in which the
+	    symbols in the list $\textit{names}$
+	    are bound to the corresponding elements in the list
+	    $\textit{values}$ (each tagged as
+	    <EM>mutable</EM>),
+	    where the enclosing environment is
+	    the environment $\textit{base-env}$.
+	  </LI>
+	  <LI>
+	    
+	    {\lstinline[mathescape=true]$set_name_value($}
+	    $\textit{name}$, $\textit{value}$,
+	    $\textit{env}$
+	    {\lstinline[mathescape=true]$)$}
+	    
+
+	    sets the given $\textit{name}$
+	    to the given $\textit{value}$ in
+	    the first frame of the environment
+	    $\textit{env}$.
+	  </LI>
+	  <LI>
+	    
+	    {\lstinline[mathescape=true]$assign_name_value($}
+	    $\textit{name}$, $\textit{value}$,
+	    $\textit{env}$
+	    {\lstinline[mathescape=true]$)$}
+	    
+
+	    checks if the value associated to the name
+	    $\textit{name}$
+	    is tagged as mutable, and if yes,
+	    changes its binding in the environment
+	    $\textit{env}$
+	    so that the name is now bound to the value
+	    $\textit{value}$,
+	    or signals an error if the name is unbound or its value
+	    tagged as immutable.
+	  </LI>
+
+	</UL>
+      
+    </SPLIT>
+
+    
+    To implement these operations we represent an environment as a list of
+    frames.  The enclosing environment of an environment is the
+    
+    {\lstinline[mathescape=true]$tail$}
+    
+    of the list.  The empty environment is simply the empty list.
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function enclosing_environment(env) {
+    return tail(env);
+}
+function first_frame(env) {
+    return head(env);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAU0gGzgZxmA5gfVQDcYAnBAW1SgApiBKRAbwChF3FTkoRSkoAhjDR0wRegG4WAXxahIsBImBlMUfMFICqo8czYcuPPogAWyAQBNdkmXPDR4SVBAyZk+AEYBPGpu3IADQoYoxMHIgG7Ea8SAAOQqR+WlTBDFKyEAhqiFDmhBRxUN6EYmSU1IgAvIhgIGhoUvKOSjCYBUUlxOVgVGC0DPoRMSZt+HUNNhlAA}{\usebox\lstbox}!*/
+function enclose_by(frame, env) {    
+    return pair(frame, env);
+}
+const the_empty_environment = null;
+function is_empty_environment(env) {
+    return is_null(env);
+}
+
+\end{JavaScriptClickable}
+
+
+    
+  </p></div>
+
+  <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+    Each frame of an environment is represented as a pair of lists: a list
+    of the variables bound in that frame and a list of the associated values.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_frame(names, values) {
+    return pair(names, values);
+}
+function frame_names(frame) {    
+    return head(frame);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9YAnVZTACjEMwGcAaRAN1QBsRKBKRAbwChEfE9MoIPEgAOqGHlLlqdRswosA3JwC+nUJFgJE+ctjJEKxXUTbteibr36DhiABaZUAE2MFTytRujwkJnPRMlG7kZhZWPDZCSFDiDCEeqkA}{\usebox\lstbox}!*/
+function frame_values(frame) {    
+    return tail(frame);
+}
+
+\end{JavaScriptClickable}
+
+
+  
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_frame(names, values) {
+    return pair(names, values);
+}
+function frame_names(frame) {    
+    return head(frame);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9YAnVZTACjEMwGcAaRAN1QBsRKBKRAbwChEfE9MoIPEgAOqGHlLlqdRswosA3JwC+nUJFgJE+ctjJEKxXUTbteibr36DhiABaZUAE2MFTytRujwkJnPRMlG7kZhZWPDZCSFDiDCEeqkA}{\usebox\lstbox}!*/
+function frame_values(frame) {    
+    return tail(frame);
+}
+
+\end{JavaScriptClickable}
+
+
+  </p></div>
+
+  <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+    To extend an environment by a new frame that associates
+    
+    names
+    with
+    values, we make a frame consisting of the list of
+    
+    names
+    and the
+    list of values,
+    and we adjoin this to the environment.  We signal
+    an error if the number of
+    
+    names
+    does not match the number of values.
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function extend_environment(names, vals, base_env) {
+    if (length(names) === length(vals)) {
+        return enclose_by(
+                   make_frame(names, 
+                      map(x => pair(x, true), vals)),
+                   base_env);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwB5WWAJgfUwNxgCcEBbTKACjAENyBnAGkXxoBsnEAjG+5PMPgCUiAN4AoRFMQxgiSm0wBzKAAtqdZPREBePYkVgV61hyEiJ0q4iLIoIIkkwQ2cPji4BPSpOt--pDQA1vzARJoaDMy+-rHWgQAOlKiIOgB8iAk0xMnMUEQgyELMptrFMXH+PO4EQgDcFQC+KBzIMnIKymqRWiIAPAZdJuxlYhVWyEQkRJQARAAqcHCIgWCeiDRESiDkYFD0iPQgCQlsMMhYAFyIs4gA1IjjcfT5MEay3rQMIg+zzLcPJ6xF5EN5KD6UUrmBpWZrIVpjWKTaZzRbLYDIADuGy2OwoByOJzOF2uAMelSsILBEK+vXuN3+9KB-ip72A3ih9Sa4kaQA}{\usebox\lstbox}!*/
+    } else if (length(names) < length(vals)) {
+        error("Too many arguments supplied: " + 
+              stringify(names) + ", " + 
+              stringify(vals));
+    } else {
+        error("Too few arguments supplied: " + 
+              stringify(names) + ", " + 
+              stringify(vals));
+    }
+}
+
+\end{JavaScriptClickable}
+
+
+
+    
+    
+      
+	The function {\lstinline[mathescape=true]$extend_environment$}
+	is used by {\lstinline[mathescape=true]$apply$} in
+	section~\ref{sec:core-of-evaluator} to bind
+	the parameters of a function to its arguments. In order to
+	allow for assignment to function parameters, as in function
+	{\lstinline[mathescape=true]$make_withdraw_with_balance$}
+	of section~\ref{sec:local-state-variables}, we
+	choose to tag the values in
+	{\lstinline[mathescape=true]$extend_environment$}	as
+	mutable, using {\lstinline[mathescape=true]$map$}.
+      
+    
+  </p></div>
+
+  <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+    To look up a
+    
+    name
+    in an environment, we scan the list of
+    
+    name
+    in the first frame.  If we find the desired
+    
+    name,
+    we return the corresponding element in the list of values.
+    If we do not find the
+    
+    name
+    in the current frame, we search the enclosing environment,
+    and so on.  If we reach the empty environment, we signal an
+    
+      
+      
+	<QUOTE>unbound
+	name</QUOTE>
+      
+      
+    error.
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+// We use a nullary function as temporary value for names whose
+// declaration has not yet been evaluated. The purpose of the
+// function definition is purely to create a unique identity;
+// the function will never be applied and its return value 
+// (null) is irrelevant.
+const no_value_yet = () => null;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAEHUFNQVwZ2gQ1AOxgG3YgTgT1AGYwoDGALgJYD2KoicoZkAtgA5XY74Bui6M0Ah1SJmkBgHcAFlQQAoEKAAmkElk6UaoKfVRUyoXJAMAjSJFqRe-REyUA6UABUp0VjGzsEoKgUauFMCJSTVoVAgoUClDQCgZ3bEh0fDIqUBJE2yRYKIBHAViVFEoyXABuQP9BYnJqWgkKTFQrSGxQMzpWVnQKSCU6FH7ohkSyD1prAsqACjRMAEpYhgpsRPQrRGL7ORIaOAMUKgB9ScgjowMAXlBpxcuAPlQMdDKgA}{\usebox\lstbox}
+
+
+    
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function lookup_name_value(name, env) {
+    function env_loop(env) {
+        function scan(names, vals) {
+            return is_null(names)
+                   ? env_loop(
+                       enclosing_environment(env))
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGznA1iADgfTAQwFsBTHAN32RGIAoCSAaRYsMgSkQG8AoRPxUJFgJmrHKjhYaLdl178Fg6PCQBnCPjB0ixVUwrJVHHgtP8ATsSghzSGKrwhkybSSPyznhQH5RZcWhSHl4h-CwQqKowYADmODIw5ggkYFDSrGxswaGmAFyI9MSIALyliAAWxPgAJq66WTmhvpU1NC21BkYNjV756po0UPgwLoVGTEMjNJ2ZANzZ-AC+C3wwwIg09vGEWFAAnvGsicksaTKZco3E5knmdUwARACqYABGcODVBTr5D2zzXkWzEMRRMOQgCFUUAE5h0JQEiShOGAsJI6XYAPBkOhBmo8MQ-S0KJ0eB0qhoxJIbAYKx6jUppFxugpqOIc24AEgFJZrLZEEySmUwHByJRqDg9lZaWZfNdbvdEA8AHJwkCqIqvYjAOCWRDVYgRfCw4RgX7dRr5JmYszLBS2ixWGxIGQBSTo-7cRZAA}{\usebox\lstbox}!*/
+                   : name === head(names)
+                     ? head(head(vals))
+                     : scan(tail(names), tail(vals));
+        }
+        if (is_empty_environment(env)) {
+            error(name, "Unbound name: ");
+        } else {
+            const frame = first_frame(env);
+            const value =  scan(frame_names(frame),
+                                frame_values(frame));
+	    return value === no_value_yet
+              ? error(name, "Name use before declaration: ")
+              : value;
+        }
+    }
+    return env_loop(env);
+}
+
+\end{JavaScriptClickable}
+
+
+
+    
+    
+  </p></div>
+
+  <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+    
+      
+      To assign a name
+      to a new value in a specified environment, we scan
+      for the name, just as in 
+      {\lstinline[mathescape=true]$lookup_name_value$},
+      and change the corresponding value when we find it,
+      provided it is tagged as mutable.
+      
+    
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function assign_name_value(name, val, env) {
+    function env_loop(env) {
+        function scan(names, vals) {
+            return is_null(names)
+                ? env_loop(
+                    enclosing_environment(env))
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwM6pgczAfTMgWwFMcA3ZAGxCIAp9iAaRciposUgSkQG8AoRIMShIsBInakcFOHAAONSd35DVw8NHhJUEZGDqEiqJi1TKBaywCciUEFaQxUeEBQoHiZi5Z+IA-BIc0rIK3r7h7BAyGGCYOJIwVgjEYFCKHJycYeFCAFyI9ESIALyliAAWRMgAJh5GWTm+ATSIUMgw7pU1NKaZ2Y2WAai2OF21Yz2UZiaUDQPh+URWSVY0AERgcCjoWGApUIhriADU-fM+a1BbEAiobamoKG5wAO5E1Wvcc+eC+Tp6NDaHTq01a7XcvU4AG4zogAL6IWEwYCIdKkEplKCVeIEORQACe8Q4iWS7Cg5gGSxWdSYawAqmAAEZwcDVAqGRAwJBoDDYfb5T4w3wIogUYa8WGqG5gO7CKwc4rCRJ3HDAeXENHQyVCGx2ByIf76NWGPCGVA0Y3ETgMbXnS0kFjUc32zJCnxwsIe1S6+xISTBeSamFwoA}{\usebox\lstbox}!*/
+                : name === head(names)
+                  ? ( tail(head(vals))
+                      ? set_head(head(vals), val)
+                      : error("no assignment " +
+                          "to constants allowed") )
+                  : scan(tail(names), tail(vals));
+        } 
+        if (env === the_empty_environment) {
+            error(name, "Unbound name in assignment: ");
+        } else {
+            const frame = first_frame(env);
+            return scan(frame_names(frame),
+                        frame_values(frame));
+        }
+    }
+    return env_loop(env);
+}
+
+\end{JavaScriptClickable}
+
+
+
+    
+
+  </p></div>
+
+  <SPLIT>
+    
+    
+      <div class='permalink'>
+<a name='p11' class='permalink'></a><p>
+	Function application and the evaluation of blocks
+	already ensure that local names are included in
+	the current environment before the actual declaration
+	is evaluated. Therefore, the 
+        declaration of constants and variables can be handled
+	similar to variable assignment, except that we can
+	insist that the name is found in the innermost frame.
+
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function set_name_value(name, val, env) {
+    function scan(names, vals) {
+        return is_null(names)
+            ? error("internal error: name not found")
+            : name === head(names)
+              ? set_head(head(vals), val)
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwKZQPpgIYFtUYBu2ANiKgBQ74A0ixJdqYhAlIgN4BQiviokWAhQRsYKnlTI6DZO259FiAE7oQypDGRYQJEhPxyeSkwH5EqZcrjKKAIhhgolnCQtWbALkTVUPuFD8cOAAJnasxiaK3r6IALwJiAAWqNghBlIRUVHmaJgpaRQF6bKsMqRZ2UreyKLiUNgw+r5ydA1NFKWsANyRiAC+iH0QCMiBwMqS8fwwymMYE5IUzGy9iqpQ6ki1YhSL+FiSyHuT+GV9VXz7BAzkx9esPVz9QA}{\usebox\lstbox}!*/
+              : scan(tail(names), tail(vals));
+    } 
+    const frame = first_frame(env);
+    return scan(frame_names(frame),
+                frame_values(frame));
+}
+
+\end{JavaScriptClickable}
+
+
+
+    
+	
+      </p></div>
+    
+  </SPLIT>
+
+  <div class='permalink'>
+<a name='p12' class='permalink'></a><p>
+    
+    The method described here is only one of many plausible ways to
+    represent environments.  Since we used data abstraction to isolate the
+    rest of the evaluator from the detailed choice of representation, we
+    could change the environment representation if we wanted to.  (See
+    exercise~\ref{ex:alternate-frame-representation}.)  In a
+    production-quality JavaScript system, the speed of the evaluator's
+    environment operations—especially that of variable lookup—has a
+    major impact on the performance of the system.  The representation
+    described here, although conceptually simple, is not efficient and
+    would not ordinarily be used in a production system.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+  
+    
+  </p></div>
+
+  
+
+  
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+    
+    Instead of representing a frame as a pair of lists, we can represent a frame as a
+    list of bindings, where each binding is a name-value pair. Rewrite the environment
+    operations to use this alternative representation.            
+  
+\end{Exercise}
+
+  <SPLIT>
+    
+    
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        JavaScript allows us to create new bindings for names by means of constant and variable
+        declaration, but provides no way to get rid of bindings.  Implement for
+        the evaluator a <QUOTE>function</QUOTE>
+        {\lstinline[mathescape=true]$make_unbound$} that removes the
+        binding of a name given as <QUOTE>argument</QUOTE> from the environment in which the
+        application of the function is evaluated.
+        This problem is not completely specified.  For example,
+        should we remove only the binding in the first frame of the
+        environment?  Complete the specification and justify any choices you
+        make.
+        
+      
+\end{Exercise}
+
+    
+  </SPLIT>
+<hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Frames are not really a data abstraction in the following code:
+    
+      
+      {\lstinline[mathescape=true]$assign_name_value$}
+      
+    
+    and 
+    
+      
+      {\lstinline[mathescape=true]$define_variable$}
+      
+    
+    use 
+    
+    {\lstinline[mathescape=true]$set_head$}
+    
+    to directly modify the values in a frame.  The purpose of the frame
+    
+    functions
+    is to make the environment-manipulation
+    
+    functions
+    easy to read.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>The drawback of this representation (as well as the variant in
+    exercise~\ref{ex:alternate-frame-representation}) is that the evaluator
+    may have to search through many frames in order to find the binding
+    for a given variable.
+    
+    (Such an approach is referred to as <EM>deep binding</EM>.)
+    One way to avoid
+    this inefficiency is to make use of a strategy called <EM>lexical
+    addressing</EM>
+    <SPLIT>
+      
+      
+        
+      
+    </SPLIT>
+  </FOOTNOTE></div>
+</SUBSECTION>

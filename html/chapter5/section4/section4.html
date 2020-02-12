@@ -1,0 +1,141 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>5.4 The Explicit-Control Evaluator</a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SECTION>\begin{center}\fbox{\textcolor{red}{Note: this section is a work in progress!}}\end{center}
+
+    <SECTIONCONTENT></SECTIONCONTENT>
+
+    
+    
+    <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+      In section~\ref{sec:designing-register-machines} we saw how to
+      transform simple Source programs into descriptions of register
+      machines.  We will now perform this transformation on a more complex
+      program, the metacircular evaluator of
+      sections \ref{sec:core-of-evaluator}–\ref{sec:running-eval},
+      which shows how
+      the behavior of a Source interpreter can be described in terms of the
+      functions
+      {\lstinline[mathescape=true]$eval$} and {\lstinline[mathescape=true]$apply$}.
+      The <EM>explicit-control
+  evaluator</EM> that we develop in this section shows how the underlying
+      function-calling and argument-passing mechanisms used in the
+      evaluation process can be described in terms of operations on
+      registers and stacks.  In addition, the explicit-control evaluator can
+      serve as an implementation of a Source interpreter, written in a
+      language that is very similar to the native machine language of
+      conventional computers.  The evaluator can be executed by the
+      register-machine simulator of section~\ref{sec:simulator}.
+      Alternatively, it can be used as a starting point for building a
+      machine-language implementation of a Source evaluator, or even a
+      
+      
+      
+      special-purpose machine for evaluating Source expressions.
+      Figure~\ref{fig:Scheme-chip} shows such a hardware implementation: a
+      silicon chip that acts as an evaluator for Scheme, the language for which this book was originally written..  The chip designers
+      started with the data-path and controller specifications for a
+      register machine similar to the evaluator described in this section
+      and used design automation programs to construct the
+      integrated-circuit layout.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+    </p></div>
+    
+    \subsubsection{
+      Registers and operations
+    
+
+    
+    
+    <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+      In designing the explicit-control evaluator, we must specify the
+      operations to be used in our register machine.  We described the
+      metacircular evaluator in terms of abstract syntax, using
+      functions
+      such as {\lstinline[mathescape=true]$quoted?$} and {\lstinline[mathescape=true]$make-procedure$}.  In implementing the
+      register machine, we could expand these
+      functions
+      into sequences of
+      elementary list-structure memory operations, and implement these
+      operations on our register machine.  However, this would make our
+      evaluator very long, obscuring the basic structure with
+      details.  To clarify the presentation, we will include as primitive
+      operations of the register machine the syntax
+      functions
+      given in
+      section~\ref{sec:representing-expressions} and the
+      functions
+      for
+      representing environments and other run-time data given in
+      sections~\ref{sec:eval-data-structures} and~\ref{sec:running-eval}.
+      In order to completely specify an evaluator that could be programmed
+      in a low-level machine language or implemented in hardware, we would
+      replace these operations by more elementary operations, using the
+      list-structure implementation we described in
+      section~\ref{sec:storage-allocation}.
+    </p></div>
+
+    
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_original/chip}.jpg}}
+\caption{A silicon-chip implementation of an evaluator for Scheme.}
+\label{fig:Scheme-chip}
+\end{figure}
+
+
+    <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+      
+      
+      
+      
+      
+      
+      
+      
+      Our Source evaluator register machine includes a stack and seven
+      registers: {\lstinline[mathescape=true]$exp$}, {\lstinline[mathescape=true]$env$}, {\lstinline[mathescape=true]$val$}, {\lstinline[mathescape=true]$continue$}, {\lstinline[mathescape=true]$proc$},
+      {\lstinline[mathescape=true]$argl$}, and {\lstinline[mathescape=true]$unev$}.  {\lstinline[mathescape=true]$Exp$} is used to hold the expression
+      to be evaluated, and {\lstinline[mathescape=true]$env$} contains the environment in which the
+      evaluation is to be performed.  At the end of an evaluation, {\lstinline[mathescape=true]$val$}
+      contains the value obtained by evaluating the expression in the
+      designated environment.  The {\lstinline[mathescape=true]$continue$} register is used to
+      implement recursion, as explained in
+      section~\ref{sec:stack-recursion}.  (The evaluator needs to call
+      itself recursively, since evaluating an expression requires evaluating
+      its subexpressions.)  The registers {\lstinline[mathescape=true]$proc$}, {\lstinline[mathescape=true]$argl$}, and {\lstinline[mathescape=true]$unev$} are used in evaluating combinations.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+      We will not provide a data-path diagram to show how the registers and
+      operations of the evaluator are connected, nor will we give the
+      complete list of machine operations.  These are implicit in the
+      evaluator's controller, which will be presented in detail.
+      
+    </p></div>
+
+    
+    &subsection5.4.1;
+    
+    
+    &subsection5.4.2;
+
+    
+    &subsection5.4.3;
+
+    
+    &subsection5.4.4;
+
+  <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>See 
+  Batali et al.~1982 for more
+  
+  information on the chip and the method by which it was designed.</FOOTNOTE></div>
+</SECTION>

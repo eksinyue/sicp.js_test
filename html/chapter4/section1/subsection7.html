@@ -1,0 +1,745 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>4.1.7 
+    Separating Syntactic Analysis from Execution
+  </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>\begin{center}\fbox{\textcolor{red}{Note: this section is a work in progress!}}\end{center}
+
+  
+  
+  
+  
+  
+  
+
+  <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+    The evaluator implemented above is simple, but it is very
+    inefficient, because the syntactic analysis of expressions is interleaved
+    with their execution.  Thus if a program is executed many times, its
+    syntax is analyzed many times.  Consider, for example, evaluating
+    
+    {\lstinline[mathescape=true]$factorial(4)$}
+     using the following definition of
+    {\lstinline[mathescape=true]$factorial$}:
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function factorial(n) {      
+    return n === 1
+           ?
+           factorial(n - 1) * n;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG9FyKAoCxDAUyhAySQF53EBGam3xAfh58KqdFlwFEAWi7EAVIjABuSgF8gA}{\usebox\lstbox}
+
+
+  </p></div>
+
+  <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+    Each time {\lstinline[mathescape=true]$factorial$} is called, the evaluator
+    must determine that the body is
+    
+      
+      a conditional
+      
+    
+    expression and extract the predicate. Only then can it evaluate the
+    predicate and dispatch on its value.  Each time it evaluates the expression
+    
+      
+      {\lstinline[mathescape=true]$factorial(n - 1) * n$},
+      
+    
+    or the subexpressions
+    
+      
+      {\lstinline[mathescape=true]$factorial(n - 1)$}
+      
+    
+    and 
+    
+    {\lstinline[mathescape=true]$n - 1$},
+    
+    the evaluator must perform the case analysis in
+    
+      
+      {\lstinline[mathescape=true]$evaluate$}
+    
+    to determine that the expression is an application, and must extract
+    its operator and operands.  This analysis is expensive.
+    Performing it repeatedly is wasteful.
+  </p></div>
+
+  <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+    We can transform the evaluator to be significantly more efficient by
+    arranging things so that syntactic analysis is performed only
+    once.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+      
+      {\lstinline[mathescape=true]$evaluate$},
+    
+    which takes an
+    expression and an environment, into two parts.  The
+    
+    function
+    {\lstinline[mathescape=true]$analyze$} takes only the expression.
+    It performs the syntactic
+    analysis and returns a new
+    
+    function, the 
+    
+    <EM>execution
+    
+    function</EM>, that
+    encapsulates the work to be done in executing the analyzed
+    expression.  The execution
+    
+    function
+    takes an environment as its
+    argument and completes the evaluation.  This saves work because
+    {\lstinline[mathescape=true]$analyze$} will be called only once on
+    an expression, while the execution
+    
+    function
+    may be called many times.
+   We split
+    
+      
+      {\lstinline[mathescape=true]$evaluate$},
+    
+    which takes an
+    expression and an environment, into two parts.  The
+    
+    function
+    {\lstinline[mathescape=true]$analyze$} takes only the expression.
+    It performs the syntactic
+    analysis and returns a new
+    
+    function, the 
+    
+    <EM>execution
+    
+    function</EM>, that
+    encapsulates the work to be done in executing the analyzed
+    expression.  The execution
+    
+    function
+    takes an environment as its
+    argument and completes the evaluation.  This saves work because
+    {\lstinline[mathescape=true]$analyze$} will be called only once on
+    an expression, while the execution
+    
+    function
+    may be called many times.
+  </p></div>
+
+  <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+    With the separation into analysis and execution,
+    
+      
+      {\lstinline[mathescape=true]$evaluate$}
+    
+    now becomes
+
+    
+\begin{JavaScript}
+function evaluate(exp, env) {      
+    return (analyze(exp))(env);
+}
+\end{JavaScript}
+
+  </p></div>
+
+  <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+    The result of calling {\lstinline[mathescape=true]$analyze$} is the execution
+    
+    function
+    to be applied to the environment.  The
+    {\lstinline[mathescape=true]$analyze$}
+    
+    function
+    is the same case analysis as performed by the original
+    {\lstinline[mathescape=true]$eval$} of
+    section~\ref{sec:core-of-evaluator},
+    except that the
+    
+    functions
+    to which we dispatch perform only analysis, not full evaluation:
+
+    
+\begin{JavaScript}
+function analyze(stmt) {
+    return is_self_evaluating(stmt)
+           ? analyze_self_evaluating(stmt)
+         : is_name(stmt)
+           ? analyze_name(stmt)
+         : is_constant_declaration(stmt)
+           ? analyze_constant_declaration(stmt)
+         : is_variable_declaration(stmt)
+           ? analyze_variable_declaration(stmt)
+         : is_assignment(stmt)
+           ? analyze_assignment(stmt)
+         : is_conditional_expression(stmt)
+           ? analyze_conditional_expression(stmt)
+         : is_function_definition(stmt)
+           ? analyze_function_definition(stmt)
+         : is_sequence(stmt)
+           ? analyze_sequence(sequence_actions(stmt))
+         : is_block(stmt)
+           ? analyze_block(block_body(stmt))
+         : is_return_statement(stmt)
+           ? analyze_return_statement(stmt)
+         : is_application(stmt)
+           ? analyze_application(stmt)
+         : error(stmt, "Unknown statement type in analyze");
+}
+\end{JavaScript}
+
+  </p></div>
+
+  <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+    Here is the simplest syntactic analysis
+    
+    function, which handles
+    self-evaluating expressions.  It returns an execution
+    
+    function
+    that
+    ignores its environment argument and just returns the expression:
+
+    
+    
+\begin{JavaScript}
+function analyze_self_evaluating(stmt) {      
+    return env => stmt;
+}
+\end{JavaScript}
+
+  </p></div>
+
+  <SPLIT>
+    
+  </SPLIT>
+  
+  <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+    Looking up
+    
+      
+      
+	the value of a name
+      
+    
+    must still be done in the execution phase,
+    since this depends upon knowing the environment.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+\begin{JavaScript}
+function analyze_name(stmt) {      
+    return env => lookup_name_value(
+                      name_of_name(stmt, env));
+}
+\end{JavaScript}
+
+  
+
+    
+\begin{JavaScript}
+function analyze_name(stmt) {      
+    return env => lookup_name_value(
+                      name_of_name(stmt, env));
+}
+\end{JavaScript}
+
+  </p></div>
+
+  <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+    
+      
+      The function
+      {\lstinline[mathescape=true]$analyze_assignment$}
+      
+    
+    also must defer actually setting the variable
+    until the execution, when the environment has been supplied.  However,
+    the fact that the
+    
+      
+      The function
+      {\lstinline[mathescape=true]$assignment_value$}
+      
+    
+    expression can be analyzed (recursively) during analysis is a
+    major gain in efficiency, because the
+    
+      
+      The function
+      {\lstinline[mathescape=true]$assignment_value$}
+      
+    
+    expression will now be analyzed
+    only once.  The same holds true for
+    
+      
+      constant and variable declarations.
+    
+    
+\begin{JavaScript}
+function analyze_assignment(stmt) {
+    const variable = assignment_variable(stmt);
+    const vfun = analyze(assignment_value(stmt));
+    return env => {
+               set_variable_value(variable,
+                   vfun(env), env);
+               return "ok";
+           };
+}
+function analyze_variable_declaration(stmt) {	   
+    const name = 
+        variable_declaration_name(stmt);
+    const vfun =
+        variable_declaration_value(stmt);
+    return env => {
+               declare_variable(name, 
+                                vfun(env),
+				env);
+	       return "ok";
+           };
+}
+function analyze_constant_declaration(stmt) {	   
+    const name = 
+        constant_declaration_name(stmt);
+    const vfun =
+        constant_declaration_value(stmt);
+    return env => {
+               declare_constant(name, 
+                                vfun(env),
+				env);
+	       return "ok";
+           };
+}
+\end{JavaScript}
+
+  </p></div>
+
+  <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+    For
+    
+      
+      
+	conditional expressions,
+      
+    
+    we extract and analyze the predicate,
+    consequent, and alternative at analysis time.
+
+    
+\begin{JavaScript}
+function analyze_conditional_expression(stmt) {	
+    const pfun = analyze(cond_expr_pred(stmt));
+    const cfun = analyze(cond_expr_cons(stmt));
+    const afun = analyze(cond_expr_alt(stmt));
+    return env => is_true(pfun(env))
+                  ? cfun(env) 
+		  : afun(env);
+}
+\end{JavaScript}
+
+  </p></div>
+
+  <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+    Analyzing a
+    
+      
+      
+	function definition
+      
+    
+    expression also achieves a major
+    gain in efficiency: We analyze the
+    
+      
+      
+	function
+      
+    
+    body
+    only once, even though
+    
+    functions
+    resulting from evaluation of the
+    
+      
+      
+	function definition
+      
+    
+    may be applied many times.
+
+    
+\begin{JavaScript}
+function analyze_function_definition(stmt) {
+    const vars = 
+        function_definition_parameters(stmt);
+    const bfun =
+        analyze(function_definition_body(stmt);
+    return env =>
+	make_function(vars, bfun, env);
+}
+\end{JavaScript}
+
+  </p></div>
+
+  <div class='permalink'>
+<a name='p11' class='permalink'></a><p>
+    Analysis of a sequence of
+    
+      
+      
+	statements
+      
+    
+    is more 
+    involved.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+      
+      
+	statement
+      
+    
+    in the sequence is analyzed, yielding an execution
+    
+    function.
+    These execution
+    
+    functions
+    are combined to produce an execution
+    
+    function
+    that takes an environment as argument and sequentially
+    calls each individual execution
+    
+    function
+    with the environment as argument.
+
+    
+\begin{JavaScript}
+function analyze_sequence(stmts) {
+    function sequentially(fun1, fun2) {
+        return env => {
+                   fun1(env);
+                   fun2(env);
+               };
+    }
+    function loop(first_fun, rest_funs) {
+        return is_null(rest_funs)
+               ? first_fun
+               : loop(sequentially(first_fun,
+                          head(rest_funs)),
+                      tail(rest_funs));
+    }
+    const funs = map(analyze, stmts);
+    return is_null(funs) 
+           ? env => undefined
+           : loop(head(funs), tail(funs));
+}
+\end{JavaScript}
+
+  
+    Each
+    
+      
+      
+	statement
+      
+    
+    in the sequence is analyzed, yielding an execution
+    
+    function.
+    These execution
+    
+    functions
+    are combined to produce an execution
+    
+    function
+    that takes an environment as argument and sequentially
+    calls each individual execution
+    
+    function
+    with the environment as argument.
+
+    
+\begin{JavaScript}
+function analyze_sequence(stmts) {
+    function sequentially(fun1, fun2) {
+        return env => {
+                   fun1(env);
+                   fun2(env);
+               };
+    }
+    function loop(first_fun, rest_funs) {
+        return is_null(rest_funs)
+               ? first_fun
+               : loop(sequentially(first_fun,
+                          head(rest_funs)),
+                      tail(rest_funs));
+    }
+    const funs = map(analyze, stmts);
+    return is_null(funs) 
+           ? env => undefined
+           : loop(head(funs), tail(funs));
+}
+\end{JavaScript}
+
+  </p></div>
+
+  <div class='permalink'>
+<a name='p12' class='permalink'></a><p>
+    To analyze an application, we analyze the operator and
+    operands and construct an execution
+    
+    function
+    that calls the operator execution
+    
+    function
+    (to obtain the actual
+    
+    function
+    to be applied) and the operand execution
+    
+    functions
+    (to obtain the actual arguments).  We then pass these to
+    
+      
+      
+	{\lstinline[mathescape=true]$execute_application$},
+      
+    
+    which is the analog of
+    {\lstinline[mathescape=true]$apply$} in
+    section~\ref{sec:core-of-evaluator}.
+    
+      
+      
+	The function
+	{\lstinline[mathescape=true]$execute_application$}
+      
+    
+    differs from
+    {\lstinline[mathescape=true]$apply$}
+    in that the
+    
+    function
+    body for a compound
+    
+    function
+    has already been analyzed, so there is no need to
+    do further analysis.  Instead, we just call the execution
+    
+    function
+    for the body on the extended environment.
+    
+\begin{JavaScript}
+function analyze_application(stmt) {	
+    const ffun = analyze(operator(stmt));
+    const afuns = map(analyze, operands(stmt));
+    return env =>
+           execute_application(ffun(env),
+               map(afun => afun(env), afuns));
+}
+function execute_application(fun, args) {	       
+    return is_primitive_function(fun)
+           ? apply_primitive_function(fun, args)
+           : is_compound_function(fun) 
+             ? (function_body(fun))
+               (extend_environment(
+                    function_parameters(fun),
+                    args,
+                    function_environment(fun)))
+             : error(fun, "unknown function type in " +
+                          "execute_application");
+}
+\end{JavaScript}
+
+  </p></div>
+
+  <div class='permalink'>
+<a name='p13' class='permalink'></a><p>
+    Our new evaluator uses the same data structures, syntax
+    
+    functions,
+    and run-time support
+    
+    functions
+    as in
+    sections~\ref{sec:representing-expressions},
+    ~\ref{sec:eval-data-structures},
+    and~\ref{sec:running-eval}.
+  </p></div>
+
+  <SPLIT>
+    
+    
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+	
+	Extend the evaluator in this section to support
+	conditional expressions.
+      
+\end{Exercise}
+
+    
+  </SPLIT>
+  
+  
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+    
+    Alyssa P. Hacker doesn't understand why
+    
+      
+      
+	{\lstinline[mathescape=true]$analyze_sequence$}
+      
+    
+    needs to be
+    so complicated.  All the other analysis
+    
+    functions
+    are straightforward transformations of the corresponding evaluation
+    
+    functions
+    (or {\lstinline[mathescape=true]$eval$} clauses) in
+    section~\ref{sec:core-of-evaluator}.
+    She expected
+    
+      
+      
+	{\lstinline[mathescape=true]$analyze_sequence$}
+      
+    
+    to look like this:
+
+    
+
+    
+\begin{JavaScript}
+function analyze_sequence(stmts) {	
+    function execute_sequence(funs, env) {
+        if (is_null(tail(funs))) {
+            return head(funs)(env);
+        } else {
+            head(funs)(env);
+            execute_sequence(tail(funs), 
+                             env);
+        }
+    }
+    const funs = map(analyze, stmts);
+    return is_null(funs)
+           ? env => undefined
+           : env => execute_sequence(funs, 
+                                     env);
+}
+\end{JavaScript}
+
+
+    Eva Lu Ator explains to Alyssa that the version in the text does more
+    of the work of evaluating a sequence at analysis time.
+    Alyssa's 
+    
+      
+      
+	{\lstinline[mathescape=true]$sequence_execution$} function,
+      
+    
+    rather than having the calls to the individual execution
+    
+    functions
+    built in, loops through the
+    
+    functions
+    in order to call them: In effect, although the individual expressions
+    in the sequence have been analyzed, the sequence itself has not been.
+
+    Compare the two versions of
+    
+      
+      
+	{\lstinline[mathescape=true]$sequence_execution$}.
+      
+    
+    For example,
+    consider the common case (typical of
+    
+    function
+    bodies) where the
+    sequence has just one expression.  What work will the execution
+    
+    function
+    produced by Alyssa's program do?  What about the execution
+    
+    function
+    produced by the program in the text above?  How do the two
+    versions compare for a sequence with two expressions?
+    
+  
+\end{Exercise}
+
+
+  
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+    Design and carry out some experiments to 
+    compare the speed of the original metacircular evaluator
+    with the version in this section.  Use your results to estimate the
+    fraction of time that is spent in analysis versus execution for various
+    
+    functions.
+  
+\end{Exercise}
+
+  
+  
+  
+
+<hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>This technique is an integral part of the compilation
+    process, which we shall discuss in chapter~5.  Jonathan Rees wrote
+    a Scheme
+    
+    
+    interpreter like this in about 1982 for the T project 
+    (Rees and Adams 1982).  
+    Marc Feeley 1986 
+    (see also Feeley and Lapalme 1987)
+    independently invented this technique
+    in his master's thesis.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>There is,
+    however, an important part of the variable search that <EM>can</EM> be
+    done as part of the syntactic analysis.
+    <SPLIT>
+      
+      
+        
+      
+    </SPLIT>
+</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>See
+    exercise~\ref{ex:analyze-sequence} for some insight
+    into the processing of sequences.</FOOTNOTE></div>
+</SUBSECTION>

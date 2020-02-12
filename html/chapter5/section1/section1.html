@@ -1,0 +1,217 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>5.1 Designing Register Machines</a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SECTION>
+
+    <SECTIONCONTENT></SECTIONCONTENT>
+
+    
+    
+    
+    
+    
+    
+    
+
+    <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+      To design a register machine, we must design its <EM>data paths</EM>
+      (registers and operations) and the <EM>controller</EM> that sequences
+      these operations.  To illustrate the design of a simple register
+      machine, let us examine Euclid's Algorithm, which is used to compute
+      
+      the greatest common divisor (GCD) of two integers.  As we saw in
+      
+      section~\ref{sec:gcd}, Euclid's Algorithm can be carried out by an iterative
+      process, as specified by the following
+      function:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function gcd(a, b) {
+    return b === 0 ? a : gcd(b, a % b);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAcwgEwBQEMA0iBGAlIgN4BQiliATgKZQjVL6IC87iADIgPyJaIAXCnQZ8eAQFIChANxkAvkA}{\usebox\lstbox}
+
+
+    </p></div>
+
+    <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+      A machine to carry out this algorithm must keep track of two numbers,
+      $a$ and $b$, so let us assume that these numbers are stored in two
+      registers with those names.  The basic operations required are testing
+      whether the contents of register {\lstinline[mathescape=true]$b$} is zero and computing the
+      remainder of the contents of register {\lstinline[mathescape=true]$a$} divided by the contents
+      of register {\lstinline[mathescape=true]$b$}.  The remainder operation is a complex process,
+      but assume for the moment that we have a primitive device that
+      computes remainders.  On each cycle of the GCD algorithm, the contents
+      of register {\lstinline[mathescape=true]$a$} must be replaced by the contents of register {\lstinline[mathescape=true]$b$}, and the contents of {\lstinline[mathescape=true]$b$} must be replaced by the remainder of
+      the old contents of {\lstinline[mathescape=true]$a$} divided by the old contents of {\lstinline[mathescape=true]$b$}.
+      It would be convenient if these replacements could be done
+      simultaneously, but in our model of register machines we will assume
+      that only one register can be assigned a new value at each step.  To
+      accomplish the replacements, our machine will use a third
+      <QUOTE>temporary</QUOTE> register, which we call {\lstinline[mathescape=true]$t$}.  (First the remainder
+      will be placed in {\lstinline[mathescape=true]$t$}, then the contents of {\lstinline[mathescape=true]$b$} will be placed
+      in {\lstinline[mathescape=true]$a$}, and finally the remainder stored in {\lstinline[mathescape=true]$t$} will be placed
+      in {\lstinline[mathescape=true]$b$}.)
+    </p></div>
+
+    <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+      
+      
+      We can illustrate the registers and operations required for this
+      machine by using the data-path diagram shown in
+      figure~\ref{fig:gcd-machine}.  In this
+      diagram, the registers ({\lstinline[mathescape=true]$a$}, {\lstinline[mathescape=true]$b$}, and {\lstinline[mathescape=true]$t$}) are represented
+      by rectangles.  Each way to assign a value to a register is
+      indicated by an arrow with an {\lstinline[mathescape=true]$X$} behind the head, pointing from
+      the source of data to the register.  We can think of the {\lstinline[mathescape=true]$X$} as a
+      button that, when pushed, allows the value at the source to <QUOTE>flow</QUOTE>
+      into the designated register.  The label next to each button is the
+      name we will use to refer to the button.  The names are arbitrary, and
+      can be chosen to have mnemonic value (for example, {\lstinline[mathescape=true]$a<-b$} denotes
+      pushing the button that assigns the contents of register {\lstinline[mathescape=true]$b$} to
+      register {\lstinline[mathescape=true]$a$}).  The source of data for a register can be another
+      register (as in the {\lstinline[mathescape=true]$a<-b$} assignment), an operation result (as in
+      the {\lstinline[mathescape=true]$t<-r$} assignment), or a constant (a built-in value that
+      cannot be changed, represented in a data-path diagram by a triangle
+      containing the constant).
+    </p></div>
+
+    <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+      An operation that computes a value from constants and the contents
+      of registers is represented in a data-path diagram by a trapezoid
+      containing a name for the operation.  For example, the box marked {\lstinline[mathescape=true]$rem$} in figure~\ref{fig:gcd-machine} represents an
+      operation that computes the remainder of the contents of the
+      registers {\lstinline[mathescape=true]$a$} and {\lstinline[mathescape=true]$b$} to which it is attached.  Arrows
+      (without buttons) point from the input registers and constants to the
+      box, and arrows connect the operation's output value to registers.
+      A test is represented by a circle containing a name for the test.  For
+      example, our GCD machine has an operation that
+      tests whether the contents of register
+      {\lstinline[mathescape=true]$b$} is zero.  A test also has arrows from its input
+      
+      
+      registers and constants, but it has no output
+      arrows; its value is used by the controller rather than by the data
+      paths.  Overall, the data-path diagram shows the registers and
+      operations that are required for the machine and how they must be
+      connected.  If we view the arrows as wires and the {\lstinline[mathescape=true]$X$} buttons as
+      switches, the data-path diagram is very like the wiring diagram for a
+      machine that could be constructed from electrical components.
+      
+      
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_original/Fig5.1a.std}.svg}}
+\caption{Data paths for a GCD machine. }
+\label{fig:gcd-machine}
+\end{figure}
+
+    </p></div>
+
+    <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+      
+      
+      In order for the data paths to actually compute GCDs, the buttons must
+      be pushed in the correct sequence.  We will describe this sequence in
+      terms of a controller diagram, as illustrated in
+      figure~\ref{fig:gcd-controller}.  The elements of the controller
+      diagram indicate how the
+      data-path components should be operated.  The rectangular boxes in the
+      controller diagram identify data-path buttons to be pushed, and the
+      arrows describe the sequencing from one step to the next.  The diamond
+      in the diagram represents a decision.  One of the two sequencing
+      arrows will be followed, depending on the value of the data-path test
+      identified in the diamond.  We can interpret the controller in terms
+      of a physical analogy: Think of the diagram as a maze in which a
+      marble is rolling.  When the marble rolls into a box, it pushes the
+      data-path button that is named by the box.  When the marble rolls into
+      a decision node (such as the test for {\lstinline[mathescape=true]$b$}$\, =0$), it leaves the
+      node on the path determined by the result of the indicated test.
+      Taken together, the data paths and the controller completely describe
+      a machine for computing GCDs.  We start the controller (the rolling
+      marble) at the place marked {\lstinline[mathescape=true]$start$}, after placing numbers in
+      registers {\lstinline[mathescape=true]$a$} and {\lstinline[mathescape=true]$b$}.  When the controller reaches {\lstinline[mathescape=true]$done$}, we will find the value of the GCD in register {\lstinline[mathescape=true]$a$}.
+      
+
+      
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_original/Fig5.2.std}.svg}}
+\caption{Controller for a GCD machine.}
+\label{fig:gcd-controller}
+\end{figure}
+
+    </p></div>
+
+    
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+      
+      Design a register machine to compute factorials using the iterative
+      algorithm specified by the following
+      function.  Draw data-path and
+      controller diagrams for this machine.
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function factorial(n) {
+    function iter(product, counter) {
+        return counter > n 
+               ? product
+               : iter(counter * product,
+                      counter + 1);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRS5caeJGKAUwzwAcM4ATEaAGkQhxwTDMXJUJiDIyggMSQcOaIAfIiQVJWqgH5E7LjyibtWgFyIGzPIrAjEAKn0dufE6Y+Vb9gNSIAjIQA3CYAvibSsvKWInj+-IEhoUA}{\usebox\lstbox}!*/
+   }
+   return iter(1, 1);
+}
+
+\end{JavaScriptClickable}
+
+
+    
+\end{Exercise}
+
+    
+    
+    
+    
+    
+
+    
+    &subsection5.1.1;
+
+    
+    &subsection5.1.2;
+
+    
+    &subsection5.1.3;
+
+    
+    &subsection5.1.4;
+
+    
+    &subsection5.1.5;
+
+  
+</SECTION>

@@ -1,0 +1,283 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>5.5.4 
+  Combining Instruction Sequences
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+  This section describes the details on how instruction sequences are
+  represented and combined.  Recall from
+  section~\ref{sec:instruction-sequences} that an instruction sequence
+  is represented as a list of the registers needed, the registers
+  modified, and the actual instructions.  We will also consider a label
+  (symbol) to be a degenerate case of an instruction sequence, which doesn't
+  need or modify any registers.
+  So to determine the registers needed
+  and modified by instruction sequences we use the selectors
+  
+\begin{JavaScript}
+function registers_needed(s) {
+     return is_symbol(s) ? null : head(s);
+}
+
+
+function registers_modified(s) {
+     return is_symbol(s) ? null : head(tail(s));
+}
+
+
+function statements(s) {
+     return is_symbol(s) ? list(s) : head(tail(tail(s));
+}
+\end{JavaScript}
+
+
+  and to determine whether a given
+  sequence needs or modifies a given register we use the predicates
+  
+\begin{JavaScript}
+function needs_register(seq, reg) {
+    return member(reg(registers_needed(seq))); /// FIXME: see https://github.com/source-academy/sicp/issues/170
+}
+
+
+function modifies_register(seq, reg) {
+    return member(reg(registers_modified(seq)));
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+  In terms of these predicates and selectors, we can implement the
+  various instruction sequence combiners used throughout the compiler.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+  The basic combiner is {\lstinline[mathescape=true]$append_instruction_sequences$}.  This takes as
+  arguments an arbitrary number of instruction sequences that are to be executed
+  sequentially and returns an instruction sequence whose statements are the
+  statements of all the sequences appended together.  The subtle point is to
+  determine the registers that are needed and modified by the resulting
+  sequence.  It modifies those registers that are modified by any of the
+  sequences; it needs those registers that must be initialized before the first
+  sequence can be run (the registers needed by the first sequence), together
+  with those registers needed by any of the other sequences that are not
+  initialized (modified) by sequences preceding it.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+  The sequences are appended two at a time by {\lstinline[mathescape=true]$append_2_sequences$}.  This
+  takes two instruction sequences {\lstinline[mathescape=true]$seq1$} and {\lstinline[mathescape=true]$seq2$} and returns the
+  instruction sequence whose statements are the statements of {\lstinline[mathescape=true]$seq1$}
+  followed by the statements of {\lstinline[mathescape=true]$seq2$}, whose modified registers are those
+  registers that are modified by either {\lstinline[mathescape=true]$seq1$} or {\lstinline[mathescape=true]$seq2$}, and whose
+  needed registers are the registers needed by {\lstinline[mathescape=true]$seq1$} together with those
+  registers needed by {\lstinline[mathescape=true]$seq2$} that are not modified by {\lstinline[mathescape=true]$seq1$}.  (In terms
+  of set operations, the new set of needed registers is the union of the set of
+  registers needed by {\lstinline[mathescape=true]$seq1$} with the set difference of the registers needed
+  by {\lstinline[mathescape=true]$seq2$} and the registers modified by {\lstinline[mathescape=true]$seq1$}.)  Thus, {\lstinline[mathescape=true]$append_instruction_sequences$} is implemented as follows:
+
+  
+\begin{JavaScript}
+function append_instruction_sequences( . seqs) {
+    function append_2_sequences(seq1, seq2) {
+        return make_instruction_sequence(
+            list_union(registers_needed(seq1),
+                       list_difference(registers_needed(seq2)
+                                       registers_modified(seq1))),
+            list_union(registers_modified(seq1),
+                       registers_modified(seq2)),
+            append(statements(seq1), statements(seq2)));
+    }
+    
+    function append_seq_list(seqs) {
+        return is_null(seqs)
+            ? empty_instruction_sequence
+            : append_2_sequences(
+                head(seqs),
+                append_seq_list(tail(seqs)));
+    }
+    
+    return append_seq_list(seqs);
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+  This
+  function
+  uses some simple operations for manipulating sets
+  represented as lists, similar to the (unordered) set representation
+  described in section~\ref{sec:representing-sets}:
+  
+\begin{JavaScript}
+function list_union(s1, s2) {
+    return is_null(s1)
+        ? s2
+        : member(head(s1), s2)
+        ? list_union(tail(s1), s2)
+        : pair(head(s1), list_union(tail(s1), s2));
+}
+
+      
+function list_difference(s1, s2) {
+    return is_null(s1)
+        ? null
+        : member(head(s1), s2)
+        ? list_difference(tail(s1), s2)
+        : pair(head(s1), list_difference(tail(s1), s2));
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+  {\lstinline[mathescape=true]$Preserving$}, the second major instruction sequence combiner, takes a list
+  of registers {\lstinline[mathescape=true]$regs$} and two instruction sequences {\lstinline[mathescape=true]$seq1$} and {\lstinline[mathescape=true]$seq2$} that are to be executed sequentially.  It returns an instruction
+  sequence whose statements are the statements of {\lstinline[mathescape=true]$seq1$} followed by the
+  statements of {\lstinline[mathescape=true]$seq2$}, with appropriate {\lstinline[mathescape=true]$save$} and {\lstinline[mathescape=true]$restore$}
+  instructions around {\lstinline[mathescape=true]$seq1$} to protect the registers in {\lstinline[mathescape=true]$regs$} that are
+  modified by {\lstinline[mathescape=true]$seq1$} but needed by {\lstinline[mathescape=true]$seq2$}.  To accomplish this, {\lstinline[mathescape=true]$preserving$} first creates a sequence that has the required {\lstinline[mathescape=true]$save$}s
+  followed by the statements of {\lstinline[mathescape=true]$seq1$} followed by the required {\lstinline[mathescape=true]$restore$}s.  This sequence needs the registers being saved and restored in
+  addition to the registers needed by {\lstinline[mathescape=true]$seq1$}, and modifies the registers
+  modified by {\lstinline[mathescape=true]$seq1$} except for the ones being saved and restored.  This
+  augmented sequence and {\lstinline[mathescape=true]$seq2$} are then appended in the usual way.  The
+  following
+  function
+  implements this strategy recursively, walking down the
+  list of registers to be 
+  preserved:<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+\begin{JavaScript}
+function preserving(regs, seq1, seq2) {
+    if (is_null(regs)) {
+        return append_instruction_sequences(seq1, seq2)
+    } else {
+        const first_reg = head(regs);
+
+        if (need_register(seq2, first_reg) && modifies_register(seq1, first_reg)) {
+            return preserving(
+                tail(regs),
+                make_instruction_sequence(
+                    list_union(list(first_reg),
+                               registers_needed(seq1)),
+                    list_difference(registers_modified(seq1),
+                                    list(first_reg)),
+                    append(list(save(first_reg)),
+                           append(statements(seq1),
+                                  list(restore(first_reg)))))
+                seq2);
+        } else {
+            return preserving(tail(regs), seq1, seq2);
+        }
+    }
+}
+\end{JavaScript}
+
+      
+  
+\begin{JavaScript}
+function preserving(regs, seq1, seq2) {
+    if (is_null(regs)) {
+        return append_instruction_sequences(seq1, seq2)
+    } else {
+        const first_reg = head(regs);
+
+        if (need_register(seq2, first_reg) && modifies_register(seq1, first_reg)) {
+            return preserving(
+                tail(regs),
+                make_instruction_sequence(
+                    list_union(list(first_reg),
+                               registers_needed(seq1)),
+                    list_difference(registers_modified(seq1),
+                                    list(first_reg)),
+                    append(list(save(first_reg)),
+                           append(statements(seq1),
+                                  list(restore(first_reg)))))
+                seq2);
+        } else {
+            return preserving(tail(regs), seq1, seq2);
+        }
+    }
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+  Another sequence combiner, {\lstinline[mathescape=true]$tack_on_instruction_sequence$},
+  is used by {\lstinline[mathescape=true]$compile_lambda$} to append a
+  function
+  body to another
+  sequence.  Because the
+  function
+  body is not <QUOTE>in line</QUOTE> to be
+  executed as part of the combined sequence, its register use has no
+  impact on the register use of the sequence in which it is embedded.
+  We thus ignore the
+  function
+  body's sets of needed and modified
+  registers when we tack it onto the other sequence.
+
+  
+\begin{JavaScript}
+function tack_on_instruction_sequence(seq, body_seq) {
+    return make_instruction_sequence(
+        registers_needed(seq),
+        registers_modified(seq),
+        append(statements(seq), statements(body_seq)));
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+  {\lstinline[mathescape=true]$Compile_if$} and {\lstinline[mathescape=true]$compile_procedure_call$} use a special
+  combiner called {\lstinline[mathescape=true]$parallel-instruction-sequences$} to append the two
+  alternative branches that follow a test.  The two branches will never be
+  executed sequentially; for any particular evaluation of the test, one
+  branch or the other will be entered.  Because of this, the registers needed by the second branch are still needed by the combined sequence,
+  even if these are modified by the first branch.
+
+  
+\begin{JavaScript}
+function parallel_instruction_sequences(seq1, seq2) {
+    return make_instruction_sequence(
+        list_union(
+            registers_needed(seq1),
+            registers_needed(seq2)),
+        list_union(
+            registers_modified(seq1),
+            registers_modified(seq2)),
+        append(
+            statements(seq1),
+            statements(seq2)));
+}
+\end{JavaScript}
+
+  
+      </p></div>
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Note that {\lstinline[mathescape=true]$preserving$} calls {\lstinline[mathescape=true]$append$} with three
+    
+    arguments.  Though the definition of {\lstinline[mathescape=true]$append$} shown in this book
+    accepts only two arguments, Scheme standardly provides an {\lstinline[mathescape=true]$append$}
+    function
+    that takes an arbitrary number of arguments.</FOOTNOTE></div>
+</SUBSECTION>

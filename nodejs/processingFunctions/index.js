@@ -32,8 +32,8 @@ export const addName = (node, writeTo) => {
     nameArr
   );
   const name = nameArr.join("").trim();
-  writeTo.push(name);
-  writeTo.push("}\n\n");
+  //writeTo.push(name);
+  //writeTo.push("}\n\n");
   return name;
 };
 

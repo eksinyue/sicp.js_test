@@ -1,0 +1,532 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>2.3.1 
+        Strings
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+
+      <SPLIT>
+        
+        
+	  
+        
+      </SPLIT>
+
+      <SPLIT>
+        
+
+        
+	  <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+	    So far, we have used strings in order to display messages, using the functions
+	    {\lstinline[mathescape=true]$display$} and
+	    {\lstinline[mathescape=true]$error$}, as for example in 
+	    exercise~\ref{ex:search-for-primes}). 
+            We can form compound data using strings and have lists such as
+
+                
+
+            
+\begin{JavaScript}
+["a", ["b", ["c", ["d", null]]]]
+list( ["Norah", 12], ["Molly", 9], ["Anna", 7],
+      ["Lauren", 6], ["Charlotte", 4] )
+\end{JavaScript}
+
+
+            Note that in order to distinguish strings from names, we surround them with
+            double quotation marks. For example, the JavaScript expression {\lstinline[mathescape=true]$z$}
+            denotes the value of the name {\lstinline[mathescape=true]$z$}, whereas the 
+            JavaScript expression {\lstinline[mathescape=true]$"z"$} denotes a string that consists of
+            one single character, namely the last letter in the English alphabet in lower case.
+            JavaScript follows the
+            common practice in natural languages, where quotation marks
+            indicate that a word or a sentence is to be treated literally as a
+            string of characters.  For instance, the first letter of <QUOTE>John</QUOTE> is
+            clearly <QUOTE>J.</QUOTE>  If we tell somebody <QUOTE>say your name aloud,</QUOTE> we expect
+            to hear that person's name.  However, if we tell
+	    somebody <QUOTE>say <QUOTE>your name</QUOTE> aloud,</QUOTE> we expect to hear the
+	    words <QUOTE>your name.</QUOTE>  Note that
+            we are forced to nest quotation marks to describe what somebody else
+            might say.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+          </p></div>
+          <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+            
+            Via quotation marks, we can distinguish between strings and names:
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const a = 1;
+const b = 2;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAhjAvDAjAbgFCkrARkmAJjSA}{\usebox\lstbox}
+
+
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+list(a, b);
+// [1, [2, null]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYSwzgLgFAhgNAAgEYEoDcAoA9FhBtARkTwCZEA7AV2GAF1ag}{\usebox\lstbox}
+
+
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+list("a", "b");
+// ["a", ["b", null]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYSwzgLgFARAhjANAAhgIxgSgNwCgD0+yA2vEieuQHYCuwwAug0A}{\usebox\lstbox}
+
+
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+list("a", b);
+// ["a", [2, null]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYSwzgLgFARAhjANAAgEYEoDcAoA9L5AbXiSICYUA7AV2GAF16g}{\usebox\lstbox}
+
+
+          </p></div>
+          <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+	    We can test whether two strings are the same, using
+	    the operator {\lstinline[mathescape=true]$===$}.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>{\lstinline[mathescape=true]$===$},
+            we can implement a useful
+            function
+            called {\lstinline[mathescape=true]$member$}.  This takes two
+            arguments, a string and a list.  If the string is not contained in the
+            list (i.e., is not {\lstinline[mathescape=true]$===$} to any item in the list), 
+            then {\lstinline[mathescape=true]$member$} returns false.  Otherwise, it returns the sublist of
+            the list beginning with the first occurrence of the string:
+
+            
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function member(item, x) {
+    return is_null(x)
+        ? false
+        : item === head(x)
+          ? x
+          : member(item, tail(x));
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwKbIEaoE4AoZToA0iAHgJSIDeAUIvYtqlCNkjAM4D6YIANn1wU6DUQH5EwAIZ8OqEaPoAuRAXSIAvFsQALVFIAmQ8gsX0JpU2ZVpMOfIWQkoUmIIrkA3DQC+QA}{\usebox\lstbox}!*/
+}
+
+\end{JavaScriptClickable}
+
+
+
+            For example, the value of
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+member("apple", list("pear", "banana", "prune"));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=LYU2CMQJwCgIgIYAckBsRwDQAJUEsBnAF3iRASi2znAQDt6Eq4koBXOjASi4G4g}{\usebox\lstbox}
+
+
+
+            is false, whereas the value of
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+member("apple", 
+     list("x", list("apple","sauce"), "y", "apple", "pear"));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=LYU2CMQJwCgIgIYAckBsRwDQAIBQ2CDUBLAZwBd4APLbEi+ZNDTOUhAVwGMMBKHOAE9aiFOhFIQCKHF68A3EA}{\usebox\lstbox}
+
+
+
+            is {\lstinline[mathescape=true]$["apple", ["pear", null]]$}.
+           Using 
+            {\lstinline[mathescape=true]$===$},
+            we can implement a useful
+            function
+            called {\lstinline[mathescape=true]$member$}.  This takes two
+            arguments, a string and a list.  If the string is not contained in the
+            list (i.e., is not {\lstinline[mathescape=true]$===$} to any item in the list), 
+            then {\lstinline[mathescape=true]$member$} returns false.  Otherwise, it returns the sublist of
+            the list beginning with the first occurrence of the string:
+
+            
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function member(item, x) {
+    return is_null(x)
+        ? false
+        : item === head(x)
+          ? x
+          : member(item, tail(x));
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwKbIEaoE4AoZToA0iAHgJSIDeAUIvYtqlCNkjAM4D6YIANn1wU6DUQH5EwAIZ8OqEaPoAuRAXSIAvFsQALVFIAmQ8gsX0JpU2ZVpMOfIWQkoUmIIrkA3DQC+QA}{\usebox\lstbox}!*/
+}
+
+\end{JavaScriptClickable}
+
+
+
+            For example, the value of
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+member("apple", list("pear", "banana", "prune"));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=LYU2CMQJwCgIgIYAckBsRwDQAJUEsBnAF3iRASi2znAQDt6Eq4koBXOjASi4G4g}{\usebox\lstbox}
+
+
+
+            is false, whereas the value of
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+member("apple", 
+     list("x", list("apple","sauce"), "y", "apple", "pear"));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=LYU2CMQJwCgIgIYAckBsRwDQAIBQ2CDUBLAZwBd4APLbEi+ZNDTOUhAVwGMMBKHOAE9aiFOhFIQCKHF68A3EA}{\usebox\lstbox}
+
+
+
+            is {\lstinline[mathescape=true]$["apple", ["pear", null]]$}.
+          </p></div>
+
+          
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled28}
+
+            What would the interpreter print in response to evaluating each of the
+            following expressions?
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+list("a", "b", "c");
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYSwzgLgFARAhjANAAhgIyagxjAlAbiA}{\usebox\lstbox}
+
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+list(list("george"));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYSwzgLgFKlQRAcwKYHsBOL4EpsG4g}{\usebox\lstbox}
+
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+tail(list(list("x1", "x2"), list("y1", "y2")));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=C4QwlgNgFBYM7BvRAiAHgRhQGgAToCYUBKPWBKFATyz2qOMYG4g}{\usebox\lstbox}
+
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+tail(head(list(list("x1", "x2"), list("y1", "y2"))));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=C4QwlgNgFAFgpiAJlCYDOwXswIgB4CMOANAAT4BMOAlGahlDgJ5FnNXWfUDcQA}{\usebox\lstbox}
+
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+member("red", list(list("red", "shoes"), list("blue", "socks")));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=LYU2CMQJwCgIiiAJnANAAgDYEsDOAXGHA+RFDOXACwHsRc4BKDYwucTAVxDXUpoDGAawaMxAbiA}{\usebox\lstbox}
+
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+member("red", list("red", "shoes", "blue", "socks"));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=LYU2CMQJwCgIiiAJnANAAgDYEsDOAXeRFDOXACwHsRc105xMBXEOsygYwGtaBKXgNxA}{\usebox\lstbox}
+
+
+
+
+	    
+          \hfill{\hyperref[ex:unlabeled28-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled28}]
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+list("a", "b", "c");
+// ["a", ["b", ["c", null]]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYSwzgLgFARAhjANAAhgIyagxjAlAbgCgB6Y5AbXk0oxUpxQDsBXYYAXU6A}{\usebox\lstbox}
+
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+list(list("george"));
+// [["george", null], null]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYSwzgLgFKlQRAcwKYHsBOL4EpsG4AoAeiIAIBtcpNTZeAGlIDsBXYYAXUdfY6A}{\usebox\lstbox}
+
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+tail(list(list("x1", "x2"), list("y1", "y2")));
+// [["y1", ["y2", null]], null]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=C4QwlgNgFBYM7BvRAiAHgRhQGgAToCYUBKPWBKFATyz2qOMYG4AoAejdwG0vrbv6OXADsArhAgBdSXjETJQA}{\usebox\lstbox}
+
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+tail(head(list(list("x1", "x2"), list("y1", "y2"))));
+// ["x2", null]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=C4QwlgNgFAFgpiAJlCYDOwXswIgB4CMOANAAT4BMOAlGahlDgJ5FnNXWfUDcAUAPT9SAbUolSAOwCuECAF0gA}{\usebox\lstbox}
+
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+member("red", list(list("red", "shoes"), list("blue", "socks")));
+// false
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=LYU2CMQJwCgIiiAJnANAAgDYEsDOAXGHA+RFDOXACwHsRc4BKDYwucTAVxDXUpoDGAawaMxAbgBQAemnoAZgENMuEEA}{\usebox\lstbox}
+
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+member("red", list("red", "shoes", "blue", "socks"));
+// ["red", ["shoes", ["blue", ["socks", null]]]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=LYU2CMQJwCgIiiAJnANAAgDYEsDOAXeRFDOXACwHsRc105xMBXEOsygYwGtaBKXgNwAoAPQj0AbQTI6UitVoYpjFrPbdF6AHZNMmALqH9QA}{\usebox\lstbox}
+
+
+
+\end{Answer}
+
+
+          
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+            We would like to define a function
+            
+            
+            
+            {\lstinline[mathescape=true]$is_equal$} that checks whether two lists contain equal elements
+            arranged in the same order.  For example,
+
+            
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+is_equal(list("this", "is", "a", "list"), 
+         list("this", "is", "a", "list"));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=JYZw+gpgjgrghgGwBQNAFyQIjQC1JgGgAJN9jM5CTUQ1MBKYgKCNbbZo2zxCtN-KVynBvQDcQA}{\usebox\lstbox}
+
+
+
+            is true, but
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+is_equal(list("this", "is", "a", "list"),
+         list("this", list("is", "a"), "list"));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=JYZw+gpgjgrghgGwBQNAFyQIjQC1JgGgAJN9jM5CTUQ1MBKAgKCNbbZo2zxCs6zIlKjaugb0A3EA}{\usebox\lstbox}
+
+
+
+            is false.  To be more precise, we can define {\lstinline[mathescape=true]$is_equal$}
+            recursively in terms of the basic {\lstinline[mathescape=true]$===$} equality of strings by
+            saying that {\lstinline[mathescape=true]$a$} and {\lstinline[mathescape=true]$b$} 
+            are equal with respect to {\lstinline[mathescape=true]$is_equal$} if they are both
+            strings and the strings are equal with respect to {\lstinline[mathescape=true]$===$}, 
+            or if they are both lists such
+            that {\lstinline[mathescape=true]$head(a)$} is equal with respect to {\lstinline[mathescape=true]$is_equal$} to {\lstinline[mathescape=true]$head(b)$} and 
+            {\lstinline[mathescape=true]$tail(a)$} is equal with respect to {\lstinline[mathescape=true]$is_equal$} to {\lstinline[mathescape=true]$tail(b)$}.  
+            Using this idea, implement
+            {\lstinline[mathescape=true]$is_equal$} as a function.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+          
+     
+          \hfill{\hyperref[ex:equal?-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:equal?}]
+       
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_equal(a, b) {
+    return (is_pair(a) && is_pair(b) &&
+            is_equal(head(a), head(b)) && is_equal(tail(a), tail(b)))
+           || 
+           a === b;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQKYEcQEMA2AFLgDSIBGAlIgN4BQijiAThlCM0oamgA64xmxagDIRydP0GEqiMQyaLFPbHiIALDLgAmwspp0zKo8SpwFCUAUVyUyVmESrGFSxQB93iV28a5EALxBFADcdAC+QA}{\usebox\lstbox}
+
+
+\end{Answer}
+
+
+          
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+	    The JavaScript interpreter reads the characters after the double quotation mark
+	    {\lstinline[mathescape=true]$"$} 
+	    until it finds another double quotation mark. All characters between
+	    the two are part of the string, excluding the 
+	    double quotation marks, themselves. What if we want a string to contain
+	    double quotation marks? For this purpose, JavaScript also allows to use <EM>single</EM>
+	    quotation marks to form strings, as for example in
+	    {\lstinline[mathescape=true]$'say your name aloud'$}.
+	    Within singly-quoted strings, we can use double quotation marks, and vice versa,
+	    so {\lstinline[mathescape=true]$'say "your name" aloud'$} and
+	    {\lstinline[mathescape=true]$"say 'your name' aloud"$} are valid 
+	    strings that have different characters in positions 5 and 15, if we start counting
+	    at 1. Depending on the font in use, two single quotation marks might not be
+	    easily distinguishable from a double quotation mark. Can you spot which is which
+	    and work out the value of the following expression?
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+" '' === '' "
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EQAg5GILw+nEA}{\usebox\lstbox}
+
+
+
+	    
+            
+	  \hfill{\hyperref[ex:double-quote-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:double-quote}]
+
+	      The given expression consists of a single string that contains four single quotation marks.
+	    
+\end{Answer}
+
+	  
+        <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Allowing quotation in a language wreaks havoc
+              with the ability to reason about the language in simple terms, because
+              it destroys the notion that equals can be substituted for equals.  For
+              example, three is one plus two, but the word <QUOTE>three</QUOTE> is not the
+              phrase <QUOTE>one plus two.</QUOTE>  Quotation is powerful because it gives us a way
+              to build expressions that manipulate other expressions (as we will see
+              when we write an interpreter in chapter~4). But allowing statements in
+              a language that talk about other statements in that language makes it
+              very difficult to maintain any coherent principle of what <QUOTE>equals can
+                be substituted for equals</QUOTE> should mean.  For example, if we know that
+              
+              the evening star is the morning star, then from the statement <QUOTE>the
+                evening star is Venus</QUOTE> we can deduce <QUOTE>the morning star is Venus.</QUOTE>
+              However, given that <QUOTE>John knows that the evening star is Venus</QUOTE> we
+              cannot infer that <QUOTE>John knows that the morning star is Venus.</QUOTE></FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>
+            We can consider two strings to be <QUOTE>the same</QUOTE> if they consist of
+	    the same characters in the same order. 
+	    Such a definition
+              skirts a deep issue that we are not yet ready to address: the meaning
+              of <QUOTE>sameness</QUOTE> in a programming language.  We will return to this in
+              chapter~3 (section~\ref{sec:costs-of-assignment}).</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>In practice, programmers
+              use {\lstinline[mathescape=true]$is_equal$} to compare lists that contain numbers as well as
+              strings.  Numbers are not considered to be strings.  A better definition
+              of {\lstinline[mathescape=true]$is_equal$} 
+              would also stipulate that if {\lstinline[mathescape=true]$a$} and {\lstinline[mathescape=true]$b$} are
+              both numbers, then {\lstinline[mathescape=true]$a$} and {\lstinline[mathescape=true]$b$} are equal with respect to {\lstinline[mathescape=true]$is_equal$} if they are equal with respect to~{\lstinline[mathescape=true]$===$}.</FOOTNOTE></div>
+      </SPLIT>
+
+      <SPLIT>
+        
+        
+	  
+        
+      </SPLIT>
+      
+    
+</SUBSECTION>

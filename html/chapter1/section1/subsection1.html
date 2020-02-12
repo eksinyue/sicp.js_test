@@ -1,0 +1,368 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>1.1.1 Expressions</a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+        
+
+        <SPLIT>
+          
+          
+            <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+              One easy way to get started at programming in JavaScript is 
+              to interact with the JavaScript interpreter that is built into
+              the browser you are using to view this page.
+              
+              We have set up the statements shown with a dark background such that
+              you can click on them.
+              The mouse click on JavaScript statements is 
+              programmed in such
+              a way that a JavaScript interpreter is displayed, which can
+	      <EM>evaluate</EM> the
+              statement and display the resulting value.
+              By the way, the program that makes the mouse click
+              on a JavaScript statement display the interpreter is itself
+              written in JavaScript; we call it the <EM>script</EM> for
+              the mouse click.
+            </p></div>
+          
+        </SPLIT>
+
+        <SPLIT>
+          
+          
+            <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+              One kind of statement is an 
+              
+              A simple kind of an expression is a number.
+              (More precisely, the expression consists of the numerals that
+              represent the number in base 10.)  If you ask our script to 
+              display the interpreter for the expression statement
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+486;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CwDgbA3EA}{\usebox\lstbox}
+
+
+              by clicking it, it will respond by creating a separate
+	      browser tab where the statement is shown, with the option
+              to evaluate the statement.
+              Click on the primitive expression statement, and see what happens!
+            </p></div>
+          
+        </SPLIT>
+
+        <SPLIT>
+          
+          
+            <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+              
+              
+              Expressions representing numbers may be combined with operators
+              (such as 
+              {\lstinline[mathescape=true]$+$} or 
+              {\lstinline[mathescape=true]$*$}) to form a
+              compound expression that represents the
+              application of a corresponding primitive
+              function to those numbers.  For example, evaluate
+              any of the following expression statements<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+137 + 349;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IwZg7ABA1BICwE4DcQ}{\usebox\lstbox}
+
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+1000 - 334;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IwBjAIFpwZhgWA3EA}{\usebox\lstbox}
+
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+5 * 99;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=KwAgVCCckNxA}{\usebox\lstbox}
+
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+10 / 5;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IwBgBA9GCsDcQ}{\usebox\lstbox}
+
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+2.7 + 10;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EwOg7ABA1BCMAMBuIA}{\usebox\lstbox}
+
+
+            
+              by clicking on it:
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+137 + 349;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IwZg7ABA1BICwE4DcQ}{\usebox\lstbox}
+
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+1000 - 334;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IwBjAIFpwZhgWA3EA}{\usebox\lstbox}
+
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+5 * 99;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=KwAgVCCckNxA}{\usebox\lstbox}
+
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+10 / 5;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IwBgBA9GCsDcQ}{\usebox\lstbox}
+
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+2.7 + 10;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EwOg7ABA1BCMAMBuIA}{\usebox\lstbox}
+
+
+            </p></div>
+          <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>
+              Note that the semicolon indicates to the JavaScript interpreter
+              that the expression should be taken as a statement, and thus as
+              a complete program. However, JavaScript systems are not strict
+              about these semicolons; they can often be left out. In this book,
+              we will never leave out these optional semicolons, and point out
+              which statements come with semicolons and which ones don't.
+              </FOOTNOTE></div>
+        </SPLIT>
+
+        <SPLIT>
+          
+          
+            <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+              Expressions such as these, which contain other expressions
+              as components, are called <EM>combinations</EM>.
+              
+              Combinations that are formed by an 
+              
+              <EM>operator</EM> symbol in the middle, and
+              
+              <EM>operand</EM> expressions to the left and right of it, 
+              are called 
+              
+              The value of an operator combination is
+              obtained by applying the function specified by the operator to the
+              
+              <EM>arguments</EM> that are the values of the operands.
+            </p></div>
+          
+        </SPLIT>
+
+        <SPLIT>
+          
+          
+            <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+              The convention of placing the operator between the operands is
+              known as 
+              
+              
+              It follows 
+              the mathematical notation that the reader is most
+              likely familiar with from school and everyday life.  
+              As in mathematics, operator combinations can
+              be <EM>nested</EM>, that is, they
+              can take arguments that themselves are operator combinations:
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+(3 * 5) + (10 - 6);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQZgBAVGCsCUYGozAIwAYwFowDZYG4g}{\usebox\lstbox}
+
+
+              As usual, parentheses are used to group operator combinations
+              in order to avoid ambiguities. JavaScript also follows the usual
+              conventions when parentheses are omitted; 
+              multiplication and division
+              bind stronger than 
+              addition and subtraction.
+              For example,
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+3 * 5 + 10 / 2;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MwAgVCCsINQgjABhAehAJgNxA}{\usebox\lstbox}
+
+
+              stands for 
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+(3 * 5) + (10 / 2);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQZgBAVGCsCUYGozAIwAYwHowCZYG4g}{\usebox\lstbox}
+
+
+              We say that {\lstinline[mathescape=true]$*$}
+              and {\lstinline[mathescape=true]$/$}
+              have <EM>higher precedence</EM> than
+              {\lstinline[mathescape=true]$+$}
+              and {\lstinline[mathescape=true]$-$}.
+              Sequences of 
+              additions and subtractions are read from left to right, as are
+              sequences of multiplications and divisions. Thus,
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+3 / 5 * 2 - 4 + 3;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MwAg9CCsIFQgTCAtCALCA1CYBuIA}{\usebox\lstbox}
+
+
+              stands for 
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+(((3 / 5) * 2) - 4) + 3;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQjMAIHpwVgSnAKnAJgQWnAFgQanKANxA}{\usebox\lstbox}
+
+
+              We say that the operators
+              {\lstinline[mathescape=true]$+$},
+              {\lstinline[mathescape=true]$-$},
+              {\lstinline[mathescape=true]$*$} and
+              {\lstinline[mathescape=true]$/$} are 
+              left-associative.
+            </p></div>
+          
+        </SPLIT>
+
+        <SPLIT>
+          
+          
+            <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+              
+              It is we humans who might get confused by still relatively
+              simple expressions such as
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+3 * 2 * (4 + (3 - 5)) + 10 * (27 / 6);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MwAgVCBM4gFALCA1HUBaEBWAlN5IBGABhlkgHYQB6EANmwG4g}{\usebox\lstbox}
+
+
+
+              which the interpreter would readily evaluate to be 57.  We can help
+              ourselves by writing such an expression in the form
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+3 * 2 * (4 + (3 - 5)) 
++ 
+10 * (27 / 6);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MwAgVCBM4gFALCA1HUBaEBWAlNkAoFfARgAYZZIB2EAehADZsBuIA}{\usebox\lstbox}
+
+
+              to visually separate the major components of the expression.
+            </p></div>
+          
+        </SPLIT>
+
+        <SPLIT>
+          
+          
+            <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+              The interpreter always operates in the
+              same basic cycle: It reads a statement from the browser, 
+              evaluates the statement, and prints the result.
+              This mode of operation is often expressed by saying that the
+              interpreter runs in a 
+              
+              
+              <EM>read-eval-print loop</EM>.
+              Observe in particular that it is not necessary to explicitly
+              instruct the interpreter to print the value of the 
+              statement.
+            </p></div>
+          
+        </SPLIT>
+
+
+      
+</SUBSECTION>

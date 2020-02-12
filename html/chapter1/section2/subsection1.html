@@ -1,0 +1,629 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>1.2.1 Linear Recursion and Iteration</a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+        
+        
+        
+
+            <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+              
+              We begin by considering the factorial function, defined by
+              
+              \[ n!=n\cdot(n-1)\cdot(n-2)\cdots3\cdot2\cdot1 \]
+              
+              There are many ways to compute factorials.  One way is to make use of
+              the observation that $n!$ is equal to 
+              $n$ times $(n-1)!$ for
+              any positive integer~$n$:
+              
+              \[ n!=n\cdot\left[(n-1)\cdot(n-2)\cdots3\cdot2\cdot1\right]=n\cdot(n-1)! \]
+              
+              Thus, we can compute $n!$ by computing 
+              $(n-1)!$ and multiplying the
+              result by $n$.  If we add the stipulation that 1! 
+              is equal to 1,
+              this observation translates directly into a 
+              function:
+              
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function factorial(n) {
+    return n === 1 
+           ? 1
+           : n * factorial(n - 1);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSxDAUyhAySQF5XEBGRCqnqgfg7dePAFyIkAKmRoombPiQBaDoQDcZAL5A}{\usebox\lstbox}
+
+
+
+        
+            </p></div>
+
+
+            <SPLIT>
+              
+              
+		
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch1-Z-G-7}.svg}}
+\caption{A linear recursive process for computing 6!.
+		  }
+\label{fig:recursive-factorial}
+\end{figure}
+
+                <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+	      We can use the substitution model of
+              section~\ref{sec:substitution-model} to watch the
+              function in action
+              computing 6!, as shown in figure~\ref{fig:recursive-factorial}.
+                </p></div>
+            
+            </SPLIT>
+
+            <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+              Now let's take a different perspective on computing factorials.  We
+              could describe a rule for computing $n!$ by 
+              specifying that we
+              first multiply 1 by 2, then multiply the result by 3, then by 4,
+              and so on until we reach $n$.
+              More formally, we maintain a running product, together with a counter
+              that counts from 1 up to $n$.  We can describe the computation by
+              saying that the counter and the product simultaneously change from one
+              step to the next according to the rule
+
+              <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+              product $\leftarrow$ counter $\cdot$ product 
+              </p></div>
+              <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+              counter $\leftarrow$ counter $+$ 1
+              </p></div>
+              and stipulating that $n!$ is the value of the product when
+              the counter exceeds $n$.
+
+            </p></div>
+
+            <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+              Once again, we can recast our description as a 
+              function 
+              for computing
+              factorials:<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function factorial(n) {
+    return fact_iter(1, 1, n);
+}
+function fact_iter(product, counter, max_count) {
+    return counter > max_count
+           ? product
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSxDAUyhAyVWgH0YoaM8BGAGkT6IiAbjIBfMqEiwEyNFDYcuABwxwAJiGj8IccEv4BbFAA8Wu-cXJVqdBkgtgliAHyJjZx1Ao3fiAPyIqhpa3n6+AFxyrOyceF6ciABUQWqa2j7hWX4JGIgA1AK8mdml7qbmek6EomJAA}{\usebox\lstbox}!*/
+           : fact_iter(counter * product,
+                       counter + 1,
+                       max_count);
+}
+
+\end{JavaScriptClickable}
+
+
+                  
+            
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function factorial(n) {
+    return fact_iter(1, 1, n);
+}
+function fact_iter(product, counter, max_count) {
+    return counter > max_count
+           ? product
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSxDAUyhAyVWgH0YoaM8BGAGkT6IiAbjIBfMqEiwEyNFDYcuABwxwAJiGj8IccEv4BbFAA8Wu-cXJVqdBkgtgliAHyJjZx1Ao3fiAPyIqhpa3n6+AFxyrOyceF6ciABUQWqa2j7hWX4JGIgA1AK8mdml7qbmek6EomJAA}{\usebox\lstbox}!*/
+           : fact_iter(counter * product,
+                       counter + 1,
+                       max_count);
+}
+
+\end{JavaScriptClickable}
+
+
+                  
+            </p></div>
+
+            <SPLIT>
+              
+              
+		
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch1-Z-G-10}.svg}}
+\caption{A linear iterative process for computing $6!$.
+		  }
+\label{fig:iterative-factorial}
+\end{figure}
+
+                <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+              As before, we can use the substitution model to visualize the process
+              of computing $6!$, as shown in figure~\ref{fig:iterative-factorial}.
+                </p></div>
+              
+            </SPLIT>
+
+        <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+          Compare the two processes.  From one point of view, they seem hardly
+          different at all.  Both compute the same mathematical function on the
+          same domain, and each requires a number of steps proportional to $n$
+          to compute $n!$.  Indeed, both processes even carry out the same
+          sequence of multiplications, obtaining the same sequence of partial
+          products.  On the other hand, when we consider the
+          
+          <QUOTE>shapes</QUOTE> of the
+          two processes, we find that they evolve quite differently.
+        </p></div>
+
+        <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+          Consider the first process.  The substitution model reveals a shape of
+          expansion followed by contraction, indicated by the arrow in
+          figure~\ref{fig:recursive-factorial}.  The expansion occurs as the
+          process builds up a chain of 
+          
+          <EM>deferred operations</EM> (in this case,
+          a chain of multiplications).  The contraction occurs as 
+          the operations are
+          actually performed.  This type of process, characterized by a chain of
+          deferred operations, is called a 
+          
+          <EM>recursive process</EM>.  Carrying
+          out this process requires that the interpreter keep track of the
+          operations to be performed later on.  In the computation of $n!$,
+          the length of the chain of deferred multiplications, and hence the amount
+          of information needed to keep track of it, 
+          
+          grows linearly with $n$
+          (is proportional to $n$), just like the number of steps.
+          
+          
+          
+          Such a process is called a <EM>linear recursive process</EM>.
+        </p></div>
+
+        <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+          By contrast, the second process does not grow and shrink.  At each
+          step, all we need to keep track of, for any $n$, are the current
+          values of the
+	  names
+	  {\lstinline[mathescape=true]$product$}, {\lstinline[mathescape=true]$counter$}, and 
+          {\lstinline[mathescape=true]$max_count$}.  We call this an 
+          
+          <EM>iterative process</EM>.  In general, an
+          iterative process is one whose state can be summarized by
+	  
+	    
+	    
+	      the values of a fixed
+              number of
+              
+            <EM>state names</EM>,
+	    
+	  
+	  together with a fixed rule that
+          describes how
+	  
+	    
+	    
+	      the values of the state names
+	    
+	  
+	  should be updated as the process
+          moves from state to state and an (optional) end test that specifies
+          conditions under which the process should terminate.  In computing
+          $n!$, the number of steps required grows linearly with $n$.  Such a process is
+          called a 
+          
+          
+          
+          <EM>linear iterative process</EM>.
+        </p></div>
+
+        <div class='permalink'>
+<a name='p11' class='permalink'></a><p>
+              The contrast between the two processes can be seen in another way.  In
+              the iterative case, the
+	      
+		
+		
+		  values of the state names
+		
+	      
+	      provide a complete
+              description of the state of the process at any point.  If we stopped
+              the computation between steps, all we would need to do to resume the
+              computation is to supply the interpreter with the values of the three
+	      
+		
+		
+		  state names.
+		
+	      
+		  Not so with the recursive process.  In this case
+              there is some additional <QUOTE>hidden</QUOTE> information, maintained by the
+              interpreter and not contained in the
+	      
+		
+		
+		  state names,
+		
+	      
+		  which
+              indicates <QUOTE>where the process is</QUOTE> in negotiating the chain of
+              deferred operations.  The longer the chain, the more information must
+              be maintained.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+        
+              
+        </p></div>
+
+        <div class='permalink'>
+<a name='p12' class='permalink'></a><p>
+              In contrasting iteration and recursion, we must be careful not to
+              confuse the notion of a 
+              
+              
+              recursive <EM>process</EM> with the notion of a
+              recursive 
+              <EM>function</EM>.  
+              When we describe a function as recursive,
+              we are referring to the syntactic fact that the
+	      
+	      function declaration 
+              refers (either directly or indirectly) to the function itself.  But
+              when we describe a process as following a pattern that is, say,
+              linearly recursive, we are speaking about how the process evolves, not
+              about the syntax of how a function is written.  It may seem
+              disturbing that we refer to a recursive function such as 
+              {\lstinline[mathescape=true]$fact_iter$}
+              as generating an iterative process.  However, the process
+              really is iterative: Its state is captured completely by its three
+              state names,
+	      and an interpreter need keep track of only three
+	      names
+	      in order to execute the process.
+        </p></div>
+
+        <div class='permalink'>
+<a name='p13' class='permalink'></a><p>
+              One reason that the distinction between process and procedure may be
+              confusing is that most implementations of common languages (including
+              
+              
+              
+              Ada, Pascal, and C) are designed in such a way that the
+              interpretation of any recursive function consumes an amount of memory
+              that grows with the number of function calls, even when the process
+              described is, in principle, iterative.  As a consequence, these
+              languages can describe iterative processes only by resorting to
+              special-purpose 
+              
+              <QUOTE>looping constructs</QUOTE> such as {\lstinline[mathescape=true]$do$}, {\lstinline[mathescape=true]$repeat$},
+              {\lstinline[mathescape=true]$until$}, {\lstinline[mathescape=true]$for$}, and {\lstinline[mathescape=true]$while$}.  The implementation of
+	      JavaScript
+              we shall consider in chapter~5 does not share this defect.  It will
+              execute an iterative process in constant space, even if the iterative
+              process is described by a recursive function.  An implementation with
+              this property is called 
+              
+              <EM>tail-recursive</EM>.  With a tail-recursive
+              implementation, 
+              
+              iteration can be expressed using the ordinary
+              function call mechanism, so that special iteration constructs are
+              useful only as 
+              
+              syntactic sugar.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+              
+            
+              
+              
+            </p></div>
+
+        
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+                Each of the following two functions defines a method for adding two
+                positive integers in terms of the functions {\lstinline[mathescape=true]$inc$},
+                which increments its argument by 1, and {\lstinline[mathescape=true]$dec$}, which decrements
+                its argument by 1.
+
+        
+
+        
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function plus(a, b) {
+    return a === 0 ? b : inc(plus(dec(a), b)); 
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwDYgM4AoCGAaRAIwEpEBvAKEWsQCcBTKEWpHRAXk8QAZEB+IogBciGJCxpMWACb0IuYgRLEA3IgoBfIA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function plus(a, b) {
+    return a === 0 ? b : plus(dec(a), inc(b));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwDYgM4AoCGAaRAIwEpEBvAKEWsQCcBTKEWpHRAXk8QAZEB+IogBcKdNgAm9CLmIEYkLCWIBuCgF8gA}{\usebox\lstbox}
+
+
+
+                Using the substitution model, illustrate the process generated by each
+                function in evaluating
+                {\lstinline[mathescape=true]$plus(4, 5);$}.  Are these processes iterative or recursive?
+
+		
+        \hfill{\hyperref[ex:addition-procedures-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:addition-procedures}]
+
+		  <SPLIT>
+		    
+    The process generated by the first procedure is recursive.
+        
+\begin{JavaScript}
+plus(4, 5)
+4 === 0 ? 5 : inc(plus(dec(4), 5))
+inc(plus(dec(4), 5))
+...
+inc(plus(3, 5))
+...
+inc(inc(plus(2, 5)))
+...
+inc(inc(inc(plus(1, 5))))
+...
+inc(inc(inc(inc(plus(0, 5)))))
+inc(inc(inc(inc( 0 === 0 ? 5 : inc(plus(dec(0), 5))))))
+inc(inc(inc(inc( 5 ))))
+inc(inc(inc( 6 )))
+inc(inc( 7 ))
+inc( 8 )
+9
+\end{JavaScript}
+
+    The process generated by the second procedure is iterative.
+        
+\begin{JavaScript}
+plus(4, 5)
+4 === 0 ? 5 : plus(dec(4), inc(5))
+plus(dec(4), inc(5))
+...
+plus(3, 6)
+...
+plus(2, 7)
+...
+plus(1, 8)
+...
+plus(0, 9)
+0 === 0 ? 9 : plus(dec(0), inc(9))
+9
+\end{JavaScript}
+
+		    
+		  </SPLIT>
+		
+\end{Answer}
+
+
+        
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled3}
+
+            
+                The following function computes a mathematical function called
+                Ackermann's function.
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function A(x,y) {
+    return y === 0
+           ? 0
+           : x === 0
+             ? 2 * y
+             : y === 1
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQQBQA8A0BPAlIgbwChFTEAnAUyhHKW0QF5nEAGEszsgfjY684AuROiYt2AybwBMiAFSJs-SWWENmjRAEZlKnomm69iYWlEBabZhQZrDS1ty4A3EQC+QA}{\usebox\lstbox}!*/
+               ? 2
+               : A(x - 1, A(x, y - 1));
+}
+
+\end{JavaScriptClickable}
+
+
+
+        What are the values of the following expressions?
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+A(1, 10);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IICgjANABGAMCUBuIA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+A(2, 4);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IICgTANABALAlAbiA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+A(3, 3);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IICgzANABGCUDcQ}{\usebox\lstbox}
+
+
+
+        Consider the following functions, where {\lstinline[mathescape=true]$A$} is the
+	
+	function declared
+	  
+        above:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function f(n) {
+    return A(0, n);
+}
+function g(n) {
+    return A(1, n);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAFGAlIg3gKEfxAJwFMoRCkBBFABgBpEMBuHAXx1ElgUQHM1MuAkVLkqKAIwNmbDuGjwkACwHY8BEmQqJqAJmnoW7Tgp4BrVUPyaxiAKyIAVIyeMjQA}{\usebox\lstbox}!*/
+function h(n) {
+    return A(2, n);
+}
+function k(n) {
+   return 5 * n * n;
+}
+
+\end{JavaScriptClickable}
+
+
+
+        
+
+        Give concise mathematical definitions for the functions computed by
+        the functions {\lstinline[mathescape=true]$f$}, {\lstinline[mathescape=true]$g$}, and {\lstinline[mathescape=true]$h$} for positive integer
+        values of $n$.  For example,
+	$k(n)$ computes $5n^2$.
+
+	
+	\hfill{\hyperref[ex:unlabeled3-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled3}]
+
+      The function $f(n)$ computes
+      $2 n$,
+      the function $g(n)$ computes
+      $2^n$, and
+      the function $h(n)$ computes
+      $2^{2^{\cdot^{\cdot^{\cdot^2}}}}$
+      where the number of 2s in
+      the chain of exponentiation is $n$.
+	
+\end{Answer}
+
+
+      <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>In a real program we would probably use the
+                block structure introduced in the last section to hide the 
+                
+		  declaration of {\lstinline[mathescape=true]$fact_iter$}:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function factorial(n) {
+    function iter(product, counter) {
+        return counter > n 
+               ? product
+               : iter(counter * product,
+                      counter + 1);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRS5caeJGKAUwzwAcM4ATEaAGkQhxwTDMXJUJiDIyggMSQcOaIAfIiQVJWqgH5E7LjyibtWgFyIGzPIrAjEAKn0dufE6Y+Vb9gNSIAjIQA3CYAvibSsvKWInj+-IEhoUA}{\usebox\lstbox}!*/
+   }
+   return iter(1, 1);
+}
+
+\end{JavaScriptClickable}
+
+
+
+                We avoided doing this here so as to minimize the number of things to
+                think about at once.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>When we discuss the implementation of
+                functions 
+                on register machines in chapter~5, we will see that any
+                iterative process can be realized <QUOTE>in hardware</QUOTE> as a machine that
+                has a fixed set of registers and no auxiliary memory.  In contrast,
+                realizing a recursive process requires a machine that uses an
+                
+                auxiliary data structure known as a <EM>stack</EM>.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Tail recursion has long been
+                
+                known as a compiler optimization trick.  A coherent semantic basis for
+                tail recursion was provided by Carl Hewitt (1977), who explained it in
+                
+                terms of the <QUOTE>message-passing</QUOTE> model of computation that we shall
+                discuss in chapter~3. Inspired by this, Gerald Jay Sussman and Guy
+                Lewis Steele Jr.~(see Steele 1975) 
+                constructed a tail-recursive
+                interpreter for Scheme.  Steele later showed how tail recursion is a
+                consequence of the natural way to compile 
+                function 
+                calls (Steele 1977).
+		The IEEE standard for Scheme requires that Scheme implementations
+                
+                be tail-recursive. The ECMA standard for JavaScript eventually followed
+		suit with ECMAScript 2015 (ECMA 2015). Note however,
+		that as of this writing (2019), most implementations of JavaScript do
+		not comply with this standard.
+	      </FOOTNOTE></div>
+</SUBSECTION>

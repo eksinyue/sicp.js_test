@@ -1,0 +1,368 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>5.5.6 
+  Lexical Addressing
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+      
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+  One of the most common optimizations performed by compilers is the
+  optimization of variable lookup.  Our compiler, as we have implemented
+  it so far, generates code that uses the {\lstinline[mathescape=true]$lookup_variable_value$}
+  operation of the evaluator machine.  This searches for a variable by
+  comparing it with each variable that is currently bound, working frame
+  by frame outward through the run-time environment.  This search can be
+  expensive if the frames are deeply nested or if there are many
+  variables.  For example, consider the problem of looking up the value
+  of {\lstinline[mathescape=true]$x$} while evaluating the expression {\lstinline[mathescape=true]$x * y * z$} in an
+  application of the
+  function
+  that is returned by
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+let x = 3;
+let y = 4;
+(a, b, c, d, e) => {
+    let y = a * b * x;
+    let z = c + d + x;
+    return x * y * z;
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYUwLgBAHhC8EGYDcAoUkCecIBZUAoBDAGggCNSBjUgE1JAEo4A+CAbxQi4nQi3kIQAVOWHRU3HuAgAvbJQgBqCDSXjO3AE7gArpoB20MVhEzUAXyA}{\usebox\lstbox}!*/
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+  Since a {\lstinline[mathescape=true]$let$} expression is just syntactic sugar for a {\lstinline[mathescape=true]$function declaration expression$} combination, this expression is equivalent to
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+((x, y) =>
+    ((a, b, c, d, e) =>
+        ((y, z) => x * y * z)(a * b * x, c + d + x)))(3, 4)
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BTAeBoAIE8EpILwD4BQl2RAQygIygMZQAmUApvMmhjSNFAF6VKSiQBUMHkTwW3ubhEgFIAakjFxrWLOABmKABZYQA}{\usebox\lstbox}
+
+
+  Each time {\lstinline[mathescape=true]$lookup_variable_value$} searches for {\lstinline[mathescape=true]$x$}, it must
+  determine that the symbol {\lstinline[mathescape=true]$x$} is not {\lstinline[mathescape=true]$eq?$} to {\lstinline[mathescape=true]$y$} or {\lstinline[mathescape=true]$z$} (in the first frame), nor to {\lstinline[mathescape=true]$a$}, {\lstinline[mathescape=true]$b$}, {\lstinline[mathescape=true]$c$}, {\lstinline[mathescape=true]$d$}, or
+  {\lstinline[mathescape=true]$e$} (in the second frame).  We will assume, for the moment, that
+  our programs do not use {\lstinline[mathescape=true]$define$}—that variables are
+  bound only with {\lstinline[mathescape=true]$lambda$}.  Because our language is 
+  
+  lexically
+  scoped, the run-time environment for any expression will have a
+  structure that parallels the lexical structure of the program in which
+  the expression appears.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>function
+  is applied the variable
+  {\lstinline[mathescape=true]$x$} in {\lstinline[mathescape=true]$x * y * z$} will be found two frames out from the
+  current frame and will be the first variable in that frame.
+      
+  Thus, the compiler can know, when it analyzes the
+  above expression, that each time the
+  function
+  is applied the variable
+  {\lstinline[mathescape=true]$x$} in {\lstinline[mathescape=true]$x * y * z$} will be found two frames out from the
+  current frame and will be the first variable in that frame.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+  
+  We can exploit this fact by inventing a new kind of variable-lookup
+  operation, {\lstinline[mathescape=true]$lexical_address_lookup$}, that takes as arguments an
+  environment and a <EM>lexical address</EM> that consists of two numbers:
+  a <EM>frame number</EM>, which specifies how many frames to pass over,
+  and a <EM>displacement number</EM>, which specifies how many variables to
+  pass over in that frame.  
+  
+  {\lstinline[mathescape=true]$Lexical_address_lookup$} will produce
+  the value of the variable stored at that lexical address relative to
+  the current environment.  If we add the {\lstinline[mathescape=true]$lexical_address_lookup$}
+  operation to our machine, we can make the compiler generate code that
+  references variables using this operation, rather than {\lstinline[mathescape=true]$lookup_variable_value$}.  Similarly, our compiled code can use a new
+  
+  {\lstinline[mathescape=true]$lexical_address_set$}  operation instead of {\lstinline[mathescape=true]$set_variable_value$}.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+  In order to generate such code, the compiler must be able to determine
+  the lexical address of a variable it is about to compile a reference
+  to.  The lexical address of a variable in a program depends on where
+  one is in the code.  For example, in the following program, the
+  address of {\lstinline[mathescape=true]$x$} in expression e1 is (2,0)—two frames back
+  and the first variable in the frame.  At that point {\lstinline[mathescape=true]$y$} is at
+  address (0,0) and {\lstinline[mathescape=true]$c$} is at address (1,2).  In expression
+  e2,$\,$ {\lstinline[mathescape=true]$x$} is at (1,0), $\,$ {\lstinline[mathescape=true]$y$} is at (1,1), and {\lstinline[mathescape=true]$c$} is at (0,2).
+
+  
+\begin{JavaScript}
+((x, y) =>
+    ((a, b, c, d, e) =>
+        ((y, z) => $e_1$)($e_2$, c + d + x)))(3, 4)
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+
+  One way for the compiler to produce code that uses lexical addressing
+  is to maintain a data structure called a <EM>compile-time
+    environment</EM>.  This keeps track of which variables will be at which
+  positions in which frames in the run-time environment when a
+  particular variable-access operation is executed.  The compile-time
+  environment is a list of frames, each containing a list of variables.
+  (There will of course be no values bound to the variables, since
+  values are not computed at compile time.)  The compile-time
+  environment becomes an additional argument to {\lstinline[mathescape=true]$compile$} and is
+  passed along to each code generator.  The top-level call to {\lstinline[mathescape=true]$compile$} uses an empty compile-time environment.
+  When a {\lstinline[mathescape=true]$lambda$} body is compiled, {\lstinline[mathescape=true]$compile_lambda_body$}
+  extends the compile-time environment by a frame containing the
+  function's parameters, so that the sequence making up the body
+  is compiled with that extended environment.
+  At each point in the compilation, {\lstinline[mathescape=true]$compile_variable$} and {\lstinline[mathescape=true]$compile_assignment$} use the compile-time
+  environment in order to generate the appropriate lexical addresses.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+  Exercises~\ref{ex:lexical-address-start}
+  through~\ref{ex:lexical-address-end} describe how to complete this sketch of
+  the lexical-addressing strategy in order to incorporate lexical lookup
+  into the compiler.
+  Exercise~\ref{ex:cte-open-code} describes another use for the
+  compile-time environment.
+  
+  
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  Write a
+  function
+  {\lstinline[mathescape=true]$lexical_address_lookup$} that implements the new
+  lookup operation.  It should take two arguments—a lexical address
+  and a run-time environment—and return the value of the variable
+  stored at the specified lexical address.  {\lstinline[mathescape=true]$Lexical_address_lookup$}
+  should signal an error if the value of the variable is the symbol {\lstinline[mathescape=true]$*unassigned*$}.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>function
+  {\lstinline[mathescape=true]$lexical_address_set$} that
+  implements the operation that changes the value of the variable at a
+  specified lexical address.
+  
+  
+       Also write a
+  function
+  {\lstinline[mathescape=true]$lexical_address_set$} that
+  implements the operation that changes the value of the variable at a
+  specified lexical address.
+  
+  
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  Modify the compiler to maintain the compile-time environment as
+  described above.  That is, add a compile-time-environment argument to
+  {\lstinline[mathescape=true]$compile$} and the various code generators, and extend it in
+  {\lstinline[mathescape=true]$compile_lambda_body$}.
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  Write a
+  function
+  {\lstinline[mathescape=true]$find_variable$} that takes as arguments a
+  variable and a compile-time environment and returns the lexical
+  address of the variable with respect to that environment.  For
+  example, in the program fragment that is shown above, the compile-time
+  environment during the compilation of expression $e_1$ is {\lstinline[mathescape=true]$list(list("y", "z"), list("a", "b", "c", "d", "e"), list("x", "y"))$}.  {\lstinline[mathescape=true]$Find_variable$} should produce
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+find_variable("c", list(list("y", "z"), list("a", "b", "c", "d", "e"), list("x", "y")));
+      [1, 2]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYSwdgJg+gbghgJxHARgGwKYAoBEBjHAGgAI0QBnAFyzKtwE8jicAvHAShNupziZxT8CJHBH4YOXCjwAe-Ru0UBuAFDF1GgNoBGEgCYAukA}{\usebox\lstbox}
+
+
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+find_variable("x", list(list("y", "z"), list("a", "b", "c", "d", "e"), list("x", "y")));
+      [2, 0]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYSwdgJg+gbghgJxHARgGwKYAoBEAPHAGgAI0QBnAFyzKtwE8jicAvHAShNupziZxT8Axvwj8MHLhR4ESORu0UBuAFDF1GgNoAmEgAYAukA}{\usebox\lstbox}
+
+
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+find_variable("w", list(list("y", "z"), list("a", "b", "c", "d", "e"), list("x", "y")));
+      not-found
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYSwdgJg+gbghgJxHARgGwKYAoBEB3HAGgAI0QBnAFyzKtwE8jicAvHAShNupziZxT8Axvwj8MHLhR4APfo3aKA3AChi6jWAD2lALTAtAV0hA}{\usebox\lstbox}
+
+
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  Using {\lstinline[mathescape=true]$find_variable$} from exercise~\ref{ex:find-variable},
+  rewrite {\lstinline[mathescape=true]$compile_variable$} and {\lstinline[mathescape=true]$compile_assignment$} to output
+  lexical-address instructions.  In cases where {\lstinline[mathescape=true]$find-variable$}
+  returns {\lstinline[mathescape=true]$not_found$} (that is, where the variable is not in the
+  compile-time environment), you should have the code generators use the
+  evaluator operations, as before, to search for the binding.
+  (The only place a variable that is not found at compile time can be is in
+  the global environment, which is part of the run-time environment but
+  is not part of the compile-time 
+  environment.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>{\lstinline[mathescape=true]$op("get_global_environment")$}, instead of having them search the whole run-time
+  environment found in {\lstinline[mathescape=true]$env$}.)
+  Test the modified compiler on a few simple cases, such as the nested
+  {\lstinline[mathescape=true]$lambda$} combination at the beginning of this section.
+  
+      
+  Thus, if you wish, you may have the evaluator operations look directly in
+  the global environment, which can be obtained with the operation {\lstinline[mathescape=true]$op("get_global_environment")$}, instead of having them search the whole run-time
+  environment found in {\lstinline[mathescape=true]$env$}.)
+  Test the modified compiler on a few simple cases, such as the nested
+  {\lstinline[mathescape=true]$lambda$} combination at the beginning of this section.
+  
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  
+  We argued in section~\ref{sec:internal-definitions} that internal definitions
+  for block structure should not be considered <QUOTE>real</QUOTE> {\lstinline[mathescape=true]$define$}s.  Rather,
+  a
+  function
+  body should be interpreted as if the internal variables being
+  defined were installed as ordinary {\lstinline[mathescape=true]$lambda$} variables initialized to their
+  correct values using assignment.  Section~\ref{sec:internal-definitions} and
+  exercise~\ref{ex:internal-defs} showed how to modify the metacircular
+  interpreter to accomplish this by scanning out internal definitions.  Modify
+  the compiler to perform the same transformation before it compiles a
+  function
+  body.
+  
+  
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  
+  
+  
+  In this section we have focused on the use of the compile-time
+  environment to produce lexical addresses.  But there are other uses
+  for compile-time environments.  For instance, in
+  exercise~\ref{ex:open-code} we increased the efficiency of compiled
+  code by open-coding primitive
+  functions.  Our implementation treated
+  the names of open-coded
+  functions
+  as reserved words.  If a program
+  were to rebind such a name, the mechanism described in
+  exercise~\ref{ex:open-code} would still open-code it as a primitive,
+  ignoring the new binding.  For example, consider the
+  function
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+(+ * a b x y) => (a * x) + (b * y)
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQagBAVGCGYEZgB5gJ4EowF4B8ZiykQ3GASnSA}{\usebox\lstbox}
+
+
+  which computes a linear combination of {\lstinline[mathescape=true]$x$} and {\lstinline[mathescape=true]$y$}.  We might
+  call it with arguments {\lstinline[mathescape=true]$+matrix$}, {\lstinline[mathescape=true]$*matrix$}, and four
+  matrices, but the open-coding compiler would still open-code the {\lstinline[mathescape=true]$+$} and the {\lstinline[mathescape=true]$*$} in {\lstinline[mathescape=true]$(a * x) + (b * y)$} as primitive {\lstinline[mathescape=true]$+$}
+  and {\lstinline[mathescape=true]$*$}.  Modify the open-coding compiler to consult the
+  compile-time environment in order to compile the correct code for
+  expressions involving the names of primitive
+  functions.
+  (The code will work correctly as long as the program does not {\lstinline[mathescape=true]$define$} or assignment these names.)
+  
+      
+\end{Exercise}
+
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>This is not true if we allow
+    internal definitions, unless we scan them out.
+    See exercise~\ref{ex:compile-internal-defs}.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>This is the modification to variable lookup
+    
+    
+    required if we implement the scanning method to eliminate internal
+    definitions (exercise~\ref{ex:compile-internal-defs}).  We will need
+    to eliminate these definitions in order for lexical addressing to
+    work.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Lexical addresses cannot be used to access variables in the global
+    environment, because these names can be defined and redefined
+    interactively at any time.  With internal definitions scanned out, as
+    in exercise~\ref{ex:compile-internal-defs}, the only definitions the
+    compiler sees are those at top level, which act on the global
+    environment.  Compilation of a definition does not cause the defined
+    name to be entered in the compile-time environment.</FOOTNOTE></div>
+</SUBSECTION>

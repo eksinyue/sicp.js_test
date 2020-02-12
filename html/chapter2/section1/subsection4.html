@@ -1,0 +1,679 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>2.1.4 
+        Extended Exercise: Interval Arithmetic
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+      
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+        Alyssa P. Hacker is designing a system to help people solve
+        engineering problems.  One feature she wants to provide in her system
+        is the ability to manipulate inexact quantities (such as measured
+        parameters of physical devices) with known precision, so that when
+        computations are done with such approximate quantities the results
+        will be numbers of known precision.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+        Electrical engineers will be using Alyssa's system to compute
+        electrical quantities.  It is sometimes necessary for them to compute
+        the value of a parallel equivalent resistance $R_{p}$ of two
+        resistors $R_{1}$ and $R_{2}$ using the formula
+        
+
+        
+          \[
+          R_{p}=\frac{1}{1/R_{1}+1/R_{2}}
+          \]
+        
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+        Resistance values are usually known only up to some 
+        
+        tolerance
+        guaranteed by the manufacturer of the resistor.  For example, if you
+        buy a resistor labeled <QUOTE>6.8 ohms with 10% tolerance</QUOTE> you can only
+        be sure that the resistor has a resistance between $6.8-0.68=6.12$ and
+        $6.8+0.68=7.48$ ohms.  Thus, if you have a 6.8-ohm 10%~resistor in
+        parallel with a 4.7-ohm 5%~resistor, the resistance of the
+        combination can range from about 2.58 ohms (if the two resistors are
+        at the lower bounds) to about 2.97 ohms (if the two resistors are at
+        the upper bounds).
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+        Alyssa's idea is to implement <QUOTE>interval arithmetic</QUOTE> as a set of
+        arithmetic operations for combining <QUOTE>intervals</QUOTE> (objects
+        that represent the range of possible values of an inexact quantity).
+        The result of adding, subtracting, multiplying, or dividing two
+        intervals is itself an interval, representing the range of the
+        result.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+        Alyssa postulates the existence of an abstract object called an
+        <QUOTE>interval</QUOTE> that has two endpoints: a lower bound and an upper bound.
+        She also presumes that, given the endpoints of an interval, she can
+        construct the interval using the data constructor 
+        
+        {\lstinline[mathescape=true]$make_interval$}.
+        Alyssa first writes a
+        function
+        for adding two intervals.  She
+        reasons that the minimum value the sum could be is the sum of the two
+        lower bounds and the maximum value it could be is the sum of the two
+        upper bounds:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function add_interval(x, y) {
+    return make_interval(lower_bound(x) + lower_bound(y),
+                         upper_bound(x) + upper_bound(y));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCaoPozFApgJwDdkAbACgA8AaRATwEpEBvAKEXcX1yhHyQFtkAa1xYcBYuRJwA7gQwAjOOFSVGAakTS5+RcrCqGVNh1Nnz5kAAcr8pSrWJN127vsGyDegG4WAXyA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+        Alyssa also works out the product of two intervals by finding the
+        minimum and the maximum of the products of the bounds and using them
+        as the bounds of the resulting interval.  ({\lstinline[mathescape=true]$math_min$} and {\lstinline[mathescape=true]$math_max$} are
+        
+        
+        
+        
+        primitives that find the minimum or maximum of any number of
+        arguments.)
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function mul_interval(x, y) {
+    const p1 = lower_bound(x) * lower_bound(y);
+    const p2 = lower_bound(x) * upper_bound(y);
+    const p3 = upper_bound(x) * lower_bound(y);
+    const p4 = upper_bound(x) * upper_bound(y);
+    return make_interval(math_min(p1, p2, p3, p4),
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWxAGwPozFApgJwDcBDNACgA8AaRATwEpEBvAKEXcQgQGcpEAHAIyIAvIjRwA7gQwAjOOAAmlRgCpxUmfKVkGAbjYcuYXgIBMojdPxyFYZRTWIQ-flrvL9h9sdP8AzJYubjba9iqI6hLWtjpeHJw8fPwALEGu7jqOkc4ZoR669AYJ+LhQIPhIyMQA1rhYOAQk5NVQABYYyNhkQjT8Zn3+fSn0VN4JE5NTrR3VFD2CfQMCQwIjRSwAvkA}{\usebox\lstbox}!*/
+                         math_max(p1, p2, p3, p4));
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+        To divide two intervals, Alyssa multiplies the first by the reciprocal of
+        the second.  Note that the bounds of the reciprocal interval are
+        the reciprocal of the upper bound and the reciprocal of the lower bound, in
+        that order.
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function div_interval(x,y) {
+    return mul_interval(x, make_interval(1 / upper_bound(y),
+                                         1 / lower_bound(y)));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAExgNwPozFApgJzQEMAbACgA8AaATwEpEBvAKETcX1yhHyQFsQJLDgLFy1RHyIBrXMLyFSZAIyIA9IhAAHLQQwAjOOGRl6VVu0tXrN2zdUaScAO57Dx03S8BuZgF8gA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+        Alyssa's program is incomplete because she has not specified the
+        implementation of the interval abstraction.  Here is a definition of
+        the interval constructor:
+
+        
+
+        
+
+        
+\begin{JavaScript}
+function make_interval(x, y) {
+    return pair(x, y); 
+}
+// lower_bound ...
+// upper_bound ...
+\end{JavaScript}
+
+
+        
+
+        
+
+        
+
+        Define selectors 
+        
+        {\lstinline[mathescape=true]$upper_bound$} and 
+        
+        {\lstinline[mathescape=true]$lower_bound$} to complete
+        the implementation.
+        
+
+      \hfill{\hyperref[ex:alyssa-interval-start-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:alyssa-interval-start}]
+
+   
+\begin{JavaScript}
+function make_interval(x, y) {
+    return pair;
+}
+function lower_bound(x) { 
+    return head(x); 
+}
+function upper_bound(x) { 
+    return tail(x); 
+}
+\end{JavaScript}
+
+ 
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled18}
+ 
+        Using reasoning analogous to Alyssa's, describe how the difference
+        of two intervals may be computed.  Define a corresponding subtraction
+        function, called 
+        
+        {\lstinline[mathescape=true]$sub_interval$}.
+
+      \hfill{\hyperref[ex:unlabeled18-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled18}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function sub_interval(x, y) {
+    return make_interval(lower_bound(x) - upper_bound(y),
+                         upper_bound(x) - lower_bound(y));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxAIwPozFApgJwDcBDAGwAoAPAGkQE8BKRAbwChEPF9coR8kAtsQDWuLDgIkKpOAHcCGNHHAATKkwC0iEAAcdCpavKNq7TuYuXLu-fkXKwaypsQz5dw4+MMGAblYAvkA}{\usebox\lstbox}
+
+
+    
+  
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled19}
+ 
+        
+        The <EM>width</EM> of an interval is half of the difference between its
+        upper and lower bounds.  The width is a measure of the uncertainty of
+        the number specified by the interval.  For some arithmetic operations
+        the width of the result of combining two intervals is a function only
+        of the widths of the argument intervals, whereas for others the width
+        of the combination is not a function of the widths of the argument
+        intervals.  Show that the width of the sum (or difference) of two
+        intervals is a function only of the widths of the intervals being
+        added (or subtracted).  Give examples to show that this is not true
+        for multiplication or division.
+
+	
+        
+      \hfill{\hyperref[ex:unlabeled19-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled19}]
+
+	  Let us denote the width of interval $i$
+	  with $W(i)$, and its lower and upper
+	  bound with $L(i)$ and
+	  $U(i)$, respectively. Two
+	  intervals $i_1$ and
+	  $i_2$ have by definition widths of
+	  $(U(i_1) - L(i_1))/2$ and
+	  $(U(i_2) - L(i_2))/2$, respectively.
+	  Adding the two intervals
+	  leads to the interval
+	  $[ L(i_1) + L(i_2), U(i_1) + U(i_2)]$,
+	  whose width is
+	  \[(U(i_1) + U(i_2) - (L(i_1) + L(i_2)))/2\]
+	  \[= (U(i_1) - L(i_1))/2 + (U(i_2) - L(i_2))/2\]
+	  \[= (W(i_1) + W(i_2)\]
+	  The argument for subtraction is similar.
+	  <div class='permalink'>
+<a name='p8' class='permalink'></a><p></p></div>
+	  The widths of the result of multiplying intervals does not have
+	  such a nice property. For example, multiplying any interval
+	  with the zero-width interval 
+	  $[ 0, 0 ]$ yields a zero-width interval
+	  whereas multiplying any interval
+	  $i$
+	  with the zero-width interval 
+	  $[ 1, 1 ]$ yields an interval with width
+	  $W(i)$.
+	  The argument for division is similar.
+	
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        
+        Ben Bitdiddle, an expert systems programmer, looks over Alyssa's
+        shoulder and comments that it is not clear what it means to
+        divide by an interval that spans zero.  Modify Alyssa's program to
+        check for this condition and to signal an error if it occurs.
+        
+
+\hfill{\hyperref[ex:div-interval-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:div-interval}]
+
+
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function div_interval(x, y) {
+    return lower_bound(y) <= 0 && upper_bound(y) >= 0
+        ? error("Division error (interval spans 0)")
+        : mul_interval(x, make_interval(1 / upper_bound(y),
+                                        1 / lower_bound(y)));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAExgNwPozFApgJzQEMAbACgA8AaRATwEpEBvAKEXcX1yhHyRLgB3AhgBGccMjINEAHgC8iAAyIAZKsQgADlpHjJ0xgD5FSthwsB+RAXxx8ZAEQARdDADO8JLfuIy2PEJSRHctIjB3ZXpHenMLdgAuRABbEBIsHAJicmoUogBrXAzA7LIARkQAek0dPQkwKQYqOPjWtvaO9grqgWF8MXrG+mGAbhYAXyA}{\usebox\lstbox}
+
+
+
+\end{Answer}
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        
+        In passing, Ben also cryptically comments: <QUOTE>By testing the signs of
+          the endpoints of the intervals, it is possible to break {\lstinline[mathescape=true]$mul_interval$} into nine cases, only one of which requires more than
+          two multiplications.</QUOTE>  Rewrite this
+        function
+        using Ben's
+        suggestion.
+        
+
+	
+      \hfill{\hyperref[ex:alyssa-interval-end-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:alyssa-interval-end}]
+
+
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function p(n) {
+    return n >= 0;
+}
+function n(n) {
+    return ! p(n);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwBRgJSIN4ChEGIBOAplCEUkgHwC8iADANy4C+uoksCiY6WeQsTIUkAQhT8W7TtHhIoACxIB9KETggARgBtVAWwCGAaxJFUADx0AaRBZC2AnjcSOQA-IQgIAzlBQAjIj0VogAVK46LELeYH4oAEzBdjrhriDRXr7+yADMyfZpzpkEsfHIACwFIEUZngRGpiowYFBmAG6GOqhGSir6LajIAbbICaO5oxUY1vVC8wu9iv2GFkMjiRNTGBjSHOByPPogOs2tHV2WTgIEc2X+ofQ6cADuZipammAAJpa7d9k7DV6CBkMh3p9wL8LP8YoDnMlnm8iB8vr9HLCsnF-G5kqDwSjIT9UBiSsJyJRJFYsAAyGlU9yIOmSZy0+loNxYRBzBaIAD8iEaqhabSInW6oQizlshSl7h5CwAXFSdGyGWq+KymeySYzubyFgKhWdReLLDUpS5ZekMArecq0NTternZrVa7dVy7QajSZhecxZdrdKUrVbQb7bxLO7mY7GbGSTGdZzbhGfYK-SaLhLUnKZRabd6I8q+E6E-YNYnKyn9Wn08aRdnzUUrbnIuG65HS0moxXnRyexy9UXO76mo3AznavmWx3O13o5W+8y3Wqh1752mx-7TUG224ZfvVSP5yXFx7l-TVx6ayfN9us5Pm3nQ5a55uDWeyzrL1GtQnbw-UdECUVR1E0XQDD9cwrHzJwXE5O8P2VMwNHMAAiJEzEQHRDCIABzbClEMJB8TMdD-lYIA}{\usebox\lstbox}!*/
+function the_trouble_maker(xl, xu, yl, yu) {
+    const p1 = xl * yl;
+    const p2 = xl * yu;
+    const p3 = xu * yl;
+    const p4 = xu * yu;
+    make_interval(math_min(p1, p2, p3, p4),
+                  math_max(p1, p2, p3, p4));
+}
+function mul_interval(x, y) {  
+    const xl = lower_bound(x);
+    const xu = upper_bound(x);
+    const yl = lower_bound(y);
+    const yu = upper_bound(y);
+    return p(xl) && p(xu) && p(yl) && p(yu)  
+           ? make_interval(xl * yl, xu * yu)
+           : p(xl) && p(xu) && n(yl) && p(yu)  
+             ? make_interval(xu * yl, xu * yu)
+             : p(xl) && p(xu) && n(yl) && n(yu)  
+               ? make_interval(xu * yl, xl * yu)
+               : n(xl) && p(xu) && p(yl) && p(yu)  
+                 ? make_interval(xl * yu, xu * yu)
+                 : n(xl) && p(xu) && n(yl) && n(yu)  
+                   ? make_interval(xu * yl, xl * yl)
+                   : n(xl) && n(xu) && p(yl) && p(yu)  
+                     ? make_interval(xl * yu, xu * yl)
+                     : n(xl) && n(xu) && n(yl) && p(yu)  
+                       ? make_interval(xl * yu, xl * yl)
+                       : n(xl) && n(xu) && n(yl) && n(yu)  
+                         ? make_interval(xu * yu, xl * yl)
+                         : n(xl) && p(xu) && n(yl) && p(yu)  
+                           ? the_trouble_maker(xl, xu, yl, yu)
+                           : error("lower larger than upper");
+}
+
+\end{JavaScriptClickable}
+
+
+	
+\end{Answer}
+
+
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+        After debugging her program, Alyssa shows it to a potential user,
+        who complains that her program solves the wrong problem.  He
+        wants a program that can deal with numbers represented as a center
+        value and an additive tolerance; for example, he wants to work with
+        intervals such as $3.5\pm 0.15$ rather than $[3.35, 3.65]$.  
+        Alyssa 
+        returns to her desk and fixes this problem by supplying an alternate
+        constructor and alternate selectors:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_center_width(c, w) {
+    return make_interval(c - w, c + w);
+}
+function center(i) {
+    return (lower_bound(i) + upper_bound(i)) / 2;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9CmxSYBO2A7jACZQAWAFBADSKkCUiA3gFCI+JGZQQRJGizYYBYgDdUAG3qIAtMyYREAamYsA3JwC+nUJFgJEeSUVow2XXnwFCktWXFLFsAIzjgKVtppAAB0D3Lx8-NgB6RAAmXQMjaHgkcio6aw5uXn5BYURaIJCSMLBfDOUXN2LvUojEaLj9IA}{\usebox\lstbox}!*/
+function width(i) {
+    return (upper_bound(i) - lower_bound(i)) / 2;
+}
+
+\end{JavaScriptClickable}
+
+
+
+        
+
+        Unfortunately, most of Alyssa's users are engineers.  Real engineering
+        situations usually involve measurements with only a small uncertainty,
+        measured as the ratio of the width of the interval to the midpoint of
+        the interval.  Engineers usually specify percentage tolerances on the
+        parameters of devices, as in the resistor specifications given
+        earlier.
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        Define a constructor 
+        
+        {\lstinline[mathescape=true]$make_center_percent$} that takes a center and
+        a percentage tolerance and produces the desired interval.  You must
+        also define a selector {\lstinline[mathescape=true]$percent$} that produces the
+        percentage tolerance for a given interval.  The {\lstinline[mathescape=true]$center$} selector
+        is the same as the one shown above.
+        
+ 
+      \hfill{\hyperref[ex:make-center-percent-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:make-center-percent}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_center_percent(center, percent) {
+    const width = center * (percent / 100);
+    return make_center_width(center, width);
+}
+function percent(i) {
+    return (width(i) / center(i)) * 100;
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9CmxSYBO2ADsXgQBSWFEA0i5RtAlIgN4BQiviECAM5REAdxgATKAAtEAXn746iAFSIqzWogD0iAIwAGA6wDcPPkUxQQRJGiy4lxbOKnSaThmMkzTXAL5coJCwCEwUSlQw7Nx8iJbWtuquMlHsurTEaexqhgZm-kA}{\usebox\lstbox}!*/
+}
+
+\end{JavaScriptClickable}
+
+
+    
+  
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+        Show that under the assumption of small percentage tolerances there is
+        a simple formula for the approximate percentage tolerance of the
+        product of two intervals in terms of the tolerances of the factors.
+        You may simplify the problem by assuming that all numbers are
+        positive.
+        
+ 
+      \hfill{\hyperref[ex:interval-product-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:interval-product}]
+
+      Let us denote the maximal error of an interval with center
+      $i$ by
+      $\Delta i$
+      the maximal error of  an interval with center
+      $j$ by
+      $\Delta j$, and
+      the maximal error of the multiplication result with center
+      $k$ by
+      $\Delta k$. Then:
+\[ k + \Delta k = (i+\Delta i) * (j+\Delta j)
+       =  ij + j \Delta i + i\Delta j + \Delta i \Delta j \]
+Since $k = i j$
+\[ \Delta k = j\Delta i + i \Delta j + \Delta i\Delta j \] 
+Since we assume that
+$\Delta i \ll i$ and
+$\Delta j \ll j$, we can neglect
+the term
+$\Delta i \Delta j$ and obtain
+\[ \Delta k = j \Delta i + i \Delta j \]
+Expressed in tolerances, we obtain:
+\[ \Delta k / k = (j \Delta i + i \Delta j) / ij = \Delta i/i + \Delta j/j \] 
+Thus, the tolerance of the result of an interval multiplication
+is (roughly) the sum of the tolerances of its arguments.
+  
+\end{Answer}
+
+
+      <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+        After considerable work, Alyssa P. Hacker delivers her finished
+        system.  Several years later, after she has forgotten all about it, she
+        gets a frenzied call from an irate user,  Lem E. Tweakit.
+        It seems that Lem has
+        noticed that the formula for parallel resistors can be written in two
+        
+        algebraically equivalent ways:
+
+        
+          \[
+          \frac{R_{1}R_{2}}{R_{1}+R_{2}}
+          \]
+        
+
+
+        and
+
+        
+          \[
+          \frac{1}{1/R_{1}+1/R_{2}}
+          \]
+        
+
+
+        He has written the following two programs, each of which computes the
+        parallel-resistors formula differently:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function par1(r1, r2) {
+    return div_interval(mul_interval(r1, r2),
+                        add_interval(r1, r2));
+}
+function par2(r1, r2) {
+    const one = make_interval(1, 1);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwIYCcCMAKLAaRdAJgEpEBvAKERsIFMoR0kATGANwH0Ywo712qADbYAtiCHde-QSPyFSearRWq1q1CxZS+A4bkwFiJEgG5KAX0qhIsBCgxEDR0hWU0ICAM5RECOogAvIiiqADWdDoy+oaImGbu9IzMiGxcPLqy2P5K6nn5mtoZ0SJpUXoiOYTxufl19WplxRXZYHQuJgkWQA}{\usebox\lstbox}!*/
+    return div_interval(one,
+                        add_interval(div_interval(one, r1),
+                                     div_interval(one, r2)));
+}
+
+\end{JavaScriptClickable}
+
+
+        
+
+        Lem complains that Alyssa's program gives different answers for
+        the two ways of computing. This is a serious complaint.
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+        Demonstrate that Lem is right. Investigate the behavior of the
+        system on a variety of arithmetic expressions. Make some intervals
+	$A$ and $B$,
+        and use them in computing the expressions $A/A$ and $A/B$.  You will
+        get the most insight by using intervals whose width is a small
+        percentage of the center value. Examine the results of the computation
+        in center-percent form (see exercise~\ref{ex:make-center-percent}).
+        
+
+	
+	  
+	
+      \hfill{\hyperref[ex:interval-compare-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:interval-compare}]
+
+	  The expression $A/A$ is interesting, because if the interval
+	  is meant to represent a specific (albeit imprecisely known) value, the result
+	  should be exactly 1 (width 0), whereas the interval division will result in an
+	  interval with positive width. Multiple occurrences of the same term are not
+	  recognized as such in the approaches above and thus they
+	  will suffer from this problem.
+	
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled20}
+
+        Eva Lu Ator, another user, has also noticed the different intervals
+        computed by different but algebraically equivalent expressions. She
+        says that a formula to compute with intervals using Alyssa's system
+        will produce tighter error bounds if it can be written in such a form
+        that no
+	
+	  
+	  
+	    name
+	  
+	
+	that represents an uncertain number is repeated.
+        Thus, she says, {\lstinline[mathescape=true]$par2$} is a <QUOTE>better</QUOTE> program for parallel
+        resistances than {\lstinline[mathescape=true]$par1$}.  Is she right?  Why?
+
+	
+	
+      \hfill{\hyperref[ex:unlabeled20-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled20}]
+
+	  She is right. The so-called <EM>dependency problem</EM> in interval arithmetic
+	  arises when the same input values (or intermediate terms) appear in a 
+	  function on intervals. The second formulation is better because each input
+	  occurs only once, and therefore the result of a naive interval calculation is
+	  optimal.
+	
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled21}
+
+        Explain, in general, why equivalent algebraic expressions may lead to
+        different answers.  Can you devise an interval-arithmetic package that
+        does not have this shortcoming, or is this task impossible?  (Warning:
+        This problem is very difficult.)
+
+	
+	
+      \hfill{\hyperref[ex:unlabeled21-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled21}]
+
+	  The dependency problem in interval arithmetic is solved using linear
+	  and polynomial appoximations, leading to affine arithmetic and
+	  Taylor series methods, respectively.
+	
+\end{Answer}
+
+      
+      
+    
+</SUBSECTION>

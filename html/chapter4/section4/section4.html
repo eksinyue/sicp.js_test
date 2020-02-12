@@ -1,0 +1,322 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>4.4 Logic Programming</a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SECTION>\begin{center}\fbox{\textcolor{red}{Note: this section is a work in progress!}}\end{center}
+
+    <SECTIONCONTENT></SECTIONCONTENT>
+
+    
+    
+
+    <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+      
+      
+      
+      
+      In chapter~1 we stressed that computer science deals with imperative
+      (how to) knowledge, whereas mathematics deals with declarative (what
+      is) knowledge.  Indeed, programming languages require that the
+      programmer express knowledge in a form that indicates the step-by-step
+      methods for solving particular problems.  On the other hand,
+      high-level languages provide, as part of the language implementation,
+      a substantial amount of methodological knowledge that frees
+      the user from concern with numerous details of how a specified
+      computation will progress.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+      Most programming languages, including
+      
+      
+      
+      are organized around
+      computing the values of mathematical functions.  Expression-oriented
+      languages (such as Lisp, Fortran, and Algol) capitalize on the <QUOTE>pun</QUOTE>
+      that an expression that describes the value of a function may also be
+      interpreted as a means of computing that value.  Because of this, most
+      programming languages are strongly biased toward unidirectional
+      computations (computations with well-defined inputs and outputs).
+      There are, however, radically different programming languages that
+      relax this bias.  We saw one such example in
+      section~\ref{sec:constraints}, where the objects of computation were
+      arithmetic constraints.  In a constraint system the direction and the
+      order of computation are not so well specified; in carrying out a
+      computation the system must therefore provide more detailed <QUOTE>how to</QUOTE>
+      knowledge than would be the case with an ordinary arithmetic
+      computation.  This does not mean, however, that the user is released
+      altogether from the responsibility of providing imperative knowledge.
+      There are many constraint networks that implement the same set of
+      constraints, and the user must choose from the set of mathematically
+      equivalent networks a suitable network to specify a particular
+      computation.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+      The nondeterministic program evaluator of
+      section~\ref{sec:nondeterministic-evaluation} also moves away from the
+      view that programming is about constructing algorithms for computing
+      unidirectional functions.  In a nondeterministic language, expressions
+      can have more than one value, and, as a result, the computation is
+      
+      dealing with relations rather than with
+      single-valued functions.  Logic programming extends this idea by
+      combining a relational vision of programming with a powerful kind of
+      symbolic pattern matching called 
+      <EM>unification</EM>.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+    </p></div>
+
+    <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+      
+      
+      This approach, when it works, can be a very powerful way to write
+      programs.  Part of the power comes from the fact that a single <QUOTE>what
+  is</QUOTE> fact can be used to solve a number of different problems that
+      would have different <QUOTE>how to</QUOTE> components.  As an example, consider
+      the 
+      
+      {\lstinline[mathescape=true]$append$} operation, which takes two lists as arguments and
+      combines their elements to form a single list.  In a procedural
+      language such as JavaScript, we could define {\lstinline[mathescape=true]$append$} in terms of the
+      basic list constructor {\lstinline[mathescape=true]$pair$}, as we did in
+      section~\ref{sec:sequences}:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function append(x, y) {    
+    return is_null(x)
+        ? y
+        : pair(head(x), append(tail(x), y));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwA6oKZgCYAoAeANIgJ4CUiA3ojYgFC2IBOGUITSMAzgPpggAbAQTINGtAPykx4xAC5EqZDCa4AFhmR58ZYmkw5cUZcJ3FyZANx0AvkA}{\usebox\lstbox}
+
+
+    </p></div>
+
+    <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+      This
+      function
+      can be regarded as a translation into JavaScript of the
+      following two rules, the first of which covers the case where the
+      first list is empty and the second of which handles the case of a
+      nonempty list, which is a {\lstinline[mathescape=true]$pair$} of two parts:
+
+      <UL>
+  <LI>For any list {\lstinline[mathescape=true]$y$}, the empty list and {\lstinline[mathescape=true]$y$} {\lstinline[mathescape=true]$append$} to form {\lstinline[mathescape=true]$y$}.
+
+  </LI>
+  <LI>For any {\lstinline[mathescape=true]$u$},$\,$ {\lstinline[mathescape=true]$v$},$\,$ {\lstinline[mathescape=true]$y$}, and {\lstinline[mathescape=true]$z$},
+    $\,${\lstinline[mathescape=true]$pair(u, v)$} and {\lstinline[mathescape=true]$y$} {\lstinline[mathescape=true]$append$} to form {\lstinline[mathescape=true]$pair(u, z)$}
+    if {\lstinline[mathescape=true]$v$} and {\lstinline[mathescape=true]$y$} {\lstinline[mathescape=true]$append$} to form {\lstinline[mathescape=true]$z$}.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+  </LI>
+      <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>To
+      see the correspondence between the rules and the
+      function, let {\lstinline[mathescape=true]$x$} in the
+      function
+      (where {\lstinline[mathescape=true]$x$} is nonempty) correspond to {\lstinline[mathescape=true]$pair(u, v)$} in the rule.  Then {\lstinline[mathescape=true]$z$} in the rule corresponds to the
+      {\lstinline[mathescape=true]$append$} of {\lstinline[mathescape=true]$tail(x)$} and {\lstinline[mathescape=true]$y$}.</FOOTNOTE></div></UL>
+    </p></div>
+
+    <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+      Using the {\lstinline[mathescape=true]$append$}
+      function, we can answer questions such as
+      
+\begin{quote}
+  Find the {\lstinline[mathescape=true]$append$} of {\lstinline[mathescape=true]$list("a", "b")$} and {\lstinline[mathescape=true]$list("c", "d")$}.
+      \end{quote}
+
+    </p></div>
+
+    <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+      But the same two rules are also sufficient for answering the following
+      sorts of questions, which the
+      function
+      can't answer:
+
+      
+\begin{quote}
+  Find a list {\lstinline[mathescape=true]$y$} that {\lstinline[mathescape=true]$append$}s with {\lstinline[mathescape=true]$list("a", "b")$} 
+  to produce {\lstinline[mathescape=true]$list("a", "b", "c", "d")$}.
+
+  Find all {\lstinline[mathescape=true]$x$} and {\lstinline[mathescape=true]$y$} that {\lstinline[mathescape=true]$append$} to form {\lstinline[mathescape=true]$list("a", "b", "c", "d")$}.
+      \end{quote}
+
+    </p></div>
+
+    <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+      
+      
+      In a logic programming language, the programmer writes an {\lstinline[mathescape=true]$append$}
+      <QUOTE>function</QUOTE> by stating the two rules about {\lstinline[mathescape=true]$append$} given above.
+      <QUOTE>How to</QUOTE> knowledge is provided automatically by the interpreter to
+      allow this single pair of rules to be used to answer all three types
+      of questions about {\lstinline[mathescape=true]$append$}.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+    
+      
+    </p></div>
+
+    <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+      Contemporary logic programming languages (including the one we
+      implement here) have substantial deficiencies, in that their general
+      <QUOTE>how to</QUOTE> methods can lead them into spurious infinite loops or other
+      undesirable behavior.
+      Logic programming is an active field of research in computer 
+      science.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
+      
+    
+      
+      
+    </p></div>
+
+    <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+      Earlier in this chapter we explored the technology of implementing
+      interpreters and described the elements that are essential to an
+      interpreter for a JavaScript-like language (indeed, to an interpreter for
+      any conventional language).  Now we will apply these ideas to discuss
+      an interpreter for a logic programming language.  We call this
+      
+      language the <EM>query language</EM>, because it is very useful for
+      retrieving information from data bases by formulating 
+      
+      <EM>queries</EM>,
+      or questions, expressed in the language.  Even though the query
+      language is very different from JavaScript, we will find it convenient to
+      describe the language in terms of the same general framework we have
+      been using all along: as a collection of primitive elements, together
+      with means of combination that enable us to combine simple elements to
+      create more complex elements and means of abstraction that enable us
+      to regard complex elements as single conceptual units.  An interpreter
+      for a logic programming language is considerably more complex than an
+      interpreter for a language like JavaScript.  Nevertheless, we will see
+      
+      that our query-language interpreter contains many of the same elements
+      found in the interpreter of section~\ref{sec:mc-eval}.  In particular,
+      there will be an <QUOTE>eval</QUOTE> part that classifies expressions according
+      to type and an <QUOTE>apply</QUOTE> part that implements the language's
+      abstraction mechanism (functions
+      in the case of JavaScript, and <EM>rules</EM>
+      in the case of logic programming).  Also, a central role is played in
+      the implementation by a frame data structure, which determines the
+      correspondence between symbols and their associated values.  One
+      additional interesting aspect of our query-language implementation is
+      that we make substantial use of streams, which were introduced in
+      chapter~3.
+      
+    </p></div>
+
+    
+    &subsection4.4.1;
+
+    
+    &subsection4.4.2;
+
+    
+    &subsection4.4.3;
+
+    
+    &subsection4.4.4;
+    
+  <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Logic programming has grown out of a long
+  
+  
+  history of research in automatic theorem proving.  Early
+  theorem-proving programs could accomplish very little, because they
+  exhaustively searched the space of possible proofs.  The major
+  breakthrough that made such a search plausible was the discovery in
+  the early 1960s of the 
+  
+  <EM>unification algorithm</EM> and the 
+  
+  <EM>
+    resolution principle</EM> (Robinson 1965).  
+  Resolution was used, for
+  example, by 
+  
+  Green and Raphael (1968) (see also Green 1969) as the
+  basis for a deductive question-answering system.  During most of this
+  period, researchers concentrated on algorithms that are guaranteed to
+  find a proof if one exists.  Such algorithms were difficult to control
+  and to direct toward a proof.  
+  
+  Hewitt (1969) recognized the
+  possibility of merging the control structure of a programming language
+  with the operations of a logic-manipulation system, leading to the
+  work in automatic search mentioned in section~\ref{sec:amb}
+  (footnote~\ref{foot:backtrack}).  At the same time that this was being done,
+  
+  Colmerauer, in Marseille, was developing rule-based systems for
+  manipulating natural language 
+  (see Colmerauer et al.~1973).  He
+  invented a programming language called 
+  
+  Prolog for representing those
+  rules.  
+  
+  Kowalski (1973; 
+  1979), 
+  in Edinburgh, recognized that execution
+  of a Prolog program could be interpreted as proving theorems (using a
+  proof technique called linear 
+  
+  Horn-clause resolution).  The merging of
+  the last two strands led to the logic-programming movement.  Thus, in
+  assigning credit for the development of logic programming, the French
+  can point to Prolog's genesis at the 
+  
+  University of Marseille, while
+  the British can highlight the work at the 
+  
+  University of Edinburgh.
+  According to people at 
+  
+  MIT, logic programming was developed by these
+  groups in an attempt to figure out what Hewitt was talking about in
+  his brilliant but impenetrable Ph.D. thesis.  For a history of logic
+  
+  programming, see Robinson 1983.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>This certainly does not
+  relieve the user of the entire problem of how to compute the answer.
+  There are many different mathematically equivalent sets of rules for
+  formulating the {\lstinline[mathescape=true]$append$} relation, only some of which can be
+  turned into effective devices for computing in any direction.  In
+  addition, sometimes <QUOTE>what is</QUOTE> information gives no clue <QUOTE>how to</QUOTE>
+  compute an answer.  For example, consider the problem of computing the
+  $y$ such that $y^2 = x$.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Interest in logic programming peaked
+  
+  
+  
+  during the early 80s when the Japanese government began an ambitious
+  project aimed at building superfast computers optimized to run logic
+  programming languages.  The speed of such computers was to be measured
+  in LIPS (Logical Inferences Per Second) rather than the usual FLOPS
+  (FLoating-point Operations Per Second).  Although the project
+  succeeded in developing hardware and software as originally planned,
+  the international computer industry moved in a different direction.
+  See 
+  
+  Feigenbaum and Shrobe 1993 for an overview evaluation of the
+  Japanese project.  The logic programming community has also moved on
+  to consider relational programming based on techniques other than
+  simple pattern matching, such as the ability to deal with numerical
+  constraints such as the ones illustrated in the constraint-propagation
+  system of section~\ref{sec:constraints}.</FOOTNOTE></div>
+</SECTION>

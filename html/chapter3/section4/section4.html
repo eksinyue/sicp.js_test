@@ -1,0 +1,130 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>3.4 Concurrency: Time Is of the Essence</a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SECTION>
+
+    <SECTIONCONTENT></SECTIONCONTENT>
+
+    
+    
+
+    <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+      We've seen the power of computational objects with local state as
+      tools for modeling.  Yet, as Section~\ref{sec:costs-of-assignment}
+      warned, this power extracts a price: the loss of referential
+      transparency, giving rise to a thicket of questions about sameness and
+      change, and the need to abandon the substitution model of evaluation in
+      favor of the more intricate environment model.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+      
+      The central issue lurking beneath the complexity of state, sameness,
+      and change is that by introducing assignment we are forced to admit
+      <EM>time</EM> into our computational models.  Before we introduced
+      assignment, all our programs were timeless, in the sense that any
+      expression that has a value always has the same value.  In contrast,
+      recall the example of modeling withdrawals from a bank account
+      and returning the resulting balance,
+      introduced at the beginning of
+      Section~\ref{sec:local-state-variables}:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+withdraw(25); // output: 75
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4SwLgFgJgTghsAFAJgKwEoDcACA9L7AewFcwAHUgLmwHZUg}{\usebox\lstbox}
+
+
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+withdraw(25); // output: 50
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4SwLgFgJgTghsAFAJgKwEoDcACA9L7AewFcwAHUgLm1QAYg}{\usebox\lstbox}
+
+
+    </p></div>
+
+    <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+      Here successive evaluations of the same expression yield different
+      values.  This behavior arises from the fact that the execution of
+      assignment statements (in this case, assignments to the variable {\lstinline[mathescape=true]$balance$}) delineates <EM>moments in time</EM> when values change.  The
+      result of evaluating an expression depends not only on the expression
+      itself, but also on whether the evaluation occurs before or after
+      these moments.  Building models in terms of computational objects with
+      local state forces us to confront time as an essential concept in
+      programming.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+      We can go further in structuring computational models to match our
+      perception of the physical world.  Objects in the world do not change
+      one at a time in sequence.  Rather we perceive them as acting <EM>
+        concurrently</EM>—all at once.  So it is often natural to model systems
+      as collections of computational processes that execute concurrently.
+      Just as we can make our programs modular by organizing models in
+      terms of objects with separate local state, it is often appropriate to
+      divide computational models into parts that evolve separately and
+      concurrently.  Even if the programs are to be executed on a sequential
+      computer, the practice of writing programs as if they were to be
+      executed concurrently forces the programmer to avoid inessential
+      timing constraints and thus makes programs more modular.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+      In addition to making programs more modular, concurrent computation
+      can provide a speed advantage over sequential computation.  Sequential
+      computers execute only one operation at a time, so the amount of time
+      it takes to perform a task is proportional to the total number of
+      operations performed.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+    </p></div>
+
+    <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+      However, if it is possible to decompose a problem into pieces that are
+      relatively independent and need to communicate only rarely, it may be
+      possible to allocate pieces to separate computing processors,
+      producing a speed advantage proportional to the number of processors
+      available.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+      Unfortunately, the complexities introduced by assignment become even
+      more problematic in the presence of concurrency.  The fact of
+      concurrent execution, either because the world operates in parallel or
+      because our computers do, entails additional complexity in our
+      understanding of time.
+    </p></div>
+
+    
+    &subsection3.4.1;
+
+    
+    &subsection3.4.2;
+
+  <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Most real processors actually execute a few
+        operations at a time, following a strategy called 
+        
+        <EM>
+          pipelining</EM>.  Although this technique greatly improves the effective
+        utilization of the hardware, it is used only to speed up the execution
+        of a sequential instruction stream, while retaining the behavior of
+        the sequential program.</FOOTNOTE></div>
+</SECTION>

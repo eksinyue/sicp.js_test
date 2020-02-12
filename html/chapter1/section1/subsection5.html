@@ -1,0 +1,401 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>1.1.5 
+          The Substitution Model for 
+          
+            
+            
+              Function
+            
+        
+          Application
+        </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+        <SPLIT>
+          
+          
+            <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+              To evaluate an application combination,
+              the interpreter follows a similar process as for operator
+	      combinations,
+              which we described in
+              section \ref{sec:evaluating-combinations}.
+              That is, the interpreter evaluates the elements of the combination
+	      and applies the function (which is the value of the
+	      function expression)
+	      to the arguments
+              (which are the values of the argument expressions of
+	      the application combination).
+            </p></div>
+          
+        </SPLIT>
+
+        <SPLIT>
+          
+          
+            <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+              In more detail, the interpreter proceeds
+	      as follows when
+	      evaluating application combinations:
+              <UL>
+                <LI>
+              To evaluate an application combination of the form
+              
+\begin{JavaScript}
+$\textit{function-expression}$ ( $\textit{argument-expressions}$ )
+\end{JavaScript}
+
+              do the following:
+              
+\begin{enumerate}
+\item{Evaluate the function expression 
+		of the application
+		combination, resulting in the function to be applied.}
+\item{Evaluate the argument expressions of the combination.}
+\item{Apply the function to the arguments:
+		<UL>
+		  <LI>If the function is primitive, we simply apply the 
+		  corresponding mathematical function to the arguments.
+		  </LI>
+		  <LI>If the function is compound, we evaluate the return
+		  expression of the function with each parameter replaced
+		  by the corresponding argument.
+		  </LI>
+		</UL>
+		}
+\end{enumerate}
+
+                </LI>
+              </UL>
+              To illustrate this process, 
+              let's evaluate the application combination
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+f(5);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYCgrAlA3EA}{\usebox\lstbox}
+
+
+              Evaluating the name {\lstinline[mathescape=true]$f$}
+	      results in the function declared in
+              section \ref{sec:compound-procedures}.
+	      Evaluating the argument expression
+	      {\lstinline[mathescape=true]$5$} yields the
+	      argument value 5.
+              Now, we retrieve the return
+              expression of
+              {\lstinline[mathescape=true]$f$}:
+              
+\begin{JavaScript}
+sum_of_squares(a + 1, a * 2)
+\end{JavaScript}
+
+              in which we replace the parameter
+	      {\lstinline[mathescape=true]$a$}
+              by the argument 5:
+              
+\begin{JavaScript}
+sum_of_squares(5 + 1, 5 * 2)
+\end{JavaScript}
+
+            </p></div>
+          
+        </SPLIT>
+
+        <SPLIT>
+          
+          
+            <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+              Thus the problem reduces to the evaluation of an application
+	      combination with two arguments
+              and a function expression
+	      {\lstinline[mathescape=true]$sum_of_squares$}.
+              Evaluating this combination involves three subproblems.
+	      We must evaluate the
+              function expression to get the function to be applied,
+	      and we must evaluate the argument expressions to get the arguments.  
+              Now {\lstinline[mathescape=true]$5 + 1$} produces 6 and
+              {\lstinline[mathescape=true]$5 * 2$} produces 10, 
+              so we must apply the
+              {\lstinline[mathescape=true]$sum_of_squares$} function 
+              to 6 and 10.  
+              These values are substituted
+              for the parameters {\lstinline[mathescape=true]$x$} and 
+              {\lstinline[mathescape=true]$y$} in the return
+	      expression of 
+              {\lstinline[mathescape=true]$sum_of_squares$},
+              reducing the expression to
+              
+\begin{JavaScript}
+square(6) + square(10)
+\end{JavaScript}
+
+              If we use the declaration of
+	      {\lstinline[mathescape=true]$square$} once, 
+              this reduces to
+              
+\begin{JavaScript}
+(6 * 6) + square(10)
+\end{JavaScript}
+
+              which reduces by multiplication to
+              
+\begin{JavaScript}
+36 + square(10)
+\end{JavaScript}
+
+              A second application of
+	      {\lstinline[mathescape=true]$square$} yields
+              
+\begin{JavaScript}
+36 + (10 * 10)
+\end{JavaScript}
+
+	      which reduces by multiplication to
+              
+\begin{JavaScript}
+36 + 100
+\end{JavaScript}
+
+	      and finally by addition to
+              
+\begin{JavaScript}
+136
+\end{JavaScript}
+
+            </p></div>
+          
+        </SPLIT>
+
+        <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+              The process we have just described is called the <EM>substitution
+                model</EM> for 
+              function
+               
+              application.  It can be taken as a model that
+              determines the <QUOTE>meaning</QUOTE> of 
+              function
+               
+              application, insofar as the
+              functions
+               
+              in this chapter are concerned.  However, there are two
+              points that should be stressed:
+              <UL>
+                <LI>
+                  The purpose of the substitution is to help us think about
+                  function
+                   
+                  application, not to provide a description of how
+                  the interpreter really works.  Typical interpreters
+		  do not evaluate
+                  
+		    
+		    function
+                    
+                  applications by manipulating the text of a 
+                  
+		    
+		    function to substitute values for the
+                   
+                  parameters.
+		  In practice, the
+                  <QUOTE>substitution</QUOTE> is accomplished by using
+		  a local environment for the
+                  
+		    
+		    parameters.
+		    
+		  
+		  We will discuss this more fully in chapters 3 and
+                  4 when we examine the implementation of an interpreter in detail.
+                </LI>
+                <LI>
+                  Over the course of this book, we will present a sequence of
+                  increasingly elaborate models of how interpreters work,
+		  culminating
+                  with a complete implementation of an interpreter and compiler in
+                  chapter~5.  The substitution model is only the first of
+		  these models—a way to get started thinking formally
+		  about the evaluation process.  In general, when 
+                  
+                  modeling phenomena in science and
+                  engineering, we begin with simplified, incomplete models.  As we
+                  examine things in greater detail, these simple models become
+                  inadequate and must be replaced by more refined models.  The
+                  substitution model is no exception.  In particular, when we
+		  address in chapter~3 the use of 
+                  functions
+                   
+                  with <QUOTE>mutable data,</QUOTE> we will see that
+                  the substitution model breaks down and must be replaced by
+		  a more complicated model of 
+                  function
+                   
+                  application.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+                </LI>
+              <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Despite the
+                  simplicity of the substitution idea, it turns out to be
+		  surprisingly complicated to give a rigorous mathematical
+		  definition of the substitution process.  The problem arises
+		  from the possibility of confusion between the names used for the 
+                  
+		  parameters of a function
+                   
+                  and the (possibly identical) names used in the expressions
+                  to which the 
+                  function
+                   
+                  may be applied.  Indeed, there is a long
+                  history of erroneous definitions of <EM>substitution</EM> in the
+                  literature of logic and programming semantics.  
+                  
+                  See Stoy 1977 for a
+                  careful discussion of substitution.
+                </FOOTNOTE></div></UL>
+            </p></div>
+
+        \subsubsection{ 
+          Applicative order versus normal order
+        
+
+        <SPLIT>
+          
+          
+            <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+              According to the description of evaluation given above,
+	      the interpreter first
+              evaluates the function and argument expressions and then applies
+	      the resulting function
+              to the resulting arguments.  This is not the only way to perform
+              evaluation.  An alternative evaluation model would not evaluate the
+              operands until their values were needed.  Instead it would first
+	      substitute argument expressions for parameters until
+              it obtained an expression involving only operators, and
+              would then perform the evaluation.  If we used this method, the
+              evaluation of
+              
+\begin{JavaScript}
+f(5)
+\end{JavaScript}
+
+              would proceed according to the sequence of expansions
+              
+\begin{JavaScript}
+sum_of_squares(5 + 1, 5 * 2)
+square(5 + 1)  +  square(5 * 2)
+(5 + 1) * (5 + 1) + square(5 * 2)
+(5 + 1) * (5 + 1) + (5 * 2) * (5 * 2)
+\end{JavaScript}
+
+              followed by the reductions
+              
+\begin{JavaScript}
+6 * (5 + 1) + (5 * 2) * (5 * 2)
+6 * 6 + (5 * 2) * (5 * 2)
+36 + (5 * 2) * (5 * 2)
+36 + 10 * (5 * 2)
+36 + 10 * 10
+36 + 100
+136
+\end{JavaScript}
+
+              This gives the same answer as our previous evaluation model, but the
+              process is different.  In particular, the evaluations
+              of {\lstinline[mathescape=true]$5 + 1$} and 
+              {\lstinline[mathescape=true]$5 * 2$} are each performed
+	      twice here,
+              corresponding to the reduction of the expression
+              
+\begin{JavaScript}
+x * x
+\end{JavaScript}
+
+              with {\lstinline[mathescape=true]$x$} replaced respectively 
+              by {\lstinline[mathescape=true]$5 + 1$} 
+              and {\lstinline[mathescape=true]$5 * 2$}.
+            </p></div>
+          
+        </SPLIT>
+
+        <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+          This alternative <QUOTE>fully expand and then reduce</QUOTE>
+	  evaluation method is
+          known as 
+              
+              <EM>normal-order evaluation</EM>, in contrast to the <QUOTE>evaluate
+                the arguments and then apply</QUOTE> method that the interpreter actually
+              uses, which is called 
+              
+              <EM>applicative-order evaluation</EM>.  It can be
+              shown that, for 
+              function
+              
+              applications that can be modeled using
+              substitution (including all the 
+              functions
+              
+              in the first two chapters
+              of this book) and that yield legitimate values, normal-order and
+              applicative-order evaluation produce the same value.  (See
+              exercise~\ref{ex:normal-order-vs-appl-order-test}
+	      for an instance of
+              an <QUOTE>illegitimate</QUOTE> value where normal-order and
+	      applicative-order evaluation do not give the same result.)
+        </p></div>
+
+        <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+          <SPLIT>
+            
+	    
+	      
+              
+	    
+	  </SPLIT>
+            
+	    JavaScript
+	    
+	    uses applicative-order evaluation, partly because of the
+            additional efficiency obtained from avoiding multiple evaluations of
+            expressions such as those illustrated with
+	    
+	      
+	    
+	    above and, more significantly, because normal-order evaluation
+            becomes much more complicated to deal with when we leave the realm of
+            procedures that can be modeled by substitution.  On the other hand,
+            normal-order evaluation can be an extremely valuable tool, and we will
+            investigate some of its implications in chapters 3 and 4.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+	
+            
+	</p></div>
+      <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>In
+            chapter 3 we will introduce <EM>stream processing</EM>, which is a
+	    way of handling apparently <QUOTE>infinite</QUOTE> data structures
+	    by incorporating a limited form of normal-order evaluation.  In
+            section \ref{sec:lazy-evaluation} we will modify the
+	    
+	    JavaScript
+	    
+            interpreter to produce a normal-order variant of
+	    
+	    JavaScript.
+	    
+	  </FOOTNOTE></div>
+</SUBSECTION>

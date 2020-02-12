@@ -1,0 +1,479 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>2.1.3 
+        What Is Meant by Data?
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+        We began the rational-number implementation in
+        section~\ref{sec:rationals} by implementing the rational-number
+        operations {\lstinline[mathescape=true]$add_rat$}, {\lstinline[mathescape=true]$sub_rat$}, and so on in terms of three
+        unspecified
+        functions: {\lstinline[mathescape=true]$make_rat$}, {\lstinline[mathescape=true]$numer$}, and {\lstinline[mathescape=true]$denom$}.
+        At that point, we could think of the operations as being defined in
+        terms of data objects—numerators, denominators, and rational
+        numbers—whose behavior was specified by the latter three
+        functions.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+        But exactly what is meant by <EM>data</EM>?  It is not enough to say
+        <QUOTE>whatever is implemented by the given selectors and constructors.</QUOTE>
+        Clearly, not every arbitrary set of three
+        functions
+        can serve as an
+        appropriate basis for the rational-number implementation.  We need to
+        guarantee that, 
+        
+        
+        
+        if we construct a rational number {\lstinline[mathescape=true]$x$} from a pair
+        of integers {\lstinline[mathescape=true]$n$} and {\lstinline[mathescape=true]$d$}, then extracting the {\lstinline[mathescape=true]$numer$} and the
+        {\lstinline[mathescape=true]$denom$} of {\lstinline[mathescape=true]$x$} and dividing them should yield the same result
+        as dividing {\lstinline[mathescape=true]$n$} by {\lstinline[mathescape=true]$d$}. 
+        In other words, {\lstinline[mathescape=true]$make_rat$},
+        {\lstinline[mathescape=true]$numer$}, and {\lstinline[mathescape=true]$denom$} must satisfy the condition that, for any
+        integer {\lstinline[mathescape=true]$n$} and any non-zero integer {\lstinline[mathescape=true]$d$}, if {\lstinline[mathescape=true]$x$} is
+        {\lstinline[mathescape=true]$make_rat(n,d)$}, then
+  <SPLIT>
+    
+        
+          \[
+          \frac{\texttt{numer}(\texttt{x})}{\texttt{denom}(\texttt{x})}
+          =
+          \frac{\texttt{n}}{\texttt{d}}
+          \]
+        
+    
+    
+  </SPLIT>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+        In fact, this is the only condition {\lstinline[mathescape=true]$make_rat$}, {\lstinline[mathescape=true]$numer$}, and
+        {\lstinline[mathescape=true]$denom$} must fulfill in order to form a suitable basis for a
+        rational-number representation.  In general, we can think of data as
+        defined by some collection of selectors and constructors, together
+        with specified conditions that these
+        functions
+        must fulfill in order
+        to be a valid representation.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+        
+          
+          
+          
+          
+          
+        
+        This point of view can serve to define not only <QUOTE>high-level</QUOTE> data
+        objects, such as rational numbers, but lower-level objects as well.
+        
+          
+          
+            
+          
+        
+        Consider the notion of a pair, which we used in order to define our
+        rational numbers.  We never actually said what a pair was, only that
+        the language supplied
+        functions
+        {\lstinline[mathescape=true]$pair$}, {\lstinline[mathescape=true]$head$}, and {\lstinline[mathescape=true]$tail$}
+        for operating on pairs.  But the only thing we need to know about
+        these three operations 
+        
+        
+        
+        
+        is that if we glue two objects together using
+        {\lstinline[mathescape=true]$pair$} we can retrieve the objects using {\lstinline[mathescape=true]$head$} and {\lstinline[mathescape=true]$tail$}.
+        That is, the operations satisfy the condition that, for any objects
+        {\lstinline[mathescape=true]$x$} and {\lstinline[mathescape=true]$y$}, if {\lstinline[mathescape=true]$z$} is {\lstinline[mathescape=true]$pair(x, y)$} then {\lstinline[mathescape=true]$head(z)$}
+        is {\lstinline[mathescape=true]$x$} and {\lstinline[mathescape=true]$tail(x)$} is {\lstinline[mathescape=true]$y$}.  Indeed, we mentioned that
+        these three
+        functions
+        are included as primitives in our language.
+        However, any triple of
+        functions
+        that satisfies the above condition
+        can be used as the basis for implementing pairs.  This point is
+        illustrated strikingly by the fact that we could implement {\lstinline[mathescape=true]$pair$},
+        {\lstinline[mathescape=true]$head$}, and {\lstinline[mathescape=true]$tail$} without using any data structures at all but
+        only using
+        functions.  Here are the definitions: 
+	
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function pair(x, y) {
+    return m =>
+           m === 0 
+           ? x
+             : m === 1 
+	       ? y
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwIYwE4AoAeAaRATwEpEBvAKEWsQwFMoQMkBbRAXgD4qbea32gxAAZEPPrwD8iHOIm8AXIgFCAjGICQ86YTnzFiOhgxxsLAgCIAghgDmIFnTBREYOC9GnE6mEjSYLYgBuCgBfClBIWAREAAs6VAATLAAvUkpeekZmRBSsYWCwiPBoeCQodAAbVPS5LKYkPNVC0KA}{\usebox\lstbox}!*/
+               : error(m, "Argument not 0 or 1 in pair");
+}
+function head(z) {
+    return z(0);
+}
+function tail(z) {
+    return z(1);
+}
+
+\end{JavaScriptClickable}
+
+
+
+        
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+        This use of
+        functions
+        corresponds to nothing like our intuitive
+        notion of what data should be.  Nevertheless, all we need to do to
+        show that this is a valid way to represent pairs is to verify that
+        these
+        functions
+        satisfy the condition given above.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+        The subtle point to notice is that the value returned by {\lstinline[mathescape=true]$pair(x, y)$} is a
+        function—namely the internally defined
+        function
+        {\lstinline[mathescape=true]$dispatch$}, which takes one argument and returns either {\lstinline[mathescape=true]$x$} or {\lstinline[mathescape=true]$y$} depending on whether the argument is 0 or 1.  Correspondingly, {\lstinline[mathescape=true]$head(z)$} is defined to apply {\lstinline[mathescape=true]$z$} to 0.  Hence, if {\lstinline[mathescape=true]$z$} is the
+        function
+        formed by {\lstinline[mathescape=true]$pair(x, y)$}, then {\lstinline[mathescape=true]$z$} applied to 0 will
+        yield {\lstinline[mathescape=true]$x$}. Thus, we have shown that {\lstinline[mathescape=true]$head(pair(x, y))$} yields
+        {\lstinline[mathescape=true]$x$}, as desired.  Similarly, {\lstinline[mathescape=true]$tail(pair(x, y))$} applies the
+        function
+        returned by {\lstinline[mathescape=true]$pair(x, y)$} to 1, which returns {\lstinline[mathescape=true]$y$}.
+        Therefore, this 
+        
+          
+          
+            functional
+          
+        
+        implementation of pairs is a valid
+        implementation, and if we access pairs using only {\lstinline[mathescape=true]$pair$}, {\lstinline[mathescape=true]$head$}, and {\lstinline[mathescape=true]$tail$} we cannot distinguish this implementation from one
+        that uses <QUOTE>real</QUOTE> data structures.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+        The point of exhibiting the 
+        
+          
+          
+            functional
+          
+        
+        representation of pairs is not
+        that our language works this way 
+        
+          
+          (we will be using arrays to represent pairs)
+          
+        
+        but that it could
+        work this way. The 
+        
+          
+          
+            functional
+          
+        
+        representation, although obscure, is a
+        perfectly adequate way to represent pairs, since it fulfills the only
+        conditions that pairs need to fulfill.  This example also demonstrates
+        that the ability to manipulate
+        functions
+        as objects automatically
+        provides the ability to represent compound data.  This may seem a
+        curiosity now, but 
+        
+          
+          
+            functional
+          
+        
+        representations of data will play a
+        central role in our programming repertoire.  This style of programming
+        is often called 
+        
+        <EM>message passing</EM>, and we will be using it as a
+        basic tool in chapter~3 when we address the issues of modeling and
+        simulation.
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+        Here is an alternative 
+        
+          
+          
+            functional
+          
+        
+        representation of pairs.  For this
+        representation, verify that {\lstinline[mathescape=true]$head(pair(x, y))$} yields {\lstinline[mathescape=true]$x$} for
+        any objects {\lstinline[mathescape=true]$x$} and {\lstinline[mathescape=true]$y$}.
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function pair(x, y) {
+    return m => m(x, y);
+}
+function head(z) {
+    return z((p, q) => p);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwIYwE4AoAeAaRATwEpEBvAKEWsQwFMoQMkBbRAXgD5EXcCSA3BQC+FUJFgJEACzqoAJlgBepSjVoMmSJVizICAR1JcUxIcKA}{\usebox\lstbox}
+
+
+
+        
+          
+          
+        
+          
+        
+
+        What is the corresponding definition of {\lstinline[mathescape=true]$tail$}? (Hint: To verify
+        that this works, make use of the substitution model of
+        section~\ref{sec:substitution-model}.)
+        
+
+      \hfill{\hyperref[ex:lambda-cons-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:lambda-cons}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function tail(z) {
+    return z((p,q) => q);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABFAhjANgCgF4EpEDeAUIqYgE4CmUI5S2mmADgDQCO+AvAHyIcDcRAL5A}{\usebox\lstbox}
+
+
+
+        
+
+
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled17}
+ 
+        Show that we can represent pairs of nonnegative integers using only
+        numbers and arithmetic operations if we represent the pair $a$ and $b$
+        as the integer that is the product $2^a 3^b$.  Give the corresponding
+        definitions of the
+        functions
+        {\lstinline[mathescape=true]$pair$}, {\lstinline[mathescape=true]$head$}, and {\lstinline[mathescape=true]$tail$}.
+
+
+\hfill{\hyperref[ex:unlabeled17-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled17}]
+
+
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function pair(a, b) {
+    return fast_expt(2, a) * fast_expt(3, b);
+}
+function head(p) {
+    return p % 2 === 0
+           ? head(p / 2) + 1
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwIYwE4ApUBpEBGAlIgN4BQiViGAplCBksKgM5QD6tAHslFgCZ8qEgCpELdl178AzPmIBucgF9yoSLASIAFrVQATLMhIVqNeoyTJEAUkQDEAXheIADJXNfEAfl36jGwB6BxIAakQARk9vagAud2U1DWh4JCh0ABtjUxiLBiYUO0RZZ1c3RDzYvwyYbOQg2XCoqu8EtySgA}{\usebox\lstbox}!*/
+           : 0;
+}
+function tail(p) {
+    return p % 3 === 0 
+           ? tail(p/3) + 1
+           : 0;
+}
+
+\end{JavaScriptClickable}
+
+
+
+\end{Answer}
+
+        
+          
+          
+
+          
+        
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+        In case representing pairs as
+        functions
+        wasn't mind-boggling enough,
+        consider that, in a language that can manipulate
+        functions, we can
+        get by without numbers (at least insofar as nonnegative integers are
+        concerned) by implementing 0 and the operation of adding 1 as
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const zero = f => x => x;
+function add_1(n) {
+    return f => x => f(n(f)(x));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAXgUwE4hgXhgM3QPhgD1wIG4AoTAVzGCgEtwYBDAE2YH0BGACjAEoYA3qRgiYSBFApIwWIoTR5MPLpl5d8vXmQC+QA}{\usebox\lstbox}
+
+
+
+        This representation is known as 
+        
+        <EM>Church numerals</EM>, after its
+        inventor, 
+        
+        Alonzo Church, the logician who invented the $\lambda$
+        calculus.
+
+        Define {\lstinline[mathescape=true]$one$} and {\lstinline[mathescape=true]$two$} directly (not in terms of {\lstinline[mathescape=true]$zero$}
+        and {\lstinline[mathescape=true]$add_1$}).  (Hint: Use substitution to evaluate {\lstinline[mathescape=true]$add_1(zero)$}).
+        Give a direct definition of the addition
+        
+	function {\lstinline[mathescape=true]$plus$}
+        (not in
+        terms of repeated application of {\lstinline[mathescape=true]$add_1$}).
+        
+
+
+      \hfill{\hyperref[ex:church-numerals-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:church-numerals}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const one = f => x => f(x);
+const two = f => x => f(f(x));
+
+function plus(n, m) {
+    return f => x => n(f)(m(f)(x));
+}
+
+// testing
+
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBOCmMC8MBmyB8MAem0ApsBKAbgChRJYoB3EZNPXJLVfN40ss1AVzGBQAluBgAHADa8I+MABoYAWyIwA3mRiaYAJ3hRe2sIxY48YdkXyKLhIlwC+3APROYUeNCFgA5t0rQ3AAtdRBRJaXwEBVoQLh5+QREjYECDFIB9KBB0sF5FACN4bXxgFXUtHT0DZNkzGABqGABGSwAGBwpU7QysnLzC4qhg+HhSIA}{\usebox\lstbox}!*/
+const three = plus(one, two);
+
+function church_to_number(c) {
+    return c(n => n + 1)(0);
+}
+church_to_number(three);
+
+\end{JavaScriptClickable}
+
+
+  
+\end{Answer}
+
+
+        
+          
+          
+      
+      
+      
+          
+        
+
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Surprisingly, this idea is very
+          difficult to formulate rigorously. There are two approaches to giving
+          such a formulation.  One, pioneered by 
+          
+          C. A. R. Hoare (1972), is known
+          as the method of 
+          
+          
+          <EM>abstract models</EM>.  It formalizes the
+          <QUOTE>functions
+            plus conditions</QUOTE> specification as outlined in the
+          rational-number example above.  Note that the condition on the
+          rational-number representation was stated in terms of facts about
+          integers (equality and division).  In general, abstract models define
+          new kinds of data objects in terms of previously defined types of data
+          objects.  Assertions about data objects can therefore be checked by
+          reducing them to assertions about previously defined data objects.
+          Another approach, introduced by 
+          
+          Zilles at MIT, by 
+          
+          Goguen, 
+          
+          Thatcher,
+          
+          Wagner, and 
+          
+          Wright at IBM (see Thatcher, Wagner, and Wright 1978), and by 
+          
+          Guttag at Toronto (see Guttag 1977),
+          is called 
+          
+          
+          <EM>algebraic specification</EM>.  It regards the <QUOTE>functions</QUOTE>
+          as elements of an abstract algebraic system whose behavior is
+          specified by axioms that correspond to our <QUOTE>conditions,</QUOTE> and uses
+          the techniques of abstract algebra to check assertions about data
+          objects.  Both methods are surveyed in the paper by 
+          
+          Liskov and Zilles
+          (1975).</FOOTNOTE></div>
+</SUBSECTION>

@@ -1,0 +1,480 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>4.1.4 
+    Running the Evaluator as a Program
+  </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+  
+  
+  <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+    Given the evaluator, we have in our hands a description
+    (expressed in JavaScript) of the process
+    by which JavaScript expressions are evaluated.  One advantage of expressing the
+    evaluator as a program is that we can run the program.  This gives us,
+    running within JavaScript, a working model of how JavaScript itself evaluates
+    expressions.  This can serve as a framework for experimenting with
+    evaluation rules, as we shall do later in this chapter.
+  </p></div>
+
+  <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+    
+      
+      
+	
+      
+    
+    Our evaluator program reduces expressions ultimately to the
+    application of primitive
+    
+      
+      functions.
+    
+    Therefore, all that we need to
+    run the evaluator is to create a mechanism that calls on the underlying
+    
+      
+      JavaScript
+    
+    system to model the application of primitive
+    
+      
+      functions.
+    
+  </p></div>
+
+  <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+    There must be a binding for each primitive
+    function
+    name, so that when
+    {\lstinline[mathescape=true]$evaluate$}
+    evaluates the operator of an application of a primitive,
+    it will find an object to pass to {\lstinline[mathescape=true]$apply$}.  We thus set up a 
+    
+    
+    global
+    environment that associates unique objects with the names of the primitive
+    functions
+    that can appear in the expressions we will be evaluating.  
+    <SPLIT>
+      
+      
+	The global environment also includes bindings for the symbols
+	
+	{\lstinline[mathescape=true]$undefined$},
+	{\lstinline[mathescape=true]$NaN$} and
+	{\lstinline[mathescape=true]$Infinity$},
+	so that they can be used as constants
+	in expressions to be evaluated.
+      
+    </SPLIT>
+
+    
+    
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function setup_environment() {
+    const primitive_function_names =
+        map(f => head(f), primitive_functions);
+    const primitive_function_values =
+        map(f => make_primitive_function(head(tail(f))),
+            primitive_functions);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwKZRABwPqrANxgCcEBbPKACgEpEBvAKEWcQgWSkUyJlJlnypsoSLATYwAQ3LJEAXiYslpSZkrB5APkQALVJIAm66gBouPPgKEjo8MMmoBuRczb3O3XvxiDh4W+L4kgA2IKiyCkrKqupaiCoA1kKelj7W-mJglHqGlFCSMMHG1KYuUUop3r42mQ7OSm4c5l5W2I35YFAS0uHyZdFqGnLaOUbAps2pvu2SnXVl7ZNVQjOd2EGhvZHl8TFDI-pG+YXFJv07la2rUPNKROggREioAB5QeAa4BMRkFJTnO2YqkwH0olzSflEdm6MjMAMBFwsyza7A6XSkMlKCPKwNB4OqGWhGzCyDh2PJSyuqNmXWJ4SxFOYUD0uFImCgAE8voQSGByJ0nAwAL5AA}{\usebox\lstbox}!*/
+    const primitive_constant_names =
+        map(f => head(f), primitive_constants);
+    const primitive_constant_values =
+        map(f => head(tail(f)),
+            primitive_constants);
+    return extend_environment(
+               append(primitive_function_names, 
+                      primitive_constant_names),
+               append(primitive_function_values, 
+                      primitive_constant_values),
+               the_empty_environment);
+}
+
+\end{JavaScriptClickable}
+
+
+
+    
+    
+    
+    
+  </p></div>
+
+  <SPLIT>
+    
+    
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+	It does not matter how we represent primitive functions,
+	so long as {\lstinline[mathescape=true]$apply$} can identify and
+	apply them using the functions
+	{\lstinline[mathescape=true]$is_primitive_function$} and 
+	{\lstinline[mathescape=true]$apply_primitive_function$}.  We have chosen to
+	represent a primitive function
+	as a list beginning with the string {\lstinline[mathescape=true]$"primitive"$} and
+	containing a function
+	in the underlying JavaScript that implements that primitive.
+
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_primitive_function(impl) {
+    return list("primitive", impl);
+}
+function is_primitive_function(fun) {
+   return is_tagged_list(fun, "primitive");
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADgJxmRlgDcdRJYEAKI3AGwEpEBvAKES8X0yhHxIGMAM5QaAIgJESMchIA0ieswDc7AL7tK0eElF5CxMhXC7alFh269+g5SOxRUAcxeYAJtmFialJVJGsvJM6lo61EjSxnI4KpjImGDOkX7gVpxctgJColDYvMBpYEoAjKGaQA}{\usebox\lstbox}!*/
+function primitive_implementation(fun) {
+   return list_ref(fun, 1);
+}
+
+\end{JavaScriptClickable}
+
+
+
+	
+      </p></div>
+    
+  </SPLIT>
+
+  <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+    
+      
+      The function {\lstinline[mathescape=true]$setup_environment$}
+      
+    
+    will get the primitive 
+    
+      
+      names and implementation functions
+    
+    from a list:<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const primitive_functions = list(
+       list("display",       display          ),
+       list("error",         error            ),
+       list("+",             (x, y) => x + y  ),
+       list("-",             (x, y) => x - y  ),
+       list("*",             (x, y) => x * y  ),
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBADgJwJYFslSQNwKYH0BmArmMBuBDALwwA2S0AFAFAytu31QMBEAJvXBoBDAJ7cANOzb8Ig0VKkBKcSwV1G3bAgQgEEhWy06EBpSoPqu3ANT7T7BgA9JIxVQB8MRzGswRrZVUpSx4AWjt7VicXN0pPb1C-APM1Th4AKgjI6L9Y+Jh0pJhAizTuAHos+xzXDy8YcqKS1I0AUirTGrz61qaU4LLKIY6pLrrvIepXfvYQ7gBCYcls51zxmEWp5oGNAB4RhTG4+t22aaDZst3KA4dV2uPva9Zz0o13W7uY9c8X7cv3jdlitvo8YO5qLkZmw5vNPuxvOxjqx5mxHIoLmxFABuIA}{\usebox\lstbox}!*/
+       list("/",             (x, y) => x / y  ),
+       list("%",             (x, y) => x % y  ),
+       list("===",           (x, y) => x === y),
+       list("!==",           (x, y) => x !== y),
+       list("<",             (x, y) => x <   y),
+       list("<=",            (x, y) => x <=  y),
+       list(">",             (x, y) => x >   y),
+       list(">=",            (x, y) => x >=  y),
+       list("!",              x     =>   !   x)
+       );
+
+\end{JavaScriptClickable}
+
+
+    
+  
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const primitive_functions = list(
+       list("display",       display          ),
+       list("error",         error            ),
+       list("+",             (x, y) => x + y  ),
+       list("-",             (x, y) => x - y  ),
+       list("*",             (x, y) => x * y  ),
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBADgJwJYFslSQNwKYH0BmArmMBuBDALwwA2S0AFAFAytu31QMBEAJvXBoBDAJ7cANOzb8Ig0VKkBKcSwV1G3bAgQgEEhWy06EBpSoPqu3ANT7T7BgA9JIxVQB8MRzGswRrZVUpSx4AWjt7VicXN0pPb1C-APM1Th4AKgjI6L9Y+Jh0pJhAizTuAHos+xzXDy8YcqKS1I0AUirTGrz61qaU4LLKIY6pLrrvIepXfvYQ7gBCYcls51zxmEWp5oGNAB4RhTG4+t22aaDZst3KA4dV2uPva9Zz0o13W7uY9c8X7cv3jdlitvo8YO5qLkZmw5vNPuxvOxjqx5mxHIoLmxFABuIA}{\usebox\lstbox}!*/
+       list("/",             (x, y) => x / y  ),
+       list("%",             (x, y) => x % y  ),
+       list("===",           (x, y) => x === y),
+       list("!==",           (x, y) => x !== y),
+       list("<",             (x, y) => x <   y),
+       list("<=",            (x, y) => x <=  y),
+       list(">",             (x, y) => x >   y),
+       list(">=",            (x, y) => x >=  y),
+       list("!",              x     =>   !   x)
+       );
+
+\end{JavaScriptClickable}
+
+
+    
+  </p></div>
+
+  <SPLIT>
+    
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+	Similar to primitive functions, we define primitive values
+	that are installed in the global environment by
+	the function {\lstinline[mathescape=true]$setup_environment$}.
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const primitive_constants = list(list("undefined", undefined),
+                                 list("NaN",       NaN),
+                                 list("Infinity",  Infinity),
+                                 list("math_PI",   math_PI)
+                                );
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBADgJwJYFslSQNwKYH1SRQCGYUEMAvDADZLQAUtDARAK5gAm2AZkmNh2YAaGOy69+HAJRCAUDAWKlylauVMo9ZgDki24at3aZ8tWfPq6m5gEkwE9AE8DMOw6iOTF7+Y1aURFAAFrgACjYuMAHBYTZSpj6JilIA3EA}{\usebox\lstbox}
+
+
+
+    
+	
+      </p></div>
+    
+  </SPLIT>
+  
+  <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+    To apply a 
+    
+    primitive function,
+    we simply apply the implementation
+    
+    function
+    to the arguments, using the underlying
+    
+    JavaScript
+    system:<SPLIT>
+    
+    
+      <a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+    
+  <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>
+        JavaScript's {\lstinline[mathescape=true]$apply$} 
+        method of function objects expects arguments in an array. Thus, the 
+        {\lstinline[mathescape=true]$argument_list$} is transformed into 
+        an array using a {\lstinline[mathescape=true]$while$} loop:
+	
+\begin{JavaScript}
+function apply_in_underlying_javascript(prim, argument_list) {
+   const argument_array = [];
+   let i = 0;
+   while (!is_null(argument_list)) {
+      argument_array[i] = head(argument_list);
+      i = i + 1;
+      argument_list = tail(argument_list);
+   }
+   return prim.apply(prim, argument_array);
+}
+\end{JavaScript}
+
+	We have made use of
+	{\lstinline[mathescape=true]$apply_in_underlying_javascript$}
+	to define the function
+	{\lstinline[mathescape=true]$apply$} in
+	section~\ref{sec:data-directed}.
+
+      </FOOTNOTE></div></SPLIT>
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function apply_primitive_function(fun, argument_list) {
+    return apply_in_underlying_javascript(
+                primitive_implementation(fun),
+                argument_list);     
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwA6oDYE8D6qBOMAtjLAG4CmOoksCAFDQDQr4DmIRFYUOGMAZygBKRAG8AUImmJ8FKCHxI0mXDDA5wAEwr5s6tjgBWyMsgERCqKPSkz7DmQWKkYlHMUwUuPZHTCM4MJMdo5hrBw+vPxCwgDcDhIAvkA}{\usebox\lstbox}
+
+
+
+	
+
+  
+  
+  </p></div>
+
+  
+  
+  <SPLIT>
+    
+    
+      <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+    
+    
+    For convenience in running the metacircular evaluator, we provide a <EM>
+    driver loop</EM> that models the underlying JavaScript system. It prints a 
+    
+    <EM>prompt</EM>, reads an input expression from a pop-up window,
+    evaluates this expression in a suitable environment, and prints the
+    result on the next pop-up window. We precede each printed
+    result by an <EM>output prompt</EM> so as to distinguish the value of
+    the expression from the output that may be printed.
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const input_prompt = "M-Eval input: ";
+const output_prompt = "M-Eval output: ";
+
+function driver_loop(env, history) {
+    const input = prompt(history + input_prompt);
+    if (input === null) {
+        display("session has ended");
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAlmADgVygfUQJxAW0bAXhgCIBZAWgFEA3AQwBt4lUAuEgbgChRJYRUU6LLnwwiZKnUb8ogtsS6cAZsjDAoccDAAmmONQCmmNPRAhEACgNhqAGhgALONBCYAngEoYAb04x-MDzQTIJiMMJ4UBZOLu4wANQhqBjYkR5cAfBKMBYIoQQFMGDI9PRevpmZ2s6I9LRuFsQQBhAQmmCOtBAw1toG2sTpfgEAvj30zT7DlYHgwcIA5pi0OGGItJjNucxQQzP+QbCmwAzdRMcMaGArLRaLyzjpAJCZ05WHMFAGeGhSyC1hHC0SwADzEAD4iiBfgx-mg3AYoLY3vtUWjMhcJnt9h8wAYAO5oazUMIGEFfMDaIk2ODYMA4axRTEQexfH5-Fr2YnYmYfTAAogGP60L53bBLFb2PGE7mKVG6fRGExmSzS6l2RzOKCuNwJEgAHX1YGIepR6PNATyyQiokSVtgiWIhuNCTNFvNMkEKREDpg0D0YAWcCUDWQzWMWAQUX5EA8cYyo04IyAA}{\usebox\lstbox}!*/
+    } else {
+        const program = parse(input);
+        const locals = local_names(program);	    
+        const temp_values = map(x => no_value_yet,
+                                locals);
+        const new_env = extend_environment(locals, temp_values, env);
+        const res = evaluate(program, new_env);
+
+        driver_loop(new_env, history + "\\n" + 
+                             input_prompt + input + "\\n" +
+                             output_prompt + stringify(user_print(res)));
+    }
+}
+
+\end{JavaScriptClickable}
+
+
+    We transform the input string that is read by {\lstinline[mathescape=true]$prompt$}
+    into a tagged-list representation of the statement according to the description in
+    section 4.1.2, a process called parsing and accomplished by the primitive function
+    {\lstinline[mathescape=true]$parse$}. Similar to the evaluation of
+    blocks in \ref{sec:core-of-evaluator}, we create a new environment by
+    extending the given environment by a binding of the local names in the program
+    to the special value {\lstinline[mathescape=true]$no_value_yet$}, and
+    evaluate the program with respect to the new environment. Passing the new
+    environment in the recursive call of {\lstinline[mathescape=true]$driver_loop$}
+    ensures that subsequent programs can refer to previously declared names.
+      </p></div>
+    
+
+
+      </SPLIT>
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+  We use a special printing
+  
+  function {\lstinline[mathescape=true]$user_print$}, 
+  to avoid printing the environment part of a compound
+  function, which may be a very long list
+  (or may even contain cycles).
+
+  
+\begin{JavaScript}
+function user_print(object) {
+   return is_compound_function(object)
+       ? "compound function" +
+         stringify(function_parameters(object)) +
+         stringify(function_body(object)) +
+         "<environment>"
+       : object;
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+  Now all we need to do to run the evaluator is to initialize the
+  global environment and start the driver loop.  Here is a sample
+  interaction:
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const the_global_environment = setup_environment();
+driver_loop(the_global_environment, "");
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBFAWBTA+gcwDYgEYEN3MTADcBLAJ3AFtDYBeGCRKAVwAcDjyqaAKASgDcAKAAmZEkURlkmEKx4IUGbHg6kKYamCgAaGACJ9goA}{\usebox\lstbox}
+
+
+
+  
+\begin{JavaScript}
+M-Eval input:
+function append(xs,ys) { 
+    if (is_null(xs)) {
+       return ys; 
+    } else {
+       return pair(head(xs),append(tail(xs),ys)); 
+    }
+}
+M-Eval value: undefined
+
+M-Eval input:    
+append(list('a', 'b', 'c'), list('d', 'e', 'f'));
+
+M-Eval value: ['a', ['b', ['c', ['d', ['e', ['f', null]]]]]]
+\end{JavaScript}
+
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  Eva Lu Ator and Louis Reasoner are each experimenting with the
+  metacircular evaluator.  Eva types in the definition of {\lstinline[mathescape=true]$map$}, and
+  runs some test programs that use it.  They work fine.  Louis, in contrast,
+  has installed the system version of {\lstinline[mathescape=true]$map$} as a primitive for the
+  metacircular evaluator.  When he tries it, things go terribly
+  wrong.  Explain why Louis's {\lstinline[mathescape=true]$map$} fails even though Eva's works.
+  
+      
+\end{Exercise}
+
+      
+
+<hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Any
+    function
+    defined in the underlying
+    JavaScript
+    can be used as a primitive for the metacircular evaluator.  The name of a primitive
+    installed in the evaluator need not be the same as the name
+    of its implementation in the underlying
+    JavaScript;
+    the names are the same here because the metacircular evaluator implements
+    JavaScript    
+    itself.
+    Thus, for example, we could put 
+    {\lstinline[mathescape=true]$list("first", head)$} 
+    or 
+    {\lstinline[mathescape=true]$list("square", x => x * x)$}
+    in the list of 
+    {\lstinline[mathescape=true]$primitive_functions$}.</FOOTNOTE></div>
+</SUBSECTION>

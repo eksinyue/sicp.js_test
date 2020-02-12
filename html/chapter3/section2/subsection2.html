@@ -1,0 +1,236 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>3.2.2 
+        Applying Simple
+        Functions
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+      
+
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+        
+        When we introduced the substitution model in
+        section~\ref{sec:substitution-model} we showed how the combination
+        {\lstinline[mathescape=true]$f(5)$} evaluates to 136, given the following
+        function
+        definitions:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function square(x) {
+    return x * x;
+}
+
+function sum_of_squares(x, y) {
+    return square(x) + square(y);
+}
+
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3PNElgIUIALYB9OMDFpMuZIQA0iAJ4kK1GjjoMU6bPmKIA1Ltn5VnHn3DR4SYHgxrK1WvSTJREqTP3yMxogAjEoBrABMRJZAA}{\usebox\lstbox}!*/
+function f(a) {
+    return sum_of_squares(a + 1, a * 2);
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+        We can analyze the same example using the environment model.
+        Figure~\ref{fig:sum-squares} shows the three
+        function
+        objects
+        created by evaluating the definitions of {\lstinline[mathescape=true]$f$}, {\lstinline[mathescape=true]$square$}, and
+        {\lstinline[mathescape=true]$sum_of_squares$} in the program environment.  Each
+        function
+        object
+        consists of some code, together with a pointer to the program
+        environment.
+
+        <SPLIT>
+          
+          
+            
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch3-Z-G-5}.svg}}
+\caption{Function objects in the program frame.}
+\label{fig:sum-squares}
+\end{figure}
+
+          
+        </SPLIT>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+        In Figure~\ref{fig:f5-eval} we see the environment structure created
+        by evaluating the expression {\lstinline[mathescape=true]$f(5)$}.  The call to {\lstinline[mathescape=true]$f$} creates
+        a new environment E1 beginning with a frame in which {\lstinline[mathescape=true]$a$}, the
+        formal parameter of {\lstinline[mathescape=true]$f$}, is bound to the argument 5.  In E1, we
+        evaluate the body of {\lstinline[mathescape=true]$f$}:
+
+        
+\begin{JavaScript}
+return sum_of_squares(a + 1, a * 2);
+\end{JavaScript}
+
+
+  <SPLIT>
+    
+    
+      
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch3-Z-G-6}.svg}}
+\caption{Environments created by evaluating {\lstinline[mathescape=true]$f(5)$} using the functions in Figure~\ref{fig:sum-squares}. }
+\label{fig:f5-eval}
+\end{figure}
+
+    
+  </SPLIT>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p> 
+        To evaluate this combination, we first evaluate the subexpressions.
+        The first subexpression, {\lstinline[mathescape=true]$sum_of_squares$}, has a value that is a
+        function
+        object.  (Notice how this value is found: We first look in
+        the first frame of E1, which contains no binding for {\lstinline[mathescape=true]$sum_of_squares$}.  Then we proceed to the enclosing environment,
+        i.e.~the program environment, and find the binding shown in
+        Figure~\ref{fig:sum-squares}.) The other two subexpressions are
+        evaluated by applying the primitive operations {\lstinline[mathescape=true]$+$} and {\lstinline[mathescape=true]$*$} to
+        evaluate the two combinations {\lstinline[mathescape=true]$a + 1$} and {\lstinline[mathescape=true]$a * 2$} to
+        obtain 6 and 10, respectively.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+        Now we apply the
+        function
+        object {\lstinline[mathescape=true]$sum_of_squares$} to the
+        arguments 6 and 10.  This results in a new environment E2 in which the
+        formal parameters {\lstinline[mathescape=true]$x$} and {\lstinline[mathescape=true]$y$} are bound to the arguments.
+        Within E2 we evaluate the combination {\lstinline[mathescape=true]$square(x) + square(y)$}.
+        This leads us to evaluate {\lstinline[mathescape=true]$square(x)$}, where {\lstinline[mathescape=true]$square$} is
+        found in the program frame and {\lstinline[mathescape=true]$x$} is 6.  Once again, we set up a
+        new environment, E3, in which {\lstinline[mathescape=true]$x$} is bound to 6, and within this
+        we evaluate the body of {\lstinline[mathescape=true]$square$}, which is {\lstinline[mathescape=true]$x * x$}.  Also as
+        part of applying {\lstinline[mathescape=true]$sum_of_squares$}, we must evaluate the
+        subexpression {\lstinline[mathescape=true]$square(y)$}, where {\lstinline[mathescape=true]$y$} is 10.  This second call
+        to {\lstinline[mathescape=true]$square$} creates another environment, E4, in which {\lstinline[mathescape=true]$x$}, the
+        formal parameter of {\lstinline[mathescape=true]$square$}, is bound to 10.  And within E4 we
+        must evaluate {\lstinline[mathescape=true]$x * x$}.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+        The important point to observe is that each call to {\lstinline[mathescape=true]$square$}
+        creates a new environment containing a binding for {\lstinline[mathescape=true]$x$}.  We can
+        see here how the different frames serve to keep separate the different
+        local variables all named {\lstinline[mathescape=true]$x$}.  Notice that each frame created by
+        {\lstinline[mathescape=true]$square$} points to the program environment, since this is the
+        environment indicated by the {\lstinline[mathescape=true]$square$}
+        function
+        object.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+        After the subexpressions are evaluated, the results are
+        returned.  The values generated by the two calls to {\lstinline[mathescape=true]$square$} are
+        added by {\lstinline[mathescape=true]$sum_of_squares$}, and this result is returned by {\lstinline[mathescape=true]$f$}.
+        Since our focus here is on the environment structures, we will not
+        dwell on how these returned values are passed from call to call;
+        however, this is also an important aspect of the evaluation process,
+        and we will return to it in detail in chapter~5.
+        
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        
+        
+        
+        In section~\ref{sec:recursion-and-iteration}
+        we used the substitution model to analyze two
+        functions
+        for computing factorials, a recursive version
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function factorial(n) {
+    return n === 1
+           ? 1
+           : n * factorial(n - 1);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSxDAUyhAySQF5XEBGCq7qgfg649uALkRIAVMjRRM2fEgC0HQgG4yAXyA}{\usebox\lstbox}
+
+
+
+        and an iterative version
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function factorial(n) {
+    return fact_iter(1, 1, n);
+}
+function fact_iter(product, counter, max_count) {
+    return counter > max_count
+           ? product
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSxDAUyhAyVWgH0YoaM8BGAGkT6IiAbjIBfMqEiwEyNFDYcuABwxwAJiGj8IccEv4BbFAA8Wu-cXJVqdBkgtgliAHyJjZx1Ao3fiAPyIqhpa3n6+AFxyrOyceF6ciABUQWqa2og+4dl+CRiIANQC-Fk5Ze6m5npOhKJiQA}{\usebox\lstbox}!*/
+           : fact_iter(counter * product, 
+                       counter + 1, 
+                       max_count);
+}
+
+\end{JavaScriptClickable}
+
+
+
+        Show the environment structures created by evaluating {\lstinline[mathescape=true]$factorial(6)$}
+        using each version of the {\lstinline[mathescape=true]$factorial$}
+        function.
+        <a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+
+      
+\end{Exercise}
+
+      
+      
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>
+          <SPLIT>
+            
+            
+              
+            
+          </SPLIT>
+</FOOTNOTE></div>
+</SUBSECTION>

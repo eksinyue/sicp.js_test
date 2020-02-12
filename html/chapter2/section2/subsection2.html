@@ -1,0 +1,1144 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>2.2.2 
+        Hierarchical Structures
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+      
+      
+      
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+        The representation of sequences in terms of lists generalizes
+        naturally to represent sequences whose elements may
+        themselves be sequences.  For example, we can regard the object
+        {\lstinline[mathescape=true]$[[1, [2, null]], [3, [4, null]]]$} constructed by
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+pair(list(1, 2), list(3, 4));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4QwlgTgFANmDOAXKBGANAAgEwEpNySgGZMAWHHAbiA}{\usebox\lstbox}
+
+
+        as a list of three items, the first of which is itself a list, {\lstinline[mathescape=true]$[1, [2, null]]$}. Figure~\ref{fig:cons-of-2-lists} shows
+        the representation of this structure in terms of pairs.
+
+      <SPLIT>
+	
+	
+              
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch2-Z-G-15}.svg}}
+\caption{Structure formed by {\lstinline[mathescape=true]$pair(list(1, 2), list(3, 4))$}.
+                }
+\label{fig:cons-of-2-lists}
+\end{figure}
+
+	
+      </SPLIT>
+	      
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+        Another way to think of sequences whose elements are sequences is as
+        <EM>trees</EM>.  The elements of the sequence are the branches of the
+        tree, and elements that are themselves sequences are subtrees.
+        Figure~\ref{fig:list-as-tree-javascript} shows the structure in
+        Figure~\ref{fig:cons-of-2-lists} viewed as a tree.
+
+        <SPLIT>
+          
+          
+            
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch2-Z-G-16}.svg}}
+\caption{The list structure in Figure~\ref{fig:cons-of-2-lists} viewed as a tree.
+              }
+\label{fig:list-as-tree-javascript}
+\end{figure}
+
+          
+        </SPLIT>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+        
+        Recursion is a natural tool for dealing with tree structures, since
+        we can often reduce operations on trees to operations on their
+        branches, which reduce in turn to operations on the branches of the
+        branches, and so on, until we reach the leaves of the tree.
+        As an example, compare the {\lstinline[mathescape=true]$length$}
+        function
+        of
+        section~\ref{sec:sequences} with the
+        
+        
+        {\lstinline[mathescape=true]$count_leaves$}
+        function, which
+        returns the total number of leaves of a tree:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const x = pair(pair(1, pair(2,null)), pair(3, pair(4,null)));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAHjAvDADgQwJYCcAU7s4CMANKprgEzFgCuANnQJSOn64DMr5OALNfU2YBuIA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+length(x);
+// 3
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYUwdg5gLgFgFADwJQG4BQB6DACAzEA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+count_leaves(x);
+// 4
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewrgdgLg+gNgUwIYDcEGcAUAPAlAbgCgB6YgAgBYg}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+list(x, x);
+// [[[[1, [2, null]], [3, [4, null]]],
+//  [[[1, [2, null]], [3, [4, null]]], null]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYSwzgLgFAHgNAAhgSgNwCgD0mEG1+4CMiuATIgHYCuwwAunSQMwkAslN9DcWOe+xPOQTVa3PCzzsRnBoxli6QA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+length(list(x, x));
+// 2
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYUwdg5gLgFgFMAlgZynAHgGgAToJR4DcAUAPSnYBMQA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+count_leaves(list(x, x));
+// 8
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewrgdgLg+gNgUwIYDcEGcAUcCW6qYAeANAASECUFA3AFAD09pAHEA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+        To implement {\lstinline[mathescape=true]$count_leaves$}, recall the recursive plan for computing
+        {\lstinline[mathescape=true]$length$}:
+
+        <UL>
+          <LI> The {\lstinline[mathescape=true]$length$} of a list {\lstinline[mathescape=true]$x$} is 1 plus the {\lstinline[mathescape=true]$length$} of the
+            {\lstinline[mathescape=true]$tail$} of {\lstinline[mathescape=true]$x$}.
+          </LI>
+          <LI>
+            The {\lstinline[mathescape=true]$length$} of the empty list is 0.
+          </LI>
+        </UL>
+        The function {\lstinline[mathescape=true]$count_leaves$} is similar.  The value for the empty list is the same:
+        <UL>
+          <LI>
+            {\lstinline[mathescape=true]$count_leaves$} of the empty list is 0.
+          </LI>
+        </UL>
+        But in the reduction step, where we strip off the {\lstinline[mathescape=true]$head$} of the
+        list, we must take into account that the {\lstinline[mathescape=true]$head$} may itself be a
+        tree whose leaves we need to count.  Thus, the appropriate reduction
+        step is
+        <UL>
+          <LI>
+            {\lstinline[mathescape=true]$count_leaves$} of a tree {\lstinline[mathescape=true]$x$} is {\lstinline[mathescape=true]$count_leaves$} of the {\lstinline[mathescape=true]$head$} of {\lstinline[mathescape=true]$x$} plus {\lstinline[mathescape=true]$count_leaves$} of the
+            {\lstinline[mathescape=true]$tail$} of {\lstinline[mathescape=true]$x$}.
+          </LI>
+        </UL>
+        Finally, by taking {\lstinline[mathescape=true]$head$}s we reach
+        actual leaves, so we need another base case:
+        <UL>
+          <LI>
+            {\lstinline[mathescape=true]$count_leaves$} of a leaf is 1.
+          </LI>
+        </UL>
+        To aid in writing recursive
+        functions
+        on trees, our JavaScript environment provides the primitive
+        predicate
+        
+        
+        {\lstinline[mathescape=true]$is_pair$}, which tests whether its argument is a pair.
+        Here is the complete
+        function:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function count_leaves(x) {
+    return is_null(x)
+           ? 0
+           : ! is_pair(x)
+             ? 1
+             : count_leaves(head(x)) +
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABBO4oH0A2BTAhgN2wGcAKADwEpEBvAKEQcQCdsoQmkYj0wRNNyFeoxGMA-IgAMw0SIBciAISIu6AA64YTQTNkiJARl16GClGix5CpABZ4AJoKoBqYyYbmwGHAWIkomgKUFADctAC+QA}{\usebox\lstbox}!*/
+               count_leaves(tail(x));
+}
+
+\end{JavaScriptClickable}
+
+
+
+        
+
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        Suppose we evaluate the expression
+        {\lstinline[mathescape=true]$list(1, list(2, list(3, 4)))$}.
+        Give the result printed by the interpreter, the corresponding
+        box-and-pointer structure, and the interpretation of this as a tree
+        (as in Figure~\ref{fig:list-as-tree-javascript}).
+        
+        
+      \hfill{\hyperref[ex:nested-list-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:nested-list}]
+
+          
+\begin{enumerate}[a.]
+\item{
+              
+\begin{JavaScript}
+[1, [[2, [[3, [4, null]], null]], null]]
+\end{JavaScript}
+
+            }
+\item{
+              
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch2-Z-G-ex-2-24}.png}}
+\end{figure}
+	 
+            }
+\item{
+              
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch2-Z-G-ex-2-24-tree}.png}}
+\end{figure}
+	 
+            }
+\end{enumerate}
+
+        
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled22}
+
+        Give combinations of {\lstinline[mathescape=true]$head$}s and {\lstinline[mathescape=true]$tail$}s that will pick 7 from
+        each of the following lists<SPLIT>, given as printed by our interpreter:</SPLIT>
+
+        
+\begin{JavaScript}
+[1, [3, [[5, [7, null]], [9, null]]]]
+
+[[7, null], null]
+
+[1,
+ [
+  [2,
+   [
+    [3, 
+     [
+      [4, 
+       [
+        [5, 
+         [
+          [6, 
+           [7, 
+            null
+           ]
+          ], 
+          null
+         ]
+        ], 
+        null
+       ]
+      ], 
+      null
+     ]
+    ], 
+    null
+   ]
+  ], 
+  null
+ ]
+]
+\end{JavaScript}
+
+  
+      \hfill{\hyperref[ex:unlabeled22-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled22}]
+
+    <UL>
+      <LI>
+        
+\begin{JavaScript}
+head(tail(head(tail(tail(the_first_list)))));
+\end{JavaScript}
+
+      </LI>
+      <LI>
+        
+\begin{JavaScript}
+head(head(the_second_list));
+\end{JavaScript}
+
+      </LI>
+      <LI>
+        
+\begin{JavaScript}
+head(tail(head(tail(head(tail(head(tail(head(
+    tail(head(tail(the_third_list))))))))))));
+\end{JavaScript}
+
+      </LI>
+    </UL>
+  
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled23}
+
+        Suppose we define {\lstinline[mathescape=true]$x$} and {\lstinline[mathescape=true]$y$} to be two lists:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const x = list(1, 2, 3);
+
+const y = list(4, 5, 6);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAHjAvDANgS2gCgIwBoYBM+AzAJQDcAUJaJLAJ5KoZSYAs+ArPgGwVA}{\usebox\lstbox}
+
+
+
+        What result is printed by the interpreter in response to evaluating
+        each of the following expressions:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+append(x, y);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYBxFMDsBMAoA8A0ACAngSgNxA}{\usebox\lstbox}
+
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+pair(x, y);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4QwlgTgFAHgNAAgJ4EoDcQ}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+list(x, y);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYSwzgLgFAHgNAAgJ4EoDcQ}{\usebox\lstbox}
+
+
+
+	
+	
+      \hfill{\hyperref[ex:unlabeled23-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled23}]
+
+	  
+\begin{enumerate}[a.]
+\item{
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+[1, [2, [3, [4, [5, [6, null]]]]]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=NoRgNABMBMnAzHALHArHAbJAdgVwDb4C6JpQA}{\usebox\lstbox}
+
+
+	    }
+\item{
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+[[1, [2, [3, null]]], [4, [5, [6, null]]]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=NrCMBoAJgJi4DMUB2BXANuguj+AWeAVngDYUNscsg}{\usebox\lstbox}
+
+
+	    }
+\item{
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+[[1, [2, [3, null]]], [[4, [5, [6, null]]], null]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=NrCMBoAJgJi4DMUB2BXANuguj+wAs8ArPAGwoba6RqY5A}{\usebox\lstbox}
+
+
+	    }
+\end{enumerate}
+
+	
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled24}
+
+        Modify your {\lstinline[mathescape=true]$reverse$}
+        function
+        of exercise~\ref{ex:reverse} to
+        produce a
+        
+        
+        {\lstinline[mathescape=true]$deep_reverse$}
+        function
+        that takes a list as argument
+        and returns as its value the list with its elements reversed and with
+        all sublists deep-reversed as well.  For example,
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const x = list(list(1, 2), list(3, 4));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAHjAvDANgS2gCnVgjAGhgCYBKQnKTAZkIBYSSBuIA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+x;
+// [[1, [2, null]], [[3, [4, null]], null]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=B4bgUA9BAEDasEYA0cBMKB2BXANjguvivAMzEAsmuBR02ehQA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+reverse(x);
+// [[3, [4, null]], [[1, [2, null]], null]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=E4UwbiwM4gFAHgSgNwCgD06AEBtHBmAGlwBZiA7AVwBtqBdO4vARiYCYKb7GsraGgA}{\usebox\lstbox}
+
+
+
+        
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+deep_reverse(x);
+// [[4, [3, null]], [[2, [1, null]], null]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUxAcH0CcQNxNAziAFADwJQG4BQB6fAAgG0SAWAGlIGZqA7AVwBtmBdN6sgJi4EYGLdpyJNWHIA}{\usebox\lstbox}
+
+
+
+
+      \hfill{\hyperref[ex:unlabeled24-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled24}]
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function deep_reverse(items){
+    return is_null(items)
+           ? null
+           : is_pair(items)
+             ? append(deep_reverse(tail(items)), 
+                      pair(deep_reverse(head(items)), 
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAEwKaoA4H0BOqBuqOAzqgBQxSoC2xAlAN4BQirieUIOSMxWYIADaCKVWnRZspbAPyIBwydKkAuRLywYAhjByia9JcqlytGDKjDIyaTLgJFSZKDpGUDdOgBpER4-7ZtXRt0bDxCEnIAC1Qta3dxb18AlP8FQU8mAEhpNQTiAG4mAF8gA}{\usebox\lstbox}!*/
+                           null))
+	     : items;
+}
+
+\end{JavaScriptClickable}
+
+
+
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        
+        Write a
+        function
+
+        
+        
+        {\lstinline[mathescape=true]$fringe$} that takes as argument a tree
+        (represented as a list) and returns a list whose elements are all the
+        leaves of the tree arranged in left-to-right order.  For example,
+
+        
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const x = list(list(1, 2), list(3, 4));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAHjAvDANgS2gCnVgjAGhgCYBKQnKTAZkIBYSSBuIA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+fringe(x);
+// [1, [2, [3, [4, null]]]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYJwlgdg5gpgFADwJQG4BQB6DACA2gRgBo8AmY3AZnIBZiIBXAG0YF02Wg}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+fringe(list(x, x));
+// [1, [2, [3, [4, [1, [2, [3, [4, null]]]]]]]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYJwlgdg5gpgFAGzAZwC5wB4BoAEGCU+A3AFAD0ZOA2gIy5UBM9AzPQCz13VPWvUc4IAVwQIAuhMkSgA}{\usebox\lstbox}
+
+
+
+
+      \hfill{\hyperref[ex:fringe-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:fringe}]
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function fringe(x) {
+    return is_null(x)
+           ? null
+           : is_pair(x)
+             ? append(fringe(head(x)), fringe(tail(x)))
+             : list(x);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMATjMBzApgCgB4CUiA3gFCIWIpZQgpIwDOA+mCADbv4HmV+UB+RG069+fAFyImzAA4BDGCm5jxfIfNmysYACY5U6bDgAWWefsIEANMjSZcURVys814qeyZRuAblIAvkA}{\usebox\lstbox}!*/
+}
+
+\end{JavaScriptClickable}
+
+
+
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        
+        A binary mobile consists of two branches, a left branch and a right
+        branch.  Each branch is a rod of a certain length, from which hangs
+        either a weight or another binary mobile.  We can represent a binary
+        mobile using compound data by constructing it from two branches (for
+        example, using {\lstinline[mathescape=true]$list$}):
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_mobile(left, right) {
+   return list(left, right);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ZcBGMANpgBQnBQA0iATjAOYAWUAlIgN4BQivtmUELSREYAZyjlMlGvWZsA3FwC+QA}{\usebox\lstbox}
+
+
+
+        A branch is constructed from a {\lstinline[mathescape=true]$length$} (which must be a number)
+        together with a {\lstinline[mathescape=true]$structure$}, which may be either a number
+        (representing a simple weight) or another mobile:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_branch(length, structure) {
+   return list(length, structure);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ARgJ1UgAsAKAG0zAHMpiAaRAZynxGhH0wEpEBvAFCJhXKJyTkYLClVoNmrdmK7cA3AIC+QA}{\usebox\lstbox}
+
+
+
+        
+\begin{enumerate}[a.]
+\item{
+            Write the corresponding selectors {\lstinline[mathescape=true]$left_branch$} and
+            {\lstinline[mathescape=true]$right_branch$}, which return the branches of a mobile, and
+                {\lstinline[mathescape=true]$branch_length$} and {\lstinline[mathescape=true]$branch_structure$}, which return
+            the components of a branch.
+          }
+\item{
+            Using your selectors, define a
+            function
+            {\lstinline[mathescape=true]$total_weight$}
+            that returns the total weight of a mobile.
+          }
+\item{
+            A mobile is said to be
+            
+            <EM>balanced</EM> if the torque applied
+            by its top-left branch is equal to that applied by its top-right
+            branch (that is, if the length of the left rod multiplied by the
+            weight hanging from that rod is equal to the corresponding product for
+            the right side) and if each of the submobiles hanging off its branches
+            is balanced. Design a predicate that tests whether a binary mobile is
+            balanced.
+          }
+\item{
+            Suppose we change the representation of mobiles so that the
+            constructors are
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_mobile(left, right) {
+   return pair(left, right);
+}
+function make_branch(length, structure) {
+   return pair(length, structure);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ZcBGMANpgBQnBQA0iATjAOYAWUAlIgN4BQivtmUELSQAHVDFrlMlGvWZsA3FwC+XUJFgIUGHPlqpITKWAZQmNAM5RaIaEMztuvOgKGjxkkibOXrtwfysSspAA}{\usebox\lstbox}
+
+
+
+            How much do you need to change your programs to convert to the new
+            representation?
+          }
+\end{enumerate}
+
+        
+  
+      \hfill{\hyperref[ex:mobile-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:mobile}]
+
+    
+\begin{enumerate}[a.]
+\item{
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function left_branch(m) {
+    return head(m);
+}
+function right_branch(m) {
+    return head(tail(m));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGwKbCgfQEYCcCGkAFgBQC2AlIgN4BQiDiuqUIuSRq+AJuRQNy0AvrVCRYCJjADmRLHkIRSlGvUbNW7RJx4ko+GMj4Dho8NHhIFxTGjDSopbFTqMmLNhy69ngkWItJayVMAGcoXBBoNlQSZ1U3DU9tbz0DI2cTISA}{\usebox\lstbox}!*/
+function branch_length(b) {
+    return head(b);
+}
+function branch_structure(b) {
+    return head(tail(b));
+}
+
+\end{JavaScriptClickable}
+
+
+      }
+\item{
+
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_weight(x){
+    return is_number(x);
+}
+function total_weight(x) {
+    return is_weight(x)
+        ? x
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQO4FMYHMAWUAFAB4CUA3gFCK2IBOWUI9SqaYIAtgEZb2kyAbioBfKqEiwEiKHCgBDADaYcBYuUTU6DJizbpseQoJo66AfkQkz5xAC5Z85auPEe9BZHxoUUeiDQLFhEtnbhEYhKWMBQaB5eEPiCZGSIANRhdnKKKkbqRAnevv6BzIyhkVV29G7xnt4pwmJAA}{\usebox\lstbox}!*/
+        : total_weight(branch_structure(
+                         left_branch(x))) +
+          total_weight(branch_structure(
+                         right_branch(x)));
+}
+
+\end{JavaScriptClickable}
+
+
+
+    
+      }
+\item{
+
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_balanced(x) {
+    return is_weight(x) ||
+        ( is_balanced(branch_structure(
+                                  left_branch(x))) &&
+          is_balanced(branch_structure(
+                                  right_branch(x))) &&
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQEYEMA2XICmAJgBQAeAlIgN4BQiDiATgVCE0qmgO4EwDmACyjkqAHzH1G0ksnTY8hUhib4IgtCihMQ0dgRJTpxk6bMMcBYFEyrIg0RSoAyZ0dNcFa4iRVqNWjp6LIbmYeHSTALCtv6OLm5hUHBQuDx8QiJ+9praumwh7hHFxpbWsfbxiEXGAFSI2epolmD8UA5lNo0OlBQ10gC8Q-2Myak46dFZdk2B+fqhJUuRUxXqVSMM9d3NBK3tJFGZaz1OIxQA3LQAvkA}{\usebox\lstbox}!*/
+          total_weight(branch_structure(
+                                  left_branch(x))) 
+          * branch_length(left_branch(x))
+          ===
+          total_weight(branch_structure(
+                                  right_branch(x))) 
+          * branch_length(right_branch(x))
+        );
+}
+
+\end{JavaScriptClickable}
+
+
+
+      }
+\item{
+	With this alternative representation, the accessor functions for
+	mobile and branch need to change as follows:
+
+    
+\begin{JavaScript}
+function left_branch(m) {
+  return head(m);
+}
+function right_branch(m) {
+  return tail(m);
+}
+function branch_length(b) {
+  return head(b);
+}
+function branch_structure(b) {
+  return tail(b);
+}
+\end{JavaScript}
+
+
+      }
+\end{enumerate}
+
+  
+\end{Answer}
+
+
+      
+      
+      
+      
+
+      \subsubsection{
+        Mapping over trees
+      
+
+      
+      
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+        Just as {\lstinline[mathescape=true]$map$} is a powerful abstraction for dealing with sequences,
+        {\lstinline[mathescape=true]$map$} together with recursion is a powerful abstraction for
+        dealing with trees.  For instance, the {\lstinline[mathescape=true]$scale_tree$}
+        function, analogous to {\lstinline[mathescape=true]$scale_list$} of
+        section~\ref{sec:sequences}, takes as arguments a numeric factor and a
+        tree whose leaves are numbers.  It returns a tree of the same shape,
+        where each number is multiplied by the factor.
+        The recursive plan for {\lstinline[mathescape=true]$scale_tree$} is similar to the one for
+        {\lstinline[mathescape=true]$count_leaves$}:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function scale_tree(tree, factor) {
+    return is_null(tree)
+           ? null
+           : ! is_pair(tree)
+             ? tree * factor
+             : pair(scale_tree(head(tree), factor), 
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwgQwDYFMD6UBOWWAFAUQDSLBrRz4CUiA3gFCLuKFQj5IzI4wIDBlKEs9Nh2kcA-IiEipM6QC5EAQkT8cABzQx8YopJVn5ZLIgBUVGlDrKzHdfsPFUmXJeIALLGgAJsYSlNS0DJROzs6e2HjipAailvRh9nT09ADcLAC+QA}{\usebox\lstbox}!*/
+                    scale_tree(tail(tree), factor));
+}
+
+\end{JavaScriptClickable}
+
+
+
+        
+      </p></div>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+        Another way to implement {\lstinline[mathescape=true]$scale_tree$} is to regard the
+        tree as a sequence of sub-trees and use {\lstinline[mathescape=true]$map$}.  We map
+        over the sequence, scaling each sub-tree in turn, and return the list
+        of results.  In the base case, where the tree is a leaf, we simply
+        multiply by the factor:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function scale_tree(tree, factor) {
+    return map(sub_tree => is_pair(sub_tree)
+                           ? scale_tree(sub_tree, factor)
+                           : sub_tree * factor, 
+               tree);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwgQwDYFMD6UBOWWAFAUQDSLBrRz4CUiA3gFCLuKFQj5IC2aAA7FkIAEZ5CWRAF4AfIhjIcgtDHwjxkovTYd9Bw0cQB+FOmzaSoiWSyVqtBnuOvjALhRa7iAFRUaKDpKFzd2O3oAbhYAXyA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+        Many tree operations can be implemented by similar combinations of
+        sequence operations and recursion.
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        Define a
+        function
+        {\lstinline[mathescape=true]$square_tree$} analogous to the {\lstinline[mathescape=true]$square_list$}
+        function
+        of exercise~\ref{ex:square-list}.  That is, {\lstinline[mathescape=true]$square_tree$} should behave as follows:
+
+        
+	
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+square_tree(list(1,
+                 list(2, list(3, 4), 5), 
+                 list(6, 7)));
+// result: [1, [[4, [[9, [16, null]], 
+//                   [25, null]]], 
+//              [[36, [49, null]], null]]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4RwrghgTgpg+gF1jAFAGwJbASgjAGgCgACUs8i0zbFAJn2OpwGYGAWASgYFYviTKgskxQA2BgHYO0gNyEA9POKxgYNAgBcxANoEd2tg23aAnEdzjiAOzVoAunYYKlQ1ztrcGNtPYdPFbuTGzJYGZta2fhE+DnZAA}{\usebox\lstbox}
+
+
+        Define {\lstinline[mathescape=true]$square_tree$} both directly (i.e., without using any
+        higher-order
+        functions) and also by using {\lstinline[mathescape=true]$map$} and recursion.
+        
+	
+      \hfill{\hyperref[ex:square-tree-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:square-tree}]
+
+Directly:	  
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function square_tree(tree) {
+    return is_null(tree)
+           ? null
+           : ! is_pair(tree)
+             ? square(tree)
+             : pair(square_tree(head(tree)),
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9KXHACkJxwEpEBvAKEQcVyhCyRmTzBABsfSiFeoxGMA-Im59hokQC5EAQkQc8ABwwwsA8kNn6JaTLh2UZ+xgo1biR7PjIkAFjgwATUxQoAaWgEgLETtcAiJSTX5HLwoAbloAXyA}{\usebox\lstbox}!*/
+	            square_tree(tail(tree)));
+}
+
+\end{JavaScriptClickable}
+
+
+The version using {\lstinline[mathescape=true]$map$}:
+
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function square_tree(tree) {
+    return map(sub_tree => ! is_pair(sub_tree)
+                           ? square(sub_tree)
+                           : square_tree(sub_tree),
+               tree);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9KXHACkJxwEpEBvAKEQcVyhCyQFsMAHY5EAIwJFEAXgB8iAISIYyPFwwwsvAUPIV6jLdp27EAfhTpsJPoLKVNe63oBcRzLjWnVFigBorNhm4DctAF8gA}{\usebox\lstbox}
+
+
+  
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        Abstract your answer to exercise~\ref{ex:square-tree} to produce a
+        function
+
+        
+        {\lstinline[mathescape=true]$tree_map$} with the property that {\lstinline[mathescape=true]$square_tree$}
+        could be defined as
+
+        
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function square_tree(tree) {
+   return tree_map(square, tree);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9KXHACkJxwEpEBvAKEQdyhCyTPwFsMAHYtTXABpE7CgG5aAXyA}{\usebox\lstbox}
+
+
+  
+      \hfill{\hyperref[ex:tree-map-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:tree-map}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function tree_map(f, tree) {
+    return map(sub_tree => is_null(sub_tree)
+                           ? null
+                           : is_pair(sub_tree)
+                             ? tree_map(f, sub_tree)
+                             : f(sub_tree),
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABFATgUzQfQLYEMAOAFMADTLpoCUiA3gFCKOLpQgpJ5EDOIARpqgyIAvAD5EMLpjAgANrMI9+gqgybqNmrYgD8iGfLXbj2gFwSp+XDBSK+AipSMmXGvSpwFiZJQ4xPXQPVzYDtlRxJnFxVKAG46AF8gA}{\usebox\lstbox}!*/
+               tree);
+}
+
+\end{JavaScriptClickable}
+
+
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled25}
+
+        We can represent a
+        
+        set as a list of distinct elements, and we can
+        represent the set of all subsets of the set as a list of lists.  For
+        example, if the set is {\lstinline[mathescape=true]$[1, [2, [3, null]]]$}, then the set of all subsets 
+        
+	looks as follows:
+	
+\begin{JavaScript}
+[null, [[3, null], [[2, null], [[2, [3, null]], 
+    [[1, null], [[2, [3, null]], [[1, [2, null]], 
+        [[1, [2, [3, null]]], null]]]]]]]]
+\end{JavaScript}
+
+	
+	 Complete the
+        following definition of a
+        function
+        that generates the set of subsets
+        of a set and give a clear explanation of why it works:
+        
+\begin{JavaScript}
+function subsets(s) {
+    if (is_null(s)) {
+        return list(null);
+    } else {
+        const rest = subsets(tail(s));
+        return append(rest, map(??, rest));
+    }
+}
+\end{JavaScript}
+
+	
+      \hfill{\hyperref[ex:unlabeled25-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled25}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function subsets(s) {
+    if (is_null(s)) {
+        return list(null);
+    } else {
+        const rest = subsets(tail(s));
+        return append(rest, map(x => pair(head(s), x), rest));
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxAI2QUysgFMgSkQG8AoRCxGYRXGZAfTBABsX8CizKfEAnbCD5IW9KLmZsCAbnKUAvokwssJOb0QQEyKP0w7EAXhTosOXFACGMdoRnreAqEKSWADm8xgAJrgE6AGkQAW3dcAA8jAD5EN2s+XAALTEtfQiDwgiD-KE5ZHnlSeSA}{\usebox\lstbox}!*/
+    }
+}
+
+\end{JavaScriptClickable}
+
+
+    
+    The argument starts in a similar way as the argument for the function
+    {\lstinline[mathescape=true]$cc$}
+    in section~\ref{sec:tree-recursion}: 
+    A subset either contains the first element $e$ of the given set,
+    or it doesn't. If it doesn't, the problem becomes strictly smaller:
+    Compute all subsets of the tail of the list that represents the given
+    set. If it does, it must result from adding $e$ to
+    a subset that doesn't contain $e$. In the end,
+    we need to append both lists of subsets to obtain the list of all subsets.
+    
+\end{Answer}
+
+      
+      
+
+    
+</SUBSECTION>

@@ -1,0 +1,155 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>5.1.2 
+  Abstraction in Machine Design
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+  We will often define a machine to include <QUOTE>primitive</QUOTE> operations that are
+  actually very complex.  For example, in sections~\ref{sec:eceval} and
+  \ref{sec:compilation} we will treat JavaScript's environment
+  manipulations as primitive.  Such abstraction is valuable because it
+  allows us to ignore the details of parts of a machine so that we can
+  concentrate on other aspects of the design.  The fact that we have
+  swept a lot of complexity under the rug, however, does not mean that a
+  machine design is unrealistic.  We can always replace the complex
+  <QUOTE>primitives</QUOTE> by simpler primitive operations.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+  Consider the GCD machine. The machine has an instruction that computes
+  the remainder of the contents of registers {\lstinline[mathescape=true]$a$} and {\lstinline[mathescape=true]$b$} and
+  assigns the result to register {\lstinline[mathescape=true]$t$}.  If we want to construct the
+  GCD machine without using a primitive remainder operation,
+  we must specify how to compute remainders in terms of simpler
+  operations, such as subtraction.  Indeed, we can write a 
+  JavaScript function
+  that finds remainders in this way:
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function remainder(n, d) {
+    return n < d
+        ? n
+        : remainder(n - d, d);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAJwKYFsCGMwBNXIAUYANIrgJSIDeAUIgyqlCMkkgDzn2O8D8iMD14MAXEyw58RJAFpyZSgG5aAXyA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+  We can thus replace the remainder operation in the GCD machine's
+  data paths with a subtraction operation and a comparison test.
+  Figure~\ref{fig:gcd-machine-rem} shows the data paths and controller
+  for the elaborated machine.
+  The instruction
+
+  
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_original/Fig5.5b.std}.svg}}
+\caption{Data paths and controller for the elaborated GCD  machine.}
+\label{fig:gcd-machine-rem}
+\end{figure}
+
+
+  
+\begin{JavaScript}
+assign("t", list(op("rem"), reg("a"), reg("b")))
+\end{JavaScript}
+
+
+  in the GCD controller definition is replaced by a sequence of
+  instructions that contains a loop, as shown in
+  figure~\ref{fig:gcd-machine-rem-controller}.
+
+  
+\begin{figure}[H]
+\centering
+
+\begin{JavaScript}
+controller(
+    "test-b",
+    list(test(list(op("="), reg("b"), constant(0))),
+         branch(label("gcd-done")),
+         assign("t", reg("a")),
+         "rem-loop",
+         test(list((op "<"), reg("t"), reg("b"))),
+         branch(label("rem-done")),
+         assign("t", list(op("-"), reg("t"), reg("b"))),
+         go_to(label("rem-loop")),
+         "rem-done",
+         assign("a", reg("b")),
+         assign("b", reg("t")),
+         go_to(label("test-b"))),
+    "gcd-done");
+\end{JavaScript}
+\caption{Controller instruction sequence for the GCD machine in
+  figure~\ref{fig:gcd-machine-rem}.}
+\label{fig:gcd-machine-rem-controller}
+\end{figure}
+
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  Design a machine to compute square roots using Newton's method, as
+  described in section~\ref{sec:sqrt}:
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function sqrt(x) {
+    function good_enough(guess, x) {
+        return abs(square(guess) - x) < 0.001;
+    }
+    function improve(guess, x) {
+        return average(guess, x / guess);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzFRJYFEBzOOAEwH0BTMOEWgCy1pFbJkAGkT4ipclPSsoIdEgCGAI2RY0IRTL4ChBALRiCAHkQAGAHRmzARgDcksgF9HFcNHhIYAWwAO6OAA3Vh1BESMJKWlZeSVg9EVaEP4w0RxEAHo6XWQ8BykXKUoPGjRMZhgoVnRQoTSCEijyGTkFOgYWdk4eWvD8VyayAH5ssIHBgC4UDCgKqpqffyDknPr6-PJC5pi26fLK6qwbKzziJyA}{\usebox\lstbox}!*/
+    }
+    function sqrt_iter(guess, x) {
+        return good_enough(guess, x)
+            ? guess
+            : sqrt_iter(improve(guess, x), x);
+    }
+    return  sqrt_iter(1.0);
+}
+
+\end{JavaScriptClickable}
+
+
+
+  Begin by assuming that {\lstinline[mathescape=true]$good_enough$} and {\lstinline[mathescape=true]$improve$} operations
+  are available as primitives.  Then show how to expand these in terms
+  of arithmetic operations.  Describe each version of the {\lstinline[mathescape=true]$sqrt$}
+  machine design by drawing a data-path diagram and writing a controller
+  definition in the register-machine language.
+  
+      
+\end{Exercise}
+
+      
+
+    
+</SUBSECTION>

@@ -1,0 +1,542 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>1.2.4 Exponentiation</a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+        
+        
+
+        <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+              Consider the problem of computing the exponential of a given number.
+              We would like a function that takes as arguments a base $b$ and a
+              positive integer exponent $n$ and computes~$b^n$.  One way to do this
+              is via the recursive definition
+              
+              \begin{eqnarray*}
+              b^{n} &=& b\cdot b^{n-1}\\
+              b^{0} &=&1
+              \end{eqnarray*}
+              
+              which translates readily into the function 
+
+                  
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function expt(b,n) {
+    return n === 0
+           ? 1
+           : b * expt(b, n - 1);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwB4AcoAoBGAaMASkQG8AoRSxAJ2ShGqSQF5XEAGCq7qgfkQCMXHtwBciHIgBUKDNnyIkAWkGEA3GQC+QA}{\usebox\lstbox}
+
+
+
+        
+        </p></div>
+
+        <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+          This is a linear recursive process, which requires $\Theta(n)$ steps
+          and $\Theta(n)$ space.  Just as with factorial, we can readily
+          formulate an equivalent linear iteration:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function expt(b,n) {
+    return expt_iter(b,n,1);
+}
+function expt_iter(b,counter,product) {
+    return counter === 0
+           ? product
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwB4AcoAoBGAaMASkQG8AoRSxAJ2ShGqTUwH0YplrcC8BGQgNxkAvmVCRYCFBihsOXfBDjh5edNTgATENGLkqNOgyRKVnRAF4riAAwUDDxAH5E6rTqj3HVAFzTW7JzcXt6hDqZg8ogAtIi8eIghYck4iABUrhraukLCQA}{\usebox\lstbox}!*/
+           : expt_iter(b,
+                       counter - 1, 
+                       b * product);
+}
+
+\end{JavaScriptClickable}
+
+
+        
+
+          This version requires $\Theta(n)$ steps and $\Theta(1)$ space.
+        </p></div>
+
+        <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+          
+          We can compute exponentials in fewer steps by using successive
+          squaring.  For instance, rather than computing $b^8$ as
+          
+          \[
+          b\cdot(b\cdot(b\cdot(b\cdot(b\cdot(b\cdot(b\cdot b))))))
+          \]
+          
+          we can compute it using three multiplications:
+          
+          \begin{eqnarray*}
+          b^{2} &=& b\cdot b\\
+          b^{4} &=& b^{2}\cdot b^{2}\\
+          b^{8} &=& b^{4}\cdot b^{4}
+          \end{eqnarray*}
+          
+        </p></div>
+
+        <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+              This method works fine for exponents that are powers of 2.  We can
+              also take advantage of successive squaring in computing exponentials
+              in general if we use the rule
+              
+              \[
+              \begin{array}{ll}
+              b^{n} =(b^{n/2})^{2}  & \mbox{~if  is even}\\
+              b^{n} =b\cdot b^{n-1} & \mbox{~if  is odd}\\
+              \end{array}
+              \]
+              
+              We can express this method as a function:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function fast_expt(b, n) {
+    return n === 0
+           ? 1
+           : is_even(n)
+             ? square(fast_expt(b, n / 2))
+             : b * fast_expt(b, n - 1);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhgZygfQKYA8AOUAFAEYA0iYAlIgN4BQiTiATtlCC0kgLx+IAGRsxHMA-IgCMw0SIBciGGhwA3bGCLUZskRLQBHECjZFUGHAWLlKiAPSIATFSradTBSUQAqZOix5CUgokAFopKgBuegBfIA}{\usebox\lstbox}!*/
+}
+
+\end{JavaScriptClickable}
+
+
+
+        
+        where the predicate to test whether an integer is even is defined in terms of
+        the 
+        
+        operator~{\lstinline[mathescape=true]$%$}, which computes the remainder after integer division, by
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_even(n) {
+    return n % 2 === 0;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQKYDcNgBRgCUiA3gFCKWIBOGUI1SSApIgEyIC83iADANxkAvkA}{\usebox\lstbox}
+
+
+
+        
+
+        </p></div>
+
+
+        <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+          
+          
+          The process evolved by 
+          {\lstinline[mathescape=true]$fast_expt$}
+          grows logarithmically with $n$
+          in both space and number of steps.  To see this, observe that
+          computing $b^{2n}$ using 
+          {\lstinline[mathescape=true]$fast_expt$}
+          requires only one more
+          multiplication than computing $b^n$.  The size of the exponent we can
+          compute therefore doubles (approximately) with every new
+          multiplication we are allowed.  Thus, the number of multiplications
+          required for an exponent of $n$ grows about as fast as the logarithm
+          of $n$ to the base 2.  The process has $\Theta(\log n)$
+          growth.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+        </p></div>
+
+        <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+          The difference between $\Theta(\log n)$ growth and $\Theta(n)$ growth
+          becomes striking as $n$ becomes large.  For example, 
+          {\lstinline[mathescape=true]$fast_expt$}
+          for $n=1000$ requires only 14 
+          multiplications.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>~\ref{ex:iter-expon-pro}), although, as is often
+          the case with iterative algorithms, this is not written down so
+          straightforwardly as the recursive algorithm.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+        
+          
+         
+          It is also possible to use the idea of
+          successive squaring to devise an iterative algorithm that computes
+          exponentials with a logarithmic number of steps
+          (see exercise~\ref{ex:iter-expon-pro}), although, as is often
+          the case with iterative algorithms, this is not written down so
+          straightforwardly as the recursive algorithm.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
+        
+          
+        </p></div>
+
+        
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+            Design a function that evolves an iterative exponentiation process
+            that uses successive squaring and uses a logarithmic number of steps,
+            as does   
+          {\lstinline[mathescape=true]$fast_expt$}.
+            (Hint: Using the observation that
+            $(b^{n/2})^2 =(b^2)^{n/2}$, keep, along with the exponent $n$ and the
+            base $b$, an additional
+	    state name
+	    $a$, and define the state
+            transformation in such a way that the product $a b^n$ is unchanged
+            from state to state.  At the beginning of the process $a$ is taken to
+            be 1, and the answer is given by the value of $a$ at the end of the
+            process.  In general, the technique of defining an 
+            
+            <EM>invariant
+              quantity</EM> that remains unchanged from state to state is a powerful way
+            to think about the
+            
+            design of iterative algorithms.)
+            
+  
+    
+    \hfill{\hyperref[ex:iter-expon-pro-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:iter-expon-pro}]
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function fast_expt_iter(a, b, n){
+    return n === 0
+           ? a
+           : is_even(n)
+             ? fast_expt_iter(a, b * b, n / 2)
+             : fast_expt_iter(a * b, b, n - 1);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhgZygfQKYA8AOWMU2ATgBQoA0iARjWAJQDeAUIh4qdlCKUkgC8wxAAZ2nSZwD8iFBKmSAXIhhocAN2xhyTBYsmzUGHASIkK1OogBUdBogD0iAEyN9BjiuNY8hTMRklLb2oUgAtIgAjIwA3KwAvqygkLAIyOi+ZuT0iExskty8-BkmfuZBUTS5TPEJQA}{\usebox\lstbox}!*/
+}
+function fast_expt(b, n){
+    return fast_expt_iter(1, b, n);
+}
+
+\end{JavaScriptClickable}
+
+
+  
+\end{Answer}
+
+
+        
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+                The exponentiation algorithms in this section are based on performing
+                exponentiation by means of repeated multiplication.  In a similar way,
+                one can perform integer multiplication by means of repeated addition.
+                The following multiplication function (in which it is assumed that
+                our language can only add, not multiply) is analogous to the {\lstinline[mathescape=true]$expt$} function:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function times(a,b) {
+    return b === 0
+           ? 0
+           : a + times(a, b - 1);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABLAtgUwM4AoCGAaAIwEpEBvAKESsQCc0oQakDEBedxABkut+oH4uPPrwBciHIgDUyGOmz5ELALSIAjEQDc5AL5A}{\usebox\lstbox}
+
+
+
+        
+
+                This algorithm takes a number of steps that is linear in {\lstinline[mathescape=true]$b$}.
+                Now suppose we include, together with addition, operations {\lstinline[mathescape=true]$double$},
+                which doubles an integer, and {\lstinline[mathescape=true]$halve$}, which divides an (even)
+                integer by 2.  Using these, design a multiplication function analogous
+                to 
+          {\lstinline[mathescape=true]$fast_expt$}
+          that uses a logarithmic number of steps.
+
+      
+    \hfill{\hyperref[ex:add-expon-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:add-expon}]
+          
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function double(x) {
+    return x + x;
+}
+
+function halve(x) {
+    return x / 2;
+}
+
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAEziARgGwKYAoAeAlIgN4BQiliATtlCNUvogNSL4DcZAvmWaJFgJEACwCGmAG54ipClVr1G7RAHpEAJi69+4aPCTAxAZygB9WAFtsx3GIA0idMRKJ5lRQyTpEAXn+IAIzuVKGIAPyIYiFhlABcUX4BAAyIAD5pTkm+iMkxsZSReQWxCTDGZtjSYLjO+SURKGhYeEamFjDWtg6iEtK1hIP1JQlirIht5lY2do4+ALRBhNpAA}{\usebox\lstbox}!*/
+function fast_times(a, b) { 
+    return b === 1
+           ? a
+           : a === 0 || b === 0
+             ? 0
+             : is_even(b)
+               ? double(fast_times(a, halve(b)))
+               : a + fast_times(a, b - 1);
+}
+
+\end{JavaScriptClickable}
+
+
+    
+\end{Answer}
+
+
+        
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+                Using the results of exercises~\ref{ex:iter-expon-pro}
+                and~\ref{ex:add-expon}, devise a function that generates an iterative
+                process for multiplying two integers in terms of adding, doubling, and
+                halving and uses a logarithmic number of steps.<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
+
+        
+        
+                
+
+        
+        \hfill{\hyperref[ex:it-pro-mult-int-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:it-pro-mult-int}]
+                
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function double(x) {
+    return x + x;
+}
+
+function half(x) {
+    return x / 2;
+}
+
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAEziARgGwKYAoAeAlIgN4BQiliATtlCNUvogNSL4DcZAvmWaJFgJEACwCGmYAWLkqNOgyaIA9IgBMXXv3DR4SYGIDOUAPqwAttkMmYUbNVxQ4UCQBpEY9+hkUqteoyI6IgAvGGIAIy+cjEA-IhOLpisHtExVABcHqHhAAyIAD4FQWEhuWnpVPHllelZMNbYAG7YYLjeFbWU8QbGZjCW1rb2js5uKGhYeGKE7uKS7YSEnV1ZvaYWVjZ2DokSKZ4eXogAtJGEmnwCusKbhriH3qS+-oqI6-2D2yO57o8XPCAA}{\usebox\lstbox}!*/
+function fast_times_iter(total, a, b) {
+    return b === 1
+           ? total + a
+           : a === 0 || b===0
+             ? 0
+             : is_even(b)
+               ? fast_times_iter(total, double(a), half(b))
+               : fast_times_iter(total + a, a, b - 1);
+}
+
+function times(a, b) {
+  return fast_times_iter(0, a, b);
+}
+
+\end{JavaScriptClickable}
+
+
+      
+\end{Answer}
+
+
+        
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled8}
+
+                
+                There is a clever algorithm for computing the Fibonacci numbers in
+                a logarithmic number of steps.
+                Recall the transformation of the
+		state names
+                $a$ and $b$ in the
+          {\lstinline[mathescape=true]$fib_iter$}
+          process of
+                section~\ref{sec:tree-recursion}: $a\leftarrow a+b$ and $b\leftarrow
+                  a$.  Call this transformation $T$, and observe that applying $T$ over
+                and over again $n$ times, starting with 1 and 0, produces the pair
+                $\textrm{Fib}(n+1)$ and $\textrm{Fib}(n)$.  In other words, the Fibonacci
+                numbers are produced by applying $T^n$, the $n$th power of the
+                transformation $T$, starting with the pair $(1,0)$.  Now consider $T$
+                to be the special case of $p=0$ and $q=1$ in a family of
+                transformations $T_{pq}$, where $T_{pq}$ transforms the pair $(a,b)$
+                according to $a\leftarrow bq+aq+ap$ and $b\leftarrow bp+aq$.  Show
+                that if we apply such a transformation $T_{pq}$ twice, the effect is
+                the same as using a single transformation $T_{p'q'}$ of the same form,
+                and compute $p'$ and $q'$ in terms of $p$ and~$q$.  This gives us an
+                explicit way to square these transformations, and thus we can compute
+                $T^n$ using successive squaring, as in the 
+          {\lstinline[mathescape=true]$fast_expt$}
+                function.  Put this all together to complete the following function,
+                which runs in a logarithmic number of 
+                steps:<a class='superscript' id='footnote-6' href='#footnote-6'>[6]</a>
+\begin{JavaScript}
+function fib(n) {
+    return fib_iter(1,0,0,1,n);
+}
+function fib_iter(a,b,p,q,count) {
+    return count === 0
+           ? b
+           : is_even(count)
+             ? fib_iter(a,
+                        b,
+                        ??,           // compute p'
+                        ??,           // compute q'
+                        count / 2)
+             : fib_iter(b * q + a * q + a * p,
+                        b * p + a * q,
+                        p,
+                        q,
+                        count - 1);
+}
+\end{JavaScript}
+
+
+    
+        
+
+        
+\begin{JavaScript}
+function fib(n) {
+    return fib_iter(1,0,0,1,n);
+}
+function fib_iter(a,b,p,q,count) {
+    return count === 0
+           ? b
+           : is_even(count)
+             ? fib_iter(a,
+                        b,
+                        ??,           // compute p'
+                        ??,           // compute q'
+                        count / 2)
+             : fib_iter(b * q + a * q + a * p,
+                        b * p + a * q,
+                        p,
+                        q,
+                        count - 1);
+}
+\end{JavaScript}
+
+
+    
+        \hfill{\hyperref[ex:unlabeled8-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled8}]
+        
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function fib(n) {
+    return fib_iter(1, 0, 0, 1, n);
+}
+
+function fib_iter(a, b, p, q, count) {
+    return count === 0
+           ? b
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMGAjAFGAlIg3gKESMQCcBTKEEpFVAfRijJPQEYAaRABk58Q8TYA3PgC++fKEiwEyNAyYsAhp1ScADpwCOnCHHBQcBYqQpUkeg4gC8t7oROPEAfkSoHT4gC5EMAM50ZABuZGDolmCGHp7ErrQKzOgqHgCQMTFq+GnpTuqIAFSIeQDUiFoFZexZOU4ATBV5heWl5U1V2TXEEVCIAPSItVjR6T7xjImoFc2ISlOIpbOFmsOdnpNL8zNTVas1y7s5OisHXfqRiAC0-FgiokA}{\usebox\lstbox}!*/
+           : is_even(count)
+             ? fib_iter(a,
+   	                b,
+	                p * p + q * q,
+	                2 * p * q + q * q,
+	                count / 2)
+             : fib_iter(b * q + a * q + a * p,
+                        b * p + a * q,
+                        p,
+                        q,
+                        count - 1);
+}
+
+\end{JavaScriptClickable}
+
+
+  
+\end{Answer}
+
+
+      <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>More precisely, the number of multiplications
+            required is equal to 1 less than the log base 2 of $n$, plus the number
+            of ones in the binary representation of $n$.  This total is always
+            less than twice the log base 2 of $n$.  The arbitrary constants
+            $k_1$ and $k_2$ in
+            the definition of order notation imply that, for a logarithmic
+            process, the base to which logarithms are taken does not matter, so
+            all such processes are described as $\Theta(\log n)$.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>You may wonder
+            why anyone would care about raising numbers to the 1000th power.  
+            See section~\ref{sec:primality}.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>This iterative
+            algorithm is ancient.  It appears in the <EM>Chandah-sutra</EM> by
+            
+            
+            Áchárya, written before 200 {\scshape b.c}.
+            See Knuth 1981, section
+            4.6.3, for a full discussion and analysis of this and other methods of
+            exponentiation.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>This iterative
+            algorithm is ancient.  It appears in the <EM>Chandah-sutra</EM> by
+            
+            
+            Áchárya, written before 200 {\scshape b.c}.
+            See Knuth 1981, section
+            4.6.3, for a full discussion and analysis of this and other methods of
+            exponentiation.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>This
+                  
+                  
+                  algorithm, which is sometimes known as the <QUOTE>Russian peasant method</QUOTE>
+                  of multiplication, is ancient.  Examples of its use are found in the
+                  
+                  Rhind Papyrus, one of the two oldest mathematical documents in
+                  existence, written about 1700 {\scshape b.c.} (and copied from an even
+                  
+                  older document) by an Egyptian scribe named A'h-mose.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>This exercise was
+                  
+                  suggested to us by Joe Stoy, based on an example in 
+                  Kaldewaij 1990.</FOOTNOTE></div>
+</SUBSECTION>

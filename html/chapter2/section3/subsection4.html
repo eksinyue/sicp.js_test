@@ -1,0 +1,897 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>2.3.4 
+        Example: Huffman Encoding Trees
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+      This section provides practice in the use of list structure and data
+      abstraction to manipulate sets and trees.  The application is to
+      methods for representing data as sequences of ones and zeros (bits).
+      For example, the
+      
+      
+      ASCII standard code used to represent text in
+      computers encodes each
+      
+      character as a sequence of seven bits.  Using
+      seven bits allows us to distinguish $2^7$, or 128, possible different
+      characters.  In general, if we want to distinguish $n$ different
+      symbols, we will need to use $\log_2 n$ bits per symbol.  If all our
+      messages are made up of the eight symbols A, B, C, D, E, F, G, and H,
+      we can choose a code with three bits per character, for example
+      
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_tex/ch2\string_3\string_4-1}.png}}
+\end{figure}
+
+      With this code, the message
+      
+\begin{quote}
+BACADAEAFABBAAAGAH
+      \end{quote}
+
+      is encoded as the string of 54 bits
+      
+\begin{quote}
+001000010000011000100000101000001001000000000110000111
+      \end{quote}
+
+      Codes such as ASCII and the A-through-H code above are known as
+      
+      
+      <EM>fixed-length</EM> codes, because they represent each symbol in the message
+      with the same number of bits.  It is sometimes advantageous to use
+      
+      
+      <EM>variable-length</EM> codes, in which different symbols may be
+      represented by different numbers of bits.  For example,
+      
+      
+      Morse code
+      does not use the same number of dots and dashes for each letter of the
+      alphabet.  In particular, E, the most frequent letter, is represented
+      by a single dot.  In general, if our messages are such that some
+      symbols appear very frequently and some very rarely, we can encode
+      data more efficiently (i.e., using fewer bits per message) if we
+      assign shorter codes to the frequent symbols.  Consider the following
+      alternative code for the letters A through H:
+
+      
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_tex/ch2\string_3\string_4-2}.png}}
+\end{figure}
+
+
+      With this code, the same message as above is encoded as the string
+      
+\begin{quote}
+100010100101101100011010100100000111001111
+      \end{quote}
+
+      This string contains 42 bits, so it saves more than 20% in space in
+      comparison with the fixed-length code shown above.
+      </p></div>
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+      One of the difficulties of using a variable-length code is knowing
+      when you have reached the end of a symbol in reading a sequence of
+      zeros and ones.  Morse code solves this problem by using a special
+      
+      <EM>separator code</EM> (in this case, a pause) after the sequence of
+      dots and dashes for each letter.  Another solution is to design the
+      code in such a way that no complete code for any symbol is the
+      beginning (or <EM>prefix</EM>) of the code for another symbol.  Such a
+      code is called a
+      
+      
+      <EM>prefix code</EM>.  In the example above, A is
+      encoded by 0 and B is encoded by 100, so no other symbol can have a
+      code that begins with 0 or with 100.
+      </p></div>
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+      In general, we can attain significant savings if we use
+      variable-length prefix codes that take advantage of the relative
+      frequencies of the symbols in the messages to be encoded.  One
+      particular scheme for doing this is called the Huffman encoding
+      method, after its discoverer,
+      
+      David Huffman.  A Huffman code can be
+      represented as a
+      
+      
+      binary tree whose leaves are the symbols that are
+      encoded.  At each non-leaf node of the tree there is a set containing
+      all the symbols in the leaves that lie below the node.  In addition,
+      each symbol at a leaf is assigned a weight (which is its
+      relative frequency), and each non-leaf
+      node contains a weight that is the sum of all the weights of the
+      leaves lying below it.  The weights are not used in the encoding or
+      the decoding process.  We will see below how they are used to help
+      construct the tree.
+      </p></div>
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+      
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_original/ch2-Z-G-53}.svg}}
+\caption{A Huffman encoding tree.}
+\label{fig:huffman}
+\end{figure}
+
+      Figure~\ref{fig:huffman} shows the Huffman tree for the A-through-H
+      code given above.  The weights at the leaves
+      indicate that the tree was designed for messages in which A appears
+      with relative frequency 8, B with relative frequency 3, and the
+      other letters each with relative frequency 1.
+      </p></div>
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+      Given a Huffman tree, we can find the encoding of any symbol by
+      starting at the root and moving down until we reach the leaf that
+      holds the symbol.  Each time we move down a left branch we add a 0 to
+      the code, and each time we move down a right branch we add a 1.  (We
+      decide which branch to follow by testing to see which branch either is
+      the leaf node for the symbol or contains the symbol in its set.)  For
+      example, starting from the root of the tree in
+      Figure~\ref{fig:huffman}, we arrive at the leaf for D by following a
+      right branch, then a left branch, then a right branch, then a right
+      branch; hence, the code for D is 1011.
+      </p></div>
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+      To decode a bit sequence using a Huffman tree, we begin at the root
+      and use the successive zeros and ones of the bit sequence to determine
+      whether to move down the left or the right branch.  Each time we come
+      to a leaf, we have generated a new symbol in the message, at which
+      point we start over from the root of the tree to find the next symbol.
+      For example, suppose we are given the tree above and the sequence
+      10001010.  Starting at the root, we move down the right branch, (since
+      the first bit of the string is~1), then down the left branch (since
+      the second bit is~0), then down the left branch (since the third bit
+      is also~0).  This brings us to the leaf for~B, so the first symbol of
+      the decoded message is~B.  Now we start again at the root, and we make
+      a left move because the next bit in the string is~0.  This brings us
+      to the leaf for~A.  Then we start again at the root with the rest of
+      the string 1010, so we move right, left, right, left and reach~C.
+      Thus, the entire message is BAC.
+      </p></div>
+
+      \subsubsection{
+        Generating Huffman trees
+      
+
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+      Given an <QUOTE>alphabet</QUOTE> of symbols and their relative frequencies, how
+      do we construct the <QUOTE>best</QUOTE> code?  (In other words, which tree will
+      encode messages with the fewest bits?)  Huffman gave an algorithm for
+      doing this and showed that the resulting code is indeed the best
+      variable-length code for messages where the relative frequency of the
+      symbols matches the frequencies with which the code was constructed.
+      
+      
+      We will not prove this optimality of Huffman codes here, but we will
+      show how Huffman trees are constructed.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+      </p></div>
+      <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+      The algorithm for generating a Huffman tree is very simple. The idea
+      is to arrange the tree so that the symbols with the lowest frequency
+      appear farthest away from the root. Begin with the set of leaf nodes,
+      containing symbols and their frequencies, as determined by the initial data
+      from which the code is to be constructed. Now find two leaves with
+      the lowest weights and merge them to produce a node that has these
+      two nodes as its left and right branches. The weight of the new node
+      is the sum of the two weights. Remove the two leaves from the
+      original set and replace them by this new node. Now continue this
+      process. At each step, merge two nodes with the smallest weights,
+      removing them from the set and replacing them with a node that has
+      these two as its left and right branches. The process stops when
+      there is only one node left, which is the root of the entire tree.
+      Here is how the Huffman tree of Figure~\ref{fig:huffman} was generated:
+      <SPLIT>
+        
+        
+
+
+      
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_tex/ch2\string_3\string_4-3}.png}}
+\end{figure}
+
+
+        
+      </SPLIT>
+      The algorithm does not always specify a unique tree, because there may
+      not be unique smallest-weight nodes at each step.  Also, the choice of
+      the order in which the two nodes are merged (i.e., which will be the
+      right branch and which will be the left branch) is arbitrary.
+      </p></div>
+
+      \subsubsection{
+        Representing Huffman trees
+      
+
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+      In the exercises below we will work with a system that uses
+      Huffman trees to encode and decode messages and generates Huffman
+      trees according to the algorithm outlined above.  We will begin by
+      discussing how trees are represented.
+      </p></div>
+      <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+      Leaves of the tree are represented by a list consisting of the
+      symbol {\lstinline[mathescape=true]$leaf$}, the symbol at the leaf, and the weight:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_leaf(symbol, weight) {
+   return list("leaf", symbol, weight);
+}
+function is_leaf(object) {
+   return head(object) === "leaf";
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ANp1YACgGcBPZAIzlwBpEB3TGAcwAsoBKRAbwChEggE6YoIIUlwwSUIgCJ8hOfXJUa9Jqw6cA3HwC+fUJFgJE0vAWJxKAK0zRu-QYhFiJiNgQAmRG-cdEAF4QxAUrOT1DY2h4JFVqXEtCIgAPJwFXUXEkL1RfKFQYXDTOXQMjcFizTXYoZOJ03kys91yfIkLizqKS9LKooA}{\usebox\lstbox}!*/
+function symbol_leaf(x) {
+  return head(tail(x));
+}
+function weight_leaf(x) {
+   return head(tail(tail(x)));
+}
+
+\end{JavaScriptClickable}
+
+
+
+      
+
+      
+      </p></div>
+      <div class='permalink'>
+<a name='p11' class='permalink'></a><p>
+      A general tree will be a list of a left branch, a right branch, a set
+      of symbols, and a weight.  The set of symbols will be simply a list of
+      the symbols, rather than some more sophisticated set representation.
+      When we make a tree by merging two nodes, we obtain the weight of the
+      tree as the sum of the weights of the nodes, and the set of symbols as
+      the union of the sets of symbols for the nodes.  Since our symbol sets are
+      represented as lists, we can form the union by using the {\lstinline[mathescape=true]$append$}
+      function
+      we defined in section~\ref{sec:sequences}:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_code_tree(left,right) {
+    return list(left,
+                right,
+                append(symbols(left), symbols(right)),
+                weight(left) + weight(right));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9CcAmOUATppgBQA2mwUANMTAOYAWUAlIgN4BQi-iUlBDEklGAGcoVGvT4CFigY1Zyl6gagAOWzGHzkJAT2QAjOJQkza7OomNmLVlW3a35GpQHdMzNtY5EAGpEHz9pFw52AG4eAF8gA}{\usebox\lstbox}
+
+
+
+      
+      
+      If we make a tree in this way, we have the following selectors:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function left_branch(tree) {
+    return head(tree);
+}
+function right_branch(tree) {
+    return head(tail(tree));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGwKbCgfQEYCcCGkAFgBRS6qoCUiA3gFCJOIVQi5JGr4AmZF1ANz0AvvVCRYCFjADmRLHkIRS5SjQbMWqNh0RdeZfDGT91VYWInR4SAM4BPALbY4yO2ep1GzVuyQwdpho+MCeVD5aUQD8KIFQJI4ubsHcYWrUEVHZAFz63HxQxqZFJuFUFqLi4DbSAO6ocgrh3lp+eoGpoeGR2UyxDU1YIekCWX3MeQaFxUZlpSVjFZUiQA}{\usebox\lstbox}!*/
+function symbols(tree) {
+    return is_leaf(tree)
+           ? list(symbol_leaf(tree))
+           : head(tail(tail(tree)));
+}
+function weight(tree) {
+    return is_leaf(tree)
+           ? weight_leaf(tree)
+           : head(tail(tail(tail(tree))));
+}
+
+\end{JavaScriptClickable}
+
+
+
+      
+      </p></div>
+      <div class='permalink'>
+<a name='p12' class='permalink'></a><p>
+      The
+      functions
+      {\lstinline[mathescape=true]$symbols$} and {\lstinline[mathescape=true]$weight$} must do something
+      slightly different depending on whether they are called with a leaf or
+      a general tree.  These are simple examples of
+      
+      
+      <EM>generic
+        functions</EM> (functions
+      that can handle more than one kind of data),
+      which we will have much more to say about in
+      sections~\ref{sec:multiple-reps} and~\ref{sec:generic-operators}.
+      </p></div>
+
+      \subsubsection{
+        The decoding
+          function
+      
+
+      <div class='permalink'>
+<a name='p13' class='permalink'></a><p>
+      The following
+      function
+      implements the decoding algorithm.
+      It takes as arguments a list of zeros and ones, together with
+      a Huffman tree.
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function decode(bits, tree) {
+    function decode_1(bits, current_branch) {
+        if (is_null(bits)) {
+            return null;
+        } else {
+            const next_branch = choose_branch(head(bits),
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAEwKYTmgFAIxlAZwBpEoAnVVASkQG8AoRJxUSWBFdTVAfQEZc+YogggyFMFB44yAQ0gALGg2arEMYIiwwCPMCAA2BwYSrLGayxShik+owG4LlgL6JUBgqjrPLzDGAEUIhgqAAeUjLyEAqIALwiCnBwXtJyilgKqLLIJgRURL5+xSXFouKokmnRSk6lTNa26roG2cBYoRHVilRF9cwA-IgADrIwZFgEAJ4AtjhwBjytsu2dkekxBX39xWgYaPxYUGPGeKYk5JRm2-0AXJz7vALHMKdCBSHh6zVUdX4uvgBqkaZCQe24hzOwku1CcANY0HgSBiyVSUQyZxI6M2PmBqBsoMQZ3icQSAAYboNEK1gN8MRslJSmPdiaSEnwmVSyDAAOYKOkxXAM3o7e4AUXEcAmACIcDkifhEABaJWJVG8bEKaVEM6-eguIA}{\usebox\lstbox}!*/
+                                    current_branch);
+            return is_leaf(next_branch)
+                   ? pair(symbol_leaf(next_branch),
+                          decode_1(tail(bits), tree))
+                   : decode_1(tail(bits), next_branch);
+        }
+    }
+    return decode_1(bits, tree);
+}
+function choose_branch(bit, branch) {
+    return bit === 0
+           ? left_branch(branch)
+           : bit === 1
+             ? right_branch(branch)
+             : Error("bad bit -- choose_branch",bit);
+}
+
+\end{JavaScriptClickable}
+
+
+
+
+     
+      
+      </p></div>
+      <div class='permalink'>
+<a name='p14' class='permalink'></a><p>
+      The
+      function
+      {\lstinline[mathescape=true]$decode_1$} takes two arguments: the list of remaining bits
+      and the current position in the tree.  It keeps moving
+      <QUOTE>down</QUOTE> the tree, choosing a left or a right branch according to
+      whether the next bit in the list is a zero or a one.  (This is done
+      with the
+      function
+      {\lstinline[mathescape=true]$choose_branch$}.)  When it reaches a leaf, it
+      returns the symbol at that leaf as the next symbol in the message by
+      {\lstinline[mathescape=true]$pair$}ing it onto the result of decoding
+      the rest of the message, starting at the root of the tree.
+      Note the error check in the final clause of {\lstinline[mathescape=true]$choose_branch$}, which
+      complains if the
+      function
+      finds something other than a zero or a one in the
+      input data.
+      </p></div>
+
+      \subsubsection{
+        Sets of weighted elements
+      
+
+      <div class='permalink'>
+<a name='p15' class='permalink'></a><p>
+      In our representation of trees, each non-leaf node contains a set of
+      symbols, which we have represented as a simple list.  However, the
+      tree-generating algorithm discussed above requires that we also work
+      with sets of leaves and trees, successively merging the two smallest
+      items.  Since we will be required to repeatedly find the smallest item
+      in a set, it is convenient to use an ordered representation for this
+      kind of set.
+      </p></div>
+      <div class='permalink'>
+<a name='p16' class='permalink'></a><p>
+      We will represent a set of leaves and trees as a list of elements,
+      arranged in increasing order of weight.
+      The following
+      
+	
+	
+	  {\lstinline[mathescape=true]$adjoin_set$}
+	
+      
+      function
+      for constructing sets is similar to the one
+      described in exercise~\ref{ex:adjoin-set}; however, items are compared
+      by their weights, and the element being added to the set is
+      never already in it.
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function adjoin_set(x, set) {
+    return is_null(set)
+           ? list(x)
+           : weight(x) < weight(head(set))
+             ? pair(x, set)
+             : pair(head(set), adjoin_set(x, tail(set)));
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCYCs4zAfQM4CmUAFAB4A0ihUAlIgN4BQiLiATkSG0jHjmCAA2g4tRrNWk1gH5Eg3iVLipKgFyIA7gRgBzABaK6AHk3b9JPQTSiiNZSpWyADshhsylMRIeT1Lt8SW1mKUaJjY+EQeiFCuImJ2ANyMAL5AA}{\usebox\lstbox}!*/
+}
+
+\end{JavaScriptClickable}
+
+
+
+     
+      
+      </p></div>
+      <div class='permalink'>
+<a name='p17' class='permalink'></a><p>
+      The following
+      function
+      takes a list of
+      symbol-frequency pairs such as
+      
+	
+	
+	  
+\begin{JavaScript}
+list(list("A", 4), list("B", 2), list("C", 1), list("D", 1))
+\end{JavaScript}
+
+	
+      
+      and constructs an initial ordered set of leaves, ready to be merged
+      according to the Huffman algorithm:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_leaf_set(pairs) {
+   if (is_null(pairs)) {
+      return null;
+   }
+   else {
+      const first_pair = head(pairs);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ANp1YbAZ0ygAoAHVGAJ2IEpEBvAKEQ5mEXJmOzAhcuKjXoMmbDtMS0yIWkkHCA3Ow4BfdYky5SLbdIgJiURMDqns1OogC8iABYEAJqMsM1MjnKgKkqC4AVnAwYCRk5IbeMRxoWHgEwOTOgeQW9FDWYgwANLGIAPSFiMQAnsgARtEFtd6pblA0IhlWNrQSeUUlwHIAjjV1KBg4+IQRFE0wIu2MEl6arBpAA}{\usebox\lstbox}!*/
+      return adjoin_set(
+                 make_leaf(head(first_pair),        // symb
+                           head(tail(first_pair))), // freq
+                 make_leaf_set(tail(pairs)));
+   }
+}
+
+\end{JavaScriptClickable}
+
+
+
+      
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        Define an encoding tree and a sample message:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const sample_tree =
+    make_code_tree(make_leaf("A",4),
+        make_code_tree(make_leaf("B",2),
+            make_code_tree(make_leaf("D",1),
+                make_leaf("C",1))));
+const sample_message =						 
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBBCGBbADgGwKYH0oCd3pgF4AoGMmReAay1ABMtd8AKSmzDeAM2YCIBBXgBoALAEohpctLa0QDbHnStqWTj14AhYQCYJU6YYqrM9RkpXt1fACLCAjPqPPysjum58Awg7F+xANzEoJCwCCgYmIjoEAgA5gSEAJApqTAGMKgAltDMAAxCMPaFxTAFZSWF5aXVlUVVgUA}{\usebox\lstbox}!*/
+    list(0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0);
+
+\end{JavaScriptClickable}
+
+
+
+        Use the {\lstinline[mathescape=true]$decode$}
+        function
+        to decode the
+        message, and give the result.
+        
+
+	
+	
+      \hfill{\hyperref[ex:sample-tree-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:sample-tree}]
+
+	  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+decode(sample_message, sample_tree);
+// should be: ["A", ["D", ["A", ["B", ["B", ["C", ["A", null]]]]]]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwxg9qAUDOCGBbADgGxAfUSWCDmIANAAQIroYAuATiCAJQDcAUAPSukAWEArqsMQBGIAFzEA2gCIAgpJJSAInIkzlUgEJrJm+ZIDCW2SQB2fVAF1LV80A}{\usebox\lstbox}
+
+
+	  
+	
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        The {\lstinline[mathescape=true]$encode$}
+        function
+        takes as arguments a message and a tree and
+        produces the list of bits that gives the encoded message.
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function encode(message, tree) {
+    return is_null(message)
+           ? null
+           : append(encode_symbol(head(message), tree),
+                    encode(tail(message), tree));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAU0nAJsgFAW2QZ3wEMBzZAGkSgCdlkBKRAbwChF3FaoRqkZ8A+mBAAbEbgLEy9NhzkcA-ImFjZ8uQC5ERAA47U6LKggZkA-AE8cAIzjiAFsiKG8hUg0o069cmvX+5Y1MsKCIYcVcpDypaBnoAbhYAXyA}{\usebox\lstbox}
+
+
+
+
+        <SPLIT>
+          Write the function {\lstinline[mathescape=true]$encode_symbol$}
+            that returns the list of bits that encodes a given symbol according to a given tree.
+          
+        </SPLIT>
+        You should design {\lstinline[mathescape=true]$encode_symbol$} so that it signals an
+        error if the symbol is not in the tree at all.  Test your
+        function
+        by
+        encoding the result you obtained in exercise~\ref{ex:sample-tree} with
+        the sample tree and seeing whether it is the same as the original
+        sample message.
+
+	
+
+      \hfill{\hyperref[ex:encode-symbol-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:encode-symbol}]
+
+
+	  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function encode_symbol(symbol, tree) {
+    function contains_symbol(symbol, current_tree) {
+        return member(symbol, symbols(current_tree)) !== null;
+    }
+    if (is_leaf(tree)) {
+        return null;
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAU0nAJsg+gZwJ4C2ARnADYAU+xZANIlAE7LICUiA3gFCI+KiSwEiCAigBDGGBy5CJClTl0IIBkzBQsjZmy689iJlBVICyYsgaVZtRArI5yy1ag1bWbAIQBeL4jAhSUgBubl4AX1CeGGBEchhpUmQxYHI3Fh1I-UNjPwDgzLCUUhxkDky9ESkoRETgVyZS31qNIgYxSAALVIaWEIBISpxqhhgAcw765kRfEfGWts7u7X7shiRK8UlpO3lrUjpmzR7y-X0AfkQABwlLAAY6VBFMGWpd14PkOqPtFhPT-QAXMJRBIpC85FZ3gYxhNvqw-v9zlcbuQAIwPNDPHaQxTQuZw9IIxG8IEWBhwSwAIh2fjg1WAcHA6EpvQKnDCQA}{\usebox\lstbox}!*/
+    } else {
+        const left_tree = left_branch(tree);
+	const right_tree = right_branch(tree);
+	return contains_symbol(symbol, left_tree)
+               ? pair(0, encode_symbol(symbol, left_tree))
+                 : contains_symbol(symbol, right_tree)
+                   ? pair(1, encode_symbol(symbol, right_tree))
+                   : error("symbol not found");
+    }
+}
+
+\end{JavaScriptClickable}
+
+
+
+	  
+	  
+	
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        The following
+        function
+        takes as its argument a list of
+        symbol-frequency pairs (where no symbol appears in more than one pair)
+        and generates a Huffman encoding tree according to the Huffman
+        algorithm.
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function generate_huffman_tree(pairs) {
+   return successive_merge(make_leaf_set(pairs));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAcwKZlQJwIZVQfQAsRhgBbbMfKTVVACgAdsZMBnASkQG8AoRAbSghMSNiAgRUbNjABuBMljT0KAawIAbVNmD42qKExbsOHANy8AvkA}{\usebox\lstbox}
+
+
+
+
+
+        <SPLIT>
+          
+          
+            The function {\lstinline[mathescape=true]$make_leaf_set$} 
+            that transforms the
+            list of pairs into an ordered set of leaves is given above.
+            Write the function {\lstinline[mathescape=true]$successive_merge$}
+            using {\lstinline[mathescape=true]$make_code_tree$} to
+            successively merge the smallest-weight elements of the set until there
+            is only one element left, which is the desired Huffman tree.
+          
+        </SPLIT>
+        (This
+        function
+        is slightly tricky, but not really complicated.  If you find
+        yourself designing a complex
+        function, then you are almost certainly
+        doing something wrong.  You can take significant advantage of the fact
+        that we are using an ordered set representation.)
+        
+  
+
+
+      \hfill{\hyperref[ex:generate-huffman-tree-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:generate-huffman-tree}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function successive_merge(leaves) {
+    return length(leaves) === 1
+           ? head(leaves)
+           : successive_merge(
+                 adjoin_set(
+                     make_code_tree(head(leaves),
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxBCBTZyYDcMD6AthgE4DmGAFADYYCG+yAlIgN4BQi3ipGUIUkjphyUABa0GTVgF55iAIxceqngH5E4hgBMpjLMxVrVALhRpM2PIRIVqxk08T0dAKzgwwBZPyqPnQKJ6AGtCCDgdQig+am1XfRkAGgDAtPStXSooehgaRMNmZhSMwJy87Nz8ugMWIuYAbg4AXyA}{\usebox\lstbox}!*/
+                                    head(tail(leaves))),
+                     tail(tail(leaves))));
+}
+
+\end{JavaScriptClickable}
+
+
+
+    
+    
+  
+\end{Answer}
+
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled36}
+
+        
+        The following eight-symbol alphabet with associated relative
+        frequencies was designed to efficiently encode the lyrics of 1950s
+        rock songs.  (Note that the <QUOTE>symbols</QUOTE> of an <QUOTE>alphabet</QUOTE> need not be
+        individual letters.)
+        
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_tex/ch2\string_3\string_4-4}.png}}
+\end{figure}
+
+        Use {\lstinline[mathescape=true]$generate_huffman_tree$} (exercise~\ref{ex:generate-huffman-tree})
+        to generate a corresponding Huffman tree, and use
+        {\lstinline[mathescape=true]$encode$} (exercise~\ref{ex:encode-symbol})
+        to encode the following message:
+
+<div class='permalink'>
+<a name='p18' class='permalink'></a><p>
+Get a job 
+\noindent 
+Sha na na na na na na na na 
+\noindent 
+Get a job 
+\noindent 
+Sha na na na na na na na na 
+\noindent 
+Wah yip yip yip yip yip yip yip yip yip 
+\noindent 
+Sha boom
+</p></div>
+        How many bits are required for the encoding?  What is the smallest
+        number of bits that would be needed to encode this song if we
+        used a fixed-length code for the eight-symbol alphabet?
+
+	
+      \hfill{\hyperref[ex:unlabeled36-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled36}]
+
+
+	  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const lyrics_frequencies = 	  
+    list(list("A", 2),
+         list("NA", 16),
+         list("BOOM", 1),
+         list("SHA", 3),
+         list("GET", 2),
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBANgTwE4EtgQPoDMkFMCOArrmMCrhDALwwCQMMAUAw3CtABRucBEAgjwA0MAEwBKQcxbT47KBx4A5AcICMANglSZrOQoBCAeUMBZITFVadLbvJ4BlABIqYAZivXZvAOIBRACrm4pKeXnYAmgCSAArmAJwe1rYKAFKG+kGJOsk8AOp8jpliANyMoJCwiKjoGFB4uNQwAOYkuEgAhlC4GAAWhFhYALbtYLX1XMhomDgExKTkECVl4NDwk+iNydowAOR+-jvCO3yHu2n6h9s7TidHyqc793e3u0+vL48fb5+X0nsBDw+5weNwe33BX0hpyuELBH3yjgeUWiSJiqJRR2RvxYOyxmLR+IxuzxxIJu1BRyMph22iWTDgJCaUB6HBIoAAJrgJtUIMIqlMxrhcGIlgB6UUwAAcABYgA}{\usebox\lstbox}!*/
+         list("YIP", 9),
+         list("JOB", 2),
+         list("WAH", 2));
+const lyrics_tree = generate_huffman_tree(lyrics_frequencies);
+const lyrics = list(
+    'GET', 'A', 'JOB',
+    'SHA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA',
+    'GET', 'A', 'JOB', 'SHA', 'NA', 'NA', 'NA', 'NA', 'NA', 
+    'NA', 'NA', 'NA', 'WAH', 'YIP', 'YIP', 'YIP', 'YIP',
+    'YIP', 'YIP', 'YIP', 'YIP', 'YIP', 'SHA', 'BOOM'
+   );
+ 
+length(encode(lyrics, lyrics_tree));
+// 84
+
+\end{JavaScriptClickable}
+
+
+We have an alphabet of $n = 8$ symbols,    
+and a message of $m = 36$ symbols.
+Then the minimum number of bits to encode a specific symbol using a fixed-length
+code is $\lceil \log_2{n} \rceil = 3$. Thus
+the minimum number of bits to encode all the lyrics is 
+$m \lceil \log_2{n} \rceil = 36 \times 3 = 108$.
+	  
+      
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        Suppose we have a Huffman tree for an alphabet of $n$ symbols, and
+        that the relative frequencies of the symbols are 1, 2, 4, …,
+        $2^{n-1}$.  Sketch the tree for $n$=5; for $n$=10.  In such a tree
+        (for general $n$) how may bits are required to encode the most
+        frequent symbol?  the least frequent symbol?
+        
+  
+      \hfill{\hyperref[ex:huffman-count-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:huffman-count}]
+
+    <div class='permalink'>
+<a name='p19' class='permalink'></a><p>
+      The tree will be unbalanced, similar to the tree given in
+      figure~\ref{fig:unbalanced-tree}.
+      Encoding the most frequent symbol requires one bit,
+      whereas $n - 1$
+      bits are required to encode the least frequent symbol.
+    </p></div>
+  
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled37}
+
+        
+        Consider the encoding
+        function
+        that you designed in
+        exercise~\ref{ex:encode-symbol}.  What is the order of growth in the
+        number of steps needed to encode a symbol?  Be sure to include the
+        number of steps needed to search the symbol list at each node
+        encountered.  To answer this question in general is difficult.
+        Consider the special case where the relative frequencies of the $n$
+        symbols are as described in exercise~\ref{ex:huffman-count}, and give
+        the order of growth (as a function of $n$) of the number of steps
+        needed to encode the most frequent and least frequent symbols in the
+        alphabet.
+    
+      \hfill{\hyperref[ex:unlabeled37-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled37}]
+
+Consider the special case in exercise~\ref{ex:encode-symbol}.
+At each step down the
+path of length $n$, we need to do a linear
+search in a list of length $n, n-1, \ldots, 1$.
+In the worst case, there are $O(n \times n / 2) = O(n^2)$
+number of steps.
+$O(n^2)$.
+ 
+\end{Answer}
+
+      
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>See
+        Hamming 1980
+        
+        for a discussion of the mathematical properties of Huffman codes.</FOOTNOTE></div>
+</SUBSECTION>

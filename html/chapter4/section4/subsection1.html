@@ -1,0 +1,1241 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>4.4.1 
+  Deductive Information Retrieval
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+  
+  Logic programming excels in providing interfaces to data bases for
+  information retrieval.  The query language we shall implement in this
+  chapter is designed to be used in this way.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+  In order to illustrate what the query system does, we will show how it
+  can be used to manage the data base of personnel records for
+  
+  Microshaft, a thriving high-technology company in the
+  Boston area.  The language provides pattern-directed access to
+  personnel information and can also take advantage of general rules in
+  order to make logical deductions.
+      </p></div>
+
+      \subsubsection{
+  A sample data base
+      
+
+      
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+  
+  
+  The personnel data base for Microshaft
+  contains <EM>assertions</EM> about company personnel.  Here is the
+  information about Ben Bitdiddle, the resident computer wizard:
+
+  
+\begin{JavaScript}
+address(list("Bitdiddle", "Ben"), list("Slumerville", "Ridge Road", 10));
+job(list("Bitdiddle", "Ben"), list("computer", "wizard"));
+salary(list("Bitdiddle", "Ben"), 60000);
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+	<SPLIT>
+	  
+	  
+	    Each assertion is an application whose arguments can be expressions
+	    such as lists.
+	  
+	</SPLIT>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+  As resident wizard, Ben is in charge of the company's computer
+  division, and he supervises two programmers and one technician.  Here
+  is the information about them:
+
+  
+\begin{JavaScript}
+address(list("Hacker", "Alyssa", "P"), list("Cambridge", "Mass Ave", 78));
+job(list("Hacker", "Alyssa", "P"), list("computer", "programmer"));
+salary(list("Hacker", "Alyssa", "P"), 40000);
+supervisor(list("Hacker", "Alyssa", "P"), list("Bitdiddle", "Ben"));
+
+address(list("Fect", "Cy", "D"), list("Cambridge", "Ames Street", 3));
+job(list("Fect", "Cy", "D"), list("computer", "programmer"));
+salary(list("Fect", "Cy", "D"), 35000);
+supervisor(list("Fect", "Cy", "D"), list("Bitdiddle", "Ben"));
+
+address(list("Tweakit", "Lem", "E"), list("Boston", "Bay State Road", 22));
+job(list("Tweakit", "Lem", "E"), list("computer", "technician"));
+salary(list("Tweakit", "Lem", "E"), 25000);
+supervisor(list("Tweakit", "Lem", "E"), list("Bitdiddle", "Ben"));
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+  There is also a programmer trainee, who is supervised by Alyssa:
+  
+\begin{JavaScript}
+address(list("Reasoner", "Louis"), list("Slumerville", "Pine Tree Road", 80));
+job(list("Reasoner", "Louis"), list("computer", "programmer trainee"));
+salary(list("Reasoner", "Louis"), 30000);
+supervisor(list("Reasoner", "Louis"), list("Hacker", "Alyssa", "P"));
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+  All of these people are in the computer division, as indicated by the
+  word {\lstinline[mathescape=true]$computer$} as the first item in their job descriptions.
+
+  Ben is a high-level employee.  His supervisor is the company's big
+  wheel himself:
+
+  
+\begin{JavaScript}
+supervisor(list("Bitdiddle", "Ben"), list("Warbucks", "Oliver"));
+
+address(list("Warbucks", "Oliver"), list("Swellesley", "Top Heap Road"));
+job(list("Warbucks", "Oliver"), list("administration", "big", "wheel"));
+salary(list("Warbucks", "Oliver"), 150000);
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+  Besides the computer division supervised by Ben, the company has an
+  accounting division, consisting of a chief accountant and his
+  assistant:
+
+  
+\begin{JavaScript}
+address(list("Scrooge", "Eben"), list("Weston", "Shady Lane", 10));
+job(list("Scrooge", "Eben"), list("accounting", list("chief", "accountant"));
+salary(list("Scrooge", "Eben"), 75000);
+supervisor(list("Scrooge", "Eben"), list("Warbucks", "Oliver"));
+
+address(list("Cratchet", "Robert"), list("Allston", "N Harvard Street", 16));
+job(list("Cratchet", "Robert"), list("accounting", "scrivener"));
+salary(list("Cratchet", "Robert"), 18000);
+supervisor(list("Cratchet", "Robert"), list("Scrooge", "Eben"));
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+  There is also a secretary for the big wheel:
+
+  
+\begin{JavaScript}
+address(list("Aull", "DeWitt"), list("Slumerville", "Onion Square", 5));
+job(list("Aull", "DeWitt"), list("administration", "secretary"));
+salary(list("Aull", "DeWitt"), 25000);
+supervisor(list("Aull", "DeWitt"), list("Warbucks", "Oliver"));
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+  The data base also contains assertions about which kinds of jobs can
+  be done by people holding other kinds of jobs.  For instance, a
+  computer wizard can do the jobs of both a computer programmer and a
+  computer technician:
+
+  
+\begin{JavaScript}
+can_do_job(list("computer", "wizard"), list("computer", "programmer"));
+can_do_job(list("computer", "wizard"), list("computer", "technician"));
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p11' class='permalink'></a><p>
+  A computer programmer could fill in for a trainee:
+  
+\begin{JavaScript}
+can_do_job(list("computer", "programmer"),
+           list("computer", "programmer", "trainee"));
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p12' class='permalink'></a><p>
+  
+  Also, as is well known,
+  
+\begin{JavaScript}
+can_do_job(list("administration", "secretary"),
+           list("administration", "big", "wheel"));
+\end{JavaScript}
+
+      </p></div>
+
+      
+      
+
+      \subsubsection{
+  Simple queries
+      
+
+      
+      <div class='permalink'>
+<a name='p13' class='permalink'></a><p>
+  The query language allows users to retrieve information from the data
+  base by posing queries in response to the system's prompt.  For
+  example, to find all computer programmers one can say
+
+  
+\begin{JavaScript}
+// Query input:
+job(x, list("computer", "programmer"));
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p14' class='permalink'></a><p>
+  The system will respond with the following items:
+
+  
+\begin{JavaScript}
+// Query results:
+job(list("Hacker", "Alyssa", "P"), list("computer", "programmer"))
+job(list("Fect", "Cy", "D"), list("computer", "programmer"))
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p15' class='permalink'></a><p>
+  
+  The input query specifies that we are looking for entries in the data
+  base that match a certain <EM>pattern</EM>.  In this example, the pattern
+  specifies entries consisting of three items, of which the first is the
+  literal symbol {\lstinline[mathescape=true]$job$}, the second can be anything, and the third is
+  the literal list {\lstinline[mathescape=true]$list("computer", "programmer")$}.  The <QUOTE>anything</QUOTE> that
+  can be the second item in the matching list is specified by a 
+  
+  <EM>
+    pattern variable</EM>,
+    
+      
+      
+	{\lstinline[mathescape=true]$x$}.
+      
+    
+
+    
+      
+    
+	The system responds to a simple query by
+      showing all entries in the data base that match the specified pattern.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p16' class='permalink'></a><p>
+  A pattern can have more than one variable.  For example, the query
+  
+\begin{JavaScript}
+address(x, y)
+\end{JavaScript}
+
+  will list all the employees' addresses.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p17' class='permalink'></a><p>
+  A pattern can have no variables, in which case the query simply
+  determines whether that pattern is an entry in the data base.  If so,
+  there will be one match; if not, there will be no matches.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p18' class='permalink'></a><p>
+  The same pattern variable can appear more than once in a query,
+  specifying that the same <QUOTE>anything</QUOTE> must appear in each position.
+  This is why variables have names.  For example,
+
+  
+\begin{JavaScript}
+supervisor(x, x)
+\end{JavaScript}
+
+
+  finds all people who supervise themselves (though there are no such
+  assertions in our sample data base).
+      </p></div>
+
+      <div class='permalink'>
+<a name='p19' class='permalink'></a><p>
+  The query
+  
+\begin{JavaScript}
+job(x, list("computer",  type));
+\end{JavaScript}
+
+
+  matches all job entries whose third item is a two-element list whose
+  first item is
+  
+    
+    
+      {\lstinline[mathescape=true]$"computer"$}:
+    
+  
+  
+\begin{JavaScript}
+job(list("Bitdiddle", "Ben"), list("computer", "wizard"));
+job(list("Hacker", "Alyssa", "P"), list("computer", "programmer"));
+job(list("Fect", "Cy", "D"), list("computer", "programmer"));
+job(list("Tweakit", "Lem", "E"), list("computer", "technician"));
+\end{JavaScript}
+
+
+      </p></div>
+      <div class='permalink'>
+<a name='p20' class='permalink'></a><p>
+  This same pattern does <EM>not</EM> match
+  
+\begin{JavaScript}
+job(list("Reasoner", "Louis"), list("computer", "programmer", "trainee"));
+\end{JavaScript}
+
+  because the third item in the entry is a list of three elements, and
+  the pattern's third item specifies that there should be two elements.
+  If we wanted to change the pattern so that the third item could be any
+  
+  list beginning with {\lstinline[mathescape=true]$computer$}, we could 
+  specify
+  
+\begin{JavaScript}
+job(x, pair("computer", type))
+\end{JavaScript}
+
+  For example,
+  
+\begin{JavaScript}
+pair("computer", type)
+\end{JavaScript}
+
+
+  matches the data
+
+  
+\begin{JavaScript}
+list("computer", "programmer", "trainee")
+\end{JavaScript}
+
+
+  with
+  
+    
+    
+      {\lstinline[mathescape=true]$type$}
+    
+  
+  as the list {\lstinline[mathescape=true]$list("programmer", "trainee")$}.  
+  It also matches the data
+
+  
+\begin{JavaScript}
+list("computer", "programmer")
+\end{JavaScript}
+
+
+  with
+  
+    
+    
+type      
+    
+  
+  as the list
+  {\lstinline[mathescape=true]$list("programmer")$}, and matches the data
+
+  
+\begin{JavaScript}
+list("computer")
+\end{JavaScript}
+
+
+  with
+    
+    
+    
+type      
+    
+  
+  as the empty list {\lstinline[mathescape=true]$null$}.
+  
+      </p></div>
+
+      <div class='permalink'>
+<a name='p21' class='permalink'></a><p>
+  We can describe the query language's processing of simple queries as
+  follows:
+
+  <UL>
+    <LI>The system finds all assignments to variables in the query
+      
+      pattern that <EM>satisfy</EM> the pattern—that is, all sets of values
+      for the variables such that if the pattern variables are 
+      
+      <EM>
+        instantiated with</EM> (replaced by) the values, the result is in the data
+      base.
+
+    </LI>
+    <LI>
+      The system responds to the query by listing all instantiations of the
+      query pattern with the variable assignments that satisfy it.
+
+    </LI>
+  </UL>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p22' class='permalink'></a><p>
+  Note that if the pattern has no variables, the query reduces to a
+  determination of whether that pattern is in the data base.  If so, the
+  empty assignment, which assigns no values to variables, satisfies that
+  pattern for that data base.
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  Give simple queries that retrieve the following information from the
+  data base:
+  
+\begin{enumerate}[a.]
+\item{
+      all people supervised by Ben Bitdiddle;
+    }
+\item{
+      the names and jobs of all people in the accounting division;
+    }
+\item{
+      the names and addresses of all people who live 
+      in Slumerville.
+    }
+\end{enumerate}
+
+      
+\end{Exercise}
+
+      
+
+      \subsubsection{
+  Compound queries
+      
+
+      
+
+      <div class='permalink'>
+<a name='p23' class='permalink'></a><p>
+  Simple queries form the primitive operations of the query language.
+  In order to form compound operations, the query language provides
+  means of combination.  One thing that makes the query language a logic
+  programming language is that the means of combination mirror the means
+  of combination used in forming logical expressions: {\lstinline[mathescape=true]$and$}, {\lstinline[mathescape=true]$or$}, and {\lstinline[mathescape=true]$not$}.  (Here {\lstinline[mathescape=true]$and$}, {\lstinline[mathescape=true]$or$}, and {\lstinline[mathescape=true]$not$} are not
+  the JavaScript primitives,
+  but rather operations built into the query language.)
+      </p></div>
+
+      <div class='permalink'>
+<a name='p24' class='permalink'></a><p>
+  
+  We can use {\lstinline[mathescape=true]$and$} as follows to find the addresses of all the
+  computer programmers:
+
+  
+\begin{JavaScript}
+and(job(person, list("computer", "programmer"),
+    address(person, where));
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p25' class='permalink'></a><p>
+  The resulting output is
+  
+\begin{JavaScript}
+and(job(list("Hacker", "Alyssa", "P"), list("computer", "programmer")),
+    address(list("Hacker", "Alyssa", "P"), list("Cambridge", "Mass Ave", 78)))
+
+and(job(list("Fect", "Cy", "D"), list("computer", "programmer")),
+    address(list("Fect", "Cy", "D"), list("Cambridge", "Ames Street", 3)))
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p26' class='permalink'></a><p>
+  
+  In general,
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+and($\textit{query}_{1}$, $\textit{query}_{2}$, $\ldots$, $\textit{query}_{n})$;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYOwJgFAJAOgLgUwB5wJZwN4EcCuCBOAngL4D6GAjMVADQAEsiK62eRZGATNfbADZgA9nADOtBvGRpMuAiXIhiASigBuIA}{\usebox\lstbox}
+
+
+
+  is satisfied by all sets of values for the pattern variables that
+  simultaneously satisfy
+  $\textit{query}_{1}\ldots \textit{query}_{n}$.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p27' class='permalink'></a><p>
+  As for simple queries, the system processes a compound query by
+  finding all assignments to the pattern variables that satisfy the
+  query, then displaying instantiations of the query with those values.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p28' class='permalink'></a><p>
+  
+  Another means of constructing compound queries is through {\lstinline[mathescape=true]$or$}.
+  For example,
+
+  
+\begin{JavaScript}
+or(supervisor(x, list("Bitdiddle", "Ben")),
+   supervisor(x, list("Hacker", "Alyssa", "P")));
+\end{JavaScript}
+
+  
+  will find all employees supervised by Ben Bitdiddle or Alyssa P.
+  Hacker:
+
+  
+\begin{JavaScript}
+or(supervisor(list("Hacker", "Alyssa", "P"), list("Bitdiddle", "Ben")),
+supervisor(list("Hacker", "Alyssa", "P"), list("Hacker", "Alyssa", "P")))
+
+or(supervisor(list("Fect", "Cy", "D"), list("Bitdiddle", "Ben")),
+   supervisor(list("Fect", "Cy", "D"), list("Hacker", "Alyssa", "P")))
+
+or(supervisor(list("Tweakit", "Lem", "E"), list("Bitdiddle", "Ben")),
+   supervisor(list("Tweakit", "Lem", "E"), list("Hacker", "Alyssa", "P")))
+
+or(supervisor(list("Reasoner", "Louis"), list("Bitdiddle", "Ben")),
+   supervisor(list("Reasoner", "Louis"), list("Hacker", "Alyssa", "P")))
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p29' class='permalink'></a><p>
+  In general,
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+or($\textit{query}_{1}$, $\textit{query}_{2}$, $\ldots$, $\textit{query}_{n}$^);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PYJwFAJAOgLgpgDxgSxgbwI4Fc4gJ4C+A+mgIwEQA0ABNPEqpjvsWgEwU3QA2AJsDADOVWrEQp02XIRIA7CgD0AlAG4gA}{\usebox\lstbox}
+
+
+
+  is satisfied by all sets of values for the pattern variables that
+  satisfy at least one of
+  
+    
+    
+      $\textit{query}_{1} \ldots \textit{query}_{n}$.
+    
+  
+      </p></div>
+
+      <div class='permalink'>
+<a name='p30' class='permalink'></a><p>
+  
+  Compound queries can also be formed with
+  
+    
+    
+      {\lstinline[mathescape=true]$not$}.
+    
+  
+  For example,
+  
+\begin{JavaScript}
+and(supervisor(x, list("Bitdiddle", "Ben")),
+    not(job(x, list("computer", "programmer"))));
+\end{JavaScript}
+
+
+  finds all people supervised by Ben Bitdiddle who are not computer
+  programmers.  In general,
+
+  
+\begin{JavaScript}
+not($\textit{query}_{1}$);
+\end{JavaScript}
+
+
+  is satisfied by all assignments to the pattern variables that do not
+  satisfy $\textit{query}_{1}$.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p31' class='permalink'></a><p>
+  
+  The final combining form is called
+  
+    
+    
+      {\lstinline[mathescape=true]$javascript_value$}.
+    
+  
+  When
+  
+    
+    
+      {\lstinline[mathescape=true]$javascript_value$}
+    
+  
+  is the first element of a pattern, it specifies that the
+  next element is a JavaScript predicate to be applied to the rest of the
+  (instantiated) elements as arguments.  In general,
+
+  
+\begin{JavaScript}
+javascript_value($\textit{predicate}$, $\textit{arg}_{1}$, $\ldots$, $\textit{arg}_{n}$)
+\end{JavaScript}
+
+
+  will be satisfied by assignments to the pattern variables for which the
+  $\textit{predicate}$ applied to the instantiated
+  $\textit{arg}_{1}, \ldots, \textit{arg}_{n}$
+  is true.  For example, to find all people whose salary is greater than
+  \$30,000 we could write<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+\begin{JavaScript}
+and(salary(person, amount),
+    javascript_value(greater_than, amount, 30000));
+\end{JavaScript}
+
+  
+      
+
+  
+\begin{JavaScript}
+and(salary(person, amount),
+    javascript_value(greater_than, amount, 30000));
+\end{JavaScript}
+
+  
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  Formulate compound queries that retrieve the following information:
+  
+\begin{enumerate}[a.]
+\item{
+      the names of all people who are supervised by Ben Bitdiddle, together
+      with their addresses;
+    }
+\item{
+      all people whose salary is less than Ben Bitdiddle's, together with
+      their salary and Ben Bitdiddle's salary;
+    }
+\item{
+      all people who are supervised by someone who is not in the computer
+      division, together with the supervisor's name and job.
+    }
+\end{enumerate}
+
+      
+\end{Exercise}
+
+      
+
+      \subsubsection{
+  Rules
+      
+
+      
+      <div class='permalink'>
+<a name='p32' class='permalink'></a><p>
+  
+  In addition to primitive queries and compound queries, the query
+  language provides means for abstracting queries.  These are given by
+  <EM>rules</EM>.  The rule
+
+  
+\begin{JavaScript}
+rule(lives_near(person_1, person_2),
+     and(address(person_1, pair(town, rest_1)),
+         address(person_2, pair(town, rest_2)),
+         not(same(person_1, person_2))));
+\end{JavaScript}
+
+
+  specifies that two people live near each other if they live in the
+  same town.  The final {\lstinline[mathescape=true]$not$} clause prevents the rule from saying
+  that all people live near themselves.  The {\lstinline[mathescape=true]$same$} relation is
+  defined by a very simple rule:<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+\begin{JavaScript}
+rule(same(x, x));
+\end{JavaScript}
+
+      
+
+  
+\begin{JavaScript}
+rule(same(x, x));
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p33' class='permalink'></a><p>
+  The following rule declares that a person is a <QUOTE>wheel</QUOTE> in an
+  organization if he supervises someone who is in turn a supervisor:
+
+  
+\begin{JavaScript}
+rule(wheel(person),
+     and(supervisor(middle_manager, person),
+         supervisor(x, middle_manager)));
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p34' class='permalink'></a><p>
+  The general form of a rule is
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+rule($\textit{conclusion}$, $\textit{body}$);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=E4VwNgpgFAJAOgFwgDwQSwQbwMYHsB22YIAzmgQL4wA0ABPEqhpgEa4AmAnlQJQDcQA}{\usebox\lstbox}
+
+
+
+  where $\textit{conclusion}$ is a pattern and $\textit{body}$ is any
+  query.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>'t be explicitly in the data base as an assertion.  It
+  
+  can be an implicit assertion implied by a rule.  For example, the
+  query
+  
+\begin{JavaScript}
+lives_near(x, list("Bitdiddle", "Ben"))
+\end{JavaScript}
+
+  results in
+  
+\begin{JavaScript}
+lives_near(list("Reasoner", "Louis"), list("Bitdiddle", "Ben"))            
+lives_near(list("Aull", "DeWitt"), list("Bitdiddle", "Ben"))
+\end{JavaScript}
+
+       We can think
+  of a rule as representing a large (even infinite) set of assertions,
+  namely all instantiations of the rule conclusion with variable
+  assignments that satisfy the rule body.  When we described simple
+  queries (patterns), we said that an assignment to variables satisfies
+  a pattern if the instantiated pattern is in the data base.  But the
+  pattern needn't be explicitly in the data base as an assertion.  It
+  
+  can be an implicit assertion implied by a rule.  For example, the
+  query
+  
+\begin{JavaScript}
+lives_near(x, list("Bitdiddle", "Ben"))
+\end{JavaScript}
+
+  results in
+  
+\begin{JavaScript}
+lives_near(list("Reasoner", "Louis"), list("Bitdiddle", "Ben"))            
+lives_near(list("Aull", "DeWitt"), list("Bitdiddle", "Ben"))
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p35' class='permalink'></a><p>
+  To find all computer programmers who live near Ben Bitdiddle, we can
+  ask
+  
+\begin{JavaScript}
+and(job(x, list("computer", "programmer")),
+    lives_near(x, list("Bitdiddle", "Ben")));
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p36' class='permalink'></a><p>
+  
+  As in the case of compound
+  functions, rules can be used as parts of
+  other rules (as we saw with the {\lstinline[mathescape=true]$lives-near$} rule above)
+  or even be defined recursively.  For instance, the rule
+  
+\begin{JavaScript}
+rule(outranked_by(staff_person, boss),
+     or(supervisor(staff_person, boss),
+        and(supervisor(staff_person, middle_manager),
+            outranked_by(middle_manager, boss))));
+\end{JavaScript}
+
+  says that a staff person is outranked by a boss in the organization if
+  the boss is the person's supervisor or (recursively) if the person's
+  supervisor is outranked by the boss.
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  Define a rule that says that person 1 can replace person 2 if either
+  person 1 does the same job as person 2 or someone who does person 1's
+  job can also do person~2's job, and if person 1 and person 2 are not
+  the same person. Using your rule, give queries that find the
+  following:
+  
+\begin{enumerate}[a.]
+\item{
+      all people who can replace Cy D. Fect;
+    }
+\item{
+      all people who can replace someone who is being paid more than they
+      are, together with the two salaries.
+    }
+\end{enumerate}
+
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  Define a rule that says that a person is a <QUOTE>big shot</QUOTE> in a division
+  if the person works in the division but does not have a supervisor who
+  works in the division.
+      
+\end{Exercise}
+
+
+      
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  Ben Bitdiddle has missed one meeting too many.
+  Fearing that his habit of forgetting meetings could cost him his
+  job, Ben decides to do something about it.  He adds all the weekly
+  meetings of the firm to the Microshaft data base by
+  asserting the following:
+  
+\begin{JavaScript}
+meeting("accounting", list("Monday", "9am"))
+meeting("administration", list("Monday", "10am"))
+meeting("computer", list("Wednesday", "3pm"))
+meeting("administration", list("Friday", "1pm"))
+\end{JavaScript}
+
+
+  Each of the above assertions is for a meeting of an entire division.
+  Ben also adds an entry for the company-wide meeting that spans all the
+  divisions.  All of the company's employees attend this meeting.
+  
+\begin{JavaScript}
+meeting("whole-company", list("Wednesday", "4pm"))
+\end{JavaScript}
+
+
+  
+\begin{enumerate}[a.]
+\item{
+      On Friday morning, Ben wants to query the data base for all the meetings
+      that occur that day.  What query should he use?
+    }
+\item{
+      Alyssa P. Hacker is unimpressed.  She thinks it would be much more
+      useful to be able to ask for her meetings by specifying her name.  So
+      she designs a rule that says that a person's meetings include all
+      
+	
+	
+	  {\lstinline[mathescape=true]$whole-company$}
+	
+      
+      meetings plus all meetings of that person's division.
+      Fill in the body of Alyssa's rule.
+      
+\begin{JavaScript}
+rule(meeting_time(person, day_and_time),
+     $\textit{rule-body}$);
+\end{JavaScript}
+
+    }
+\item{
+      Alyssa arrives at work on Wednesday morning and wonders what meetings she 
+      has to attend that day.  Having defined the above rule,
+      what query should she make to find this out?
+    }
+\end{enumerate}
+
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  By giving the query
+  
+\begin{JavaScript}
+lives_near(person, list("Hacker", "Alyssa", "P"));
+\end{JavaScript}
+
+
+  Alyssa P. Hacker is able to find people who live near her, with whom
+  she can ride to work.  On the other hand, when she tries to find all
+  pairs of people who live near each other by querying
+
+  
+\begin{JavaScript}
+lives_near(person_1, person_2)
+\end{JavaScript}
+
+
+  she notices that each pair of people who live near each other is
+  listed twice; for example,
+
+  
+
+  Why does this happen?
+  Is there a way to find a list of people who live near each other, in
+  which each pair appears only once?  Explain.
+  
+      
+\end{Exercise}
+
+
+
+      \subsubsection{
+  Logic as programs
+      
+
+      
+      <div class='permalink'>
+<a name='p37' class='permalink'></a><p>
+  We can regard a rule as a kind of logical implication: <EM>If</EM> an
+  assignment of values to pattern variables satisfies the body, <EM>
+    then</EM> it satisfies the conclusion.  Consequently, we can regard the
+  query language as having the ability to perform <EM>logical
+    deductions</EM> based upon the rules.  As an example, consider the {\lstinline[mathescape=true]$append$} operation described at the beginning of
+  section~\ref{sec:logic-programming}.  As we said, {\lstinline[mathescape=true]$append$} can be
+  characterized by the following two rules:
+
+  <UL>
+    <LI>For any list {\lstinline[mathescape=true]$y$}, the empty list and {\lstinline[mathescape=true]$y$} {\lstinline[mathescape=true]$append$} to form {\lstinline[mathescape=true]$y$}.
+
+    </LI>
+    <LI>For any {\lstinline[mathescape=true]$u$},$\,$ {\lstinline[mathescape=true]$v$},$\,$ {\lstinline[mathescape=true]$y$}, and {\lstinline[mathescape=true]$z$},
+      $\,${\lstinline[mathescape=true]$pair(u, v)$} and {\lstinline[mathescape=true]$y$} {\lstinline[mathescape=true]$append$} to form {\lstinline[mathescape=true]$pair(u, z)$}
+      if {\lstinline[mathescape=true]$v$} and {\lstinline[mathescape=true]$y$} {\lstinline[mathescape=true]$append$} to form {\lstinline[mathescape=true]$z$}.
+    </LI>
+
+  </UL>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p38' class='permalink'></a><p>
+  To express this in our query language, we define two rules for a
+  relation
+  
+\begin{JavaScript}
+append-to-form("x", "y", "z")
+\end{JavaScript}
+
+
+  which we can interpret to mean <QUOTE>{\lstinline[mathescape=true]$x$} and {\lstinline[mathescape=true]$y$} {\lstinline[mathescape=true]$append$} to
+    form {\lstinline[mathescape=true]$z$}</QUOTE>:
+
+  
+\begin{JavaScript}
+rule(append_to_form(null, y, y));
+rule(append_to_form(pair(u, v), y, pair(u, z)),
+     append-to-form(v, y, z));
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p39' class='permalink'></a><p>
+	
+  The first rule has no body, which means that the conclusion holds for
+  any value of~{\lstinline[mathescape=true]$y$}.  Note how the second rule makes use of
+  
+  dotted-tail notation to name the {\lstinline[mathescape=true]$head$} and {\lstinline[mathescape=true]$tail$} of a list.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p40' class='permalink'></a><p>
+  Given these two rules, we can formulate queries that compute the {\lstinline[mathescape=true]$append$} of two lists:
+  
+\begin{JavaScript}
+// Query input:
+append-to-form(list("a", "b"), list("c", "d"), z);
+// Query results:
+append-to-form(list("a", "b"), list("c", "d"), list("a", "b", "c", "d"))
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p41' class='permalink'></a><p>
+  What is more striking, we can use the same rules to ask the question
+  <QUOTE>Which list, when {\lstinline[mathescape=true]$append$}ed to {\lstinline[mathescape=true]$list("a", "b")$}, yields {\lstinline[mathescape=true]$list("a", "b", "c", "d")$}?</QUOTE>
+  This is done as follows:
+  
+\begin{JavaScript}
+// Query input:
+append-to-form(list("a", "b"), y, list("a", "b", "c", "d"));
+// Query results:
+append-to-form(list("a", "b"), list("c", "d"), list("a", "b", "c", "d"))
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p42' class='permalink'></a><p>
+  We can also ask for all pairs of lists that {\lstinline[mathescape=true]$append$} to form {\lstinline[mathescape=true]$list("a", "b", "c", "d")$}:
+  
+\begin{JavaScript}
+// Query input:
+append-to-form(x, y, list("a", "b", "c", "d"));
+// Query results:
+append-to-form(null, list("a", "b", "c", "d"), list("a", "b", "c", "d"))
+append-to-form(list("a"), list("b", "c", "d"), list("a", "b", "c", "d"))
+append-to-form(list("a", "b"), list("c", "d"), list("a", "b", "c", "d"))
+append-to-form(list("a", "b", "c"), list("d"), list("a", "b", "c", "d"))
+append-to-form(list("a", "b", "c", "d"), null, list("a", "b", "c", "d"))
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p43' class='permalink'></a><p>
+  The query system may seem to exhibit quite a bit of intelligence in
+  using the rules to deduce the answers to the queries above.  Actually,
+  as we will see in the next section, the system is following a
+  well-determined algorithm in unraveling the rules.  Unfortunately,
+  although the system works impressively in the {\lstinline[mathescape=true]$append$} case, the
+  general methods may break down in more complex cases, as we will see
+  in section~\ref{sec:math-logic}.
+      </p></div>
+
+      
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  The following rules implement a {\lstinline[mathescape=true]$next-to$} relation that finds
+  adjacent elements of a list:
+  
+\begin{JavaScript}
+rule(next_to_in(x, y, pair(x, pair(y, u))),
+     and(next_to_in(x, y, pair(v, z)),
+         next_to_in(x, y, z));
+\end{JavaScript}
+
+
+  What will the response be to the following queries?
+  
+\begin{JavaScript}
+next_to_in(x, y, list(1, list(2, 3), 4));
+
+next_to_in(x, 1, list(2, 1, 3, 1));
+\end{JavaScript}
+
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  Define rules to implement the
+  
+    
+    
+      {\lstinline[mathescape=true]$last_pair$}
+    
+  
+    operation of
+  exercise~\ref{ex:last}, which returns a list containing the last
+  element of a nonempty list.  Check your rules on queries such as
+  {\lstinline[mathescape=true]$last_pair(list(3), x)$}, {\lstinline[mathescape=true]$last_pair(list(1, 2, 3), x)$}, and {\lstinline[mathescape=true]$last_pair(list(2, x, list(3))$}.
+  Do your rules work correctly on queries such as {\lstinline[mathescape=true]$last_pair(x, list(3))$}$\,$?
+  
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  The following data base (see Genesis 4) traces the genealogy of the
+  descendants of Ada back to Adam, by way of Cain:
+
+  
+\begin{JavaScript}
+son("Adam", "Cain");     
+son("Cain", "Enoch");
+son("Enoch", "Irad");      
+son("Methushael", "Lamech");
+wife("Lamech", "Ada");
+son("Ada", "Jabal");
+son("Ada", "Jubal");
+\end{JavaScript}
+
+
+  Formulate rules such as <QUOTE>If <EM>S</EM> is the son of <EM>F</EM>, and <EM>
+      F</EM> is the son of <EM>G</EM>, then <EM>S</EM> is the grandson of <EM>G</EM></QUOTE>
+  and <QUOTE>If <EM>W</EM> is the wife of <EM>M</EM>, and <EM>S</EM> is the son of
+    <EM>W</EM>, then <EM>S</EM> is the son of <EM>M</EM></QUOTE> (which was supposedly
+  more true in biblical times than today) that will enable the query
+  system to find the grandson of Cain; the sons of Lamech; the grandsons
+  of Methushael.
+  (See exercise~\ref{ex:great-grandson} for some rules to
+  deduce more complicated relationships.)
+  
+      
+\end{Exercise}
+
+      
+      
+      
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Actually, this description of
+  
+    
+    
+      {\lstinline[mathescape=true]$not$}.
+    
+  
+  is valid only for simple cases.
+  The real behavior of
+  
+    
+    
+      {\lstinline[mathescape=true]$not$}
+    
+  
+  is more complex.  We will examine
+  {\lstinline[mathescape=true]$not$}'s  peculiarities
+  in sections~\ref{sec:how-query-works} and~\ref{sec:math-logic}.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Such {\lstinline[mathescape=true]$javascript_value$} expressions should be used only to perform an operation not
+    
+    provided in the query language.  In particular, it should not
+    be used to test equality (since that is what the matching in the
+    query language is designed to do) or inequality (since that can
+    be done with the {\lstinline[mathescape=true]$same$} rule shown below).</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Notice 
+    that we do not need {\lstinline[mathescape=true]$same$} in order to make two things be
+    the same: We just use the same pattern variable for each—in effect,
+    we have one thing instead of two things in the first place.  For
+    example, see
+    
+      
+      
+    
+    in the
+    
+      
+      
+    
+    rule and
+    
+      
+      
+    
+    in the
+    {\lstinline[mathescape=true]$wheel$}
+    rule below.
+    
+      
+      
+	The {\lstinline[mathescape=true]$same$} relation
+      
+    
+    is useful when we want to force two things to be
+    different, such as
+    
+      
+      
+    
+    and
+    
+      
+      
+    
+    in the
+    
+      
+      
+    
+    rule.  Although using the same pattern variable in two
+    parts of a query forces the same value to appear in both places, using
+    different pattern variables does not force different values to appear.
+    (The values assigned to different pattern variables may be the same or
+    different.)</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>We will also allow rules without bodies, as in
+  
+  {\lstinline[mathescape=true]$same$}, and we will interpret such a rule to mean that the rule
+    conclusion is satisfied by any values of the variables.</FOOTNOTE></div>
+</SUBSECTION>

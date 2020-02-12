@@ -1,0 +1,315 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>1.2.5 Greatest Common Divisors</a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+        
+        
+
+        <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+          The greatest common divisor (GCD) of two integers $a$ 
+          and $b$ is
+          defined to be the largest integer that divides both $a$ and
+          $b$ with no remainder.  
+          For example, the GCD of 16 and 28 is 4.  In chapter~2,
+          when we investigate how to implement rational-number arithmetic, we
+          will need to be able to compute GCDs in order to reduce
+          rational numbers to lowest terms.  (To reduce a rational number to
+          lowest terms, we must divide both the numerator and the denominator by their
+          GCD.  For example, 16/28 reduces to 4/7.)  One way to find the
+          GCD of two integers is to factor them and search for common
+          factors, but there is a famous algorithm that is much more efficient.
+        </p></div>
+
+        <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+          
+          The idea of the algorithm is based on the observation that, 
+          if $r$ is
+          the remainder when $a$ is divided by 
+          $b$, then the common divisors of
+          $a$ and $b$ are 
+          precisely the same as the common divisors of $b$ and
+          $r$.  Thus, we can use the equation
+          
+          \[
+          \textrm{GCD} (a, b) = \textrm{GCD}(b, r)
+          \]
+          
+          to successively reduce the problem of computing a GCD to the
+          problem of computing the GCD of smaller and smaller pairs of
+          integers.  For example,
+          
+          
+          \begin{eqnarray*}
+          \textrm{GCD}(206,40) & = & \textrm{GCD}(40,6) \\
+          & = & \textrm{GCD}(6,4) \\
+          & = & \textrm{GCD}(4,2) \\
+          & = & \textrm{GCD}(2,0) \\
+          & = & 2
+          \end{eqnarray*}
+          
+          reduces $\textrm{GCD}(206, 40)$ to
+	  $\textrm{GCD}(2, 0)$, which is 2.  It is
+          possible to show that starting with any two positive integers and
+          performing repeated reductions will always eventually produce a pair
+          where the second number is 0.  Then the GCD is the other
+          number in the pair.  This method for computing the GCD is
+          known as <EM>Euclid's Algorithm</EM>.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+        </p></div>
+
+        <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+              It is easy to express Euclid's Algorithm as a 
+              function:
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function gcd(a, b) {
+    return b === 0 ? a : gcd(b, a % b);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAcwgEwBQEMA0iBGAlIgN4BQiliATgKZQjVL6IC87iADIgPyJaIAXCnQZ8eAQFIChANxkAvkA}{\usebox\lstbox}
+
+
+
+        
+        </p></div>
+
+        <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+          This generates an iterative process, whose number of steps grows as
+          the logarithm of the numbers involved.
+        </p></div>
+
+        <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+          
+          The fact that the number of steps required by Euclid's Algorithm has
+          logarithmic growth bears an interesting relation to the Fibonacci
+          numbers:
+          
+          
+          <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+          <B>Lamé's Theorem:</B> If Euclid's Algorithm requires 
+          $k$ steps to
+          compute the GCD of some pair, then the smaller number in the pair
+          must be greater than or equal to the $k$th Fibonacci
+          number.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+          </p></div>
+        <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>This theorem was proved in 1845 by Gabriel 
+            Lamé, a
+            
+            French mathematician and engineer known chiefly for his contributions
+            to mathematical physics.  To prove the theorem, we consider pairs
+            $(a_k ,b_k)$, where 
+            $a_k\geq b_k$, for which Euclid's Algorithm
+            terminates in $k$ steps.
+            The proof is based on the claim that, if
+            $(a_{k+1},\ b_{k+1}) \rightarrow (a_{k},\ b_{k})
+              \rightarrow (a_{k-1},\ b_{k-1})$ are three successive pairs in the
+            reduction process, then we must have 
+            $b_{k+1}\geq b_{k} + b_{k-1}$.
+            To verify the claim, consider that a reduction step is defined by
+            applying the transformation $a_{k-1} = b_{k}$, 
+            $b_{k-1} =
+              \text{ remainder of } a_{k}\text{ divided by }b_{k}$.  
+            The second equation means that $a_{k} = qb_{k} + b_{k-1}$ for some
+            positive integer $q$.  
+            And since $q$ must be at least 1 we have 
+            $a_{k}
+              = qb_{k} + b_{k-1} \geq b_{k} + b_{k-1}$.  
+            But in the previous
+            reduction step we have $b_{k+1}= a_{k}$.  
+            Therefore, $b_{k+1} =
+              a_{k}\geq b_{k} + b_{k-1}$.  This verifies the claim.  Now we can
+            prove the theorem by induction on $k$, 
+            the number of steps that the
+            algorithm requires to terminate.  
+            The result is true for $k=1$, since
+            this merely requires that $b$ be at least as large as 
+            $\text{Fib}(1)=1$.  
+            Now, assume that the result is true for all integers less
+            than or equal to $k$ and establish the result for 
+            $k+1$.  Let
+            $(a_{k+1},\ b_{k+1})\rightarrow(a_{k},\ b_{k})
+              \rightarrow(a_{k-1},\ b_{k-1})$ be successive pairs in the
+            reduction process.  By our induction hypotheses, we have $b_{k-1}\geq
+              {\textrm{Fib}}(k-1)$ and 
+            $b_{k}\geq {\textrm{Fib}}(k)$.  Thus, applying the claim we just
+            proved together with the definition of the Fibonacci numbers gives
+            $b_{k+1} \geq b_{k} + b_{k-1}\geq {\textrm{Fib}}(k) + {\textrm{Fib}}(k-1) 
+              ={\textrm{Fib}}(k+1)$, which
+            completes the proof of Lamé's Theorem.</FOOTNOTE></div></p></div>
+
+        <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+              We can use this theorem to get an order-of-growth estimate for Euclid's
+              Algorithm.  Let $n$ be the smaller of the two inputs to the
+              function.  
+              If the process takes $k$ steps, then we must have 
+              $n\geq {\textrm{Fib}} (k)\approx\phi^k/\sqrt{5}$.  Therefore
+              the number of steps $k$ grows as the logarithm (to the base
+              $\phi$) of $n$.  
+              Hence, the order of growth is $\Theta(\log n)$.
+              
+              
+        </p></div>
+
+        
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+                
+                
+                The process that a 
+                function
+                generates is of course dependent on the
+                rules used by the interpreter.  As an example, consider the iterative
+                {\lstinline[mathescape=true]$gcd$} 
+                function
+                given above.
+                Suppose we were to interpret this 
+                function
+                using normal-order
+                evaluation, as discussed in section~\ref{sec:substitution-model}.
+                (The normal-order-evaluation rule for {\lstinline[mathescape=true]$if$} is described in
+                exercise~\ref{ex:normal-order-vs-appl-order-test}.)  
+                Using the
+                substitution method (for normal order), illustrate the process
+                generated in evaluating 
+                {\lstinline[mathescape=true]$gcd(206, 40)$}
+                and indicate the
+		
+		remainder
+		operations
+		that are actually performed.
+                How many
+		
+		remainder
+		operations are actually performed
+                in the normal-order evaluation of 
+                {\lstinline[mathescape=true]$gcd(206, 40)$}?
+                In the applicative-order evaluation?
+		\hfill{\hyperref[ex:gcd-process-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:gcd-process}]
+
+		  <SPLIT>
+
+    
+\begin{enumerate}[a.]
+\item{
+Using normal-order evaluation, the process undergoes 18 remainder operations.
+   14 while evaluating the condition, rest during final reduction phase.
+        
+\begin{JavaScript}
+gcd(206, 40)
+40 === 0 ? 206 : gcd(40, 206 % 40)
+gcd(40, 206 % 40)
+206 % 40 === 0 ? 40 : gcd(206 % 40,
+                          40 % (206 % 40))
+// remainder operation (1)
+6 === 0 ? 40 : gcd(206 % 40,
+                   40 % (206 % 40))
+gcd(206 % 40, 40 % (206 % 40))
+40 % (206 % 40) === 0 
+    ? 206 % 40 
+    : gcd(40 % (206 % 40),
+          (206 % 40) % (40 % (206 % 40)))
+// remainder operations (2) and (3)
+4 === 0 
+    ? 206 % 40 
+    : gcd(40 % (206 % 40),
+          (206 % 40) % (40 % (206 % 40)))
+gcd(40 % (206 % 40), (206 % 40) % (40 % (206 % 40)))
+(206 % 40) % (40 % (206 % 40)) === 0 
+    ? 40 % (206 % 40)
+    : gcd((206 % 40) % (40 % (206 % 40)), 
+          (40 % (206 % 40)) % ((206 % 40) % (40 % 
+                                             (206 % 40)))
+// remainder operations (4), (5), (6), (7)
+2 === 0
+    ? 40 % (206 % 40)
+    : gcd((206 % 40) % (40 % (206 % 40)), 
+          (40 % (206 % 40)) % ((206 % 40) % (40 % 
+                                             (206 % 40))))
+gcd((206 % 40) % (40 % (206 % 40)), 
+    (40 % (206 % 40)) % ((206 % 40) % (40 % (206 % 40)))
+(40 % (206 % 40)) % ((206 % 40) % (40 % (206 % 40))) === 0
+    ? (206 % 40) % (40 % (206 % 40)) 
+    : gcd((40 % (206 % 40)) % ((206 % 40) % (40 % 
+                                             (206 % 40)),
+          ((206 % 40) % (40 % (206 % 40))) %
+          ((40 % (206 % 40)) % ((206 % 40) % (40 % 
+                                             (206 % 40))))
+// remainder operations 
+                    (8), (9), (10), (11), (12), (13), (14)
+0 === 0
+    ? (206 % 40) % (40 % (206 % 40)) 
+    : gcd((40 % (206 % 40)) % ((206 % 40) % (40 % 
+                                             (206 % 40)),
+          ((206 % 40) % (40 % (206 % 40))) %
+          ((40 % (206 % 40)) % ((206 % 40) % (40 % 
+                                             (206 % 40))))
+(206 % 40) % (40 % (206 % 40))    
+// remainder operations (15), (16), (17), (18)
+2
+\end{JavaScript}
+
+      }
+\item{ Using application order evaluation, the process performs
+      4 remainder operations.
+        
+\begin{JavaScript}
+gcd(206, 40)
+40 === 0 ? 206 : gcd(40, 206 % 40)
+gcd(40, 206 % 40)
+// remainder operation (1)
+gcd(40, 6)
+6 === 0 ? 40 : gcd(6, 40 % 6)
+gcd(6, 40 % 6)
+// remainder operation (2)
+gcd(6, 4)
+4 === 0 ? 6 : gcd(4, 6 % 4)
+gcd(4, 6 % 4)
+// remainder operation (3)
+gcd(4, 2)
+2 === 0 ? 4 : gcd(2, 4 % 2)
+gcd(2, 4 % 2)
+// remainder operation (4)
+gcd(2, 0)
+0 === 0 ? 2 : gcd(0, 2 % 0)
+2
+\end{JavaScript}
+
+   }
+\end{enumerate}
+
+
+		  </SPLIT>
+
+\end{Answer}
+
+      <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Euclid's 
+            Algorithm is so
+            
+            called because it appears in Euclid's <EM>Elements</EM> (Book 7, ca. 300
+            {\scshape b.c}.  According to Knuth (1973), it can be considered the
+            
+            oldest known nontrivial algorithm.  The ancient Egyptian method of
+            multiplication (exercise~\ref{ex:it-pro-mult-int}) is surely older,
+            but, as Knuth explains, Euclid's algorithm is the oldest known to have
+            been presented as a general algorithm, rather than as a set of
+            illustrative examples.</FOOTNOTE></div>
+</SUBSECTION>

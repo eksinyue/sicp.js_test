@@ -1,0 +1,460 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>3.1.2 
+        The Benefits of Introducing Assignment
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+        
+        
+        As we shall see, introducing assignment into our programming language
+        leads us into a thicket of difficult conceptual issues.  Nevertheless,
+        viewing systems as collections of objects with local state is a
+        powerful technique for maintaining a modular design.  As a simple
+        example, consider the design of a
+        function
+        {\lstinline[mathescape=true]$rand$} that, whenever
+        it is called, returns an integer chosen at random.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+        
+        It is not at all clear what is meant by <QUOTE>chosen at random.</QUOTE>  What we
+        presumably want is for successive calls to {\lstinline[mathescape=true]$rand$} to produce a
+        sequence of numbers that has statistical properties of uniform
+        distribution.  We will not discuss methods for generating suitable
+        sequences here.  Rather, let us assume that we have a
+        function
+{\lstinline[mathescape=true]$rand_update$} 
+that has the property that if we start with a given
+        number {\lstinline[mathescape=true]$x_1$} and form
+
+        
+\begin{JavaScript}
+x_2 = rand_update(x_1);
+x_3 = rand_update(x_2);
+\end{JavaScript}
+
+        then the sequence of values {\lstinline[mathescape=true]$x_1$},
+	{\lstinline[mathescape=true]$x_2$},
+	{\lstinline[mathescape=true]$x_3$},
+	…, will have the
+        desired statistical properties.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+        We can implement {\lstinline[mathescape=true]$rand$} as a
+        function
+        with a local state variable
+        {\lstinline[mathescape=true]$x$} that is initialized to some fixed value 
+{\lstinline[mathescape=true]$random_init$}.
+        Each call to {\lstinline[mathescape=true]$rand$} computes 
+{\lstinline[mathescape=true]$rand_update$} 
+of the current
+        value of {\lstinline[mathescape=true]$x$}, returns this as the random number, and also stores
+        this as the new value of {\lstinline[mathescape=true]$x$}.
+
+	
+
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_rand() {
+   let x = random_init;
+   function rand() {
+        x = rand_update(x);
+        return x;
+   }
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ATqsAEwAoBKRAbwChFaAbTKRAD0QF5F8i5lsYwYUANw1aoSLAScCJctVoKFrDl0LYQAB0KoomYs1IjFi3IxC4kzI7QC+ozmYvSiIuxAQBnJqvYoMOVTIhIA}{\usebox\lstbox}!*/
+   return rand;
+}
+const rand = make_rand();
+
+\end{JavaScriptClickable}
+
+
+
+	
+	
+	
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+        Of course, we could generate the same sequence of random numbers
+        without using assignment by simply calling 
+{\lstinline[mathescape=true]$rand_update$} 
+directly.
+        However, this would mean that any part of our program that used random
+        numbers would have to explicitly remember the current value of {\lstinline[mathescape=true]$x$}
+        to be passed as an argument to 
+{\lstinline[mathescape=true]$rand_update$}.  To realize what an
+        annoyance this would be, consider using random numbers to implement a
+        technique called 
+        
+        
+        <EM>Monte Carlo simulation</EM>.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+        The Monte Carlo method consists of choosing sample experiments at
+        random from a large set and then making deductions on the basis of the
+        probabilities estimated from tabulating the results of those
+        experiments.  For example, we can approximate 
+        
+        $\pi$ using the fact
+        that $6/\pi^2$ is the probability that two integers chosen at random
+        will have no factors in common; that is, that their greatest common
+        divisor will be 1.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>$\pi$, we perform a large number of experiments.
+        In each experiment we choose two integers at random and perform a test
+        
+        to see if their GCD is 1.  The fraction of times that the test is
+        passed gives us our estimate of $6/\pi^2$, and from this we obtain our
+        approximation to $\pi$.
+       To obtain
+        the approximation to $\pi$, we perform a large number of experiments.
+        In each experiment we choose two integers at random and perform a test
+        
+        to see if their GCD is 1.  The fraction of times that the test is
+        passed gives us our estimate of $6/\pi^2$, and from this we obtain our
+        approximation to $\pi$.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+        The heart of our program is a
+        function
+{\lstinline[mathescape=true]$monte_carlo$}, which takes
+        as arguments the number of times to try an experiment, together with
+        the experiment, represented as a no-argument
+        function
+        that will
+        return either true or false each time it is run.  {\lstinline[mathescape=true]$monte_carlo$}
+        runs the experiment for the designated number of trials and returns a
+        number telling the fraction of the trials in which the experiment was
+        found to be true.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function estimate_pi(trials) {
+    return math_sqrt(6 / monte_carlo(trials, cesaro_test));
+}
+
+function cesaro_test() {
+    return gcd(rand(), rand()) === 1;
+}
+
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwM6wLYEMrIPoAOMAFFAE4xYA2qAlIgN4BQiriZyUIZS2UAFnlQBHMlGIA2RAHpEGBLjwQsZKnFIVqqADSIIaFXDy50tWgG4mAXyZNQkWAj0GyRk+PrM27TtyQBzCAATYjIsMBDaXTCI4jNEAF4kxABGSxs7cGh4XgV8ZVV1ckoaXWQADwJkCgxkMChPFjZ7bKcYXDINEtQ8DmwYMAH-XWKtQixUVGQgxu9vGGBELrG+rAGhxOSABlm5vY4uHkRRmnHJ6ZljzRpLPdYrFBpkRAWliqqauo9du7YDvxeHWWp1W6zA-kQAFpUtomr94XMTj0CBMpkFEABqVIWOFzB7IJ6MXG-f5HdrVYE9UGDcFQmGIYkI+FIs5onG-GzeTl-XxkoFI3Q7dJAA}{\usebox\lstbox}!*/
+function monte_carlo(trials, experiment) {
+    function iter(trials_remaining, trials_passed) {
+        if (trials_remaining === 0) {
+            return trials_passed / trials;
+        } else if (experiment()) {
+            return iter(trials_remaining - 1,
+                        trials_passed + 1);
+        } else {
+            return iter(trials_remaining - 1, 
+                        trials_passed);
+        }
+    }
+    return iter(trials, 0);
+}
+
+\end{JavaScriptClickable}
+
+
+
+        
+	
+      </p></div>
+
+      <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+        Now let us try the same computation using 
+{\lstinline[mathescape=true]$rand_update$} 
+directly
+        rather than {\lstinline[mathescape=true]$rand$}, the way we would be forced to proceed if we
+        did not use assignment to model local state:
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function estimate_pi(trials) {
+    return math_sqrt(6 / random_gcd_test(trials, random_init));
+}
+
+function random_gcd_test(trials, initial_x) {
+    function iter(trials_remaining, trials_passed, x) {
+        const x1 = rand_update(x);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwM6wLYEMrIPoAOMAFFAE4xYA2qAlIgN4BQiriZyUIZS2UAFnlQBHMlGIA2RAHp2WMABM4GPAHMICvLnSkK1VABo5i5XhhgYUWrQDcTAL5MmoSLATGlK9Zu3jylGiNzSwC8AA96ZjZEF2h4JEtkMl0A1DwObGCwVSN-fUIsVFRkBSMIxhZotggEdEQwgEZEAF4PPBACBRxkYgi7KuraqHqAJha2jq7cXobbSoGYYEQU-IysLNUW5taABkj5gbYOLh5EPJoCopKZM70afsP7FBpkREXl7xmykfpt1tmKocqsduAlcMlzmk1htEABaRANIwHIEotiQy7FBSIADUCO+cyBT2QL0BqPYnFBb3BKwu0Is2TheMQyLJQPRBEKmPxDwGjmifKOFNOiQhd0MiB2QQssGo4Tm9iAA}{\usebox\lstbox}!*/
+        const x2 = rand_update(x1);
+        if (trials_remaining === 0) {
+            return trials_passed / trials;
+        } else if (gcd(x1, x2) === 1) {
+            return iter(trials_remaining - 1, 
+                        trials_passed + 1, x2);
+        } else {
+            return iter(trials_remaining - 1, 
+                        trials_passed, x2);
+        }
+    }
+    return iter(trials, 0, initial_x);
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+        While the program is still simple, it betrays some painful
+        breaches of modularity.  In our first version of the program, using
+        {\lstinline[mathescape=true]$rand$}, we can express the Monte Carlo method directly as
+        a general 
+{\lstinline[mathescape=true]$monte_carlo$} 
+        function
+        that takes as an argument an
+        arbitrary {\lstinline[mathescape=true]$experiment$}
+        function.  In our second version of the
+        program, with no local state for the random-number generator, 
+{\lstinline[mathescape=true]$random_gcd_test$} 
+must explicitly manipulate the random numbers {\lstinline[mathescape=true]$x1$} and {\lstinline[mathescape=true]$x2$} and recycle {\lstinline[mathescape=true]$x2$} through the iterative loop as
+        the new input to 
+{\lstinline[mathescape=true]$rand_update$}.
+This explicit handling of the
+        random numbers intertwines the structure of accumulating test results
+        with the fact that our particular experiment uses two random numbers,
+        whereas other Monte Carlo experiments might use one random number or
+        three.  Even the top-level
+        function
+{\lstinline[mathescape=true]$estimate_pi$}
+        has to be
+        concerned with supplying an initial random number.  The fact that the
+        random-number generator's insides are leaking out into other parts of
+        the program makes it difficult for us to isolate the Monte Carlo idea
+        so that it can be applied to other tasks.  In the first version of the
+        program, assignment encapsulates the state of the random-number
+        generator within the {\lstinline[mathescape=true]$rand$}
+        function, so that the details of
+        random-number generation remain independent of the rest of the
+        program.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+        The general phenomenon illustrated by the Monte Carlo example is this:
+        From the point of view of one part of a complex process, the other
+        parts appear to change with time.  They have hidden time-varying local
+        state.  If we wish to write computer programs whose structure reflects
+        this decomposition, we make
+        computational objects (such as bank accounts and random-number
+        generators) whose behavior changes with time.  We model state with
+        local state variables, and we model the changes of state with
+        assignments to those variables.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p11' class='permalink'></a><p>
+        It is tempting to conclude this discussion by saying that, by
+        introducing assignment and the technique of hiding state in local
+        variables, we are able to structure systems in a more modular fashion
+        than if all state had to be manipulated explicitly, by passing
+        additional parameters.  Unfortunately, as we shall see, the story is
+        not so simple.
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        
+          
+          
+          <EM>Monte Carlo integration</EM> is a method of estimating definite
+          integrals by means of Monte Carlo simulation.  Consider computing the
+          area of a region of space described by a predicate $P(x, y)$ that is
+          true for points $(x, y)$ in the region and false for points not in the
+          region.  For example, the region contained within a circle of radius
+          $3$ centered at $(5, 7)$ is described by the predicate that tests
+          whether $(x-5)^2 + (y-7)^2\leq 3^2$.  To estimate the area of the
+          region described by such a predicate, begin by choosing a rectangle
+          that contains the region.  For example, a rectangle with diagonally
+          opposite corners at $(2, 4)$ and $(8, 10)$ contains the circle above.
+          The desired integral is the area of that portion of the rectangle that
+          lies in the region.  We can estimate the integral by picking, at
+          random, points $(x,y)$ that lie in the rectangle, and testing $P(x,
+            y)$ for each point to determine whether the point lies in the region.
+          If we try this with many points, then the fraction of points that fall
+          in the region should give an estimate of the proportion of the
+          rectangle that lies in the region.  Hence, multiplying this fraction
+          by the area of the entire rectangle should produce an estimate of the
+          integral.
+        <div class='permalink'>
+<a name='p12' class='permalink'></a><p></p></div>
+          Implement Monte Carlo integration as a
+          function
+          
+{\lstinline[mathescape=true]$estimate_integral$}
+that takes as arguments a predicate {\lstinline[mathescape=true]$P$}, upper
+          and lower bounds {\lstinline[mathescape=true]$x1$}, {\lstinline[mathescape=true]$x2$}, {\lstinline[mathescape=true]$y1$}, and {\lstinline[mathescape=true]$y2$} for the
+          rectangle, and the number of trials to perform in order to produce the
+          estimate.  Your
+          function
+          should use the same 
+{\lstinline[mathescape=true]$monte_carlo$}
+          function
+          that was used above to estimate $\pi$.  Use
+          your 
+{\lstinline[mathescape=true]$estimate_integral$}
+{\lstinline[mathescape=true]$$} 
+to produce an estimate of $\pi$ by
+          measuring the area of a unit circle.
+<div class='permalink'>
+<a name='p13' class='permalink'></a><p></p></div>
+          You will find it useful to have a
+          function
+          that returns a number
+          chosen at random from a given range.  The following 
+{\lstinline[mathescape=true]$random_in_range$}
+          function
+          implements this in terms of the {\lstinline[mathescape=true]$random$}
+          function
+          used in section~\ref{sec:primality}, which returns a nonnegative
+          number less than its
+	  
+	    
+	    
+	      input.
+	    
+	  
+          
+\begin{JavaScript}
+function random_in_range(low, high) {
+    const range = high - low;
+    return low + random(range);
+}
+\end{JavaScript}
+
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        
+        
+        
+        It is useful to be able to reset a random-number generator to produce
+        a sequence starting from a given value.  Design a new {\lstinline[mathescape=true]$rand$}
+        function
+        that is called with an argument that is either the symbol
+        {\lstinline[mathescape=true]$generate$} or the symbol {\lstinline[mathescape=true]$reset$} and behaves as follows: {\lstinline[mathescape=true]$rand("generate")$} produces a new random number; 
+{\lstinline[mathescape=true]$(rand("reset"))($\textit{new-value}$)$} resets the internal state variable to the designated
+        $\textit{new-value}$.
+Thus, by resetting the state, one can generate
+        repeatable sequences.  These are very handy to have when testing and
+        debugging programs that use random numbers.
+
+
+
+      \hfill{\hyperref[ex:random-with-reset-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:random-with-reset}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+let state = 2;
+
+function rand(symbol) {
+    if (symbol === "reset") {
+        return new_state => {
+            state = new_state;
+        };
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYUwLgBAzmCGYggXggJgNwChMDMCuAdgMZgCWA9gRAE6wEAmAFFAJ4C2ARucAJQQDemCMIikcEZuy7BkSFACJqIKOHl9BIzTXB5qVAiADuAfRjxESAHwChWu2YTIIBkw5BY7wgL4eRXiCDAKjaeEAD0YdBS3KJQEPIA5iAGtAjytvZwjijMWYgAVBAAjAAMpXwApMWlRb52SmC6VG51EP6YXkA}{\usebox\lstbox}!*/
+    } else {
+        // symbol is "generate"
+        state = (state * 1010) % 1101;
+        return state;
+    } 
+}
+
+\end{JavaScriptClickable}
+
+
+
+    
+    
+  
+\end{Answer}
+
+      
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>One common way to implement
+{\lstinline[mathescape=true]$rand_update$} 
+is to use the rule that $x$ is updated to $ax+b$
+          modulo $m$, where $a$, $b$, and $m$ are appropriately chosen integers.
+          Chapter~3 of 
+          
+          Knuth 1981 
+          includes an extensive discussion of techniques
+          for generating sequences of random numbers and establishing their
+          statistical properties.  Notice that the 
+{\lstinline[mathescape=true]$rand_update$} 
+          function
+          computes a mathematical function: Given the same input twice, it
+          produces the same output.  Therefore, the number sequence produced by
+{\lstinline[mathescape=true]$rand_update$} 
+certainly is not <QUOTE>random,</QUOTE> if by <QUOTE>random</QUOTE> we
+          insist that each number in the sequence is unrelated to the preceding
+          number.  The relation between <QUOTE>real randomness</QUOTE> and so-called 
+          
+          <EM>
+            pseudo-random</EM> sequences, which are produced by well-determined
+          computations and yet have suitable statistical properties, is a
+          complex question involving difficult issues in mathematics and
+          philosophy.  
+          
+          
+          
+          Kolmogorov, Solomonoff, and Chaitin have made great
+          progress in clarifying these issues; a discussion can be found in
+          Chaitin 1975.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>This theorem is due to E. 
+          
+          Cesàro.  See
+          section 4.5.2 of  
+          
+          Knuth 1981 for a discussion and a proof.</FOOTNOTE></div>
+</SUBSECTION>

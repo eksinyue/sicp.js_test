@@ -1,0 +1,289 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>5.4.2 
+  Sequence Evaluation and Tail Recursion
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+  The portion of the explicit-control evaluator at {\lstinline[mathescape=true]$ev-sequence$} is
+  analogous to the metacircular evaluator's {\lstinline[mathescape=true]$eval_sequence$}
+  function.  It
+  handles sequences of expressions in
+  function
+  bodies or in explicit
+  {\lstinline[mathescape=true]$begin$} expressions.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+  Explicit {\lstinline[mathescape=true]$begin$} expressions are evaluated by placing the sequence
+  of expressions to be evaluated in {\lstinline[mathescape=true]$unev$}, saving {\lstinline[mathescape=true]$continue$} on the
+  stack, and jumping to {\lstinline[mathescape=true]$ev_sequence$}.
+  
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+  The implicit sequences in
+  function
+  bodies are handled by jumping to
+  {\lstinline[mathescape=true]$ev_sequence$} from {\lstinline[mathescape=true]$compound_apply$}, at which point {\lstinline[mathescape=true]$continue$} is already on the stack, having been saved at
+  {\lstinline[mathescape=true]$ev_application$}.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+  The entries at {\lstinline[mathescape=true]$ev_sequence$}
+  and {\lstinline[mathescape=true]$ev_sequence_continue$} form a loop that
+  successively evaluates each expression in a sequence.  The list of
+  unevaluated expressions is kept in {\lstinline[mathescape=true]$unev$}.  Before evaluating each
+  expression, we check to see if there are additional expressions to be
+  evaluated in the sequence.  If so, we save the rest of the unevaluated
+  expressions (held in {\lstinline[mathescape=true]$unev$}) and the environment in which these
+  must be evaluated (held in {\lstinline[mathescape=true]$env$}) and call {\lstinline[mathescape=true]$eval_dispatch$} to
+  evaluate the expression.  The two saved registers are restored upon
+  the return from this evaluation, at {\lstinline[mathescape=true]$ev_sequence_continue$}.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+  The final expression in the sequence is handled differently, at the
+  entry point {\lstinline[mathescape=true]$ev_sequence_last_exp$}.  Since there are no more
+  expressions to be evaluated after this one, we need not save {\lstinline[mathescape=true]$unev$} or {\lstinline[mathescape=true]$env$} before going to {\lstinline[mathescape=true]$eval_dispatch$}.  The value of
+  the whole sequence is the value of the last expression, so after the
+  evaluation of the last expression there is nothing left to do except
+  continue at the entry point currently held on the stack (which was saved
+  by {\lstinline[mathescape=true]$ev_application$} or {\lstinline[mathescape=true]$ev_begin$}.)
+  Rather than setting up {\lstinline[mathescape=true]$continue$} to arrange for {\lstinline[mathescape=true]$eval_dispatch$} to return here and then restoring {\lstinline[mathescape=true]$continue$} from
+  the stack and continuing at that entry point, we restore {\lstinline[mathescape=true]$continue$} from
+  the stack before going to {\lstinline[mathescape=true]$eval_dispatch$}, so that {\lstinline[mathescape=true]$eval_dispatch$} will continue at that entry point after evaluating the
+  expression.
+
+  
+\begin{JavaScript}
+"ev_sequence",
+          assign(exp(op("first_exp"), reg("unev"))),
+          test(op("is_last_exp"), reg("unev")),
+          branch(label("ev_sequence_last_exp")),
+          save("unev"),
+          save("env"),
+          assign("continue", label("ev_sequence_continue")),
+          go_to(label("eval_dispatch")),
+      "ev_sequence_continue",
+          restore("env"),
+          restore("unev"),
+          assign("unev", op("rest_exps"), reg("unev")),
+          go_to(label("ev_sequence")),
+      "ev_sequence_last_exp",
+          restore("continue"),
+          go_to(label("eval_dispatch")),
+\end{JavaScript}
+
+      </p></div>
+
+      \subsubsection{ 
+  Tail recursion
+      
+
+      
+      
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+  In chapter~1 we said that the process described by a
+  function
+  such as
+
+  
+\begin{JavaScript}
+function sqrt_iter(guess, x) {
+          return is_good_enough(guess, x)
+              ? guess
+              : sqrt_iter(improve(guess, x), x);
+      }
+\end{JavaScript}
+
+  is an iterative process.  Even though the
+  function
+  is syntactically
+  recursive (defined in terms of itself), it is not logically necessary
+  for an evaluator to save information in passing from one call to {\lstinline[mathescape=true]$sqrt_iter$} to the next.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>function
+  such as {\lstinline[mathescape=true]$sqrt_iter$} without requiring
+  increasing storage as the
+  function
+  continues to call itself is called
+  a 
+  
+  <EM>tail-recursive</EM> evaluator.  
+  
+  
+  The metacircular implementation of
+  the evaluator in chapter~4 does not specify whether the evaluator is
+  tail-recursive, because that evaluator inherits its mechanism for
+  saving state from the underlying Scheme.  With the explicit-control
+  evaluator, however, we can trace through the evaluation process to see
+  when
+  function
+  calls cause a net accumulation of information on the
+  stack.
+       An evaluator that can
+  execute a
+  function
+  such as {\lstinline[mathescape=true]$sqrt_iter$} without requiring
+  increasing storage as the
+  function
+  continues to call itself is called
+  a 
+  
+  <EM>tail-recursive</EM> evaluator.  
+  
+  
+  The metacircular implementation of
+  the evaluator in chapter~4 does not specify whether the evaluator is
+  tail-recursive, because that evaluator inherits its mechanism for
+  saving state from the underlying Scheme.  With the explicit-control
+  evaluator, however, we can trace through the evaluation process to see
+  when
+  function
+  calls cause a net accumulation of information on the
+  stack.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+  Our evaluator is tail-recursive, because in order to evaluate the final
+  expression of a sequence we transfer directly to {\lstinline[mathescape=true]$eval_dispatch$} without
+  saving any information on the stack.  Hence, evaluating the final expression
+  in a sequence—even if it is a
+  function
+  call (as in {\lstinline[mathescape=true]$sqrt_iter$}, where
+  the conditional expression, which is the last expression in the
+  function
+  body,
+  reduces to a call to {\lstinline[mathescape=true]$sqrt_iter$})—will not cause any information to be
+  accumulated on the stack.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+  If we did not think to take advantage of the fact that it was
+  unnecessary to save information in this case, we might have
+  implemented {\lstinline[mathescape=true]$eval_sequence$} by treating all the expressions in a
+  sequence in the same way—saving the registers, evaluating the expression,
+  returning to restore the registers, and repeating this until all the
+  expressions have been evaluated:<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+\begin{JavaScript}
+"ev_sequence",
+          test(op("has_no_more_exps"), reg("unev")),
+          branch(label("ev_sequence_end")),
+          assign(exp(op("first_exp"), reg("unev")),
+          save("unev"),
+          save("env"),
+          assign(continue(label("ev_sequence_continue"))),
+          go_to(label("eval_dispatch")),
+      "ev_sequence_continue",
+          restore("env"),
+          restore("unev"),
+          assign("unev", op("rest_exps"), reg("unev")),
+          go_to(label("ev_sequence")),
+      "ev_sequence_end",
+          restore("continue"),
+          go_to(reg("continue")),
+\end{JavaScript}
+
+      
+
+  
+\begin{JavaScript}
+"ev_sequence",
+          test(op("has_no_more_exps"), reg("unev")),
+          branch(label("ev_sequence_end")),
+          assign(exp(op("first_exp"), reg("unev")),
+          save("unev"),
+          save("env"),
+          assign(continue(label("ev_sequence_continue"))),
+          go_to(label("eval_dispatch")),
+      "ev_sequence_continue",
+          restore("env"),
+          restore("unev"),
+          assign("unev", op("rest_exps"), reg("unev")),
+          go_to(label("ev_sequence")),
+      "ev_sequence_end",
+          restore("continue"),
+          go_to(reg("continue")),
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+  This may seem like a minor change to our previous code for evaluation
+  of a sequence:  The only difference is that we go through the
+  save-restore cycle for the last expression in a sequence as well as
+  for the
+  others.  The interpreter will still give the same value for
+  any expression.  But this change is fatal to the tail-recursive
+  implementation, because we must now return after evaluating the final
+  expression in a sequence in order to undo the (useless) register
+  saves.  These extra saves will accumulate during a nest of
+  function
+  calls.  Consequently, processes such as {\lstinline[mathescape=true]$sqrt_iter$} will require
+  space proportional to the number of iterations rather than requiring
+  constant space.  This difference can be significant.  For example,
+  
+  with tail recursion, an infinite loop can be expressed using only the
+  function-call mechanism:
+
+  
+\begin{JavaScript}
+function count(n) {
+          display(n, "\n");
+          count(n + 1);
+      }
+\end{JavaScript}
+
+  Without tail recursion, such a
+  function
+  would eventually run out of
+  stack space, and expressing a true iteration would require some
+  control mechanism other than
+  function
+  call.
+  
+  
+  
+      </p></div>
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>We saw in
+    section~\ref{sec:designing-register-machines} how to implement such a
+    process with a register machine that had no stack; the state of the
+    process was stored in a fixed set of registers.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>This implementation of tail recursion in
+    {\lstinline[mathescape=true]$ev_sequence$} is one variety of a well-known optimization technique used
+    by many compilers.  In compiling a
+    function
+    that ends with a
+    function
+    call,
+    one can replace the call by a jump to the called
+    function's entry point.
+    Building this strategy into the interpreter, as we have done in this section,
+    provides the optimization uniformly throughout the language.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>We can define {\lstinline[mathescape=true]$has_no_more_exps$} as follows:
+  
+\begin{JavaScript}
+function has_no_more_exps(seq) {
+            return is_null(seq);
+        }
+\end{JavaScript}
+
+  </FOOTNOTE></div>
+</SUBSECTION>

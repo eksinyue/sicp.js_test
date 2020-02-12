@@ -1,0 +1,636 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>1.3.2 
+          Function Definition Expressions
+          </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+        
+
+        <SPLIT>
+          
+          
+        <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+          In using {\lstinline[mathescape=true]$sum$} as in section~\ref{sec:procedures-as-parameters},
+          it seems terribly awkward to have to declare trivial
+          functions
+          such as
+          {\lstinline[mathescape=true]$pi_term$} and {\lstinline[mathescape=true]$pi_next$} just 
+          so we can use them as arguments to our higher-order
+          function.
+          Rather than declare {\lstinline[mathescape=true]$pi_next$} and 
+          {\lstinline[mathescape=true]$pi_term$}, it would be more convenient
+          to have a way to directly specify <QUOTE>the
+            function that returns its
+            input incremented by 4</QUOTE> and <QUOTE>the
+            function that returns the
+            reciprocal of its input times its input plus 2.</QUOTE>  We can do this by
+          introducing <EM>function definition expressions</EM>, which create functions.
+          Using function definitions, we can describe what we want as
+
+          
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+x => x + 4;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=B4AgvAfCoNQgLAbiA}{\usebox\lstbox}
+
+
+
+          and 
+
+          
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+x => 1.0 / (x * (x + 2));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=B4AgvAfCCMB0AMID0IAUoBUbQGoQCYBKQgbiA}{\usebox\lstbox}
+
+
+        </p></div>
+          
+        </SPLIT>
+
+        <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+          Then our 
+          
+            {\lstinline[mathescape=true]$pi_sum$}
+          function
+          can be expressed without 
+          
+	  declaring any auxiliary functions
+          as
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function pi_sum(a,b) {
+    return sum(x => 1.0 / (x * (x + 2)),
+               a,
+               x => x + 4,
+               b);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABxgfQM4gLYAoCGANAEYCUiA3gFCK2IBOAplCPUlngB6IC8AfIgCMAOgAMiAPSJc3AFTTuAakQAmUqUI062nbSJbdh7v0RLEAFk2HrZANxUAvkA}{\usebox\lstbox}
+
+
+        
+        </p></div>
+
+        <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+          Again using 
+          a function definition, 
+          we can write the {\lstinline[mathescape=true]$integral$}
+          function
+          without having to 
+          
+	  declare the auxiliary function
+          {\lstinline[mathescape=true]$add_dx$}:
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function integral(f, a, b, dx) {
+    return sum(f,
+               a + dx / 2.0,
+               x => x + dx,
+               b)
+           *
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDMUCmBzATgQwDYAUwANIjqQEakAmAHgJSIDeAUIu4lmlCFkgM4gAtkWJsOEyexyIA1IjqIA9IgBMAOgAMYqbva1EAXgB8iA-Lo69UivXHWAVPb10A3CwC+QA}{\usebox\lstbox}!*/
+           dx;
+}
+
+\end{JavaScriptClickable}
+
+
+        </p></div>
+        
+        <SPLIT>
+          
+          
+            <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+              In general, function definitions are used to create
+              functions similarly to function declarations, except that 
+              
+              no name is specified for the function<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>return keyword along with the curly braces
+	      can be omitted.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+\[ \texttt{(} \ \textit{parameters}\ \texttt{) => } \textit{expression} \]
+	      
+            
+              
+\[ \texttt{(} \ \textit{parameters}\ \texttt{) => } \textit{expression} \]
+	      
+            
+	      and the return keyword along with the curly braces
+	      can be omitted.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+\[ \texttt{(} \ \textit{parameters}\ \texttt{) => } \textit{expression} \]
+	      
+            
+              
+\[ \texttt{(} \ \textit{parameters}\ \texttt{) => } \textit{expression} \]
+	      
+            </p></div>
+          <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>If there is only one parameter,
+	      then the parentheses around the parameter list can be omitted.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>In section~\ref{sec:graphics}, we will
+	      extend the syntax of function definition expressions to allow blocks as bodies,
+	      as in function declaration statements.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>In section~\ref{sec:graphics}, we will
+	      extend the syntax of function definition expressions to allow blocks as bodies,
+	      as in function declaration statements.</FOOTNOTE></div>
+        </SPLIT>
+        <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+          The resulting
+          function
+          is just as much a
+          function
+          as one that is created using 
+          a function declaration statement.  
+          The only difference is that it has not
+          been associated with any name in the environment.  In fact,
+          
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function plus4(x) { return x + 4; }
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwDYgM4BYAUAPASkQG9EAnAUyhDKT0QGpEsBuRAXyA}{\usebox\lstbox}
+
+
+
+        
+
+          is equivalent to
+          
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const plus4 = x => x + 4;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBADgGwK4QCwwLwwB6YHw4wDUMqA3EA}{\usebox\lstbox}
+
+
+        </p></div>
+        <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+	  <SPLIT>
+	    
+	    
+              We can read a function definition expression as follows:
+              
+\begin{JavaScript}
+// read                   x         =>           x     +   4
+// as:                    ^         ^            ^     ^   ^
+// function with argument x that results in the value plus 4
+\end{JavaScript}
+
+	    
+	  </SPLIT>
+        </p></div>
+	<div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+          
+          
+          
+          Like any expression that has a
+          function
+          as its value, a
+          
+	  function definition
+          expression can be used as the function expression in an application
+          combination such as
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+((x, y, z) => x + y + square(z))(1, 2, 3);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BTAeBoAIE8oLwJSQLwD5KkgahtyBnARwFcBDAJwFNhEFgBGKAJigGYEBuIA}{\usebox\lstbox}
+
+
+        or, more generally, in any context where we would normally use a
+        function
+        name.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a> Note that the JavaScript parser requires parentheses 
+            around the function in this case.<hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>The idea to introduce functions without naming
+              them plays a central role in the 
+            
+            $\lambda$ calculus, a
+            
+            mathematical formalism introduced by the mathematical logician Alonzo
+            Church (1941).  Church developed the $\lambda$ calculus 
+            to provide a
+            rigorous foundation for studying the notions of function and function
+            application.  
+            The $\lambda$ calculus has become a basic tool for
+            mathematical investigations of the semantics of programming
+            languages.</FOOTNOTE></div>
+        </p></div>
+
+        \subsubsection{
+          Using 
+          
+	    
+	    {\lstinline[mathescape=true]$const$} to create local names
+	  
+          
+        
+        
+        
+
+        <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+          Another use of 
+          
+	  function definitions is in creating local names.
+          
+	    
+	    We often need local names in our functions
+            other than those that have been bound as parameters.
+	    
+	  
+	  For example, suppose we
+	  wish to compute the function
+          
+            \[ f(x,y)=x(1+xy)^2 +y(1-y)+(1+xy)(1-y)\]
+          
+          which we could also express as
+          
+            \begin{eqnarray*}
+            a &=& 1+xy\\
+            b &=& 1-y\\
+            f(x,y) &=& xa^2 +yb +ab
+            \end{eqnarray*}
+          
+          In writing a
+          function
+          to compute $f$, we would like to include as
+	  
+	    
+	    
+	      local names
+	    
+	  
+	  not only $x$ and 
+          $y$  but also the names of
+          intermediate quantities like $a$ and 
+          $b$.  One way to
+          accomplish this is to use an auxiliary
+          
+	    
+	    function          to bind the local names:
+	  
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function f(x, y) {
+    function f_helper(a, b) {
+        return x * square(a) + 
+               y * b + 
+               a * b;
+    }
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAFADwDSIJ4EpEDeAUIqcuNPEsAPoAWApgDYAODATigIZYBG+xMkMTsGUEOyRpEAKkQBnAI4guo7vgDUiEsN1lssxL0Rade3V0O8A3GcQBfO6PGTk9Zm04BGE4mlzsDDtzcx8AWhxcW3sgA}{\usebox\lstbox}!*/
+    return f_helper(1 + x * y,
+                    1 - y);
+}
+
+\end{JavaScriptClickable}
+
+
+
+        
+        </p></div>
+
+        <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+          Of course, we could use a 
+          function definition
+          expression to specify an anonymous
+          
+	    
+	    function for binding our local names.
+	  
+	  The body of
+          {\lstinline[mathescape=true]$f$} then becomes a single call to that
+          function:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function f(x,y) {
+    return ( (a,b) => x * square(a) + 
+                      y * b + 
+                      a * b
+           )(1 + x * y, 1 - y);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAFADwDQE8CUiDeAUIiYgE4CmUIZSKiKAhhgEZ4C8AfImogFSIAzgEcQjSkzwBqRMVLyFi0ln6IWiGXKXaFjVSy3acKAIwaeqrBkRmAtIlwBuQgF8gA}{\usebox\lstbox}
+
+
+        </p></div>
+
+        <SPLIT>
+          
+          
+            <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+              A more convenient way to declare local names is by using
+              {\lstinline[mathescape=true]$const$} within the body of
+              the function. 
+              Using {\lstinline[mathescape=true]$const$}, the  function
+              {\lstinline[mathescape=true]$f$} can be written as
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function f(x, y) {
+    const a = 1 + x * y;
+    const b = 1 - y;
+    return x * square(a) + 
+           y * b + 
+           a * b;
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAFADwDSIJ4EpEDeAUIqYhAgM5SICGiAvIgIyIDUiaiAVDgNwkyFMNUQAjRi0QBafoNIAnAKZQQCpF16UAjiFrKUtfB3lkzOHuPaJT50vV5iBAXyA}{\usebox\lstbox}!*/
+}
+
+\end{JavaScriptClickable}
+
+
+          </p></div>
+          
+        </SPLIT>
+
+        <SPLIT>
+          
+          
+	    Names that are declared with {\lstinline[mathescape=true]$const$}
+	    inside of function declarations have the surrounding block
+	    as their scope.<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
+          
+        <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>
+	    Note that a name declared in a function using
+	    {\lstinline[mathescape=true]$const$} cannot be used
+	    before the declaration fully is evaluated, not even in the
+	    right-hand expression
+	    of the declaration itself, and regardless whether the same
+	    name is declared outside of the function. Thus the program
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function h() {
+    const x = 1;
+    function i() {
+        const x = x + 1;
+        return x;
+    }
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABACwBQEpEG8BQj+IQIDOUiAHogLyICMA3HgaJLAojBtkwQUWKQrUhAajqNevAE4BTKCClJyEggF8eiWfMUcMjdWnT0gA}{\usebox\lstbox}!*/
+    return i();
+}
+h();
+
+\end{JavaScriptClickable}
+
+
+	leads to an error, because the
+	{\lstinline[mathescape=true]$x$} in
+	{\lstinline[mathescape=true]$x + 1$} is used before its
+	declaration is fully evaluated. The
+	{\lstinline[mathescape=true]$const$} 
+	declaration makes sure that the declared name is not used before
+	the evaluation of the declaration is complete.
+	We will return to this issue in
+        section~\ref{sec:internal-definitions}, 
+        after we learn more about evaluation.
+      </FOOTNOTE></div></SPLIT>
+
+	<SPLIT>
+	  
+	  
+            \subsubsection{
+              Conditional statements
+              
+            
+            
+            
+
+	    We have seen that it is often useful to declare names that are local to
+	    function declarations. When functions become big, it will contribute to their
+	    readability if we keep the scope of the names as narrow as possible. 
+	    Consider for example {\lstinline[mathescape=true]$expmod$} in
+	    exercise ~\ref{ex:louis-fast-prime} in
+	    section~\ref{sec:primality}.
+
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function expmod(base, exp, m) {
+    return exp === 0
+           ? 1
+           : is_even(exp)
+             ? expmod(base, exp / 2, m) 
+               * expmod(base, exp / 2, m)
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwB4AcC2cAmAKAIwEMBnZAGhQ0swEpEBvAKEVcQCdkoR2k11EAXmGIADCzaS2AfkQBGCVMkAuRDBIB9ZADdkYPP1qKlk2f2z5iZSv0QB6RACYa9YyckAqKllyFSFb3snFzd3VgBSRExQk1UrZBj3L3NfeJsMRABaeRdERJNIzABuJgBfIA}{\usebox\lstbox}!*/
+               % m
+             : base
+               * expmod(base, exp - 1, m) 
+               % m;
+}
+
+\end{JavaScriptClickable}
+
+
+	    This function is unnecessarily inefficient, because it contains
+	    two identical
+	    calls:
+	    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+expmod(base, exp / 2, m)
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=KYDwDgtg9gJgFAIwIYGdgBoAEoyYPSYBMWEAlEA}{\usebox\lstbox}
+
+
+    	    While this can be easily fixed in this example using the
+	    {\lstinline[mathescape=true]$square$}
+	    function, this is not so easy in general. Without using
+	    {\lstinline[mathescape=true]$square$},
+	    we would be tempted to introduce a local name for the expression
+	    as follows:
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function expmod(base, exp, m) {
+    const to_half = expmod(base, exp / 2, m);
+    return exp === 0
+           ? 1
+           : is_even(exp)
+             ? to_half * to_half
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwB4AcC2cAmAKAIwEMBnZAGhQ0swEpEBvAKEVcQgRKkSjgH0AFkQA2wRAF4qWXIVIUpiAPSIATDVoBuFmwBOyKCB1I06CeMkAGbWxusA-IgCM122wBciGCT7IAbsjA8E1oXVzYHXkERMQAqHn4hUVCwtgBSRExksI9iMiyUuJNsfFz5E0QAWid1RHyw9MwtAF8gA}{\usebox\lstbox}!*/
+               % m
+             : base
+               * expmod(base, exp - 1, m) 
+               % m;
+}
+
+\end{JavaScriptClickable}
+
+
+	    This would make the function not just inefficient, but actually non-terminating!
+	    The problem is that the constant declaration appears outside the conditional expression,
+	    which means that it is executed even when the base case {\lstinline[mathescape=true]$exp === 0$}
+	    is reached. To avoid this situation, we shall provide for <EM>conditional statements</EM>, and allow for
+	    {\lstinline[mathescape=true]$return$} statements to appear in several branches of the statement.
+	    Using a conditional statement, the function {\lstinline[mathescape=true]$expmod$}
+	    can be written as follows:
+            
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function expmod(base, exp, m) {
+    if (exp === 0) {
+        return 1;
+    } else {
+        if (is_even(exp)) {
+            const to_half = expmod(base, exp / 2, m);    
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwB4AcC2cAmAKAIwEMBnZAGhQ0swEpEBvAKEVcRmETzXUQF4BiAAz1mbcYgBOyKCElIAjAG4WbAL4oANmUaqJ7TnhgkA+sgBuyMNwy1Re-WwgISURFDgmAFkU2c+VFi4hKQUgYgA9IgATDS0SuIOjlIyckge3r6cAFTunj5+iACkiJgqyRrI2si6yeLSsvKIxDq5PNj4LWE8iAC0iApxxaXljmoOagCQiWpAA}{\usebox\lstbox}!*/
+            return to_half * to_half % m;
+        } else {
+            return base * expmod(base, exp - 1, m) % m;
+        }
+    }	    
+}
+
+\end{JavaScriptClickable}
+
+
+	  
+              The general form of a conditional statement is
+              
+\begin{JavaScript}
+if ($\textit{predicate}$) { $\textit{consequent}$ } else { $\textit{alternative}$ }
+\end{JavaScript}
+
+	      and, like conditional expressions, their evaluation first evaluates the
+	      $\textit{predicate}$. 
+ 	      If it evaluates to true, the interpreter
+	      evaluates the 
+	      $\textit{consequent}$ statements
+	      and otherwise the
+	      $\textit{alternative}$ statements.
+	      Note that any constant declarations occurring in either
+	      part are local to that part, because both are enclosed in
+	      curly braces and thus form their own block.
+	</SPLIT>
+	
+        
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled9}
+ 
+          Suppose we 
+          
+	  declare
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function f(g) {
+   return g(2);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAFAcwJSIN4ChEEBOAplCIUmigEwYDcuAvkA}{\usebox\lstbox}
+
+
+
+          Then we have
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+f(square);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYCgzgjgrghgTgUwJQG4g}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+f(z => z * (z + 1));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYCgXgBAvAfBkCoLggaggRgJRYNxA}{\usebox\lstbox}
+
+
+          What happens if we (perversely) ask the interpreter to evaluate the
+          combination 
+        {\lstinline[mathescape=true]$f(f)$}?  
+        Explain.
+
+        \hfill{\hyperref[ex:unlabeled9-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled9}]
+        
+      <div class='permalink'>
+<a name='p11' class='permalink'></a><p>
+Let's use the substitution model to illustrate what happens:
+
+
+The application combination
+{\lstinline[mathescape=true]$2(2)$}
+leads to an error, since 2 is neither a primitive nor a compound
+function. 
+</p></div>
+  
+\end{Answer}
+
+
+</SUBSECTION>

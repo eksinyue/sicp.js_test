@@ -1,0 +1,441 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>2.5.1 
+        Generic Arithmetic Operations
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+      The task of designing generic arithmetic operations is analogous to
+      that of designing the generic complex-number operations.  We would
+      like, for instance, to have a generic addition
+      function
+      {\lstinline[mathescape=true]$add$} that
+      acts like ordinary primitive addition {\lstinline[mathescape=true]$+$} on ordinary numbers,
+      like {\lstinline[mathescape=true]$add_rat$} on rational numbers, and like {\lstinline[mathescape=true]$add_complex$} on
+      complex numbers.  We can implement {\lstinline[mathescape=true]$add$}, and the other generic
+      arithmetic operations, by following the same strategy we used in
+      section~\ref{sec:data-directed} to implement the generic selectors for
+      complex numbers.  We will attach a type tag to each kind of
+      number and cause the generic
+      function
+      to dispatch to an appropriate
+      package according to the data type of its arguments.
+      </p></div>
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+      The generic arithmetic
+      functions
+      are defined as follows:
+
+      
+\begin{JavaScript}
+function add(x, y) {
+   return apply_generic("add", list(x, y));
+}
+function sub(x, y) {
+   return apply_generic("sub", list(x, y));
+}
+function mul(x, y) {
+   return apply_generic("mul", list(x, y));
+}
+function div(x, y) {
+   return apply_generic("div", list(x, y));
+}
+\end{JavaScript}
+
+
+      
+      
+      We begin by installing a package for handling <EM>ordinary</EM> numbers,
+      that is, the primitive numbers of our language.  We will tag these
+      with the symbol {\lstinline[mathescape=true]$javascript_number$}.  The arithmetic operations in this
+      package are the primitive arithmetic
+      functions
+      (so there is no need to
+      define extra
+      functions
+      to handle the untagged numbers).  Since
+      these operations each take two arguments, they are installed in the
+      table keyed by the list {\lstinline[mathescape=true]$list("javascript_number","javascript_number")$}:
+      
+      
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function install_javascript_number_package() {
+    function tag(x) {
+        return attach_tag("javascript_number", x);
+    }
+    put("add", list("javascript_number", "javascript_number"), 
+        (x, y) => tag(x + y));
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDMBnKBDANlg+gKwwDcNUIAnGABylzBAFsAjAU3NyowgGsMBzFgAoAlIgDeAKETTEoSLASJMfQQA9RkmVsTkWUEOSQYomCAAtcywQCJCJMpRp1GrctYA0idQG4pMgL5+0lQgUDYYACYRHohYMOg2dqQU1LT0zGwxtsTJjmkumcKeQdpqngCeogC8AHxK-GqIANSIlcK+WiFh1qggTDFxCdn2KU7prllJDqnOGW5FiCVaZa3VdVaqiAC0q+0lXTYMIFgD8d1To-lzkznTYwXzxdoyK5WItfUqmwBUux0yB2sERgRFOQwueVmE08w1yM3GhSez0QrzWn0aAHo-vtQocMNwWDcRpCEW4kc9Nh8NsI9lpdPpDIggQhCb5-EA}{\usebox\lstbox}!*/
+    put("sub", list("javascript_number", "javascript_number"), 
+        (x, y) => tag(x - y));
+    put("mul", list("javascript_number", "javascript_number"), 
+        (x, y) => tag(x * y));
+    put("div", list("javascript_number", "javascript_number"), 
+        (x, y) => tag(x / y));
+    put("make", "javascript_number", 
+        x => tag(x));
+    return "done";
+}
+
+\end{JavaScriptClickable}
+
+
+
+      Users of the JavaScript-number package
+      will create (tagged) ordinary numbers by means of the
+      function:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_javascript_number(n) {
+    return get("make", "javascript_number")(n);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AVqgN1QGcIAnGABymzBGQCNMyAKMASkQG8AoRfxGUxQQZJAHNhLAERos0gDSJp+IqQrVa9JmWns27ANw8AvkA}{\usebox\lstbox}
+
+
+      </p></div>
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+      Now that the framework of the generic arithmetic system is in place,
+      we can readily include new kinds of numbers.  Here is a package that
+      performs rational arithmetic.  Notice that, as a benefit of
+      additivity, we can use without modification the rational-number code
+      from section~\ref{sec:rationals} as the internal
+      functions
+      in the
+      package:
+      
+      
+      
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function install_rational_package() {
+    // internal functions
+    function numer(x) { 
+        return head(x); 
+    }
+    function denom(x) {
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDMBnKBDANlg+gJw1gW1wAcMIBrDAcwFMAKASkQG8AoRbxAel+Rgo9fGGyJQkYmi49J0eEjAgAtiMYAPVm0SyePfPSghRiABb0MAE03MA3Lv0BfPRPAKEiK-TBwVt9ld9Q2NTTBgsWztXF315aUQVDCp6AiJGMAAaL21HfR4sI0RaRABeYogbLJzo-IMjEyQKGHwMvmLsq3baezzuWLl3BOsrNKhNbIBPbSD60KQklLGM1XUtRAAqLx8-RmnEAGpZupP85TVW-a3vX38tbNP9Y8fTm931653-afsY13jFIhUCAAEbLDRTGanEKNRLJVKEcbnNasT63PasAC0zxedWRl1R23R91x3BxpJ4bzuhKpGN+zn+Q0BKhAeERE0Q+040IapkWCPS+ICWyF00y5IpRPeNK+dNqPAG3ABnisMAAbuDIYEefM4Ut2UKPlLvsxxZKXrSjaLmPSFa5+IJhPhgJR6IgoHBEIZ0Ig4MB3RYgZN0PQVIypIDMLQAtyTjDTERMBAzLgo4wAESIxTYdPZLTy-quMggcbp-m5xCZojZrAV-ljGu27jF0sjCtYGDoDNZki17JV6Q502IEYN3tNxAtjPAkHtzulntiPuVxdD7IzsdLidTsusuddgc1iuH3vp4cstnV8cFycljOqtX7hdXpfH1e14cPzfYX4uDjKhZ4W-SJqisKE5lhRgGFLct+3fM9mAyTpfyAA}{\usebox\lstbox}!*/
+        return tail(x);
+    }
+    function make_rat(n, d) { 
+        let g = gcd(n, d);
+        return pair(n / g, d / g); 
+    }
+    function add_rat(x, y) {
+        return make_rat(numer(x) * denom(y) +
+                        numer(y) * denom(x),             
+                        denom(x) * denom(y));
+    }
+    function sub_rat(x, y) {
+        return make_rat(numer(x) * denom(y) -
+                        numer(y) * denom(x),             
+                        denom(x) * denom(y));
+    }
+    function mul_rat(x, y) {
+        return make_rat(numer(x) * numer(y),
+                        denom(x) * denom(y));
+    }
+    function div_rat(x, y) {
+        return make_rat(numer(x) * denom(y),
+                        denom(x) * numer(y));
+    }
+    // interface to rest of the system
+    function tag(x) {
+        return attach_tag("rational", x);
+    }
+    put("make", "rational", make_rational);
+    put("add", list("rational", "rational"), add_rational);
+    put("sub", list("rational", "rational"), sub_rational);
+    put("mul", list("rational", "rational"), mul_rational);
+    put("div", list("rational", "rational"), div_rational);
+}
+
+function make_rational(n, d) {
+    return (get("make", "rational"))(n, d);
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+      We can install a similar package to handle complex numbers, using the
+      tag {\lstinline[mathescape=true]$"complex"$}.  In~creating the package, we extract from the table
+      the operations {\lstinline[mathescape=true]$make_from_real_imag$} and {\lstinline[mathescape=true]$make_from_mag_ang$}
+      that were defined by the rectangular and polar packages.  
+      
+      Additivity
+      permits us to use, as the internal operations, the same {\lstinline[mathescape=true]$add_complex$}, {\lstinline[mathescape=true]$sub_complex$}, {\lstinline[mathescape=true]$mul_complex$}, and {\lstinline[mathescape=true]$div_complex$}
+      functions
+      from
+      section~\ref{sec:representations-complex-numbers}.
+      
+      
+      
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function install_complex_package() {
+    // imported functions from rectangular and polar packages	  
+    function make_from_real_imag(x, y) {
+        return get("make_from_real_imag", "rectangular")(x, y);
+    }
+    function make_from_mag_ang(r, a) {
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDMBnKBDANlg+hOAWwAcsBTAD12IwgGsMBzMgCgEpEBvAKET8QD0A5CTgAnKGQAmiUJFgJUssUURiy0DGEYgsGMYi0zicPQZr0mZVAEg+vfnOjwkhDHTK5gKwrnXZcGDdGFgoAGkQATw4efji1MigQMSRmKBYAIjcPLx8-MgCgpgyIjPVNbV19DLZQiOiAbgc+AF9m2XBnBERsz28iXGDcLRCxCIwY9rj1JJTENMze3IGhkZLEDJMzGpYxwzYmuLb2oWQwSRTsDvkXVHanBSQMKSl8IlJKFgAvAEYIr4ATJN4vwZslXO4+nl-HgiqMCngaBJvj8OABqRBTEHYnG4mHUfTpQFsMJY3Hk8lwgnI37ozEUhkMqlIolAg7tNpxB4uRCoEAAIzeJHIFBR-yBXDJCVmEJy-V8+LhuwR1KJqMQAFp6Yyddj8SzvkDSbqTXFmYSURwtVLTZShgbieyjvdOo8erohR9Rb9xcC9YlwT1IctfKttCxgmAYEkpKwKBwAFTa22MyPRkCxw0km0p+IjciWxAYnO5-j51iOpo2TmOV08qQwABunpFYsQxMlOLBcyW8sGTGG4bTMbjHGEJdLQcYUZHWeNk-J5cL1oXi+0Bcr3Gr3BOwhQF2AtDIiCgcAS6EQcGAJ4AFsfUJF0GRCC6bt1MCEvn6Qd2nlBMBAN64B+mQEMKlDrF+hz8DWfDECA6QZM8UjrFgMDoKB7wiusGRgV6NQRFKbYdgAvAAfCeTAsMhLafD67Zsk6-DwYhfL8qh6GIXh2GlNxEEksm8TERK5GUSEbG0d6fwMWwsnQXBCGLLoHEYbhWEQbx6kUARglxMJHCiSBhAenxUm+nJ7QsZkDaNipXFaThpk6UR9GkRRIE2ZJ+kWXEVlZMGfaKsEjkOYROJ1FEBnuVRvbQiqSrhJFPnMYp-lynkYaMCF4HaWF2K7OMUViRGAUZQOIwFfsyV8L+GxSAgZAZA0cTcC0QA}{\usebox\lstbox}!*/
+        return get("make_from_mag_ang", "polar")(r, a);
+    }
+
+    // internal functions
+    function add_complex(z1, z2) {
+        return make_from_real_imag(real_part(z1) + 
+                                   real_part(z2),
+                                   imag_part(z1) + 
+                                   imag_part(z2));
+    }
+    function sub_complex(z1, z2) {
+        return make_from_real_imag(real_part(z1) - 
+                                   real_part(z2),
+                                   imag_part(z1) - 
+                                   imag_part(z2));
+    }
+    function mul_complex(z1, z2) {
+        return make_from_mag_ang(magnitude(x) * 
+                                 magnitude(z2),
+                                 angle(z1) + 
+                                 angle(z2));
+	}
+    function div_complex(z1, z2) {
+        return make_from_mag_ang(magnitude(x) / 
+                                 magnitude(z2),
+                                 angle(z1) - 
+                                 angle(z2));
+	}
+
+    // interface to rest of the system
+    function tag(z) {
+        return attach_tag("complex", z);
+    }
+    put("add", list("complex", "complex"), 
+        (z1, z2) => tag(add_complex(z1, z2)));
+    put("sub", list("complex", "complex"), 
+        (z1, z2) => tag(sub_complex(z1, z2)));
+    put("mul", list("complex", "complex"), 
+        (z1, z2) => tag(mul_complex(z1, z2)));
+    put("div", list("complex", "complex"), 
+        (z1, z2) => tag(div_complex(z1, z2)));
+    put("make_from_real_imag", "complex", 
+        (x, y) => tag(make_from_real_imag(x, y)));
+    put("make_from_mag_ang", "complex", 
+        (r, a) => tag(make_from_mag_ang(r, a)));
+    return "done";    
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+      Programs outside the complex-number package can construct complex
+      numbers either from real and imaginary parts or from magnitudes and
+      angles.  Notice how the underlying
+      functions, originally defined in
+      the rectangular and polar packages, are exported to the complex
+      package, and exported from there to the outside world.
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_complex_from_real_imag(x, y){
+   return get("make_from_real_imag", "complex")(x, y);
+}
+function make_complex_from_mag_ang(r, a){
+   return get("make_from_mag_ang", "complex")(r, a);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9CdkAOANpgB7bABO+2lmqR2MaA5gBSkA0iAngJQBvAFCJRdKCEpIWmKGwBEaLBWrJa9Rs1Qt53eXkIlS8vh278A3EIC+Q0JFgIUGHAeJkVNVtlRh2lblRBETFZSWlZBSUcKi9tHz9dRH18d2NTAMQgq2sgA}{\usebox\lstbox}
+
+
+
+      
+      What we have here is a two-level tag system.  A typical complex number,
+      such as $3+4i$ in rectangular form, would be
+      represented as shown in Figure~\ref{fig:complex-number-structure}.
+      The outer tag ({\lstinline[mathescape=true]$"complex"$}) is used to direct the number to the
+      complex package.  Once within the complex package, the next tag ({\lstinline[mathescape=true]$"rectangular"$}) is used to direct the number to the rectangular package.
+      In a large and complicated system there might be many levels, each
+      interfaced with the next by means of generic operations.  As a data
+      object is passed <QUOTE>downward,</QUOTE> the outer tag that is used to direct
+      it to the appropriate package is stripped off (by applying {\lstinline[mathescape=true]$contents$}) and the next level of tag (if any) becomes visible to be used for
+      further dispatching.
+
+      <SPLIT>
+        
+        
+          
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch2-Z-G-65}.svg}}
+\caption{Representation of $3+4i$ in rectangular form.}
+\label{fig:complex-number-structure}
+\end{figure}
+
+        
+      </SPLIT>
+      </p></div>
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+        In the above packages, we used {\lstinline[mathescape=true]$add_rat$}, {\lstinline[mathescape=true]$add_complex$}, and
+      the other arithmetic
+      functions
+      exactly as originally written.
+      Once these definitions are internal to different installation
+      functions,
+      however, they no longer need names that are distinct from each other:
+      we could simply name them {\lstinline[mathescape=true]$add$}, {\lstinline[mathescape=true]$sub$}, {\lstinline[mathescape=true]$mul$}, and {\lstinline[mathescape=true]$div$}
+      in both packages.
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+        Louis Reasoner tries to evaluate the
+        expression {\lstinline[mathescape=true]$magnitude(z)$} where {\lstinline[mathescape=true]$z$} is the object
+        shown in Figure~\ref{fig:complex-number-structure}.  To his
+        surprise, instead of the answer $5$
+        he gets an error message from {\lstinline[mathescape=true]$apply_generic$},
+        saying there is no method for the operation {\lstinline[mathescape=true]$magnitude$}
+        on the types {\lstinline[mathescape=true]$["complex",null]$}.
+        He shows this interaction to Alyssa P. Hacker, who says
+        <QUOTE>The problem is that the complex-number selectors were never
+          defined for {\lstinline[mathescape=true]$"complex"$} numbers, just for {\lstinline[mathescape=true]$"polar"$} and {\lstinline[mathescape=true]$"rectangular"$}
+          numbers.  All you have to do to make this work is add the following
+          to the {\lstinline[mathescape=true]$complex$} package:</QUOTE>
+
+        
+\begin{JavaScript}
+put("real_part", list("complex"), real_part);
+put("imag_part", list("complex"), imag_part);
+put("magnitude", list("complex"), magnitude);
+put("angle",     list("complex"), angle);
+\end{JavaScript}
+
+
+        Describe in detail why this works.  As an example, trace through all
+        the
+        functions
+        called in evaluating the expression {\lstinline[mathescape=true]$magnitude(z)$}
+        where {\lstinline[mathescape=true]$z$} is the object shown in
+        Figure~\ref{fig:complex-number-structure}.  In particular, how many
+        times is {\lstinline[mathescape=true]$apply_generic$} invoked?  What
+        function
+        is dispatched to
+        in each case?
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+        
+        
+        
+        
+        
+        
+        
+        The internal
+        functions
+        in the {\lstinline[mathescape=true]$javascript_number$} package are essentially
+        nothing more than calls to the primitive
+        functions
+        {\lstinline[mathescape=true]$+$}, {\lstinline[mathescape=true]$-$},
+        etc.  It was not possible to use the primitives of the language
+        directly because our type-tag system requires that each data
+        object have a type attached to it.  In fact, however, all JavaScript
+        implementations do have a type system, which they use internally.
+        Primitive predicates such as {\lstinline[mathescape=true]$is_string$} and {\lstinline[mathescape=true]$is_number$}
+        determine whether data objects have particular types.  Modify the
+        definitions of {\lstinline[mathescape=true]$type_tag$}, {\lstinline[mathescape=true]$contents$}, and {\lstinline[mathescape=true]$attach_tag$}
+        from section~\ref{sec:manifest-types} so that our generic system takes
+        advantage of JavaScript's internal type system.  That is to say, the system
+        should work as before except that ordinary numbers should be
+        represented simply as JavaScript numbers rather than as pairs whose {\lstinline[mathescape=true]$head$} is
+        the string {\lstinline[mathescape=true]$"javascript_number"$}.
+        
+      
+\end{Exercise}
+
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+        
+        
+        Define a generic equality predicate {\lstinline[mathescape=true]$is_equ$} that tests the equality
+        of two numbers, and install it in the generic arithmetic
+        package.  This operation should work for ordinary numbers, rational numbers, and
+        complex numbers.
+        
+      
+\end{Exercise}
+
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        
+        
+        Define a generic
+        predicate {\lstinline[mathescape=true]$equal_to_zero$} that tests if its argument is zero,
+        and install it in the generic arithmetic package.  This
+        operation should work for ordinary numbers, rational numbers, and
+        complex numbers.
+        
+      
+\end{Exercise}
+
+
+      
+
+    
+</SUBSECTION>

@@ -5,21 +5,23 @@ import path from "path";
 import xpath from "xpath";
 import { DOMParser as dom } from "xmldom";
 
-import { switchParseFunctions, recursiveProcessText } from './parseXML';
-import { setupSnippets } from './processingFunctions/processSnippet';
-import { preamble, ending } from './latexContent';
+import { switchParseFunctions, parseXML } from './parseXML';
+//import { setupSnippets } from './processingFunctions/processSnippet';
+import { preamble, ending } from './htmlContent';
 
 const inputDir = path.join(__dirname, "../xml");
-const outputDir = path.join(__dirname, "../latex");
+const outputDir = path.join(__dirname, "../html");
 
 const readdir = util.promisify(fs.readdir);
 const open = util.promisify(fs.open);
 const readFile = util.promisify(fs.readFile);
 
+/*
 const latexmkrcContent = `$pdflatex = "xelatex %O %S";
 $pdf_mode = 1;
 $dvi_mode = 0;
 $postscript_mode = 0;`;
+*/
 
 const ensureDirectoryExists = (path, cb) => {
   fs.mkdir(path, err => {
@@ -31,7 +33,7 @@ const ensureDirectoryExists = (path, cb) => {
   });
 };
 
-async function xmlToLatex(filepath, filename, isSetupSnippet) {
+async function xmlToHtml(filepath, filename, isSetupSnippet) {
   const fullFilepath = path.join(inputDir, filepath, filename);
   const fileToRead = await open(fullFilepath, "r")
   // if (err) {
@@ -45,14 +47,15 @@ async function xmlToLatex(filepath, filename, isSetupSnippet) {
   // }
   const doc = new dom().parseFromString(data);
   const writeTo = [];
-
+  /*
   if (isSetupSnippet) {
     setupSnippets(doc.documentElement);
     return;
   }
-  console.log(path.join(filepath, filename));
+  */
+  console.log("parsing: " + path.join(filepath, filename));
   // parsing over here
-  recursiveProcessText(doc.documentElement, writeTo);
+  parseXML(doc, writeTo, path.join(filepath, filename));
 
   ensureDirectoryExists(path.join(outputDir, filepath), err => {
     if (err) {
@@ -62,7 +65,7 @@ async function xmlToLatex(filepath, filename, isSetupSnippet) {
     const outputFile = path.join(
       outputDir,
       filepath,
-      filename.replace(/\.xml$/, "") + ".tex"
+      filename.replace(/\.xml$/, "") + ".html"
     );
     const stream = fs.createWriteStream(outputFile);
     stream.once("open", fd => {
@@ -72,27 +75,27 @@ async function xmlToLatex(filepath, filename, isSetupSnippet) {
   });
 };
 
-async function recursiveXmlToLatex(filepath, isSetupSnippet) {
+async function recursiveXmlToHtml(filepath, isSetupSnippet) {
   let files;
   const fullPath = path.join(inputDir, filepath);
   files = await readdir(fullPath);
   const promises = [];
   files.forEach(file => {
     if (file.match(/\.xml$/)) {
-      // console.log(file + " being processed");
+      //console.log(file + " being processed");
       promises.push(
-        xmlToLatex(filepath, file, isSetupSnippet)
+        xmlToHtml(filepath, file, isSetupSnippet)
       );
     } else if (fs.lstatSync(path.join(fullPath, file)).isDirectory()) {
       promises.push(
-        recursiveXmlToLatex(path.join(filepath, file), isSetupSnippet)
+        recursiveXmlToHtml(path.join(filepath, file), isSetupSnippet)
       );
     }
   });
   await Promise.all(promises);
 };
 
-const createMainLatex = () => {
+const createMainHtml = () => {
   const chaptersFound = [];
   const files = fs.readdirSync(inputDir);
   files.forEach(file => {
@@ -103,11 +106,11 @@ const createMainLatex = () => {
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir);
   }
-  const stream = fs.createWriteStream(path.join(outputDir, "sicpjs.tex"));
+  const stream = fs.createWriteStream(path.join(outputDir, "sicpjs.html"));
   stream.once("open", fd => {
     stream.write(preamble);
     chaptersFound.forEach(chapter => {
-      const pathStr = "./" + chapter + "/" + chapter + ".tex";
+      const pathStr = "./" + chapter + "/" + chapter + ".html";
       stream.write("\\input{" + pathStr + "}\n");
     });
     stream.write(ending);
@@ -115,6 +118,7 @@ const createMainLatex = () => {
   });
 
   // makes the .latexmkrc file
+  /*
   const latexmkrcStream = fs.createWriteStream(
     path.join(outputDir, ".latexmkrc")
   );
@@ -122,6 +126,7 @@ const createMainLatex = () => {
     latexmkrcStream.write(latexmkrcContent);
     latexmkrcStream.end();
   });
+  */
 };
 
 async function main() {
@@ -129,11 +134,13 @@ async function main() {
   if (type) {
     switchParseFunctions(type);
   }
-  createMainLatex();
+  createMainHtml();
   console.log("setup snippets");
-  await recursiveXmlToLatex("", true);
+  
+  await recursiveXmlToHtml("", true);
   console.log("setup snippets done\n");
-  recursiveXmlToLatex("", false);
+  recursiveXmlToHtml("", false);
+  
 };
 
 main();

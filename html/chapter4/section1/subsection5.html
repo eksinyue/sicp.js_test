@@ -1,0 +1,328 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>4.1.5 
+  Data as Programs
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+      
+
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+  In thinking about a JavaScript program that evaluates JavaScript expressions, an
+  analogy might be helpful.  One operational view of the meaning of a
+  program is that a 
+  
+  program is a description of an abstract (perhaps
+  infinitely large) machine.  For example, consider the familiar
+  program to compute factorials:
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function factorial(n) {
+    return n === 1
+           ? 1
+           : factorial(n - 1) * n;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSxDAUyhAySQF5XEBGCq7qgfg649uALmRoombPiQBaDsQBUiMAG4yAXyA}{\usebox\lstbox}
+
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+  
+  We may regard this program as the description of a machine containing
+  parts that decrement, multiply, and test for equality, together with a
+  two-position switch and another factorial machine. (The factorial
+  machine is infinite because it contains another factorial machine
+  within it.)  Figure~\ref{fig:fact-proc-as-machine} is a flow diagram for the
+  factorial machine, showing how the parts are wired together.
+
+  
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_original/ch4-Z-G-2}.svg}}
+\caption{The factorial program, viewed as an abstract machine.
+    }
+\label{fig:fact-proc-as-machine}
+\end{figure}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+  
+  In a similar way, we can regard the evaluator as a very special
+  machine that takes as input a description of a machine.  Given this
+  input, the evaluator configures itself to emulate the machine
+  described.  For example, if we feed our evaluator the definition of
+  {\lstinline[mathescape=true]$factorial$}, as shown in Figure~\ref{fig:eval-factorial}, the
+  evaluator will be able to compute factorials.
+
+  <SPLIT>
+    
+    
+      
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch4-Z-G-3}.svg}}
+\caption{The evaluator emulating a factorial machine.
+        }
+\label{fig:eval-factorial}
+\end{figure}
+
+    
+  </SPLIT>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+  
+  
+  From this perspective, our evaluator is seen to be a <EM>universal machine</EM>.
+  It mimics other machines when these are described as 
+  JavaScript 
+  programs.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+  This is striking. Try to imagine an analogous evaluator for electrical
+  circuits.  This would be a circuit that takes as input a signal
+  encoding the plans for some other circuit, such as a filter.  Given
+  this input, the circuit evaluator would then behave like a filter with
+  the same description.  Such a universal electrical circuit is
+  almost unimaginably complex.  It is remarkable that the program
+  evaluator is a rather simple program.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+  Another striking aspect of the evaluator is that it acts as a bridge
+  between the data objects that are manipulated by our programming
+  language and the programming language itself.  Imagine that the
+  evaluator program (implemented in 
+  JavaScript) 
+  is running, and that a user is
+  typing expressions to the evaluator and observing the results.
+  From
+  the perspective of the user, an input expression such as 
+  
+    {\lstinline[mathescape=true]$x * x$}
+  is an expression in the programming language, which the evaluator
+  should execute.
+  
+    
+    
+      From the perspective of the evaluator, however, the
+      expression is simply a string or—after parsing—a
+      tagged-object representation
+      that is to be manipulated according to
+      a well-defined set of rules.
+    
+  
+      </p></div>
+
+      <SPLIT>
+	
+	
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+  That the user's programs are the evaluator's data need not be a source
+  of confusion.  In fact, it is sometimes convenient to ignore this
+  distinction, and to give the user the ability to explicitly evaluate a
+  string as a JavaScript expression, using JavaScript's primitive function
+  {\lstinline[mathescape=true]$eval$}
+  that takes as argument a string. It parses the string and—provided
+  that it syntactically correct—evaluates the resulting representation
+  in the environment in which {\lstinline[mathescape=true]$eval$} is
+  applied.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+  
+      
+  
+  
+      </p></div>
+	<hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Warning:
+    
+    This {\lstinline[mathescape=true]$eval$} primitive is not
+    identical to the {\lstinline[mathescape=true]$evaluate$}
+    function we implemented in
+    section~\ref{sec:core-of-evaluator}, because it
+    uses <EM>actual</EM> JavaScript environments rather than the sample environment
+    structures we
+    built in section~\ref{sec:eval-data-structures}.  These actual
+    environments cannot be manipulated by the user as ordinary lists; they
+    must be accessed via {\lstinline[mathescape=true]$eval$} or other special
+    operations.
+    
+    Similarly, the {\lstinline[mathescape=true]$apply$} primitive we saw
+    in section~\ref{sec:data-directed} is not identical
+    to the metacircular {\lstinline[mathescape=true]$apply$}, because it uses
+    actual JavaScript functions
+    rather than the function
+    objects we constructed in
+    sections~\ref{sec:eval-data-structures}
+    and~\ref{sec:running-eval}.</FOOTNOTE></div>
+      </SPLIT>
+	
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  Given a one-argument
+  function
+  {\lstinline[mathescape=true]$p$} and an object {\lstinline[mathescape=true]$a$}, {\lstinline[mathescape=true]$p$}
+  is said to <QUOTE>halt</QUOTE> on {\lstinline[mathescape=true]$a$} if evaluating
+  the expression
+  
+  {\lstinline[mathescape=true]$p(a)$}
+  returns a value (as opposed to terminating with an error message
+  or running forever).  Show that it is impossible to write a
+  
+  function
+  
+  {\lstinline[mathescape=true]$halts$}
+  
+  that correctly determines whether {\lstinline[mathescape=true]$p$}
+  halts on {\lstinline[mathescape=true]$a$} for any
+  
+  function
+  {\lstinline[mathescape=true]$p$} and object {\lstinline[mathescape=true]$a$}.
+  Use the following
+  reasoning: If you had such a
+  
+  function
+  
+  {\lstinline[mathescape=true]$halts$},
+  
+  you could implement the following program:
+  
+\begin{JavaScript}
+function run_forever() {
+    return run_forever();      
+}
+function try(p) {
+    return halts(p, p) 
+           ? run_forever();
+           : "halted";
+}
+\end{JavaScript}
+
+  Now consider evaluating the expression
+  
+  {\lstinline[mathescape=true]$try(try)$}
+  
+  and show that
+  any possible outcome (either halting or running forever) violates the
+  intended behavior of
+  {\lstinline[mathescape=true]$halts$}.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
+      
+  
+      
+\end{Exercise}
+
+      
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>The fact that the machines are described in 
+    JavaScript 
+    is inessential.  If we give our evaluator a 
+    JavaScript 
+    program that behaves as an evaluator for
+    some other language, say C, the 
+    JavaScript 
+    evaluator will emulate the C
+    evaluator, which in turn can emulate any machine described as a C
+    program.  Similarly, writing a 
+    JavaScript 
+    evaluator in C produces a C
+    program that can execute any 
+    JavaScript 
+    program.  The deep idea here is that
+    any evaluator can emulate any other.  Thus, the notion of <QUOTE>what can
+      in principle be computed</QUOTE> (ignoring practicalities of time and
+    memory required) is independent of the language or the computer, and
+    instead reflects an underlying notion of 
+    
+    <EM>computability</EM>.  This
+    was first demonstrated in a clear way by 
+    
+    Alan M. Turing (1912–1954),
+    whose 1936 paper laid the foundations for theoretical 
+    
+    computer science.  In the paper, Turing presented a simple computational
+    model—now known as a 
+    
+    <EM>Turing machine</EM>—and argued that any
+    <QUOTE>effective process</QUOTE> can be formulated as a program for such a
+    machine.  (This argument is known as the 
+    
+    <EM>Church-Turing thesis</EM>.)
+    Turing then implemented a universal machine, i.e., a Turing machine
+    that behaves as an evaluator for Turing-machine programs.  He used
+    this framework to demonstrate that there are well-posed problems that
+    cannot be computed by Turing machines (see
+    exercise~\ref{ex:halting-theorem}), and so by implication cannot be
+    formulated as <QUOTE>effective processes.</QUOTE>  Turing went on to make
+    fundamental contributions to practical computer science as well.  For
+    example, he invented the idea of 
+    
+    structuring programs using
+    general-purpose subroutines.  See 
+    
+    Hodges 1983 for a biography of
+    Turing.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Some people find it
+    counterintuitive that an evaluator, which is implemented by a
+    relatively simple
+    function, 
+    can emulate programs that are more
+    complex than the evaluator itself.  The existence of a universal
+    evaluator machine is a deep and wonderful property of computation.
+    
+    <EM>Recursion theory</EM>, a branch of mathematical logic, is concerned
+    with logical limits of computation.  
+    
+    Douglas Hofstadter's beautiful
+    book <EM>Gödel, Escher, Bach</EM> (1979) 
+    explores some of these ideas.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Although we stipulated that
+  
+  {\lstinline[mathescape=true]$halts$}
+
+  is given a
+  
+  function
+    object,
+    notice that this reasoning still applies even if
+    
+    {\lstinline[mathescape=true]$halts$}
+    
+    can gain access to the
+    
+    function's
+    text and its environment.
+    
+    
+    This is Turing's celebrated <EM>Halting Theorem</EM>, which gave
+    the first clear example of a <EM>non-computable</EM> problem, i.e., a
+    well-posed task that cannot be carried out as a computational
+    
+    function.
+  </FOOTNOTE></div>
+</SUBSECTION>

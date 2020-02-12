@@ -1,0 +1,184 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>1.1.2 Naming and the Environment</a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+        
+
+        <SPLIT>
+          
+
+          
+            <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+              A critical aspect of a programming language is the means it provides
+              for using
+              
+              names to refer to computational objects,
+	      
+              and our first such means are .
+	      We say that the name identifies a constant whose
+	      <EM>value</EM> is the object.
+	    </p></div>
+	    <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+	      In JavaScript, we name constants using <EM>constant declarations</EM>.
+              
+	      Typing
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const size = 2;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBBCWAvApjAvDATAbiA}{\usebox\lstbox}
+
+
+              causes the interpreter to associate the value 2 with the
+              name {\lstinline[mathescape=true]$size$}.
+	      The purpose of the constant declaration is to
+	      create this association,
+	      and not to compute a particular value as for
+              expression statements. The JavaScript specification
+              demands that the special
+              value {\lstinline[mathescape=true]$undefined$} shall
+	      be the result of evaluating such constant declarations.
+            </p></div>
+            <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+              Once the name {\lstinline[mathescape=true]$size$}
+              has been associated with the number 2, we can
+              refer to the value 2 by name as in
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+size;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4SwXgpg3EA}{\usebox\lstbox}
+
+
+	      or
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+5 * size;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=KwAgVCDOCWBeCmBuIA}{\usebox\lstbox}
+
+
+            </p></div>
+          
+        </SPLIT>
+
+        <SPLIT>
+          
+          
+            <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+              
+            </p></div>
+          
+        </SPLIT>
+
+        <SPLIT>
+          
+          
+            <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+              Here are further examples of the use of {\lstinline[mathescape=true]$const$}:
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const pi = 3.14159;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBADgSxgXhgZgHQEYAsWCsAnANxA}{\usebox\lstbox}
+
+
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const radius = 10;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBATgQwCYEsCuEYF4YEYAMA3EA}{\usebox\lstbox}
+
+
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+pi * radius * radius;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4SwBAVGBOCGAmICuBnSMHJQbiA}{\usebox\lstbox}
+
+
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const circumference = 2 * pi * radius;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBMCWAnYBXAtgMwKaK2YWMAvDAEwwBUMADvJTIgIYAm8KEA3EA}{\usebox\lstbox}
+
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+circumference;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYSwTsCuC2BmCmZ4DtjwNxA}{\usebox\lstbox}
+
+
+
+              
+              Constant declaration is our language's
+              simplest means of abstraction, for it allow us to use simple names to
+              refer to the results of compound operations, such as the
+              {\lstinline[mathescape=true]$circumference$}
+              computed above.  In general, computational objects may have very
+              complex structures, and it would be extremely inconvenient to
+              have to remember and repeat their details each time we want to use
+              them. Indeed, complex programs are constructed by building, step
+              by step, computational objects of increasing complexity.
+              
+            </p></div>
+          
+        </SPLIT>
+
+        <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+              It should be clear that the possibility of associating values with
+              names and later retrieving them means that the interpreter must
+              maintain some sort of memory that keeps track of the name-object
+              pairs.  This memory is called the
+              
+              <EM>environment</EM>
+              (more precisely the
+              
+              <EM>global environment</EM>, since we will see later that a
+              computation may involve a number of different
+              environments).<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+            </p></div>
+
+      <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Chapter~3 will show that this notion of
+                environment is crucial, both for understanding how the interpreter
+                works and for implementing interpreters.</FOOTNOTE></div>
+</SUBSECTION>

@@ -1,0 +1,162 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>3.2 The Environment Model of Evaluation</a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SECTION>
+
+    <SECTIONCONTENT></SECTIONCONTENT>
+
+    
+    
+
+    <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+      When we introduced compound
+      functions
+      in chapter~1, we used the
+      
+      substitution model of evaluation
+      (section~\ref{sec:substitution-model}) to define what is meant by
+      applying a
+      function
+      to arguments:
+
+      <UL>
+        <LI>To apply a compound
+          function
+          to arguments, evaluate the body of the
+          function
+          with each formal parameter replaced by the corresponding
+          argument.
+        </LI>
+      </UL>
+    </p></div>
+
+    <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+      Once we admit assignment into our programming language, such a
+      definition is no longer adequate.  In particular,
+      section~\ref{sec:costs-of-assignment} argued that, in the presence of
+      assignment, a variable can no longer be considered to be merely a name
+      for a value.  Rather, a variable must somehow designate a <QUOTE>place</QUOTE> in
+      which values can be stored.  In our new model of evaluation, these
+      places will be maintained in structures called 
+      
+      <EM>environments</EM>.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+      An environment is a sequence of 
+      
+      <EM>frames</EM>.  Each frame is a table
+      (possibly empty) of 
+      
+      <EM>bindings</EM>, which associate variable names with
+      their corresponding values.  (A single frame may contain at most one
+      binding for any variable.)  Each frame also has a pointer to its 
+      
+      
+      <EM>
+        enclosing environment</EM>, unless, for the purposes of discussion, the
+      frame is considered to be 
+      
+      
+      <EM>global</EM>.  The 
+      
+      <EM>value of a variable</EM>
+      with respect to an environment is the value given by the binding of
+      the variable in the first frame in the environment that contains a
+      binding for that variable.  If no frame in the sequence specifies a
+      binding for the variable, then the variable is said to be 
+      
+      
+      <EM>
+        unbound</EM> in the environment.
+
+        <SPLIT>
+          
+          
+            
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch3-Z-G-2}.svg}}
+\caption{A simple environment structure.}
+\label{fig:environment-structure}
+\end{figure}
+
+          
+        </SPLIT>
+        
+    </p></div>
+
+    <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+      Figure~\ref{fig:environment-structure} shows a simple environment
+      structure consisting of three frames, labeled I, II, and III.  In the
+      diagram, A, B, C, and D are pointers to environments.  C and D point
+      to the same environment.  The variables {\lstinline[mathescape=true]$z$} and {\lstinline[mathescape=true]$x$} are bound
+      in frame II, while {\lstinline[mathescape=true]$y$} and {\lstinline[mathescape=true]$x$} are bound in frame I.  The
+      value of {\lstinline[mathescape=true]$x$} in environment D is 3.  The value of {\lstinline[mathescape=true]$x$} with
+      respect to environment B is also 3.  This is determined as follows: We
+      examine the first frame in the sequence (frame III) and do not find a
+      binding for {\lstinline[mathescape=true]$x$}, so we proceed to the enclosing environment D and
+      find the binding in frame I.  On the other hand, the value of {\lstinline[mathescape=true]$x$}
+      in environment A is 7, because the first frame in the sequence (frame
+      II) contains a binding of {\lstinline[mathescape=true]$x$} to 7.  With respect to environment
+      A, the binding of {\lstinline[mathescape=true]$x$} to 7 in frame II is said to 
+      
+      <EM>shadow</EM> the
+      binding of {\lstinline[mathescape=true]$x$} to 3 in frame I.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+      
+      The environment is crucial to the evaluation process,
+      because it determines the context in which an expression should be
+      evaluated.  Indeed, one could say that expressions in a programming
+      language do not, in themselves, have any meaning.  Rather, an
+      expression acquires a meaning only with respect to some environment in
+      which it is evaluated.  
+      <SPLIT>
+  
+  
+      Even the interpretation of an expression as
+      straightforward as {\lstinline[mathescape=true]$display(1)$} depends on an understanding that one
+      is operating in a context in which {\lstinline[mathescape=true]$display$} refers to the primitive function
+      that displays a value. Thus, in our model of evaluation we will always speak of evaluating an
+      expression with respect to some environment.  To describe interactions
+      with the interpreter, we will suppose that there is a 
+      
+      program
+      environment, consisting of a single frame (directly inside the global
+      environment) that includes values for the symbols associated with the
+      primitive
+      functions.  
+      For example, the idea that {\lstinline[mathescape=true]$display$} is the
+      primitive function for displaying a value is captured by saying that the variable 
+      {\lstinline[mathescape=true]$display$} is
+      bound in the global environment to the respective primitive 
+      function.
+  
+      </SPLIT>
+    </p></div>
+
+    
+    &subsection3.2.1;
+
+    
+    &subsection3.2.2;
+
+    
+    &subsection3.2.3;
+
+    
+    &subsection3.2.4;
+
+  
+</SECTION>

@@ -1,0 +1,639 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>5.5.5 
+  An Example of Compiled Code
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>\begin{center}\fbox{\textcolor{red}{Note: this section is a work in progress!}}\end{center}
+
+      
+      
+      
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+  Now that we have seen all the elements of the compiler, let us examine
+  an example of compiled code to see how things fit together.  We will
+  compile the definition of a recursive {\lstinline[mathescape=true]$factorial$}
+  function
+  by
+  calling {\lstinline[mathescape=true]$compile$}:
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+compile(parse("                \
+function factorial(n) {        \
+    return n === 1             \
+        ? 1"                   \
+        : n * factorial(n - 1);\
+}                              "),
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewtgDglgNgpgCggQwE4GdECIAEf8GE4A6AUAGYCuAdsAC5QjU7nL0ipTIwLUCUOAN5E8ZAqjh1KqZswC8CnAEYRRMSID8y3Kt0lSqgFw5mAKhZs6HLj2YBaZXwDcZAL56PurHwA0BolgAbtxYfiJY1HAAHnTeTkA}{\usebox\lstbox}!*/
+       "val",
+       "next");
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+  We have specified that the value of the {\lstinline[mathescape=true]$define$} expression should
+  be placed in the {\lstinline[mathescape=true]$val$} register.  We don't care what the compiled
+  code does after executing the {\lstinline[mathescape=true]$define$}, so our choice of {\lstinline[mathescape=true]$next$} as the linkage descriptor is arbitrary.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+  {\lstinline[mathescape=true]$Compile$} determines that the expression is a definition, so it calls {\lstinline[mathescape=true]$compile_definition$} to compile code to compute the value to be assigned
+  (targeted to {\lstinline[mathescape=true]$val$}), followed by code to install the definition, followed
+  by code to put the value of the {\lstinline[mathescape=true]$define$} (which is the symbol {\lstinline[mathescape=true]$ok$})
+  into the target register, followed finally by the linkage code.  {\lstinline[mathescape=true]$Env$} is
+  preserved around the computation of the value, because it is needed in order
+  to install the definition.  Because the linkage is {\lstinline[mathescape=true]$next$}, there is no
+  linkage code in this case.  The skeleton of the compiled code is thus
+
+  
+\begin{JavaScript}
+$\langle \textit{save}$ env $\textit{if modified by code to compute value}\rangle$
+$\langle \textit{compilation of definition value, target}$ val$, \textit{linkage}$ next$\rangle$
+$\langle \textit{restore}$ env $\textit{if saved above}\rangle$
+perform(
+    op("define_variable"),
+    constant("factorial"),
+    reg("val"),
+    reg("env"));
+assign("val", constant(ok));
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+  The expression that is to be compiled to produce the value for the
+  variable {\lstinline[mathescape=true]$factorial$} is a {\lstinline[mathescape=true]$lambda$} expression whose value is
+  the
+  function
+  that computes factorials.  {\lstinline[mathescape=true]$Compile$} handles this by
+  calling {\lstinline[mathescape=true]$compile_lambda$}, which compiles the
+  function
+  body,
+  labels it as a new entry point, and generates the instruction that
+  will combine the
+  function
+  body at the new entry point with the
+  run-time environment and assign the result to {\lstinline[mathescape=true]$val$}.  The sequence
+  then skips around the compiled
+  function
+  code, which is inserted at
+  this point.  The
+  function
+  code itself begins by extending the
+  function's definition environment by a frame that binds
+  the formal parameter {\lstinline[mathescape=true]$n$} to the
+  function
+  argument.  Then comes the actual
+  function
+  body.  Since this code for the value of the variable
+  doesn't modify the {\lstinline[mathescape=true]$env$} register, the optional {\lstinline[mathescape=true]$save$}
+  and {\lstinline[mathescape=true]$restore$} shown above aren't generated.  (The
+  function
+  code at
+  {\lstinline[mathescape=true]$entry2$} isn't executed at this point, so its use of {\lstinline[mathescape=true]$env$}
+  is irrelevant.)
+  Therefore, the skeleton for the compiled code becomes
+
+  
+\begin{JavaScript}
+assign("val", list(op("make_compiled_function"),
+                     label(entry2), 
+                     reg("env"))),
+  go_to(label("after_lambda1")),
+"entry2",
+  assign("env", list(op("compiled_function_env"), reg("fun"))),
+  assign("env", list(op("extend_environment"), 
+                     constant(n), 
+                     reg("argl"), 
+                     reg("env"))),
+  $\langle \textit{compilation of procedure body} \rangle$
+"after_lambda1",
+  perform(op("define-variable"), 
+          constant("factorial"), 
+          reg("val"), 
+          reg("env")),
+  assign("val", constant(ok)),
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+  A
+  function
+  body is always compiled (by {\lstinline[mathescape=true]$compile_lambda_body$}) as
+  a sequence with target {\lstinline[mathescape=true]$val$} and linkage {\lstinline[mathescape=true]$return$}.  The
+  sequence in this case consists of a single {\lstinline[mathescape=true]$if$} expression:
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+n === 1 
+    ? 1 
+    : n * factorial(n - 1)
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=HYAgvBIIwgUCCQH5p0SAXCUAqEAzAQwGMAXAewCcBLQgGwApQBaaASiA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+  {\lstinline[mathescape=true]$Compile_if$} generates code that first computes the predicate (targeted to
+  {\lstinline[mathescape=true]$val$}), then checks the result and branches around the true branch if the
+  predicate is false.  {\lstinline[mathescape=true]$Env$} and {\lstinline[mathescape=true]$continue$} are preserved around the
+  predicate code, since they may be needed for the rest of the {\lstinline[mathescape=true]$if$}
+  expression.  Since the {\lstinline[mathescape=true]$if$} expression is the final expression (and only
+  expression) in the sequence making up the
+  function
+  body, its target is {\lstinline[mathescape=true]$val$} and its linkage is {\lstinline[mathescape=true]$return$}, so the true and false branches are both
+  compiled with target {\lstinline[mathescape=true]$val$} and linkage {\lstinline[mathescape=true]$return$}.
+  (That is, the value of the conditional, which is the value computed by
+  either of its branches, is the value of the
+  function.)
+
+  
+\begin{JavaScript}
+$\langle \textit{save}$ continue$,$ env $\textit{if modified by predicate and needed by branches} \rangle$
+  $\langle \textit{compilation of predicate, target}$ val$, \textit{linkage}$ next$\rangle$
+  $\langle \textit{restore}$ continue$,$ env $\textit{if saved above}\rangle$
+  test(op("false"), reg("val")),
+  branch(label("false_branch4")),
+"true_branch5",
+  $\langle \textit{compilation of true branch, target}$ val$, \textit{linkage}$ return$\rangle$
+"false_branch4",
+  $\langle \textit{compilation of false branch, target}$ val$, \textit{linkage}$ return$\rangle$
+"after_if3",
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+  The predicate {\lstinline[mathescape=true]$n === 1$} is a
+  function
+  call.  This
+  looks up the operator (the symbol {\lstinline[mathescape=true]$=$}) and places this value in
+  {\lstinline[mathescape=true]$fun$}.  It then assembles the arguments {\lstinline[mathescape=true]$1$} and the value of
+  {\lstinline[mathescape=true]$n$} into {\lstinline[mathescape=true]$argl$}.  Then it tests whether {\lstinline[mathescape=true]$fun$} contains a
+  primitive or a compound
+  function, and dispatches to a primitive branch
+  or a compound branch accordingly.  Both branches resume at the {\lstinline[mathescape=true]$after_call$} label.  The requirements to preserve registers
+  around the evaluation of the operator and operands don't result in
+  any saving of registers, because in this case those evaluations don't
+  modify the registers in question.
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+assign("fun", list(op("lookup_variable_value"), constant("="), reg("env"))),
+assign("val", constant(1)),
+assign("argl", list(op("list"), reg("val"))),
+assign("val", list(op("lookup_variable_value"), constant(n), reg("env"))),
+assign("argl", list(op("cons"), reg("val"), reg("argl"))),
+test(op("primitive_function"), reg("fun")),
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYZxEsHMDsAoCIBmBXa8A0ACANuEAXWAewAcFsiiBrZEgfQDdgAncYAI2wFNHhtku8AJRYAxkWgFg0QvAC8wrMy6QEXaA2FCRAKFAQYCJtgyZxk-NMIBGbej1goceC0gmsuAsTLxP+RZjKqvDGWrr6TkZ8pn7e5JQ09EysHNy8-IIiZhJSMrDQWUFqGmH2EYYuzG4xeISkCOYgAUUh0YUqCK4m2rr4XF718CSsALbg+OAMPCjQohMSzR1IqFr27MzSogAWsNgcXNgIw+BjE1N065tb1gDsqzrw4iMk4NwAJhcbs9cAbBgOBmc5gm0AENS8e3YB06iD6zDooj42GsAFZSgDIq13DhanFHkRnq8uB8ZnNwBI6Op8MwAJ6LYIzdGQIh0fBEWAtUJ2B7HU6THiXb63f7lZyhDy4wbAEgkbA0ui88b8uik+ZodoMlYazpVbrclywrjwxHYZFo9BAA}{\usebox\lstbox}!*/
+branch(label("primitive_branch17")),
+"compiled_branch16",
+assign("continue", list(label("after_call15"))),
+assign("val", list(op("compiled_function_entry"), reg("fun"))),
+go_to(reg("val")),
+"primitive_branch17",
+assign("val", list(op("apply_primitive_function"), reg("fun"), reg("argl"))),
+"after_call15",
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+  The true branch, which is the constant 1, compiles (with target
+  {\lstinline[mathescape=true]$val$} and linkage {\lstinline[mathescape=true]$return$}) to
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+assign("val", constant(1)),
+go_to(reg("continue")),
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYZxEsHMDsAoCIBuwA28A0ACAxge2iAC7DSGwCMAlJegFCS4D6husATgKaQJ6njQBXDvGrogA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+  The code for the false branch is another a
+  function
+  call, where the
+  function
+  is the value of the symbol {\lstinline[mathescape=true]$*$}, and the arguments are
+  {\lstinline[mathescape=true]$n$} and the result of another
+  function
+  call (a call to {\lstinline[mathescape=true]$factorial$}).
+  Each of these calls sets up
+  {\lstinline[mathescape=true]$fun$}
+  and {\lstinline[mathescape=true]$argl$} and its own primitive
+  and compound branches.  Figure~\ref{fig:comp-factorial1}
+  shows the complete compilation of the
+  definition of the {\lstinline[mathescape=true]$factorial$}
+  function.
+  Notice that the possible {\lstinline[mathescape=true]$save$} and {\lstinline[mathescape=true]$restore$} of
+  {\lstinline[mathescape=true]$continue$} and {\lstinline[mathescape=true]$env$} around the predicate, shown above,
+  are in fact generated, because these registers are modified by the
+  function
+  call in the predicate and needed for the
+  function
+  call and the
+  {\lstinline[mathescape=true]$return$} linkage in the branches.
+  
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  Consider the following definition of a factorial
+  function, which is
+  slightly different from the one given above:
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function factorial_alt(n) {
+    return  n === 1  
+        ? 1
+        : factorial_alt(n - 1) * n;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2B9XKACjAEpEBvAKEVsQwFMoQMlEkBeLxARlprqCA-LwGDaALmRoombPkIlEAWl7kAVOwDcVAL5A}{\usebox\lstbox}
+
+
+  Compile this
+  function
+  and compare the resulting code with that produced for
+  {\lstinline[mathescape=true]$factorial$}.  Explain any differences you find.  Does either
+  program execute more efficiently than the other?
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  
+  Compile the iterative factorial
+  function
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function factorial(n) {
+    function iter(product, counter) {
+        return counter > n
+            ? product
+            : iter(product * counter, counter + 1);
+    }
+
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRS5caeJGKAUwzwAcM4ATEaAGkQhxwTDMXJUJiDIyggMSQcOaIAfIjAVJWgPyJ2XHlE1aJALkQNmbDt2iIAVAKFgR-RS+UBqRAEZCAbmNEAF8yIOlZeQsRPB9+P0DgoA}{\usebox\lstbox}!*/
+    return iter(1, 1);
+}
+
+\end{JavaScriptClickable}
+
+
+  Annotate the resulting code, showing the essential difference between
+  the code for iterative and recursive versions of {\lstinline[mathescape=true]$factorial$} that
+  makes one process build up stack space and the other run in constant
+  stack space.
+  
+      
+\end{Exercise}
+
+      
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+  
+  
+  What order of evaluation does our compiler produce for operands of a
+  combination?  Is it left-to-right, right-to-left, or some other order?
+  Where in the compiler is this order determined?  Modify the compiler
+  so that it produces some other order of evaluation.  (See the
+  discussion of order of evaluation for the explicit-control evaluator
+  in section~\ref{sec:eceval-core}.)  How does changing the order of
+  operand evaluation affect the efficiency of the code that constructs
+  the argument list?
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  
+  One way to understand the compiler's {\lstinline[mathescape=true]$preserving$} mechanism for
+  optimizing stack usage is to see what extra operations would
+  be generated if we did not use this idea.  Modify {\lstinline[mathescape=true]$preserving$} so
+  that it always generates the {\lstinline[mathescape=true]$save$} and {\lstinline[mathescape=true]$restore$} operations.
+  Compile some simple expressions and identify the unnecessary stack
+  operations that are generated.
+  Compare the code to that generated with the {\lstinline[mathescape=true]$preserving$} mechanism intact.
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  
+  Our compiler is clever about avoiding unnecessary stack operations,
+  but it is not clever at all when it comes to compiling calls to the primitive
+  functions
+  of the language in terms of the primitive operations
+  supplied by the machine.  For example, consider how much code is
+  compiled to compute {\lstinline[mathescape=true]$a + 1$}: The code sets up an argument list
+  in {\lstinline[mathescape=true]$argl$}, puts the primitive addition
+  function
+  (which it finds
+  by looking up the symbol {\lstinline[mathescape=true]$+$} in the environment) into {\lstinline[mathescape=true]$fun$},
+  and tests whether the
+  function
+  is primitive or compound.  The
+  compiler always generates code to perform the test, as well as code
+  for primitive and compound branches (only one of which will be executed).
+  We have not shown the part of the controller that implements
+  primitives, but we presume that these instructions make use of
+  primitive arithmetic operations in the machine's data paths.  Consider
+  how much less code would be generated if the compiler could <EM>
+    open-code</EM> primitives—that is, if it could generate code to directly
+  use these primitive machine operations.  The expression {\lstinline[mathescape=true]$a + 1$}
+  might be compiled into something as simple as<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+assign("val", op("lookup-variable-value"), constant("a"), reg("env")),
+assign("val", op("+"), reg("val"), constant(1)),
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYZxEsHMDsAoCIBuwA28A0ACA9gBwSttgNYCuuAtMgE7jABGKAplaqU-AJRYDG20IAC7BoghMC5ZqTSAibREXbgChQEGAmRoseBAGpJmabKSpDfAcNGwAjJ25A}{\usebox\lstbox}
+
+
+  In this exercise we will extend our compiler to support open coding of
+  selected primitives.  Special-purpose code will be generated for calls to these primitive
+  functions
+  instead of the general
+  function-application code.  In order to support this, we will augment
+  our machine with special argument registers {\lstinline[mathescape=true]$arg1$} and {\lstinline[mathescape=true]$arg2$}.
+  The primitive arithmetic operations of the machine will take their
+  inputs from {\lstinline[mathescape=true]$arg1$} and {\lstinline[mathescape=true]$arg2$}. The results may be put into
+  {\lstinline[mathescape=true]$val$}, {\lstinline[mathescape=true]$arg1$}, or {\lstinline[mathescape=true]$arg2$}.
+
+  The compiler must be able to recognize the application of an
+  open-coded primitive in the source program.  We will augment the
+  dispatch in the {\lstinline[mathescape=true]$compile$}
+  function
+  to recognize the names of
+  these primitives in addition to the 
+  
+  reserved words (the special forms)
+  it currently recognizes.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+\begin{enumerate}[a.]
+\item{
+      The open-coded primitives, unlike the special forms, all need their
+      operands evaluated.  Write a code generator {\lstinline[mathescape=true]$spread_arguments$} for use by
+      all the open-coding code generators.  {\lstinline[mathescape=true]$Spread_arguments$} should take an
+      operand list and compile the given operands targeted to successive argument
+      registers.  Note that an operand may contain a call to an open-coded
+      primitive, so argument registers will have to be preserved during operand
+      evaluation.
+    }
+\item{
+      For each of the primitive
+      functions
+      {\lstinline[mathescape=true]$=$}, {\lstinline[mathescape=true]$*$}, {\lstinline[mathescape=true]$-$}, and
+      {\lstinline[mathescape=true]$+$}, write a code generator that takes a combination with that
+      operator, together with a target and a linkage descriptor, and
+      produces code to spread the arguments into the registers and then
+      perform the operation targeted to the given target with the given
+      linkage.  You need only handle expressions with two operands.  Make
+      {\lstinline[mathescape=true]$compile$} dispatch to these code generators.
+    }
+\item{
+      Try your new compiler on the {\lstinline[mathescape=true]$factorial$} example.  Compare the
+      resulting code with the result produced without open coding.
+    }
+\item{
+      Extend your code generators for {\lstinline[mathescape=true]$+$} and {\lstinline[mathescape=true]$*$} so that they
+      can handle expressions with arbitrary numbers of operands.  An
+      expression with more than two operands will have to be compiled into a
+      sequence of operations, each with only two inputs.
+      
+    }
+\end{enumerate}
+
+       For each special form our compiler has a code generator.  In
+  this exercise we will construct a family of code generators for the
+  open-coded primitives.
+  
+\begin{enumerate}[a.]
+\item{
+      The open-coded primitives, unlike the special forms, all need their
+      operands evaluated.  Write a code generator {\lstinline[mathescape=true]$spread_arguments$} for use by
+      all the open-coding code generators.  {\lstinline[mathescape=true]$Spread_arguments$} should take an
+      operand list and compile the given operands targeted to successive argument
+      registers.  Note that an operand may contain a call to an open-coded
+      primitive, so argument registers will have to be preserved during operand
+      evaluation.
+    }
+\item{
+      For each of the primitive
+      functions
+      {\lstinline[mathescape=true]$=$}, {\lstinline[mathescape=true]$*$}, {\lstinline[mathescape=true]$-$}, and
+      {\lstinline[mathescape=true]$+$}, write a code generator that takes a combination with that
+      operator, together with a target and a linkage descriptor, and
+      produces code to spread the arguments into the registers and then
+      perform the operation targeted to the given target with the given
+      linkage.  You need only handle expressions with two operands.  Make
+      {\lstinline[mathescape=true]$compile$} dispatch to these code generators.
+    }
+\item{
+      Try your new compiler on the {\lstinline[mathescape=true]$factorial$} example.  Compare the
+      resulting code with the result produced without open coding.
+    }
+\item{
+      Extend your code generators for {\lstinline[mathescape=true]$+$} and {\lstinline[mathescape=true]$*$} so that they
+      can handle expressions with arbitrary numbers of operands.  An
+      expression with more than two operands will have to be compiled into a
+      sequence of operations, each with only two inputs.
+      
+    }
+\end{enumerate}
+
+      
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+assign("val", op("lookup-variable-value"), constant("a"), reg("env")),
+assign("val", op("+"), reg("val"), constant(1)),
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYZxEsHMDsAoCIBuwA28A0ACA9gBwSttgNYCuuAtMgE7jABGKAplaqU-AJRYDG20IAC7BoghMC5ZqTSAibREXbgChQEGAmRoseBAGpJmabKSpDfAcNGwAjJ25A}{\usebox\lstbox}
+
+
+  In this exercise we will extend our compiler to support open coding of
+  selected primitives.  Special-purpose code will be generated for calls to these primitive
+  functions
+  instead of the general
+  function-application code.  In order to support this, we will augment
+  our machine with special argument registers {\lstinline[mathescape=true]$arg1$} and {\lstinline[mathescape=true]$arg2$}.
+  The primitive arithmetic operations of the machine will take their
+  inputs from {\lstinline[mathescape=true]$arg1$} and {\lstinline[mathescape=true]$arg2$}. The results may be put into
+  {\lstinline[mathescape=true]$val$}, {\lstinline[mathescape=true]$arg1$}, or {\lstinline[mathescape=true]$arg2$}.
+
+  The compiler must be able to recognize the application of an
+  open-coded primitive in the source program.  We will augment the
+  dispatch in the {\lstinline[mathescape=true]$compile$}
+  function
+  to recognize the names of
+  these primitives in addition to the 
+  
+  reserved words (the special forms)
+  it currently recognizes.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+\begin{enumerate}[a.]
+\item{
+      The open-coded primitives, unlike the special forms, all need their
+      operands evaluated.  Write a code generator {\lstinline[mathescape=true]$spread_arguments$} for use by
+      all the open-coding code generators.  {\lstinline[mathescape=true]$Spread_arguments$} should take an
+      operand list and compile the given operands targeted to successive argument
+      registers.  Note that an operand may contain a call to an open-coded
+      primitive, so argument registers will have to be preserved during operand
+      evaluation.
+    }
+\item{
+      For each of the primitive
+      functions
+      {\lstinline[mathescape=true]$=$}, {\lstinline[mathescape=true]$*$}, {\lstinline[mathescape=true]$-$}, and
+      {\lstinline[mathescape=true]$+$}, write a code generator that takes a combination with that
+      operator, together with a target and a linkage descriptor, and
+      produces code to spread the arguments into the registers and then
+      perform the operation targeted to the given target with the given
+      linkage.  You need only handle expressions with two operands.  Make
+      {\lstinline[mathescape=true]$compile$} dispatch to these code generators.
+    }
+\item{
+      Try your new compiler on the {\lstinline[mathescape=true]$factorial$} example.  Compare the
+      resulting code with the result produced without open coding.
+    }
+\item{
+      Extend your code generators for {\lstinline[mathescape=true]$+$} and {\lstinline[mathescape=true]$*$} so that they
+      can handle expressions with arbitrary numbers of operands.  An
+      expression with more than two operands will have to be compiled into a
+      sequence of operations, each with only two inputs.
+      
+    }
+\end{enumerate}
+
+       For each special form our compiler has a code generator.  In
+  this exercise we will construct a family of code generators for the
+  open-coded primitives.
+  
+\begin{enumerate}[a.]
+\item{
+      The open-coded primitives, unlike the special forms, all need their
+      operands evaluated.  Write a code generator {\lstinline[mathescape=true]$spread_arguments$} for use by
+      all the open-coding code generators.  {\lstinline[mathescape=true]$Spread_arguments$} should take an
+      operand list and compile the given operands targeted to successive argument
+      registers.  Note that an operand may contain a call to an open-coded
+      primitive, so argument registers will have to be preserved during operand
+      evaluation.
+    }
+\item{
+      For each of the primitive
+      functions
+      {\lstinline[mathescape=true]$=$}, {\lstinline[mathescape=true]$*$}, {\lstinline[mathescape=true]$-$}, and
+      {\lstinline[mathescape=true]$+$}, write a code generator that takes a combination with that
+      operator, together with a target and a linkage descriptor, and
+      produces code to spread the arguments into the registers and then
+      perform the operation targeted to the given target with the given
+      linkage.  You need only handle expressions with two operands.  Make
+      {\lstinline[mathescape=true]$compile$} dispatch to these code generators.
+    }
+\item{
+      Try your new compiler on the {\lstinline[mathescape=true]$factorial$} example.  Compare the
+      resulting code with the result produced without open coding.
+    }
+\item{
+      Extend your code generators for {\lstinline[mathescape=true]$+$} and {\lstinline[mathescape=true]$*$} so that they
+      can handle expressions with arbitrary numbers of operands.  An
+      expression with more than two operands will have to be compiled into a
+      sequence of operations, each with only two inputs.
+      
+    }
+\end{enumerate}
+
+      
+\end{Exercise}
+
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>We have used
+    the same symbol {\lstinline[mathescape=true]$+$} here to denote both the source-language
+    function
+    and the machine operation.  In general there will not be a
+    one-to-one correspondence between primitives of the source language
+    and primitives of the machine.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Making the primitives into reserved
+    words is in general a bad idea, since a user cannot then rebind these
+    names to different
+    functions.  Moreover, if we add reserved words to
+    a compiler that is in use, existing programs that define
+    functions
+    with these names will stop working.  See
+    exercise~\ref{ex:cte-open-code} for ideas on how to avoid this
+    problem.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Making the primitives into reserved
+    words is in general a bad idea, since a user cannot then rebind these
+    names to different
+    functions.  Moreover, if we add reserved words to
+    a compiler that is in use, existing programs that define
+    functions
+    with these names will stop working.  See
+    exercise~\ref{ex:cte-open-code} for ideas on how to avoid this
+    problem.</FOOTNOTE></div>
+</SUBSECTION>

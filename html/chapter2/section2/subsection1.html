@@ -1,0 +1,1420 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>2.2.1 
+        Representing Sequences
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+
+        <SPLIT>
+	        
+	        
+            
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch2-Z-G-13}.svg}}
+\caption{The sequence 1, 2, 3, 4 represented as a chain of pairs. }
+\label{fig:sequence-of-pairs}
+\end{figure}
+
+	        
+        </SPLIT>
+      
+        One of the useful structures we can build with pairs is a 
+        
+        
+        
+        <EM>
+          sequence</EM>—an ordered collection of data objects.  There are, of
+        course, many ways to represent sequences in terms of pairs.  One
+        particularly straightforward representation is illustrated in
+        figure~\ref{fig:sequence-of-pairs}, where the sequence 1, 2, 3, 4 is
+        represented as a chain of pairs.  The {\lstinline[mathescape=true]$head$} of each pair is the
+        corresponding item in the chain, and the {\lstinline[mathescape=true]$tail$} of the pair is
+        the next pair in the chain.  The {\lstinline[mathescape=true]$tail$} of the final pair
+        signals the end of the sequence by pointing to a distinguished
+        value that is not a pair, 
+        represented in box-and-pointer diagrams as a diagonal line
+        
+        and in programs as the value of 
+        
+        
+        
+	  
+	  JavaScript's value {\lstinline[mathescape=true]$null$}
+	  
+	  .
+        The entire sequence is constructed by nested {\lstinline[mathescape=true]$pair$} operations:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+pair(1, 
+     pair(2, 
+          pair(3, 
+               pair(4, null))));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4QwlgTgFAjANAAgFANa0koCZErf9caAZlwPPw2gBZEA7AVwBsmBKd1gbiA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+        Such a sequence of pairs is called a
+        
+        <EM>list</EM>, and our JavaScript environment provides a
+        primitive called 
+        
+        
+        {\lstinline[mathescape=true]$list$} to help in constructing 
+        lists.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+        The above sequence could be produced by {\lstinline[mathescape=true]$list(1, 2, 3, 4)$}.  In
+        general, 
+
+        
+\begin{JavaScript}
+list(a$_{1}$, a$_{2}$, $\ldots$, a$_{n}$)
+\end{JavaScript}
+
+
+        is equivalent to
+
+        
+\begin{JavaScript}
+pair(a$_{1}$, pair(a$_{2}$, pair($\ldots$, pair(a$_{n}$, null)$\ldots$)))
+\end{JavaScript}
+
+      </p></div>
+
+      <SPLIT>
+        
+        
+          <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+            Our interpreter prints pairs using a textual representation of
+	    box-and-pointer diagrams. The result of
+	    {\lstinline[mathescape=true]$pair(1, 2)$}
+            is printed as {\lstinline[mathescape=true]$[1, 2]$}, and
+	    the data object in
+          figure~\ref{fig:sequence-of-pairs} 
+          is printed as 
+          {\lstinline[mathescape=true]$[1, [2, [3, [4, null]]]]$}:
+          </p></div>
+        
+      </SPLIT>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const one_through_four = list(1, 2, 3, 4);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBOCmB9KALATiArgcxYgZlmjALwwA2AltABQCMANDAExMDMTALAJQDcQA}{\usebox\lstbox}
+
+
+	
+        
+
+      </p></div>
+
+
+
+<SPLIT>
+  
+  
+    
+  
+</SPLIT>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+        We can think of 
+        
+        
+        {\lstinline[mathescape=true]$head$} as selecting the first item in the list, and
+        of 
+        
+        {\lstinline[mathescape=true]$tail$} as selecting the sublist consisting of all but the first
+        item.  Nested applications of {\lstinline[mathescape=true]$head$} and {\lstinline[mathescape=true]$tail$} can be used to
+        extract the second, third, and subsequent items in the
+        list.
+        The constructor 
+        
+        {\lstinline[mathescape=true]$pair$} makes a list like the original one, 
+        but with an additional item at the beginning.
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+head(one_through_four);
+// result: 1
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BYUwhgJgFA9gdiA+gF2AJxgVwObEQMyzQEoBuAKAHpKACNEAZ0wBtkAuGgRiA}{\usebox\lstbox}
+
+
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+tail(one_through_four);
+// result: [2, [3, [4, null]]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=C4QwlgNgFA9gdgUwPrABYCcYFcDmqkBm26AlANwBQA9FQAToIDOWEwAXLQNoBMANFwGZ+nACz84LCAF0ZQA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+head(tail(one_through_four));
+// result: 2
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BYUwhgJgFALmCWAbKB7AdiA+jYAnFArgObCYBmhuAlFQNwBQA9IwAS4gDOBiMAXCwCYgA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+pair(10, one_through_four);
+// result: [10, [1, [2, [3, [4, null]]]]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4QwlgTgFAjADAGgAQHsB2BTA+gFwBYQoCuA5nlgGbEQCUA3AFAD0TSEGAzkQDY4BcSANrxkw0QCZRAZlEAWZGh7cAuqtVA}{\usebox\lstbox}
+
+
+
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+pair(5, one_through_four);
+// result: [5, [1, [2, [3, [4, null]]]]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4QwlgTgFArANAAgPYDsCmB9ALgCwkgVwHMcMAzQiASgG4AoAegYQjQGcCAbLALgQG14AgIyJ+AJjEBmMQBZEKLpwC6q1UA}{\usebox\lstbox}
+
+
+
+      </p></div>
+
+      <SPLIT>
+         
+        
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+        The value {\lstinline[mathescape=true]$null$}, 
+        used to terminate the chain of pairs, can be
+        thought of as a sequence of no elements, the 
+        
+        
+        <EM>empty list</EM>.
+      </p></div>
+        
+      </SPLIT>
+
+      \subsubsection{
+        List operations
+      
+
+      
+      
+      <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+        The use of pairs to represent sequences of elements as lists is
+        accompanied by conventional programming techniques for manipulating
+        lists by successively 
+        
+        
+        <QUOTE>{\lstinline[mathescape=true]$tail$}ing down</QUOTE> the lists.  For example, 
+        the
+        function
+        
+        {\lstinline[mathescape=true]$list_ref$} takes as arguments a list and a number
+        $n$ and returns the $n$th item of the list.  It is customary to
+        number the elements of the list beginning with 0.  The method for
+        computing {\lstinline[mathescape=true]$list_ref$} is the following:
+
+        <UL>
+          <LI>For $n=0$, {\lstinline[mathescape=true]$list_ref$} should return the {\lstinline[mathescape=true]$head$} of the list.
+          </LI>n
+          <LI>Otherwise, {\lstinline[mathescape=true]$list_ref$} should return  the $(n-1)$st item of the
+            {\lstinline[mathescape=true]$tail$} of the list.
+          </LI>
+        </UL>
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function list_ref(items, n) {
+    return n === 0
+           ? head(items)
+           : list_ref(tail(items), n - 1);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGxgZygfQE4FNgAUMUuAtmgDSJgCUiA3gFCIuJ5QjZJIC8fiABmasRrAPyIAFrgCGAEyIlyNYaJEAuFOix5CUGTGSKyaGlSQBaRAEYaAbkYBfIA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const squares = list(1, 4, 9, 16, 25);
+list_ref(squares, 3);
+// result: 16
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBBCOBXAhgJwKYRgXhgGwEtoAKARgBoYAWSgTktIDZKAmAVgEoBuAKEOgD6GAGbEEKDBEoBmbjwD08mJMR4oALhhMgA}{\usebox\lstbox}
+
+
+
+        
+
+        
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+        Often we {\lstinline[mathescape=true]$tail$} down the whole list.  To aid in this, our JavaScript environment includes
+          a predicate
+        
+        
+        {\lstinline[mathescape=true]$is_null$}, which tests whether its argument is
+        the empty list.  The
+        function
+        
+        
+        {\lstinline[mathescape=true]$length$}, which
+        returns the number of items in a list, illustrates this typical
+        pattern of use:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function length(items) {
+    return is_null(items)
+           ? 0
+           : 1 + length(tail(items));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGwKZgOZQBYAoZSoC2AzgJSIDeAUInYgE6pQgNIwkD6YIyy+hUmVr1R9APyIADCLGiAXIgCMiANQp0WPFACGMfgWLkyAbmoBfIA}{\usebox\lstbox}
+
+
+
+        
+      </p></div>
+
+      <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+        The {\lstinline[mathescape=true]$length$}
+        function
+        implements a simple recursive plan. The
+        reduction step is:
+
+        <UL>
+          <LI>The {\lstinline[mathescape=true]$length$} of any list is 1 plus the {\lstinline[mathescape=true]$length$} of the
+            {\lstinline[mathescape=true]$tail$} of the list.
+          </LI>
+        </UL>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p11' class='permalink'></a><p>
+        This is applied successively until we reach the base case:
+
+        <UL>
+          <LI>The {\lstinline[mathescape=true]$length$} of the empty list is 0.
+          </LI>
+        </UL>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p12' class='permalink'></a><p>
+        We could also compute {\lstinline[mathescape=true]$length$} in an iterative style:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function length(items) {
+    function length_iter(a, count) {
+        return is_null(a)
+               ? count
+               : length_iter(tail(a), count + 1);
+    }
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGwKZgOZQBYAoZSoC2AzgJSIDeAUInYqJLAiultgPoGoBOuAhgBpEEOOCgUa9aYh6ooIHkhgkOYEMmQCytGXvoB+EWLBRd+vQC5WmHF0J8o-GFv5lho8YgDUiAIxkANzmiAC+IXIKSjbs9rz4hKTCAAxB1KFAA}{\usebox\lstbox}!*/
+    return length_iter(items, 0);
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p13' class='permalink'></a><p>
+        Another conventional programming technique is to 
+        
+        
+        <QUOTE>{\lstinline[mathescape=true]$pair$} up</QUOTE> an
+        answer list while {\lstinline[mathescape=true]$tail$}ing down a list, as in the
+        function
+        
+        
+        {\lstinline[mathescape=true]$append$}, which takes two lists as arguments and combines their
+        elements to make a new list:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+append(squares, odds);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYBxFMDsBMAoGcCOBXYAnc8A0ACA9tNPAJQDcQA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+// returns: [1, [4, [9, [16, [25, [1, [3, [5, [7, null]]]]]]]]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAECcFMBcFdwHYGcBcoDaBGANBgLLugJyGYBshATAKymEDMhtGA7LgrADacC6f--IA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+append(odds, squares);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYBxFMDsBMAoHtrQM4BoAEyCOBXYAncZASgG4g}{\usebox\lstbox}
+
+
+
+        
+
+	
+      </p></div>
+
+      <div class='permalink'>
+<a name='p14' class='permalink'></a><p>
+        
+	The function {\lstinline[mathescape=true]$append$}
+	
+	is also implemented using a recursive plan.
+	To {\lstinline[mathescape=true]$append$}
+        lists {\lstinline[mathescape=true]$list1$} and {\lstinline[mathescape=true]$list2$},
+	do the following:
+        <UL>
+          <LI>If {\lstinline[mathescape=true]$list1$} is the empty list, then the result is just {\lstinline[mathescape=true]$list2$}.
+          </LI>
+          <LI>Otherwise, {\lstinline[mathescape=true]$append$} the {\lstinline[mathescape=true]$tail$} of {\lstinline[mathescape=true]$list1$} and 
+            {\lstinline[mathescape=true]$list2$}, and {\lstinline[mathescape=true]$pair$} the {\lstinline[mathescape=true]$head$} of {\lstinline[mathescape=true]$list1$} onto the result:
+          </LI>
+        </UL>
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function append(list1, list2) {
+    return is_null(list1)
+           ? list2
+           : pair(head(list1), append(tail(list1), list2));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwA6oKZgCYAoA2MAzlAIwA0ihJATAJSIDeAUIm4gE4ZQgdLEB9MCHz4CxMnVbsZ7APxUJNabJkAuRKmQwOuABYZkeapMppMOXFG1iTpOpRP06AbmYBfIA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+        Define a
+        function
+
+        
+        
+        {\lstinline[mathescape=true]$last_pair$} that returns the list that contains only
+        the last element of a given (nonempty) list:
+
+        
+
+	
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+last_pair(list(23, 72, 149, 34));
+// result: [34, null]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYQwzgLg+gDiCWAnAFMelkCYDMAaABAOyYECMALAJwHbkCUdA3AFAD0r+iApmAK7AQAXPgDatAgDt+wALpA}{\usebox\lstbox}
+
+
+
+      \hfill{\hyperref[ex:last-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:last}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function last_pair(items) {
+    return is_null(tail(items))
+           ? items
+           : last_pair(tail(items));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGwIYGcoH0AOqYBOAFDFAKYC26AlIgN4BQiziBZUIBSM6WYIyZESj4hpSjWpMWMlgH5E4qtNkyAXCgzY8hYaJLkq1agG4GAXyA}{\usebox\lstbox}
+
+
+  
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        Define a
+        function
+
+        
+        
+        {\lstinline[mathescape=true]$reverse$} that takes a list as argument and
+        returns a list of the same elements in reverse order:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+reverse(list(1, 4, 9, 16, 25));
+// result: [25, [16, [9, [4, [1, null]]]]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=E4UwbiwM4gFANgSygF1gRgDQAIAsOBOHdANhwCYBWASmoG4AoAeie1CgFd4UAubAbSo5+pYUQH4BWbADsu8ALpKlQA}{\usebox\lstbox}
+
+
+
+      \hfill{\hyperref[ex:reverse-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:reverse}]
+
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+// naive reverse (what is the runtime?)
+function reverse(items) {
+    return is_null(items)
+           ? null
+           : append(reverse(tail(items)),
+	            pair(head(items), null));
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAEDsEMEsDcFNQCd4KQZ0QCgO4AtIAXUadUQvRJAV3EOgFt4B+ASgCgAzWgY3oHtwyVPAzws0QvAbpWoAN7tQy4YWpIhpAPrhqAGz0SpMjirNnmEfXqXnzALlCQADs-jgAJlhRpMWQjCGktKyrAA07ACQdnbOMEhYlJBewSZhVgasrADc7AC+QA}{\usebox\lstbox}!*/
+}
+
+\end{JavaScriptClickable}
+
+
+
+ 
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+// a better version
+function reverse(items) {
+    function reverse_iter(items, result) {
+        return is_null(items)
+               ? result
+               : reverse_iter(tail(items),
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAEENQIwUwFzjATqAbsgzgSwPYDsAoAMwFc8BjOXPUJGdJDGACi0QFsMBKUAbwNCDQpClXy16mGAH02yVhwwAaCRhIAbOD35DdEuCSQ0sGaXg3qFMTlwF77QgPyqNcOw-sAuCQyazESMxw4FiWcjZKBACQHrF6AA4hgQAWMOAAJlYRLppcXADc7qAAvkV0BkY+Uv7y4cqg5urqBQTFQA}{\usebox\lstbox}!*/
+	                      pair(head(items), result));
+    }
+    return reverse_iter(items, null);
+}
+
+\end{JavaScriptClickable}
+
+
+  
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled26}
+ 
+        <div class='permalink'>
+<a name='p15' class='permalink'></a><p>
+          Consider the 
+          
+          change-counting program of
+          section~\ref{sec:tree-recursion}.  It would be nice to be able to
+          easily change the currency used by the program, so that we could
+          compute the number of ways to change a British pound, for example.  As
+          the program is written, the knowledge of the currency is distributed
+          partly into the
+          function
+          {\lstinline[mathescape=true]$first_denomination$} and partly into the
+          function
+          {\lstinline[mathescape=true]$count_change$} (which knows that there are five
+          kinds of U.S. coins).  It would be nicer to be able to
+          supply a list of coins to be used for making change.
+        </p></div>
+        <div class='permalink'>
+<a name='p16' class='permalink'></a><p>
+          We want to rewrite the
+          function
+          {\lstinline[mathescape=true]$cc$} so that its
+          second argument is a list of the values of the
+          coins to use rather than an integer specifying which coins to use.  We
+          could then have lists that defined each kind of currency:
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const us_coins = list(50, 25, 10, 5, 1);
+const uk_coins = list(100, 50, 20, 10, 5, 2, 1, 0.5);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBArhA+qAlpGBeGAbF0AUArAAwA0MATIeQIxkzUw0CUA3AFCiSxwDWyINBEw48UfHXolyFenXKMKtcsQB0hNkA}{\usebox\lstbox}
+
+
+
+          We could then call {\lstinline[mathescape=true]$cc$} as follows:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+cc(100, us_coins);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MbAUEYAZIGgAgK4GcD6wD2BLAdkglANxA}{\usebox\lstbox}
+
+
+
+          To do this will require changing the program {\lstinline[mathescape=true]$cc$} somewhat.  It will
+          still have the same form, but it will access its second argument
+          differently, as follows:
+
+        
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function cc(amount, coin_values) {
+    return amount === 0
+           ? 1
+           : amount < 0 || no_more(coin_values)
+             ? 0
+             : cc(amount,
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABBCAKAhgWzuKAaZOGMAfQDd0AbEAUwGcBKRAbwChEPEAnGqELpFhxgoiALwTEABnac5nAPyIAjLPlyAXIiG5EAHmmIAPkcRg4JbD1QQipCtXoM16uUpmv1WlBmy48rACQnhw0AB4QNAAOUCTAMFx0sQAmNOaYxOiwCDZ25FS0jM4h6gDULiXIaDoiiAC0iPGJKWlwGWBZ8GC5xPmOjAQVlRy2vQ6FDADcrAC+QA}{\usebox\lstbox}!*/
+	          except_first_denomination(coin_values))
+               +
+               cc(amount - first_denomination(coin_values), 
+                  coin_values);
+}
+
+\end{JavaScriptClickable}
+
+
+
+        </p></div>
+        <div class='permalink'>
+<a name='p17' class='permalink'></a><p>
+          Define the
+          functions
+          {\lstinline[mathescape=true]$first_denomination$}, {\lstinline[mathescape=true]$except_first_denomination$}, and {\lstinline[mathescape=true]$no_more$} in terms of primitive
+          operations on list structures.  Does the order of the list {\lstinline[mathescape=true]$coin_values$} affect the answer produced by {\lstinline[mathescape=true]$cc$}?  Why or why not?
+        </p></div>
+
+      \hfill{\hyperref[ex:unlabeled26-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled26}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function first_denomination(coin_values) {
+    return head(coin_values);
+}
+function except_first_denomination(coin_values) {
+    return tail(coin_values);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMGAnAzlA+gEwKZhwC2MYAhrAgBQRylYBuZANiHugJSIDeAUIgMSo8UEKiQALPGRw06YRizacA3LwC+vUJEpI8ADwh4ADthQZs+QiXK659Jq3Zc+goSLFIoZGM3sLHZQ41TW1oeCRCLCI4YX9FJ04efkFhUXFEGHQsMBBmP1oHJWcQoA}{\usebox\lstbox}!*/
+function no_more(coin_values) {
+    return is_null(coin_values);
+}
+
+\end{JavaScriptClickable}
+
+
+    The order of the list {\lstinline[mathescape=true]$coin_values$}
+    does not affect the answer given by any correct solution of the problem,
+    because the given list represents an unordered collection of denominations.
+
+\end{Answer}
+
+
+      <SPLIT>
+        
+      
+    
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled27}
+
+	In the presence of higher-order functions, it is not strictly necessary
+	for functions to have multiple parameters; one would
+	suffice.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>{\lstinline[mathescape=true]$plus$} that
+	naturally requires two parameters, we could write a variant of the function
+	to which we pass the arguments one at
+	at time. An application of the variant to the first argument could return a
+	function that we can then apply to the second argument, and so on. This
+	practice—called
+	<EM>currying</EM> and named after the American mathematician and
+	logician Haskell Brooks Curry—is quite common
+	in programming languages such as Haskell (the reader might venture a guess 
+	after whom this programming language is named) and Ocaml. In JavaScript, a curried
+	version of {\lstinline[mathescape=true]$plus$} looks as follows.
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function plus_curried(x) {	    
+    return y => x + y;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwDYgM4H0IgE54wCmAJgBQAeAlIgN4CQiTiAUM4nkVPkgJ6IBeAHyIKiANSJeAbhYBfIA}{\usebox\lstbox}
+
+
+	
+	Write a function {\lstinline[mathescape=true]$brooks$}, that
+	takes a curried function as first argument and as second argument a list
+	of arguments to which the curried function is then applied, one by one,
+	in the given order. For example, the following application of
+	{\lstinline[mathescape=true]$brooks$} should have the
+	same effect as the call {\lstinline[mathescape=true]$plus_curried(3)(4)$} above.
+
+
+	
+
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+brooks(plus_curried, list(3, 4));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOAUAOAbArtA+gY2SEBLApgCYA0ABIrtAC6wDMZALAJRMDcQA}{\usebox\lstbox}
+
+
+
+	While we are at it, we might as well curry the function
+	{\lstinline[mathescape=true]$brooks$}! Write
+	a function 
+	{\lstinline[mathescape=true]$brooks_curried$} that
+	can be applied as follows, to yield the same result 7:
+
+	
+
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+brooks_curried(list(plus_curried, 3, 4));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOD6DGBXEICWBTAJgCgDaugBdsAHXROJFDTAGgAIBmBgFgEo2BuIA}{\usebox\lstbox}
+
+
+
+	With this function 
+	{\lstinline[mathescape=true]$brooks_curried$}
+	what are the results of evaluating the following two statements?
+
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+brooks_curried(list(brooks_curried,
+                    list(plus_curried, 3, 4)));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOD6DGBXEICWBTAJgCgDaugBdtQIYFk0sAaAKAAJGnmWX8jsAHXROJFDJmr0AzMIAsASmkBuIA}{\usebox\lstbox}
+
+
+
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+brooks_curried(list(brooks_curried,
+                    list(brooks_curried, 
+                         list(plus_curried, 3, 4))));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOD6DGBXEICWBTAJgCgDaugBdtQIYFk0sAaAKAAJGnmWX8iTwo4kUNNq9BqxGim7YgAdciHpX6CAzIIAsASg1qA3EA}{\usebox\lstbox}
+
+
+		
+	
+	
+      
+	If we have
+	a function such as {\lstinline[mathescape=true]$plus$} that
+	naturally requires two parameters, we could write a variant of the function
+	to which we pass the arguments one at
+	at time. An application of the variant to the first argument could return a
+	function that we can then apply to the second argument, and so on. This
+	practice—called
+	<EM>currying</EM> and named after the American mathematician and
+	logician Haskell Brooks Curry—is quite common
+	in programming languages such as Haskell (the reader might venture a guess 
+	after whom this programming language is named) and Ocaml. In JavaScript, a curried
+	version of {\lstinline[mathescape=true]$plus$} looks as follows.
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function plus_curried(x) {	    
+    return y => x + y;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwDYgM4H0IgE54wCmAJgBQAeAlIgN4CQiTiAUM4nkVPkgJ6IBeAHyIKiANSJeAbhYBfIA}{\usebox\lstbox}
+
+
+	
+	Write a function {\lstinline[mathescape=true]$brooks$}, that
+	takes a curried function as first argument and as second argument a list
+	of arguments to which the curried function is then applied, one by one,
+	in the given order. For example, the following application of
+	{\lstinline[mathescape=true]$brooks$} should have the
+	same effect as the call {\lstinline[mathescape=true]$plus_curried(3)(4)$} above.
+
+
+	
+
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+brooks(plus_curried, list(3, 4));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOAUAOAbArtA+gY2SEBLApgCYA0ABIrtAC6wDMZALAJRMDcQA}{\usebox\lstbox}
+
+
+
+	While we are at it, we might as well curry the function
+	{\lstinline[mathescape=true]$brooks$}! Write
+	a function 
+	{\lstinline[mathescape=true]$brooks_curried$} that
+	can be applied as follows, to yield the same result 7:
+
+	
+
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+brooks_curried(list(plus_curried, 3, 4));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOD6DGBXEICWBTAJgCgDaugBdsAHXROJFDTAGgAIBmBgFgEo2BuIA}{\usebox\lstbox}
+
+
+
+	With this function 
+	{\lstinline[mathescape=true]$brooks_curried$}
+	what are the results of evaluating the following two statements?
+
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+brooks_curried(list(brooks_curried,
+                    list(plus_curried, 3, 4)));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOD6DGBXEICWBTAJgCgDaugBdtQIYFk0sAaAKAAJGnmWX8jsAHXROJFDJmr0AzMIAsASmkBuIA}{\usebox\lstbox}
+
+
+
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+brooks_curried(list(brooks_curried,
+                    list(brooks_curried, 
+                         list(plus_curried, 3, 4))));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOD6DGBXEICWBTAJgCgDaugBdtQIYFk0sAaAKAAJGnmWX8iTwo4kUNNq9BqxGim7YgAdciHpX6CAzIIAsASg1qA3EA}{\usebox\lstbox}
+
+
+		
+	
+	
+      \hfill{\hyperref[ex:unlabeled27-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled27}]
+
+	  
+\begin{enumerate}[a.]
+\item{
+	      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function brooks(f, items) {
+    return is_null(items)
+           ? f
+           : brooks(f(head(items)), tail(items));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAIwE5zgawM4ApgA0iMUApgLbYCUiA3gFCJOKqlQipIzYD6YIAGwG4SFao2aTmAfkTAJUyQC4U6LHmC4AFqQCGAExFlKVKkSi6Yw0SaoBuegF8gA}{\usebox\lstbox}
+
+
+	    }
+\item{
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function brooks_curried(items) {
+    return brooks(head(items), tail(items));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAIwE5zgawM4H0IiqowCmAJgBQxQkC22AlIgN4BQiHiqJUhSaGHBQAWJAIaVqdRgBpEUMTAA2VGvQYMA3KwC+QA}{\usebox\lstbox}
+
+
+	    }
+\item{
+The statement 
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+brooks_curried(list(brooks_curried,
+                    list(plus_curried, 3, 4)));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOD6DGBXEICWBTAJgCgDaugBdtQIYFk0sAaAKAAJGnmWX8jsAHXROJFDJmr0AzMIAsASmkBuIA}{\usebox\lstbox}
+
+
+	of course evaluates to 7, as does
+	    }
+\item{
+	
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+brooks_curried(list(brooks_curried,
+                    list(brooks_curried, 
+                         list(plus_curried, 3, 4))));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOD6DGBXEICWBTAJgCgDaugBdtQIYFk0sAaAKAAJGnmWX8iTwo4kUNNq9BqxGim7YgAdciHpX6CAzIIAsASg1qA3EA}{\usebox\lstbox}
+
+
+	    }
+\end{enumerate}
+
+	
+\end{Answer}
+
+      
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Exercise 2.20 of the original textbook deals with Scheme
+	operators that take variable numbers of arguments. This concept exists
+	in JavaScript, but plays a less prominent role. The textbook adaptors
+	decided to sneak in currying on this occasion.
+      </FOOTNOTE></div>
+      
+      </SPLIT>
+
+      \subsubsection{
+        Mapping over lists
+      
+
+      
+      
+      <div class='permalink'>
+<a name='p18' class='permalink'></a><p>
+        One extremely useful operation is to apply some transformation
+        to each element in a list and generate the list of results.
+        For instance, the following
+        function
+        scales each number in a list by
+        a given factor:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function scale_list(items, factor) {
+    return is_null(items)
+           ? null
+           : pair(head(items) * factor, 
+                  scale_list(tail(items), factor));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwgQwDYFMD6GbJQAUMUWAtsgDSLBrRwBOAlIgN4BQi3ijWUIRkgI4wIDBhJlKzLj3k8A-IjES5C+QC5EABzQxGRABZY0AEykVkrAFS16UJjXUbX3VJlz5CRKPsmkVsw0dAwszADcHAC+QA}{\usebox\lstbox}
+
+
+
+        
+      </p></div>
+
+      <div class='permalink'>
+<a name='p19' class='permalink'></a><p>
+        We can abstract this general idea and capture it as a common pattern
+        expressed as a higher-order
+        function, just as in
+        section~\ref{sec:higher-order-procedures}.  The higher-order
+        function
+        here is called {\lstinline[mathescape=true]$map$}.  The function {\lstinline[mathescape=true]$map$} takes as arguments a
+        function
+        of one argument
+        and a list, and returns a list of the results produced by
+        applying the
+        function
+        to each element in the list:
+	
+      
+
+        
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function map(fun, items) {
+    return is_null(items)
+           ? null
+           : pair(fun(head(items)), 
+                  map(fun, tail(items)));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYAcAUowBpExQCmyAzgJSIDeAUIvYgE5FQiNIykD6YIANn0yESFOg3EMA-Il4CxE8QC5E6VDEbZwmABZFUAEyHEy5cvnkLL9NFhz4oawcJOmA3DQC+QA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+map(abs, list(-10, 2.5, -11.6, 17));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=LYQwDgFCBGDOA0ACANgS1gFwgWgIwAYkAmAOgFYk9cSA2JXAdgEomBuIA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+map(x => x * x, list(1, 2, 3, 4));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=LYQwDgFAHgBAvAPhrAVMgNDANgSwM4AuEAjJgEyYDMmALAJR0DcQA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p20' class='permalink'></a><p>
+        Now we can give a new definition of {\lstinline[mathescape=true]$scale_list$} in terms of {\lstinline[mathescape=true]$map$}:
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function scale_list(items, factor) {
+    return map(x => x * factor, items);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwgQwDYFMD6GbJQAUMUWAtsgDSLBrRwBOAlIgN4BQi3ijWUIRknJoADkQAeiALwA+RFIBUtelCY1SFZMwDcHAL5A}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p21' class='permalink'></a><p>
+        
+	The function {\lstinline[mathescape=true]$map$}
+	
+	is an important construct, not only because it captures a
+        common pattern, but because it establishes a higher level of
+        abstraction in dealing with lists.  In the original definition of {\lstinline[mathescape=true]$scale_list$}, the recursive structure of the program draws attention to
+        the element-by-element processing of the list.  Defining {\lstinline[mathescape=true]$scale_list$} in terms of {\lstinline[mathescape=true]$map$} suppresses that level of detail and
+        emphasizes that scaling transforms a list of elements to a list of
+        results.  The difference between the two definitions is not that the
+        computer is performing a different process (it isn't) but that we
+        think about the process differently.  In effect, {\lstinline[mathescape=true]$map$} helps
+        establish an abstraction barrier that isolates the implementation of
+        functions
+        that transform lists from the details of how the
+        elements of the list are extracted and combined.  Like the barriers
+        shown in figure~\ref{fig:abstraction-barriers}, this abstraction gives
+        us the flexibility to change the low-level details of how sequences
+        are implemented, while preserving the conceptual framework of
+        operations that transform sequences to sequences.
+        section~\ref{sec:sequences-conventional-interfaces} expands on this use
+        of sequences as a framework for organizing programs.
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        The
+        function
+        {\lstinline[mathescape=true]$square_list$} takes a list of
+        numbers as argument and returns a list of the squares of those
+        numbers.
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+square_list(list(1, 2, 3, 4));
+// returns: [1, [4, [9, [16, null]]]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4RwrghgTgpg+gGwJbAC4AplvQRgDQAEATIQMyEAsAlFQNwBQA9IwbKmFAHbABcBA2vgEVC-AJyicANkKcwCBAF1lioA}{\usebox\lstbox}
+
+
+
+        Here are two different definitions of {\lstinline[mathescape=true]$square_list$}.  Complete
+        both of them by filling in the missing expressions:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function square_list(items) {
+    return is_null(items) 
+           ? null
+           : pair(??, ??);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9AGxmSgAoYocBbZASkQG8AoRVxXKELJYvMEAgXKUa9FmwlsA-In6DxkiQC5EABwwwspKVIA0iHbQDcTAL5A}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function square_list(items) {
+   return map(??, ??);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9AGxmSgAoYocBbZASkQG8AoRV3KELJKjAB1ID8AgDSIhtANxMAvkA}{\usebox\lstbox}
+
+
+
+	
+      \hfill{\hyperref[ex:square-list-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:square-list}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function square_list(items) {
+    return is_null(items)
+           ? null
+           : pair(square(head(items)),
+	          square_list(tail(items)));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9AGxmSgAoYocBbZASkQG8AoRVxXKELJYvMEAgXKUatFmwlsA-In6DxkiQC5EABwwwspNJlykAFjgwATYdTq0ANEwCQiiTuz4iJUlA1CK52j4DcTAF8gA}{\usebox\lstbox}
+
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function square_list(items) {
+    return map(square, items);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9AGxmSgAoYocBbZASkQG8AoRVxXKELJKjAB1JpMuADSIK1OgG4mAXyA}{\usebox\lstbox}
+
+
+
+
+  
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+        Louis Reasoner tries to rewrite the first {\lstinline[mathescape=true]$square_list$}
+        function
+        of
+        exercise~\ref{ex:square-list} so that it evolves an iterative
+        process:
+
+        
+	
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function square_list(items) {
+    function iter(things, answer) {
+        return is_null(things) 
+               ? answer
+               : iter(tail(things), 
+                      pair(square(head(things)), 
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9AGxmSgAoYocBbZASkQG8AoRVxUSWBRCnLUqAAsYYAObIANIgxhkAdz71mbFYlxQQWJMTxgQBAgOFi6iFqotsA-NNkKs5yxYBcPSvygYYhoSPG0pRydg1gAHL340TFxSQRwMABMjPzoAsxCMixl5RVoAbiCAXyD1TW13ckoaKT0DfKZCoA}{\usebox\lstbox}!*/
+                           answer));
+    }
+    return iter(items, null);
+}
+
+\end{JavaScriptClickable}
+
+
+
+        Unfortunately, defining {\lstinline[mathescape=true]$square_list$} this way produces the answer
+        list in the reverse order of the one desired.  Why?
+
+        Louis then tries to fix his bug by interchanging the arguments to
+        {\lstinline[mathescape=true]$pair$}:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function square_list(items) {
+   function iter(things, answer) {
+       return is_null(things)
+              ? answer
+              : iter(tail(things), 
+                     pair(answer, 
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9AGxmSgAoYocBbZASkQG8AoRV0SWBRCnLUqABYwwAc2QAaRBjDIA7r3rNWy1riggsSYnjAgCBfkNF0WKsyoD8UmfKynz5gFzdKfKBhgHBwsbUn2HQOUABw8+aTlefyCYhzRMXFIBHAwAE0MfOlpsgG57AF97NQ0tV3JKGkldfVo8-KA}{\usebox\lstbox}!*/
+                          square(head(things))));
+   }
+   return iter(items, null);
+}
+
+\end{JavaScriptClickable}
+
+
+
+        This doesn't work either.  Explain.
+        
+
+      \hfill{\hyperref[ex:iter-square-list-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:iter-square-list}]
+
+  
+\begin{enumerate}[a.]
+\item{
+      The result list is reversed in the first program
+      because the argument list is traversed in the
+      given order, from first to last, but squares are added successively to the
+      front of the answer list via
+      
+      {\lstinline[mathescape=true]$pair$}.
+      The last element of the list is the last one to be added to the answer
+      and thus ends up as the first element of the result list.
+    }
+\item{
+      The second program makes things worse! The result is not even a list any longer,
+      because the elements occupy the tail position of the result list and not the
+      head position.
+    }
+\end{enumerate}
+
+  
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        The
+        function
+
+        
+        
+	{\lstinline[mathescape=true]$for_each$}
+	is similar to {\lstinline[mathescape=true]$map$}.  It takes as arguments a
+        
+	function
+        and a list of elements.  However, rather than forming a list of the  results,
+	
+	{\lstinline[mathescape=true]$for_each$}
+	just applies the
+	
+	function
+        to each of the elements in turn, from left to right.
+	The values returned by applying the
+        
+	function
+        to the elements are not used at
+        all—{\lstinline[mathescape=true]$for_each$} is used with
+        
+	functions
+        that perform an action, such as printing.  For example, 
+
+        
+
+	
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+for_each(x => display(x), 
+         list(57, 321, 88));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYewTg+gpghgxgCwBQA8AEBeAfGgJgSwGcAHAGxgE9UBKAGjQCg1mWXSiAXJAVgHZ6AzACYAjPQAc46tQDcQA}{\usebox\lstbox}
+
+
+
+        The value returned by the call to
+	
+	{\lstinline[mathescape=true]$for_each$}
+	
+	(not illustrated above)
+        can be something arbitrary, such as true.  Give an
+        implementation of
+	
+	{\lstinline[mathescape=true]$for_each$}.
+        
+ 
+      \hfill{\hyperref[ex:for-each-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:for-each}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function for_each(fun, items) {
+    if (is_null(items)){
+        return undefined;
+    } else {
+        fun(head(items));
+        for_each(fun, tail(items));
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMOAnA+gUwIYQBYAUoYANIjFJgLYDOAlIgN4BQib5wiBMN6YIAGwHdKtOnRbspiVJighUScABNMwGGEzKA3K3YBfRJgE1MTPdOTgCeHMpHV6dXZbYoMOfEXBko2GMIUjuIuBsz6QA}{\usebox\lstbox}!*/
+    }
+}
+
+\end{JavaScriptClickable}
+
+
+  
+\end{Answer}
+
+      
+      
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>In this book, we use <EM>list</EM> to mean a chain of
+          pairs terminated by the end-of-list marker.  In contrast, the term
+          
+          
+          <EM>list structure</EM> refers to any data structure made out of pairs, 
+          not just to lists.</FOOTNOTE></div>
+</SUBSECTION>

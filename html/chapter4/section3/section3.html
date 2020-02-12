@@ -1,0 +1,185 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>4.3  Nondeterministic Computing</a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SECTION>\begin{center}\fbox{\textcolor{red}{Note: this section is a work in progress!}}\end{center}
+
+    <SECTIONCONTENT></SECTIONCONTENT>
+
+    
+    
+
+    <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+      
+      In this section, we extend the JavaScript evaluator to support a
+      programming paradigm called <EM>nondeterministic computing</EM> by
+      building into the evaluator a facility to support automatic search.
+      This is a much more profound change to the language than the
+      introduction of lazy evaluation in section~\ref{sec:lazy-evaluation}.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+      
+      Nondeterministic computing, like stream processing, is useful for
+      <QUOTE>generate and test</QUOTE> applications.  Consider the task of starting with
+      two lists of positive integers and finding a pair of integers—one
+      from the first list and one from the second list—whose sum is prime.
+      We saw how to handle this with finite sequence operations in
+      section~\ref{sec:nested-mappings} and with infinite streams in
+      section~\ref{sec:exploiting-streams}.  Our approach was to generate
+      the sequence of all possible pairs and filter these to select the
+      pairs whose sum is prime.  Whether we actually generate the entire
+      sequence of pairs first as in chapter~2, or interleave the generating
+      and filtering as in chapter~3, is immaterial to the essential image of
+      how the computation is organized.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+      
+      The nondeterministic approach evokes a different image.  Imagine simply
+      that we choose (in some way) a number from the first list and a number
+      from the second list and require (using some mechanism) that their sum
+      be prime.  This is expressed by following
+      function:
+
+      
+\begin{JavaScript}
+function prime_sum_pair(list1, list2) {    
+    const a = an_element_of(list1);
+    const b = an_element_of(list2);
+    require(is_prime(a + b);
+    return list(a, b);
+}
+\end{JavaScript}
+
+    </p></div>
+
+    <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+      It might seem as if this
+      function
+      merely restates the problem,
+      rather than specifying a way to solve it.  Nevertheless, this is
+      a legitimate nondeterministic program.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+    </p></div>
+
+    <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+      The key idea here is that expressions in a nondeterministic language
+      can have more than one possible value.  For instance,
+      {\lstinline[mathescape=true]$an_element_of$}
+      might return any element of the given list.  Our
+      nondeterministic program evaluator will work by automatically choosing
+      a possible value and keeping track of the choice.  If a subsequent
+      requirement is not met, the evaluator will try a different choice, and
+      it will keep trying new choices until the evaluation succeeds, or
+      until we run out of choices.  Just as the lazy evaluator freed the
+      programmer from the details of how values are delayed and forced, the
+      nondeterministic program evaluator will free the programmer from the
+      details of how choices are made.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+      
+      It is instructive to contrast the different images of time evoked by
+      nondeterministic evaluation and stream processing.  Stream processing
+      uses lazy evaluation to decouple the time when the stream of possible
+      answers is assembled from the time when the actual stream elements are
+      produced.  The evaluator supports the illusion that all the possible
+      answers are laid out before us in a timeless sequence.  With
+      nondeterministic evaluation, an expression represents the exploration
+      of a set of possible worlds, each determined by a set of choices.
+      Some of the possible worlds lead to dead ends, while others have
+      useful values.  The nondeterministic program evaluator supports the
+      illusion that time branches, and that our programs have different
+      possible execution histories.  When we reach a dead end, we can
+      revisit a previous choice point and proceed along a different branch.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+      The nondeterministic program evaluator implemented below is called the
+      {\lstinline[mathescape=true]$amb$} evaluator because it is based on 
+      
+      a special <QUOTE>function</QUOTE>
+      called
+      {\lstinline[mathescape=true]$amb$}.  We can type the above definition of
+      
+      {\lstinline[mathescape=true]$prime_sum_pair$}
+      
+      at the {\lstinline[mathescape=true]$amb$} evaluator driver loop
+      (along with definitions of
+      {\lstinline[mathescape=true]$is_prime$},
+      {\lstinline[mathescape=true]$is_prime$},
+      {\lstinline[mathescape=true]$an_element_of$}, and
+      {\lstinline[mathescape=true]$require$}) and run the
+      function
+      as follows:
+
+      
+\begin{JavaScript}
+Amb-Eval input:
+prime_sum_pair(list(1, 3, 5, 8), list(20, 35, 110));
+Starting a new problem
+Amb-Eval value:
+[3, [20, null]]
+\end{JavaScript}
+
+    </p></div>
+
+    <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+      The value returned was obtained after the evaluator repeatedly chose
+      elements from each of the lists, until a successful choice was made.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+      Section~\ref{sec:amb} introduces {\lstinline[mathescape=true]$amb$} and explains how it
+      supports nondeterminism through the evaluator's automatic search
+      mechanism.  Section \ref{sec:amb-examples} presents examples of
+      nondeterministic programs, and section~\ref{sec:amb-implementation}
+      gives the details of how to implement the {\lstinline[mathescape=true]$amb$} evaluator by
+      modifying the ordinary Scheme evaluator.
+    </p></div>
+
+    
+    &subsection4.3.1;
+
+    
+    &subsection4.3.2;
+
+    
+    &subsection4.3.3;
+    
+    
+  <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>We assume that we have previously defined a
+  function
+  {\lstinline[mathescape=true]$is_prime$} that tests whether numbers are prime.  Even with
+  {\lstinline[mathescape=true]$is_prime$} defined,
+  the 
+  {\lstinline[mathescape=true]$prime_sum_pair$}
+  function
+  may look
+  suspiciously like the unhelpful <QUOTE>pseudo-JavaScript</QUOTE> attempt to define the
+  square-root function, which we described at the beginning of
+  section~\ref{sec:sqrt}.  In fact, a square-root
+  function
+  along those
+  lines can actually be formulated as a nondeterministic program.
+  By incorporating a search mechanism into the evaluator, we
+  are eroding the 
+  
+  
+  distinction between purely declarative descriptions
+  and imperative specifications of how to compute answers.  We'll go
+  even farther in this direction in
+  section~\ref{sec:logic-programming}.</FOOTNOTE></div>
+</SECTION>

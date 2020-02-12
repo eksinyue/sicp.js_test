@@ -1,0 +1,1118 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>3.1.1 
+        Local State Variables
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+      
+
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+        
+        
+        To illustrate what we mean by having a computational object with
+        time-varying state, let us model the situation of withdrawing money
+        from a bank account.  We will do this using a
+        function
+        {\lstinline[mathescape=true]$withdraw$}, which takes as argument an {\lstinline[mathescape=true]$amount$} 
+  to be withdrawn.
+        If there is enough money in the account to accommodate the withdrawal,
+        then {\lstinline[mathescape=true]$withdraw$} should return the balance remaining after the
+        withdrawal.  Otherwise, {\lstinline[mathescape=true]$withdraw$} should return the message <EM>
+        Insufficient funds.</EM> For example, if we begin with \$100 in the
+        account, we should obtain the following sequence of responses using
+        {\lstinline[mathescape=true]$withdraw$}:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+withdraw(25); // output: 75
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4SwLgFgJgTghsAFAJgKwEoDcACA9L7AewFcwAHUgLmwHZUg}{\usebox\lstbox}
+
+
+       
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+withdraw(25); // output: 50
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4SwLgFgJgTghsAFAJgKwEoDcACA9L7AewFcwAHUgLm1QAYg}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+withdraw(60); // output: "Insufficient funds"
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4SwLgFgJgTghsAFANgAwEoDcACA9L7AewFcwAHUgLmwCIBJAOwGdiAzVkAYxAFMGxsrYgyhMaQA}{\usebox\lstbox}
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+withdraw(15); // output: 35
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4SwLgFgJgTghsAFARgKwEoDcACA9L7AewFcwAHUgLmwGZUg}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+        Observe that the expression {\lstinline[mathescape=true]$withdraw(25)$}, evaluated twice,
+        yields different values.  This is a new kind of behavior for a
+        function.  Until now, all our
+        functions
+        could be viewed as
+        specifications for computing mathematical functions.  A call to a
+        function
+        computed the value of the function applied to the given
+        arguments, and two calls to the same
+        function
+        with the
+        same arguments always produced the same result.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+	<SPLIT>
+	  
+	    So far, all our names were <EM>constants</EM> as declared by the keyword
+	    {\lstinline[mathescape=true]$const$}. Once declared, they did not change their value,
+	    as appropriate for constants.
+	    To implement functions like  {\lstinline[mathescape=true]$withdraw$}, we introduce a new kind
+	    of declaration—<EM>variable declarations</EM> using the keyword {\lstinline[mathescape=true]$let$}
+	    instead of {\lstinline[mathescape=true]$const$}.
+            After declaring a variable {\lstinline[mathescape=true]$balance$},
+	    to indicate the balance of money in the account, we can define {\lstinline[mathescape=true]$withdraw$}
+            as a function that accesses {\lstinline[mathescape=true]$balance$}.
+	
+	
+	</SPLIT>
+	The {\lstinline[mathescape=true]$withdraw$}
+        function
+        checks to see if {\lstinline[mathescape=true]$balance$} is at least as large as the
+        requested {\lstinline[mathescape=true]$amount$}.  If so, {\lstinline[mathescape=true]$withdraw$} decrements {\lstinline[mathescape=true]$balance$} by {\lstinline[mathescape=true]$amount$} and returns the new value of {\lstinline[mathescape=true]$balance$}.
+        Otherwise, {\lstinline[mathescape=true]$withdraw$} returns the <EM>Insufficient funds</EM>
+        message.
+	Here are the declarations of
+	{\lstinline[mathescape=true]$balance$} and {\lstinline[mathescape=true]$withdraw$}:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+let balance = 100;
+
+function withdraw(amount) {
+   if (balance >= amount) {
+      balance = balance - amount;
+      return balance;
+   } else {
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYUwLgBARghsMDsDGIIF4IEYAM2DcAUAQGYCuyYAlgPYIQDulYAFgCYBOM9AFDALbVyYAJQQA3gQhTKxCN1jxkqAHwZ+ghCPGSpuhYhTpocA6gC0EdUMK7d7cKXZ19Sm1IC+EEMADOqCbZS9mCOdABEAJIIPqTExJRIlCCaEGQIrD5hbhDuBO5AA}{\usebox\lstbox}!*/
+      return "Insufficient funds";
+   }
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+        Decrementing {\lstinline[mathescape=true]$balance$} is accomplished by the 
+        statement
+
+        
+\begin{JavaScript}
+balance = balance - amount;
+\end{JavaScript}
+
+
+        
+        <SPLIT>
+          
+          
+            The syntax of such <EM>assignment statements</EM> is
+          
+        </SPLIT>
+        
+\begin{JavaScript}
+$\textit{name}$ = $\textit{new-value}$;
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+        Here $\textit{name}$ is a symbol and 
+$\textit{new-value}$ is any expression.  
+The assignment 
+changes $\textit{name}$ so that its value is the result obtained by
+evaluating $\textit{new-value}$.  In the case at hand, 
+we are changing {\lstinline[mathescape=true]$balance$} so that its new value will be the result of 
+subtracting {\lstinline[mathescape=true]$amount$} from the previous value 
+of {\lstinline[mathescape=true]$balance$}.<SPLIT>
+          
+            <a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+          
+        <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Note that assignment statements look similar to and should not be confused
+            with constant and variable declarations of the form
+            
+\begin{JavaScript}
+const $\textit{name}$ = $\textit{value}$;
+\end{JavaScript}
+
+	    and
+            
+\begin{JavaScript}
+let $\textit{name}$ = $\textit{value}$;
+\end{JavaScript}
+
+            in which a newly declared $\textit{name}$
+            is associated with a $\textit{value}$. Also similar in looks but not
+	    in meaning are expressions of the form 
+            
+\begin{JavaScript}
+$\textit{expression}_1$ === $\textit{expression}_2$
+\end{JavaScript}
+
+	    which evaluate to {\lstinline[mathescape=true]$true$}
+	    if $\textit{expression}_1$ evaluates to the same value as
+	    $\textit{expression}_2$ and to
+	    {\lstinline[mathescape=true]$false$}, otherwise.
+            </FOOTNOTE></div></SPLIT>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+        
+        <SPLIT>
+          
+          The function {\lstinline[mathescape=true]$withdraw$} 
+          also uses a <EM>sequential composition</EM>
+          to cause two expressions to be evaluated
+          in the case where the {\lstinline[mathescape=true]$if$} test is true: first decrementing 
+          {\lstinline[mathescape=true]$balance$} and then returning the value of 
+          {\lstinline[mathescape=true]$balance$}.  
+
+          In general, executing the statement
+
+        
+\begin{JavaScript}
+$\textit{stmt}_{1}$ $\textit{stmt}_{2}$
+\end{JavaScript}
+
+ 
+        causes the statements $\textit{stmt}_{1}$ and $\textit{stmt}_{2}$ to be evaluated in sequence.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+          
+        <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>We have already used 
+          
+          sequential composition implicitly in our
+          programs, because in JavaScript the body of a
+          function can be a sequence
+          of statements, not just a single
+	  {\lstinline[mathescape=true]$return$} statement,
+	  as discussed in
+	  section~\ref{sec:block-structure}.</FOOTNOTE></div></SPLIT>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+        Although {\lstinline[mathescape=true]$withdraw$} works as desired, the variable
+        {\lstinline[mathescape=true]$balance$} presents a problem.  As specified above, {\lstinline[mathescape=true]$balance$}
+        is a name defined in the program environment and is freely accessible
+        to be examined or modified by any
+        function.  It would be much better
+        if we could somehow make {\lstinline[mathescape=true]$balance$} internal to {\lstinline[mathescape=true]$withdraw$}, so
+        that {\lstinline[mathescape=true]$withdraw$} would be the only
+        function
+        that could access {\lstinline[mathescape=true]$balance$} directly and any other
+        function
+        could access {\lstinline[mathescape=true]$balance$}
+        only indirectly (through calls to {\lstinline[mathescape=true]$withdraw$}).  This would more
+        accurately model the notion that {\lstinline[mathescape=true]$balance$} is a local state
+        variable used by {\lstinline[mathescape=true]$withdraw$} to keep track of the state of the
+        account.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+        We can make {\lstinline[mathescape=true]$balance$} internal to {\lstinline[mathescape=true]$withdraw$} by rewriting the definition as follows:
+
+        
+	
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_withdraw() {
+    let balance = 100;
+    return amount => {
+        if (balance >= amount) {
+            balance = balance - amount;
+            return balance;
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9A7jKACwBMAnVXACgEpEBvAKEWcQBtMpEAjVV1STIgC8iAIwAGcQG4mLUhxCkkqZHHCchAPnqyWLGMESUefAYk0iVasFFqM9Dlif4RBI52YC0iK+pmPHeShFJA9XfwCAX0RMVgBnQXsAvSCQxAAiGDA4kGBgGAgYTBtEUDBiOPSIx0jdREiZWogEOM4wTFw8AhJyXGEUDBx8IjIKGikgA}{\usebox\lstbox}!*/
+        } else {
+            return "insufficient funds";
+        }
+    };
+}
+const new_withdraw = make_withdraw();
+
+\end{JavaScriptClickable}
+
+
+        </p></div>
+
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+        <SPLIT>
+          
+          
+            What we have done here is use {\lstinline[mathescape=true]$let$}
+	    to establish an environment
+            with a local variable {\lstinline[mathescape=true]$balance$}, bound to the initial
+	    value 100.
+            Within this local environment, we use function definition<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>{\lstinline[mathescape=true]$amount$} as an argument and behaves
+	    like our previous {\lstinline[mathescape=true]$withdraw$}
+            function.  This
+	    function—returned as the
+            result of evaluating the body of the {\lstinline[mathescape=true]$make_withdraw$}
+	    function—behaves in precisely
+	    the same way as
+	    {\lstinline[mathescape=true]$withdraw$} but whose
+            variable {\lstinline[mathescape=true]$balance$} is not accessible by any other
+	    function.<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
+           to create a
+	    function that takes {\lstinline[mathescape=true]$amount$} as an argument and behaves
+	    like our previous {\lstinline[mathescape=true]$withdraw$}
+            function.  This
+	    function—returned as the
+            result of evaluating the body of the {\lstinline[mathescape=true]$make_withdraw$}
+	    function—behaves in precisely
+	    the same way as
+	    {\lstinline[mathescape=true]$withdraw$} but whose
+            variable {\lstinline[mathescape=true]$balance$} is not accessible by any other
+	    function.<a class='superscript' id='footnote-6' href='#footnote-6'>[6]</a>
+          
+        <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>Blocks as bodies
+	    of function definition expressions were introduced in
+	    section~\ref{sec:graphics}.
+	    </FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>In programming-language jargon, the variable
+	    {\lstinline[mathescape=true]$balance$} is said to be 
+            
+            
+            <EM>encapsulated</EM> within the {\lstinline[mathescape=true]$new_withdraw$}
+	    function.  Encapsulation reflects the general system-design principle known as the 
+            
+            
+            <EM>hiding principle</EM>: One can
+            make a system more modular and robust by protecting parts of the
+            system from each other; that is, by providing information access only
+            to those parts of the system that have a <QUOTE>need to know.</QUOTE></FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>In programming-language jargon, the variable
+	    {\lstinline[mathescape=true]$balance$} is said to be 
+            
+            
+            <EM>encapsulated</EM> within the {\lstinline[mathescape=true]$new_withdraw$}
+	    function.  Encapsulation reflects the general system-design principle known as the 
+            
+            
+            <EM>hiding principle</EM>: One can
+            make a system more modular and robust by protecting parts of the
+            system from each other; that is, by providing information access only
+            to those parts of the system that have a <QUOTE>need to know.</QUOTE></FOOTNOTE></div></SPLIT>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+        Combining 
+        
+          
+          
+            assignment statements with variable statements
+          
+        
+        is the general programming
+        technique we will use for constructing computational objects with
+        local state.  Unfortunately, using this technique raises a serious
+        problem: When we first introduced
+        functions, 
+        we also introduced the substitution model of evaluation
+        (section~\ref{sec:substitution-model}) to provide an interpretation of
+        what
+        function
+        application means.  We said that applying a
+        function
+        should be interpreted as evaluating the body of the
+        function
+        with the
+        formal parameters replaced by their values.  The trouble is that, as
+        soon as we introduce assignment into our language, substitution is no
+        longer an adequate model of
+        function
+        application.  (We will see why
+        this is so in section~\ref{sec:costs-of-assignment}.)  As a
+        consequence, we technically have at this point no way to understand
+        why the {\lstinline[mathescape=true]$new_withdraw$}
+        function
+        behaves as claimed above.  In
+        order to really understand a
+        function
+        such as {\lstinline[mathescape=true]$new_withdraw$}, we
+        will need to develop a new model of
+        function
+        application.  In
+        section~\ref{sec:environment-model} we will introduce such a model,
+        together with an explanation of 
+        assignment statements and variable statements.
+        First, however, we examine some variations on the theme established by
+        {\lstinline[mathescape=true]$make_withdraw$}.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p11' class='permalink'></a><p>
+	<SPLIT>
+	  
+	  
+        The following
+	function, {\lstinline[mathescape=true]$make_withdraw_with_balance$},
+	abstracts the initial balance into a parameter.
+	  
+	</SPLIT>
+	The formal parameter {\lstinline[mathescape=true]$balance$} in
+	
+	  
+	  {\lstinline[mathescape=true]$make_withdraw_with_balance$}
+	  
+	
+	specifies the initial amount of money in the
+        account.<a class='superscript' id='footnote-7' href='#footnote-7'>[7]</a>
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_withdraw_with_balance(balance) {
+    return amount => {
+        if (balance >= amount) {
+            balance = balance - amount;
+            return balance;
+        } else {
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9A7jKACwBMAnVXPAw7AI1QBtVJMAKeplgSkQG8AoREMSlMUEKSSpkccFEQBeAHx9Bw9TGCJ2jZhEyIlCxNNlgoPAeuvCOeg8bstEAWhMy5AbjU31o8ZKITvrevogAvoiYDADOBlZhwv4SSABEMGAxIMDAMBAwmOaIoGDEMamhvuE+Ed7hQA}{\usebox\lstbox}!*/
+            return "insufficient funds";
+        }
+    };
+}
+
+\end{JavaScriptClickable}
+
+
+      
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_withdraw_with_balance(balance) {
+    return amount => {
+        if (balance >= amount) {
+            balance = balance - amount;
+            return balance;
+        } else {
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9A7jKACwBMAnVXPAw7AI1QBtVJMAKeplgSkQG8AoREMSlMUEKSSpkccFEQBeAHx9Bw9TGCJ2jZhEyIlCxNNlgoPAeuvCOeg8bstEAWhMy5AbjU31o8ZKITvrevogAvoiYDADOBlZhwv4SSABEMGAxIMDAMBAwmOaIoGDEMamhvuE+Ed7hQA}{\usebox\lstbox}!*/
+            return "insufficient funds";
+        }
+    };
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p12' class='permalink'></a><p>
+        The function {\lstinline[mathescape=true]$make_withdraw_with_balance$} can be used as follows to create two objects
+        {\lstinline[mathescape=true]$w1$}
+and 
+{\lstinline[mathescape=true]$w2$}:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const w1 = make_withdraw_with_balance(100);
+const w2 = make_withdraw_with_balance(100);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBA7gRhgXhgWwIYGsCmB9OASygAsATAJwzgOJLwCMMAbDMYHACgQAYeBKANwAoUJFhwATCnTZ8RUpWq1SjFmw7c+QoA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+w1(50); // output: 50
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4RgFArADAlA3AAgPRIQewK4BcAO2BcC0QA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+w2(70); // output: 30
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4JgFA7ADAlA3AAgPRIQewK4BcAO2BcCAzFEA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+w2(40); // output: "Insufficient funds"
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4JgFALADAlA3AAgPRIQewK4BcAO2BcCARAJIB2AzhgGbUCWAxnQKZlYLUZkAmFRQA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+w1(40); // output: 10
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4RgFALADAlA3AAgPRIQewK4BcAO2BcCIUQA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p13' class='permalink'></a><p>
+        Observe that 
+{\lstinline[mathescape=true]$w1$}
+and 
+{\lstinline[mathescape=true]$w2$} 
+are completely independent objects,
+        each with its own local state variable {\lstinline[mathescape=true]$balance$}.  Withdrawals
+        from one do not affect the other.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p14' class='permalink'></a><p>
+        We can also create objects that handle deposits as well as
+        withdrawals, and thus we can represent simple bank accounts.  Here is
+        a
+        function
+        that returns a <QUOTE>bank-account object</QUOTE> with
+        a specified initial balance:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_account(balance) {
+    function withdraw(amount) {
+        if (balance >= amount) {
+            balance = balance - amount;
+            return balance;
+        } else {
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9VEJzhQAUARqgDaqSYCUiA3gFCKuKiSwKIDuMUACwAmAJ1Q9iqZITBR6zNosQxgiMpWoRMiAHwBeRFJlzGLJefJUaiA5c3aAtIelEA3GfOKRmKCBFI7GndPRABfREwKAGdtBRC2b19-RAAiAEkwKJBgYBgIGExZdnAhKJTgz1CPMOqOaHgkIUwABzgo-kkXWXlqxUCtG0R+7QBqZ2MK80S-AI0g6qrFOq5GmCjm1CgIAWJkHpCVNWQbPQMUvkFRcRT9+NZp5IvhMR5JpXDImOVVXZOzpta7SgN1Md3uPhmiABbX4b0UH2isV6ngeSBSAFUwOgwHAeEhvABHECYKJQRBOJwAWQAggBpACiDmpAGFmQB5dEAOQAKuVkaxFmxBeCkqt1pttu5QkA}{\usebox\lstbox}!*/
+            return "Insufficient funds";
+        }
+    }
+    function deposit(amount) {
+        balance = balance + amount;
+        return balance;
+    }
+    function dispatch(m) {
+        if (m === "withdraw") {
+            return withdraw;
+        } else if (m === "deposit") {
+            return deposit;
+        } else {
+            return "Unknown request - - MAKE-ACCOUNT";
+        }
+    }
+    return dispatch;
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p15' class='permalink'></a><p>
+        Each call to {\lstinline[mathescape=true]$make_account$} sets up an environment with a local
+        state variable {\lstinline[mathescape=true]$balance$}.
+	Within this environment, {\lstinline[mathescape=true]$make_account$} defines
+        functions
+        {\lstinline[mathescape=true]$deposit$} and {\lstinline[mathescape=true]$withdraw$}
+        that access {\lstinline[mathescape=true]$balance$} and an additional
+        function
+        {\lstinline[mathescape=true]$dispatch$}
+        that takes a <QUOTE>message</QUOTE> as input and returns one of the two local
+        functions.
+	The {\lstinline[mathescape=true]$dispatch$}
+        function
+        itself is returned as the
+        value that represents the bank-account object.
+        This is precisely the 
+        
+        <EM>message-passing</EM>
+        style of programming that we saw in section~\ref{sec:data-directed}, although
+        here we are using it in conjunction with the ability to modify local
+        variables.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p16' class='permalink'></a><p>
+        {\lstinline[mathescape=true]$make_account$} can be used as follows:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const acc = make_account(100);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAhsYMC8MC2cDWBTA+g0AVzCgAoBGABkoEoBuIA}{\usebox\lstbox}
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+(acc("withdraw"))(50);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQQwxmwEQO4JYBcAWATATiGUCU3gFYAGbAbiA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+(acc("withdraw"))(60);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQQwxmwEQO4JYBcAWATATiGUCU3gDYAGbAbiA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+(acc("deposit"))(40);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQQwxmwEQCYKYAcD2BnAlgFygSm8ALAAzYDcQA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+(acc("withdraw"))(60);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQQwxmwEQO4JYBcAWATATiGUCU3gDYAGbAbiA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p17' class='permalink'></a><p>
+        Each call to {\lstinline[mathescape=true]$acc$} returns the locally defined {\lstinline[mathescape=true]$deposit$} or
+        {\lstinline[mathescape=true]$withdraw$}
+        function, which is then applied to the specified {\lstinline[mathescape=true]$amount$}.  As was the case with {\lstinline[mathescape=true]$make_withdraw$}, another call to {\lstinline[mathescape=true]$make_account$}
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const acc2 = make_account(100);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAhsYAmGBeGBbOBrApgfQVAFcwoAKARgAZqBKAbiA}{\usebox\lstbox}
+
+
+
+        will produce a completely separate account object, which maintains its
+        own local {\lstinline[mathescape=true]$balance$}.
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        An 
+        
+        <EM>accumulator</EM> is a
+        function
+        that is called repeatedly with a
+        single numeric argument and accumulates its arguments into a sum.
+        Each time it is called, it returns the currently accumulated sum.
+        Write a
+        function
+
+        
+{\lstinline[mathescape=true]$make_accumulator$}
+that generates accumulators,
+        each maintaining an independent sum.  The input to 
+{\lstinline[mathescape=true]$make_accumulator$}
+should specify the initial value of the sum; for
+        example
+
+
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+// make_accumulator to be written by students
+const a = make_accumulator(5);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAEFsEMGsFMH1IGMkFdyoDaQC4HsAnUfUAI1lAHcCBLHHWAOzIE9QBnHVAEyZ3YBQSPI06hIoALwQYCZGgzZ8BABQBWAJQBuIA}{\usebox\lstbox}
+
+
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+a(10);  // output: 15
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYCgjADAlA3ABHA9IuB7ArgFwA5YFxxgCsQA}{\usebox\lstbox}
+
+
+        
+  
+        
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+a(10);  // output: 25
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYCgjADAlA3ABHA9IuB7ArgFwA5YFxwBMArEA}{\usebox\lstbox}
+
+
+
+  
+
+  
+      \hfill{\hyperref[ex:make-accumulator-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:make-accumulator}]
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_accumulator(current) {
+    function add(arg) {
+        current = current + arg;
+        return current;
+    }
+    return add;
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9VEIjIgA2qUcATgBQEUWZhQCUiA3gFCJeKiSwKJUAEyFVUFAOYsO3WYlr1GiALzyQdBlEQBqQZIDcnOV3pR1SBZsOyAvkZOYzFJMKGGbQA}{\usebox\lstbox}!*/
+}
+
+\end{JavaScriptClickable}
+
+
+  
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        In software-testing applications, it is useful to be able to count the
+        number of times a given
+        function
+        is called during the course of a
+        computation.  Write a
+        function
+        
+        
+        
+{\lstinline[mathescape=true]$make_monitored$}
+that takes as
+        input a
+        function, {\lstinline[mathescape=true]$f$}, that itself takes one input.  The result
+        returned by 
+{\lstinline[mathescape=true]$make_monitored$}
+is a third
+        function, say {\lstinline[mathescape=true]$mf$},
+        that keeps track of the number of times it has been called by
+        maintaining an internal counter. If the input to {\lstinline[mathescape=true]$mf$} is the
+string {\lstinline[mathescape=true]$"how many calls?"$}, 
+then {\lstinline[mathescape=true]$mf$} returns the
+        value of the counter.  If the input is the 
+string {\lstinline[mathescape=true]$"reset count"$}, then {\lstinline[mathescape=true]$mf$} resets the counter to zero.  For any other
+        input, {\lstinline[mathescape=true]$mf$} returns the result of calling {\lstinline[mathescape=true]$f$} on that input
+        and increments the counter.  For instance, we could make a monitored
+        version of the {\lstinline[mathescape=true]$sqrt$}
+        function:
+
+
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+// make_monitored function to be written by students
+const s = make_monitored(math_sqrt);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAEFsEMGsFMH1wHsB2BLALkgTrAJqAGYCuKAxhmqqFqAEaygDu2mGsK9AnqAM4bE8HDLwBQZVPz6gAvBBgJk6LLjwAKKBgAW8XgEdsGAJQBuIA}{\usebox\lstbox}
+
+
+
+
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+s(100);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4CgjADBCUDcQ}{\usebox\lstbox}
+
+
+
+
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+s("how many calls?"); // returns 1
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4CgRAFg9g7gBAWwIYDsCecDGSA2PgD8YAlANxwD0FcATgKYAuArjSsHAIxA}{\usebox\lstbox}
+
+
+
+
+	      
+      \hfill{\hyperref[ex:make-monitored-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:make-monitored}]
+
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const s = make_monitored(math_sqrt);
+s(100);
+display(s("how many calls"));
+s(5);
+display(s("how many calls"));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBBMF4YFsCGBrApgfWeAllCAE6YAmAFGlABbYQCOxUAlANwBQEFAjAAx92HMvggAHADaoAnhW4AiGiADuKVGGkxgqCRIjyWQ7gFYhI8VNkKlqtBq069B9kA}{\usebox\lstbox}
+
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_monitored(f) {
+    let counter = 0; //initialized to 0
+    function mf(cmd) {
+        if (cmd === "how many calls") {
+            return counter;
+        } else if (cmd === "reset count") {
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ZCZRwBOmAJgBTACUiA3gFCJOIA2mUiEc4UmRiAXkQAGANyIA9BJhgCMVCxgAvMokIjGzUJFgIUwchGSkaDZucQxgiQ8cEChAIgAWcAO4pUYAJ6cFLAGdHU00LCxIoECIkLh4+UVCLAF9ETEDMS2tbUnsnEgD2Tm4wKGC6RLCmWJK+QREEyvD2KJji3iIGypS0gvLG82r2usHagGpEAEZO-sQIlsQDIxNp5MSkxLno-QSkoA}{\usebox\lstbox}!*/
+            counter = 0;
+            return counter;
+        } else {
+            counter = counter + 1;
+            return f(cmd);
+        }
+    }
+    return mf;
+}
+
+\end{JavaScriptClickable}
+
+
+  
+\end{Answer}
+
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        
+        
+        Modify the 
+{\lstinline[mathescape=true]$make_account$}
+        function
+        so that it creates
+        password-protected accounts.  That is, 
+{\lstinline[mathescape=true]$make_account$}
+should take
+        a symbol as an additional argument, as in
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+// make_account function to be written by students
+const acc = make_account(100, "secret password");
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAEFsEMGsFMH1IGMkHsCuA7ALqAZlktgJaqajaqgBGsoA7gE7HbaznUCeoAztugBN22HgCg0mPqGRJQAXggwEMjDgAUARgAMWgDSgARD1hJGsXAAdIPHvVSMBBgJQBuIA}{\usebox\lstbox}
+
+
+
+        The resulting account object should process a request only if it is
+        accompanied by the password with which the account was created, and
+        should otherwise return a complaint:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+(acc("secret password", "withdraw"))(40); // result: 60
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQQwxmwEQM4KZgE5wC4AIAOIYwO4HtEATKAGjSlwEsUALIxEXKASheABYAGFgbjQD0AtMhgBXADYoAXGgBsXIA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+(acc("some other password", "deposit"))(40);  
+// result: incorrect password
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQQwxmwEQM4PYFsCmACOAXAFkgTigDiDDAO5w4AmUANClBUvnDAJbpQCUHwALAAwcA3ChQAoAPTiUOJDACuAG3QAuFCwB2YcjLDoCRUuQpA}{\usebox\lstbox}
+
+
+
+
+	
+
+      \hfill{\hyperref[ex:password-protection-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:password-protection}]
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_account(balance, p) {
+    function withdraw(amount) {
+        if (balance >= amount) {
+            balance = balance - amount;
+            return balance;
+        } else {
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9VEJzhQAUARqgDaqSYA0iADgJSIDeAUIl4qJLAogDuMKAAsAJgCdUg4qmSEwUFh25rEMYIjKVqETIgB8AXkTzFytp3U3yVGolN29BgLRmFRANzWbayZhQIJJIzjQ+fogAvoiYFADOBqqR3AFBIYgARACSYPEgwMAwEDCYSjzg4vGZEX5RvtENvNDwSOKYDHDxInKeSioNamH6jojDBgDUHha1NmnBobrhDfVqzfxtMPEMqFAQosTI9ACOA5Ga2gyOxqanVincF4fXppnCYlIymWcP6vMZ7wk0kEsxSMTiiQ0WmeN1e7U63Sg33uv38gQWiHhXREoMi4ISSUGv3+SEyAFUwOgwHBBEgAscQJh4lBEO40FhcPgLDUiTZVtwAJD4yHJB4kxDHRyGLK5AiSALQRAABVQ8XigjgknEPLxKwa4vEWx2e1EPnq7AIeRZqFG7JweAIRGIAEYAAyu+iZTAAN1Q3x8cmIbxEQK+np9fqYTGIAFZXUwvIgAPRJwGfQTxRBx9iB4MfYGZT2kMrfaMAFnjiZTMEgmoVLJ2ao1WqAA}{\usebox\lstbox}!*/
+            return "Insufficient funds";
+        }
+    }
+    function deposit(amount) {
+        balance = balance + amount;
+        return balance;
+    }
+    function dispatch(m, q) {
+        if (p === q) {
+            if (m === "withdraw") {
+                return withdraw;
+            } else if (m === "deposit") {
+                return deposit;
+            } else {
+                return "Unknown request - make_account";
+            }
+    	} else {
+            return q => "Incorrect Password";
+        }
+    }
+    return dispatch;
+}
+
+const a = make_account(100, "eva");
+(a("withdraw", "eva"))(50); //withdraws 50
+(a("withdraw", "ben"))(40); //incorrect password
+
+\end{JavaScriptClickable}
+
+
+  
+\end{Answer}
+
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled42}
+
+        Modify the 
+{\lstinline[mathescape=true]$make_account$}
+        function
+        of
+        exercise~\ref{ex:password-protection} by adding another local state
+        variable so that, if an account is accessed more than seven
+        consecutive times with an incorrect password, it invokes the
+        function
+{\lstinline[mathescape=true]$call_the_cops$}. 
+     	
+  
+	      
+	\hfill{\hyperref[ex:unlabeled42-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled42}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_account(balance, p) {
+
+    let invalid_attempts = 0; //initializes to 0
+
+    function withdraw(amount) {
+        if (balance >= amount) {
+            balance = balance - amount;
+            return balance;
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9VEJzhQAUARqgDaqSYA0iADgJSIDeAUO4t4hZlIhhgAbpRgATXFCiZkDKAGdEAXkQAGANyIA9NqExYYgF6YlUOOs49EoSLASIA7gYAW4gE6pHxVMkJgoFg5raxhgRDJKaghMRAA+VV9-QLYuEPTyKhoVREzo2IBaRCSiDTT063d+EHckPJoyisQAX0RMCgVY4KaeKqgapAAiAEkwBRBgYBgIGEwAm3BxBUHGiubylqseW2h4JHFMBjgFAx8-IiCN63qYnJvYgGpi84DV9L6B3KiGjfWNnfsSAglAo2CgLhwBAYCmIlyaH1qiEGwIoFCEAHNEODYlClKglABPQiIFyoYSxTAADximAO4iRiAeVx6SOxKFQlMQYAscHCwFQMD49NQ0lk8mWb02-3Auwc4hgCgYIogLmIyHoAEc4RUwhEhKI0ZIRTI5IpEAAeVQAdm1LN1xAYKmUqi1qRZ6XtyCdqkGznBHi8g1t7ve1URfrcnkckpDrXanUE4TV3qRByOJygQbdIYqCP2h2OBhj7rjHS6zJziDzSIAqmB0NzHEgqhqQKYBEU0FhcPhkisKz11rG2mXs5X9WIjaLTUpVBPDVITeLGYgAIySgCQ8LDQ1GBHcVWgiAACviFI44O5xP3YwPSwnuizqyjQdjsLjYcXuEOeH9KjvEHlRVlRcMp2GaIA}{\usebox\lstbox}!*/
+        } else {
+            return "Insufficient funds";
+        }
+    }
+
+    function deposit(amount) {
+        balance = balance + amount;
+        return balance;
+    }
+
+    function call_the_cops() {
+        return "calling the cops as you have exceeded " +
+               "the max no of failed attempts";
+    }
+
+    function dispatch(m, q) {
+        if (invalid_attempts <= 7) {
+            if (p === q) {
+                if (m === "withdraw") {
+                    return withdraw;
+                } else if (m === "deposit") {
+                    return deposit;
+                } else {
+                    return "Unknown request - make_account";
+                }
+            } else {
+                invalid_attempts = invalid_attempts + 1;
+    	        return "Incorrect Password";
+            }
+        } else {
+            return call_the_cops();
+        }
+    }
+
+    return dispatch;
+
+}
+
+\end{JavaScriptClickable}
+
+
+
+    
+    
+  
+\end{Answer}
+
+      
+      
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-7' href='#footnote-link-7'>[7] </a><FOOTNOTE>Actually,
+          this is not quite true.  One exception was the 
+          
+          
+          random-number generator
+          in section~\ref{sec:primality}.  Another exception involved the
+          
+          operation/type tables we introduced in section~\ref{sec:data-directed},
+          where the values of two calls to {\lstinline[mathescape=true]$get$} with the same arguments
+          depended on intervening calls to {\lstinline[mathescape=true]$put$}.
+          On the other hand, until we introduce
+          assignment, we have no way to create such
+          functions
+          ourselves.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-7' href='#footnote-link-7'>[7] </a><FOOTNOTE>In contrast
+	with 
+	{\lstinline[mathescape=true]$make_withdraw$}
+	above, we do not
+        have to use
+	
+	{\lstinline[mathescape=true]$let$}
+	to make {\lstinline[mathescape=true]$balance$} a local variable, since
+        formal parameters are already local.  This will be clearer after the
+        discussion of the environment model of evaluation
+	in section~\ref{sec:environment-model}.
+        (See also exercise~\ref{ex:local-state-variable}.)</FOOTNOTE></div>
+</SUBSECTION>

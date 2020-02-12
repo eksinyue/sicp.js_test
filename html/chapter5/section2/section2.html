@@ -1,0 +1,231 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>5.2 A Register-Machine Simulator</a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SECTION>
+
+    <SECTIONCONTENT></SECTIONCONTENT>
+
+    
+    
+    
+
+    <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+      In order to gain a good understanding of the design of register
+      machines, we must test the machines we design to see if they perform
+      as expected.  One way to test a design is to hand-simulate the
+      operation of the controller, as in exercise~\ref{ex:hand-sim}.  But this is
+      extremely tedious for all but the simplest machines.  In this section
+      we construct a simulator for machines described in the
+      register-machine language.  The simulator is a Source program with
+      four interface
+      functions.  The first uses a description of a register
+      machine to construct a model of the machine (a data structure whose
+      parts correspond to the parts of the machine to be simulated), and the
+      other three allow us to simulate the machine by manipulating the
+      model:
+
+      <UL>
+  <LI>
+    
+    
+      
+      
+	{\lstinline[mathescape=true]$make_machine($}
+        $\textit{register-names}\texttt{,}$
+        $\textit{operations}\texttt{,}$
+        $\textit{controller}$
+	{\lstinline[mathescape=true]$);$}
+      
+    
+    
+\noindent 
+    
+    constructs and returns a model of the machine with the given
+    registers, operations, and controller.
+  </LI>
+  <LI>
+    
+    
+      
+      
+	{\lstinline[mathescape=true]$set_register_contents($}
+        $\textit{machine-model}\texttt{,}$
+	$\textit{register-name}\texttt{,}$
+        $\textit{value}$
+	{\lstinline[mathescape=true]$);$}
+      
+    
+    
+\noindent 
+    
+    stores a value in a simulated register in the given machine.
+  </LI>
+  <LI>
+    
+    
+      
+      
+	{\lstinline[mathescape=true]$get_register_contents($}
+        $\textit{machine-model}\texttt{,}$
+        $\textit{register-name}$
+	{\lstinline[mathescape=true]$);$}
+      
+    
+    
+\noindent 
+    
+    returns the contents of a simulated register in the given machine.
+  </LI>
+  <LI>
+    
+    
+      
+      
+	{\lstinline[mathescape=true]$start($}
+	$\textit{machine-model}$
+	{\lstinline[mathescape=true]$);$}
+      
+    
+    
+\noindent 
+    
+    simulates the execution of the given
+    machine, starting from the beginning of the controller sequence and
+    stopping when it reaches the end of the sequence.
+  </LI>
+      </UL>
+    </p></div>
+
+    <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+      As an example of how these
+      functions
+      are used, we can define
+      {\lstinline[mathescape=true]$gcd_machine()$} to be a model of the GCD machine
+      of section~\ref{sec:register-machine-language} as follows:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function gcd_machine() {
+    return make_machine(list("a", "b", "t"),
+                        list(list("rem", binary_function((a, b) => a % b)),
+                             list("=", binary_function((a, b) => a === b))),
+                        list("test-b",
+                             test(op("="), reg("b"), constant(0)),
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAcwgEwPoFsCGEAWMYApgBQCUiA3gFCL2IBOxUIjSuA1sdnoSaQA2MAM5RSAIhwSANIgkAjWfKgTyMugy3ad24WKGjxE5lmUKiORgE8MoSLASlSOOQsoBeAHyIciAKSI7uqaumHhDPrGHuaWNnbg0PBgzq5Bnj5+Htnp5CERBZFGklDEYgC0ShqFNVqlBnAADpIx6kzEyJJKbRAIYjhg4gAMedW1tQqMAwRCOArEgpKoaOVoCMRq+eM1OCIiMMgpEqpyUaRNkqZqcsydUtftd92jodsRu-uHktKnxbddmy2b3eewORyqiDO-2OgLGwPCyDgGCgcFm80WxzKUEqmzh8N0EmWq3WmwA3DQAL5AA}{\usebox\lstbox}!*/
+                             branch(label("gcd-done")),
+                             assign("t", list(op("rem"), reg("a"), reg("b"))),
+                             assign("a", list(reg("b"))),
+                             assign("b", list(reg("t"))),
+                             go_to(label("test-b")),
+                             "gcd-done"));
+}
+
+\end{JavaScriptClickable}
+
+
+      The first argument to {\lstinline[mathescape=true]$make_machine$} is a list of register names.
+      The next argument is a table (a list of two-element lists) that pairs
+      each operation name with a Scheme
+      function
+      that implements the operation
+      (that is, produces the same output value given the same input values).
+      The last argument specifies the controller as a list of labels and
+      machine instructions, as in section~\ref{sec:designing-register-machines}.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+      To compute GCDs with this machine, we set the
+      input registers, start the machine, and examine the result when the
+      simulation terminates:
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+set_register_contents(gcd_machine, "a", 206); 
+"done"
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4UwLg+gTiDmCWwwihAxgewHbJ8AFLGgCYQC2AhmgBbxYgA0ABAEQUvMBMADAGwCUAbiYAoFsWwgWQA}{\usebox\lstbox}
+
+
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+set_register_contents(gcd_machine, "b", 40);
+"done"
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4UwLg+gTiDmCWwwihAxgewHbJ8AFLGgCYQC2AhmgBbxYgA0ABAEQBGLzALAAwCUAbgBQLYthAsgA}{\usebox\lstbox}
+
+
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+start(gcd_machine);
+"done"
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4FwhgTiAUDmDGATA+gWzPAFgSwHYFMBKAbgCgAiRAewPKA}{\usebox\lstbox}
+
+
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+get_register_contents(gcd_machine, "a");
+2
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=OYUwLg+gTiwJYGcwihAxgewHbJwgFMGgCYQC2AhmgBZxYgA0ABAEQUsCUA3AFABMQA}{\usebox\lstbox}
+
+
+    </p></div>
+
+    <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+      This computation will run much more slowly than a gcd
+      function
+      written in Scheme, because we will simulate low-level machine
+      instructions, such as assign, by much more complex operations.
+    </p></div>
+
+    
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+      Use the simulator to test the machines you designed in
+      exercise~\ref{ex:design-reg-machines}.
+      
+    
+\end{Exercise}
+
+
+    
+    &subsection5.2.1;
+
+    
+    &subsection5.2.2;
+
+    
+    &subsection5.2.3;
+
+    
+    &subsection5.2.4;
+
+  
+</SECTION>

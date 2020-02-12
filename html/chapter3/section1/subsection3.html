@@ -1,0 +1,822 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>3.1.3 
+        The Costs of Introducing Assignment
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+        As we have seen, the 
+
+assignment statement
+enables us to model objects
+        that have local state.  However, this advantage comes at a price.  Our
+        programming language can no longer be interpreted in terms of the
+        substitution model of
+        function
+        application that we introduced in
+        section~\ref{sec:substitution-model}.  Moreover, no simple model with
+        <QUOTE>nice</QUOTE> mathematical properties can be an adequate framework for
+        dealing with objects and assignment in programming languages.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+        So long as we do not use assignments, two evaluations of the same
+        function
+        with the same arguments will produce the same result, so
+        that
+        functions
+        can be viewed as computing mathematical functions.
+        Programming without any use of assignments, as we did throughout the
+        first two chapters of this book, is accordingly known as 
+        
+        <EM>
+          functional programming</EM>.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+        
+        To understand how assignment complicates matters, consider a
+        simplified version of the {\lstinline[mathescape=true]$make_withdraw$}
+        function
+        of
+        section~\ref{sec:local-state-variables} that does not bother to check
+        for an insufficient amount:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_simplified_withdraw(balance) {
+    return amount => {
+               balance = balance - amount;
+               return balance;
+           };
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AzjZABwBsZgZMATbAdxigAtKAnVGgCgCNVjVJMAlIgDeAKEQTEzTFBDMkqZHHBREAXgB8I8ZN16J3Xv3WJDfCJkQBaRIuVgoAbh37X02fNM9zmZ690Avs4BQA}{\usebox\lstbox}
+
+
+
+
+
+  
+
+        
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+        Compare this
+        function
+        with the following {\lstinline[mathescape=true]$make_decrementer$}
+        function, which does not use assignment:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_decrementer(balance) {
+    return amount => balance - amount;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AJpiAJ02UzCk0IAoAjVAG1UkwEpEBvAKER8WKhCEkqZHHBREAXgB8iOo2aIAtIhFjyAbk4BfIA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+        
+	
+	  The function
+	  {\lstinline[mathescape=true]$make_decrementer$}
+	
+	returns a
+        function
+        that subtracts its input
+        from a designated amount {\lstinline[mathescape=true]$balance$},
+	but there is no accumulated effect
+        over successive calls,
+	as with {\lstinline[mathescape=true]$make_simplified_withdraw$}:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const d = make_decrementer(25);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAJjAvDAtgQwNYFMD6cvABOWKWYUWhAFAEwCsAlANxA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+d(20); // output: 5
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYCgTADAlA3ABAegXA9gVwC4AdMC44CsQA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+d(10); // output: 15
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYCgjADAlA3ABAegXA9gVwC4AdMC45gCsQA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+        We can use the substitution model to explain how {\lstinline[mathescape=true]$make_decrementer$} works.  For instance, let us analyze the evaluation
+        of the expression
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+(make_decrementer(25))(20);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQWwhg1gpg+gJlAxgJyiKA7ALlZwBMArAJTEEAMxA3EA}{\usebox\lstbox}
+
+
+
+        We first simplify the operator of the combination by substituting $25$
+        for {\lstinline[mathescape=true]$balance$} in the body of {\lstinline[mathescape=true]$make-decrementer$}.  This reduces
+        the expression to
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+(amount => 25 - amount)(20);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQQwtg9grgdgLgAgLwD4ECYCsCC0DzTwCUw6ADEQNxA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+        Now we apply the operator by substituting 20 for {\lstinline[mathescape=true]$amount$} in the
+        body of the
+	
+	  
+	  function definition
+	
+	  expression:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+25 - 20;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EwVgBAtGwAwNxA}{\usebox\lstbox}
+
+
+
+        The final answer is 5.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+        Observe, however, what happens if we attempt a similar substitution
+        analysis with {\lstinline[mathescape=true]$make_simplified_withdraw$}:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+(make_simplified_withdraw(25))(20);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQWwhg1gpg+gzgSxABwDYIGYKgExgdwQBcALHAJzH2ACYBWASgdoAYGBuIA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+        We first simplify the operator by substituting 25 for
+	{\lstinline[mathescape=true]$balance$} in
+        
+	the return expression of
+	{\lstinline[mathescape=true]$make_simplified_withdraw$}.
+        This reduces the expression to<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+\begin{JavaScript}
+(amount => {
+     balance = 25 - amount; 
+     return 25;
+ })(20);
+\end{JavaScript}
+
+      
+
+        
+\begin{JavaScript}
+(amount => {
+     balance = 25 - amount; 
+     return 25;
+ })(20);
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+        Now we apply the function
+	by substituting 20 for {\lstinline[mathescape=true]$amount$} in the
+        body of the 
+	function:
+
+        
+\begin{JavaScript}
+balance = 25 - 20;
+return 25;
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p11' class='permalink'></a><p>
+        If we adhered to the substitution model, we would have to say that the
+        meaning of the
+        function
+        application is to first set {\lstinline[mathescape=true]$balance$} to
+        5 and then return 25 as the value of the expression.  This gets the
+        wrong answer.  In order to get the correct answer, we would have to
+        somehow distinguish the first occurrence of {\lstinline[mathescape=true]$balance$} (before the
+        effect of the assignment)  from the second occurrence of {\lstinline[mathescape=true]$balance$}
+        (after the effect of the assignment), and the substitution model
+        cannot do this.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p12' class='permalink'></a><p>
+        The trouble here is that substitution is based ultimately on the
+        notion that the symbols in our language are essentially names for
+        values.
+	<SPLIT>
+	  
+	  
+	    But as soon as we introduce assignment and the idea that the
+            value of a variable can change, a variable can no longer be simply a
+            name.  Now a variable somehow refers to a place where a value can be
+            stored, and the value stored at this place can change.  In
+            section~\ref{sec:environment-model}
+            we will see how environments play this role of <QUOTE>place</QUOTE> in our
+            computational model.
+            
+	  
+	</SPLIT>
+	</p></div>
+
+      \subsubsection{
+        Sameness and change
+      
+
+      
+      
+
+      <div class='permalink'>
+<a name='p13' class='permalink'></a><p>
+        The issue surfacing here is more profound than the mere breakdown of a
+        particular model of computation.  As soon as we introduce change into
+        our computational models, many notions that were previously
+        straightforward become problematical.  Consider the concept of two
+        things being <QUOTE>the same.</QUOTE>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p14' class='permalink'></a><p>
+        Suppose we call 
+{\lstinline[mathescape=true]$make_decrementer$}
+twice with the same argument to
+        create two
+        functions:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const d1 = make_decrementer(25);
+
+const d2 = make_decrementer(25);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAJgRhgXhgWwIYGsCmB9OHYAJxzRzCh2IAoAmAVgEoBuAKDdEljjpXWz5CJMhSq1GrIA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p15' class='permalink'></a><p>
+        Are 
+{\lstinline[mathescape=true]$d1$}
+and 
+{\lstinline[mathescape=true]$d2$}
+the same?  An acceptable answer is yes,
+        because 
+{\lstinline[mathescape=true]$d1$}
+and 
+{\lstinline[mathescape=true]$d2$}
+have the same computational
+        behavior—each is a
+        function
+        that subtracts its input from 25.  In
+        fact, 
+{\lstinline[mathescape=true]$d1$}
+could be substituted for 
+{\lstinline[mathescape=true]$d2$}
+in any computation
+        without changing the result.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p16' class='permalink'></a><p>
+        Contrast this with making two calls to 
+{\lstinline[mathescape=true]$make_simplified_withdraw$}:
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const w1 = make_simplified_withdraw(25);
+
+const w2 = make_simplified_withdraw(25);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBA7gRhgXhgWwIYGsCmB9CASzQAcAbQgM0JwBM85CoALWgJwzgAoAmAVgCUAbgBQI0JFhweKdNnxFSFanQZNWHbv2FA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p17' class='permalink'></a><p>
+        Are 
+{\lstinline[mathescape=true]$w1$}
+and 
+{\lstinline[mathescape=true]$w2$}
+the same?  Surely not, because calls to 
+{\lstinline[mathescape=true]$w1$}
+and 
+{\lstinline[mathescape=true]$w2$}
+have distinct effects, as shown by the following
+        sequence of interactions:
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+w1(20);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4RgFATADAlA3EA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+w1(20);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4RgFATADAlA3EA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+w2(20);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4JgFCAMCUDcQ}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p18' class='permalink'></a><p>
+        Even though 
+{\lstinline[mathescape=true]$w1$}
+and 
+{\lstinline[mathescape=true]$w2$}
+are <QUOTE>equal</QUOTE> in the sense that they
+        are both created by evaluating the same expression, 
+{\lstinline[mathescape=true]$make_simplified_withdraw(25)$}, it is not true that 
+{\lstinline[mathescape=true]$w1$}
+could be
+        substituted for 
+{\lstinline[mathescape=true]$w2$}
+in any expression without changing the result
+        of evaluating the expression.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p19' class='permalink'></a><p>
+        A language that supports the concept that <QUOTE>equals can be substituted
+          for equals</QUOTE> in an expression without changing the value of the expression is said to be
+        
+        
+        
+        <EM>referentially transparent</EM>.  Referential transparency is violated
+        when we include assignment in our computer language.  This makes it
+        tricky to determine when we can simplify expressions by substituting
+        equivalent expressions.  Consequently, reasoning about programs that
+        use assignment becomes drastically more difficult.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p20' class='permalink'></a><p>
+        Once we forgo referential transparency, the notion of what it means
+        for computational objects to be <QUOTE>the same</QUOTE> becomes difficult to
+        capture in a formal way.  Indeed, the meaning of <QUOTE>same</QUOTE> in the real
+        world that our programs model is hardly clear in itself.  In general,
+        we can determine that two apparently identical objects are indeed
+        <QUOTE>the same one</QUOTE> only by modifying one object and then observing
+        whether the other object has changed in the same way.  But how can we
+        tell if an object has <QUOTE>changed</QUOTE> other than by observing the <QUOTE>same</QUOTE>
+        object twice and seeing whether some property of the object differs
+        from one observation to the next?  Thus, we cannot determine
+        <QUOTE>change</QUOTE> without some <EM>a priori</EM> notion of <QUOTE>sameness,</QUOTE> and we
+        cannot determine sameness without observing the effects of change.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p21' class='permalink'></a><p>
+        
+        As an example of how this issue arises in programming, consider the
+        situation where Peter and Paul have a bank account with \$100 in
+        it.  There is a substantial difference between modeling this as
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const peter_acc = make_account(100);
+const paul_acc = make_account(100);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBADgUyggTgfQIbGDAvDAWwwGsFNsQBXMKACgEYAGRgSgG4AoUSWODSgDbkc+IqWFUaDZuyA}{\usebox\lstbox}
+
+
+
+        and modeling it as
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const peter_acc = make_account(100);
+const paul_acc = peter_acc;
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBADgUyggTgfQIbGDAvDAWwwGsFNsQBXMKACgEYAGRgSgG4AoUSWODSgDbkc+RMnRZgbIA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p22' class='permalink'></a><p>
+        In the first situation, the two bank accounts are distinct.
+        Transactions made by Peter will not affect Paul's account, and vice
+        versa.  In the second situation, however, we have defined 
+{\lstinline[mathescape=true]$paul_acc$}
+to be <EM>the same thing</EM> as 
+{\lstinline[mathescape=true]$peter_acc$}
+In effect,
+        Peter and Paul now have a joint bank account, and if Peter makes a
+        withdrawal from 
+{\lstinline[mathescape=true]$peter_acc$}
+Paul will observe less money in 
+{\lstinline[mathescape=true]$paul_acc$}.
+These two similar but distinct situations can cause
+        confusion in building computational models.  With the shared account,
+        in particular, it can be especially confusing that there is one object
+        (the bank account) that has two different names 
+({\lstinline[mathescape=true]$peter_acc$}
+and
+{\lstinline[mathescape=true]$paul_acc$}); 
+if we are searching for all the places in our program where 
+{\lstinline[mathescape=true]$paul_acc$}
+can be changed, we must remember to look also at
+        things that change 
+{\lstinline[mathescape=true]$peter_acc$}.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p23' class='permalink'></a><p>
+        With reference to the above remarks on <QUOTE>sameness</QUOTE> and <QUOTE>change,</QUOTE>
+        observe that if Peter and Paul could only examine their bank balances,
+        and could not perform operations that changed the balance, then the
+        issue of whether the two accounts are distinct would be moot.  In
+        general, so long as we never modify data objects, we can regard a
+        compound data object to be precisely the totality of its pieces.  For
+        example, a rational number is determined by giving its numerator and
+        its denominator.  But this view is no longer valid in the presence of
+        change, where a compound data object has an <QUOTE>identity</QUOTE> that is
+        something different from the pieces of which it is composed.  A bank
+        account is still <QUOTE>the same</QUOTE> bank account even if we change the
+        balance by making a withdrawal; conversely, we could have two
+        different bank accounts with the same state information.  This
+        complication is a consequence, not of our programming language, but of
+        our perception of a bank account as an object.  We do not, for
+        example, ordinarily regard a rational number as a changeable object
+        with identity, such that we could change the numerator and still have
+        <QUOTE>the same</QUOTE> rational number.
+        
+        
+      </p></div>
+
+      \subsubsection{
+        Pitfalls of imperative programming
+      
+
+      <div class='permalink'>
+<a name='p24' class='permalink'></a><p>
+        In contrast to functional programming, programming that makes
+        extensive use of assignment is known as 
+        
+        
+        <EM>imperative
+          programming</EM>.  In addition to raising complications about
+        computational models, programs written in imperative style are
+        susceptible to bugs that cannot occur in functional programs.  For
+        example, recall the iterative factorial program from
+        section~\ref{sec:recursion-and-iteration}:
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function factorial(n) {
+   function iter(product,counter) {
+      if (counter > n) {
+          return product;
+      } else {
+          return iter(counter*product,
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRS0SWBRGKAUwzwAcM4ATEaAGgjjgmGYuUrj6wRHgFDmiAHyIipChPUZGUEBiTsuPKAG41EgL6JGOAM6NV6jVp1IGzGYLDCAVPu59TDoGBsp7MANQAjIQmDmamceKa2rr0wngRvFEmZkA}{\usebox\lstbox}!*/
+                       counter+1);
+      }
+   }
+   return iter(1,1);
+}
+
+\end{JavaScriptClickable}
+
+
+        Instead of passing arguments in the internal iterative loop, we could
+        adopt a more imperative style by using explicit assignment
+        to update the values of the variables {\lstinline[mathescape=true]$product$} and {\lstinline[mathescape=true]$counter$}:
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function factorial(n) {
+   let product = 1;
+   let counter = 1;
+   function iter() {
+      if (counter > n) {
+          return product;
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSnAUykQAcM4ATEaRAXkQEYBuCqrUQQ44KNQyce-SsnDR4SGOIx5i5WbJjBEeEWImIAfIiKkBmzRlogMSRizZQZlgL6JqOAM7Vzlyw6s7Fz6YCqIAFQMTEHOFv7ComGGIUnhANTS8f7WULZKKmoumq4WpbK5+YjKEkVkrkA}{\usebox\lstbox}!*/
+      } else {
+          product = counter * product;
+          counter = counter + 1;
+          return iter();
+      }
+   }
+   return iter();
+}
+
+\end{JavaScriptClickable}
+
+
+        
+        
+        This does not change the results produced by the program, but it does
+        introduce a subtle trap.  How do we decide the order of the assignments?
+        As it happens, the program is correct as written.  But
+        writing the assignments in the opposite order
+        
+\begin{JavaScript}
+counter = counter + 1;
+product = counter * product;
+\end{JavaScript}
+
+        would have produced a different, incorrect result.
+        In general, programming with assignment forces us to
+        carefully consider the relative orders of the assignments to make sure
+        that each statement is using the correct version of the variables that
+        have been changed.  This issue simply does not arise in functional
+        programs.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p25' class='permalink'></a><p>
+        The complexity of imperative programs becomes even worse if we
+        consider applications in which several processes execute concurrently.  We
+        will return to this in section~\ref{sec:time-is-of-the-essence}.
+        First, however, we will address the issue of providing a computational
+        model for expressions that involve assignment, and explore the uses of
+        objects with local state in designing simulations.
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled43}
+
+        
+        Consider the bank account objects created by 
+{\lstinline[mathescape=true]$make_account$}, 
+with
+        the password modification described in
+        exercise~\ref{ex:password-protection}.  Suppose that our banking
+        system requires the ability to make joint accounts.  Define a
+        function
+        
+{\lstinline[mathescape=true]$make_joint$}
+that accomplishes this.  
+The function {\lstinline[mathescape=true]$make_joint$}
+        should take three arguments.  The first is a password-protected
+        account.  The second argument must match the password with which the
+        account was defined in order for the 
+{\lstinline[mathescape=true]$make_joint$}
+operation to
+        proceed.  The third argument is a new password.  
+The function {\lstinline[mathescape=true]$make_joint$}
+is to create an additional access to the original account using the new
+        password.  For example, if 
+({\lstinline[mathescape=true]$peter_acc$}
+is a bank account with
+        password 
+({\lstinline[mathescape=true]$"open sesame"$}, 
+then
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+// make_joint function to be written by students
+const paul_acc = 
+    make_joint(peter_acc, "open sesame", "rosebud");
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAEFsEMGsFMH0BWB7AlgOwC6gGYFd0BjTVZdUTZUAI1lAHcAnVTTWc6gT1AGdM8AJu0w8AUITJ9QAB0h4ANvEiFCoALyhRobRBgIUGTAAppsNoyUqANKABEyU+R6wekcLFs3bjZM+qDbAEoAbiA}{\usebox\lstbox}
+
+
+        will allow one to make transactions on 
+({\lstinline[mathescape=true]$peter_acc$}
+using the name
+{\lstinline[mathescape=true]$paul_acc$}
+and the password {\lstinline[mathescape=true]$"rosebud"$}.  You may wish to modify
+        your solution to exercise~\ref{ex:password-protection} to accommodate
+        this new feature.
+
+     	
+  
+
+      \hfill{\hyperref[ex:unlabeled43-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled43}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_joint(linked_acc, linked_pw, joint_pw) {
+    return (message, input_pw) => {
+        
+        // Check authentication for joint account
+        if (input_pw !== joint_pw) {
+            return x => "Wrong joint account password";
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AVnGMKACgBtCsATbVCCAGkXLCuwAcB3R-QqdjgJSIA3gChEExACdMUEFKTFkmAM4rUAc0yNCbEH05CAvAD4R4yZYuWJAeluIAwgAtMEdIlT7XRGBFSwCIjAcFKIPESedHDgUNY2MMCIxLr6-IgAhEZG4QRE-EJiNsXSsvJIAB6IpogARADqUggaubxREDGRbKhqHKGUtQDc8ZYAvoiYpCqY5iU2HWAqUO2qKtjMVNVMFJjUtBBKq5ra2yy7BcNzVleS9k6u7p7emL7+gUghYRu77Z1xNxJEsl9qt1jtKMQAAzGbJ1ACSkFCMmgiAACj0VH0pANCiMAXcQWowWcIdDEJQ4KpPOTMGw4CoYMsHBxGc5KFJUBxUKREHAkpCdEh+pgpHibncoHBEFBVMtPtLXPDEVJkct0b1+rUUEctAA6RBiq4yOQKRBVGoNJpgFrfSi-WKIboa7FDQ1jCZTGZFAGWO4AQVIPK8UB8sDe8CQTumlEYxvKKzUP32f2lUpA01FPsscdNhLWtsuANGhuLY2GoyAA}{\usebox\lstbox}!*/
+        } else {
+            const access_linked = linked_acc(message, linked_pw);
+            
+            // Check authentication for linked account
+            if (access_linked(0) === "Incorrect Password") {
+                // access_linked(0) does a deposit / withdrawal of 0, in order
+                // to test for the "Incorrect Password" message. 
+                return x => "Wrong linked account password";
+            } else {
+                // All authentication passed, return accessed account to user
+                return access_linked;
+            }
+        }
+    };
+}
+
+\end{JavaScriptClickable}
+
+
+
+    
+    
+  
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        
+        
+        When we defined the evaluation model in
+        section~\ref{sec:evaluating-combinations}, we said that the first step
+        in evaluating an expression is to evaluate its subexpressions.  But we
+        never specified the order in which the subexpressions should be
+        evaluated (e.g., left to right or right to left).  When we introduce
+        assignment, the order in which the arguments to a
+        function
+        are
+        evaluated can make a difference to the result.  Define a simple
+        function
+        {\lstinline[mathescape=true]$f$} such that evaluating {\lstinline[mathescape=true]$f(0) + f(1)$} will
+        return 0 if the arguments to {\lstinline[mathescape=true]$+$} are evaluated from left to right
+        but will return 1 if the arguments are evaluated from right to left.
+        
+      
+\end{Exercise}
+
+      
+      
+      
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>We don't substitute for
+          the occurrence of {\lstinline[mathescape=true]$balance$} in the assignment statement because
+          the name in an assignment is not evaluated.
+          If we did substitute for it, we would get
+          {\lstinline[mathescape=true]$25 = 25 - amount;$}, which makes no sense.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>The phenomenon of a
+          single computational object being accessed by more than one name is
+          known as 
+          
+          <EM>aliasing</EM>.  The joint bank account situation illustrates
+          a very simple example of an alias.  In section~\ref{sec:mutable-data}
+          we will see much more complex examples, such as <QUOTE>distinct</QUOTE> compound
+          data structures that share parts.  Bugs can occur in our programs if
+          
+          
+          
+          we forget that a change to an object may also, as a <QUOTE>side effect,</QUOTE>
+          change a <QUOTE>different</QUOTE> object because the two <QUOTE>different</QUOTE> objects
+          are actually a single object appearing under different aliases.  These
+          so-called <EM>side-effect bugs</EM> are so difficult to locate and to
+          analyze that some people have proposed that programming languages be
+          designed in such a way as to not allow side effects or aliasing
+          
+          
+          
+          
+          (Lampson et al.~1981; 
+          Morris, Schmidt, and Wadler 1980).</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>In view of this, it is ironic that introductory programming
+          is most often taught in a highly imperative style.  This may be a
+          vestige of a belief, common throughout the 1960s and 1970s, that
+          programs that call
+          functions
+          must inherently be less efficient than
+          programs that perform assignments.  
+          (Steele (1977) 
+          
+          debunks this
+          argument.)  Alternatively it may reflect a view that step-by-step
+          assignment is easier for beginners to visualize than
+          function
+          call.
+          Whatever the reason, it often saddles beginning programmers with
+          <QUOTE>should I set this variable before or after that one</QUOTE> concerns that can
+          complicate programming and obscure the important ideas.</FOOTNOTE></div>
+</SUBSECTION>

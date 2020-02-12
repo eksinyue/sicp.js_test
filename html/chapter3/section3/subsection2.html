@@ -1,0 +1,552 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>3.3.2 
+        Representing Queues
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+        The mutators {\lstinline[mathescape=true]$set_head$} and {\lstinline[mathescape=true]$set_tail$} enable us to use
+        pairs to construct data structures that cannot be built with {\lstinline[mathescape=true]$pair$}, {\lstinline[mathescape=true]$head$}, and {\lstinline[mathescape=true]$tail$} alone.  This section shows how to use
+        pairs to represent a data structure called a queue.  Section~\ref{sec:tables}
+        will show how to represent data structures called tables.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+        A <EM>queue</EM> is a sequence in which items are inserted at one end
+        (called the
+        
+        <EM>rear</EM> of the queue) and deleted from the other end
+        (the
+        
+        <EM>front</EM>).  Figure~\ref{fig:queue-ops} shows an initially empty
+        queue in which the items {\lstinline[mathescape=true]$a$} and {\lstinline[mathescape=true]$b$} are inserted.  Then {\lstinline[mathescape=true]$a$} is removed, {\lstinline[mathescape=true]$c$} and {\lstinline[mathescape=true]$d$} are inserted, and {\lstinline[mathescape=true]$b$} is
+        removed.  Because items are always removed in the order in which they
+        are inserted, a queue is sometimes called a
+        
+        <EM>FIFO</EM> (first in,
+        first out) buffer.
+
+  <SPLIT>
+    
+    
+      
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch3.18}.svg}}
+\caption{Queue operations.}
+\label{fig:queue-ops}
+\end{figure}
+
+    
+  </SPLIT>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+        
+        
+        In terms of data abstraction, we can regard a queue as defined by the
+        following set of operations:
+        <UL>
+          <LI>a constructor:
+            <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+              
+              {\lstinline[mathescape=true]$make_queue()$}
+              returns an empty queue (a queue containing no items).
+            </p></div>
+          </LI>
+          <LI>
+            two selectors:
+            <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+              
+              {\lstinline[mathescape=true]$empty_queue(queue)$}
+              tests if the queue is empty.
+            </p></div>
+            <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+              
+              {\lstinline[mathescape=true]$front_queue(queue)$}
+              returns the object at the front of
+              the queue, signaling an error if the queue is empty; it does not
+              modify the queue.
+            </p></div>
+          </LI>
+          <LI>
+            two mutators:
+            <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+              
+              {\lstinline[mathescape=true]$insert_queue(queue, item)$}
+              inserts the item at the rear of the queue and returns the modified
+              queue as its value.
+            </p></div>
+            <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+              
+              {\lstinline[mathescape=true]$delete_queue(queue)$}
+              removes the item at the
+              front of the queue and returns the modified queue as its value,
+              signaling an error if the queue is empty before the deletion.
+            </p></div>
+          </LI>
+        </UL>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+        Because a queue is a sequence of items, we could certainly represent
+        it as an ordinary list; the front of the queue would be the {\lstinline[mathescape=true]$head$}
+        of the list, inserting an item in the queue would amount to appending
+        a new element at the end of the list, and deleting an item from the
+        queue would just be taking the {\lstinline[mathescape=true]$tail$} of the list.  However, this
+        representation is inefficient, because in order to insert an item we
+        must scan the list until we reach the end.  Since the only method we
+        have for scanning a list is by successive {\lstinline[mathescape=true]$tail$} operations, this
+        scanning requires $\Theta(n)$ steps for a list of $n$ items.  A simple
+        modification to the list representation overcomes this disadvantage by
+        allowing the queue operations to be implemented so that they require
+        $\Theta(1)$ steps; that is, so that the number of steps
+        needed is independent of the length of the queue.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+        The difficulty with the list representation arises from the need to
+        scan to find the end of the list.  The reason we need to scan is that,
+        although the standard way of representing a list as a chain of pairs
+        readily provides us with a pointer to the beginning of the list, it
+        gives us no easily accessible pointer to the end.  The modification
+        that avoids the drawback is to represent the queue as a list, together
+        with an additional pointer that indicates the final pair in the list.
+        That way, when we go to insert an item, we can consult the rear
+        pointer and so avoid scanning the list.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p11' class='permalink'></a><p>
+        A queue is represented, then, as a pair of pointers,
+{\lstinline[mathescape=true]$front_ptr$}
+        and
+{\lstinline[mathescape=true]$rear_ptr$},
+which indicate, respectively, the first and last
+        pairs in an ordinary list.  Since we would like the queue to be an
+        identifiable object, we can use {\lstinline[mathescape=true]$pair$} to combine the two
+        pointers.  Thus, the queue itself will be the {\lstinline[mathescape=true]$pair$} of the two
+        pointers.  Figure~\ref{fig:queue-pointers} illustrates this
+        representation.
+
+        <SPLIT>
+          
+          
+            
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch3-Z-G-19}.svg}}
+\caption{Implementation of a queue as a list with front and rear pointers.}
+\label{fig:queue-pointers}
+\end{figure}
+
+          
+        </SPLIT>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p12' class='permalink'></a><p>
+        To define the queue operations we use the following
+        functions, which
+        enable us to select and to modify the front and rear pointers of a
+        queue:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function front_ptr(queue) {
+    return head(queue);
+}
+function rear_ptr(queue) {
+    return tail(queue);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMATgqB9ADlFAKARxAFMSBKRAbwChE7EVioQUkALYgQwBNCTyA3NQC+1UJFgIGXFNlx9SxCjXrTmrRFE4wANgsEix4aPCQBnJhlTo5+IooA0iGFGIBbZbXoXMHHvuInF3cyIVFxEykfDEZOWRw7fkDnVw8qLzporV0AoNTQkSA}{\usebox\lstbox}!*/
+function set_front_ptr(queue, item) {
+    set_head(queue, item);
+}
+function set_rear_ptr(queue, item) {
+    set_tail(queue, item);
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p13' class='permalink'></a><p>
+        Now we can implement the actual queue operations.  We will consider a
+        queue to be empty if its front pointer is the empty list:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_empty_queue(queue) {
+    return is_null(front_ptr(queue));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQKYFsAOUCeaAjiBqQBQlkYCUiA3gFCIuIBOGUIbSqaYIADaDywNgiho8bSqVI0aAbkYBfIA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p14' class='permalink'></a><p>
+        The {\lstinline[mathescape=true]$make_queue$}
+  constructor returns, as an initially empty queue,
+        a pair whose {\lstinline[mathescape=true]$head$} and {\lstinline[mathescape=true]$tail$} are both the empty list:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_queue() {
+    return pair(null, null);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AjiTAgCgEpEBvAKERsQCdMoQ6kAHVGOosEAG14A0iHvxIBuSgF8gA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p15' class='permalink'></a><p>
+        To select the item at the front of the queue, we return the {\lstinline[mathescape=true]$head$}
+        of the pair indicated by the front pointer:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function front_queue(queue) {
+    return is_empty_queue(queue)
+        ? Error("front_queue called with an empty queue",
+                queue)
+        : front_ptr(queue);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMATgqB9AjiApngCh31wEpEBvAKEVsRVyhBSRgGcNcBbABygE9seQsTykadSQH5EAURRoUBAESp0QkoggBDADa7cAE0QB3GFAAWibUm59+iUbmUAaCZI8en4z7QBcyGhgmHxK3gDcVAC+QA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p16' class='permalink'></a><p>
+        To insert an item in a queue, we follow the method whose result is
+        indicated in Figure~\ref{fig:queue-insert}.  We first create a new
+        pair whose {\lstinline[mathescape=true]$head$} is the item to be inserted and whose {\lstinline[mathescape=true]$tail$} is
+        the empty list.  If the queue was initially empty, we set the front and
+        rear pointers of the queue to this new pair.  Otherwise, we modify the
+        final pair in the queue to point to the new pair, and also set the
+        rear pointer to the new pair.
+
+        <SPLIT>
+          
+          
+            
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch3-Z-G-20}.svg}}
+\caption{Result of using {\lstinline[mathescape=true]$insert_queue(q, 'd')$} on the queue of Figure~\ref{fig:queue-pointers}. }
+\label{fig:queue-insert}
+\end{figure}
+
+          
+        </SPLIT>
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function insert_queue(queue, item) {
+    const new_pair = pair(item, null);
+    if (is_empty_queue(queue)) {
+        set_front_ptr(queue, new_pair);
+        set_rear_ptr(queue, new_pair);
+    } else {
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDMBnApgJygfQI4jqEAUBR6ANMlOgLYCUiA3gFCLuIQKpSJjoB3HAAcAhjEyIAvIjETiMGrSpgQAGzX0A3Gw4xgiBahx1hUAJ75CJMoXqNWHJ4gy5gmBLjOZS1yn0ERcUxtXWcXdFxMdFFMESgfW39+ITkQnScAX0R0NQxmMOdXHChxNWJo2PjEv3oVQLTQ8PZiyrjvX3J61OCmjkzC6KgQTCQknUygA}{\usebox\lstbox}!*/
+        set_tail(rear_ptr(queue), new_pair);
+        set_rear_ptr(queue, new_pair);
+    }
+    return queue;
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p17' class='permalink'></a><p>
+        To delete the item at the front of the queue, we merely modify the
+        front pointer so that it now points at the second item in the queue,
+        which can be found by following the {\lstinline[mathescape=true]$tail$} pointer of the first
+        item (see Figure~\ref{fig:queue-delete}):<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a><SPLIT>
+          
+          
+            
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch3-Z-G-21}.svg}}
+\caption{Result of using {\lstinline[mathescape=true]$delete_queue(q)$} on the queue of Figure~\ref{fig:queue-insert}. }
+\label{fig:queue-delete}
+\end{figure}
+
+          
+        </SPLIT>
+          
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function delete_queue(queue) {
+    if (is_empty_queue(queue)) {
+        Error("delete_queue called with an empty queue",
+              queue);
+    } else {
+        set_front_ptr(queue, tail(front_ptr(queue)));
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAEwKYBtVVQfQI4iqEAUBRqAlIgN4BQiDiMwixMAzjqgLYAOUAT3yESZQhSp1G0xAFEATvLjziAIjSZsw8oggBDdJmSIA7jCgALRHqQ9+AxGNSqANPRkeGTigG53DAF9EDHZUGn8ZUKgcYCUwaP4VJxdEKD0YdGJYhASoJJFKCT9PRHksEHkkJ2LGANoAoA}{\usebox\lstbox}!*/
+        return queue;
+    }
+}
+
+\end{JavaScriptClickable}
+
+
+      
+
+        <SPLIT>
+          
+          
+            
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch3-Z-G-21}.svg}}
+\caption{Result of using {\lstinline[mathescape=true]$delete_queue(q)$} on the queue of Figure~\ref{fig:queue-insert}. }
+\label{fig:queue-delete}
+\end{figure}
+
+          
+        </SPLIT>
+          
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function delete_queue(queue) {
+    if (is_empty_queue(queue)) {
+        Error("delete_queue called with an empty queue",
+              queue);
+    } else {
+        set_front_ptr(queue, tail(front_ptr(queue)));
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAEwKYBtVVQfQI4iqEAUBRqAlIgN4BQiDiMwixMAzjqgLYAOUAT3yESZQhSp1G0xAFEATvLjziAIjSZsw8oggBDdJmSIA7jCgALRHqQ9+AxGNSqANPRkeGTigG53DAF9EDHZUGn8ZUKgcYCUwaP4VJxdEKD0YdGJYhASoJJFKCT9PRHksEHkkJ2LGANoAoA}{\usebox\lstbox}!*/
+        return queue;
+    }
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        Ben Bitdiddle decides to test the queue implementation described
+        above.  He types in the
+        functions
+        to the JavaScript interpreter and
+        proceeds to try them out:
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+const q1 = make_queue();
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAjgRhgXhgWwIYGsCmB9OAVx2IAoBKAbiA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+insert_queue(q1, "a");
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=JYOwzgpgTgLg+gRwK4RQCgQRgDQAIBEAhvgJQDcQA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+insert_queue(q1, "b");
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=JYOwzgpgTgLg+gRwK4RQCgQRgDQAIBEARvgJQDcQA}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+delete_queue(q1);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwNiAuIPoI4FcRIBRwIwEoDcQ}{\usebox\lstbox}
+
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+delete_queue(q1);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwNiAuIPoI4FcRIBRwIwEoDcQ}{\usebox\lstbox}
+
+
+
+        <QUOTE>It's all wrong!</QUOTE> he complains.  <QUOTE>The interpreter's response shows
+          that the last item is inserted into the queue twice.  And when I
+          delete both items, the second {\lstinline[mathescape=true]$b$} is still there, so the queue
+          isn't empty, even though it's supposed to be.</QUOTE>  Eva Lu Ator suggests
+        that Ben has misunderstood what is happening.  <QUOTE>It's not that the
+          items are going into the queue twice,</QUOTE> she explains.  <QUOTE>It's just
+          that the standard JavaScript printer doesn't know how to make sense of the
+          queue representation.  If you want to see the queue printed correctly,
+          you'll have to define your own print
+          function
+          for queues.</QUOTE> Explain
+        what Eva Lu is talking about.  In particular, show why Ben's examples
+        produce the printed results that they do.  Define a
+        function
+        
+  {\lstinline[mathescape=true]$print_queue$}
+that takes a queue as input and prints the sequence of
+        items in the queue.
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        
+        Instead of representing a queue as a pair of pointers, we can build a
+        queue as a
+        function
+        with local state.  The local state will consist
+        of pointers to the beginning and the end of an ordinary list.  Thus,
+        the
+{\lstinline[mathescape=true]$make_queue$}
+        function
+        will have the form
+
+        
+\begin{JavaScript}
+function make_queue() {
+    function front_ptr(...) ...
+    function rear_ptr(...) ...
+    //definitions of internal functions
+    function dispatch(m) ...
+    return dispatch;
+}
+\end{JavaScript}
+
+
+        Complete the definition of
+{\lstinline[mathescape=true]$make_queue$}
+and provide
+        implementations of the queue operations using this representation.
+      
+\end{Exercise}
+
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        
+        
+        A <EM>deque</EM> (<QUOTE>double-ended queue</QUOTE>) is a sequence in which items
+        can be inserted and deleted at either the front or the rear.
+        Operations on deques are the constructor
+{\lstinline[mathescape=true]$make_deque$},
+the predicate
+{\lstinline[mathescape=true]$is_empty_deque$},
+selectors
+{\lstinline[mathescape=true]$front_deque$}
+{\lstinline[mathescape=true]$front-deque$}
+and
+{\lstinline[mathescape=true]$rear_deque$}
+and mutators
+{\lstinline[mathescape=true]$front_insert_deque$},
+{\lstinline[mathescape=true]$front_delete_deque$},
+{\lstinline[mathescape=true]$rear_insert_deque$}, and
+{\lstinline[mathescape=true]$rear_delete_deque$}.
+Show how to represent deques using pairs, and
+        give implementations of the operations.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>$\Theta(1)$ steps.
+        
+      
+        All operations should be accomplished in $\Theta(1)$ steps.
+        
+      
+\end{Exercise}
+
+      
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>If the first item is
+          the final item in the queue, the front pointer will be the empty list after
+          the deletion, which will mark the queue as empty; we needn't worry
+          about updating the rear pointer, which will still point to the deleted
+          item, because {\lstinline[mathescape=true]$empty-queue?$} looks only at the front pointer.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Be careful not to
+          make the interpreter try to print a structure that contains cycles.
+          (See exercise~\ref{ex:make-cycle}.)</FOOTNOTE></div>
+</SUBSECTION>

@@ -1,0 +1,999 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>2.3.2 
+        Example: Symbolic Differentiation
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+      
+      
+
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+      As an illustration of symbol manipulation and a further illustration
+      of data abstraction, consider the design of a
+      function
+      that performs
+      symbolic differentiation of algebraic expressions.  We would like the
+      function
+      to take as arguments an algebraic expression and a variable
+      and to return the derivative of the expression with respect to the
+      variable.  For example, if the arguments to the
+      function
+      are $ax^2 + bx +c$ and $x$, the
+      function
+      should return $2ax+b$.  Symbolic
+      differentiation is of special historical significance in Lisp.  It was
+      one of the motivating examples behind the development of a computer
+      language for symbol manipulation.  Furthermore, it marked the
+      beginning of the line of research that led to the development of
+      powerful systems for symbolic mathematical work, which are currently
+      being used by a growing number of applied mathematicians and
+      physicists.
+      </p></div>
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+      In developing the symbolic-differentiation program, we will follow the
+      same strategy of data abstraction that we followed in developing the
+      rational-number system of section~\ref{sec:rationals}.  That is, we will first
+      define a differentiation algorithm that operates on abstract
+      objects such as <QUOTE>sums,</QUOTE> <QUOTE>products,</QUOTE> and <QUOTE>variables</QUOTE> without
+      worrying about how these are to be represented.  Only afterward will
+      we address the representation problem.
+      </p></div>
+
+      \subsubsection{
+        The differentiation program with abstract data
+      
+
+      
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+      In order to keep things simple, we will consider a very simple
+      symbolic-differentiation program that handles expressions that are
+      built up using only the operations of addition and multiplication with
+      two arguments.  Differentiation of any such expression can be carried
+      out by applying the following reduction rules:
+
+      
+        \[ \frac{dc}{dx} = 0\text{ for $c$ a constant or a variable different from $x$} \]
+      
+
+      
+        \[ \frac{dx}{dx} = 1 \]
+      
+
+      
+        \[ \frac{d(u+v)}{dx} = \frac{du}{dx}+\frac{dv}{dx} \]
+      
+
+      
+        \[ \frac{d(uv)}{dx} = u\left( \frac{dv}{dx}\right)+v\left(
+        \frac{du}{dx}\right)\]
+      
+      Observe that the latter two rules are recursive in nature.  That is, 
+      to obtain the derivative of a sum we first find the derivatives of the
+      terms and add them.  Each of the terms may in turn be an
+      expression that needs to be decomposed.  Decomposing into smaller and
+      smaller pieces will eventually produce pieces that are either
+      constants or variables, whose derivatives will be either $0$ or $1$.
+      </p></div>
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+      To embody these rules in a
+      function
+      we indulge in a little 
+      
+      wishful
+      thinking, as we did in designing the rational-number implementation.
+      If we had a means for representing algebraic expressions, we should be
+      able to tell whether an expression is a sum, a product, a constant, or
+      a variable.  We should be able to extract the parts of an expression.
+      For a sum, for example we want to be able to extract the addend
+      (first term) and the augend (second term).  We should also be able to
+      construct expressions from parts.  Let us assume that we already have
+      functions
+      to implement the following selectors, constructors, and
+      predicates:
+      
+
+\noindent\begin{tabular}{ | l | l | } \hline
+
+            {\lstinline[mathescape=true]$is_variable(e)$}
+           & 
+            Is {\lstinline[mathescape=true]$e$} a variable?
+           \\ \hline
+
+          {\lstinline[mathescape=true]$is_same_variable(v1, v2)$}
+           & 
+            Are {\lstinline[mathescape=true]$v1$} and {\lstinline[mathescape=true]$v2$} the same variable?
+           \\ \hline
+
+            {\lstinline[mathescape=true]$is_sum(e)$}
+           & 
+            Is {\lstinline[mathescape=true]$e$} a sum?
+           \\ \hline
+
+            {\lstinline[mathescape=true]$addend(e)$}
+           & 
+            Addend of the sum {\lstinline[mathescape=true]$e$}.
+           \\ \hline
+
+            {\lstinline[mathescape=true]$augend(e)$} 
+           & 
+            Augend of the sum {\lstinline[mathescape=true]$e$}.
+           \\ \hline
+
+            {\lstinline[mathescape=true]$make_sum(a1, a2)$}
+           & 
+            Construct the sum of {\lstinline[mathescape=true]$a1$} and {\lstinline[mathescape=true]$a2$}.
+           \\ \hline
+
+            {\lstinline[mathescape=true]$is_product(e)$}
+           & 
+            Is {\lstinline[mathescape=true]$e$} a product?
+           \\ \hline
+
+            {\lstinline[mathescape=true]$multiplier(e)$}
+           & 
+            Multiplier of the product {\lstinline[mathescape=true]$e$}.
+           \\ \hline
+
+            {\lstinline[mathescape=true]$multiplicand(e)$}
+           & 
+            Multiplicand of the product {\lstinline[mathescape=true]$e$}.
+           \\ \hline
+
+            {\lstinline[mathescape=true]$make_product(m1, m2)$}
+           & 
+            Construct the product of {\lstinline[mathescape=true]$m1$} and {\lstinline[mathescape=true]$m2$}.
+           \\ \hline
+\end{tabular}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+        Using these, and the primitive predicate {\lstinline[mathescape=true]$is_number$},
+      
+      
+      which identifies numbers,        we can express the differentiation rules as the        following
+      function:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function deriv(exp, variable) {
+    return is_number(exp)
+           ? 0
+           : is_variable(exp)
+             ? (is_same_variable(exp, variable)) ? 1 : 0
+             : is_sum(exp)
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAEwKYCcYDcAUqAeADgDSJYCGm5ARgDaoCUiA3gFCIeLqpQjpIwAzgH0wIALbUMeIg3acFnAPyIADPMUKAXIiHCKVOqhmE5m8ypx7B5can2UYNeidIGnRhkxUBGRDvVzTR1rCRMzIM0VcXIAa3tBMLRMXHJkNDBkcLdHZ0ZSDUiihWTsHHIQAHNUTOyyXM8I4o4QkUJ0OGQQaHDC5sRouISwmPjhds7uqBxxEFpYQloYaQJTAv6NxVLcWfmYRZgIclrVhnXNi813PK9iPsvEUfsJrp7tmbmFpZXZc4f-zjXTx-AEKXZfQ7HLKnLz3Yo6ACi6A66BwACJwLEwHAAO5IVbcQSCeBIKAAT0IqF0SG2aLuoIUpwA3KwAL5AA}{\usebox\lstbox}!*/
+               ? make_sum(deriv(addend(exp), variable), 
+                          deriv(augend(exp), variable))
+               : is_product(exp)
+                 ? make_sum(make_product(multiplier(exp), 
+                                deriv(multiplicand(exp), 
+                                      variable)),
+                       make_product(deriv(multiplier(exp), 
+                                          variable), 
+                           multiplicand(exp)))
+                 : Error("unknown expression type in deriv",
+                         exp);
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+      This {\lstinline[mathescape=true]$deriv$}
+      function
+      incorporates the complete differentiation algorithm.
+      Since it is expressed in terms of abstract data, it will work no
+      matter how we choose to represent algebraic expressions, as long as we
+      design a proper set of selectors and constructors.  This is the issue
+      we must address next.
+      </p></div>
+
+      \subsubsection{
+        Representing algebraic expressions
+      
+
+      
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+      We can imagine many ways to use list structure to represent algebraic
+      expressions.  For example, we could use lists of symbols that mirror
+      the usual algebraic notation, representing 
+      $ax+b$ as 
+      {\lstinline[mathescape=true]$list( "a", "*", "x", "+", "b")$}.  
+      
+        
+        
+          However, it will be more convenient, if we reflect the mathematical structure of the expression in the JavaScript
+          value representing it; that is, to represent $ax+b$ as {\lstinline[mathescape=true]$list("+", list("*", "a", "x"), "b")$}.
+        
+      
+      Then our data representation for the differentiation problem is as
+      follows:
+
+      <UL>
+        <LI>The variables are strings.  
+          They are identified by the primitive predicate
+          
+          
+          {\lstinline[mathescape=true]$is_string$}:
+          
+          
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_variable(x) {
+    return is_string(x);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQG4EMBOMsBGANgKYAUAHgJSIDeAUIk4jiVCDkqmilHmAHNKVANz0AvkA}{\usebox\lstbox}
+
+
+        </LI>
+        <LI>Two variables are the same if the 
+          
+            
+            strings representing them are equal:
+            
+          
+          
+          
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_same_variable(v1, v2) {
+    return is_variable(v1) && 
+           is_variable(v2) && v1 === v2;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfRQQwLYFM0BumATjJgEYA2uAFAQIwA0iBATAJSIDeAUIv4mK4oIYklSESZKrQacAZPMR8BqgRKKkK1Oh0SKW9RAF5TLVgG4eAXyA}{\usebox\lstbox}
+
+
+          </LI>
+        <LI>Sums and products are constructed as lists:
+          
+          
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_sum(a1, a2) {
+    return list("+", a1, a2);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AziZAClQEYAaRVAJgEpEBvAKERcQCdMoQ2kAbGXFEIAiANTCKpSbQDcjAL5A}{\usebox\lstbox}
+
+
+          
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_product(m1, m2) {
+    return list("*", m1, m2);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADgJzgBMRoAKZARgBoUAmASkQG8AoRDxfTKEfJADYwAzlDIAiAFTjaVWYwDcrAL5A}{\usebox\lstbox}
+
+
+        </LI>
+        <LI>A sum is a list whose first element is the 
+          
+            
+            string {\lstinline[mathescape=true]$"+"$}:
+          
+
+          
+
+          
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_sum(x) {
+    return is_pair(x) && head(x) === "+";
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfRSAtgCgB4CUiA3gFCIWIBOAplCFUqmgA4CGMV+RAZD4gAsabACbdEAXimIARAGoZAblIBfIA}{\usebox\lstbox}
+
+
+
+
+        </LI>
+        <LI>The addend is the second item of the sum list:
+
+          
+          
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function addend(s) {
+    return head(tail(s));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCaoKZlQCgM4CUiA3gFCIWIBOGUIVSAFhmjlMjADb4EEDcpAL5A}{\usebox\lstbox}
+
+
+
+
+        </LI>
+        <LI>The augend is the third item of the sum list:
+
+          
+          
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function augend(s) {
+    return head(tail(tail(s)));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQxAcwKZgCYAoDOAlIgN4BQiliAThlCNUgBYbJ5TIwA2uH3BhQQG4yAXyA}{\usebox\lstbox}
+
+
+        </LI>
+        <LI>A product is a list whose first element is the 
+          
+            
+            string {\lstinline[mathescape=true]$"*"$}:
+          
+
+          
+
+          
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_product(x) {
+    return is_pair(x) && head(x) === "*";
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQA4Cc4BMTQAUAHgJSIDeAUIrYlgKZQhZKqYCGMWJ5AZH0QALBh1y9EAXmmIARACpZAbioBfIA}{\usebox\lstbox}
+
+
+        </LI>
+        <LI>The multiplier is the second item of the product list:
+
+          
+
+          
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function multiplier(s) {
+    return head(tail(s));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWxAG1gBzTApgJwAoBnASkQG8AoRWxfXKEfJAC1wEMATQqDmNCVKkA3FQC+QA}{\usebox\lstbox}
+
+
+
+        </LI>
+        <LI>The multiplicand is the third item of the product list:
+
+          
+
+          
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function multiplicand(s) {
+    return head(tail(tail(s)));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWxAG1gBzTCBDMAEwAoBnASkQG8AoRexAJwFMoRGkALZvEqPGGmL9BZcuIDcNAL5A}{\usebox\lstbox}
+
+
+        </LI>
+
+      </UL>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+      Thus, we need only combine these with the algorithm as embodied by
+      {\lstinline[mathescape=true]$deriv$} in order to have a working symbolic-differentiation
+      program.  Let us look at some examples of its behavior:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+deriv(list("+", "x", 3), "x");
+// ["+", [1, [0, null]]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwTglgbgFANhAzgFxgIgNRoDQAI0AeOuAzAJR6FpkDcAUAPQO4DamxLAjHiwAx4A7AK5w4AXQlA}{\usebox\lstbox}
+
+
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+deriv(list("*", "x", "y"), "x");
+// ["+", [["*", ["x", [0, null]]], 
+//        [["*", [1, ["y", null]]], null]]]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwTglgbgFANhAzgFxgIgFRoDQAI0AeO+AnmgJR6EUDcAUAPQO4DaaA1MS21nm0XwAMeAHYBXOHAC6MvI2a5FS1jy4BGPmjKiJ02bnGSZUoA}{\usebox\lstbox}
+
+
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+deriv(list("*", list("*", "x", "y"), list("+", "x", 3)), "x");
+// [ "+",
+//   [["*", [["*", ["x", ["y", null]]], 
+//           [["+", [1, [0, null]]], null]]],
+//    [["*",
+//      [["+",
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwTglgbgFANhAzgFxgIgFRoDQAIErpZ5oAeOuaAnmgJR4GpoDUFZFAzLfZebQNwAoAPTDcAbUqtsIsbgnjMFcYuIT2eRTTwA7AK5w4AXRN5Z8i5fkqWygIyaADLoPHTufYZNGZoyzeJzKxtpIKsFJU0NCWcPV28zP3DrVXso7Tivd083HzDwkOVo8Q4XLJ9M41wjat85CxzqkyA}{\usebox\lstbox}!*/
+//        [["*", ["x", [0, null]]], 
+//         [["*", [1, ["y", null]]], null]]],
+//         [["+", ["x", [3, null]]], null] ] ],
+//     null ]]]
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+      The program produces answers that are correct; however, they are
+      unsimplified.  It is true that
+      
+        \[ \frac{d(xy)}{dx} = x\cdot 0+1\cdot y \]
+      
+      but we would like the program to know that $x\cdot 0 = 0$, $1\cdot y =
+        y$, and $0+y = y$.  The answer for the second example should have been
+      simply~{\lstinline[mathescape=true]$y$}.  As the third example shows, this becomes a serious
+      issue when the expressions are complex.
+      </p></div>
+      <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+      
+      
+      Our difficulty is much like the one we encountered with the
+      rational-number implementation: we haven't reduced answers to simplest
+      form.  To accomplish the rational-number reduction, we needed to
+      change only the constructors and the selectors of the implementation.
+      We can adopt a similar strategy here.  We won't change {\lstinline[mathescape=true]$deriv$} at
+      all.  Instead, we will change {\lstinline[mathescape=true]$make_sum$} so that if both summands
+      are numbers, {\lstinline[mathescape=true]$make_sum$} will add them and return their sum.  Also,
+      if one of the summands is 0, then {\lstinline[mathescape=true]$make_sum$} will return the other
+      summand.
+
+          
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_sum(a1, a2) {
+    return number_equal(a1, 0)
+           ? a2
+           : number_equal(a2, 0)
+             ? a1
+	     : is_number(a1) && is_number(a2)
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AziZAClQEYAaRVAJgEpEBvAKERcQCdMoQ2kwCAjTG2yYAjiFQAbYuUQAGGs1bLWAfkpUlK5QC5EfZIOFiJ06hQVbty9aUYBIFXpi5sBozLoAyL4hduBIWJaK2sbShJEAGoNULCWPUkXKEIAIijUilIs2gBuRgBfIA}{\usebox\lstbox}!*/
+               ? a1 + a2
+               : list("+", a1, a2);
+}
+
+\end{JavaScriptClickable}
+
+
+
+      This uses the
+      function
+      {\lstinline[mathescape=true]$number_equal$}, which checks whether an
+      expression is equal to a given number:
+
+          
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function number_equal(exp, num) {
+    return is_number(exp) && exp === num;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABGEBbARgUwE4H1MCOIAhgDYAUmAHgA4A0yaAlIgN4BQiXi2mUI2JDADOuFBhyVaLAGQzE1GogC8qxqgDc7AL5A}{\usebox\lstbox}
+
+
+
+        Similarly, we will change {\lstinline[mathescape=true]$make_product$} to build in the rules that 0
+      times anything is 0 and 1 times anything is the thing itself:
+
+
+          
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_product(m1, m2) {
+    return number_equal(m1, 0) || number_equal(m2, 0)
+           ? 0
+           : number_equal(m1, 1)
+             ? m2
+             : number_equal(m2, 1)
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADgJzgBMRoAKZARgBoUAmASkQG8AoRDxfTKEfJMCGQAjTPmyYAjiFQAbCjUQAGJgB9ViQSLETpcinVor2nU5wD8yk2dMAuTUNHipM+VVqUG1m6cvI63j4c9lpOuq4GHl5BZn6UgUH2MADO2KFiCkwAZFmIKWmOGf7RMbEolIgAVPQJMfayKVBkAESVzbTu9AwA3KwAvkA}{\usebox\lstbox}!*/
+             ? m1
+             : is_number(m1) && is_number(m2)
+               ? m1 * m2
+               : list("*", m1, m2);
+}
+
+\end{JavaScriptClickable}
+
+
+
+      
+
+
+      Here is how this version works on our three examples:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+deriv(list("+", "x", 3), "x");
+// 1
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwTglgbgFANhAzgFxgIgNRoDQAI0AeOuAzAJR6FpkDcAUAPQO4CMQA}{\usebox\lstbox}
+
+
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+deriv(list("*", "x", "y"), "x");
+// "y"
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwTglgbgFANhAzgFxgIgFRoDQAI0AeO+AnmgJR6EUDcAUAPQOlpA}{\usebox\lstbox}
+
+
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+deriv(list("*", list("*", "x", "y"), list("+", "x", 3)), "x");
+// [ "+",
+//   [["*", ["x", ["y", null]]], 
+//    [["*", ["y", [["+", ["x", [3, null]]], null]]], null]] ]
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwTglgbgFANhAzgFxgIgFRoDQAIErpZ5oAeOuaAnmgJR4GpoDUFZFAzLfZebQNwAoAPTDcAbUqtsIsbgnjMFReTyKaeAHYBXOHAC6hvLPnzxi4hOrLF0q6okctug0dw69h-c8-7c+oA}{\usebox\lstbox}
+
+
+
+      Although this is quite an improvement, the third example shows that
+      there is still a long way to go before we get a program that puts
+      expressions into a form that we might agree is <QUOTE>simplest.</QUOTE>  The
+      problem of algebraic simplification is complex because, among other
+      reasons, a form that may be simplest for one purpose may not be for
+      another.
+      
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+        
+        Show how to extend the basic differentiator to handle more kinds of
+        expressions.  For instance, implement the differentiation rule
+	for exponentiation
+
+        
+          \[ \frac {d(u^{n})}{dx} = nu^{n-1}\left( \frac{du}{dx}\right) \]
+        
+
+        by adding a new clause to the
+	
+	{\lstinline[mathescape=true]$deriv$}
+	
+	program and defining appropriate
+        
+	functions
+        {\lstinline[mathescape=true]$is_exp$}, {\lstinline[mathescape=true]$base$}, {\lstinline[mathescape=true]$exponent$},
+        and {\lstinline[mathescape=true]$make_exp$}.  (You may use the string {\lstinline[mathescape=true]$"**"$} to denote
+        exponentiation.)
+        Build in the rules that anything raised to the power 0 is 1 and
+        anything raised to the power 1 is the thing itself.
+        
+   
+    
+      \hfill{\hyperref[ex:deriv-exponentiation-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:deriv-exponentiation}]
+
+     
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function base(e) {
+    return head(tail(e));
+}
+function exponent(e) {
+    return head(tail(tail(e)));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAIwIYGcCmAKTBKRAbwChEzEAnTKECpAC01QBNspUYAbXPPAbmIBfYqEiwEiTAA8ADgkxgoPIqXJUadRIxZsO3dlx68Bw0dHhIAtqgDWmAPrSZ2NFgA0k2QRLlK1WkhgIJbImBSOAI4gqNxOHgAMeKq+KQD8iACMySnkAFyIQSFhkdGxsh4ZSTnV6a6Y2dVk+Zww6EoARABUne0edR5O-EIi4OYSrY6y2FLe2eoBiBMyHBTTBABk61pMrDOIALyHXT0mI2IWiMxhMABuuOWIN6gUMKjInPgqvvOaE4Whq0GDRy6XiwJS+QmTxebw+9xkVUavnS2Am6FQlgc0Ne7xwcUezxxHwI6QyiHyiXBOUh6Hs6GC8MRSORiGsdjpDKuLzuLCuYFYgw82Nh+A8VOZjS5t2wqBAAHMFAKvELCSLeOLqYtaTIKHBmCBoIyNTVWbYHPTLNg2Q4dXqDUpLCBOLAZC0woyxRKvUipXdHc6YK6YBBUPyPYhjd6o8LcbxPVHvdb7Lb9YbfVanS63YDlRGE-n8zHifGC4nM4GWiGw4N1QWaZNnEDS4h0kmU-arWbk7rU0onPJFOHI83qkmnNhhyOkXUPZOp9V+2AFH2vIgALSZOPEACQu+Z6ZngoJMNjTPz+QAohRdat2uAbGA4AB3JBOKjodAXKAATxkmEWSC+r0EZ7sygwmEAA}{\usebox\lstbox}!*/
+function make_exp(base, exp) {
+    return number_equal(exp, 0)
+           ? 1
+           : number_equal(exp, 1)
+             ? base
+             : list("**", base, exp);
+}
+function is_exp(x) {
+    return is_pair(x) && head(x) ==="**";
+}
+function deriv(exp, variable) {
+    return is_number(exp)
+           ? 0
+           : is_variable(exp)
+             ? (is_same_variable(exp, variable) ? 1 : 0)
+             : is_sum(exp)
+               ? make_sum(deriv(addend(exp), variable), 
+                          deriv(augend(exp), variable))
+               : is_product(exp)
+                 ? make_sum(make_product(multiplier(exp), 
+                                deriv(multiplicand(exp), 
+                                      variable)), 
+                            make_product(deriv(multiplier(exp), 
+                                               variable), 
+                                multiplicand(exp)))
+                 : is_exp(exp)
+                   ? make_product(make_product(exponent(exp), 
+                                      make_exp(
+                                          base(exp),
+                                          exponent(exp) - 1)),
+			          deriv(base(exp), variable))
+                   : Error("unknown expression type in deriv", 
+		           exp);
+}
+
+\end{JavaScriptClickable}
+
+
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled34}
+
+        Extend the differentiation program to handle sums and products of
+        arbitrary numbers of (two or more) terms.
+        Then the last example above could be expressed as
+      
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+deriv(list("*", "x", "y", list("+", "x", 3)), "x");
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwTglgbgFANhAzgFxgIgFRoDQAI0AeO+AnsQiugNTGHEDMAlI3nYwNxA}{\usebox\lstbox}
+
+
+
+        Try to do this by changing only the
+          representation for sums and products, without changing the {\lstinline[mathescape=true]$deriv$}
+        function
+        at all.  For example, the {\lstinline[mathescape=true]$addend$} of a sum would
+        be the first term, and the {\lstinline[mathescape=true]$augend$} would be the sum of the rest
+        of the terms.
+
+	
+	  
+      \hfill{\hyperref[ex:unlabeled34-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled34}]
+
+
+
+      
+      
+      
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+deriv(list("*", "x", "y", list("+", "x", 3)), "x");
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwTglgbgFANhAzgFxgIgFRoDQAI0AeO+AnsQiugNTGHEDMAlI3nYwNxA}{\usebox\lstbox}
+
+
+
+	
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled35}
+
+        
+        
+        Suppose we want to modify the differentiation program so that it works
+        with ordinary mathematical notation, in which {\lstinline[mathescape=true]$"+"$} and {\lstinline[mathescape=true]$"*"$} are
+        infix rather than prefix operators.  Since the differentiation program
+        is defined in terms of abstract data, we can modify it to work with
+        different representations of expressions solely by changing the
+        predicates, selectors, and constructors that define the representation
+        of the algebraic expressions on which the differentiator is to
+        operate.
+        
+\begin{enumerate}[a.]
+\item{
+            Show how to do this in order to differentiate algebraic
+            expressions presented in infix form, 
+	    
+	    as in this example:
+	    
+\begin{JavaScript}
+list("x", "+", 
+     list(3, "*", 
+          list("x", "+", 
+               list("y", "+", 2))))
+\end{JavaScript}
+
+	    
+	    
+            To simplify the task, assume that {\lstinline[mathescape=true]$"+"$} and {\lstinline[mathescape=true]$"*"$} always
+            take two arguments and that expressions are fully parenthesized.
+          }
+\item{
+            The problem becomes substantially harder if we 
+            allow 
+            
+              
+              
+		provide for avoiding unnecessary lists by assuming that multiplication is done before addition, as in this example:
+		
+\begin{JavaScript}
+list("x", "+", "3", "*", list("x", "+", "y", "+", 2))
+\end{JavaScript}
+
+	      
+	    
+            Can you design appropriate predicates, selectors, and
+            constructors for this notation such that our derivative 
+            program still works?
+          }
+\end{enumerate}
+
+	
+      \hfill{\hyperref[ex:unlabeled35-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled35}]
+
+	  
+\begin{enumerate}[a.]
+\item{
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_sum(a1, a2) {
+    return number_equal(a1, 0)
+           ? a2
+           : number_equal(a2, 0)
+             ?  a1
+             : is_number(a1) && is_number(a2)
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AziZAClQEYAaRVAJgEpEBvAKERcQCdMoQ2kwCAjTG2yYAjiFQAbYuUQAGGs1bLWAfkpUlK5QC5EfZIOFiJ06hQVbty9ZRJXrLPTFzYDRmXQBkXxC7cCQsS0Do4s6qSIANQaoWF6ki5QMhQARFGpFNQ0ANyMAL6MoJCwCH6u+EQAHnRMyhxcPOXYAA6oMGyENYg+iAAWmKgAJoRQ7dI1dAC8M4jpqXmFxdDwSMNDmGAjuLVWDdxIA8OEO4tF4CtlqCAA5pvbu-WcB-2DI2Mw0h-SOzS5BecSqsUBgcC02HAhiBoIRkLJkLQGHtnk13EIROIpLDZApEAAfPH6QLGTHSBEWRRhcIsORxXREwzokxYuEUEiUqnUhF0lR6NEk0ywqhsjmc6koexi1jOVz87HeXz+OUI0VSxDqOGIABUKE0auliESuGSrLmWsyuv+SwupSQ-nBkOhyW6dVY+ya9vanW6vSO73GXT+iBmUzNCwBy1tKBAklgLUSQR2SKejUObxOVsBlyQyBjccSEFQWwzybdKLTx2+owDv0zkeBGzYMAAboRMFUWhRm6gm6h+JJMI8y6nmnL2y1VTZ5HSZdhu73+5g2x3Jyp1IR-LhUMgcPOYH2B8vO4g9wfB+rECREHpLFTZ5Uj6vtBrQXgCIRGy3iEMNsXxzQux7fdFwAxAeTVT9W2uO4-xXQCFwHP5wKcZoHShGF-2QtQQSwN8iDQXC0KdWE8xgeMYCCf8KCw-UWEgkjYzIgsixGKiwNojiWFPEDQJosUCLBCF0OSejc0Y8igj4zjpMQNipJksJuMQ6iFI4sT8xgQtYInJC1T0ABRNgIU6VJwHQMA4AAdyQccOFwXBgSgABPFpMD8JBIMyeTtH-RYgA}{\usebox\lstbox}!*/
+               ? a1 + a2
+               : list(a1, "+", a2);
+}
+function is_sum(x) {
+    return is_pair(x) && head(tail(x)) === "+";
+}
+function addend(s) {
+    return head(s);
+}
+function augend(s) {
+    return head(tail(tail(s)));
+}
+function make_product(m1, m2) {
+    return number_equal(m1, 0) || number_equal(m2, 0)
+           ?  0
+           : number_equal(m1, 1)
+             ? m2
+             : number_equal(m2, 1)
+               ?  m1
+               : is_number(m1) && is_number(m2)
+                 ? m1 * m2
+                 : list(m1, "*", m2);
+}
+function is_product(x) {
+    return is_pair(x) && head(tail(x)) === "*";
+}
+function multiplier(s) {
+    return head(s);
+}
+function multiplicand(s) {
+    return head(tail(tail(s)));
+}
+function deriv(exp, variable) {
+    return is_number(exp)
+        ? 0
+        : is_variable(exp)
+          ? (is_same_variable(exp, variable) ? 1 : 0)
+          : is_sum(exp)
+            ? make_sum(deriv(addend(exp), variable), 
+                       deriv(augend(exp), variable))
+            : is_product(exp)
+              ? make_sum(make_product(multiplier(exp), 
+                             deriv(multiplicand(exp), 
+                                   variable)), 
+                         make_product(deriv(multiplier(
+                                                    exp), 
+                                            variable), 
+                                      multiplicand(exp)))
+              : Error("unknown expression type in deriv",
+                      exp);
+}
+
+\end{JavaScriptClickable}
+
+
+
+    
+    
+	    }
+\item{
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function items_before_first(op, s) {
+    return head(s) === op
+           ? null
+           : pair(head(s), 
+                  items_before_first(op, tail(s)));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDKBTAtgZwPoCNXBwBOq2wMRmUAFHAA4A0imAlIgN4BQiPiJUIIkgAWqAIYATaq0QBeeYnrdeK3gH5EYEABtty1SoBciOmIrVRk6Syb6D9nigw58hEmQpVajRFDPbrFhYAbk4AX05QSFgEZDQsbDFgNCIPShp6JhkuFX5BEXEpGXlZRTo7ew0-GADWCoNjJwSklLSvTN9-a1CIqOh4JHQxAGtSTBB0ajEARiYxACY2HN48oU0J-FTUAEcQMQCZpgAGFnrVDQWzo3X0TewdvYP549OHc54Zq9VGnC1b1CIU2mbAAZCDkL8NgCposvgYLtNEABqRCXN4NRDaGBeQ6IABESLxc0WPU4AHoyajmA9UJBUIpgL4AVhUWAJGUAWIoMRMBCqeN0OTKTBGWI2YowNoAJ7IUVQTHiKgS+ko+ic7lERQQCCCTCRcD9WLY7AC6gADyWdlWSGNpnMFsQYMQcMQAEJENRjVpdNR0BhNtQCUTEBaQuF9dEBqiJBJaUVLblUAI1k0XARiKRyOlA4SsmHegaYkgxCAAOZx6wcK1J-JxZyJZIAto0IN50l9IuIIajbB0IhwCQgaC+2ZdxZVxPJpB-O4PfYjl6IAA+S5us928-Qz0QJxdGh3LuMM6bc4C6FHwJdPA0W6viCPUK2G7P28v6PeXemd54P2wx8B56guCXqPr6sLvvCn6IAAVGO368MYWJeOeTB4tBwZbvmQr8jSdIMkyRAsmK7JqkQXI8nyYgmP2g7QNhIqsiRkoygxYBwMiHJkRqWo6pQEaGjaOB9gOQ40A6yw8NaEK9mYgIOk6IE+n6-yAq2IYhM6BaRrE6A6LAdBYtC2TVlOdYJK4GbNoG6FtuGHZRrp2j6ViEDEZWEl8DWKbxDgLRNlmXhocGrDtoWUaxkQMAAG7UKgZo+FFYiRWIuDaKgCYrF5gl-qBcV0K8lQHg4v6JclqWoLF8UFQ4GiejgmBiH62ClTAKVpZVCVJa15VsBoiLGLu6K-qaeXVW8N4jGMEzUBF0VTDGFajUwLVteltgQe+s0xSW5Zsh1NiICtPVjcV0nCbRNCjd+E09qa3akOdom+npMAGTA0JLc6G3fTwW3PU5r0uW5n3wT9qhHWlQTrWDDj3b2NFPX9jnOe9gIgzDGNvBDa1fZjbzI4DMCuXto1BN+xgAKJEP2qngMMbEAO5IHlJCYJgUZQFKdD0jASBbUSoMGKNPRAA}{\usebox\lstbox}!*/
+function items_after_first(op, s) {
+    return head(s) === op
+           ? tail(s)
+           : items_after_first(op, tail(s);
+}
+function make_sum(a1, a2) {
+    return number_equal(a1, 0)
+           ? a2
+           : number_equal(a2, 0)
+             ?  a1
+             : is_number(a1) && is_number(a2)
+               ? a1 + a2
+               : list(a1, "+", a2);
+}
+// a sequence of terms and operators is a sum
+// if and only if at least one + operator occurs
+function is_sum(x) {
+    return is_pair(x) && 
+           ! (is_null(member("+", x));
+}
+function addend(s) {
+    return items_before_first("+", s);
+}
+function augend(s) {
+    return items_after_first("+", s);
+}
+function make_product(m1, m2) {
+    return number_equal(m1, 0) || number_equal(m2, 0)
+           ?  0
+           : number_equal(m1, 1)
+             ? m2
+             : number_equal(m2, 1)
+               ?  m1
+               : is_number(m1) && is_number(m2)
+                 ? m1 * m2
+                 : list(m1, "*", m2);
+}
+// a sequence of terms and operators is a product
+// if and only if no + operator occurs
+function is_product(x) {
+    return is_pair(x) && is_null(member("+", x); 
+}
+function multiplier(s) {
+    return items_before_first("*", s);
+}
+function multiplicand(s) {
+    return items_after_first("*", s);
+}
+function deriv(exp, variable) {
+    return is_number(exp)
+        ? 0
+        : is_variable(exp)
+          ? (is_same_variable(exp, variable) ? 1 : 0)
+          : is_sum(exp)
+            ? make_sum(deriv(addend(exp), variable), 
+                       deriv(augend(exp), variable))
+            : is_product(exp)
+              ? make_sum(make_product(multiplier(exp), 
+                             deriv(multiplicand(exp), 
+                                   variable)), 
+                         make_product(deriv(multiplier(exp), 
+                                            variable), 
+                             multiplicand(exp)))
+              : Error("unknown expression type in deriv",
+                      exp);
+}
+
+\end{JavaScriptClickable}
+
+
+
+    
+    
+	    }
+\end{enumerate}
+
+	  
+   
+\end{Answer}
+
+      
+      
+      
+      
+
+    
+</SUBSECTION>

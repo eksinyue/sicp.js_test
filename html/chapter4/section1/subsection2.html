@@ -1,0 +1,574 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>4.1.2 
+    Representing
+    
+      
+      Statements and Expressions
+    
+  </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+  
+  
+  
+
+  <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+    
+    The evaluator is reminiscent of the symbolic differentiation program
+    discussed in section~\ref{sec:symbolic-differentiation}.  Both
+    programs operate on symbolic expressions.  In both programs, the
+    result of operating on a compound expression is determined by
+    operating recursively on the pieces of the expression and combining
+    the results in a way that depends on the type of the expression.  In
+    both programs we used 
+    
+    data abstraction to decouple the general rules
+    of operation from the details of how expressions are represented.  In
+    the differentiation program this meant that the same differentiation
+    
+    function
+    could deal with algebraic expressions in prefix form, in
+    infix form, or in some other form.  For the evaluator, this means that
+    the syntax of the language being evaluated is determined solely by the
+    
+    functions
+    that classify and extract pieces of expressions.
+  </p></div>
+
+  <SPLIT>
+    
+    
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+	Here is the specification of the syntax of our language:
+	<UL>
+          <LI>
+	    The self-evaluating items are numbers, strings and boolean values.
+
+	    
+
+	    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_self_evaluating(stmt) {
+    return is_number(stmt) ||
+           is_string(stmt) || 
+           is_boolean(stmt);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfRQUwDbDZgNwENsQjYwBzAChSgFsoBKRAbwChEvEAnTKEDySo0YEPQBGmHrQbNEAHwWduq7iLo8YVWYxZLEKtapES4cbJiJhdzANzsAvkA}{\usebox\lstbox}
+
+
+
+	    
+	    
+          </LI>
+          <LI>
+	    The function {\lstinline[mathescape=true]$is_name$} tests
+	    whether the given statement is a name
+	    expression, and the function
+	    {\lstinline[mathescape=true]$name_of_name$} accesses
+	    the JavaScript string that represents the name.
+	    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_name(stmt) {
+    return is_tagged_list(stmt, "name");
+}
+function name_of_name(stmt) {
+    return head(tail(stmt));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfTAQwLYFMAUKU2UAlIgN4BQitiATrlCPUqmlJgOZe4AmaADaoohYlAA0iAERY800gG4qAXyqhIsBIjm40cYBhwEiJctToMmLJAAtcmPvk4xBYs0tVA}{\usebox\lstbox}
+
+
+
+	    
+
+	    
+	    The function {\lstinline[mathescape=true]$is_name$} 
+	    is defined in terms of the function
+	    {\lstinline[mathescape=true]$is_tagged_list$},
+	    which identifies lists beginning with a designated string that
+	    we call <EM>tag</EM>:
+	    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_tagged_list(stmt, the_tag) {
+    return is_pair(stmt) && head(stmt) === the_tag;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgQwObYKYAmaANqlABQpQC2UANIlABZ4Y4CUiA3gFCL+IATnighBSVGgAOmGIMo0onAGTLELTAQW1OAXn2MWbbAG4eAXyA}{\usebox\lstbox}
+
+
+	    
+          </LI>
+
+          <LI>
+	    Assignments have the form $\textit{name}$ {\lstinline[mathescape=true]$=$} $\textit{value}$:
+
+	    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_assignment(stmt) {
+   return is_tagged_list(stmt, "assignment");
+}
+function assignment_name(stmt) {
+   return head(tail(head(tail(stmt))));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQIYpTA5mAWwFMwoAKFKAqASkQG8AoRFgJyKhFaVTSg1y4iAEzQAbVOUrUANIgBEWHPmKl5NANyMAvo1CRYCREryESUNGAzEKVWg2ZsOXJAAsiGYWX4wxZd57eGL621DThmjp64NDwSCYq5mgAbhhiIESh9kwsiOyc3IgBXj5+pVkRWtpAA}{\usebox\lstbox}!*/
+function assignment_value(stmt) {
+   return head(tail(tail(stmt)));
+}
+
+\end{JavaScriptClickable}
+
+
+
+	    
+	    
+          </LI>
+
+          <LI>
+	    Declarations have the form
+	    
+\begin{JavaScript}
+const $\textit{name}$ = $\textit{value}$;
+\end{JavaScript}
+
+	    or
+	    
+\begin{JavaScript}
+let $\textit{name}$ = $\textit{value}$;
+\end{JavaScript}
+
+	    or
+	    
+\begin{JavaScript}
+function $\textit{name}$($\textit{parameter}_{1}$, $\ldots$, $\textit{parameter}_{n}$) {
+    $\textit{body}$
+}
+\end{JavaScript}
+
+
+	    
+	    
+	    Here, we treat the latter form (function
+	    declarations) as syntactic sugar<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+\begin{JavaScript}
+const $\textit{name}$ = ($\textit{parameter}_{1}$, $\ldots$, $\textit{parameter}_{n}$) => { $\textit{body}$; };
+\end{JavaScript}
+
+
+	    The corresponding syntax functions are the following:
+
+	    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_constant_declaration(stmt) {
+   return is_tagged_list(stmt, "constant_declaration");
+}
+function constant_declaration_name(stmt) {
+   return head(tail(head(tail(stmt))));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQglUCGYpoAmAphADY4BOOsCAFNgLZQCUiA3gFCI+XFQhKSVGlwBzMcUJoyqKAyjMANIgBEmMNjwES5KjXhhVLANycAvp1CRaSDVvxFSFarbRgcjYguZsuPRD4BIUQAC2IcQjpcGDI6cMjonFifVhZ0s0traENEe1xHXRcDBDQANxwyEG8mVg5uXn5BJASomLj21PTTCytwHIRkdArKGBwAIzJiJz1XQy76gKDmodEcCSkZOVSVVRGxyemi-VtjTL6bXP2JqZnitw8vBf9G4JaItuS41qSU2u6ell+rZENdDncToZypVqs8GoEmiEfp1Ov8MhYgA}{\usebox\lstbox}!*/
+function constant_declaration_value(stmt) {
+   return head(tail(tail(stmt)));
+}
+function is_variable_declaration(stmt) {
+   return is_tagged_list(stmt, "variable_declaration");
+}
+function variable_declaration_name(stmt) {
+   return head(tail(head(tail(stmt))));
+}
+function variable_declaration_value(stmt) {
+   return head(tail(tail(stmt)));
+}
+
+\end{JavaScriptClickable}
+
+
+
+	    
+	    
+          
+	    for
+	    
+\begin{JavaScript}
+const $\textit{name}$ = ($\textit{parameter}_{1}$, $\ldots$, $\textit{parameter}_{n}$) => { $\textit{body}$; };
+\end{JavaScript}
+
+
+	    The corresponding syntax functions are the following:
+
+	    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_constant_declaration(stmt) {
+   return is_tagged_list(stmt, "constant_declaration");
+}
+function constant_declaration_name(stmt) {
+   return head(tail(head(tail(stmt))));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQglUCGYpoAmAphADY4BOOsCAFNgLZQCUiA3gFCI+XFQhKSVGlwBzMcUJoyqKAyjMANIgBEmMNjwES5KjXhhVLANycAvp1CRaSDVvxFSFarbRgcjYguZsuPRD4BIUQAC2IcQjpcGDI6cMjonFifVhZ0s0traENEe1xHXRcDBDQANxwyEG8mVg5uXn5BJASomLj21PTTCytwHIRkdArKGBwAIzJiJz1XQy76gKDmodEcCSkZOVSVVRGxyemi-VtjTL6bXP2JqZnitw8vBf9G4JaItuS41qSU2u6ell+rZENdDncToZypVqs8GoEmiEfp1Ov8MhYgA}{\usebox\lstbox}!*/
+function constant_declaration_value(stmt) {
+   return head(tail(tail(stmt)));
+}
+function is_variable_declaration(stmt) {
+   return is_tagged_list(stmt, "variable_declaration");
+}
+function variable_declaration_name(stmt) {
+   return head(tail(head(tail(stmt))));
+}
+function variable_declaration_value(stmt) {
+   return head(tail(tail(stmt)));
+}
+
+\end{JavaScriptClickable}
+
+
+
+	    
+	    
+          </LI>
+
+          <LI>
+	    Function definitions are objects tagged with the
+	    string {\lstinline[mathescape=true]$function_definition$}:
+
+	    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_function_definition(stmt) {
+   return is_tagged_list(stmt, "function_definition");
+}
+function function_definition_parameters(stmt) {
+   return head(tail(stmt));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfVJWC0BMCmwMYM2YAFClALZQCUiA3gFCJsBO+UI7SqaUAIYBzYflxoANqiiUaUADSIARJmjwweQsVIbldANzMAvszVlE5jVqIkyaAA6D2g6l3zsUc2gxZtEnNy8iAAW+IK45EIwkt70hiZm4OoIlsn2BLa6OABGcLgAnnG+rBxcPEhhEVGCMTV1VD50CcZAA}{\usebox\lstbox}!*/
+function function_definition_body(stmt) {
+   return head(tail(tail(stmt)));
+}
+
+\end{JavaScriptClickable}
+
+
+
+	    
+	    
+          </LI>
+
+	  <LI>
+	    {\lstinline[mathescape=true]$return$} statements are objects
+	    tagged with the string 
+	    {\lstinline[mathescape=true]$"return_statement"$}:
+	    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_return_statement(stmt) {
+   return is_tagged_list(stmt, "return_statement");
+}
+function return_statement_expression(stmt) {
+   return head(tail(stmt));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQE4FMog2NFKAQyiwFsswoAKI8qASkQG8AoRT7XfZdEgOYCsAEzQAbVLXpQANIgBE3PASKkKVKAsYBuNgF82oSLASJl+QiTKVqaLAA8ADthQp4YOlAbN2nczgqiAAWWMQiNCQw4l4+ugZAA}{\usebox\lstbox}
+
+
+
+	    
+	    
+          </LI>
+
+          <LI>
+	    Conditional expressions are tagged with 
+	    {\lstinline[mathescape=true]$"conditional_expression"$}
+	    and have a predicate, a consequent, and an alternative. 
+
+	    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_conditional_expression(stmt) {
+   return is_tagged_list(stmt, 
+                "conditional_expression");
+}
+function cond_expr_pred(stmt) {
+   return list_ref(stmt, 1);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQggJjWCCGANmgKYAeADgE4korxgAUKUAtlAJSIDeAUIgJpQQVJKjRR8AcykksaQqijM2UADSJ+A7Tt2IARJjA48YIqUo06DfRwDcvAL69QkU4iPzy1NNTkr2Lj5tIREkRRY0GmAA9UQARnsnF3BoBg9sCx8jFFigrURQ0UQIqCiSGJZ2DQAmJOdXNIQM4yyqNCJlKs4eAqLwpXLK1Q0AZnqgA}{\usebox\lstbox}!*/
+}
+function cond_expr_cons(stmt) {
+   return list_ref(stmt, 2);
+}
+function cond_expr_alt(stmt) {
+   return list_ref(stmt, 3);
+}
+
+\end{JavaScriptClickable}
+
+
+
+	    
+	    
+          </LI>
+
+          <LI>
+	    A sequence is a list of statements.
+
+	    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_sequence(stmt) {
+   return is_tagged_list(stmt, "sequence");
+}
+function make_sequence(stmts) {
+   return list("sequence", stmts);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfRQUwI4k5TAChSgFsoBKRAbwChEGAnTKERpVNKAQwHNfMAEzQAbVFGJkoAGkQAiLLnwRMcigG5aAX1qhIsBIlLcA1pgw48BSeRRU6DRM1btEYkoQWXlq2SVsa2rrg0PBIilYqGDxQmKT4UCg2lDSO9EwsbEgAFpjcgoQ8MCLJFIE6eqGGnHEADlAAnhZK1v6J9ulOma6cYCAiJW12mhUhBhzoItwk0dyx8WASQx2OzlnI6H0DhdzFyXblwfphiMAwjDMkc3EJ+ysZLjl5BcsjR1VIzJcxN4tJyzROmtXEVBlJhtogA}{\usebox\lstbox}!*/
+function sequence_statements(stmt) {   
+   return head(tail(stmt));
+}
+function is_empty_sequence(stmts) {
+   return is_null(stmts);
+}
+function is_last_statement(stmts) {
+   return is_null(tail(stmts));
+}
+function first_statement(stmts) {
+   return head(stmts);
+}
+function rest_statements(stmts) {
+   return tail(stmts);
+}
+
+\end{JavaScriptClickable}
+
+
+
+	    
+
+          </LI>
+
+          <LI>
+	    A block contains its body statement.
+
+	    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_block(stmt) {
+    return is_tagged_list(stmt, "block");
+}
+function make_block(stmt) {
+   return list("block", stmt);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQEYBs4QNYAUKUAtlAJSIDeAUIvYgE4CmUIjSqaUAhgOZ9mAEzRZUUIqSgAaRACJsuPHPIBuGgF8aoSLASISPPM0w58kspVoMWbDojHECCs8tnFL6rTujwki-Ew4IQBPCwpqOhtWdiQAC2YeIQJeGCxw8jVNIA}{\usebox\lstbox}!*/
+function block_body(stmt) {
+    return head(tail(stmt));
+}
+
+\end{JavaScriptClickable}
+
+
+
+	    
+
+          </LI>
+
+
+	  
+          <LI>
+	    A function application is an object tagged with
+	    the string {\lstinline[mathescape=true]$"application"$}.
+	    We provide access functions for the 
+	    {\lstinline[mathescape=true]$operator$}, the
+	    {\lstinline[mathescape=true]$operands$}, and three
+	    functions for iterating  through the operand list:
+
+	    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_application(stmt) {
+   return is_tagged_list(stmt, "application");
+}
+function operator(stmt) {
+   return head(tail(stmt));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQIYAcsBsYQawIAUKUAtlAJSIDeAUIswE4CmUILSqaUGAcwFsAJmnzkylKABpEAImx4CReGHnUA3AwC+DUJGJI4WNiyJwWUqrUbNE7Tt0QALNhhEl+MXNZpbdfXBoNUQTMwwwERQ-WyZWDi4kNw8vDB80jPIbagC9AxCERDA4NHDzKJiTFDj7RyTkdDAQXF9qvKDDUOAYFnIy0wrPdvp4h0TnFOGsGu184KNx-vLI6JIRuwSnJG82mbygA}{\usebox\lstbox}!*/
+function operands(stmt) {
+   return head(tail(tail(stmt)));
+}
+function no_operands(ops) {
+   return is_null(ops);
+}
+function first_operand(ops) {
+   return head(ops);
+}
+function rest_operands(ops) {
+   return tail(ops);
+}
+
+\end{JavaScriptClickable}
+
+
+
+	    
+	  </LI>
+	<hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>In actual
+	    JavaScript, there is a subtle difference between the two
+	    forms. The interpretation of function declaration statements
+	    involves reordering of sequence statements, a topic which 
+	    we prefer to skip at this point.
+            </FOOTNOTE></div></UL>
+      </p></div>
+    
+  </SPLIT>
+
+  <SPLIT>
+    
+    
+      
+    
+  </SPLIT>
+
+  
+  
+  <SPLIT>
+    
+  </SPLIT>
+
+  
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+    
+    
+    
+    Rewrite
+    
+    {\lstinline[mathescape=true]$evaluate$}
+    
+    so that the dispatch is done in data-directed
+    style.  Compare this with the data-directed
+    differentiation
+    function
+    of
+    exercise~\ref{ex:data-directed-differentiation}.
+    (You may use the {\lstinline[mathescape=true]$head$} of a compound expression as the
+    type of the expression, as is appropriate for the syntax implemented
+    in this section.)
+    
+  
+\end{Exercise}
+
+
+  
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+ 
+    
+    
+    Recall the definitions of the special forms
+    {\lstinline[mathescape=true]$&&$}
+    and
+    {\lstinline[mathescape=true]$||$}
+    from chapter~1:
+    <SPLIT>
+      
+      
+	<UL>
+	  <LI>$\textit{expression}_1$ {\lstinline[mathescape=true]$&&$} $\textit{expression}_2$: The expression $\textit{expression}_1$ is evaluated first. If it evaluates to 
+	  {\lstinline[mathescape=true]$false$}, {\lstinline[mathescape=true]$false$}
+	  is returned; the expression $\textit{expression}_2$
+	  is not evaluated.  If it evaluates to {\lstinline[mathescape=true]$true$}, the value
+	  of $\textit{expression}_2$ is returned.  
+	  </LI>
+	  <LI>$\textit{expression}_1$ {\lstinline[mathescape=true]$||$} $\textit{expression}_2$: The expression $\textit{expression}_1$ is evaluated first. If it evaluates to {\lstinline[mathescape=true]$true$},
+	  {\lstinline[mathescape=true]$true$} is returned;
+	  the expression $\textit{expression}_2$
+	  is not evaluated.  If it evaluates to
+	  {\lstinline[mathescape=true]$false$}, the value
+	  of $\textit{expression}_2$ is returned.  
+	  </LI>
+	</UL>
+	Include 
+	{\lstinline[mathescape=true]$&&$} and {\lstinline[mathescape=true]$||$}
+	expressions 
+	by defining appropriate syntax
+	functions
+	and evaluation functions
+	{\lstinline[mathescape=true]$eval_and$}
+	and 
+	{\lstinline[mathescape=true]$eval_or$}
+	
+      
+    </SPLIT>
+  
+\end{Exercise}
+
+
+  <SPLIT>
+    
+  </SPLIT>
+
+  <SPLIT>
+    
+    
+      
+    
+  </SPLIT>
+
+  <SPLIT>
+    
+  </SPLIT>
+
+  <SPLIT>
+    
+  </SPLIT>
+
+  <SPLIT>
+    
+  </SPLIT>
+
+  <SPLIT>
+    
+  </SPLIT>
+
+
+</SUBSECTION>

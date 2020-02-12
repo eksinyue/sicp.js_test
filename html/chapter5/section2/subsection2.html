@@ -1,0 +1,364 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>5.2.2 
+  The Assembler
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+  The assembler transforms the sequence of controller expressions for a
+  machine into a corresponding list of machine instructions, each with
+  its execution
+  function.  Overall, the assembler is much like the
+  evaluators we studied in chapter~4—there is an input language (in
+  this case, the register-machine language) and we must perform an
+  appropriate action for each type of expression in the language.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+  
+  The technique of producing an execution
+  function
+  for each instruction
+  is just what we used in section~\ref{sec:separating-analysis} to speed
+  up the evaluator by separating analysis from runtime execution.  As we
+  saw in chapter~4, much useful analysis of Scheme expressions could be
+  performed without knowing the actual values of variables.  Here,
+  analogously, much useful analysis of register-machine-language
+  expressions can be performed without knowing the actual contents of
+  machine registers.  For example, we can replace references to
+  registers by pointers to the register objects, and we can
+  replace references to labels by pointers to the place in the
+  instruction sequence that the label designates.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+  Before it can generate the instruction execution
+  functions, the
+  assembler must know what all the labels refer to, so it begins by
+  scanning the controller text to separate the labels from the
+  instructions.  As it scans the text, it constructs both a list of
+  instructions and a table that associates each label with a pointer
+  into that list.  Then the assembler augments the instruction list by
+  inserting the execution
+  function
+  for each instruction.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+  The assemble
+  function
+  is the main entry to the assembler.
+  It takes the controller text and the machine model as arguments and
+  returns the instruction sequence to be stored in the model.
+  Assemble calls
+  {\lstinline[mathescape=true]$extract_labels$} to build the initial instruction list
+  and label table from the supplied controller text.  The second argument
+  to {\lstinline[mathescape=true]$extract_labels$} is a
+  function
+  to be called to process these results:
+  This
+  function
+  uses {\lstinline[mathescape=true]$update_insts$} to generate the instruction execution
+  functions
+  and insert them into the instruction list,
+  and returns the modified list.
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function assemble(controller_text, machine) {
+    function receive(insts, labels) {
+        update_insts(insts, labels, machine);
+        return insts;
+    }
+    
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwM6oKYFsBGAbDACggSgCc48CyB9KDADygBpEtkIALGMDASkQBvAFCIxiUJFgJEZDBAwwAbkR6ooqVnmQ4MeVAJHjjiEAAcAJsno01Gwnc2Jtu-a3Zce-ANyiTYuSgQMiRHX2MAXz8xaNkMIJDERnIOKBoXPVRiUgoqDFp6JlY5BWUfYQigA}{\usebox\lstbox}!*/
+    return extract_labels(controller_text, receive);
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+  {\lstinline[mathescape=true]$Extract_labels$}
+  takes as arguments a list text (the sequence of controller
+  instruction expressions) and a receive
+  function.  Receive
+  will be called with two values: (1) a list insts of instruction
+  data structures, each containing an instruction from text; and
+  (2) a table called labels, which associates each label from
+  text
+  with the position in the list insts that the label designates.
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function extract_labels(text, receive) {
+    function helper(insts, labels) { 
+        const next_inst = head(text);
+
+        return is_string(next_inst)
+            ? receive(insts, pair(make_label_entry(next_inst, insts), labels))
+            : receive(pair(make_instruction(next_inst), insts), labels);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwB5QE4ENoH0A2WARsvgM4AUUaUANIhshMjAG7ICUiA3gFCIDEoSLASIAFqQAOyDBRhgyUMvUIlyXbon6DdEBEsRgauBYYC8E5FgAmVGhwDcvHboGMoIDEhhlcSjAUAcwpjdFNFKA5XN10AfgYmFnZ5SJVEKSwYOQBbLABrZAJiUlxkMEwAT1CTMzpEOrIOVRKNaNjYgC5E5jZkCkzsijzCiICQaHgwGvC65oa0+bVSJuddAF8XXQ8vJGp0RHMjxHAbZGAFZBtEAB8bhr8wEHx8e3R2joTGXpSnl-o-vgPl0UOhsHhluQqFlXvsovRJPgZBgnLx1kA}{\usebox\lstbox}!*/
+    }
+
+    return text === undefined || is_null(text)
+        ? receive(null, null)
+        : extract_labels(tail(text), helper);
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+  {\lstinline[mathescape=true]$Extract_labels$} works by sequentially scanning the elements of
+  the text and accumulating the
+  insts and the labels.
+  If an element is a symbol (and thus a label) an appropriate entry is
+  added to the labels table.  Otherwise the element is accumulated
+  onto the insts list.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+  {\lstinline[mathescape=true]$Update_insts$} modifies the instruction list, which initially
+  contains only the text of the instructions, to include the
+  corresponding execution
+  functions:
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function update_insts(insts, labels, machine) {
+    const pc = get_register(machine, "pc");
+    const flag = get_register(machine, "flag");
+    const stack = machine("stack");
+    const ops = machine("operations");
+
+    const set_iep = set_instruction_execution_proc;
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABCADgEwIZQKYH0ZgDOUhAFAcYQDSIA2GARtrdYgLYYQAWB2AlIgDeAKERjEEBMUQoIiALyIA5tii4ATtiUxi2daQ7deNAESyTfANyjxkolETB6ShctUatOnPsM8w2UycMJQtrcQkpB2JOAGtXX15SE2iIGNCbMTtpOBRCeM4-bCScvSx4InSMiPtEQncYbBRXOrUKKHUQaHLcbAAPbAgQWARcFHU4CDDbSPYMGLxG-Pme-sHhsFxQSHWpsU0oEHUkDhRyBQA+WvrG8ioq8IfHp7EOZZu2jq6RnF6ocj47s8gcCgfQmCxASCoVCEv5IdCEU9ZPDEaixEElCi0YiUjEsdjoTlCHwAfdgW1idYAL5AA}{\usebox\lstbox}!*/
+    const make_ep = make_execution_function;
+    return map(i => set_iep(i,
+                            make_ep(instruction_text(i),
+                                    labels,
+                                    machine,
+                                    pc,
+                                    flag,
+                                    stack,
+                                    ops)),
+               insts);
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+  The machine instruction data structure simply pairs the
+  instruction text with the corresponding execution
+  function.
+  The execution
+  function
+  is not yet available when {\lstinline[mathescape=true]$extract_labels$}
+  constructs the instruction, and is inserted later by {\lstinline[mathescape=true]$update_insts$}.
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_instruction(text) {
+    return pair(text, null);
+}
+
+function instruction_text(inst) {
+    return head(inst);
+}
+
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9GYDOUATiNPGABRSYAeUAlIgN4BQi7iRmUIRSADqhhEqtKABpEYEABsZ9ANwsAvixahIsBIjyESZBNmp0KuhszYcuPPogAWmVABNTBBktXrwBpGf1awbFpMCBAA7H4iOAhXQkZWDk5uXiQoIRlY9xU1DR9EfG5cN39yIJoQsNLI6MzJaoh4y3YCqCN02sR6xUQVIA}{\usebox\lstbox}!*/
+function instruction_execution_proc(inst) {
+    return tail(inst);
+}
+
+function set_instruction_execution_proc(inst, proc) {
+    set_tail(inst, proc); 
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+  The instruction text is not used by our simulator, but it is handy to keep
+  around for debugging (see exercise~\ref{ex:reg-machine-instruction-trace}).
+      </p></div>
+
+      <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+  Elements of the label table are pairs:
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_label_entry(label_name, insts) {
+    return pair(label_name, insts);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ANqgI0120zCgCcBPACnyJLFWUwBpEYwBnKLgSkQBvAFCIxiCpiggKSAA6oYFOoWLYmLdpx78A3MIC+QA}{\usebox\lstbox}
+
+
+  Entries will be looked up in the table with
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function lookup_label(labels, label_name) {
+    const val = assoc(label_name, labels);
+
+    return val === undefined
+        ? error(label_name, "Undefined label: ASSEMBLE")
+        : tail(val);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGznA1iADgfWQQwCMBTZACgJOQGcAaFI0nMfAW2IEpEBvAKEQGIICalEQA3fMkQBeRPmrU4ECo2TM2xepVLUOAbl79BAJ2JQQJpJOky7icABNiwGGGKPjgwQH5ExExM4E1UqDXZ6ACIAVTBnV3dHBioALkQAQQBlTIBRAFkAIQAZHMiOL29ENKh8GHIbA14AXyA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  The following register-machine code is ambiguous, because the label
+  here is defined more than once:
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+"start"
+    go_to(label(here)),
+    "here",
+    assign("a", list(const(3))),
+    go_to(label(there)),
+    "here",
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EQZwLghgTmwFAAIkIOYHsD6Y0AoA2EARgKZ44AWxUxAlDQDSLLCXXCPIIQggCWKAOxzAI7BHl7gcAYzQCpAZjoMmSdFlwESZMK1orOLKsXaquPfkJFiJU2fLA4ALMo7J12fEVI5dxum5IwH5s9EA}{\usebox\lstbox}!*/
+    assign("a", list(const(4))),
+    go_to(label(there)),
+    "there",
+
+\end{JavaScriptClickable}
+
+
+
+  With the simulator as written, what will the contents of register a
+  be when control reaches there?  Modify the {\lstinline[mathescape=true]$extract_labels$}
+  function
+  so that the assembler will signal an error if the same label
+  name is used to indicate two different locations.
+      
+\end{Exercise}
+
+      
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>
+    
+    Using the receive
+    function
+    here is a way to get {\lstinline[mathescape=true]$extract_labels$} to effectively return two values—labels and
+    insts—without explicitly making a compound data structure to
+    hold them.  An alternative implementation, which returns an explicit
+    pair of values, is
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function extract_labels(text, receive) { 
+    if (is_null(text)) {
+        return pair(null, null);
+
+    } else {
+        const result = extract_labels(tail(text));
+        const insts = head(result);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwB5QE4ENoH0A2WARsvgM4AUUaUANIhshMjAG7ICUiA3ogFCJBiGMEQUYZXGBD58VGhy7cBQ1YyggMSAA5YYGCtNn0j+DgG4+KwQF8U5ZD2urEEBGSgNkZGZ4C8KOjYeIQk5FR6ctToipYuQm5gHsJJUGSIAQAWyFgAJhSMPvhQFs6qicmhpOkBUJEF3r6l8YIVnmA0uDCpGYjZefIxlmVC6ppIErgeGN0A5oad3R4cI-EA-Ii6+uKpZPRbBgC2WADWyATEpLjIYJgAngvoXan0S2kc9FXkiqsuAFybPQGA4UY5nZ7TEDQeBgR5QCElV67D6IL5kZpCGx8GxAA}{\usebox\lstbox}!*/
+        const labels = tail(result);
+        const next_inst = head(text);
+
+        return is_string(next_inst)
+            ? pair(insts, pair(make_label_entry(next_inst, insts), labels))
+            : pair(pair(make_instruction(next_inst), insts), labels);
+    }
+}
+
+\end{JavaScriptClickable}
+
+
+    which would be called by assemble as follows:
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function assemble_alternative(controller_text, machine) {
+    const result = extract_labels(controller_text);
+    const insts = head(result);
+    const labels = tail(result);
+
+    update_insts(insts, labels, machine);
+
+    return insts;
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwM6oKYFsBGAbDAfWTygwCcxlYA3DACggSnLjwPMLIA8oAaRFmQQAFjDAYAlIgDeAKESLETMKiiJyGVCFKIAvIgy9ywqITzIcGPKkbNW7ClyNRJAbgVKVaxOLWp9RBEMZAATek1tUndPRW91CysbQKhkGDwIrR1XD1jEEAAHUOoiPyhbMtQBROsqwWExCRi8zSgQSl9Vco8AXyA}{\usebox\lstbox}!*/
+}
+
+\end{JavaScriptClickable}
+
+
+
+    
+    
+    
+    You can consider our use of receive as demonstrating an elegant
+    way to return multiple values, or simply an excuse to show off a
+    programming trick.  An argument like receive that is the next
+    function
+    to be invoked is called a <QUOTE>continuation.</QUOTE>  Recall that we
+    also used continuations to implement the backtracking control
+    structure in the amb evaluator in section~\ref{sec:amb-implementation}.</FOOTNOTE></div>
+</SUBSECTION>

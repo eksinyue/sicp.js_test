@@ -1,0 +1,73 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>3.3 Modeling with Mutable Data</a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SECTION>\begin{center}\fbox{\textcolor{red}{Note: this section is a work in progress!}}\end{center}
+    
+    
+
+    <SECTIONCONTENT></SECTIONCONTENT>
+
+    <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+      Chapter~2 dealt with compound data as a means for constructing
+      computational objects that have several parts, in order to model
+      real-world objects that have several aspects.  In that chapter we
+      introduced the discipline of data abstraction, according to which data
+      structures are specified in terms of constructors, which create data
+      objects, and selectors, which access the parts of compound data
+      objects.  But we now know that there is another aspect of data that
+      chapter~2 did not address.  The desire to model systems composed of
+      objects that have changing state leads us to the need to modify
+      compound data objects, as well as to construct and select from them.
+      In order to model compound objects with changing state, we will design
+      data abstractions to include, in addition to selectors and
+      constructors, operations called 
+      
+      <EM>mutators</EM>, which modify data
+      objects.  For instance, modeling a banking system requires us to
+      change account balances.  Thus, a data structure for representing bank
+      accounts might admit an operation
+
+      
+\begin{JavaScript}
+set_balance($\textit{account}$, $\textit{new-value}$)
+\end{JavaScript}
+
+      that changes the balance of the designated account to the designated
+      new value.  Data objects for which mutators are defined are known as
+      <EM>mutable data objects</EM>.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+      Chapter~2 introduced pairs as a general-purpose <QUOTE>glue</QUOTE> for
+      synthesizing compound data.  We begin this section by defining basic
+      mutators for pairs, so that pairs can serve as building blocks for
+      constructing mutable data objects.  These mutators greatly enhance the
+      representational power of pairs, enabling us to build data structures
+      other than the sequences and trees that we worked with in
+      section~\ref{sec:hierarchical-data}.  We also present some examples of
+      simulations in which complex systems are modeled as collections of
+      objects with local state.
+    </p></div>
+
+    
+    &subsection3.3.1;
+
+    
+    &subsection3.3.2;
+
+    
+    &subsection3.3.3;
+        
+    
+    &subsection3.3.4;
+
+    
+    &subsection3.3.5;
+
+  
+</SECTION>

@@ -1,0 +1,98 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>5.1.5 
+  Instruction Summary
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+  
+  
+  A controller instruction in our register-machine language
+  has one of the following forms, where each
+  $\textit{input}_i$ is either {\lstinline[mathescape=true]$reg($}$\textit{register-name}${\lstinline[mathescape=true]$)$}
+  or {\lstinline[mathescape=true]$constant($}$\textit{constant-value}${\lstinline[mathescape=true]$)$}.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+  These instructions were introduced in
+  section~\ref{sec:register-machine-language}:
+  
+  
+  
+  
+  
+  
+  
+  
+\begin{JavaScript}
+assign($\textit{register-name}$, reg($\textit{register-name}$))
+
+assign($\textit{register-name}$, constant($\textit{constant-value}$))
+
+assign($\textit{register-name}$, list(op($\textit{operation-name}$), $\textit{input}_{1}$, $\ldots$, $\textit{input}_{n}$))
+
+perform(list(op($\textit{operation-name}$), $\textit{input}_{1}$, $\ldots$, $\textit{input}_{n}$))
+
+test(list(op($\textit{operation-name}$), $\textit{input}_{1}$, $\ldots$, $\textit{input}_{n}$))
+
+branch(label($\textit{label-name}$))
+
+go_to(label($\textit{label-name}$))
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+  The use of registers to hold labels was introduced in
+  section~\ref{sec:subroutines}:
+  
+\begin{JavaScript}
+assign($\textit{register-name}$, label($\textit{label-name}$))
+
+go_to(reg($\textit{register-name}$))
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+  Instructions to use the stack were introduced in
+  section~\ref{sec:stack-recursion}:
+  
+  
+  
+\begin{JavaScript}
+save($\textit{register-name}$)
+
+restore($\textit{register-name}$)
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+  
+  
+  
+  The only kind of constant-value we have seen so far is a number,
+  but later we will use strings, symbols, and lists.
+  For example,
+  {\lstinline[mathescape=true]$constant("abc")$} is the string {\lstinline[mathescape=true]$"abc"$},
+  
+  {\lstinline[mathescape=true]$constant(list(a, b, c))$} is the list {\lstinline[mathescape=true]$list(a, b, c)$},
+  and {\lstinline[mathescape=true]$constant(null)$} is the empty list.
+  
+      </p></div>
+
+    
+</SUBSECTION>

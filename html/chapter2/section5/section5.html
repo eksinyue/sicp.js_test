@@ -1,0 +1,81 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>2.5 Systems with Generic Operations</a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SECTION>
+
+    <SECTIONCONTENT></SECTIONCONTENT>
+
+    
+    <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+    
+    In the previous section, we saw how to design systems in which data
+    objects can be represented in more than one way.  The key idea is to
+    link the code that specifies the data operations to the several
+    representations by means of generic interface
+    functions.  Now we will
+    see how to use this same idea not only to define operations that are
+    generic over different representations but also to define operations
+    that are generic over different kinds of arguments.  We have already
+    seen several different packages of arithmetic operations: the primitive
+    arithmetic ({\lstinline[mathescape=true]$+$}, {\lstinline[mathescape=true]$-$}, {\lstinline[mathescape=true]$*$}, {\lstinline[mathescape=true]$/$}) built into our
+    language, the rational-number arithmetic ({\lstinline[mathescape=true]$add_rat$}, {\lstinline[mathescape=true]$sub_rat$}, {\lstinline[mathescape=true]$mul_rat$}, {\lstinline[mathescape=true]$div_rat$}) of
+    section~\ref{sec:rationals}, and the complex-number arithmetic that we
+    implemented in section~\ref{sec:data-directed}.  We will now use
+    data-directed techniques to construct a package of arithmetic
+    operations that incorporates all the arithmetic packages we have already
+    constructed.
+    </p></div>
+    <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+    Figure~\ref{fig:generic-system} shows the structure of the system we
+    shall build.  Notice the 
+    
+    abstraction barriers.  From the perspective
+    of someone using <QUOTE>numbers,</QUOTE> there is a single
+    function
+    {\lstinline[mathescape=true]$add$}
+    that operates on whatever numbers are supplied.  The function {\lstinline[mathescape=true]$add$} is part of
+    a generic interface that allows the separate ordinary-arithmetic,
+    rational-arithmetic, and complex-arithmetic packages to be accessed
+    uniformly by programs that use numbers.  Any individual arithmetic
+    package (such as the complex package) may itself be accessed through
+    generic
+    functions
+    (such as {\lstinline[mathescape=true]$add_complex$}) that combine packages
+    designed for different representations (such as rectangular and
+    polar).  Moreover, the structure of the system is additive, so
+    that one can design the individual arithmetic packages separately and
+    combine them to produce a generic arithmetic system.
+    
+
+    <SPLIT>
+      
+      
+        
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch2-Z-G-64}.svg}}
+\caption{Generic arithmetic system.}
+\label{fig:generic-system}
+\end{figure}
+
+      
+    </SPLIT>
+    </p></div>
+
+    
+    &subsection2.5.1;
+
+    
+    &subsection2.5.2;
+
+    
+    &subsection2.5.3;
+
+  
+</SECTION>

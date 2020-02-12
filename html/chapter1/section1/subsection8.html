@@ -1,0 +1,1003 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>1.1.8 
+          
+            
+            
+              Functions
+            
+          
+          as Black-Box Abstractions
+        </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+        <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+              The function {\lstinline[mathescape=true]$sqrt$} is our first example of a process defined by a set of
+              mutually 
+              
+	      defined functions.
+              Notice that the 
+              declaration of {\lstinline[mathescape=true]$sqrt_iter$} is
+              
+              <EM>recursive</EM>; that is, the
+          
+            
+            
+              function
+            
+          
+          is defined in
+              terms of itself.  The idea of being able to define a
+          
+            
+            
+              function
+            
+          
+          in
+              terms of itself may be disturbing; it may seem unclear how such a
+              <QUOTE>circular</QUOTE> definition could make sense at all, much less specify a
+              well-defined process to be carried out by a computer.  This will be
+              addressed more carefully in
+              section~\ref{sec:procedures-and-processes}.  But first let's consider
+              some other important points illustrated by the
+              {\lstinline[mathescape=true]$sqrt$} example.
+        </p></div>
+
+        <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+              
+              Observe that the problem of computing square roots breaks up naturally
+              into a number of subproblems: how to tell whether a guess is good
+              enough, how to improve a guess, and so on.  Each of these tasks is
+              accomplished by a separate
+          function.
+              The entire {\lstinline[mathescape=true]$sqrt$} program
+              can be viewed as a cluster of
+          
+            
+            
+              functions
+            
+          
+          (shown in
+          Figure~\ref{fig:sqrt-decomposition}) that mirrors the
+          decomposition of the problem into subproblems.
+        </p></div>
+
+        <SPLIT>
+          
+          
+            
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch1-Z-G-6}.svg}}
+\caption{Functional decomposition of the
+                {\lstinline[mathescape=true]$sqrt$} program.
+              }
+\label{fig:sqrt-decomposition}
+\end{figure}
+
+          
+        </SPLIT>
+
+        <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+          
+          The importance of this decomposition strategy is not simply that one
+          is dividing the program into parts.  After all, we could take any
+          large program and divide it into parts—the first ten lines, the next
+          ten lines, the next ten lines, and so on.  Rather, it is crucial that
+          each
+          
+            
+            
+              function
+            
+          
+          accomplishes an identifiable task that can be used as a
+          module in defining other
+          functions.
+          
+          For example, when we 
+	  define the	      
+          
+            
+            
+              {\lstinline[mathescape=true]$good_enough$} function
+            
+          
+          in terms of {\lstinline[mathescape=true]$square$}, we are able to
+          regard the {\lstinline[mathescape=true]$square$}
+          
+            
+            
+              function
+            
+          
+          as a
+          
+          <QUOTE>black box.</QUOTE>  We are not at
+          that moment concerned with <EM>how</EM> the
+          
+            
+            
+              function
+            
+          
+          computes its
+          result, only with the fact <EM>that</EM> it computes the square.  The details
+          of how the square is computed can be suppressed, to be considered at a
+          later time.  Indeed, as far as the
+          
+            
+            
+              {\lstinline[mathescape=true]$good_enough$} function
+            
+          
+          is
+          concerned, {\lstinline[mathescape=true]$square$} is not quite a
+          
+            
+            
+              function
+            
+          
+          but rather an
+          abstraction of a
+          function,
+          a so-called
+          
+            
+            
+          
+          
+          <EM>functional abstraction</EM>.
+            
+          
+          At this level of abstraction, any
+          
+            
+            
+              function
+            
+          
+          that computes the square
+          is equally good.
+        </p></div>
+
+        <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+          Thus, considering only the values they return, the following two
+          
+            
+            
+              functions
+            
+          
+          squaring a number should be indistinguishable.
+          Each takes a numerical
+          argument and produces the square of that number as the
+          value.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function square(x) {
+    return x * x;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgXyA}{\usebox\lstbox}
+
+
+          
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function square(x) {
+    return math_exp(double(math_log(x)));
+}
+function double(x) {
+    return x + x;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQFsMoALAfRwIAc8ATOCABGAG3zM27EXADmhIgoDc5AL7lQkWAkQDhY+WUrVa9JAUQBqRAWUqgA}{\usebox\lstbox}
+
+
+        
+          
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function square(x) {
+    return x * x;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgXyA}{\usebox\lstbox}
+
+
+          
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function square(x) {
+    return math_exp(double(math_log(x)));
+}
+function double(x) {
+    return x + x;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQFsMoALAfRwIAc8ATOCABGAG3zM27EXADmhIgoDc5AL7lQkWAkQDhY+WUrVa9JAUQBqRAWUqgA}{\usebox\lstbox}
+
+
+        </p></div>
+
+        <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+          So a
+          
+            
+            
+              function
+            
+          
+          should be able to suppress detail.  The
+          users of the
+          
+            
+            
+              function
+            
+          
+          may not have written the
+          
+            
+            
+              function
+            
+          
+          themselves, but may have obtained it from another programmer as a
+          black box. A user should not need to know how the
+          
+            
+            
+              function
+            
+          
+          is implemented in order
+          to use it.
+          
+        </p></div>
+
+        \subsubsection{
+          Local names
+        
+        
+
+        <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+              One detail of a
+          function's implementation that should not matter to
+              the user of the
+          
+            
+            
+              function
+            
+          
+          is the implementer's choice of names for the
+          
+	    
+	    function's parameters.
+	  
+	  Thus, the following
+          
+            
+            
+              functions
+            
+          
+          should
+              not be distinguishable:
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function square(x) {
+    return x * x;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgXyA}{\usebox\lstbox}
+
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function square(y) {
+    return y * y;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKATwEpEBvAKESsVyhCyQMQCpECBucgXyA}{\usebox\lstbox}
+
+
+          </p></div>
+
+        <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+          This principle—that the meaning of a
+          
+            
+            
+              function
+            
+          
+          should be independent
+          of the parameter names used by its author—seems on the
+          surface to be
+          self-evident, but its consequences are profound.  The simplest
+          consequence is that the parameter names of a
+          
+            
+            
+              function
+            
+          
+          must be local
+          to the body of the
+          
+            
+            
+              function.
+            
+          
+          For example, we used
+          {\lstinline[mathescape=true]$square$} 
+          
+            
+            
+	      in the declaration of	      
+              {\lstinline[mathescape=true]$good_enough$}
+            
+          
+          in our square-root
+          
+            
+            
+              function
+            
+          :
+
+          
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function good_enough(guess, x) {
+    return abs(square(guess) - x) < 0.001;
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAcznAJgfQKZjiZACwApkRsBnCgGkQA8BKRAbwChEPEAnbKELpAEMARhWIUAjiEE9S5KkwC09JgB5EABgB0GjQEYA3KwC+QA}{\usebox\lstbox}
+
+
+        </p></div>
+
+        <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+          The intention of the author of
+          
+            
+            
+              {\lstinline[mathescape=true]$good_enough$}
+            
+          
+          is to determine if
+          the square of the first argument is within a given tolerance of
+          the second argument.  We see that the author of
+          
+            
+            
+              {\lstinline[mathescape=true]$good_enough$}
+            
+          
+          used
+          the name {\lstinline[mathescape=true]$guess$} to refer to the
+          first argument and {\lstinline[mathescape=true]$x$} to
+          refer to the second argument.  The argument of
+          {\lstinline[mathescape=true]$square$} is
+          {\lstinline[mathescape=true]$guess$}.  If the author of
+          {\lstinline[mathescape=true]$square$} used
+          {\lstinline[mathescape=true]$x$} (as above)
+          to refer to that argument, we see that the
+          {\lstinline[mathescape=true]$x$} in
+          
+            
+            
+              {\lstinline[mathescape=true]$good_enough$}
+            
+          
+          must be a different {\lstinline[mathescape=true]$x$} than the one
+          in  {\lstinline[mathescape=true]$square$}.
+          Running the
+          
+            
+            
+              function
+            
+          
+    {\lstinline[mathescape=true]$square$} must
+          not affect the value
+          of {\lstinline[mathescape=true]$x$} that is used by
+          {\lstinline[mathescape=true]$good_enough$},
+          because that value of
+          {\lstinline[mathescape=true]$x$} may be needed by
+          
+            
+            
+              {\lstinline[mathescape=true]$good_enough$}
+            
+          
+          after {\lstinline[mathescape=true]$square$} is done
+          computing.
+        </p></div>
+
+        <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+              If the parameters were not local to the bodies of their respective
+              functions,
+              then the parameter {\lstinline[mathescape=true]$x$} in
+              {\lstinline[mathescape=true]$square$} could be
+              confused with the parameter {\lstinline[mathescape=true]$x$} in
+              {\lstinline[mathescape=true]$good_enough$},
+              and the
+              behavior of
+              
+                
+                
+                  {\lstinline[mathescape=true]$good_enough$}
+                
+              
+              would depend upon which version of
+              {\lstinline[mathescape=true]$square$} we used.  Thus,
+              {\lstinline[mathescape=true]$square$} would not be the black box
+              we desired.
+        </p></div>
+
+        <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+              
+              
+              
+                
+                
+		  A parameter of a
+                  function
+                
+              
+              has a very special role in the
+              
+                
+                
+                  function declaration,
+                
+              
+              in that it doesn't matter what name the
+              
+                
+		
+		  parameter
+		
+	      
+		  has.  Such a name is called
+              
+              
+                
+                
+		  <EM>bound</EM>, and we
+		  say that the function declaration
+                
+              
+              
+              <EM>binds</EM> its
+              
+                
+		
+		  parameters.
+		
+	      
+	      The meaning of a
+              
+                
+                
+                  function declaration is unchanged if a bound name
+                
+              
+              is consistently renamed throughout the
+	      declaration.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>name
+		is not bound, we say that it is
+              
+              <EM>free</EM>.  The
+              set of expressions for which a binding
+	      declares
+	      a name
+	      is called the
+              
+              <EM>scope</EM> of that name.
+              In a
+              
+                
+                
+                  function declaration, the bound names
+                
+              
+              declared as the
+              
+              
+              
+              
+                
+                
+                  parameters of the
+                  function
+                
+              
+              have the body of
+              the
+              
+                
+                
+                  function
+                
+              
+              as their scope.
+        
+		If a name
+		is not bound, we say that it is
+              
+              <EM>free</EM>.  The
+              set of expressions for which a binding
+	      declares
+	      a name
+	      is called the
+              
+              <EM>scope</EM> of that name.
+              In a
+              
+                
+                
+                  function declaration, the bound names
+                
+              
+              declared as the
+              
+              
+              
+              
+                
+                
+                  parameters of the
+                  function
+                
+              
+              have the body of
+              the
+              
+                
+                
+                  function
+                
+              
+              as their scope.
+        </p></div>
+
+        <SPLIT>
+          
+          
+            <div class='permalink'>
+<a name='p11' class='permalink'></a><p>
+              In the declaration of {\lstinline[mathescape=true]$good_enough$} above,
+              {\lstinline[mathescape=true]$guess$} and {\lstinline[mathescape=true]$x$} are
+              bound names but {\lstinline[mathescape=true]$abs$}, and
+              {\lstinline[mathescape=true]$square$} are free.
+              The meaning of {\lstinline[mathescape=true]$good_enough$}
+              should be independent of the names we
+              choose for {\lstinline[mathescape=true]$guess$} and {\lstinline[mathescape=true]$x$}
+              so long as they are distinct and
+              different from {\lstinline[mathescape=true]$abs$}, and
+              {\lstinline[mathescape=true]$square$}.  (If we renamed
+              {\lstinline[mathescape=true]$guess$} to
+              {\lstinline[mathescape=true]$abs$} we would have introduced a bug by
+              
+              
+              
+              <EM>capturing</EM>
+              the name {\lstinline[mathescape=true]$abs$}.
+              It would have changed from free to bound.)  The
+              meaning of {\lstinline[mathescape=true]$good_enough$} is
+              not independent of the choice of its
+              free names, however.  It surely depends upon the fact (external to
+              this declaration) that the symbol {\lstinline[mathescape=true]$abs$} names a
+              function for computing the absolute value of a number.
+              The JavaScript function {\lstinline[mathescape=true]$good_enough$} will
+              compute a different mathematical function if we substitute
+              {\lstinline[mathescape=true]$math_cos$} (JavaScript's cosine function)
+              for {\lstinline[mathescape=true]$abs$} in its declaration.
+              
+            </p></div>
+          
+        </SPLIT>
+
+        \subsubsection{
+          Internal
+	  declarations
+	  and block structure
+        
+        
+
+        <div class='permalink'>
+<a name='p12' class='permalink'></a><p>
+          We have one kind of name isolation available to us so far:
+	  
+                
+                
+		  The parameters of a function
+                
+              
+              are local to the body of the
+              function.  The
+              square-root program illustrates another way in which we would like to
+              control the use of names.
+              
+              The existing program consists of
+              separate
+              
+                
+                
+                  functions
+                
+              :
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function sqrt(x) {
+    return sqrt_iter(1.0, x);
+}
+function sqrt_iter(guess, x) {
+    return good_enough(guess, x)
+           ? guess
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzF0BTKEdJNTAfRikvSwEYA6ABgBpE+ANzEAvsVCRYCFBijNW7AOYhKyZAPxFS5KjTqIlcOABNGlMHBBKAFlhVqNgvDvJuyAfkOr1r9+QAuWSYWNiwYAFsAB3Q4ADdKex8nfE08EXFJaHgkI1NzS2s7B3U07Tc9WiQAQwAjZCw0EGqqJMcCAFpnRAAeRB5eHg4MiXBsmUiY+MSSlIISCuoqxGqE9GqlGeTNRAB6b3aMoA}{\usebox\lstbox}!*/
+           : sqrt_iter(improve(guess, x), x);
+}
+function good_enough(guess, x) {
+    return abs(square(guess) - x) < 0.001;
+}
+function improve(guess, x) {
+    return average(guess, x / guess);
+}
+
+\end{JavaScriptClickable}
+
+
+        </p></div>
+
+        <div class='permalink'>
+<a name='p13' class='permalink'></a><p>
+              The problem with this program is that the only
+              
+                
+                
+                  function
+                
+              
+              that is
+              important to users of {\lstinline[mathescape=true]$sqrt$} is
+              {\lstinline[mathescape=true]$sqrt$}.  The other
+              
+                
+                
+                  functions
+                
+              
+              ({\lstinline[mathescape=true]$sqrt_iter$},
+                  {\lstinline[mathescape=true]$good_enough$},
+              and {\lstinline[mathescape=true]$improve$})
+              only clutter up their minds.  They may not 
+              
+                
+                
+		  declare any other		  
+                  function
+                
+              
+              called
+              
+                
+                
+                  {\lstinline[mathescape=true]$good_enough$}
+                
+              
+              as part of
+              another program to work together
+              with the square-root program,
+              because {\lstinline[mathescape=true]$sqrt$} needs it.  The
+              problem is especially severe in the construction of large systems by
+              many separate programmers.  For example, in the construction of a
+              large library of numerical
+              functions,
+              many numerical functions are
+              computed as successive approximations and thus might have
+              
+                
+                
+                  functions
+                
+              
+              named
+              
+                
+                
+                  {\lstinline[mathescape=true]$good_enough$}
+                
+              
+              and
+              {\lstinline[mathescape=true]$improve$} as auxiliary
+              functions.
+              We would like to localize the
+              subfunctions,
+              hiding them inside
+              {\lstinline[mathescape=true]$sqrt$} so that
+              {\lstinline[mathescape=true]$sqrt$} could coexist with other
+              successive approximations, each having its own private
+              {\lstinline[mathescape=true]$good_enough$} function.
+              To make this possible, we allow a
+              
+                
+                
+                  function
+                
+              
+              to have
+              
+              
+              internal declarations that are local to that
+              function.
+              For example, in the square-root problem we can write
+
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function sqrt(x) {
+    function good_enough(guess, x) {
+        return abs(square(guess) - x) < 0.001;
+    }
+    function improve(guess, x) {
+        return average(guess, x / guess);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzFRJYFEBzOOAEwH0BTMOEWgCy1pFbJkAGkT4ipclPSsoIdEgCGAI2RY0IRTL4ChBALRiCAHkQAGAHRmzARgDcksgF9HFcNHhIYAWwAO6OAA3Vh1BESMJKWlZeSVg9EVaEP4w0RxEAHo6XWQ8BykXKUoPGjRMZhgoVnRQoTSCEijyGTkFOgYWdk4eWvDxVybBsgB+bLCBoaaALhQMKAqqmp9-IOSc+vr88kKyFtjZ8srqrBsrTeInIA}{\usebox\lstbox}!*/
+    }
+    function sqrt_iter(guess, x) {
+        return good_enough(guess, x) 
+                   ? guess
+                   : sqrt_iter(improve(guess, x), x);
+    }
+   return sqrt_iter(1.0, x);
+}
+
+\end{JavaScriptClickable}
+
+
+        </p></div>
+
+        <div class='permalink'>
+<a name='p14' class='permalink'></a><p>
+	  The body of a function—a statement enclosed in curly braces—is called a <EM>block</EM>.
+	  Function declarations nested inside a block are local to that block.
+          This <EM>block structure</EM>
+              is basically the right solution to the simplest
+              name-packaging problem.  But there is a better idea lurking here.  In
+              addition to internalizing the 
+              
+	      declarations of the auxiliary functions,
+              we can simplify them.  Since {\lstinline[mathescape=true]$x$}
+	      is bound in the
+	      
+	      declaration
+	      of
+              {\lstinline[mathescape=true]$sqrt$}, the
+              
+                
+                
+                  functions
+                
+              
+              {\lstinline[mathescape=true]$good_enough$},
+              {\lstinline[mathescape=true]$improve$}, and
+              
+		
+		{\lstinline[mathescape=true]$sqrt_iter$},
+		which are defined internally to
+	      
+              {\lstinline[mathescape=true]$sqrt$}, are in the
+              scope of {\lstinline[mathescape=true]$x$}.
+	      Thus, it is not necessary to pass
+              {\lstinline[mathescape=true]$x$} explicitly to
+              each of these
+              functions.
+              Instead, we allow {\lstinline[mathescape=true]$x$} to be a
+              
+              
+              free
+	      name
+	      in the internal
+	      
+	      declarations,
+	      as shown below.
+	      Then {\lstinline[mathescape=true]$x$}
+              gets its value from the argument with which the enclosing
+              
+                
+                
+                  function
+                
+              
+              {\lstinline[mathescape=true]$sqrt$} is called.  This discipline is called
+              
+              <EM>lexical
+                scoping</EM>.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function sqrt(x) {
+    function good_enough(guess) {
+        return abs(square(guess) - x) < 0.001;
+    }
+    function improve(guess) {
+        return average(guess, x / guess);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzFRJYFEBzOOAEwH0BTMOEWgCy1pFbJkBEuTGJ0rKCHRIAhgCNkWNCDmS+AoQQC0ifIgA8iAAwA6EyYCMAblLkAvvbKVo8JDAC2AB3RwAbqyagsJEzuKS0rKIcoHocrRB-CEANPqIAPR0WsJ2Yk5irtRIaJjMMFCs6MHaYeLkkTJI9ExsHFy8ydrh9eIA-NkhPb3kAFwoGFDlldVevgFJOXh4eWQFZI3RpVMVVVhWFivEDkA}{\usebox\lstbox}!*/
+    }
+    function sqrt_iter(guess) {
+        return good_enough(guess)
+               ? guess
+               : sqrt_iter(improve(guess));
+   }
+   return sqrt_iter(1.0);
+}
+
+\end{JavaScriptClickable}
+
+
+        
+
+              
+              
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function sqrt(x) {
+    function good_enough(guess) {
+        return abs(square(guess) - x) < 0.001;
+    }
+    function improve(guess) {
+        return average(guess, x / guess);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzFRJYFEBzOOAEwH0BTMOEWgCy1pFbJkBEuTGJ0rKCHRIAhgCNkWNCDmS+AoQQC0ifIgA8iAAwA6EyYCMAblLkAvvbKVo8JDAC2AB3RwAbqyagsJEzuKS0rKIcoHocrRB-CEANPqIAPR0WsJ2Yk5irtRIaJjMMFCs6MHaYeLkkTJI9ExsHFy8ydrh9eIA-NkhPb3kAFwoGFDlldVevgFJOXh4eWQFZI3RpVMVVVhWFivEDkA}{\usebox\lstbox}!*/
+    }
+    function sqrt_iter(guess) {
+        return good_enough(guess)
+               ? guess
+               : sqrt_iter(improve(guess));
+   }
+   return sqrt_iter(1.0);
+}
+
+\end{JavaScriptClickable}
+
+
+        </p></div>
+
+        <div class='permalink'>
+<a name='p15' class='permalink'></a><p>
+              We will use block structure extensively to help us break
+              up large programs into tractable pieces.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
+              Algol~60.  It appears in most advanced
+              programming languages and is an important tool for helping to organize
+              the construction of large programs. 
+              
+              
+              
+        
+              The idea of block structure originated with the
+              programming language
+              
+              Algol~60.  It appears in most advanced
+              programming languages and is an important tool for helping to organize
+              the construction of large programs. 
+              
+              
+              
+        </p></div>
+
+      <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>It is not even clear which of these
+            
+              
+              
+                functions
+              
+            
+            is a
+            more efficient implementation.  This depends upon the hardware
+            available.  There are machines for which the <QUOTE>obvious</QUOTE>
+            implementation is the less efficient one.  Consider a machine that has
+            extensive tables of logarithms and antilogarithms stored in a very
+            efficient manner.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>The
+                concept of consistent renaming is actually subtle and difficult to
+                define formally.  Famous logicians have made embarrassing errors
+                here.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Lexical
+                scoping dictates that free
+                
+                
+                
+		  names in a
+                  function
+                
+                
+                are taken to refer to
+                bindings made by enclosing
+              
+                
+                
+                  function declarations;
+                
+              
+                that is, they are looked up in
+                
+                the environment in which the
+              
+                
+                
+                  function was declared.
+                
+              
+              We will see how
+              this works in detail in chapter~3 when we
+	      study environments and the
+              detailed behavior of the interpreter.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Embedded 
+              
+                
+                
+                  declarations must come first in a function
+                
+              
+              body.
+              
+	      The management is not responsible
+              for the consequences of running programs that intertwine
+	      
+                
+		declaration
+	      
+              and use.</FOOTNOTE></div>
+</SUBSECTION>

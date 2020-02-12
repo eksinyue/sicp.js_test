@@ -1,0 +1,545 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>4.3.1 
+  Amb and Search
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+  
+  To extend JavaScript
+  to support nondeterminism, we introduce a new kind of expression called {\lstinline[mathescape=true]$amb$}.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+	The expression
+	
+	{\lstinline[mathescape=true]$amb($}$e_1,\ e_2,\ldots, e_n${\lstinline[mathescape=true]$)$}
+  returns the value of one of the $n$ expressions $e_i$ <QUOTE>ambiguously.</QUOTE>
+  For example, the expression
+
+  
+\begin{JavaScript}
+list(amb(1, 2, 3), amb("a", "b"))
+\end{JavaScript}
+
+
+  can have six possible values:
+  
+\begin{JavaScript}
+list(1, "a") list(1, "b") list(2, "a") list(2, "b") list(3, "a") list(3, "b")
+\end{JavaScript}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+	
+	  
+	  
+	    An application of {\lstinline[mathescape=true]$amb$}
+	  
+	
+	    with a single choice produces an ordinary (single) value.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+  
+	
+	  
+	  
+	    An application of {\lstinline[mathescape=true]$amb$}
+	  
+	
+  with no choices—the expression {\lstinline[mathescape=true]$amb()$}—is an
+  expression with no acceptable values.  Operationally, we can think of
+  {\lstinline[mathescape=true]$amb()$} as an expression that when evaluated causes the
+  computation to <QUOTE>fail</QUOTE>: The computation aborts and no value is
+  produced.  Using this idea, we can express the requirement that a
+  particular predicate expression {\lstinline[mathescape=true]$p$} must be true as follows:
+
+  
+\begin{JavaScript}
+function require(p) {
+    return ! p ? amb() : "some ordinary value";      
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+	With {\lstinline[mathescape=true]$amb$} and {\lstinline[mathescape=true]$require$}, we can implement the
+	
+	
+	{\lstinline[mathescape=true]$an_element_of$} function
+	
+  used above:
+
+  
+\begin{JavaScript}
+function an_element_of(items) {
+    require(! is_null(items));
+    return amb(head(items), an_element_of(tail(items));
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+	
+	An application of {\lstinline[mathescape=true]$an_element_of$}
+	
+	fails if the list is empty.  Otherwise it
+  ambiguously returns either the first element of the list or an element
+  chosen from the rest of the list.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+  We can also express infinite ranges of choices.  The following
+  function
+  potentially returns any integer greater than or equal to
+  some given~$n$:
+
+  
+\begin{JavaScript}
+function an_integer_starting_from(n) {
+    return amb(n, an_integer_starting_from(n + 1));
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+  This is like the stream
+  
+    
+    function
+    {\lstinline[mathescape=true]$integers_starting_from$}
+    
+  described in section~\ref{sec:infinite-streams}, but with an important
+  difference: The stream
+  function
+  returns an object that represents the
+  sequence of all integers beginning with $n$,
+  whereas the {\lstinline[mathescape=true]$amb$}
+  function
+  returns a single integer.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+  
+  Abstractly, we can imagine that evaluating an {\lstinline[mathescape=true]$amb$} expression
+  causes time to split into branches, where the computation continues on
+  each branch with one of the possible values of the expression.  We say
+  that {\lstinline[mathescape=true]$amb$} represents a 
+  
+  <EM>nondeterministic choice point</EM>.
+  If we had a machine with a sufficient number of processors that could
+  be dynamically allocated, we could implement the search in a
+  straightforward way.  Execution would proceed as in a sequential
+  machine, until an {\lstinline[mathescape=true]$amb$} expression is encountered.  At this point,
+  more processors would be allocated and initialized to continue all of
+  the parallel executions implied by the choice.  Each processor would
+  proceed sequentially as if it were the only choice, until it either
+  terminates by encountering a failure, or it further subdivides, or
+  it finishes.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+  
+  On the other hand, if we have a machine that can execute
+  only one process (or a few concurrent processes),
+  we must consider the alternatives sequentially.
+  One could imagine modifying an evaluator
+  to pick at random a branch to follow whenever it encounters a choice
+  point.  Random choice, however, can easily lead to failing values.
+  We might try running the evaluator over and over, making random
+  choices and hoping to find a non-failing value, but it is better to 
+  
+  <EM>
+    systematically search</EM> all possible execution paths.
+  The {\lstinline[mathescape=true]$amb$} evaluator that we will develop and work with in this section
+  implements a systematic search as follows: When the evaluator
+  encounters an application of {\lstinline[mathescape=true]$amb$}, it initially selects the first
+  alternative.  This selection may itself lead to a further choice.  The
+  evaluator will always initially choose the first alternative at each
+  choice point.  If a choice results in a failure, then the evaluator
+  
+  automagically<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
+  <EM>backtracks</EM>
+  to the most recent choice point and tries the next
+  alternative.  If it runs out of alternatives at any choice point, the
+  evaluator will back up to the previous choice point and resume from
+  there.  This process leads to a search strategy known as 
+  
+  
+  <EM>
+    depth-first search</EM> or <EM>chronological backtracking</EM>.<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
+       
+  
+  <EM>backtracks</EM>
+  to the most recent choice point and tries the next
+  alternative.  If it runs out of alternatives at any choice point, the
+  evaluator will back up to the previous choice point and resume from
+  there.  This process leads to a search strategy known as 
+  
+  
+  <EM>
+    depth-first search</EM> or <EM>chronological backtracking</EM>.<a class='superscript' id='footnote-6' href='#footnote-6'>[6]</a>
+      </p></div>
+
+      \subsubsection{
+  Driver loop
+      
+
+      <div class='permalink'>
+<a name='p11' class='permalink'></a><p>
+  
+  The driver loop for the {\lstinline[mathescape=true]$amb$} evaluator
+  has some unusual properties.  It reads an
+  expression and prints the value of the first non-failing execution, as
+  in the
+  
+  example shown above.  If we
+  want to see the value of the next successful execution, we can
+  ask the interpreter to backtrack and attempt to generate a second
+  non-failing execution.
+  
+    
+    
+  This is signaled by typing
+  
+  {\lstinline[mathescape=true]$try-again$}.  If any other input except {\lstinline[mathescape=true]$try-again$}
+  is given, the interpreter will start a new problem, discarding the unexplored
+  alternatives in the previous problem.
+    
+  
+  Here is a sample
+  interaction:
+
+  
+\begin{JavaScript}
+// Amb-Eval input:
+prime_sum_pair(list(1, 3, 5, 8), list(20, 35, 110));
+// Starting a new problem
+// Amb-Eval value:
+[3, [20, null]]
+
+// Amb-Eval input:
+try-again
+// Amb-Eval value:
+[3, [110, null]]
+
+// Amb-Eval input:
+try-again
+// Amb-Eval value:
+[8, [35, null]]
+
+// Amb-Eval input:
+try-again
+// There are no more values of
+prime_sum_pair([1, [3, [5, [8, null]]]], [20, [35, [110, null]]])
+
+// Amb-Eval input:
+prime_sum_pair(list(19, 27, 30), list(11, 36, 58));
+// Starting a new problem
+// Amb-Eval value:
+[30, [11, null]]
+\end{JavaScript}
+
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  
+  Write a
+  
+    
+    function
+    {\lstinline[mathescape=true]$an_integer_between$}
+    
+  
+that returns an integer
+  between two given bounds.  This can be used to implement a
+  function
+  that finds Pythagorean triples,
+  i.e., triples of integers $(i,j,k)$ between the given bounds such
+  that $i \leq j$ and $i^2 + j^2 =k^2$, as follows:
+  
+\begin{JavaScript}
+function a_pythogorean_triple_between(low, high) {      
+    const i = an_integer_between(low, high);
+    const j = an_integer_between(i, high);
+    const k = an_integer_between(j, high);
+    require(i * i + j * j === k * k);
+    return list(i, j, k);
+}
+\end{JavaScript}
+
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  
+  exercise~\ref{ex:stream-pythagorean-triples} discussed how to generate
+  the stream of <EM>all</EM> Pythagorean triples, with no upper bound on the
+  size of the integers to be searched.  Explain why simply replacing
+  
+    
+    
+      {\lstinline[mathescape=true]$an_integer_between$}
+    
+  
+  by
+  
+    
+    
+      {\lstinline[mathescape=true]$an_integer_starting_from$}
+    
+  
+  in the
+  function
+  in
+  exercise~\ref{ex:amb-pythag-triples} is not an adequate way to
+  generate arbitrary Pythagorean triples.  Write a
+  function
+  that
+  actually will accomplish this.  (That is, write a
+  function
+  for which
+  repeatedly typing
+  
+    
+    
+      {\lstinline[mathescape=true]$       $}
+    
+  
+  would in principle eventually
+  generate all Pythagorean triples.)
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  
+  Ben Bitdiddle claims that the following method for generating
+  Pythagorean triples is more efficient than the one in
+  exercise~\ref{ex:amb-pythag-triples}.  Is he correct?  (Hint: Consider
+  the number of possibilities that must be explored.)
+
+  
+\begin{JavaScript}
+function a_pythagorean_triple_between(low, high) {
+    const i = an_integer_between(low, high);
+    const hsq = high * high;
+    const j = an_integer_between(i, high);
+    const ksq = i * i + j * j;
+    require(hsq >= ksq);
+    const k = sqrt(ksq);
+    require(is_integer(k));
+    list(i, j, k);
+}
+\end{JavaScript}
+
+      
+\end{Exercise}
+
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>The idea of {\lstinline[mathescape=true]$amb$} for nondeterministic programming was
+    
+    first described in 1961 by John McCarthy 
+    (see McCarthy 1967).
+    For convenience, we make these expressions look like function applications. This is analogous
+    to the lazy boolean operators, which look like binary operators, but which are treated differently by the evaluator.
+    Applications of {\lstinline[mathescape=true]$amb$} will be treated differently from applications of ordinary
+    primitive functions.
+  </FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>In actuality, the distinction between nondeterministically
+    returning a single choice and returning all choices depends somewhat
+    on our point of view.  From the perspective of the code that uses the
+    value, the nondeterministic choice returns a single value.  From the
+    perspective of the programmer designing the code, the nondeterministic
+    choice potentially returns all possible values, and the computation
+    branches so that each value is investigated separately.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>One might object that this is a hopelessly
+    inefficient mechanism.  It might require millions of processors to
+    solve some easily stated problem this way, and most of the time most
+    of those processors would be idle.  This objection should be taken in
+    the context of history.  Memory used to be considered just such an
+    expensive commodity.  
+    
+    In 1964 a megabyte of RAM cost about \$400,000.
+    Now every personal computer has many megabytes of RAM, and most of the
+    time most of that RAM is unused.  It is hard to underestimate the cost
+    of mass-produced electronics.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>Automagically: <QUOTE>Automatically, but in a way
+      which, for some reason (typically because it is too complicated, or
+      too ugly, or perhaps even too trivial), the speaker doesn't feel like
+      explaining.</QUOTE>  
+    
+    (Steele 1983, Raymond 1993)</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>The 
+    integration of automatic search strategies
+    
+    into programming languages has had a long and checkered history.  The
+    first suggestions that nondeterministic algorithms might be elegantly
+    encoded in a programming language with search and automatic
+    backtracking came from
+    
+    Robert Floyd (1967).  
+    
+    Carl Hewitt
+    (1969) invented a programming language called 
+    
+    Planner that explicitly
+    supported automatic chronological backtracking, providing for a
+    built-in depth-first search strategy.  
+    
+    Sussman, Winograd, and Charniak 
+    (1971) implemented a subset of this language, called 
+    
+    MicroPlanner,
+    which was used to support work in problem solving and robot planning.
+    Similar ideas, arising from logic and theorem proving, led to the
+    genesis in Edinburgh and Marseille of the elegant language 
+    
+    Prolog
+    (which we will discuss in section~\ref{sec:logic-programming}).  After
+    sufficient frustration with automatic search, 
+    
+    McDermott and Sussman
+    (1972) developed a language called 
+    
+    Conniver, which included mechanisms
+    for placing the search strategy under programmer control.  This proved
+    unwieldy, however, and 
+    
+    Sussman and Stallman (1975) found a more
+    tractable approach while investigating methods of symbolic analysis
+    for electrical circuits.  They developed a non-chronological
+    backtracking scheme that was based on tracing out the logical
+    dependencies connecting facts, a technique that has come to be known
+    as 
+    
+    <EM>dependency-directed backtracking</EM>.  Although their method was
+    complex, it produced reasonably efficient programs because it did
+    little redundant search.  
+    
+    Doyle 1979 
+    and McAllester (McAllester 1978, 
+    McAllester 1980)
+    generalized and clarified the methods of Stallman and Sussman,
+    developing a new paradigm for formulating search that is now called
+    
+    <EM>truth maintenance</EM>.  Modern problem-solving systems all
+    use some form of truth-maintenance system as a substrate.  See 
+    
+    Forbus and deKleer 1993 
+    for a discussion of elegant ways to build
+    truth-maintenance systems and applications using truth maintenance.
+    
+    Zabih, McAllester, and Chapman 1987 
+    describes a nondeterministic extension to Scheme that
+    is based on {\lstinline[mathescape=true]$amb$}; it is similar to the interpreter described in
+    this section, but more sophisticated, because it uses
+    dependency-directed backtracking rather than chronological
+    
+    backtracking.  Winston 1992 gives an introduction to both kinds of
+    backtracking.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>The 
+    integration of automatic search strategies
+    
+    into programming languages has had a long and checkered history.  The
+    first suggestions that nondeterministic algorithms might be elegantly
+    encoded in a programming language with search and automatic
+    backtracking came from
+    
+    Robert Floyd (1967).  
+    
+    Carl Hewitt
+    (1969) invented a programming language called 
+    
+    Planner that explicitly
+    supported automatic chronological backtracking, providing for a
+    built-in depth-first search strategy.  
+    
+    Sussman, Winograd, and Charniak 
+    (1971) implemented a subset of this language, called 
+    
+    MicroPlanner,
+    which was used to support work in problem solving and robot planning.
+    Similar ideas, arising from logic and theorem proving, led to the
+    genesis in Edinburgh and Marseille of the elegant language 
+    
+    Prolog
+    (which we will discuss in section~\ref{sec:logic-programming}).  After
+    sufficient frustration with automatic search, 
+    
+    McDermott and Sussman
+    (1972) developed a language called 
+    
+    Conniver, which included mechanisms
+    for placing the search strategy under programmer control.  This proved
+    unwieldy, however, and 
+    
+    Sussman and Stallman (1975) found a more
+    tractable approach while investigating methods of symbolic analysis
+    for electrical circuits.  They developed a non-chronological
+    backtracking scheme that was based on tracing out the logical
+    dependencies connecting facts, a technique that has come to be known
+    as 
+    
+    <EM>dependency-directed backtracking</EM>.  Although their method was
+    complex, it produced reasonably efficient programs because it did
+    little redundant search.  
+    
+    Doyle 1979 
+    and McAllester (McAllester 1978, 
+    McAllester 1980)
+    generalized and clarified the methods of Stallman and Sussman,
+    developing a new paradigm for formulating search that is now called
+    
+    <EM>truth maintenance</EM>.  Modern problem-solving systems all
+    use some form of truth-maintenance system as a substrate.  See 
+    
+    Forbus and deKleer 1993 
+    for a discussion of elegant ways to build
+    truth-maintenance systems and applications using truth maintenance.
+    
+    Zabih, McAllester, and Chapman 1987 
+    describes a nondeterministic extension to Scheme that
+    is based on {\lstinline[mathescape=true]$amb$}; it is similar to the interpreter described in
+    this section, but more sophisticated, because it uses
+    dependency-directed backtracking rather than chronological
+    
+    backtracking.  Winston 1992 gives an introduction to both kinds of
+    backtracking.</FOOTNOTE></div>
+</SUBSECTION>

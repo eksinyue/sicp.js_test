@@ -1,0 +1,183 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>5.4.3 
+  Conditionals, Assignments, and Definitions
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+  
+  As with the metacircular evaluator, special forms are handled by
+  selectively evaluating fragments of the expression.  For an {\lstinline[mathescape=true]$if$}
+  expression, we must evaluate the predicate and decide, based on the
+  value of predicate, whether to evaluate the consequent or the
+  alternative.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+  Before evaluating the predicate, we save the {\lstinline[mathescape=true]$if$} expression
+  itself so that we can later extract the consequent or alternative.  We
+  also save the environment, which we will need later in order to
+  evaluate the consequent or the alternative, and we save {\lstinline[mathescape=true]$continue$}, which we will need later in order to return to the
+  evaluation of the expression that is waiting for the value of the {\lstinline[mathescape=true]$if$}.
+
+  
+\begin{JavaScript}
+"ev_if",
+          save("exp"),                    // save expression for later
+          save("env"),
+          save("continue"),
+          assign("continue", label("ev_if_decide")),
+          assign("exp", op("if_predicate"), reg("exp")),
+          go_to(label("eval_dispatch")),  // evaluate the predicate
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+  When we return from evaluating the predicate, we test whether it was
+  true or false and, depending on the result, place either the
+  consequent or the alternative in {\lstinline[mathescape=true]$exp$} before going to {\lstinline[mathescape=true]$eval_dispatch$}.  Notice that restoring {\lstinline[mathescape=true]$env$} and {\lstinline[mathescape=true]$continue$}
+  here sets up {\lstinline[mathescape=true]$eval_dispatch$} to have the correct environment and
+  to continue at the right place to receive the value of the {\lstinline[mathescape=true]$if$}
+  expression. 
+
+  
+\begin{JavaScript}
+"ev_if_decide",
+          restore("continue"),
+          restore("env"),
+          restore("exp"),
+          test(op("is_true"), reg("val")),
+          branch(label("ev_if_consequent")),
+
+      "ev_if_alternative",
+          assign("exp", op("if_alternative"), reg("exp")),
+          go_to(label("eval_dispatch")),
+
+      "ev_if_consequent",
+          assign("exp", op("if_consequent"), reg("exp")),
+          go_to(label("eval_dispatch")),
+\end{JavaScript}
+
+      </p></div>
+
+      \subsubsection{ 
+  Assignments and definitions
+      
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+  
+  Assignments are handled by {\lstinline[mathescape=true]$ev_assignment$}, which is reached from
+  {\lstinline[mathescape=true]$eval_dispatch$} with the assignment expression in {\lstinline[mathescape=true]$exp$}.  The code at {\lstinline[mathescape=true]$ev_assignment$} first evaluates the value part of the expression and
+  then installs the new value in the environment.  {\lstinline[mathescape=true]$Set_variable_value$} is assumed to be available as a machine
+  operation.
+
+  
+\begin{JavaScript}
+"ev_assignment",
+          assign("unev", op("assignment_variable"), reg("exp")),
+          save("unev"),                   // save variable for later
+          assign("exp", op("assignment_value"), reg("exp")),
+          save("env"),
+          save("continue"),
+          assign("continue", label("ev_assignment_1")),
+          go_to(label("eval_dispatch")),  // evaluate the assignment value
+
+      "ev_assignment_1",
+          restore("continue"),
+          restore("env"),
+          restore("unev"),
+          perform(op("set_variable_value"), reg("unev"), reg("val"), reg("env")),
+          assign("val", const("ok")),
+          go_to(reg("continue")),
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+  
+  Definitions are handled in a similar way:
+  
+\begin{JavaScript}
+"ev-definition",
+          assign("unev", op("definition-variable"), reg("exp")),
+          save("unev"),                   // save variable for later
+          assign("exp", op("definition-value"), reg("exp")),
+          save("env"),
+          save("continue"),
+          assign("continue", label("ev-definition-1")),
+          go_to(label("eval-dispatch")),  // evaluate the definition value
+
+      "ev-definition-1",
+          restore("continue"),
+          restore("env"),
+          restore("unev"),
+          perform(op("define-variable"), reg("unev"), reg("val"), reg("env")),
+          assign("val", const("ok")),
+          go_to(reg("continue")),
+\end{JavaScript}
+
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  
+  
+  Extend the evaluator to handle derived expressions such as {\lstinline[mathescape=true]$cond$},
+  {\lstinline[mathescape=true]$let$}, and so on (section~\ref{sec:representing-expressions}).
+  You may <QUOTE>cheat</QUOTE> and assume that the syntax
+  transformers such as {\lstinline[mathescape=true]$cond->if$} are available as machine
+  operations.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+      
+  
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  Implement {\lstinline[mathescape=true]$cond$} as a new basic special form without
+  reducing it to {\lstinline[mathescape=true]$if$}.  You will have to construct a loop that tests
+  the predicates of successive {\lstinline[mathescape=true]$cond$} clauses until you find one
+  that is true, and then use {\lstinline[mathescape=true]$ev-sequence$} to evaluate the actions
+  of the clause.
+  
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  
+  Modify the evaluator so that it uses normal-order evaluation,
+  based on the lazy evaluator of section~\ref{sec:lazy-evaluation}.
+      
+\end{Exercise}
+
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>This isn't really cheating.  In an actual
+    implementation built from scratch, we would use our explicit-control
+    evaluator to interpret a <SPLIT>JavaScript</SPLIT> program that performs source-level
+    transformations {\lstinline[mathescape=true]$$} in a syntax phase that runs before
+    execution.</FOOTNOTE></div>
+</SUBSECTION>

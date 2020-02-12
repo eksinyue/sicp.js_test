@@ -1,0 +1,164 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>2.4 Multiple Representations for Abstract Data</a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SECTION>
+
+    <SECTIONCONTENT></SECTIONCONTENT>
+
+    
+    
+    
+
+    <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+    We have introduced data abstraction, a methodology for structuring
+    systems in such a way that much of a program can be specified
+    independent of the choices involved in implementing the data objects
+    that the program manipulates.  For example, we saw in
+    section~\ref{sec:rationals} how to separate the task of designing a
+    program that uses rational numbers from the task of implementing
+    rational numbers in terms of the computer language's primitive
+    mechanisms for constructing compound data.  The key idea was to erect
+    an abstraction barrier—in this case, the selectors and constructors
+    for rational numbers ({\lstinline[mathescape=true]$make_rat$}, {\lstinline[mathescape=true]$numer$}, {\lstinline[mathescape=true]$denom$})—that
+    isolates the way rational numbers are used from their underlying
+    representation in terms of list structure.  A similar abstraction
+    barrier isolates the details of the
+    functions
+    that perform rational
+    arithmetic ({\lstinline[mathescape=true]$add_rat$}, {\lstinline[mathescape=true]$sub_rat$}, {\lstinline[mathescape=true]$mul_rat$}, and {\lstinline[mathescape=true]$div_rat$}) from the <QUOTE>higher-level</QUOTE>
+    functions
+    that use rational
+    numbers.  The resulting program has the structure shown in
+    figure~\ref{fig:abstraction-barriers}.
+    </p></div>
+    <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+    These data-abstraction barriers are powerful tools for controlling
+    complexity.  By isolating the underlying representations of data
+    objects, we can divide the task of designing a large program into
+    smaller tasks that can be performed separately.  But this kind of data
+    abstraction is not yet powerful enough, because it may not always make
+    sense to speak of <QUOTE>the underlying representation</QUOTE> for a data object.
+    </p></div>
+    <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+    For one thing, there might be more than one useful representation for
+    a data object, and we might like to design systems that can deal with
+    multiple representations.  To take a simple example, complex numbers
+    may be represented in two almost equivalent ways: in rectangular form
+    (real and imaginary parts) and in polar form (magnitude and angle).
+    Sometimes rectangular form is more appropriate and sometimes polar
+    form is more appropriate.  Indeed, it is perfectly plausible to
+    imagine a system in which complex numbers are represented in both
+    ways, and in which the
+    functions
+    for manipulating complex numbers work
+    with either representation.
+    </p></div>
+    <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+    More importantly, programming systems are often designed by many
+    people working over extended periods of time, subject to requirements
+    that change over time.  In such an environment, it is simply not
+    possible for everyone to agree in advance on choices of data
+    representation.  So in addition to the data-abstraction barriers that
+    isolate representation from use, we need abstraction barriers that
+    isolate different design choices from each other and permit different
+    choices to coexist in a single program.  Furthermore, since large
+    programs are often created by combining pre-existing modules that were
+    designed in isolation, we need conventions that permit programmers to
+    incorporate modules into larger systems 
+    
+    <EM>additively</EM>, that is,
+    without having to redesign or reimplement these modules.
+    </p></div>
+    <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+    In this section, we will learn how to cope with data that may be
+    represented in different ways by different parts of a program.  This
+    requires constructing 
+    
+    
+    <EM>generic
+      functions</EM>—functions
+    that can
+    operate on data that may be represented in more than one way.  Our
+    main technique for building generic
+    functions
+    will be to work in terms
+    of data objects that have 
+    
+    <EM>type tags</EM>, that is, data objects
+    that include explicit information about how they are to be processed.
+    We will also discuss 
+    
+    <EM>data-directed</EM> programming, a powerful and
+    convenient implementation strategy for additively assembling systems
+    with generic operations.
+    </p></div>
+    <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+    We begin with the simple complex-number example. We will see how
+    type tags and data-directed style enable us to design separate
+    rectangular and polar representations for complex numbers while
+    maintaining the notion of an abstract <QUOTE>complex-number</QUOTE> data object.
+    
+    
+    We will accomplish this by defining arithmetic
+    functions
+    for complex
+    numbers ({\lstinline[mathescape=true]$add_complex$}, {\lstinline[mathescape=true]$sub_complex$}, {\lstinline[mathescape=true]$mul_complex$}, and
+    {\lstinline[mathescape=true]$div_complex$}) in terms of generic selectors that access parts of
+    a complex number independent of how the number is represented.  The
+    resulting complex-number system, as shown in
+    figure~\ref{fig:complex-system}, contains two different kinds of
+    
+    abstraction barriers.  The <QUOTE>horizontal</QUOTE> abstraction barriers play
+    the same role as the ones in
+    figure~\ref{fig:abstraction-barriers}.  They isolate <QUOTE>higher-level</QUOTE>
+    operations from <QUOTE>lower-level</QUOTE> representations.  In addition, there
+    is a <QUOTE>vertical</QUOTE> barrier that gives us the ability to separately
+    design and install alternative representations.
+    <SPLIT>
+      
+      
+    
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch2-Z-G-54}.svg}}
+\caption{Data-abstraction barriers in the complex-number system.}
+\label{fig:complex-system}
+\end{figure}
+
+      
+    </SPLIT>
+    </p></div>
+    <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+    In section~\ref{sec:generic-operators} we will show how to use
+    type tags and data-directed style to develop a generic arithmetic
+    package.  This provides
+    functions
+    ({\lstinline[mathescape=true]$add$}, {\lstinline[mathescape=true]$mul$}, and so on)
+    that can be used to manipulate all sorts of <QUOTE>numbers</QUOTE> and can be
+    easily extended when a new kind of number is needed.
+    In section~\ref{sec:symbolic-algebra}, we'll show how to use generic
+    arithmetic in a system that performs symbolic algebra.
+    </p></div>
+
+    
+    &subsection2.4.1;
+
+    
+    &subsection2.4.2;
+
+    
+    &subsection2.4.3;
+
+  
+</SECTION>

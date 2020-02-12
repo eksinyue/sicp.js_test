@@ -1,0 +1,274 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>5.2.4 
+  Monitoring Machine Performance
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+  
+  Simulation is useful not only for verifying the correctness of a
+  proposed machine design but also for measuring the machine's
+  performance.  For example, we can install in our simulation program a
+  <QUOTE>meter</QUOTE> that measures the number of stack operations used in a
+  computation.  To do this, we modify our simulated stack to keep track
+  of the number of times registers are saved on the stack and the
+  maximum depth reached by the stack, and add a message to the stack's
+  interface that prints the statistics, as shown below.
+  We also add an operation to the basic machine model to print the
+  stack statistics, by initializing {\lstinline[mathescape=true]$the_ops$} in {\lstinline[mathescape=true]$make_new_machine$} to
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+list(list("initialize-stack", () => stack("initialize")),
+     list("print-stack-statistics", () => stack("print-statistics")));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYSwzgLgFKlQRCAdiCICGoBeBTAtJOgMYDW8ANAARQCUlAvAHyWGkLKobY7w03kAoSsOGxo8AA4AnZBAIRiJeejSQQRMBWp0mLBW0kykcwqrQbefANxA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+  Here is the new version of {\lstinline[mathescape=true]$make_stack$}:
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function make_stack() { 
+    let s = null;
+    let number_pushes = 0;
+    let max_depth = 0;
+    let current_depth = 0;
+
+    function push(x) {
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AzlVCdACgEpEBvRAKETsQBtMpFdEBeRMEBhgblr0mLbsgBGmAE7YADiFwALTG04AGAfUbMUqAB7YAJphlQFHROsF1hiCCEmTMYKIeOnzlq4lCRYCRHKKxLrkFF6aKgGoMJLBADSspBqa9KIS0oFKkWlSsvJZiADUiACMySm29o7OriZmnHYOTi5GdUWl5Slo+q3unGim2N3EjdUtbgoJAwpDekleAL7UXj7Q8EgycDJklOH0MMCIxDC42Ny8xLikoXsVUpJwsQBEAKLIJgCerAREAFyIAAUAPIAp7zW6IBaITAMXCYXYVCoQBD4RBQLbmJSoAyXeaIlKRAgwBi4zr40bNWp9SpNGq9MwAWg6y3xmkcUHsSHRMjJ9CWmiWK3Aa38MDAMFgqAYMAAXpgdmF8dkePwITkMvllB5eXRulT6hYdTSxvrtSzEezOYgngYEJgnp1BZpVn4NpIxS58KhYPgYBBcAqIQYTjIGKgPsRCHZkDxvfLiGIEqhyOwAHzfd1gADmBwjyfaiYhrOL0vwxCeAB0wE8Ek90QQGAzMlrODWuCBxLlm7g4kXi-26JXq7XujAY8gGfTzG29fTrni+ea6C71ohg7gZN6IApiMhlLhUFnMDd8ZbJEg97gD0eOOxW5knn26AB+AL5J+If6X6-wu-3raPgOr6bNspAfl++6Hr+d7WmKEowFKsr2h+r5wZK0pymQ4EoJBN5-taMiZlADJej6sD+oB-bAUReAEGRfoBmBA7-Pcjy7rhmC1gAqmA6BgHAADuSCOAAjiAyhQP8ADKAAqACCADCADSYKOkuiBnkg66blA24CAsQA}{\usebox\lstbox}!*/
+        s = pair(x, s);
+        number_pushes = number_pushes + 1;
+        current_depth = current_depth + 1;
+        max_depth = math_max(current_depth, math_max);
+    }
+
+    function pop() {
+        if (is_null(s)) {
+            error("Empty stack: POP");
+
+        } else {
+            const top = head(s);
+            s = tail(s);
+            current_depth = current_depth - 1;
+
+            return top;
+        }
+    }
+
+    function initialize() {
+        s = null;
+        number_pushes = 0;
+        max_depth = 0;
+        current_depth = 0;
+
+        return "done";
+    }
+
+    function print_statistics() {
+        display(accumulate((b, a) => stringify(a) + b,
+                           list("\n", "total-pushes = ", number_pushes,
+                                "\n", "maximum-depth = ", max_depth)));
+    }
+
+    function dispatch(message) {
+        return message === "push"
+            ? push
+            : message === "pop"
+            ? pop()
+            : message === "initialize"
+            ? initialize()
+            : message === "print-statistics"
+            ? print_statistics()
+            : error(message, "Unknown request: STACK");
+    }
+
+    return dispatch;
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+  Exercises~\ref{ex:instruction-count} through~\ref{ex:breakpoints}
+  describe other useful monitoring and debugging features that can be
+  added to the register-machine simulator.
+      </p></div>
+      
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  Measure the number of pushes and the maximum stack depth required to
+  compute $n!$ for various small values of $n$ using the factorial
+  machine shown in Figure~\ref{fig:fact-machine}.  From your data
+  determine formulas in terms of $n$ for the total number of push
+  operations and the maximum stack depth used in computing $n!$ for any
+  $n > 1$. Note that each of these is a linear function of $n$ and is
+  thus determined by two constants.  In order to get the statistics
+  printed, you will have to augment the factorial machine with instructions to
+  initialize the stack and print the statistics.
+  You may want to also modify the
+  machine so that it repeatedly reads a value for $n$, computes the
+  factorial, and prints the result (as we did for the GCD machine in
+  figure~\ref{fig:gcd-with-io}), so that you will not have to repeatedly
+  invoke {\lstinline[mathescape=true]$get_register_contents$}, {\lstinline[mathescape=true]$set_register_contents$}, and
+  start.
+  
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  Add 
+  
+  <EM>instruction counting</EM> to the register machine simulation.
+  That is, have the machine model keep track of the number of
+  instructions executed.  Extend the machine model's interface to accept
+  a new message that prints the value of the instruction count and
+  resets the count to zero.
+  
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  Augment the simulator to provide for 
+  
+  
+  <EM>instruction tracing</EM>.
+  That is, before each instruction is executed, the simulator should print
+  the text of the instruction.  Make the machine model accept {\lstinline[mathescape=true]$trace_on$} and
+  {\lstinline[mathescape=true]$trace_off$} messages to turn tracing on and off.
+  
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  Extend the instruction tracing of
+  exercise~\ref{ex:reg-machine-instruction-trace} so that before
+  printing an instruction, the simulator prints any labels that
+  immediately precede that instruction in the controller sequence.  Be
+  careful to do this in a way that does not interfere with instruction
+  counting (exercise~\ref{ex:instruction-count}).
+  You will have to make the simulator retain the necessary label information.
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  
+  Modify the {\lstinline[mathescape=true]$make_register$}
+  function
+  of
+  section~\ref{sec:machine-model} so that registers can be traced.
+  Registers should accept messages that turn tracing on and off.  When a
+  register is traced, assigning a value to the register should print the
+  name of the register, the old contents of the register, and the new
+  contents being assigned.  Extend the interface to the machine model
+  to permit you to turn tracing on and off for designated machine registers.
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  Alyssa P. Hacker wants a 
+  
+  <EM>breakpoint</EM> feature in the simulator to
+  help her debug her machine designs.  You have been hired to install
+  this feature for her.  She wants to be able to specify a place in the
+  controller sequence where the simulator will stop and allow her to
+  examine the state of the machine.  You are to implement a
+  function
+
+  
+\begin{JavaScript}
+set_breakpoint($machine$, $label$, $n$);
+\end{JavaScript}
+
+  that sets a breakpoint just before the $n$th instruction after the
+  given label.  For example,
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+set_breakpoint(gcd_machine, "test-b", 4);
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4UwLg+gRgTiCGBrADgewJYDswAoDmAxgCYQC28BAFliADQAEARGCMGALRSMMAsAlAG4gA}{\usebox\lstbox}
+
+
+  installs a breakpoint in {\lstinline[mathescape=true]$gcd_machine$} just before the
+  assignment to register a.  When the simulator reaches the
+  breakpoint it should print the label and the offset of the breakpoint
+  and stop executing instructions.  Alyssa can then use {\lstinline[mathescape=true]$get_register_contents$} and {\lstinline[mathescape=true]$set_register_contents$} to manipulate
+  the state of the simulated machine.  She should then be able to
+  continue execution by saying
+
+  
+\begin{JavaScript}
+proceed_machine($machine$);
+\end{JavaScript}
+
+  She should also be able to remove a specific breakpoint by means of
+
+  
+\begin{JavaScript}
+cancel_breakpoint($machine$, $label$, $n$);
+\end{JavaScript}
+
+  or to remove all breakpoints by means of
+
+  
+\begin{JavaScript}
+cancel_all_breakpoints($machine$);
+\end{JavaScript}
+
+      
+\end{Exercise}
+
+      
+      
+      
+
+    
+</SUBSECTION>

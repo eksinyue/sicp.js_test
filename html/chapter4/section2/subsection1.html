@@ -1,0 +1,292 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>4.2.1 
+    Normal Order and Applicative Order
+  </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+  
+
+  <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+    
+    
+    In section~\ref{sec:elements-of-programming}, where we began our
+    discussion of models of evaluation, we noted that
+    
+    JavaScript
+    is an <EM>
+    applicative-order</EM> language, namely, that all the arguments to
+    
+    JavaScript
+    
+    functions
+    are evaluated when the
+    
+    function
+    is applied.  In
+    contrast, <EM>normal-order</EM> languages delay evaluation of
+    
+    function
+    arguments until the actual argument values are needed. Delaying evaluation of
+    
+    function
+    arguments until the
+    last possible moment (e.g., until they are required by a primitive
+    operation) is called 
+    
+    <EM>lazy evaluation</EM>.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+    function
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function try_me(a, b) {
+    return a === 0 ? 1 : b;	
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABFATgTwPoFsCmAKAQwBpEAjASkQG8AoRexFHKEFJAxAXm8QAZEA-IgCMiAFxkA3AEgaAXyA}{\usebox\lstbox}
+
+
+  
+    Consider the
+    
+    function
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function try_me(a, b) {
+    return a === 0 ? 1 : b;	
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABFATgTwPoFsCmAKAQwBpEAjASkQG8AoRexFHKEFJAxAXm8QAZEA-IgCMiAFxkA3AEgaAXyA}{\usebox\lstbox}
+
+
+  </p></div>
+
+  <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+    Evaluating
+    
+      
+      {\lstinline[mathescape=true]$try_me(0, head(null));$}
+    
+    generates an error in
+    
+      
+      JavaScript.
+    
+    With lazy evaluation, there would be no error.  Evaluating the expression
+    would return 1, because the argument
+    
+      
+      {\lstinline[mathescape=true]$head(null)$}
+    
+    would never be evaluated.
+  </p></div>
+
+  <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+    An example that exploits lazy evaluation is the definition of a
+    function
+    {\lstinline[mathescape=true]$unless$}
+
+    
+
+    that can be used in expressions such as
+
+    
+\begin{JavaScript}
+unless(xs === null,
+       head(xs),	
+       display("error: xs should not be null"));
+\end{JavaScript}
+
+  </p></div>
+
+  <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+    This won't work in an applicative-order language because both the
+    usual value and the exceptional value will be evaluated before
+    {\lstinline[mathescape=true]$unless$}
+    is called (compare exercise~\ref{ex:new-if}).
+    An advantage of lazy evaluation is that some
+    
+    functions,
+    such as {\lstinline[mathescape=true]$unless$}, can do useful computation
+    even if evaluation of some of their arguments would produce errors or
+    would not terminate.
+  </p></div>
+
+  <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+    If the body of a
+    
+    function
+    is entered before an argument has been evaluated we say that the
+    
+    function
+    is 
+    
+    <EM>non-strict</EM> in that
+    argument.  If the argument is evaluated before the body of the
+    
+    function
+    is entered we say that the
+    
+    function
+    is 
+    
+    <EM>strict</EM> in that
+    argument.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+  </p></div>
+
+  <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+    In a purely applicative-order language, all
+    
+    functions
+    are strict in
+    each argument.  In a purely normal-order language, all compound
+    
+    functions
+    are non-strict in each argument, and primitive
+    
+    functions
+    may be
+    either strict or non-strict.  There are also languages (see
+    exercise~\ref{ex:user-controlled-strictness}) that give programmers
+    detailed control over the strictness of the
+    
+    functions
+    they define.
+  </p></div>
+
+  <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+    A striking example of a
+    
+    function
+    that can usefully be made non-strict
+    is
+    
+    {\lstinline[mathescape=true]$pair$}
+    (or, in general, almost any constructor for data structures).
+    One can do useful computation, combining elements to form
+    data structures and operating on the resulting data structures,
+    even if the values of the elements are not known.  It makes perfect
+    sense, for instance, to compute the length of a list without knowing
+    the values of the individual elements in the list.  We will exploit
+    this idea in section~\ref{sec:lazy-cons} to implement the
+    streams of chapter~3 as lists formed of non-strict
+    
+    {\lstinline[mathescape=true]$pair$}
+    pairs.
+  </p></div>
+
+  
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+    
+      
+      
+	Suppose that (in ordinary applicative-order JavaScript) we define
+      
+    
+    {\lstinline[mathescape=true]$unless$}
+    as shown above and then define {\lstinline[mathescape=true]$factorial$} in terms
+    of {\lstinline[mathescape=true]$unless$} as
+
+    
+\begin{JavaScript}
+function factorial(n) {
+    return unless(n === 1,
+                  n * factorial(n - 1),
+                  1);
+}
+\end{JavaScript}
+
+
+    
+
+    What happens if we attempt to evaluate
+    
+    {\lstinline[mathescape=true]$factorial(5)$}?
+    
+    Will our definitions work in a normal-order language?
+  
+\end{Exercise}
+
+
+  
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+    
+    
+    Ben Bitdiddle and Alyssa P. Hacker disagree over the importance of
+    lazy evaluation for implementing things such as {\lstinline[mathescape=true]$unless$}.
+    Ben points out that it's possible to implement {\lstinline[mathescape=true]$unless$}
+    in applicative order as a
+    
+    new kind of expression,
+    akin to conditional expressions.
+    
+    Alyssa counters that, if one did that,
+    {\lstinline[mathescape=true]$unless$} would be merely syntax, not a
+    
+    function
+    that could be used in conjunction with higher-order
+    
+    functions.
+    Fill in the details on both sides of the argument.
+    
+      
+      
+	Show how to define the evaluation of 
+	{\lstinline[mathescape=true]$unless$} as a new kind of expression
+	(as we defined the evaluation of conditional expressions in
+	section~\ref{sec:conditionals}),
+	and give an example of a situation where it might be useful to have
+	{\lstinline[mathescape=true]$unless$} available as a function,
+	rather than as a new expression syntax.
+      
+    
+    
+  
+\end{Exercise}
+
+  
+  
+
+<hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>The difference between the
+    <QUOTE>lazy</QUOTE> terminology and the <QUOTE>normal-order</QUOTE> terminology
+    is somewhat fuzzy.  Generally, <QUOTE>lazy</QUOTE> refers to the mechanisms of
+    particular evaluators, while <QUOTE>normal-order</QUOTE>
+    refers to the semantics of languages, independent of any particular
+    evaluation strategy.  But this is not a hard-and-fast distinction, and
+    the two terminologies are often used interchangeably.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>The <QUOTE>strict</QUOTE> versus <QUOTE>non-strict</QUOTE>
+    terminology means essentially the same thing as <QUOTE>applicative-order</QUOTE>
+    versus <QUOTE>normal-order,</QUOTE> except that it refers to individual
+    functions
+    and arguments rather than to the language as a whole.  At a conference on
+    programming languages you might hear someone say, <QUOTE>The normal-order language 
+    
+    Hassle has certain
+    strict primitives.  Other
+    
+    functions
+    take their arguments by lazy
+    evaluation.</QUOTE></FOOTNOTE></div>
+</SUBSECTION>

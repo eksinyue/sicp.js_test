@@ -1,0 +1,1219 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>2.3.3 
+        Example: Representing Sets
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+      In the previous examples we built representations for two kinds of
+      compound data objects: rational numbers and algebraic expressions.  In
+      one of these examples we had the choice of simplifying (reducing) the
+      expressions at either construction time or selection time, but other
+      than that the choice of a representation for these structures in terms
+      of lists was straightforward. When we turn to the representation of
+      sets, the choice of a representation is not so obvious.  Indeed, there
+      are a number of possible representations, and they differ
+      significantly from one another in several ways.
+      </p></div>
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+      
+      Informally, a set is simply a collection of distinct objects.  To give
+      a more precise definition we can employ the method of data
+      abstraction.  That is, we define <QUOTE>set</QUOTE> by specifying the operations
+      that are to be used on sets.  These are {\lstinline[mathescape=true]$union_set$},
+      {\lstinline[mathescape=true]$intersection_set$}, {\lstinline[mathescape=true]$is_element_of_set$}, and {\lstinline[mathescape=true]$adjoin_set$}.
+      
+      The function {\lstinline[mathescape=true]$is_element_of_set$} is a predicate that determines whether a given
+      element is a member of a set.
+      
+      The function {\lstinline[mathescape=true]$adjoin_set$} takes an object and a
+      set as arguments and returns a set that contains the elements of the
+      original set and also the adjoined element.
+      
+      The function {\lstinline[mathescape=true]$union_set$} computes
+      the union of two sets, which is the set containing each element that
+      appears in either argument.
+      
+      The function {\lstinline[mathescape=true]$intersection_set$} computes the
+      intersection of two sets, which is the set containing only elements
+      that appear in both arguments.  From the viewpoint of data abstraction, we
+      are free to design any representation that implements these operations
+      in a way consistent with the interpretations given above.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+      
+      
+      </p></div>
+
+      \subsubsection{
+        Sets as unordered lists
+      
+
+      
+      
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+      One way to represent a set is as a list of its elements in which no
+      element appears more than once.  The empty set is represented by the
+      empty list.  In this representation, {\lstinline[mathescape=true]$is_element_of_set$} is similar
+      to the
+      function
+      
+	
+	{\lstinline[mathescape=true]$member$}
+	of section~\ref{sec:strings}.	
+	
+      
+      It uses {\lstinline[mathescape=true]$is_equal$}
+      instead of {\lstinline[mathescape=true]$===$} so that the set elements need not be primitive values:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_element_of_set(x, set) {
+   return ! is_null(set) && 
+          ( is_equal(x, head(set)) || 
+            is_element_of_set(x, tail(set)) );
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQKYBsMFsNhRpzBooZQAUAHgDSLlQCUiA3gFCJcBOFI3SAITJ0YEFiyVGLAGQzEnLkuWURmAI4gAhpLqIAFhi0ATKRSYsAPpYXK7S1Jhz5CxUoxr0oWmJOksmAG52AF8gA}{\usebox\lstbox}
+
+
+      
+      </p></div>
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+        Using this, we can write {\lstinline[mathescape=true]$adjoin_set$}.  If the object to be adjoined
+      is already in the set, we just return the set.  Otherwise, we use
+      {\lstinline[mathescape=true]$pair$} to add the object to the list that represents the set:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function adjoin_set(x, set) {
+    return is_element_of_set(x, set)
+           ? set
+           : pair(x, set);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCYCs4zAfQM4CmUAFAB4A0ihUAlIgN4BQiLiATkSG0jHjgQBsCAWwJgoOOMHxEylajWatlrAPxUiSlcoBciAA7IYbORtoBuRgF8gA}{\usebox\lstbox}
+
+
+      
+      </p></div>
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+        For {\lstinline[mathescape=true]$intersection_set$} we can use a recursive strategy.  If we
+        know how to form the intersection of {\lstinline[mathescape=true]$set2$} and the {\lstinline[mathescape=true]$tail$}
+            of {\lstinline[mathescape=true]$set1$}, we only need to decide whether to include
+            the {\lstinline[mathescape=true]$head$} of {\lstinline[mathescape=true]$set1$} in this.  But this depends on whether {\lstinline[mathescape=true]$head(set1)$} is also in {\lstinline[mathescape=true]$set2$}.  Here is the resulting
+      function:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function intersection_set(set1, set2) {
+    return is_null(set1) || is_null(set2)
+           ? null
+           : is_element_of_set(head(set1), set2)
+             ? pair(head(set1),
+                    intersection_set(tail(set1), set2))
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDMUCmAnAzm68wD6OUAFMQIwA0ixATAJSIDeAUIu4hmlCBkjFgJgQAGxFlu5RgB9pyQcLESoDNh3UcA-IkUi1G9QC55BNCLQBbNKgJxgRbiQAWaAIYATZVOp16+g+raAA6uMBjObp4U9JT+AfHIqJg4eAgOpFCh4tE+3Ax+CUaJ6Ni4sGnEJJkw2ZIxNHn0ANwsAL5AA}{\usebox\lstbox}!*/
+             : intersection_set(tail(set1), set2);
+}
+
+\end{JavaScriptClickable}
+
+
+      
+      </p></div>
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+      In designing a representation, one of the issues we should be
+      concerned with is efficiency.  Consider the number of steps required by our set
+        operations.  Since they all use {\lstinline[mathescape=true]$is_element_of_set$}, the speed
+      of this operation has a major impact on the efficiency of the set
+      implementation as a whole.  Now, in order to check whether an object
+        is a member of a set, {\lstinline[mathescape=true]$is_element_of_set$} may have to scan the
+      entire set. (In the worst case, the object turns out not to be in the
+        set.)  Hence, if the set has $n$ elements, {\lstinline[mathescape=true]$is_element_of_set$}
+      might take up to $n$ steps.  Thus, the number of steps
+      required grows as $\Theta(n)$.
+      The number of steps required by {\lstinline[mathescape=true]$adjoin-set$}, which uses this operation,
+        also grows as $\Theta(n)$.  For {\lstinline[mathescape=true]$intersection_set$}, which does an {\lstinline[mathescape=true]$is_element_of_set$} check for each element of {\lstinline[mathescape=true]$set1$}, the number of steps
+      required grows as the product of the sizes of the sets involved, or
+        $\Theta(n^{2})$ for two sets of size $n$.  The same will be true of {\lstinline[mathescape=true]$union_set$}.
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled38}
+
+        Implement the
+        
+        {\lstinline[mathescape=true]$union_set$} operation for the unordered-list
+        representation of sets.
+  
+      \hfill{\hyperref[ex:unlabeled38-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled38}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function union_set(set1, set2) {
+    return is_null(set1)
+           ? set2
+           : adjoin_set(head(set1), 
+                 union_set(tail(set1), set2));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABOeYD6BnAplAFNqARgBpECAmASkQG8AoRRxAJxxGaRgzTBABs++HIUoMm4pgH4yOcmIniAXIgCGAEwBWcGOgK4AFlnVCilUvIWXkYVJhy4oKmIIIjSFSpQDcdAL5A}{\usebox\lstbox}
+
+
+
+
+  
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+\label{ex:unlabeled39}
+
+        We specified that a set would be represented as a list with no
+        duplicates.  Now suppose we allow duplicates.  For instance,
+        the set $\{1,2,3\}$ could be represented as the list {\lstinline[mathescape=true]$list(2, 3, 2, 1, 3, 2, 2)$}.  Design
+        functions
+        {\lstinline[mathescape=true]$is_element_of_set$}, {\lstinline[mathescape=true]$adjoin_set$}, {\lstinline[mathescape=true]$union_set$}, and {\lstinline[mathescape=true]$intersection_set$} that operate on this
+        representation.  How does the efficiency of each compare with the
+        corresponding
+        function
+        for the non-duplicate representation?  Are
+        there applications for which you would use this representation in
+        preference to the non-duplicate one?
+	
+      \hfill{\hyperref[ex:unlabeled39-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:unlabeled39}]
+
+	  The functions {\lstinline[mathescape=true]$is_element_of_set$} and
+	  {\lstinline[mathescape=true]$intersection_set$}
+	  remain unchanged. Here is the new implementation of
+	  {\lstinline[mathescape=true]$adjoin_set$} and
+	  {\lstinline[mathescape=true]$union_set$}.
+	  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function adjoin_set(x, set) {
+  return pair(x, set);
+}
+function union_set(set1, set2) {
+  return append(set1, set2);
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCYCs4zAfQM4CmUAFAB4A0ihUAlIgN4BQiiATkSK0gA7IytlK1GgG5GAX0ahIsBInDxc1YtQCMQogCY6TFuyickybtwJhUKouqpbREoA}{\usebox\lstbox}
+
+
+
+    In the version with no duplicates,
+    the required number of steps for
+    {\lstinline[mathescape=true]$is_element_of_set$} and 
+    {\lstinline[mathescape=true]$adjoin_set$} has
+    an order of growth of
+    $O(n)$, where
+    $n$ is the number of 
+    element occurrences in the given representation, and
+    the required number of steps for
+    {\lstinline[mathescape=true]$intersection_set$} and 
+    {\lstinline[mathescape=true]$union_set$} has
+    an order of growth of
+    $O(n m)$, where
+    $n$ is the number of 
+    element occurrences in the representation of the first set and
+    $m$ is the number of 
+    element occurrences in the representation of the second set.
+    In the version that allows duplicates, the number of steps for
+    {\lstinline[mathescape=true]$adjoin_set$} shrinks to
+    $O(n)$, and
+    the number of steps for
+    {\lstinline[mathescape=true]$union_set$} shrinks to
+    $O(n)$. However, note that the
+    number of element occurrences may be much larger in the second
+    version, because many duplicates may accumulate.
+    For applications where duplicate elements are rare, the version
+    that allows duplicates is preferrable.
+
+    
+\end{Answer}
+
+      
+      
+
+      \subsubsection{
+        Sets as ordered lists
+      
+
+      
+      
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+      One way to speed up our set operations is to change the representation
+      so that the set elements are listed in increasing order.  To do this,
+      we need some way to compare two objects so that we can say which is
+      bigger.  For example, we could compare symbols lexicographically, or
+      we could agree on some method for assigning a unique number to an
+      object and then compare the elements by comparing the corresponding
+      numbers.  To keep our discussion simple, we will consider only the
+      case where the set elements are numbers, so that we can compare
+      elements using {\lstinline[mathescape=true]$>$} and {\lstinline[mathescape=true]$<$}.
+      We will represent a set of
+      numbers by listing its elements in increasing order.  Whereas our
+      first representation above allowed us to represent the set
+      $\{1,3,6,10\}$ by listing the elements in any order, our new
+      representation allows only the list
+      
+      {\lstinline[mathescape=true]$list(1, 3, 6, 10)$}.
+      </p></div>
+      <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+	One advantage of ordering shows up in
+	
+	{\lstinline[mathescape=true]$is_element_of_set$}: In
+      checking for the presence of an item, we no longer have to scan the
+      entire set.  If we reach a set element that is larger than the item we
+      are looking for, then we know that the item is not in the set:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_element_of_set(x,set) {
+    return ! is_null(set) && 
+           ( x === head(set)) 
+             ? true
+             : x < head(set)
+               ? false
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQKYBsMFsNhRpzBooZQAUAHgDTlQCUiA3gFCKeIBOFI3SAITJ0YEFiyUGzAGQzEHLkq6VE1RAF4tiABYYAhgBMpFRs0XLLAfkRRuIDBctKAXGsQAeXQePSnzpRtgfSxyfwDON1RMHHxCYlIGGlpbfRhJaUYAbjYAXyA}{\usebox\lstbox}!*/
+               : is_element_of_set(x, tail(set));
+}
+
+\end{JavaScriptClickable}
+
+
+      
+      </p></div>
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+      How many steps does this save?  In the worst case, the item we are
+      looking for may be the largest one in the set, so the number of steps
+      is the same as for the unordered representation.  On the other hand,
+      if we search for items of many different sizes we can expect that
+      sometimes we will be able to stop searching at a point near the
+      beginning of the list and that other times we will still need to
+      examine most of the list.  On the average we should expect to have to
+      examine about half of the items in the set.  Thus, the average
+      number of steps required will be about $n/2$.
+      This is still $\Theta(n)$ growth, but
+      it does save us, on the average, a factor of 2 in number of steps over the
+      previous implementation.
+      </p></div>
+      <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+      We obtain a more impressive speedup with {\lstinline[mathescape=true]$intersection_set$}.  In
+      the unordered representation this operation required
+      $\Theta(n^2)$ steps, because we performed a complete scan of {\lstinline[mathescape=true]$set2$} for
+      each element of {\lstinline[mathescape=true]$set1$}.  But with the ordered representation, we
+      can use a more clever method.  Begin by comparing the initial
+      elements, {\lstinline[mathescape=true]$x1$} and {\lstinline[mathescape=true]$x2$}, of the two sets.  If {\lstinline[mathescape=true]$x1$}
+      equals {\lstinline[mathescape=true]$x2$}, then that gives an element of the intersection, and
+      the rest of the intersection is the intersection of the {\lstinline[mathescape=true]$tail$}s of
+      the two sets.  Suppose, however, that {\lstinline[mathescape=true]$x1$} is less than {\lstinline[mathescape=true]$x2$}.
+      Since {\lstinline[mathescape=true]$x2$} is the smallest element in {\lstinline[mathescape=true]$set2$}, we can
+      immediately conclude that {\lstinline[mathescape=true]$x1$} cannot appear anywhere in {\lstinline[mathescape=true]$set2$} and hence is not in the intersection.  Hence, the intersection
+      is equal to the intersection of {\lstinline[mathescape=true]$set2$} with the {\lstinline[mathescape=true]$tail$} of {\lstinline[mathescape=true]$set1$}.  Similarly, if {\lstinline[mathescape=true]$x2$} is less than {\lstinline[mathescape=true]$x1$}, then the
+      intersection is given by the intersection of {\lstinline[mathescape=true]$set1$} with the {\lstinline[mathescape=true]$tail$} of {\lstinline[mathescape=true]$set2$}.  Here is the
+      function:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function intersection_set(set1, set2) {
+    if (is_null(set1) || is_null(set2)) {
+        return null;
+    } else {
+      const x1 = head(set1);
+      const x2 = head(set2);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDMUCmAnAzm68wD6OUAFMQIwA0ixATAJSIDeAUIu8sIiTFgWCAA2gsmijlGAH0nI+A4aKgNGrDmsQYxIDEnmCA3Gw4BfRGkE5mRtRARYoiAB7lEAXkQALNAEMAJoolDdURbMHsnWjdPH386eiD1TShtJGc3V3dHWmtgtQB+RAAHbxgMEmdqFHRsXFgEIjESKBKRCnpKHNyu7p72ZphWsWV6Tq6ALicXAB4IxBYASFyCqswcPHriJpaA9pohkd61CZWa9cJNig7D6+7+waV6eJzjFmMgA}{\usebox\lstbox}!*/
+      return x1 === x2
+             ? pair(x1, intersection_set(tail(set1),
+                                        tail(set2)))
+             : x1 < x2 
+	       ? intersection_set(tail(set1), set2)
+               : intersection_set(set1,
+                                  tail(set2));
+    }
+}
+
+\end{JavaScriptClickable}
+
+
+      
+      </p></div>
+      <div class='permalink'>
+<a name='p11' class='permalink'></a><p>
+      To estimate the number of steps required by this process, observe that at each
+      step we reduce the intersection problem to computing intersections of
+      smaller sets—removing the first element from {\lstinline[mathescape=true]$set1$} or {\lstinline[mathescape=true]$set2$} or both.  Thus, the number of steps required is at most the sum
+      of the sizes of {\lstinline[mathescape=true]$set1$} and {\lstinline[mathescape=true]$set2$}, rather than the product of
+      the sizes as with the unordered representation.  This is $\Theta(n)$ growth
+      rather than $\Theta(n^2)$—a considerable speedup, even for sets of
+      moderate size.
+      </p></div>
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        Give an implementation of
+        
+        {\lstinline[mathescape=true]$adjoin_set$} using the ordered
+        representation.  By analogy with {\lstinline[mathescape=true]$is_element_of_set$} show how to
+        take advantage of the ordering to produce a
+        function
+        that requires on
+        the average about half as many steps as with the unordered
+        representation.
+        
+  
+      \hfill{\hyperref[ex:adjoin-set-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:adjoin-set}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function adjoin_set(x, set) {
+    return is_null(set)
+           ? list(x)
+           : x === head(set) 
+             ? set
+             : x < head(set)
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCYCs4zAfQM4CmUAFAB4A0ihUAlIgN4BQiLiATkSG0jHjmCAA2g4tRrNWk1gH5Eg3iVLipKgFyJSiALw7EACwJpRROhJVTZ1M+dbrNAHn2HUx2tZszEAB2Qw2ZSjF3D0R1Hz9iAyMxSmCQlTRMbHwiAMQoXxExGhoAbkYAXyA}{\usebox\lstbox}!*/
+               ? pair(x, set)
+               : pair(head(set), 
+                      adjoin_set(x, tail(set)));
+}
+
+\end{JavaScriptClickable}
+
+
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        
+        Give a $\Theta(n)$ implementation of
+        
+        {\lstinline[mathescape=true]$union_set$} for sets
+        represented as ordered lists.
+    
+      \hfill{\hyperref[ex:union-set-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:union-set}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function union_set(set1, set2) {
+    if (is_null(set1)) {
+        return set2;
+    } else if (is_null(set2)) {
+       	return set1;
+    } else {
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABOeYD6BnAplAFNqARgBpECAmASkQG8AoRRxGYRXGDNMEAGx-xyFK1ekzGIATjhASkFANwMmAX0RYe2Zq3adufAVCoil4gJBSoMuYMVjV6zaPEQEGKIgAehRAF5EACywAQwATAyFbZ1d3D3JfAOCwikpIsQsrT28fbM9yE3FxAH5EAAcgmAlcL1IUBEwcXChy-gIhYnyCzq7uppgWnCNKDq6ALkzEAB5cxGHu4rKKqpJkMFR6vF7+okpSZKHugrGFytia1bqCcNJNg0HUxGU6ZSA}{\usebox\lstbox}!*/
+      const x1 = head(set1);
+      const x2 = head(set2);
+      return x1 === x2
+             ? pair(x1, union_set(tail(set1),
+                                  tail(set2)))
+             : x1 < x2 
+               ? pair(x1, union_set(tail(set1), set2))
+               : pair(x2, union_set(set1, tail(set2)));
+    }
+}
+
+\end{JavaScriptClickable}
+
+
+    
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+union_set(
+   adjoin_set(10, adjoin_set(20, adjoin_set(30, null))),
+   adjoin_set(10, adjoin_set(15, adjoin_set(20, null))));
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=K4Owlg9iD6DOCmAXAFAKAASYIYBMBWEYMCKAjAAwA06uBRcSyATFTfocYwMysjAA2-AJQjKGbO3olkFarQ4MyAVjmTOKFtT6CRIgNxA}{\usebox\lstbox}
+
+
+    
+  
+\end{Answer}
+
+      
+      
+
+
+      \subsubsection{
+        Sets as binary trees
+      
+
+      
+      
+      
+      
+      
+      
+      <div class='permalink'>
+<a name='p12' class='permalink'></a><p>
+      We can do better than the ordered-list representation by arranging the
+      set elements in the form of a tree.  Each node of the tree holds one
+      element of the set, called the <QUOTE>entry</QUOTE> at that node, and a link to
+      each of two other (possibly empty) nodes.  The <QUOTE>left</QUOTE> link points to
+      elements smaller than the one at the node, and the <QUOTE>right</QUOTE> link to
+
+      elements greater than the one at the node.
+      Figure~\ref{fig:binary-tree} shows some trees that represent the set
+      $\{1,3,5,7,9,11\}$.  The same set may be represented by a tree in a
+      number of different ways.  The only thing we require for a valid
+      representation is that all elements in the left subtree be smaller
+      than the node entry and that all elements in the right subtree be
+      larger.
+
+        
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_original/ch2-Z-G-51}.svg}}
+\caption{Various binary trees that represent the set $\{ 1,3,5,7,9,11 \}$.}
+\label{fig:binary-tree}
+\end{figure}
+
+      </p></div>
+      <div class='permalink'>
+<a name='p13' class='permalink'></a><p>
+      The advantage of the tree representation is this: Suppose we want to
+      check whether a number $x$ is contained in a set.  We begin by
+      comparing $x$ with the entry in the top node.  If $x$ is less than
+      this, we know that we need only search the left subtree; if $x$ is
+      greater, we need only search the right subtree.  Now, if the tree is
+      <QUOTE>balanced,</QUOTE> each of these subtrees will be about half the size of
+      the original.  Thus, in one step we have reduced the problem of
+      searching a tree of size $n$ to searching a tree of size $n/2$.  Since
+      the size of the tree is halved at each step, we should expect that the
+      number of steps needed to search a tree of size $n$ grows as $\Theta(\log
+        n)$.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a> For large sets, this will
+      be a significant speedup over the previous representations.
+      </p></div>
+      <div class='permalink'>
+<a name='p14' class='permalink'></a><p>
+      
+      We can represent trees by using lists.  Each node will be a list of
+      three items: the entry at the node, the left subtree, and the right
+      subtree.  A left or a right subtree of the empty list will indicate
+      that there is no subtree connected there.  We can describe this
+      representation by the following
+      functions:<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function entry(tree) {
+   return head(tree);
+}
+function left_branch(tree) {
+   return head(tail(tree));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUzFATgTwBQecgSkQG8AoRC9ZKEdJAC2QEMATXKwgblIF9TRIsBIgA2yYFAD6AI3RNI9dviJkKiKjTqJGrXExgilhAtz4Do8JOhgBzelNnyIivIRLlK1Wg2Zso+w38DIwJQ035wC2EAWyYAa2RJV2xUDEwAGjEJdOs7KBUPdS8tERgAZygUtCxM8Sgc23sTXiA}{\usebox\lstbox}!*/
+function right_branch(tree) {
+   return head(tail(tail(tree)));
+}
+function make_tree(entry,left,right) {
+   return list(entry,left,right);
+}
+
+\end{JavaScriptClickable}
+
+
+
+      
+
+      
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function entry(tree) {
+   return head(tree);
+}
+function left_branch(tree) {
+   return head(tail(tree));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUzFATgTwBQecgSkQG8AoRC9ZKEdJAC2QEMATXKwgblIF9TRIsBIgA2yYFAD6AI3RNI9dviJkKiKjTqJGrXExgilhAtz4Do8JOhgBzelNnyIivIRLlK1Wg2Zso+w38DIwJQ035wC2EAWyYAa2RJV2xUDEwAGjEJdOs7KBUPdS8tERgAZygUtCxM8Sgc23sTXiA}{\usebox\lstbox}!*/
+function right_branch(tree) {
+   return head(tail(tail(tree)));
+}
+function make_tree(entry,left,right) {
+   return list(entry,left,right);
+}
+
+\end{JavaScriptClickable}
+
+
+
+      
+
+      </p></div>
+      <div class='permalink'>
+<a name='p15' class='permalink'></a><p>
+        Now we can write the {\lstinline[mathescape=true]$is_element_of_set$}
+      function
+      using the strategy
+      described above:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function is_element_of_set(x, set) {
+    return ! is_null(set) &&
+           ( x === entry(set) ||
+             ( x < entry(set)
+               ? is_element_of_set(x, left_branch(set))
+               : is_element_of_set(x, right_branch(set))
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQKYBsMFsNhRpzBooZQAUAHgDSLlQCUiA3gFCJeIBOFIPJAEJk6MCCxZKjFgDJZnbku6VE1RAF4tiAlB4BPaRRYAfE4uWXV6gDw7CBo8wuXLAflGYc+QsVKMaehxgIgAjHgBDSAALJyYmF1clAC5PbDxdPzIKQN4YAHNosMiYuISk5XKKxCYAbnYAXyA}{\usebox\lstbox}!*/
+             )
+           );
+}
+
+\end{JavaScriptClickable}
+
+
+    
+      </p></div>
+      <div class='permalink'>
+<a name='p16' class='permalink'></a><p>
+      Adjoining an item to a set is implemented similarly and also requires
+      $\Theta(\log n)$ steps.  To adjoin an item {\lstinline[mathescape=true]$x$}, we compare {\lstinline[mathescape=true]$x$} with
+      the node entry to determine whether {\lstinline[mathescape=true]$x$} should be added to the
+      right or to the left branch, and having adjoined {\lstinline[mathescape=true]$x$} to the
+      appropriate branch we piece this newly constructed branch together
+      with the original entry and the other branch.  If {\lstinline[mathescape=true]$x$} is equal to
+      the entry, we just return the node.  If we are asked to adjoin
+      {\lstinline[mathescape=true]$x$} to an empty tree, we generate a tree that has {\lstinline[mathescape=true]$x$} as the
+      entry and empty right and left branches.  Here is the
+      function:
+
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function adjoin_set(x,set) {
+    return is_null(set)
+           ? make_tree(x, null, null)
+           : x === entry(set)
+             ? set
+             : x < entry(set)
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCYCs4zAfQM4CmUAFAB4A0hUAlIgN4BQiziATkSK0jHjmCABsBxKtSYsJLAPyIAtsgDWBHFHYEy5RPyGbtAsZMMAuRKUQBeS4gJhVATxFEDhwzKriXEk2YA8126wOoh6eEjLySipqxDb2jjTkIaGeaJjY+EQaiAIEwFA4AEasyJAAFvHU1InJNawwAOal+UUlEOWizjXMJhHKqgTqsYEV1V2eOXmFxWUjSWMsqVi4VFl1jc3TbRWVANwMAL5AA}{\usebox\lstbox}!*/
+               ? make_tree(entry(set),
+                     adjoin_set(x, left_branch(set)),
+                     right_branch(set))
+               : make_tree(entry(set),
+                     left_branch(set),
+                     adjoin_set(x, right_branch(set)));
+}
+
+\end{JavaScriptClickable}
+
+
+      </p></div>
+      <div class='permalink'>
+<a name='p17' class='permalink'></a><p>
+      The above claim that searching the tree can be performed in a logarithmic
+      number of steps
+      rests on the assumption that the tree is
+      
+      
+      <QUOTE>balanced,</QUOTE> i.e., that the
+      left and the right subtree of every tree have approximately the same
+      number of elements, so that each subtree contains about half the
+      elements of its parent.  But how can we be certain that the trees we
+      construct will be balanced?  Even if we start with a balanced tree,
+      adding elements with {\lstinline[mathescape=true]$adjoin_set$} may produce an unbalanced
+      result.  Since the position of a newly adjoined element depends on how
+      the element compares with the items already in the set, we can expect
+      that if we add elements <QUOTE>randomly</QUOTE> the tree will tend to be balanced
+      on the average.  But this is not a guarantee.  For example, if we
+      start with an empty set and adjoin the numbers 1 through 7 in sequence
+      we end up with the highly unbalanced tree shown in
+      Figure~\ref{fig:unbalanced-tree}.  In this tree all the left subtrees
+      are empty, so it has no advantage over a simple ordered list.  One
+      way to solve this problem is to define an operation that transforms an
+      arbitrary tree into a balanced tree with the same elements.  Then we
+      can perform this transformation after every few {\lstinline[mathescape=true]$adjoin_set$}
+      operations to keep our set in balance.  There are also other ways to
+      solve this problem, most of which involve designing new data
+      structures for which searching and insertion both can be done in
+      $\Theta(\log n)$ steps.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_original/ch2-Z-G-52}.svg}}
+\caption{Unbalanced tree produced by adjoining 1 through 7 in sequence.}
+\label{fig:unbalanced-tree}
+\end{figure}
+
+      
+
+        
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_original/ch2-Z-G-52}.svg}}
+\caption{Unbalanced tree produced by adjoining 1 through 7 in sequence.}
+\label{fig:unbalanced-tree}
+\end{figure}
+
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        
+        Each of the following two
+        functions
+        converts a
+        
+        
+        binary tree to a list.
+        
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function tree_to_list_1(tree) {
+    return is_null(tree)
+           ? null
+           : append(tree_to_list_1(left_branch(tree)),
+                    pair(entry(tree),
+                         tree_to_list_1(right_branch(tree))));
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABFATgUzQfSnTAbGAZykwEYAKVDASkQG8AoRZxdKEFJIzMEPPSujTUmLMSwD8iXv1HixALkQBDAA6q0YACaCM2XAWJlyeNMBIAjFMsgALXcOoAaOfLdjVymCnKbUATwdnV3dQsSosHHwiEgoUGABzW0trOyDqDIBuBgBfIA}{\usebox\lstbox}!*/
+}
+
+\end{JavaScriptClickable}
+
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function tree_to_list_2(tree) {
+    function copy_to_list(tree, result_list) {
+        return is_null(tree)
+               ? result_list
+               : copy_to_list(left_branch(tree),
+                     pair(entry(tree),
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABFATgUzQfSnTAbGAZykwCYAKVDASkQG8AoRZxUSWBRCOABwE9suAsUro0AGkTpCIPCWFRajFiqlooIFEiKYwsvKJpNVJlgH41MufiJRjpkwC4uvAThsi8aYCQBGKAENIAAtDNGpxewdoxB4AmBRyNDBUPjCIqJisl35BDyhyFBgAc2C-QJD0yOya1WlZeVtqZoBuKIBfKPQNLRy3IVswyT08PGo29qA}{\usebox\lstbox}!*/
+                          copy_to_list(right_branch(tree),
+                              result_list)));
+    }
+    return copy_to_list(tree, null);
+}
+
+\end{JavaScriptClickable}
+
+
+        
+\begin{enumerate}[a.]
+\item{
+            Do the two
+            functions
+            produce the same result for every tree?  If
+            not, how do the results differ?  What lists do the two
+            functions
+            produce for the trees in Figure~\ref{fig:binary-tree}?
+            
+          }
+\item{
+            Do the two
+            functions
+            have the same order of growth in the number
+            of steps required to convert a balanced tree with $n$ elements to a list?
+            If not, which one grows more slowly?
+          }
+\end{enumerate}
+
+	
+      \hfill{\hyperref[ex:tree-to-list-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:tree-to-list}]
+
+	  
+\begin{enumerate}[a.]
+\item{
+	      The two procedures produce the same results.
+	      For the trees in Figure~\ref{fig:binary-tree}, the result
+	      will always be {\lstinline[mathescape=true]$list(1, 3, 5, 7, 9, 11)$}.
+	    }
+\item{
+  A balanced tree with $n$ elements
+  has a height of $O(\log{n})$ and
+  $O(n)$ nodes.
+  To convert the tree into a list using function
+  
+  {\lstinline[mathescape=true]$tree_to_list_1$},
+  we call 
+  
+  {\lstinline[mathescape=true]$tree_to_list_1$}
+  $O(n)$ times. We call
+  
+  {\lstinline[mathescape=true]$append$} at
+  each node of the tree,  but at each level, we apply 
+  
+  {\lstinline[mathescape=true]$append$}
+  with a combined $O(n)$ elements in the first arguments.
+  Thus, the runtime of
+  
+  {\lstinline[mathescape=true]$tree_to_list_1$}
+  has an order of growth of 
+  $O(n\log{n})$. Instead of
+  
+  {\lstinline[mathescape=true]$append$},
+  the function
+  
+  {\lstinline[mathescape=true]$tree_to_list_2$}
+  gets away with calling 
+  
+  {\lstinline[mathescape=true]$pair$}
+  at each node, and thus
+  
+  {\lstinline[mathescape=true]$tree_to_list_2$}
+  has an order of growth of 
+  $O(n)$.
+	    }
+\end{enumerate}
+
+	
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        
+        
+        
+        The following
+        function
+        {\lstinline[mathescape=true]$list_to_tree$} converts an ordered list to a
+        balanced binary tree.  The helper
+        function
+        {\lstinline[mathescape=true]$partial_tree$} takes
+        as arguments an integer $n$ and list of at least $n$ elements and
+        constructs a balanced tree containing the first $n$ elements of the
+        list.  The result returned by {\lstinline[mathescape=true]$partial_tree$} is a pair (formed
+        with {\lstinline[mathescape=true]$pair$}) whose {\lstinline[mathescape=true]$head$} is the constructed tree and whose
+        {\lstinline[mathescape=true]$tail$} is the list of elements not included in the tree.
+
+        
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function list_to_tree(elements) {
+   return head(partial_tree(elements,length(elements)));
+}
+function partial_tree(elts, n) {
+    if (n === 0) {
+       return pair(null,elts);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGxgZygfSnbAnAUwIAoDkCBbAsKNASkQG8AoRNwqEPJACwIEMAJsQAO-PLH7J8RUuSo00AGnJgA5lB5zK1WnX0BuZgF9moSLASIxEmFJkkytJYjAMWbNjGCJiSALyBiAAM7qyenhxcSGIweH4gyMhKTvRGEcaIZGgETOERiBAIGCgEwFhoMABeuf6IFPyamMDIcHDxfogAtIgAjAwA9IgATHTpBYXFUKXlmIRoidN1NpLSUISOyM4zFdUEY-kRRWAl5LPrRIh1fELEZ1jziwcTkyfTYAiY95ipV4hQ-BgyDuZQeBAWW2eE2OJTwMDUPF2NT+SB6INmlWRAGo+lCCjDppp0D8aHgAJ5-G7CD5gL6gn5bNKHTwExBwhFgiFLaziVYOYgAoF+T7fVJ0JTMl5S6Uy9jwxGYTH7cb4qZs+VYC61RBU4jshWPSEqo5qwgNGBgC1qBm0P6C4H6zlPY2RAicbg8uLEBoAawI-KJaBJ6zJLklsoj3y1YYjsYijoc4vDEbNgMt6htTIyJiAA}{\usebox\lstbox}!*/
+    } else {
+       const left_size = math_floor((n - 1) / 2);
+       const left_result = partial_tree(elts, left_size);
+       const left_tree = head(left_result);
+       const non_left_elts = tail(left_result);
+       const right_size = n - (left_size + 1);
+       const this_entry = head(non_left_elts);
+       const right_result = partial_tree(tail(non_left_elts),
+                                         right_size);
+       const right_tree = head(right_result);
+       const remaining_elts = tail(right_result);
+       return pair(make_tree(this_entry, 
+                             left_tree, 
+                             right_tree),
+                   remaining_elts);
+    }
+}
+
+\end{JavaScriptClickable}
+
+
+        
+        
+\begin{enumerate}[a.]
+\item{
+            Write a short paragraph explaining as clearly as you can how {\lstinline[mathescape=true]$partial_tree$} works.  Draw the tree produced by {\lstinline[mathescape=true]$list_to_tree$} for
+            the list {\lstinline[mathescape=true]$list(1, 3, 5, 7, 9, 11)$}.
+            
+          }
+\item{
+            What is the order of growth in the number of steps required by {\lstinline[mathescape=true]$list_to_tree$} to convert a list of $n$ elements?
+          }
+\end{enumerate}
+
+  
+      \hfill{\hyperref[ex:list-to-tree-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:list-to-tree}]
+
+    
+\begin{enumerate}[a.]
+\item{
+	The function {\lstinline[mathescape=true]$partial_tree(elts, n)$}
+	returns a pair whose head is a balanced tree for the first
+	$\lfloor (n - 1) / 2 \rfloor$
+	elements of {\lstinline[mathescape=true]$elts$}, and whose tail
+	is the list containing the remaining elements of
+	{\lstinline[mathescape=true]$elts$}. It works by calling itself
+	recursively, to construct the left subtree and right subtree, and
+	then makes the tree, and the required return pair. Thus, the overall
+	function {\lstinline[mathescape=true]$list_to_tree$} just needs
+	to call {\lstinline[mathescape=true]$partial_tree$} with the
+	given list and its length, and return the head of the result.
+	<div class='permalink'>
+<a name='p18' class='permalink'></a><p></p></div>
+	The tree for
+	{\lstinline[mathescape=true]$list(1, 3, 5, 7, 9, 11)$}
+	is the tree on the right in Figure~\ref{fig:binary-tree}.
+      }
+\item{
+	The order of growth for the runtime of
+	function {\lstinline[mathescape=true]$list_to_tree$} is
+	$O(n)$ because for every node of
+	the result tree, only a constant amount of work is needed.
+      }
+\end{enumerate}
+
+  
+\end{Answer}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        
+        
+        Use the results of exercises~\ref{ex:tree-to-list} and
+        ~\ref{ex:list-to-tree} to give $\Theta(n)$ implementations of {\lstinline[mathescape=true]$union_set$} and {\lstinline[mathescape=true]$intersection_set$} for sets implemented as
+        (balanced) binary trees.<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
+  
+      
+        
+  
+      \hfill{\hyperref[ex:tree-ops-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:tree-ops}]
+
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function union_set_as_tree(set1, set2) {
+    const list1 = tree_to_list_2(set1);
+    const list2 = tree_to_list_2(set2);
+    return list_to_tree(union_set(list1, list2));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABOeYD6BnAplNBDDNKAJyywApsoBGAGkSoCYBKRAbwChFvEIEMoiADYwB1RAF5EJMkThoRAtI0o5qzANxcefMAOGiojSdNJY5Cw8tVHN27qSghiSRbijyZFFAkw5ybnQGAix2AL5AA}{\usebox\lstbox}
+
+
+
+    
+    
+    
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function intersection_set_as_tree(set1, set2) {
+    const list1=tree_to_list_2(set1);
+    const list2=tree_to_list_2(set2);
+    return list_to_tree(intersection_set(list1, list2));
+}
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDMUCmAnAzm68wD6OUBAhlgVBmmgBTECMANIsQEwCUiA3gFCIDEEBFiiIANjFEMAvFRqU4BSaIJt6aKAw4BufoOFhREqVDZzqaRctNqNZ3foHUoIDEhUkoS+XRTpsXFgEIk1aT2YTUU5HAF8gA}{\usebox\lstbox}
+
+
+
+    
+    
+    
+  
+\end{Answer}
+
+      
+      
+
+      \subsubsection{
+        Sets and information retrieval
+      
+
+      
+
+      <div class='permalink'>
+<a name='p19' class='permalink'></a><p>
+      We have examined options for using lists to represent sets and have
+      seen how the choice of representation for a data object can have a
+      large impact on the performance of the programs that use the data.
+      Another reason for concentrating on sets is that the techniques
+      discussed here appear again and again in applications involving
+      information retrieval.
+      </p></div>
+      <div class='permalink'>
+<a name='p20' class='permalink'></a><p>
+      
+      Consider a data base containing a large number of individual records,
+      
+      such as the personnel files for a company or the transactions in an
+      accounting system.  A typical data-management system spends a large
+      amount of time accessing or modifying the data in the records and
+      therefore requires an efficient method for accessing records.  This is
+      done by identifying a part of each record to serve as an identifying
+      
+      <EM>key</EM>.  A key can be anything that uniquely identifies the
+      record.  For a personnel file, it might be an employee's ID number.
+      For an accounting system, it might be a transaction number.  Whatever
+      the key is, when we define the record as a data structure we should
+      include a
+      
+      {\lstinline[mathescape=true]$key$} selector
+      function
+      that retrieves the key
+      associated with a given record.
+      </p></div>
+      <div class='permalink'>
+<a name='p21' class='permalink'></a><p>
+      Now we represent the data base as a set of records. To locate the
+      record with a given key we use a
+      function
+      {\lstinline[mathescape=true]$lookup$}, which takes
+      as arguments a key and a data base and which returns the record that
+      has that key, or false if there is no such record.  The function {\lstinline[mathescape=true]$lookup$}
+      is implemented in almost the same way as {\lstinline[mathescape=true]$is_element_of_set$}.  For
+      example, if the set of records is implemented as an unordered list, we
+      could use
+
+      
+      
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function lookup(given_key, set_of_records) {
+    return ! is_null(set_of_records) &&
+           ( is_equal(given_key, key(head(set_of_records)))
+             ? head(set_of_records)
+             : lookup(given_key, tail(set_of_records))
+           );
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGznA1iADgCgOYwBuApmAPrrECeANIgM7FRlzBkBOxEc7AJvQEpEAbwBQiCYk5QQ7JAEJEMemTAhkyHI2asOXHvyEAyI+MnnJOJSuIBHEAENNBEuUq1E7nAAtiD3lpMLGyc3HyCAgJmFjEA-Ii+-oE6IfrhUTGZAFwoaJi4LqQU1HRQDjCa2sF6YYYZmZICANyiAL5AA}{\usebox\lstbox}!*/
+}
+
+\end{JavaScriptClickable}
+
+
+      
+      </p></div>
+      <div class='permalink'>
+<a name='p22' class='permalink'></a><p>
+      Of course, there are better ways to represent large sets than as
+      unordered lists.  Information-retrieval systems in which records have
+      to be <QUOTE>randomly accessed</QUOTE> are typically implemented by a tree-based
+      method, such as the binary-tree representation discussed previously.
+      In designing such a system the methodology of data abstraction
+      can be a great help.  The designer can create an initial
+      implementation using a simple, straightforward representation such as
+      unordered lists.  This will be unsuitable for the eventual system, but
+      it can be useful in providing a <QUOTE>quick and dirty</QUOTE> data base with
+      which to test the rest of the system.  Later on, the data
+      representation can be modified to be more sophisticated.  If the data
+      base is accessed in terms of abstract selectors and constructors, this
+      change in representation will not require any changes to the rest of
+      the system.
+      </p></div>
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+        Implement the {\lstinline[mathescape=true]$lookup$}
+        function
+        for the case
+        where the set of records is structured as a binary tree, ordered by
+        the numerical values of the keys.
+        
+   
+      \hfill{\hyperref[ex:set-lookup-binary-tree-Answer]{Solution}}\\
+\end{Exercise}
+
+\begin{Answer}[ref={ex:set-lookup-binary-tree}]
+
+     
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+function lookup(given_key, tree_of_records) {
+    if (is_null(tree_of_records)) {
+        return null;
+    } else {
+        const this_entry = entry(tree_of_records);
+        const this_key = key(this_entry);
+\end{JavaScriptClickable}
+\end{lrbox}
+\begin{JavaScriptClickable}
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGznA1iADgCgOYwBuApmAPrrECeANIlAE7HFlzBlMRwMAmAzgEpEAbwBQiCYhjBEOGHzJgQyZDkbNW7Tt34ChYyYcRMoIBkiUqA3OMkBfRMWR9iI20cRcwfKPQAW8mSkjFSIALyOYCFqTCxsHMRcvII2HhJePv6BlKEROWoBCsEMVAKpaSZmSAQk5DnhYRFQhRTUiO5pRgD8WUVRJR2dkgBciDWkraEAPL2Tg0OSPagY2PhEEzl08wsLyMTAUGQARgwAhpB+MRrx2sl62wujy5i443XUWztfkgwweH6HE7nCCXdRxLSJHSCModOyiOxAA}{\usebox\lstbox}!*/
+        return given_key === this_key 
+               ? this_entry
+               : given_key < this_key
+                 ? lookup(given_key, 
+                          left_branch(tree_of_records))
+                 : lookup(given_key, 
+                          right_branch(tree_of_records));
+    }
+}
+
+\end{JavaScriptClickable}
+
+
+    
+  
+\end{Answer}
+
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>If
+        we want to be more formal, we can specify <QUOTE>consistent with the
+          interpretations given above</QUOTE> to mean that the operations satisfy a
+        collection of rules such as these:
+
+        <UL>
+          <LI>For any set {\lstinline[mathescape=true]$S$} and any object {\lstinline[mathescape=true]$x$},
+            {\lstinline[mathescape=true]$is_element_of_set(x,S)$}
+            is true (informally: <QUOTE>Adjoining an object to a set produces a set that contains the object</QUOTE>).
+
+          </LI>
+          <LI>
+            For any sets {\lstinline[mathescape=true]$S$} and {\lstinline[mathescape=true]$T$} and any object {\lstinline[mathescape=true]$x$},
+            {\lstinline[mathescape=true]$is_element_of_set(x,union_set(S,T))$}
+            is equal to
+            {\lstinline[mathescape=true]$is_element_of_set(x,S) || is_element_of_set(x,T)$}
+            (informally: <QUOTE>The elements of {\lstinline[mathescape=true]$union(S,T)$} are the elements that
+              are in {\lstinline[mathescape=true]$S$} or in {\lstinline[mathescape=true]$T$}</QUOTE>).
+
+          </LI>
+          <LI>
+            For any object {\lstinline[mathescape=true]$x$},
+            {\lstinline[mathescape=true]$is_element_of_set(x,null)$}
+            is false (informally: <QUOTE>No object is an element of the empty set</QUOTE>).
+
+          </LI>
+        </UL>
+      </FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>Halving the size of the problem at each step is the
+        distinguishing characteristic of
+        
+        logarithmic growth, as we saw with
+        the fast-exponentiation algorithm of section~\ref{sec:exponentiation}
+        and the half-interval search method of
+        section~\ref{sec:proc-general-methods}.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>We are
+        representing sets in terms of trees, and trees in terms of lists—in
+        effect, a data abstraction built upon a data abstraction.  We can
+        regard the
+        functions
+        {\lstinline[mathescape=true]$entry$}, {\lstinline[mathescape=true]$left_branch$}, {\lstinline[mathescape=true]$right_branch$}, and {\lstinline[mathescape=true]$make_tree$} as a way of isolating the
+        abstraction of a <QUOTE>binary tree</QUOTE> from the particular way we might wish
+        to represent such a tree in terms of list structure.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>Examples of such structures include
+        
+        
+        
+        
+        <EM>B-trees</EM> and <EM>red-black trees</EM>.  There is a large literature on
+        data structures devoted to this problem.  See Cormen,
+        
+        
+        
+        Leiserson, and Rivest 1990.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>Exercises~\ref{ex:tree-to-list}–\ref{ex:tree-ops}
+          
+          are due to Paul Hilfinger.</FOOTNOTE></div>
+</SUBSECTION>

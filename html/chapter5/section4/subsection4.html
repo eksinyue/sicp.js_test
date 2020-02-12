@@ -1,0 +1,551 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>5.4.4 
+  Running the Evaluator
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+  
+  With the implementation of the explicit-control evaluator we come to
+  the end of a development, begun in chapter~1, in which we have
+  explored successively more precise models of the evaluation process.
+  We started with the relatively informal substitution model, then
+  extended this in chapter~3 to the environment model, which enabled us
+  to deal with state and change.  In the metacircular evaluator of
+  chapter~4, we used Scheme itself as a language for making more explicit
+  the environment structure constructed during evaluation of an
+  expression.  Now, with register machines, we have taken a close look
+  at the evaluator's mechanisms for storage management,
+  argument passing, and control.  At
+  each new level of description, we have had to raise issues and resolve
+  ambiguities that were not apparent at the previous, less precise
+  treatment of evaluation.  To understand the behavior of the
+  explicit-control evaluator, we can simulate it and monitor its
+  performance.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+  
+  
+  We will install a driver loop in our evaluator machine.  This plays
+  the role of the {\lstinline[mathescape=true]$driver_loop$}
+  function
+  of
+  section~\ref{sec:running-eval}.  The evaluator will repeatedly print a
+  prompt, read an expression, evaluate the expression by going to {\lstinline[mathescape=true]$eval_dispatch$}, and print the result.  The following instructions form
+  the beginning of the explicit-control evaluator's controller
+  sequence:<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+\begin{JavaScript}
+"read_eval_print_loop",
+          perform(op("initialize_stack")),
+          perform(op("prompt_for_input"), const("/// EC_Eval input:")),
+          assign("exp", op("read")),
+          assign("env", op("get_global_environment")),
+          assign("continue", label("print_result")),
+          go_to(label("eval_dispatch")),
+          <!__  \indcode*{print_result} __>
+      "print_result",
+          perform(op("announce_output"), const(";;; EC_Eval value:")),
+          perform(op("user_print"), reg("val")),
+          go_to(label("read_eval_print_loop")),
+\end{JavaScript}
+
+      
+
+  
+\begin{JavaScript}
+"read_eval_print_loop",
+          perform(op("initialize_stack")),
+          perform(op("prompt_for_input"), const("/// EC_Eval input:")),
+          assign("exp", op("read")),
+          assign("env", op("get_global_environment")),
+          assign("continue", label("print_result")),
+          go_to(label("eval_dispatch")),
+          <!__  \indcode*{print_result} __>
+      "print_result",
+          perform(op("announce_output"), const(";;; EC_Eval value:")),
+          perform(op("user_print"), reg("val")),
+          go_to(label("read_eval_print_loop")),
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+  
+  
+  When we encounter an error in a
+  function
+  (such as the <QUOTE>unknown
+    function
+    type error</QUOTE> indicated at {\lstinline[mathescape=true]$apply_dispatch$}), we print an
+  error message and return to the driver loop.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+\begin{JavaScript}
+"unknown_expression_type",
+          assign("val", const("unknown_expression_type_error")),
+          go_to(label("signal_error")),
+
+      
+      "unknown_procedure_type",
+          restore("continue"),    /// clean up stack (from apply_dispatch)
+          assign(val(const("unknown_procedure_type_error"))),
+          go_to(label("signal_error")),
+
+      
+      "signal_error",
+          perform(op("user_print"), reg("val")),
+          go_to(label("read_eval_print_loop")),
+\end{JavaScript}
+
+      
+
+  
+\begin{JavaScript}
+"unknown_expression_type",
+          assign("val", const("unknown_expression_type_error")),
+          go_to(label("signal_error")),
+
+      
+      "unknown_procedure_type",
+          restore("continue"),    /// clean up stack (from apply_dispatch)
+          assign(val(const("unknown_procedure_type_error"))),
+          go_to(label("signal_error")),
+
+      
+      "signal_error",
+          perform(op("user_print"), reg("val")),
+          go_to(label("read_eval_print_loop")),
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+  For the purposes of the simulation, we initialize the stack each time
+  through the driver loop, since it might not be empty after an error
+  (such as an undefined variable) interrupts an evaluation.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+      
+  
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+  
+  If we combine all the code fragments presented in sections
+  \ref{sec:eceval-core}–\ref{sec:running-evaluator}, we can create an
+  evaluator machine model that we can run using the register-machine simulator
+  of section~\ref{sec:simulator}.
+
+  
+\begin{JavaScript}
+function eceval() {
+    return make_machine(list("exp", "env", "val", "proc", "argl", "continue", "unev"),
+                        eceval_operations,
+                        list(read_eval_print_loop,
+                             ... /* entire machine controller as given above */ 
+                             ));
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+  We must define Scheme
+  functions
+  to simulate the
+  operations used as primitives by the evaluator.  These are
+  the same
+  functions
+  we used for the metacircular evaluator in
+  section~\ref{sec:mc-eval}, together with the few additional ones
+  defined in footnotes throughout section~\ref{sec:eceval}.
+  
+\begin{JavaScript}
+const eceval_operations = 
+    list(list("is_self_evaluating", is_self_evaluating),
+         ... /* complete list of operations for eceval machine */
+         );
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+  Finally, we can initialize the global environment and run the evaluator:
+  
+\begin{JavaScript}
+const the_global_environment = setup_environment();
+
+start(eceval);
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+  Of course, evaluating expressions in this way will take much longer
+  than if we had directly typed them into Scheme, because of the
+  multiple levels of simulation involved.  Our expressions are evaluated
+  by the explicit-control-evaluator machine, which is being simulated by
+  a Scheme program, which is itself being evaluated by the Scheme
+  interpreter.
+  
+      </p></div>
+
+      \subsubsection{ 
+  Monitoring the performance of the evaluator
+      
+
+      
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+  
+  Simulation can be a powerful tool to guide the implementation of
+  evaluators.  Simulations make it easy not only to explore variations
+  of the register-machine design but also to monitor the performance of
+  the simulated evaluator.  For example, one important factor in
+  performance is how efficiently the evaluator uses the stack.  We can
+  observe the number of stack operations required to evaluate various
+  expressions by defining the evaluator register machine with the
+  version of the simulator that collects statistics on stack use
+  (section~\ref{sec:monitor}), and adding an instruction at the
+  evaluator's {\lstinline[mathescape=true]$print_result$} entry point to print the
+  statistics:
+
+  
+\begin{lrbox}{\lstbox}
+\begin{JavaScriptClickable}
+"print_result",
+          perform(op("print_stack_statistics")), // added instruction
+          perform(op("announce_output"), const("/// EC-Eval value:")),
+          /* ... same as before ... */
+\end{JavaScriptClickable}
+\end{lrbox}
+
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EQBwTglgdgLg+mApgZwK4BsbADQCgAEhRxIiYAZgPZgC2AFJSHaJLHMjAIYDGA1u1xgQOEbsmABKCdnwB6Wfk4ATJYiX5oHMKm5DKUAsSOkK1eo2acoUSqijdEcWzBCos0-N30dm8hQFEAYQBafwA3TnR8CPRURAAuSWlDIyJZACp8ADoc-GROGkRFZHwAI0QqJGzc9NkgA}{\usebox\lstbox}
+
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+  Interactions with the evaluator now look like this:
+  
+\begin{JavaScript}
+/// EC-Eval input:
+function factorial (n) {
+return n === 1 ?
+1
+n * factorial(n - 1); }
+(total-pushes = 3 maximum-depth = 3)
+/// EC-Eval value:
+ok
+
+/// EC-Eval input:
+factorial(5);
+(total-pushes = 144 maximum-depth = 28)
+/// EC-Eval value:
+120
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p11' class='permalink'></a><p>
+  Note that the driver loop of the evaluator reinitializes the stack
+  at the start of
+  each interaction, so that the statistics printed will refer only to
+  stack operations used to evaluate the previous expression.
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  
+  
+  Use the monitored stack to explore the tail-recursive property of the
+  evaluator (section~\ref{sec:sequence-evaluation}).  Start the
+  evaluator and define the iterative {\lstinline[mathescape=true]$factorial$}
+  function
+  from
+  section~\ref{sec:recursion-and-iteration}:
+
+  
+\begin{JavaScript}
+function factorial(n) {
+    function iter(product, counter, max_count) {
+        return counter > max_count
+               ? product
+               : fact_iter(counter * product,
+                           counter + 1,
+                           max_count);
+    }
+
+    return iter(1, 1, n);
+}
+\end{JavaScript}
+
+
+  Run the
+  function
+  with some small values of $n$.  Record the maximum
+  stack depth and the number of pushes required to compute $n!$ for each of
+  these values.
+  
+\begin{enumerate}[a.]
+\item{
+      You will find that the maximum depth required to evaluate $n!$ is
+      independent of $n$.  What is that depth?
+    }
+\item{
+      Determine from your data a formula in terms of $n$ for the total
+      number of push operations used in evaluating $n!$ for any $n \geq 1$.
+      Note that the number of operations used is a linear function of $n$
+      and is thus determined by two constants.
+    }
+\end{enumerate}
+
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  For comparison with exercise~\ref{ex:tail-rec-fact}, explore the
+  behavior of the following
+  function
+  for computing factorials
+  recursively:
+  
+\begin{JavaScript}
+function factorial(n) {
+    return n === 1 
+           ? 1
+           : n * factorial(n - 1);
+}
+\end{JavaScript}
+
+  By running this
+  function
+  with the monitored stack, determine, as a
+  function of $n$, the maximum depth of the stack and the total number
+  of pushes used in evaluating $n!$ for $n \geq 1$.  (Again, these functions
+  will be linear.)  Summarize your experiments by filling in the
+  following table with the appropriate expressions in terms of $n$:
+  
+\begin{figure}[H]
+\centering
+
+\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_original/527table}.svg}}
+\end{figure}
+
+
+  The maximum depth is a measure of the amount of space used by the
+  evaluator in carrying out the computation, and the number of pushes
+  correlates well with the time required.
+  
+      
+\end{Exercise}
+
+
+      
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  
+  
+  Modify the definition of the evaluator by changing
+  {\lstinline[mathescape=true]$eval_sequence$} as described in
+  section~\ref{sec:sequence-evaluation} so that the evaluator is no
+  longer tail-recursive.  Rerun your experiments from
+  exercises~\ref{ex:tail-rec-fact} and~\ref{ex:rec-fact} to demonstrate
+  that both versions of the {\lstinline[mathescape=true]$factorial$}
+  function
+  now require space
+  that grows linearly with their input.
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  Monitor the stack operations in the tree-recursive Fibonacci computation:
+
+  
+\begin{JavaScript}
+function fib(n) {
+    return n < 2 ? n : fib(n - 1) + fib(n - 2);
+}
+\end{JavaScript}
+
+  
+\begin{enumerate}[a.]
+\item{
+      Give a formula in terms of $n$ for the maximum depth of the stack
+      required to compute ${\textrm{Fib}}(n)$ for $n \geq 2$.  Hint: In
+      section~\ref{sec:tree-recursion} we argued that the space used by this
+      process grows linearly with $n$.
+    }
+\item{
+      Give a formula for the total number of pushes used to compute
+      ${\textrm{Fib}}(n)$ for $n \geq 2$.  You should find that the number of
+      pushes (which correlates well with the time used) grows exponentially
+      with $n$.  Hint: Let $S(n)$ be the number of pushes used in computing
+      ${\textrm{Fib}}(n)$.  You should be able to argue that there is a formula
+      that expresses $S(n)$ in terms of $S(n-1)$, $S(n-2)$, and some fixed
+      <QUOTE>overhead</QUOTE> constant $k$ that is independent of $n$.  Give the
+      formula, and say what $k$ is.  Then show that $S(n)$ can be expressed
+      as $a {\textrm{Fib}}(n+1) + b$ and give the values of $a$ and $b$.
+    }
+\end{enumerate}
+
+      
+\end{Exercise}
+
+      
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  
+  
+  Our evaluator currently catches and signals only two kinds of
+  errors—unknown expression types and unknown
+  function
+  types.  Other
+  errors will take us out of the evaluator read-eval-print loop.  When
+  we run the evaluator using the register-machine simulator, these
+  errors are caught by the underlying Scheme system.  This is analogous
+  to the computer crashing when a user program makes an
+  error.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
+\begin{enumerate}[a.]
+\item{
+      Errors that occur in the evaluation process, such as an attempt to
+      access an unbound variable, could be caught by changing the lookup
+      operation to make it return a distinguished condition code, which cannot
+      be a possible value of any user variable.  The evaluator can test
+      for this condition code and then do what is necessary to go to {\lstinline[mathescape=true]$signal-error$}.  Find all of the places in the evaluator where such a
+      change is necessary and fix them.  This is lots of work.
+    }
+\item{
+      Much worse is the problem of handling errors that are signaled by
+      applying primitive
+      functions, such as an attempt to divide by zero or
+      an attempt to extract the {\lstinline[mathescape=true]$head$} of a symbol.  In a professionally
+      written high-quality system, each primitive application is checked for
+      safety as part of the primitive.  For example, every call to {\lstinline[mathescape=true]$head$}
+      could first check that the argument is a pair.  If the argument is not
+      a pair, the application would return a distinguished condition code to
+      the evaluator, which would then report the failure.  We could arrange
+      for this in our register-machine simulator by making each primitive
+      function
+      check for applicability and returning an appropriate distinguished
+      condition code on failure. Then the {\lstinline[mathescape=true]$primitive-apply$} code in the
+      evaluator can check for the condition code and go to {\lstinline[mathescape=true]$signal-error$} if necessary.  Build this structure and make it work.
+      This is a major project.
+    }
+\end{enumerate}
+
+        It is a large project to make a real
+  error system work, but it is well worth the effort to understand what
+  is involved here.
+  
+\begin{enumerate}[a.]
+\item{
+      Errors that occur in the evaluation process, such as an attempt to
+      access an unbound variable, could be caught by changing the lookup
+      operation to make it return a distinguished condition code, which cannot
+      be a possible value of any user variable.  The evaluator can test
+      for this condition code and then do what is necessary to go to {\lstinline[mathescape=true]$signal-error$}.  Find all of the places in the evaluator where such a
+      change is necessary and fix them.  This is lots of work.
+    }
+\item{
+      Much worse is the problem of handling errors that are signaled by
+      applying primitive
+      functions, such as an attempt to divide by zero or
+      an attempt to extract the {\lstinline[mathescape=true]$head$} of a symbol.  In a professionally
+      written high-quality system, each primitive application is checked for
+      safety as part of the primitive.  For example, every call to {\lstinline[mathescape=true]$head$}
+      could first check that the argument is a pair.  If the argument is not
+      a pair, the application would return a distinguished condition code to
+      the evaluator, which would then report the failure.  We could arrange
+      for this in our register-machine simulator by making each primitive
+      function
+      check for applicability and returning an appropriate distinguished
+      condition code on failure. Then the {\lstinline[mathescape=true]$primitive-apply$} code in the
+      evaluator can check for the condition code and go to {\lstinline[mathescape=true]$signal-error$} if necessary.  Build this structure and make it work.
+      This is a major project.
+    }
+\end{enumerate}
+
+      
+\end{Exercise}
+
+      
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE><div class='permalink'>
+<a name='p12' class='permalink'></a><p>We assume here that {\lstinline[mathescape=true]$read$} and the
+      various printing operations are
+      available as primitive machine operations, which is useful for our
+      simulation, but completely unrealistic in practice.  These
+      are actually extremely complex operations.  In practice, they would be
+      implemented using low-level input-output operations
+      such as transferring single characters to and from a device.
+    </p></div>
+    <div class='permalink'>
+<a name='p13' class='permalink'></a><p>
+      To support the {\lstinline[mathescape=true]$get_global_environment$} operation we define
+
+      
+\begin{JavaScript}
+const the_global_environment = setup_environment();
+
+
+function get_global_environment() {
+    return the_global_environment;
+}
+\end{JavaScript}
+
+    </p></div>
+  </FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>There are other
+    errors that we would like the interpreter to handle, but these are not
+    so simple.  See exercise~\ref{ex:interp-errors}.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>We
+    could perform the stack initialization only after errors, but doing it in
+    the driver loop will be convenient for monitoring the evaluator's
+    performance, as described below.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Regrettably, this is the normal state of affairs in
+    
+    conventional compiler-based language systems such as C.  
+    
+    
+    
+    In UNIX$^{\textrm{TM}}$ the system <QUOTE>dumps core,</QUOTE> and in 
+    DOS/Windows$^{\textrm{TM}}$ it becomes catatonic.
+    The Macintosh$^{\textrm{TM}}$ displays a
+    picture of an exploding bomb and offers you the opportunity to reboot
+    the computer—if you're lucky.</FOOTNOTE></div>
+</SUBSECTION>

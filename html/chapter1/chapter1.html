@@ -1,0 +1,258 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>1 
+      Building Abstractions with 
+      Functions
+    </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><CHAPTER>
+
+    
+
+    \epigraph{
+      The acts of the mind, wherein it exerts its power over simple ideas,
+      are chiefly these three: 1. Combining several simple ideas into one
+      compound one, and thus all complex ideas are made.  2. The second is
+      bringing two ideas, whether simple or complex, together, and setting
+      them by one another so as to take a view of them at once, without
+      uniting them into one, by which it gets all its ideas of relations.
+      3.  The third is separating them from all other ideas that accompany
+      them in their real existence: this is called abstraction, and thus all
+      its general ideas are made.
+      }{--- \textup{John Locke}, An Essay Concerning Human Understanding (1690)}
+
+
+    
+
+    <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+      We are about to study the idea of a
+      <EM>computational process</EM>.
+      Computational processes are abstract beings that inhabit computers.
+      As they evolve, processes manipulate other abstract things called
+      <EM>data</EM>.
+      The evolution of a process is directed by a pattern of rules
+      called a
+      <EM>program</EM>.
+      People create programs to direct processes.
+      In effect, we conjure the spirits of the computer with our spells.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+      A computational process is indeed much like a sorcerer's idea of a
+      spirit.  It cannot be seen or touched.  It is not composed of matter
+      at all.  However, it is very real.  It can perform intellectual work.
+      It can answer questions.  It can affect the world by disbursing money
+      at a bank or by controlling a robot arm in a factory.  The programs we
+      use to conjure processes are like a sorcerer's spells.  They are
+      carefully composed from symbolic expressions in arcane and esoteric
+      <EM>programming languages</EM>
+      that prescribe the tasks we want our
+      processes to perform.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+      A computational process, in a correctly working computer, executes
+      programs precisely and accurately.  Thus, like the sorcerer's
+      apprentice, novice programmers must learn to understand and to
+      anticipate the consequences of their conjuring.  Even small errors
+      (usually called <EM>bugs</EM>
+      or <EM>glitches</EM>) 
+      in programs can have complex and unanticipated consequences.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+      Fortunately, learning to program is considerably less dangerous than
+      learning sorcery, because the spirits we deal with are conveniently
+      contained in a secure way.  Real-world programming, however,
+      requires care, expertise, and wisdom.  A small bug in a computer-aided
+      design program, for example, can lead to the catastrophic collapse of
+      an airplane or a dam or the self-destruction of an industrial robot.
+    </p></div>
+
+    <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+      Master software engineers have the ability to organize programs so
+      that they can be reasonably sure that the resulting processes will
+      perform the tasks intended.  They can visualize the behavior of their
+      systems in advance.  They know how to structure programs so that
+      unanticipated problems do not lead to catastrophic consequences, and
+      when problems do arise, they can <EM>debug</EM>
+      their programs.  Well-designed
+      computational systems, like well-designed automobiles or nuclear
+      reactors, are designed in a modular manner, so that the parts can be
+      constructed, replaced, and debugged separately.
+    </p></div>
+
+    <SPLIT>
+      
+      
+        \subsubsection{
+          Programming in JavaScript
+        
+      
+    </SPLIT>
+
+    <SPLIT>
+      
+      
+        <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+          We need an appropriate language for describing processes, and we will
+          use for this purpose the programming language JavaScript.  Just as our
+          everyday thoughts are usually expressed in our natural language (such
+          as English, French, or Japanese), and descriptions of quantitative
+          phenomena are expressed with mathematical notations, our process
+          descriptions will be expressed in JavaScript. 
+          
+          JavaScript was developed in the early
+          1990s as a programming language for controlling the behavior 
+          of World Wide Web browsers through scripts that are embedded
+	  in web pages.
+          The language was conceived by 
+          
+          
+          Brendan Eich, originally under the name <EM>Mocha</EM>, which
+          
+          was later renamed to <EM>LiveScript</EM>, and finally to JavaScript.
+          
+          The name <QUOTE>JavaScript</QUOTE> is a trademark
+	  of Oracle Corporation.
+        </p></div>
+      
+    </SPLIT>
+
+    <SPLIT>
+      
+      
+        <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+          Despite its inception as a language for controlling browsers, JavaScript
+          
+          is a general-purpose programming language. A JavaScript <EM>interpreter</EM>
+          is a machine that carries out processes described in the JavaScript
+          
+          language. The first JavaScript interpreter was implemented by Eich
+          
+          
+          at Netscape Communications Corporation, for the Netscape Navigator web 
+          browser. The main features of JavaScript are inherited from the 
+          
+          
+          Scheme and Self programming languages. Scheme is a dialect of Lisp, and
+          
+          was used as programming language for the original version of this book. 
+          From Scheme, JavaScript inherited its most fundamental design principles 
+          
+          such as statically-scoped first-class 
+          
+          
+          functions and dynamic typing, and as a result, it
+          was fairly straightforward to translate the
+	  programs in this book from Scheme to JavaScript.
+        </p></div>
+      
+    </SPLIT>
+
+    <SPLIT>
+      
+      
+        <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+          JavaScript bears only superficial resemblance to the language Java, 
+          
+          after which it was
+          
+          (eventually) named; both Java and JavaScript use the block structure of the language
+          
+          C. In contrast with Java and C, which usually
+	  employ compilation to lower-level
+          languages, JavaScript programs were initially
+	  <EM>interpreted</EM>
+	  by web browsers.
+          
+          After Netscape Navigator, other web browsers provided interpreters
+          
+          
+          for the language, including Microsoft's Internet Explorer, whose
+          JavaScript version is called
+          
+          <EM>JScript</EM>. The popularity of JavaScript for controlling web
+          browsers gave rise to a standardization effort, culminating in 
+          <EM>ECMAScript</EM>. The
+          first edition of the ECMAScript standard was led by Guy Lewis 
+          Steele Jr.~and completed in June 1997 (Ecma 1997).
+          The sixth edition, which is used in this book, was led by 
+          Allen Wirfs-Brock and adopted by the General Assembly of ECMA in
+	  June 2015.
+        </p></div>
+      
+    </SPLIT>
+
+    <SPLIT>
+      
+      
+        <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+          The practice of embedding JavaScript programs in web pages encouraged
+          the developers of web browsers to implement JavaScript interpreters.
+          As these programs became more complex,
+          the interpreters became more efficient in executing them, eventually
+          using sophisticated implementation techniques such as Just-In-Time
+          (JIT) compilation.
+          The majority of JavaScript programs (as of 2019) is embedded in 
+          web pages and interpreted by browsers, but JavaScript is also used
+          for scripting dashboard widgets in Apple computers running the OS X 
+          operating system, for controlling software systems such as Adobe
+          Reader and devices such as universal remote panels, and
+	  in server software, using Node.js.
+        </p></div>
+      
+    </SPLIT>
+
+    <SPLIT>
+      
+      
+        <div class='permalink'>
+<a name='p10' class='permalink'></a><p> 
+          
+          However, it is the ability of browsers to execute JavaScript programs
+          that makes it an ideal language for an online version of a programming
+          textbook. Executing programs by clicking on things on a web page comes
+          naturally in JavaScript—after all that is what JavaScript
+	  was designed
+          for! More fundamentally, JavaScript
+          possesses features that make it an excellent medium for studying
+          important programming constructs and data structures and for relating
+          them to the linguistic features that support them. JavaScript's 
+          
+          statically-scoped first-class functions  
+          provide direct and concise access to abstraction mechanisms, and
+          
+          
+          dynamic typing removes the need for declaring the types of the data
+          being manipulated by the program.
+          Above and beyond these
+          considerations, programming in JavaScript is great fun.
+        </p></div>
+       
+    </SPLIT>
+
+    
+
+    
+    &section1.1;
+
+    
+    &section1.2;
+
+    
+    &section1.3;
+
+    
+</CHAPTER>

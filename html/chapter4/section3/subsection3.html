@@ -1,0 +1,1190 @@
+<div class='chapter-title'>
+	<div class='permalink'>
+		<a name='top' class='permalink'>4.3.3 
+  Implementing the {\lstinline[mathescape=true]$amb$} Evaluator
+      </a>
+	</div>
+</div>
+	<div class='chapter-text'>
+		<div class='SECTION'><SUBSECTION>
+
+      
+      
+
+      <div class='permalink'>
+<a name='p1' class='permalink'></a><p>
+	The evaluation of an ordinary
+	JavaScript
+	expression may return a value,
+	may never terminate, or may signal an error.  In nondeterministic
+	JavaScript	
+	the evaluation of an expression may in addition result in the
+	discovery of a dead end, in which case evaluation must backtrack to a previous
+	choice point.  The interpretation of nondeterministic
+	JavaScript	
+	is complicated by this extra case.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p2' class='permalink'></a><p>
+  
+  We will construct the {\lstinline[mathescape=true]$amb$} evaluator for nondeterministic
+  JavaScript	
+  by modifying the analyzing evaluator of section~\ref{sec:separating-analysis}.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+  execution
+  function
+  produced by analysis of
+  that expression.  The difference between the interpretation of ordinary
+  JavaScript	
+  and the interpretation of nondeterministic
+  JavaScript	
+  will be entirely
+  in the execution
+  functions.
+      
+  As in the analyzing evaluator, evaluation of an expression is
+  accomplished by calling an 
+  
+  execution
+  function
+  produced by analysis of
+  that expression.  The difference between the interpretation of ordinary
+  JavaScript	
+  and the interpretation of nondeterministic
+  JavaScript	
+  will be entirely
+  in the execution
+  functions.
+      </p></div>
+
+      \subsubsection{
+  Execution
+    functions
+    and continuations
+      
+
+      
+      <div class='permalink'>
+<a name='p3' class='permalink'></a><p>
+  
+  Recall that the execution
+  functions
+  for the ordinary evaluator take
+  one argument: the environment of execution.  In contrast, the
+  execution
+  functions
+  in the {\lstinline[mathescape=true]$amb$} evaluator take three arguments:
+  the environment, and two
+  functions
+  called <EM>continuation
+    functions</EM>.  The evaluation of an expression will finish by calling
+  one of these two continuations: If the evaluation results in a value,
+  the 
+  
+  <EM>success continuation</EM> is called with that value; if the
+  evaluation results in the discovery of a dead end, the 
+  
+  <EM>failure
+    continuation</EM> is called.  Constructing and calling appropriate
+  continuations is the mechanism by which the nondeterministic evaluator
+  implements backtracking.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p4' class='permalink'></a><p>
+  It is the job of the success continuation to receive a value and
+  proceed with the computation.  Along with that value, the success
+  continuation is passed another failure continuation, which is to be
+  called subsequently if the use of that value leads to a dead end.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p5' class='permalink'></a><p>
+  It is the job of the failure continuation to try another branch of the
+  nondeterministic process.  The essence of the nondeterministic
+  language is in the fact that expressions may represent choices among
+  alternatives.  The evaluation of such an expression must proceed with
+  one of the indicated alternative choices, even though it is not known
+  in advance which choices will lead to acceptable results.  To deal
+  with this, the evaluator picks one of the alternatives and passes this
+  value to the success continuation.  Together with this value, the
+  evaluator constructs and passes along a failure continuation that can
+  be called later to choose a different alternative.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p6' class='permalink'></a><p>
+  A failure is triggered during evaluation (that is, a failure
+  continuation is called) when a user program explicitly rejects the
+  current line of attack (for example, a call to {\lstinline[mathescape=true]$require$} may
+  result in execution of {\lstinline[mathescape=true]$amb()$}, an expression that always
+  fails—see section~\ref{sec:amb}).  The failure continuation in hand
+  at that point will cause the most recent choice point to choose
+  another alternative.  If there are no more alternatives to be
+  considered at that choice point, a failure at an earlier choice point
+  is triggered, and so on.  Failure continuations are also invoked by
+  the driver loop in response to a
+  
+    
+    {\lstinline[mathescape=true]$try-again$}
+  
+    request, to find
+  another value of the expression.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p7' class='permalink'></a><p>
+  In addition, if a side-effect operation (such as assignment to a
+  variable) occurs on a branch of the process resulting from a choice,
+  it may be necessary, when the process finds a dead end, to undo the
+  side effect before making a new choice.  This is accomplished by
+  having the side-effect operation produce a failure continuation that
+  undoes the side effect and propagates the failure.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p8' class='permalink'></a><p>
+  In summary, failure continuations are constructed by
+  <UL>
+    <LI>{\lstinline[mathescape=true]$amb$} expressions—to provide a mechanism to make
+      alternative choices if the current choice made by the {\lstinline[mathescape=true]$amb$}
+      expression leads to a dead end;
+
+    </LI>
+    <LI>the top-level driver—to provide a mechanism to report failure
+      when the choices are exhausted;
+
+    </LI>
+    <LI> assignments—to intercept failures and undo assignments
+      during backtracking.
+    </LI>
+
+  </UL>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p9' class='permalink'></a><p>
+  Failures are initiated only when a dead end is encountered.
+  This occurs
+  <UL>
+    <LI> if the user program executes {\lstinline[mathescape=true]$amb()$};
+
+    </LI>
+    <LI> if the user types {\lstinline[mathescape=true]$try-again$} at the top-level driver.
+    </LI>
+
+  </UL>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p10' class='permalink'></a><p>
+  Failure continuations are also called during processing of a failure:
+  <UL>
+    <LI>When the failure continuation created by an assignment finishes
+      undoing a side effect, it calls the failure continuation it intercepted,
+      in order to propagate the failure back to the choice point that
+      led to this assignment or to the top level.
+
+    </LI>
+    <LI>When the failure continuation for an {\lstinline[mathescape=true]$amb$} runs out of choices,
+      it calls the failure continuation that was originally given to the {\lstinline[mathescape=true]$amb$},
+      in order to propagate the failure back to the previous choice point
+      or to the top level.
+    </LI>
+  </UL>
+  
+      </p></div>
+
+      \subsubsection{
+  Structure of the evaluator
+      
+
+      <div class='permalink'>
+<a name='p11' class='permalink'></a><p>
+  
+  The syntax- and data-representation
+  functions
+  for the {\lstinline[mathescape=true]$amb$}
+  evaluator, and also the basic {\lstinline[mathescape=true]$analyze$}
+  function, are identical
+  to those in the evaluator of section~\ref{sec:separating-analysis},
+  except for the fact that we need additional syntax
+  functions
+  to
+  recognize
+  {\lstinline[mathescape=true]$amb$} expressions:<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+\begin{JavaScript}
+function is_amb(stmt) {      
+    return is_tagged_list(stmt, "application") && 
+           is_name(operator(stmt)) && 
+           name_of_name(operator(stmt)) === "amb";
+}
+function amb_choices(stmt) {
+    return operands(stmt);
+}
+\end{JavaScript}
+
+      
+  
+\begin{JavaScript}
+function is_amb(stmt) {      
+    return is_tagged_list(stmt, "application") && 
+           is_name(operator(stmt)) && 
+           name_of_name(operator(stmt)) === "amb";
+}
+function amb_choices(stmt) {
+    return operands(stmt);
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p12' class='permalink'></a><p>
+  We must also add to the dispatch in {\lstinline[mathescape=true]$analyze$} a clause that will
+  recognize
+  such expressions and generate an appropriate execution function:
+
+  
+\begin{JavaScript}
+: is_amb(stmt)
+  ? analyze_amb(stmt)
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p13' class='permalink'></a><p>
+  The top-level
+  function
+  {\lstinline[mathescape=true]$ambeval$} (similar to the version of
+  
+  {\lstinline[mathescape=true]$evaluate$}
+  given in section~\ref{sec:separating-analysis}) analyzes the
+  given expression and applies the resulting execution
+  function
+  to the given environment, together with two given continuations:
+
+  
+\begin{JavaScript}
+function ambeval(exp, env, succeed, fail) {      
+    return analyze(exp)(env, succeed, fail);
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p14' class='permalink'></a><p>
+  
+  
+  
+  A success continuation is a
+  function
+  of two arguments: the value just
+  obtained and another failure continuation to be used if that value leads
+  to a subsequent failure. A failure continuation is a
+  function
+  of no
+  arguments.  So 
+  
+  the general form of an execution
+  function
+  is
+
+  
+\begin{JavaScript}
+(env, succeed, fail) => {      
+    // succeed is a function of the form: (value, fail) => ...
+    // fail    is a function of the form: is () => ...
+}
+\end{JavaScript}
+
+
+  For example, executing
+
+  
+\begin{JavaScript}
+ambeval($\textit{exp}$,      
+    the_global_environment,
+    (value, fail) => value,
+    () => "failed");
+\end{JavaScript}
+
+
+  will attempt to evaluate the given expression and will return
+  either the expression's value (if the evaluation succeeds) or
+  the
+  
+    
+    
+      string {\lstinline[mathescape=true]$"failed"$}
+    
+  
+  (if the evaluation fails).
+  The call to {\lstinline[mathescape=true]$ambeval$} in the driver loop shown below uses
+  much more complicated continuation
+  functions, which continue the
+  loop and support the {\lstinline[mathescape=true]$try-again$} request.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p15' class='permalink'></a><p>
+  Most of the complexity of the {\lstinline[mathescape=true]$amb$} evaluator results
+  from the mechanics of passing the continuations around as the
+  execution
+  functions
+  call each other.  In going through the following code,
+  you should compare each of the execution
+  functions
+  with the
+  corresponding
+  function
+  for the ordinary evaluator given in
+  section~\ref{sec:separating-analysis}.
+      </p></div>
+
+      \subsubsection{
+  Simple expressions
+      
+
+      <div class='permalink'>
+<a name='p16' class='permalink'></a><p>
+  The execution
+  functions
+  for the simplest kinds of expressions are
+  essentially the same as those for the ordinary evaluator, except for the
+  need to manage the continuations.  The execution
+  functions
+  simply
+  succeed with the value of the expression, passing along the failure
+  continuation that was passed to them.
+
+  
+  
+\begin{JavaScript}
+function analyze_self_evaluating(stmt) {
+    return (env, succeed, fail) => succeed(stmt, fail);
+}
+
+function analyze_name(stmt) {
+    return (env, succeed, fail) =>
+           succeed(lookup_name_value(name_of_name(stmt), env),
+                   fail);
+}
+
+function analyze_function_definition(stmt) {
+    const vars = 
+        function_definition_parameters(stmt);
+    const bfun =
+        analyze(function_definition_body(stmt);
+    return (env, succeed, fail) =>
+        succeed(make_function(vars, bfun, env),
+                fail);
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p17' class='permalink'></a><p>
+  
+  Notice that looking up a
+  name
+  always <QUOTE>succeeds.</QUOTE>  If
+  
+    
+    
+      {\lstinline[mathescape=true]$lookup_name_value$}
+    
+  
+  fails to find the
+  name,
+  it signals an
+  error, as usual.  Such a <QUOTE>failure</QUOTE> indicates a program bug—a
+  reference to an unbound variable; it is not an indication that we
+  should try another nondeterministic choice instead of the one that is
+  currently being tried.
+      </p></div>
+
+      \subsubsection{
+  Conditionals and sequences
+      
+
+      <div class='permalink'>
+<a name='p18' class='permalink'></a><p>
+  Conditionals are also handled in a similar way as in the ordinary
+  evaluator.  The execution
+  function
+  generated by
+  
+    
+    
+      {\lstinline[mathescape=true]$analyze_conditional_expression$}
+    
+  
+  invokes the predicate execution
+  
+    
+    function
+    {\lstinline[mathescape=true]$pfun$}
+    
+  
+  with a success
+  continuation that checks whether the predicate value is true and goes
+  on to execute either the consequent or the alternative.  If the
+  execution of
+  
+    
+    
+      {\lstinline[mathescape=true]$pfun$}
+    
+  
+  fails, the original failure continuation for
+  the
+  
+    
+    
+      conditional
+    
+  
+  expression is called.
+
+  
+\begin{JavaScript}
+function analyze_conditional_expression(stmt) {      
+    const pfun = analyze(cond_expr_pred(stmt);
+    const cfun = analyze(cond_expr_cons(stmt));
+    const afun = analyze(cond_expr_alt(stmt));
+    return (env, succeed, fail) =>
+           pfun(env,
+                // success continuation for evaluating the predicate
+                // to obtain pred_value
+                (pred_value, fail2) =>
+                    is_true(pred_value) 
+                    ? cfun(env, succeed, fail2)
+                    : afun(env, succeed, fail2),
+                fail);
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p19' class='permalink'></a><p>
+  Sequences are also handled in the same way as in the previous
+  evaluator, except for the machinations in the subfunction
+  {\lstinline[mathescape=true]$sequentially$} that are required for passing the continuations.
+  Namely, to sequentially execute {\lstinline[mathescape=true]$a$} and then {\lstinline[mathescape=true]$b$}, we call {\lstinline[mathescape=true]$a$} with a success continuation that calls {\lstinline[mathescape=true]$b$}.
+
+  
+\begin{JavaScript}
+function analyze_sequence(stmts) {
+    function sequentially(a, b) {
+        return (env, succeed, fail) => 
+                   a(env, 
+		     (a_value, fail2) => b(env, succeed, fail2),
+                     fail);
+    }
+    function loop(first_fun, rest_funs) {
+        return is_null(rest_funs)
+               ? first_fun
+               : loop(sequentially(first_fun,
+                          head(rest_funs)),
+                      tail(rest_funs));
+    }
+    const funs = map(analyze, stmts);
+    return is_null(funs) 
+           ? env => undefined
+           : loop(head(funs), tail(funs));
+}
+\end{JavaScript}
+
+      </p></div>
+
+      \subsubsection{
+  Declarations and assignments
+      
+
+      <div class='permalink'>
+<a name='p20' class='permalink'></a><p>
+	Declarations
+	are another case where we must go to some trouble to
+	manage the continuations, because it is necessary to evaluate the
+	definition-value expression before actually defining the new variable.
+	To accomplish this, the
+	declaration-value	
+	execution
+	
+	  
+	  function
+	  {\lstinline[mathescape=true]$vfun$}
+	  
+		  
+  is called with the environment, a success continuation, and the
+  failure continuation.  If the execution of
+	
+	  
+	  
+	  {\lstinline[mathescape=true]$vfun$}
+	  
+		  
+  succeeds,
+  obtaining a value {\lstinline[mathescape=true]$val$} for the
+	
+	  
+	  
+	    declared name, the name is
+	    declared and the success is propagated:
+	  
+	
+  
+\begin{JavaScript}
+function analyze_variable_declaration(stmt) {	   
+    const name = variable_declaration_name(stmt);
+    const vfun = variable_declaration_value(stmt);
+    return (env, succeed, fail) => 
+              vfun(env,
+                   (val, fail2) => {
+                       declare_variable(name, val, env);
+                       succeed("ok", fail2);
+                   },
+	           fail);
+}
+function analyze_constant_declaration(stmt) {	   
+    const name = 
+        constant_declaration_name(stmt);
+    const vfun =
+        constant_declaration_value(stmt);
+    return (env, succeed, fail) => 
+              vfun(env,
+                   (val, fail2) => {
+                       declare_constant(name, val, env);
+                       succeed("ok", fail2);
+                   },
+	           fail);
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p21' class='permalink'></a><p>
+  
+  Assignments are more interesting.  This is the first place where we
+  really use the continuations, rather than just passing them around.
+  The execution
+  function
+  for assignments starts out like the one for
+  definitions.  It first attempts to obtain the new value to be assigned
+  to the variable. If this evaluation of
+  
+  {\lstinline[mathescape=true]$vfun$}  
+  fails, the assignment fails.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p22' class='permalink'></a><p>
+	If
+	
+	{\lstinline[mathescape=true]$vfun$}  
+	succeeds, however, and we go on to make the assignment,
+	we must consider the possibility that this branch of the computation
+	might later fail, which will require us to backtrack out of the
+	assignment.  Thus, we must arrange to undo the assignment as
+	part of the backtracking 
+	process.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+      </p></div>
+
+      <div class='permalink'>
+<a name='p23' class='permalink'></a><p>
+	This is accomplished by giving
+	
+	{\lstinline[mathescape=true]$vfun$}  
+	a success continuation
+	(marked with the comment <QUOTE>*1*</QUOTE> below) that saves the old value of
+	the variable before assigning the new value to the
+	variable and proceeding from the assignment.  The failure continuation
+	that is passed along with the value of the assignment (marked with the
+	comment <QUOTE>*2*</QUOTE> below) restores the old value of the variable
+	before continuing the failure.
+	That is, a successful assignment provides a failure continuation that
+	will intercept a subsequent failure; whatever failure would otherwise
+	have called {\lstinline[mathescape=true]$fail2$} calls this
+	function
+	instead, to undo the
+	assignment before actually calling {\lstinline[mathescape=true]$fail2$}.
+
+  
+\begin{JavaScript}
+function analyze_assignment(stmt) {
+    const variable = assignment_variable(stmt);
+    const vfun = analyze(assignment_value(stmt));
+    return (env, succeed, fail) =>
+           vfun(env,
+                (val, fail2) => { // *1*
+                    const old_value = lookup_name_value(variable, env);
+                    set_variable_value(variable, val, env);
+	            succeed("ok",
+                            () => { // *2*
+                                set_variable_value(variable, old_value, env);
+                                fail2();
+                            });
+                },
+		fail);
+}
+\end{JavaScript}
+
+      </p></div>
+
+      \subsubsection{
+  Function
+    applications
+      
+
+      <div class='permalink'>
+<a name='p24' class='permalink'></a><p>
+  The execution
+  function
+  for applications contains no new ideas except
+  for the technical complexity of managing the continuations.  This
+  complexity arises in
+  
+  {\lstinline[mathescape=true]$analyze_application$},  
+  due to the need to
+  keep track of the success and failure continuations as we evaluate the
+  operands.  We use a
+  
+  function {\lstinline[mathescape=true]$get_args$}
+    
+  to evaluate the list of
+  operands, rather than a simple {\lstinline[mathescape=true]$map$} as in the ordinary evaluator.
+
+  
+\begin{JavaScript}
+function analyze_application(stmt) {	
+    const ffun = analyze(operator(stmt));
+    const afuns = map(analyze, operands(stmt));
+    return (env, succeed, fail) =>
+               ffun(env,
+                    (fun, fail2) =>
+                        get_args(afuns, 
+                                 env,
+   			         (args, fail3) =>
+                                     execute_application(fun,
+                                         args, succeed, fail3),
+				 fail2),
+		    fail); 
+}
+\end{JavaScript}
+
+  
+      </p></div>
+
+      <div class='permalink'>
+<a name='p25' class='permalink'></a><p>
+	In
+  
+  {\lstinline[mathescape=true]$get_args$},
+    
+  notice how {\lstinline[mathescape=true]$tail$}ing down the list of
+  
+  {\lstinline[mathescape=true]$afun$},
+    
+  execution
+  functions
+  and {\lstinline[mathescape=true]$pair$}ing up the resulting list of
+  {\lstinline[mathescape=true]$args$} is accomplished by calling each
+  
+  {\lstinline[mathescape=true]$afun$}
+    
+  in the list
+  with a success continuation that recursively calls
+  
+  {\lstinline[mathescape=true]$get_args$}.
+    
+  Each of these recursive calls to
+  
+  {\lstinline[mathescape=true]$get_args$}
+    
+  has a success
+  continuation whose value is the {\lstinline[mathescape=true]$pair$} of the newly obtained
+  argument onto the list of accumulated arguments:
+
+  
+\begin{JavaScript}
+function get_args(afuns, env, succeed, fail) {      
+    return is_null(afuns)
+        ? succeed(null, fail)
+        : head(afuns)(env,
+                      // success continuation for this afun
+	              (arg, fail2) =>
+		          get_args(tail(afuns),
+                                   env,
+                                   // success continuation for
+				   // recursive call to get_args
+				   (args, fail3) =>
+				       succeed(pair(arg, args),
+				               fail3),
+			           fail2),
+		      fail);
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p26' class='permalink'></a><p>
+  The actual
+  function
+  application, which is
+  performed by
+  
+  {\lstinline[mathescape=true]$execute_application$},
+    
+  is accomplished in the same way as for the ordinary evaluator, except for
+  the need to manage the continuations.
+
+  
+\begin{JavaScript}
+function execute_application(fun, args, succeed, fail) {
+    return is_primitive_function(fun)
+        ? succeed(apply_primitive_function(fun, args),
+                  fail)
+        : is_compound_function(fun) 
+        ? function_body(fun)(
+              extend_environment(
+                  function_parameters(fun),
+                  args,
+                  function_environment(fun)),
+              succeed,       
+              fail)
+        : error(fun, "unknown function type in " +
+                     "execute_application");
+}
+\end{JavaScript}
+
+      </p></div>
+
+      \subsubsection{
+  Evaluating {\lstinline[mathescape=true]$amb$} expressions
+      
+
+      <div class='permalink'>
+<a name='p27' class='permalink'></a><p>
+  
+  The
+  
+  {\lstinline[mathescape=true]$amb$} expression
+  
+  is the key element in the nondeterministic
+  language.  Here we see the essence of the interpretation process and
+  the reason for keeping track of the continuations.  The execution
+  function
+  for {\lstinline[mathescape=true]$amb$} defines a loop
+  
+  
+    {\lstinline[mathescape=true]$try_next$}
+  
+  that cycles through the execution
+  functions
+  for all the possible values of the
+  {\lstinline[mathescape=true]$amb$} expression.  Each execution
+  function
+  is called with a
+  failure continuation that will try the next one.  When there are no
+  more alternatives to try, the entire {\lstinline[mathescape=true]$amb$} expression fails.
+
+  
+\begin{JavaScript}
+function analyze_amb(exp) {
+    const cfuns = map(analyze, amb_choices(exp));
+    return (env, succeed, fail) => {
+        function try_next(choices) {
+            return is_null(choices)
+                ? fail()
+                : head(choices)(env,
+		                succeed,
+                                () =>
+    	                        try_next(tail(choices)));
+        }
+        return try_next(cfuns);
+    };
+}
+\end{JavaScript}
+
+      </p></div>
+
+      \subsubsection{
+  Driver loop
+      
+
+      
+      <div class='permalink'>
+<a name='p28' class='permalink'></a><p>
+  
+  The driver loop for the {\lstinline[mathescape=true]$amb$} evaluator is complex, due to
+  the mechanism that permits the user to try again in evaluating an
+  expression.  The driver uses a
+  function
+  called
+  
+  
+    {\lstinline[mathescape=true]$internal_loop$},
+  
+  which takes as argument a
+  function
+  
+  
+    {\lstinline[mathescape=true]$try_again$}.
+  
+  The intent is
+  that calling
+  
+  
+    {\lstinline[mathescape=true]$try_again$}
+  
+  should go on to the next untried
+  alternative in the nondeterministic evaluation.
+  
+  The function
+    {\lstinline[mathescape=true]$internal_loop$}
+  
+  either calls
+  
+  
+    {\lstinline[mathescape=true]$try_again$}
+  
+  in response to the user typing
+  
+  
+    {\lstinline[mathescape=true]$try-again$}
+  
+  at the driver loop, or else starts a new evaluation by
+  calling {\lstinline[mathescape=true]$ambeval$}.  
+      </p></div>
+
+      <div class='permalink'>
+<a name='p29' class='permalink'></a><p>
+  The failure continuation for this call to {\lstinline[mathescape=true]$ambeval$}
+  
+  informs the user that there are no more values and re-invokes the driver loop.
+      </p></div>
+
+      <div class='permalink'>
+<a name='p30' class='permalink'></a><p>
+  The success continuation for the call to {\lstinline[mathescape=true]$ambeval$}
+  
+  is more subtle.  We print the obtained value and then invoke
+  the internal loop again with a
+  
+  
+    {\lstinline[mathescape=true]$try_again$}
+  
+  function
+  that will be
+  able to try the next alternative.  This
+  
+  
+    {\lstinline[mathescape=true]$next_alternative$}
+  
+  function
+  is the second argument that was passed to the
+  success continuation.  Ordinarily, we think of this second argument
+  as a failure continuation to be used if the current evaluation branch
+  later fails.  In this case, however, we have completed a successful
+  evaluation, so we can invoke the <QUOTE>failure</QUOTE> alternative branch in
+  order to search for additional successful evaluations.
+
+  
+\begin{JavaScript}
+const input_prompt = "// Amb-Eval input:");
+const output_prompt =  "// Amb-Eval value:");
+function driver_loop() {
+    function internal_loop(try_again) {
+        prompt_for_input(input_prompt);
+        const input = read();
+        if (input === "try-again") {
+            try_again();
+        } else {
+            display("// Starting a new problem ");
+            ambeval(input,
+                the_global_environment,
+                // ambeval success
+                (val, next_alternative) => {
+                    announce_output(output_prompt);
+                    user_print(val);
+                    return internal_loop(next_alternative);
+                },
+		// ambeval failure
+                () => {
+                    announce_output(
+                        "// There are no more values of");
+                    user_print(input);
+                    return driver_loop();
+                });
+        }
+    }
+    return internal_loop(
+               () => {
+                   display("// There is no current problem");
+                   return driver_loop();
+               });
+}
+\end{JavaScript}
+
+      </p></div>
+
+      <div class='permalink'>
+<a name='p31' class='permalink'></a><p>
+	The initial call to
+	
+	
+	  {\lstinline[mathescape=true]$internal_loop$}
+	
+	uses a
+	
+	
+	  {\lstinline[mathescape=true]$try_again$}
+	
+  function
+  that complains that there is no current
+  problem and restarts the driver loop.  This is the behavior that will
+  happen if the user types
+	
+	
+	  {\lstinline[mathescape=true]$try-again$}
+	
+  when there is no evaluation in progress.
+      </p></div>
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  Implement a new special form {\lstinline[mathescape=true]$ramb$} that is like {\lstinline[mathescape=true]$amb$} except that it searches alternatives in a random order, rather 
+  than from left to right.  Show how this can help with Alyssa's problem
+  in exercise~\ref{ex:sentence-generate}.
+  
+      
+\end{Exercise}
+
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+	Implement a new kind of assignment 
+	
+	
+	
+	that is not undone upon failure.  For example, we can choose two distinct
+  elements from a list and count the number of trials required to make a
+  successful choice as follows:
+
+  
+\begin{JavaScript}
+let count = 0;
+
+let x = an_element_of("a", "b", "c");
+let y = an_element_of("a", "b", "c");
+count = count + 1;
+require(! x === y);
+list(x, y, count);
+
+// Starting a new problem
+// Amb-Eval value:
+["a", ["b", [2, null]]]
+
+// Amb-Eval input:
+try-again
+// Amb-Eval value:
+["a", ["c", [3, null]]]
+\end{JavaScript}
+
+
+  What values would have been displayed if we had used
+  
+  assignment as originally defined here
+  rather than
+  
+  
+    the new kind?
+  
+  
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+      Implement a new
+      
+	
+	
+	  kind of expression 
+	{\lstinline[mathescape=true]$if_fail$}
+	
+      
+      that permits the user to
+      catch the failure of an expression.
+      
+	
+	
+	  An application of {\lstinline[mathescape=true]$if_fail$}
+	  to two expressions evaluates the first one as usual, and returns
+	  as usual if the evaluation succeeds.
+	
+      
+      If the evaluation fails,
+  however, the value of the second expression is returned, as in the
+  following example:
+  
+\begin{JavaScript}
+// Amb-Eval input:      
+if_fail( ( x => {
+               require(is_even(x));
+               return x;
+           } )(an_element_of(1, 3, 5)),
+         "all-odd");
+// Starting a new problem	   
+// Amb-Eval value:
+"all-odd"
+// Amb-Eval input:
+if_fail( ( x => {
+               require(is_even(x));
+               return x;
+           } )(an_element_of(1, 3, 5, 8)),
+         "all-odd");
+// Starting a new problem	   
+// Amb-Eval value:
+8
+\end{JavaScript}
+
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+	With
+	
+	  
+	  
+	    the new kind of assignment
+	  
+	
+	as described in exercise~\ref{ex:permanent-set} and
+	
+	  
+	  
+	    {\lstinline[mathescape=true]$if_fail$}
+	  
+	
+	as in
+  exercise~\ref{ex:if-fail}, what will be the result of evaluating
+  
+\begin{JavaScript}
+let pairs = null;      
+if_fail( ( p => {
+               pairs = pair(p, pairs);
+               amb();
+           } )(prime_sum_pair(list(1, 3, 5, 8), list(20, 35, 110))),
+         pairs);
+\end{JavaScript}
+
+      
+\end{Exercise}
+
+
+      
+\stepcounter{ExerciseDisplayNumber}
+\begin{Exercise}
+
+  
+  If we had not realized that {\lstinline[mathescape=true]$require$} could be implemented as an
+  ordinary
+  function
+  that uses {\lstinline[mathescape=true]$amb$}, to be defined by the user as
+  part of a nondeterministic program, we would have had to implement it
+  
+    
+    
+      in a way similar to the way we implemented
+      {\lstinline[mathescape=true]$amb$}.
+    
+  
+  This would require syntax
+  functions
+
+  
+\begin{JavaScript}
+function is_require(stmt) {
+    return is_tagged_list(stmt, "application") && 
+           is_name(operator(stmt)) && 
+           name_of_name(operator(stmt)) === "require";
+}
+function require_predicate(exp) {
+    return operands(exp);
+}
+\end{JavaScript}
+
+
+  and a new clause in the dispatch in {\lstinline[mathescape=true]$analyze$}
+
+  
+\begin{JavaScript}
+: is_require(stmt)
+  ? analyze_require(stmt)
+\end{JavaScript}
+
+
+  as well the
+  function
+  {\lstinline[mathescape=true]$analyze-require$} that handles {\lstinline[mathescape=true]$require$}
+  expressions.  Complete the following definition of {\lstinline[mathescape=true]$analyze-require$}.
+
+  
+\begin{JavaScript}
+function analyze_require(stmt) {      
+    return (env, succeed, fail) =>
+        pfun(env,
+             (pred_value, fail2) =>
+                 ... 
+	         ? ...
+                 : succeed("ok", fail2),
+             fail);
+}
+\end{JavaScript}
+
+      
+\end{Exercise}
+
+      
+
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>We chose to implement the lazy evaluator in
+    section~\ref{sec:lazy-evaluation} as a modification of the ordinary
+    metacircular evaluator of section~\ref{sec:core-of-evaluator}.  In
+    contrast, we will base the {\lstinline[mathescape=true]$amb$} evaluator on the analyzing evaluator
+    of section~\ref{sec:separating-analysis}, because the execution
+    functions
+    in that evaluator provide a convenient framework for implementing
+    backtracking.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>We assume that the evaluator supports {\lstinline[mathescape=true]$let$}
+    (see exercise~\ref{ex:implement-analyze-let}),
+    which we have used in our nondeterministic programs.</FOOTNOTE></div><hr><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>We didn't worry about undoing
+	declarations,
+	since we can
+    
+    assume that internal
+    declarations
+    are scanned out
+    (section~\ref{sec:internal-definitions}).</FOOTNOTE></div>
+</SUBSECTION>
