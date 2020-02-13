@@ -66,13 +66,11 @@ const processTextFunctionsDefault = {
       .replace(/\s+/g, " ")
       .replace(/\^/g, "\^{}")
       .replace(/%/g, "\\%");
-    if (trimedValue.match(/&(\w|\.)+;/)) {
-      processFileInput(trimedValue.trim(), writeTo);
-    } else {
-      writeTo.push(trimedValue);
-    }
     */
-    writeTo.push(node.nodeValue);
+   // ignore the section/subsection tags at the end of chapter/section files
+    if (!node.nodeValue.match(/&(\w|\.|\d)+;/)) {
+      writeTo.push(node.nodeValue);
+    } 
     // if (!trimedValue.match(/^\s*$/)) {
     // }
   },
@@ -139,6 +137,11 @@ const processTextFunctionsDefault = {
     }
   },
 
+  em: (node, writeTo) => {
+    node.nodeName = "EM";
+    recursiveProcessText(node, writeTo);
+  },
+
   EPIGRAPH: (node, writeTo) => {
     processEpigraph(node, writeTo);
   },
@@ -154,10 +157,17 @@ const processTextFunctionsDefault = {
   FOOTNOTE: (node, writeTo) => {
     footnote_number += 1;
     writeTo.push("<a class='superscript' id='footnote-" + footnote_number + "' href='#footnote-" + footnote_number + "'>[" + footnote_number + "]</a>");
+   // clone the current FOOTNOTE node and its children
     let cloneNode = node.cloneNode(true);
     cloneNode.nodeName = "displayFootnote";
-    node.parentNode.parentNode.appendChild(cloneNode); 
-    recursiveProcessText(node.nextSibling.nextSibling, writeTo);
+    let parent = node.parentNode;
+    // the last parentNode is <#document> the second last node is either <CHAPTER>/<(SUB)SECTION>
+    while (parent.parentNode.parentNode) {
+      parent = parent.parentNode;
+    }
+    // append the cloned node as the last elements inside <CHAPTER>/<SECTION> node
+    parent.appendChild(cloneNode); 
+    recursiveProcessText(node.nextSibling, writeTo);
   },
 
   displayFootnote: (node, writeTo) => {
