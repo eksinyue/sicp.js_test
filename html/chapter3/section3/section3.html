@@ -1,6 +1,15 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>3.3 Modeling with Mutable Data</a>
+		<a name='top' class='permalink'>3.3  Modeling with Mutable Data</a>
 	</div>
 </div>
 	<div class='chapter-text'>
@@ -12,14 +21,14 @@
 
     <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
-      Chapter~2 dealt with compound data as a means for constructing
+      Chapter 2 dealt with compound data as a means for constructing
       computational objects that have several parts, in order to model
       real-world objects that have several aspects.  In that chapter we
       introduced the discipline of data abstraction, according to which data
       structures are specified in terms of constructors, which create data
       objects, and selectors, which access the parts of compound data
       objects.  But we now know that there is another aspect of data that
-      chapter~2 did not address.  The desire to model systems composed of
+      chapter 2 did not address.  The desire to model systems composed of
       objects that have changing state leads us to the need to modify
       compound data objects, as well as to construct and select from them.
       In order to model compound objects with changing state, we will design
@@ -31,11 +40,12 @@
       change account balances.  Thus, a data structure for representing bank
       accounts might admit an operation
 
-      
-\begin{JavaScript}
+      <kbd class='snippet'>
+        
+        
 set_balance($\textit{account}$, $\textit{new-value}$)
-\end{JavaScript}
-
+  
+      </kbd>
       that changes the balance of the designated account to the designated
       new value.  Data objects for which mutators are defined are known as
       <EM>mutable data objects</EM>.
@@ -43,31 +53,23 @@ set_balance($\textit{account}$, $\textit{new-value}$)
 
     <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
-      Chapter~2 introduced pairs as a general-purpose <QUOTE>glue</QUOTE> for
+      Chapter 2 introduced pairs as a general-purpose <QUOTE>glue</QUOTE> for
       synthesizing compound data.  We begin this section by defining basic
       mutators for pairs, so that pairs can serve as building blocks for
       constructing mutable data objects.  These mutators greatly enhance the
       representational power of pairs, enabling us to build data structures
       other than the sequences and trees that we worked with in
-      section~\ref{sec:hierarchical-data}.  We also present some examples of
+      section \ref{sec:hierarchical-data}.  We also present some examples of
       simulations in which complex systems are modeled as collections of
       objects with local state.
     </p></div>
 
     
-    &subsection3.3.1;
-
-    
-    &subsection3.3.2;
-
-    
-    &subsection3.3.3;
-        
-    
-    &subsection3.3.4;
-
-    
-    &subsection3.3.5;
-
-  
-</SECTION>
+</SECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section2/subsection4.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section3/subsection1.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+3.3  Modeling with Mutable Data</div>	<div class='next-page'></div></div>

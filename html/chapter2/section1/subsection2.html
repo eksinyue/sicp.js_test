@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>2.1.2 
-        Abstraction Barriers
-      </a>
+		<a name='top' class='permalink'>2.1.2  Abstraction Barriers</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
 
@@ -16,8 +23,8 @@
         Before continuing with more examples of compound data and data
         abstraction, let us consider some of the issues raised by the
         rational-number example.  We defined the rational-number operations in
-        terms of a constructor {\lstinline[mathescape=true]$make_rat$} and selectors {\lstinline[mathescape=true]$numer$} and
-        {\lstinline[mathescape=true]$denom$}.  In general, the underlying idea of data abstraction is
+        terms of a constructor <kbd>make_rat</kbd> and selectors <kbd>numer</kbd> and
+        <kbd>denom</kbd>.  In general, the underlying idea of data abstraction is
         to identify for each type of data object a basic set of operations in
         terms of which all manipulations of data objects of that type will be
         expressed, and then to use only those operations in manipulating the
@@ -27,20 +34,20 @@
       <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
         We can envision the structure of the rational-number system as
-        shown in Figure~\ref{fig:abstraction-barriers}.  The
+        shown in Figure \ref{fig:abstraction-barriers}.  The
         horizontal lines represent <EM>abstraction barriers</EM> that isolate
         different <QUOTE>levels</QUOTE> of the system.  At each level, the barrier
         separates the programs (above) that use the data abstraction from the
         programs (below) that implement the data abstraction.  Programs that
         use rational numbers manipulate them solely in terms of the
         functions
-        supplied <QUOTE>for public use</QUOTE> by the rational-number package: {\lstinline[mathescape=true]$add_rat$}, {\lstinline[mathescape=true]$sub_rat$}, {\lstinline[mathescape=true]$mul_rat$}, {\lstinline[mathescape=true]$div_rat$}, and {\lstinline[mathescape=true]$equal_rat$}. These, in turn, are implemented solely in terms of the
+        supplied <QUOTE>for public use</QUOTE> by the rational-number package: <kbd>add_rat</kbd>, <kbd>sub_rat</kbd>, <kbd>mul_rat</kbd>, <kbd>div_rat</kbd>, and <kbd>equal_rat</kbd>. These, in turn, are implemented solely in terms of the
         
         
-        constructor and selectors {\lstinline[mathescape=true]$make_rat$}, {\lstinline[mathescape=true]$numer$}, and {\lstinline[mathescape=true]$denom$}, which themselves are implemented in terms of pairs.  The
+        constructor and selectors <kbd>make_rat</kbd>, <kbd>numer</kbd>, and <kbd>denom</kbd>, which themselves are implemented in terms of pairs.  The
         details of how pairs are implemented are irrelevant to the rest of the
         rational-number package so long as pairs can be manipulated by the use
-        of {\lstinline[mathescape=true]$pair$}, {\lstinline[mathescape=true]$head$}, and {\lstinline[mathescape=true]$tail$}.  In effect,
+        of <kbd>pair</kbd>, <kbd>head</kbd>, and <kbd>tail</kbd>.  In effect,
         functions
         at
         each level are the interfaces that define the abstraction barriers and
@@ -87,7 +94,7 @@
         it.  This leads to different constructor and selector
         functions:
 
-        
+        <div class='snippet' id='javascript_25_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_rat(n, d) {
@@ -99,7 +106,7 @@ function numer(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ATqqACjABpEATASkQG8AoRRxXTKEXJAB1Rl2LKoBuOgF86oSLASIwIZJj4APavSaIICAM5REAc0QBePRHKEAFplSnlZKDwA2hZZWFqWbDogtWn1APR6wmIS0PBI5JhgcMi+tAxMGmDaeobGpt7WlLYOvi7xjO7sSHYwjsqIAbpBQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAcwgEwBQEMA0iBGAlIgN4BQiliATgKZQjVL6IC87iADIgPyJaIAXCnQZ8eAQFIChANxkAvmVCRYCRAFssAa1oB9aligYweNMXJUa9RkgAOWGNRNm5i5eGjwkYEBtrOAB4WFFQQCADOUChsIpgAFrRYmMF4UI4ANhjBblZ0DEyIicnZxAD0KPJKKl7qaLRgcBqlpKGU4WBRMaxxGMUphGmZpblU+baI6TBZwYgVyFVkHqreiHbUMGBQBkYtllRoMBF2GVgAniZ+ASPyVofHpxcARAC0T6OU9yfnGPWNzTlFmQOl0EPp4lgMsBYlpdDtjABGPAAJjcZHWm22hmMYL0EKhciAA}{\usebox\lstbox}!*/
 }
 function denom(x) {
     const g = gcd(head(x), tail(x));
@@ -107,24 +114,25 @@ function denom(x) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
         
       </p></div>
 
       <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
         The difference between this implementation and the previous one lies
-        in when we compute the {\lstinline[mathescape=true]$gcd$}.
+        in when we compute the <kbd>gcd</kbd>.
         If in our typical use of rational numbers we access the
         numerators and denominators of the same rational numbers many
         times, it would be preferable
-        to compute the {\lstinline[mathescape=true]$gcd$} when the rational numbers are constructed.
+        to compute the <kbd>gcd</kbd> when the rational numbers are constructed.
         If not, we may be better off waiting until access
-        time to compute the {\lstinline[mathescape=true]$gcd$}.  In any case, when
+        time to compute the <kbd>gcd</kbd>.  In any case, when
         we change from one representation to the other, the
         functions
-        {\lstinline[mathescape=true]$add_rat$}, {\lstinline[mathescape=true]$sub_rat$}, and so on do not have to be modified at all.
+        <kbd>add_rat</kbd>, <kbd>sub_rat</kbd>, and so on do not have to be modified at all.
       </p></div>
 
       <div class='permalink'>
@@ -135,7 +143,7 @@ function denom(x) {
         because it allows us to maintain the flexibility to consider alternate
         implementations.  To continue with our simple example, suppose we are
         designing a rational-number package and we can't decide initially
-        whether to perform the {\lstinline[mathescape=true]$gcd$} at construction time or at selection
+        whether to perform the <kbd>gcd</kbd> at construction time or at selection
         time.  The data-abstraction methodology gives us a way to defer that
         decision without losing the ability to make progress on the rest of
         the system.
@@ -153,34 +161,33 @@ function denom(x) {
 	Declare
 	a constructor 
         
-        {\lstinline[mathescape=true]$make_segment$} and selectors 
+        <kbd>make_segment</kbd> and selectors 
         
-        {\lstinline[mathescape=true]$start_segment$}
+        <kbd>start_segment</kbd>
         and 
         
-        {\lstinline[mathescape=true]$end_segment$} that define the representation of segments in
+        <kbd>end_segment</kbd> that define the representation of segments in
         terms of points.  Furthermore, a point 
         
         can be represented as a pair
         of numbers: the $x$ coordinate and the $y$ coordinate.  Accordingly,
         specify a constructor 
         
-        {\lstinline[mathescape=true]$make_point$} and selectors {\lstinline[mathescape=true]$x_point$} and
-        {\lstinline[mathescape=true]$y_point$} that define this representation.  Finally, using your
+        <kbd>make_point</kbd> and selectors <kbd>x_point</kbd> and
+        <kbd>y_point</kbd> that define this representation.  Finally, using your
         selectors and constructors, 
         
 	declare a function
 
         
-        {\lstinline[mathescape=true]$midpoint_segment$}
+        <kbd>midpoint_segment</kbd>
         that takes a line segment as argument and returns its midpoint (the
         point whose coordinates are the average of the coordinates of the
         endpoints).
         To try your
         functions, you'll need a way to print points:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_25_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function print_point(p) {
     display("(");
     display(x_point(p));
@@ -188,8 +195,7 @@ function print_point(p) {
     display(y_point(p));
     display(")");
 }
-\end{JavaScript}
-
+</pre></div></div>
         
 
 
@@ -198,7 +204,7 @@ function print_point(p) {
 
 \begin{Answer}[ref={ex:segments1}]
         
-
+<div class='snippet' id='javascript_25_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function x_point(x) {
@@ -210,7 +216,7 @@ function y_point(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABADwPoAc4zFAFMgSkQG8AoRCxAJwFMoQqkALGgQwBN8CBuUgX1KhIsBIgCeGLDi4lylWvUaIorGABsuvAUOjwkAW1YBrGpOx5kAGnFEylanQZJ0qqvmtie-QeF2jDJqgAzjQA5vo00kEqVFBmONaR7PFQtnIUCk6ILjBu0ayxKZZJKV7aviJI+YUh4ZEWafaZSiwcmt46lYgltRHShLJNjkoq6u3lwnqIrABuNFSsoTS4rNYARo3yw0griADUiBuIAPSIAExaPpP+MMmY5sFhfQ2DlBAI0dOIALyI1XG9ertezvMCfNY-bpgZKA-peIaKAzGUz3aSzeaLZZoVF4VgESzpexE4kkonYqR4Db4wmk2nTOYLJa4CQ4lbUukc2ksim4KllIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABABwE4zFA+suGoAUyAlIgN4BQi1iAJjAM7IA2AhgJ4EBE3xA3FRr0mbTgA8ceTEWL9B1YSw7cANFzk06jJZ3aT8MjUO2je6gQF8KoSLASIJuA2NKVNqAKZQQqJAAsPVloCF0trcGh4JD0naRdyeURPb19EKFYYZhC5KxtI+wBbVgBrD304lUR2V0TknyRkDNQQyuqwvLskItKsBg8AcwKPaQZ01GxYqErh2nKoGvcvepQmglHWcbmVGbmc8NsoxHXNvsHhwni3GjrUgKDs9ojOxB3TobiF66XU9MyHilyT0OrAAbh5UKx+h4CKxKgAjT7UG5IGGIADUiARiAA9IgAEyPA6FGCzSa9AbvC6IxAQBCjRCsRAAXiOY2wb3O-00tLA9LhzJeYFmHI+AkWKS6JTKkxhYIhUJCcxhxBUiU06o1ms0jikhARKrVWqNoPBkOhMV1ytVRpttotBn1ewoPPpCDKflYzGAAu6ZRFhF9SoADJUgyrEIbbVHEIGZQBGSpx2QCND4JUFElzclnaRurAer3JoA}{\usebox\lstbox}!*/
 function make_point(x, y) {
     return pair(x, y);
 }
@@ -236,8 +242,9 @@ function mid_point_segment(x) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 \end{Answer}
 
@@ -248,7 +255,7 @@ function mid_point_segment(x) {
 
         
         Implement a representation for rectangles in a plane.
-        (Hint: You may want to make use of exercise~\ref{ex:segments1}.)
+        (Hint: You may want to make use of exercise \ref{ex:segments1}.)
         In terms of
         your constructors and selectors, create
         functions
@@ -267,7 +274,7 @@ function mid_point_segment(x) {
 \begin{Answer}[ref={ex:rectangles}]
 
 	  First implementation:
-    
+    <div class='snippet' id='javascript_25_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_point(x,y){
@@ -279,7 +286,7 @@ function x_point(x){
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADnGMKACgA8AaATwEoBvAKEScQCdMoQWldUYWyq1ANz0AvvVCRYCRKTwEiZOo2ZsOXRAAtMqACZKR4ydHhJK8wiVLLmrdpyRReAGwNj6E8CZlos2NtDEAEZwUFBwyNjOmMBQ5IjhuP4wAOaaUDaq9ho8fMGh4ZHRsfGJyWkZhh7G0o5wSSyp6cQBGQy2ag4JLi2Y0MLunlKmiCFhEeXNrZlMnRq+OPiWZBaKTjCu09TkKrZ7+3vmS4raer391APiQ951ScUk0+1Z6kgLq1YfxKf6WzsHAIORwUJHWmz6GUuVSYN1qowKEwe5zauzsry0Ol+EKuKlhI1QQQAzkpnrNskhSIgADyIAAMiAA-IgALSyRAALlkVTxMgA7jBdFBNP4IciZmiugTiXJjiQxoUojFHtjqCzEKjAUwZSD8uNIo0KmKoYMaiNtE0oCLAk9UXMkFLEMRgct5YilUa1RrNYhnWt6orYkacTz7WxUFblf1nnbEPzBcLWmLEAAqDEWiNi7mmmS4TCNZDsPMZm1k9EAJhTjrjQuL2MQAGo0xVaxdDEA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADnGMKACgA8AaATwEoBvAKEScQCdMoQWldUYWyq1ANz0AvvVCRYCRKTwEiZOo2ZsOXRAAtMqACZKR4ydHhJK8wiVLLmrdpyRReAGwNj6E8CZlos2NtDEAEZwUFBwyNjOmMBQ5IjhuP4wAOaaUDaq9ho8fMGh4ZHRsfGJyWkZhh7G0o5wSSyp6cQBGQy2ag4JLi2Y0MLunlKmiCFhEeXNrZlMnRq+OPiWZBaKTjCu09TkKrZ7+3vmS4raer391APiQ951ScUk0+1Z6kgLq1YfxKf6WzsHAIORwUJHWmz6GUuVSYN1qowKEwe5zauzsry0Ol+EKuKlhI1QQQAzkpnrNskhSIgADyIAAMiAA-IgALSyRAALlkVTxMgA7jBdFBNP4IciZmiugTiXJjiQxoUojFHtjqCzEKjAUwZSD8uNIo0KmKoYMaiNtE0oCLAk9UXMkFLEMRgct5YilUa1RrNYhnWt6orYkacTz7WxUFblf1nnbEPzBcLWmLEAAqDEWiNi7mmmS4TCNZDsPMZm1k9EAJhTjrjQuL2MQAGo0xVaxduRAEISoIgAG6IAC8KAwOET71lxFp8QAjNtB34x2X4gBmY30XP5wssDPd4RAA}{\usebox\lstbox}!*/
 function y_point(x){
     return tail(x);
 }
@@ -329,13 +336,14 @@ function perimeter_rect(rect){
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
     
 
 	  Second implementation:
-    
+    <div class='snippet' id='javascript_25_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_point(x,y){
@@ -349,7 +357,7 @@ function make_rect(bottom_left, width, height){
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADnGMKACgA8AaATwEoBvAKEScQCdMoQWldUYWyq1ANz0AvvXqhIsBCgw420YgCM4UKHGTYANpmBRyiAO4wAJlAAWhi5hgBzC1DqNmbDl0Q8+KtRq279Qy9+E3MrRBt7R2phMQkpaHgkSIcobEUSDOdmVnZOJChebWJCmGKs2PFJcETZUMt0zCUshiY3fIjMVFMSouIKkSqEmSRUNlRG5qanVtz3JHqLSczp6kQAKk6otIz+1cH4mpHPTBYYZHZT5b3obLmOgCYNxGJF66zEAGot1PfVyqAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADnGMKACgA8AaATwEoBvAKEScQCdMoQWldUYWyq1ANz0AvvXqhIsBCgw420YgCM4UKHGTYANpmBRyiAO4wAJlAAWhi5hgBzC1DqNmbDl0Q8+KtRq279Qy9+E3MrRBt7R2phMQkpaHgkSIcobEUSDOdmVnZOJChebWJCmGKs2PFJcETZUMt0zCUshiY3fIjMVFMSouIKkSqEmSRUNlRG5qanVtz3JHqLSczp6kQAKk6otIz+1cH4mpHPTBYYZHZT5b3obLmOgCYNxGJF66zEAGot1PfVyokEAQAGcoIgAG6IAC8ciw1zQcPwhBIAEZDA9qOj0bF6LhTudLixruDhEA}{\usebox\lstbox}!*/
 function height_rect(rect){
     return tail(tail(rect));
 }
@@ -367,8 +375,9 @@ function perimeter_rect(rect){
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     
     
@@ -377,4 +386,11 @@ function perimeter_rect(rect){
 
       
     
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section1/subsection1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section1/subsection3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+2.1.2  Abstraction Barriers</div>	<div class='next-page'></div></div>

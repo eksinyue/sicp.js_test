@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>3.4.1 
-    The Nature of Time in Concurrent Systems
-  </a>
+		<a name='top' class='permalink'>3.4.1  The Nature of Time in Concurrent Systems</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
   
   
@@ -14,25 +21,10 @@
   <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
     On the surface, time seems straightforward.  It
-    is an ordering imposed on events.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>$A$ and $B$,
-    either $A$ occurs before $B$,
-    $A$~and~$B$
-    are simultaneous, or $A$ occurs after
-    $B$.  For instance,
-    returning to the bank account example, suppose that Peter withdraws
-    \$10 and Paul withdraws \$25 from a 
-    
-    joint account that initially
-    contains \$100, leaving \$65 in the account.  Depending on the order
-    of the two withdrawals, the sequence of balances in the account is
-    either $\$100 \rightarrow \$90 \rightarrow\$65$$\$100 \rightarrow \$75 \rightarrow\$65$.
-    In a computer implementation of the banking system, this changing
-    sequence of balances could be  modeled by successive assignments to
-    a variable {\lstinline[mathescape=true]$balance$}.
-  
+    is an ordering imposed on events.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
     For any events $A$ and $B$,
     either $A$ occurs before $B$,
-    $A$~and~$B$
+    $A$ and $B$
     are simultaneous, or $A$ occurs after
     $B$.  For instance,
     returning to the bank account example, suppose that Peter withdraws
@@ -44,7 +36,7 @@
     either $\$100 \rightarrow \$90 \rightarrow\$65$$\$100 \rightarrow \$75 \rightarrow\$65$.
     In a computer implementation of the banking system, this changing
     sequence of balances could be  modeled by successive assignments to
-    a variable {\lstinline[mathescape=true]$balance$}.
+    a variable <kbd>balance</kbd>.
   </p></div>
 
   <div class='permalink'>
@@ -63,13 +55,13 @@
     This indeterminacy in the order of events can pose serious problems in
     the design of concurrent systems.  For instance, suppose that the
     withdrawals made by Peter and Paul are implemented as two separate
-    processes sharing a common variable {\lstinline[mathescape=true]$balance$},
+    processes sharing a common variable <kbd>balance</kbd>,
     each process  specified by the
     
     function
     given in
-    Section~\ref{sec:local-state-variables}:
-    
+    Section \ref{sec:local-state-variables}:
+    <div class='snippet' id='javascript_63_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function withdraw(amount) {
@@ -81,13 +73,14 @@ function withdraw(amount) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAdxlAFgEwE4ENkAUuAtnOFAJSIDeAUIg4jMIgQEa4A2ukApogD4AvIhJkwlGvUYyO3PohFyeEfgFpRpcgG5pMhtl5QQ2JMr66ZAX0S9OAZ3519jQ8dOIARAEkw9kMDAMBAwvBKIoGCY9p6WjFa0VkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=DYUwLgBARghsMDsDGIIF4IEYAM2DcAUAGYCuyYAlgPYIQDuFYAFgCYBOMdAFDALZVkwASggBvAhEkQKRCF1jxkqAHwY+AhMLESpuhYhTpocA6gC0EdYMK7dbcCTa19Sm1IC+EEMADOqcbZS9mCOtABEAJIIPiRERBRIFCCaEKQILD5hbpLuBLkEDMzsnFwATACsQngQAPQ1EAJgAA4kYABcEADs5UA}{\usebox\lstbox}!*/
     }
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     
     
@@ -107,35 +100,33 @@ function withdraw(amount) {
   <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
     Things can be worse still.  Consider the expression
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_63_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 balance = balance - amount;
-\end{JavaScript}
-
+</pre></div></div>
     executed as part of each withdrawal process.  This consists of three
-    steps: (1) accessing the value of the {\lstinline[mathescape=true]$balance$}
+    steps: (1) accessing the value of the <kbd>balance</kbd>
     variable; (2) computing the new balance; (3) setting
-    {\lstinline[mathescape=true]$balance$} to this new value.  If Peter and
+    <kbd>balance</kbd> to this new value.  If Peter and
     Paul's withdrawals execute this statement concurrently, then the
     two withdrawals might interleave the order in which they access
-    {\lstinline[mathescape=true]$balance$} and set it to the new value.
+    <kbd>balance</kbd> and set it to the new value.
   </p></div>
 
   <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
-    The timing diagram in Figure~\ref{fig:bank-access} depicts
-    an order of events where {\lstinline[mathescape=true]$balance$} starts at 100,
+    The timing diagram in Figure \ref{fig:bank-access} depicts
+    an order of events where <kbd>balance</kbd> starts at 100,
     Peter withdraws 10, Paul withdraws 25, and yet the final value of
-    {\lstinline[mathescape=true]$balance$} is 75.  As shown in the diagram,
+    <kbd>balance</kbd> is 75.  As shown in the diagram,
     the reason for this anomaly is that Paul's assignment of 75 to
-    {\lstinline[mathescape=true]$balance$} is made under the assumption that
-    the value of {\lstinline[mathescape=true]$balance$} to be decremented is 100.
+    <kbd>balance</kbd> is made under the assumption that
+    the value of <kbd>balance</kbd> to be decremented is 100.
     That assumption, however, became invalid when Peter changed
-    {\lstinline[mathescape=true]$balance$} to 90.  This is a catastrophic
+    <kbd>balance</kbd> to 90.  This is a catastrophic
     failure for the banking system, because the total amount of money in the
     system is not conserved.  Before the transactions, the total amount of
     money was \$100.  Afterwards, Peter has \$10, Paul has
-    \$25, and the bank has \$75.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+    \$25, and the bank has \$75.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
   </p></div>
 
   <div class='permalink'>
@@ -155,15 +146,16 @@ balance = balance - amount;
 
   <SPLIT>
     
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         JavaScript and concurrency
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
 	In its initial design, JavaScript did not allow for two
         processes to apply functions such as
-	{\lstinline[mathescape=true]$withdraw$}
+	<kbd>withdraw</kbd>
         concurrently. In fact, the concurrency model of the language enforced
 	strict sequential execution of activities resulting from <EM>events</EM>,
 	with the use of an <EM>event queue</EM>. In the early 2000s, multicore
@@ -172,25 +164,22 @@ balance = balance - amount;
 	the concept of <EM>web workers</EM>. As of 2019,
 	most internet browsers support this feature. As originally conceived,
 	web workers were not able to share data such as the variable
-	{\lstinline[mathescape=true]$balance$} above. However,
+	<kbd>balance</kbd> above. However,
 	a shared data structure called
-	{\lstinline[mathescape=true]$SharedArrayBuffer$} is included
+	<kbd>SharedArrayBuffer</kbd> is included
 	in the latest
 	\href{http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf}{ECMAScript specification}.
-	Using {\lstinline[mathescape=true]$SharedArrayBuffer$}, it is
-	possible to program a {\lstinline[mathescape=true]$withdraw$}
-	function as described above.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+	Using <kbd>SharedArrayBuffer</kbd>, it is
+	possible to program a <kbd>withdraw</kbd>
+	function as described above.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
       </p></div>
-    <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>As of 2019, browsers differ
-	in their support for
-	{\lstinline[mathescape=true]$SharedArrayBuffer$}
-	objects.</FOOTNOTE></div>
+    
   </SPLIT>
   
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     Correct behavior of concurrent programs
-  
+  </h2></div>
 
   
   <div class='permalink'>
@@ -203,7 +192,7 @@ balance = balance - amount;
     
     assignment,
     because the results of a computation depend on the order in which the assignments
-    occur.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
+    occur.<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
   </p></div>
 
   <div class='permalink'>
@@ -242,11 +231,11 @@ balance = balance - amount;
     extremely stringent requirement.  For distributed banking, it would
     require the system designer to ensure that only one transaction could
     proceed at a time. This would be both inefficient and overly
-    conservative.  Figure~\ref{fig:two-shared-accounts} shows
+    conservative.  Figure \ref{fig:two-shared-accounts} shows
     Peter and Paul sharing a bank account, where Paul has a private account
     as well. The diagram illustrates two withdrawals from the shared account
     (one by Peter and one by Paul) and a deposit to Paul's private
-    account.<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
+    account.<a class='superscript' id='footnote-link-5' href='#footnote-5'>[5]</a>
   </p></div>
 
   <div class='permalink'>
@@ -281,7 +270,7 @@ balance = balance - amount;
     First, it does not require the processes to actually run sequentially,
     but only to produce results that are the same <EM>as if</EM> they had run
     sequentially.  For the example in
-    Figure~\ref{fig:two-shared-accounts}, the designer of the bank
+    Figure \ref{fig:two-shared-accounts}, the designer of the bank
     account system can safely allow Paul's deposit and Peter's
     withdrawal to happen concurrently, because the net result will be the same as
     if the two operations had happened sequentially.  Second, there may be more
@@ -293,7 +282,7 @@ balance = balance - amount;
     with \$100, and Peter deposits \$40 while Paul concurrently
     withdraws half the money in the account. Then sequential execution could
     result in the account balance being either \$70 or \$90
-    (see exercise~\ref{ex:joint-account}).<a class='superscript' id='footnote-6' href='#footnote-6'>[6]</a>
+    (see exercise \ref{ex:joint-account}).<a class='superscript' id='footnote-link-6' href='#footnote-6'>[6]</a>
   </p></div>
 
   <div class='permalink'>
@@ -340,7 +329,7 @@ balance = balance - amount;
 \item{
         List all the different possible values for
         
-	{\lstinline[mathescape=true]$balance$}
+	<kbd>balance</kbd>
 	
 	after these three transactions have been completed, assuming that the
 	banking system forces the three processes to run sequentially in some
@@ -350,7 +339,7 @@ balance = balance - amount;
         What are some other values
         that could be produced if the system allows the processes to
 	be interleaved? Draw timing diagrams like the one in
-	figure~\ref{fig:bank-access} to explain
+	figure \ref{fig:bank-access} to explain
 	how these values can occur.
       }
 \end{enumerate}
@@ -362,11 +351,11 @@ balance = balance - amount;
   
 
 <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>To quote some graffiti seen on a Cambridge
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>To quote some graffiti seen on a Cambridge
     
     building wall: <QUOTE>Time is a device that was invented to keep everything
-    from happening at once.</QUOTE></FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>An even worse
+    from happening at once.</QUOTE></FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>An even worse
     failure for this system could occur if the two
     
       
@@ -384,15 +373,19 @@ balance = balance - amount;
     protocols are required to ensure that the various processors will
     maintain a consistent view of memory contents, despite the fact that
     data may be replicated (<QUOTE>cached</QUOTE>) among the different
-    processors to increase the speed of memory access.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>The factorial program in
-    section~\ref{sec:costs-of-assignment} illustrates this for
-    a single sequential process.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>The columns show the contents of Peter's wallet,
+    processors to increase the speed of memory access.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>As of 2019, browsers differ
+	in their support for
+	<kbd>SharedArrayBuffer</kbd>
+	objects.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>The factorial program in
+    section \ref{sec:costs-of-assignment} illustrates this for
+    a single sequential process.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>The columns show the contents of Peter's wallet,
     the joint account (in Bank1), Paul's wallet, and Paul's
     private account (in Bank2), before and after each withdrawal (W) and
     deposit (D). Peter withdraws \$10 from Bank1; Paul deposits
-    \$5 in Bank2, then withdraws \$25 from Bank1.</FOOTNOTE></div><hr><div class='footnote'>
+    \$5 in Bank2, then withdraws \$25 from Bank1.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>A more formal
     way to express this idea is to say that concurrent programs are inherently 
     
@@ -406,4 +399,11 @@ balance = balance - amount;
       
     </SPLIT>
 </FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section4/section4.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section4/subsection2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+3.4.1  The Nature of Time in Concurrent Systems</div>	<div class='next-page'></div></div>

@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>4.2.3 
-    Streams as Lazy Lists
-  </a>
+		<a name='top' class='permalink'>4.2.3  Streams as Lazy Lists</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
   
   
@@ -20,7 +27,7 @@
     
     
     
-    In section~\ref{sec:delayed-lists}, we showed how to
+    In section \ref{sec:delayed-lists}, we showed how to
     implement streams as delayed lists.
     
       
@@ -31,7 +38,7 @@
     to construct a <QUOTE>promise</QUOTE> to compute
     the
     
-    {\lstinline[mathescape=true]$tail$}
+    <kbd>tail</kbd>
     of a stream, without actually fulfilling that promise
     until later.
     
@@ -40,8 +47,8 @@
 	We were forced to create streams as a new kind of data object
 	similar but not identical to lists, and this required us to
 	reimplement many ordinary list operations
-	({\lstinline[mathescape=true]$map$},
-	{\lstinline[mathescape=true]$append$}, and
+	(<kbd>map</kbd>,
+	<kbd>append</kbd>, and
 	so on) for use with streams.	
       
     
@@ -55,21 +62,22 @@
     separate list and stream operations.
     All we need to do is to arrange matters so that
     
-    {\lstinline[mathescape=true]$pair$}
+    <kbd>pair</kbd>
     is non-strict.  One way to accomplish this is to extend the lazy
     evaluator to allow for non-strict primitives, and to implement
     
-    {\lstinline[mathescape=true]$pair$}
+    <kbd>pair</kbd>
     as one of these.  An easier way is to recall
-    (section~\ref{sec:data?}) that there is no fundamental
+    (section \ref{sec:data?}) that there is no fundamental
     need to implement
     
-    {\lstinline[mathescape=true]$pair$}
+    <kbd>pair</kbd>
     as a primitive at all.  Instead, we can represent
     
     pairs as
-    functions:<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-\begin{JavaScript}
+    functions:<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
+
+    <div class='snippet' id='javascript_83_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function pair(x, y) {	
     return m => m(x, y);
 }
@@ -79,23 +87,7 @@ function head(z) {
 function tail(z) {
     return z( (p, q) => q );
 }
-\end{JavaScript}
-
-  
-
-    
-\begin{JavaScript}
-function pair(x, y) {	
-    return m => m(x, y);
-}
-function head(z) {    
-    return z( (p, q) => p );
-}
-function tail(z) {
-    return z( (p, q) => q );
-}
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
@@ -105,8 +97,7 @@ function tail(z) {
     finite ones, and the stream operations can be implemented as list operations.
     Here are some examples:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_83_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function list_ref(items, n) {	
     return n === 0
            ? head(items)
@@ -134,34 +125,25 @@ const ones = pair(1, ones);
 const integers = pair(1, add_lists(ones, integers));
 
 list_ref(integers, 17); // returns 18
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
     Note that these lazy lists are even lazier than the streams of
-    chapter~3:  The
+    chapter 3:  The
     
-    {\lstinline[mathescape=true]$head$}
+    <kbd>head</kbd>
     of the list, as well as the
     
-    {\lstinline[mathescape=true]$tail$},
-    is delayed.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
-    {\lstinline[mathescape=true]$head$}
-    or
-    
-    {\lstinline[mathescape=true]$tail$}
-    of a lazy pair need not force the value of a list element.  The value will be
-    forced only when it is really needed—e.g., for use as the
-    argument of a primitive, or to be printed as an answer.
-  
+    <kbd>tail</kbd>,
+    is delayed.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
     In fact, even accessing the
     
-    {\lstinline[mathescape=true]$head$}
+    <kbd>head</kbd>
     or
     
-    {\lstinline[mathescape=true]$tail$}
+    <kbd>tail</kbd>
     of a lazy pair need not force the value of a list element.  The value will be
     forced only when it is really needed—e.g., for use as the
     argument of a primitive, or to be printed as an answer.
@@ -170,7 +152,7 @@ list_ref(integers, 17); // returns 18
   <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
     Lazy pairs also help with the problem that arose with streams in
-    section~\ref{sec:streams-and-delayed-evaluation}, where we found
+    section \ref{sec:streams-and-delayed-evaluation}, where we found
     that formulating stream models of systems with loops may require us to
     sprinkle our programs with
     
@@ -188,10 +170,9 @@ list_ref(integers, 17); // returns 18
     are delayed uniformly.  For instance, we can implement
     functions
     to integrate lists and solve differential equations as we originally intended in
-    section~\ref{sec:streams-and-delayed-evaluation}:
+    section \ref{sec:streams-and-delayed-evaluation}:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_83_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function integral(integrand, initial_value, dt) {	
     const int =
         pair(initial_value,
@@ -205,8 +186,7 @@ function solve(f, y0, dt) {
     return y;
 }
 list_ref(solve(x => x, 1, 0.001), 1000);
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   
@@ -214,7 +194,7 @@ list_ref(solve(x => x, 1, 0.001), 1000);
 \begin{Exercise}
 
     Give some examples that illustrate the difference between the streams
-    of chapter~3 and the <QUOTE>lazier</QUOTE> lazy lists described in
+    of chapter 3 and the <QUOTE>lazier</QUOTE> lazy lists described in
     this section. How can you take advantage of this extra laziness?
   
 \end{Exercise}
@@ -226,27 +206,25 @@ list_ref(solve(x => x, 1, 0.001), 1000);
 
     Ben Bitdiddle tests the lazy list implementation given above by
     evaluating the expression
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_83_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 head(list(a, b, c));
-\end{JavaScript}
-
+</pre></div></div>
     To his surprise, this produces an error.  After some thought, he
     realizes that the <QUOTE>lists</QUOTE> obtained by reading in quoted expressions
     are different from the lists manipulated by the new definitions of
     
-    {\lstinline[mathescape=true]$pair$},
+    <kbd>pair</kbd>,
     
-    {\lstinline[mathescape=true]$head$},
+    <kbd>head</kbd>,
     and
     
-    {\lstinline[mathescape=true]$tail$}.
+    <kbd>tail</kbd>.
     Modify the evaluator's treatment of
     
       
       
 	applications of the primitive function l
-	{\lstinline[mathescape=true]$list$}
+	<kbd>list</kbd>
       
     
     typed at the driver loop will produce true lazy lists.
@@ -276,7 +254,7 @@ head(list(a, b, c));
   
 
 <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>This
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>This
     is the 
     
       
@@ -285,7 +263,7 @@ head(list(a, b, c));
       
     
     representation described in
-    exercise~\ref{ex:lambda-cons}.  Essentially any 
+    exercise \ref{ex:lambda-cons}.  Essentially any 
     
       
       
@@ -297,21 +275,28 @@ head(list(a, b, c));
     that we can install these definitions in the lazy evaluator simply by
     typing them at the driver loop.  If we had originally included
     
-    {\lstinline[mathescape=true]$pair$},
+    <kbd>pair</kbd>,
     
-    {\lstinline[mathescape=true]$head$},
+    <kbd>head</kbd>,
     and
     
-    {\lstinline[mathescape=true]$tail$}
+    <kbd>tail</kbd>
     as primitives in the global environment, they will be redefined.  (Also see
-    exercises~\ref{ex:lazy-list-input}
-    and~\ref{ex:lazy-list-printing}.)</FOOTNOTE></div><hr><div class='footnote'>
+    exercises \ref{ex:lazy-list-input}
+    and \ref{ex:lazy-list-printing}.)</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>This permits us to create delayed versions of more
     general kinds of
     
     list structures, not just sequences.  
-    Hughes 1990
+    <CITATION>Hughes 1990</CITATION>
     discusses some
     
     applications of <QUOTE>lazy trees.</QUOTE></FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section2/subsection2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section3/section3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+4.2.3  Streams as Lazy Lists</div>	<div class='next-page'></div></div>

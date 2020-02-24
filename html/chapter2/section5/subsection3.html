@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>2.5.3 
-        Example: Symbolic Algebra
-      </a>
+		<a name='top' class='permalink'>2.5.3  Example: Symbolic Algebra</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -45,9 +52,10 @@
       abstract data and generic operations to help organize this effort.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Arithmetic on polynomials
-      
+      </h2></div>
 
       
       
@@ -64,15 +72,7 @@
       
       
       <EM>
-        univariate polynomials</EM>).<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-        \[ 5x^2 +3x +7 \]
-      
-      is a simple polynomial in $x$, and
-      
-        \[ (y^2 +1)x^3 +(2y)x+1 \]
-      
-      is a polynomial in $x$ whose coefficients are polynomials in $y$.
-       We will define a polynomial to be a
+        univariate polynomials</EM>).<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a> We will define a polynomial to be a
       sum of terms, each of which is either a coefficient, a power of the
       indeterminate, or a product of a coefficient and a power of the
       indeterminate.  A coefficient is defined as an algebraic expression
@@ -99,9 +99,7 @@
       Furthermore, there are other ways to represent a polynomial—for
       example, as a product of factors, or (for a univariate polynomial) as
       the set of roots, or as a listing of the values of the polynomial at a
-      specified set of points.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a><QUOTE>polynomial</QUOTE> will be a
-      particular syntactic form, not its underlying mathematical meaning.
-      
+      specified set of points.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
       We can finesse these questions by deciding that in our
       algebraic-manipulation system a <QUOTE>polynomial</QUOTE> will be a
       particular syntactic form, not its underlying mathematical meaning.
@@ -121,23 +119,22 @@
       
       <EM>poly</EM>, which consists of a variable and a
       
-      collection of terms.  We assume that we have selectors {\lstinline[mathescape=true]$variable$}
-      and {\lstinline[mathescape=true]$term_list$} that extract those parts from a poly and
-      a constructor {\lstinline[mathescape=true]$make_poly$} that assembles a
+      collection of terms.  We assume that we have selectors <kbd>variable</kbd>
+      and <kbd>term_list</kbd> that extract those parts from a poly and
+      a constructor <kbd>make_poly</kbd> that assembles a
       poly from a given variable and a term list.
       A variable will be just a symbol, so we can use the 
       
-      {\lstinline[mathescape=true]$is_same_variable$}
+      <kbd>is_same_variable</kbd>
       function
-      of section~\ref{sec:symbolic-differentiation} to compare variables.
+      of section \ref{sec:symbolic-differentiation} to compare variables.
       
       
       The following
       functions
       define addition and multiplication of polys:
 
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_45_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function add_poly(p1, p2) {
     return is_same_variable(variable(p1), variable(p2))
            ? make_poly(variable(p1),
@@ -154,26 +151,24 @@ function mul_poly(p1, p2) {
            : Error("Polys not in same var in mul_poly",
                    list(p1, p2));
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
       <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
       To incorporate polynomials into our generic arithmetic system, we need
-      to supply them with type tags.  We'll use the tag {\lstinline[mathescape=true]$"polynomial"$},
+      to supply them with type tags.  We'll use the tag <kbd>"polynomial"</kbd>,
       and install appropriate operations on tagged polynomials in
       the operation table.  We'll embed all our code
       in an installation
       function
       for the polynomial package,
       similar to the ones in
-      section~\ref{sec:generic-arithmetic-operators}:
+      section \ref{sec:generic-arithmetic-operators}:
       
       
       
 
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_45_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function install_polynomial_package() {
     // internal functions
     // representation of poly
@@ -208,8 +203,7 @@ function install_polynomial_package() {
             tag(make_poly(variable, terms)));
     return "done";
 }
-\end{JavaScript}
-
+</pre></div></div>
       Polynomial addition is performed termwise.  Terms of the same order
       (i.e., with the same power of the indeterminate) must be combined.
       This is done by forming a new term of the same order whose coefficient
@@ -222,27 +216,27 @@ function install_polynomial_package() {
       In order to manipulate term lists, we will assume that we have a
       constructor 
       
-      {\lstinline[mathescape=true]$the_empty_termlist$} that returns an empty term list
+      <kbd>the_empty_termlist</kbd> that returns an empty term list
       and a constructor 
       
-      {\lstinline[mathescape=true]$adjoin_term$} that adjoins a new term to a term
+      <kbd>adjoin_term</kbd> that adjoins a new term to a term
       list.  We will also assume that we have a predicate 
       
-      {\lstinline[mathescape=true]$is_empty_termlist$} that tells if a given term list is empty, a selector
+      <kbd>is_empty_termlist</kbd> that tells if a given term list is empty, a selector
       
-      {\lstinline[mathescape=true]$first_term$} that extracts the highest-order term from a term
+      <kbd>first_term</kbd> that extracts the highest-order term from a term
       list, and a selector 
       
-      {\lstinline[mathescape=true]$rest_terms$} that returns all but the highest-order
+      <kbd>rest_terms</kbd> that returns all but the highest-order
       term.  To manipulate terms, we will suppose that we have a
       constructor 
       
-      {\lstinline[mathescape=true]$make_term$} that constructs a term with given
+      <kbd>make_term</kbd> that constructs a term with given
       order and coefficient, and selectors 
       
-      {\lstinline[mathescape=true]$order$} and 
+      <kbd>order</kbd> and 
       
-      {\lstinline[mathescape=true]$coeff$} that return, respectively, the order and the
+      <kbd>coeff</kbd> that return, respectively, the order and the
       coefficient of the term.  These operations allow us to consider both
       terms and term lists as data abstractions, whose concrete
       representations we can worry about separately.
@@ -252,8 +246,9 @@ function install_polynomial_package() {
       Here is the
       function
       that constructs the term list for the sum of two
-      polynomials:<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
-\begin{JavaScript}
+      polynomials:<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
+
+      <div class='snippet' id='javascript_45_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function add_terms(L1, L2) {
     if (is_empty_termlist(L1)) {
       return L2;
@@ -279,53 +274,13 @@ function add_terms(L1, L2) {
       }
     }
 }
-\end{JavaScript}
-
-
-      The most important point to note here is that we used the generic
-      addition
-      function
-      
-      {\lstinline[mathescape=true]$add$} to add together the coefficients of the
-      terms being combined.  This has powerful consequences, as we will see
-      below.
-      
-
-      
-\begin{JavaScript}
-function add_terms(L1, L2) {
-    if (is_empty_termlist(L1)) {
-      return L2;
-    } 
-    else if (is_empty_termlist(L2)) {
-      return L1;
-    } 
-    else {
-      const t1 = first_term(L1);
-      const t2 = first_term(L2);
-      if (order(t1) > order(t2)) {
-        return adjoin_term(t1, add_terms(rest_terms(L1), L2));
-      } 
-      else if (order(t1) < order(t2)) {
-        return adjoin_term(t2, add_terms(L1, rest_terms(L2)));
-      } 
-      else {
-        return adjoin_term(make_term(order(t1), 
-                                     add(coeff(t1),
-                                     coeff(t2))),
-                          add_terms(rest_terms(L1),
-                                    rest_terms(L2)));
-      }
-    }
-}
-\end{JavaScript}
-
+</pre></div></div>
 
       The most important point to note here is that we used the generic
       addition
       function
       
-      {\lstinline[mathescape=true]$add$} to add together the coefficients of the
+      <kbd>add</kbd> to add together the coefficients of the
       terms being combined.  This has powerful consequences, as we will see
       below.
       </p></div>
@@ -334,7 +289,7 @@ function add_terms(L1, L2) {
       In order to multiply two term lists, we multiply each term of the
       first list by all the terms of the other list, repeatedly using
       
-      {\lstinline[mathescape=true]$mul_term_by_all_terms$}
+      <kbd>mul_term_by_all_terms</kbd>
       , which multiplies a given term by
       all terms in a given term list.  The resulting term lists (one for
       each term of the first list) are accumulated into a sum.  Multiplying
@@ -342,8 +297,7 @@ function add_terms(L1, L2) {
       factors and whose coefficient is the product of the coefficients of
       the factors:
 
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_45_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function mul_terms(L1, L2) {
     return is_empty_termlist(L1)
            ? the_empty_termlist
@@ -361,8 +315,7 @@ function mul_term_by_all_terms(t1, L) {
                  mul_term_by_all_terms(t1, rest_terms(L)));
     }
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
       <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
@@ -371,12 +324,12 @@ function mul_term_by_all_terms(t1, L) {
       
       Notice that, since we operate on terms using the generic
       functions
-      {\lstinline[mathescape=true]$add$} and {\lstinline[mathescape=true]$mul$}, our polynomial package is automatically able
+      <kbd>add</kbd> and <kbd>mul</kbd>, our polynomial package is automatically able
       to handle any type of coefficient that is known about by the generic
       arithmetic package.  If we include a 
       
       coercion mechanism such as one of
-      those discussed in section~\ref{sec:combining-data-of-different-types},
+      those discussed in section \ref{sec:combining-data-of-different-types},
       then we also are automatically able to handle operations on
       polynomials of different coefficient types, such as
       
@@ -390,13 +343,13 @@ function mul_term_by_all_terms(t1, L) {
       multiplication
       functions
       
-      {\lstinline[mathescape=true]$add_poly$}
+      <kbd>add_poly</kbd>
        and 
       
-      {\lstinline[mathescape=true]$mul_poly$}
+      <kbd>mul_poly</kbd>
        in the generic
-      arithmetic system as the {\lstinline[mathescape=true]$add$} and {\lstinline[mathescape=true]$mul$} operations
-      for type {\lstinline[mathescape=true]$polynomial$}, our system is also
+      arithmetic system as the <kbd>add</kbd> and <kbd>mul</kbd> operations
+      for type <kbd>polynomial</kbd>, our system is also
       automatically able to handle polynomial operations such as
       
         \[
@@ -408,38 +361,37 @@ function mul_term_by_all_terms(t1, L) {
       <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
       The reason is that when the system tries to combine coefficients, it
-      will dispatch through {\lstinline[mathescape=true]$add$} and {\lstinline[mathescape=true]$mul$}.  Since the coefficients
+      will dispatch through <kbd>add</kbd> and <kbd>mul</kbd>.  Since the coefficients
       are themselves polynomials (in $y$), these will be combined using 
       
-      {\lstinline[mathescape=true]$add_poly$}
+      <kbd>add_poly</kbd>
        and 
       
-      {\lstinline[mathescape=true]$mul_poly$}
+      <kbd>mul_poly</kbd>
       .  The result is a kind of 
       
       
       <QUOTE>data-directed recursion</QUOTE> in which, for example, a call to 
       
-      {\lstinline[mathescape=true]$mul_poly$}
+      <kbd>mul_poly</kbd>
        will result
       in recursive calls to 
       
-      {\lstinline[mathescape=true]$mul_poly$}
+      <kbd>mul_poly</kbd>
        in order to multiply the
       coefficients.  If the coefficients of the coefficients were themselves
       polynomials (as might be used to represent polynomials in three
       variables), the data direction would ensure that the system would
       follow through another level of recursive calls, and so on through as
-      many levels as the structure of the data dictates.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
-      
-      
+      many levels as the structure of the data dictates.<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
       
       
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Representing term lists
-      
+      </h2></div>
 
       
       <div class='permalink'>
@@ -448,15 +400,15 @@ function mul_term_by_all_terms(t1, L) {
       representation for term lists.  A term list is, in effect, a set of
       coefficients keyed by the order of the term.  Hence, any of the
       methods for representing sets, as discussed in
-      section~\ref{sec:representing-sets}, can be applied to this task.  On
+      section \ref{sec:representing-sets}, can be applied to this task.  On
       the other hand, our
       functions
       
       
-      {\lstinline[mathescape=true]$add_terms$}
+      <kbd>add_terms</kbd>
        and 
       
-      {\lstinline[mathescape=true]$mul_terms$}
+      <kbd>mul_terms</kbd>
        always
       access term lists sequentially from highest to lowest order.  Thus, we
       will use some kind of ordered list representation.
@@ -488,89 +440,9 @@ function mul_term_by_all_terms(t1, L) {
       The term lists of dense polynomials are most efficiently represented
       as lists of the coefficients.  For example, $A$ above would be nicely
       represented as 
-      {\lstinline[mathescape=true]$list(1, 2, 0, 3, -2, -5)$}.  The order of a term in this
+      <kbd>list(1, 2, 0, 3, -2, -5)</kbd>.  The order of a term in this
       representation is the length of the sublist beginning with that term's
-      coefficient, decremented by 1.<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>$B$: There would be a giant list of zeros
-      punctuated by a few lonely nonzero terms.  A more reasonable
-      representation of the term list of a sparse polynomial is as a list of
-      the nonzero terms, where each term is a list containing the order of the
-      term and the coefficient for that order.  In such a scheme, polynomial
-      $B$ is efficiently represented as 
-      
-      {\lstinline[mathescape=true]$list(list(100, 1), list(2, 2), list(0, 1))$}.  As
-      most polynomial manipulations are performed on sparse polynomials, we
-      will use this method.  We will assume that term lists are represented
-      as lists of terms, arranged from highest-order to lowest-order term.
-      Once we have made this decision, implementing the selectors and
-      constructors for terms and term lists is straightforward:<a class='superscript' id='footnote-6' href='#footnote-6'>[6]</a>
-\begin{JavaScript}
-function adjoin_term(term, term_list) {
-    return is_equal_to_zero(coeff(term))
-           ? term_list
-           : pair(term, term_list);
-}
-const the_empty_termlist = null;
-function first_term(term_list) {
-    return head(term_list);
-}
-function rest_terms(term_list) {
-    return tail(term_list);
-}
-function is_empty_termlist(term_list) {
-    return is_null(term_list);
-}
-function make_term(order, coeff) {
-    return list(order, coeff);
-}
-function order(term) {
-    return head(term);
-}
-function coeff(term) {
-    return head(tail(term));
-}
-\end{JavaScript}
-
-
-      where 
-      {\lstinline[mathescape=true]$is_equal_to_zero$}
-       is as defined in
-      exercise~\ref{ex:=zero?}.  (See also exercise~\ref{ex:adjoin-term} below.)
-      
-
-      
-\begin{JavaScript}
-function adjoin_term(term, term_list) {
-    return is_equal_to_zero(coeff(term))
-           ? term_list
-           : pair(term, term_list);
-}
-const the_empty_termlist = null;
-function first_term(term_list) {
-    return head(term_list);
-}
-function rest_terms(term_list) {
-    return tail(term_list);
-}
-function is_empty_termlist(term_list) {
-    return is_null(term_list);
-}
-function make_term(order, coeff) {
-    return list(order, coeff);
-}
-function order(term) {
-    return head(term);
-}
-function coeff(term) {
-    return head(tail(term));
-}
-\end{JavaScript}
-
-
-      where 
-      {\lstinline[mathescape=true]$is_equal_to_zero$}
-       is as defined in
-      exercise~\ref{ex:=zero?}.  (See also exercise~\ref{ex:adjoin-term} below.)
-        
+      coefficient, decremented by 1.<a class='superscript' id='footnote-link-5' href='#footnote-5'>[5]</a>  
       This would be a terrible representation for a
       sparse polynomial such as $B$: There would be a giant list of zeros
       punctuated by a few lonely nonzero terms.  A more reasonable
@@ -579,13 +451,14 @@ function coeff(term) {
       term and the coefficient for that order.  In such a scheme, polynomial
       $B$ is efficiently represented as 
       
-      {\lstinline[mathescape=true]$list(list(100, 1), list(2, 2), list(0, 1))$}.  As
+      <kbd>list(list(100, 1), list(2, 2), list(0, 1))</kbd>.  As
       most polynomial manipulations are performed on sparse polynomials, we
       will use this method.  We will assume that term lists are represented
       as lists of terms, arranged from highest-order to lowest-order term.
       Once we have made this decision, implementing the selectors and
-      constructors for terms and term lists is straightforward:<a class='superscript' id='footnote-7' href='#footnote-7'>[7]</a>
-\begin{JavaScript}
+      constructors for terms and term lists is straightforward:<a class='superscript' id='footnote-link-6' href='#footnote-6'>[6]</a>
+
+      <div class='snippet' id='javascript_45_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function adjoin_term(term, term_list) {
     return is_equal_to_zero(coeff(term))
            ? term_list
@@ -610,48 +483,12 @@ function order(term) {
 function coeff(term) {
     return head(tail(term));
 }
-\end{JavaScript}
-
-
-      where 
-      {\lstinline[mathescape=true]$is_equal_to_zero$}
-       is as defined in
-      exercise~\ref{ex:=zero?}.  (See also exercise~\ref{ex:adjoin-term} below.)
-      
-
-      
-\begin{JavaScript}
-function adjoin_term(term, term_list) {
-    return is_equal_to_zero(coeff(term))
-           ? term_list
-           : pair(term, term_list);
-}
-const the_empty_termlist = null;
-function first_term(term_list) {
-    return head(term_list);
-}
-function rest_terms(term_list) {
-    return tail(term_list);
-}
-function is_empty_termlist(term_list) {
-    return is_null(term_list);
-}
-function make_term(order, coeff) {
-    return list(order, coeff);
-}
-function order(term) {
-    return head(term);
-}
-function coeff(term) {
-    return head(tail(term));
-}
-\end{JavaScript}
-
+</pre></div></div>
 
       where 
-      {\lstinline[mathescape=true]$is_equal_to_zero$}
+      <kbd>is_equal_to_zero</kbd>
        is as defined in
-      exercise~\ref{ex:=zero?}.  (See also exercise~\ref{ex:adjoin-term} below.)
+      exercise \ref{ex:=zero?}.  (See also exercise \ref{ex:adjoin-term} below.)
       </p></div>
       <div class='permalink'>
 <a name='p16' class='permalink'></a><p>
@@ -659,13 +496,11 @@ function coeff(term) {
       will create (tagged) polynomials by means of the
       function:
 
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_45_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_polynomial(variable, terms) {
     return get("make", "polynomial")(variable, terms);
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
       
 \stepcounter{ExerciseDisplayNumber}
@@ -674,10 +509,10 @@ function make_polynomial(variable, terms) {
         
         
         Install 
-      {\lstinline[mathescape=true]$is_equal_to_zero$}
+      <kbd>is_equal_to_zero</kbd>
        for polynomials in the generic arithmetic
         package.  This will allow 
-      {\lstinline[mathescape=true]$adjoin_term$}
+      <kbd>adjoin_term</kbd>
        to work for polynomials
         with coefficients that are themselves polynomials.
         
@@ -719,7 +554,7 @@ function make_polynomial(variable, terms) {
         Suppose we want to have a polynomial system that is efficient for both
         sparse and dense polynomials.  One way to do this is to allow both
         kinds of term-list representations in our system.  The situation is
-        analogous to the complex-number example of section~\ref{sec:multiple-reps},
+        analogous to the complex-number example of section \ref{sec:multiple-reps},
         where we allowed both rectangular and polar representations.
         To do this we must distinguish different types of term lists and make
         the operations on term lists generic.  Redesign the polynomial system
@@ -756,45 +591,44 @@ function make_polynomial(variable, terms) {
 
         
         We can design a 
-      {\lstinline[mathescape=true]$div_poly$}
+      <kbd>div_poly</kbd>
         function
         on the model of 
-      {\lstinline[mathescape=true]$add_poly$}
+      <kbd>add_poly</kbd>
        and 
-      {\lstinline[mathescape=true]$mul_poly$}. The
+      <kbd>mul_poly</kbd>. The
         function
         checks to see if the two polys have
         the same variable.  If so, 
-      {\lstinline[mathescape=true]$div_poly$}
+      <kbd>div_poly</kbd>
        strips off the variable and
         passes the problem to 
-      {\lstinline[mathescape=true]$div_terms$}
+      <kbd>div_terms</kbd>
       , which performs the division
         operation on term lists. 
-      {\lstinline[mathescape=true]$div_poly$}
+      <kbd>div_poly</kbd>
        finally reattaches the variable
         to the result supplied by 
-      {\lstinline[mathescape=true]$div_terms$}
+      <kbd>div_terms</kbd>
       .  It is convenient
         to design 
-      {\lstinline[mathescape=true]$div_terms$}
+      <kbd>div_terms</kbd>
        to compute both the quotient and the remainder
         of a division.  
-      {\lstinline[mathescape=true]$div_terms$}
+      <kbd>div_terms</kbd>
        can take two term lists as arguments and
         return a list of the quotient term list and the remainder term list.
 
         Complete the following definition of 
-      {\lstinline[mathescape=true]$div_terms$}
+      <kbd>div_terms</kbd>
        by filling in the
         missing expressions.  Use this to implement 
-      {\lstinline[mathescape=true]$div_poly$}
+      <kbd>div_poly</kbd>
       , which takes
         two polys as arguments and returns a list of the quotient and
         remainder polys.
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_45_7_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function div_terms(L1, L2) {
     if (is_empty_termlist(L1)) {
         return list(the_empty_termlist, the_empty_termlist);
@@ -813,16 +647,16 @@ function div_terms(L1, L2) {
         }
     }
 }
-\end{JavaScript}
-
+</pre></div></div>
       
 \end{Exercise}
 
  
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Hierarchies of types in symbolic algebra
-      
+      </h2></div>
 
       
       
@@ -894,9 +728,10 @@ function div_terms(L1, L2) {
       
       
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Extended exercise: Rational functions
-      
+      </h2></div>
 
       
       
@@ -934,25 +769,23 @@ function div_terms(L1, L2) {
  
         Modify the rational-arithmetic package to use generic operations, but
         change 
-      {\lstinline[mathescape=true]$make_rat$}
+      <kbd>make_rat</kbd>
        so that it does not attempt to reduce fractions
         to lowest terms.  Test your system by calling 
         
-      {\lstinline[mathescape=true]$make_rational$}
+      <kbd>make_rational</kbd>
        on
         two polynomials to produce a rational function
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_45_8_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const p1 = make_polynomial("x", list(list(2, 1),
                                      list(0, 1)));
 const p2 = make_polynomial("x", list(list(3, 1),
                                      list(0, 1)));
 const rf = make_rational(p2, p1);
-\end{JavaScript}
+</pre></div></div>
 
-
-        Now add {\lstinline[mathescape=true]$rf$} to itself, using {\lstinline[mathescape=true]$add$}. You will observe that
+        Now add <kbd>rf</kbd> to itself, using <kbd>add</kbd>. You will observe that
         this addition
         function
         does not reduce fractions to lowest terms.
@@ -966,76 +799,42 @@ const rf = make_rational(p2, p1);
 <a name='p22' class='permalink'></a><p>
       We can reduce polynomial fractions to lowest terms using the same idea
       we used with integers: modifying 
-      {\lstinline[mathescape=true]$make_rat$}
+      <kbd>make_rat</kbd>
        to divide both the numerator and the denominator by their
       greatest common divisor. The notion of 
       
       
       <QUOTE>greatest common divisor</QUOTE> makes sense for polynomials.  In
       fact, we can compute the GCD of two polynomials using essentially the
-      same Euclid's Algorithm that works for integers.<a class='superscript' id='footnote-8' href='#footnote-8'>[8]</a>
-\begin{JavaScript}
-function gcd(a, b) {
-    return b === 0
-           ? a
-           : gcd(b, remainder(a, b));
-}
-\end{JavaScript}
-
-
-      Using this, we could make the obvious modification to define a GCD
-      operation that works on term lists:
-
-      
-\begin{JavaScript}
-function gcd_terms(a, b) {
-    return is_empty_termlist(b)
-           ? a
-           : gcd_terms(b, remainder_terms(a, b));
-}
-\end{JavaScript}
-
-
-      where 
-      {\lstinline[mathescape=true]$remainder_terms$}
-       picks out the remainder component of the
-      list returned by the term-list division operation 
-      
-      {\lstinline[mathescape=true]$div_terms$}
-       that was implemented in exercise~\ref{ex:/terms}.
-        The
+      same Euclid's Algorithm that works for integers.<a class='superscript' id='footnote-link-7' href='#footnote-7'>[7]</a>  The
       integer version is
 
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_45_9_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function gcd(a, b) {
     return b === 0
            ? a
            : gcd(b, remainder(a, b));
 }
-\end{JavaScript}
-
+</pre></div></div>
 
       Using this, we could make the obvious modification to define a GCD
       operation that works on term lists:
 
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_45_10_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function gcd_terms(a, b) {
     return is_empty_termlist(b)
            ? a
            : gcd_terms(b, remainder_terms(a, b));
 }
-\end{JavaScript}
-
+</pre></div></div>
 
       where 
-      {\lstinline[mathescape=true]$remainder_terms$}
+      <kbd>remainder_terms</kbd>
        picks out the remainder component of the
       list returned by the term-list division operation 
       
-      {\lstinline[mathescape=true]$div_terms$}
-       that was implemented in exercise~\ref{ex:/terms}.
+      <kbd>div_terms</kbd>
+       that was implemented in exercise \ref{ex:/terms}.
       </p></div>
 
       
@@ -1045,31 +844,30 @@ function gcd_terms(a, b) {
         
         
         Using 
-      {\lstinline[mathescape=true]$div_terms$}
+      <kbd>div_terms</kbd>
       , implement the
         function
         
-      {\lstinline[mathescape=true]$remainder_terms$}
+      <kbd>remainder_terms</kbd>
        and use this to define 
       
-      {\lstinline[mathescape=true]$gcd_terms$}
+      <kbd>gcd_terms</kbd>
        as above.  Now write a
         function
         
-      {\lstinline[mathescape=true]$gcd_poly$}
+      <kbd>gcd_poly</kbd>
        that computes the polynomial GCD of two polys. (The
         function
         should signal an error if the two polys are not
         in the same variable.)  Install in the system a generic operation 
       
-      {\lstinline[mathescape=true]$greatest_common_divisor$}
+      <kbd>greatest_common_divisor</kbd>
        that reduces to 
-      {\lstinline[mathescape=true]$gcd_poly$}
+      <kbd>gcd_poly</kbd>
        for polynomials
-        and to ordinary {\lstinline[mathescape=true]$gcd$} for ordinary numbers.  As a test, try
+        and to ordinary <kbd>gcd</kbd> for ordinary numbers.  As a test, try
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_45_11_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const p1 = make_polynomial("x", list(make_term(4, 1),
                                      make_term(3, -1),
                                      make_term(2, -2),
@@ -1077,8 +875,7 @@ const p1 = make_polynomial("x", list(make_term(4, 1),
 const p2 = make_polynomial("x", list(make_term(3, 1),
                                      make_term(1, -1)));
 greatest_common_divisor(p1, p2);
-\end{JavaScript}
-
+</pre></div></div>
 
         and check your result by hand.
         
@@ -1105,9 +902,9 @@ P_{3}: & 13x +5
         Now define $Q_1$ to be the product of $P_1$ and $P_2$ and $Q_2$ to
         be the product of $P_1$ and $P_3$, and use 
       
-      {\lstinline[mathescape=true]$greatest_common_divisor$}
+      <kbd>greatest_common_divisor</kbd>
       
-        (exercise~\ref{ex:remainder-terms}) to
+        (exercise \ref{ex:remainder-terms}) to
         compute the GCD of $Q_1$ and $Q_2$.
         Note that the answer is not the same as $P_1$.
         This example introduces noninteger
@@ -1120,7 +917,7 @@ P_{3}: & 13x +5
 	
         To understand what is happening,
         try tracing 
-      {\lstinline[mathescape=true]$gcd_terms$}
+      <kbd>gcd_terms</kbd>
        while computing the GCD or
         try performing the division by hand.
         
@@ -1131,7 +928,7 @@ P_{3}: & 13x +5
 
       <div class='permalink'>
 <a name='p23' class='permalink'></a><p>
-      We can solve the problem exhibited in exercise~\ref{ex:gcd-of-polys} if
+      We can solve the problem exhibited in exercise \ref{ex:gcd-of-polys} if
       we use the following modification of the GCD algorithm (which really
       works only in the case of polynomials with integer coefficients).
       Before performing any polynomial division in the GCD computation, we
@@ -1154,7 +951,7 @@ P_{3}: & 13x +5
         integerizing factor</EM> $c^{1+O_{1} -O_{2}}$, the resulting polynomial can
       be divided by $Q$ by using the 
       
-      {\lstinline[mathescape=true]$div_terms$}
+      <kbd>div_terms</kbd>
        algorithm without
       introducing any fractions.  The operation of multiplying the dividend
       by this constant and then dividing is sometimes called the 
@@ -1176,31 +973,31 @@ P_{3}: & 13x +5
             Implement the
             function
             
-            {\lstinline[mathescape=true]$pseudoremainder_terms$}
+            <kbd>pseudoremainder_terms</kbd>
             , which is just like
             
             
-            {\lstinline[mathescape=true]$remainder_terms$}
+            <kbd>remainder_terms</kbd>
              except that it multiplies the dividend by
             the integerizing factor described above before calling 
             
-            {\lstinline[mathescape=true]$div_terms$}
+            <kbd>div_terms</kbd>
             .
             Modify 
-            {\lstinline[mathescape=true]$gcd_terms$}
+            <kbd>gcd_terms</kbd>
              to use 
-            {\lstinline[mathescape=true]$pseudoremainder_terms$}
+            <kbd>pseudoremainder_terms</kbd>
             , and verify that 
             
-            {\lstinline[mathescape=true]$greatest_common_divisor$}
+            <kbd>greatest_common_divisor</kbd>
              now produces an answer with integer
-            coefficients on the example in exercise~\ref{ex:gcd-of-polys}.
+            coefficients on the example in exercise \ref{ex:gcd-of-polys}.
           }
 \item{
             The GCD now has integer coefficients, but they are larger than those
             of $P_1$.  Modify 
             
-            {\lstinline[mathescape=true]$gcd_terms$}
+            <kbd>gcd_terms</kbd>
              so that it removes common factors from
             the coefficients of the answer by dividing all the coefficients by their
             (integer) greatest common divisor.
@@ -1222,8 +1019,8 @@ P_{3}: & 13x +5
       <UL>
         <LI>Compute the GCD of the numerator and denominator, using
           the version of 
-            {\lstinline[mathescape=true]$gcd_terms$}
-             from exercise~\ref{ex:pseudoremainder-terms}.
+            <kbd>gcd_terms</kbd>
+             from exercise \ref{ex:pseudoremainder-terms}.
 
         </LI>
         <LI>When you obtain the GCD, multiply both numerator and
@@ -1256,30 +1053,30 @@ P_{3}: & 13x +5
 \item{ Implement this algorithm as a
             function
             
-            {\lstinline[mathescape=true]$reduce_terms$}
+            <kbd>reduce_terms</kbd>
              that takes two
-            term lists {\lstinline[mathescape=true]$n$} and {\lstinline[mathescape=true]$d$} as arguments and returns a list {\lstinline[mathescape=true]$nn$}, {\lstinline[mathescape=true]$dd$}, which are {\lstinline[mathescape=true]$n$} and {\lstinline[mathescape=true]$d$} reduced to lowest terms
+            term lists <kbd>n</kbd> and <kbd>d</kbd> as arguments and returns a list <kbd>nn</kbd>, <kbd>dd</kbd>, which are <kbd>n</kbd> and <kbd>d</kbd> reduced to lowest terms
             via the algorithm given above.
             Also write a
             function
             
-            {\lstinline[mathescape=true]$reduce_poly$}
+            <kbd>reduce_poly</kbd>
             , analogous to 
             
-            {\lstinline[mathescape=true]$add_poly$}
+            <kbd>add_poly</kbd>
             ,
             that checks to see if the two polys have
             the same variable.  If so, 
             
-            {\lstinline[mathescape=true]$reduce_poly$}
+            <kbd>reduce_poly</kbd>
              strips off the variable and
             passes the problem to 
             
-            {\lstinline[mathescape=true]$reduce_terms$}
+            <kbd>reduce_terms</kbd>
             , then reattaches the variable
             to the two term lists supplied by 
             
-            {\lstinline[mathescape=true]$reduce_terms$}
+            <kbd>reduce_terms</kbd>
             .
           }
 \item{
@@ -1287,49 +1084,46 @@ P_{3}: & 13x +5
             function
             analogous to 
             
-            {\lstinline[mathescape=true]$reduce_terms$}
+            <kbd>reduce_terms</kbd>
             
             that does what the original 
             
-            {\lstinline[mathescape=true]$make_rat$}
+            <kbd>make_rat</kbd>
              did for integers:
 
-            
-\begin{JavaScript}
+            <div class='snippet' id='javascript_45_12_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function reduce_integers(n, d) {
     const g = gcd(n, d);
     return list(n / g, d / g);
 }
-\end{JavaScript}
-
+</pre></div></div>
 
             and define
-            {\lstinline[mathescape=true]$reduce$} as a generic operation that calls 
+            <kbd>reduce</kbd> as a generic operation that calls 
             
-            {\lstinline[mathescape=true]$apply_generic$}
+            <kbd>apply_generic</kbd>
              to dispatch to either 
             
-            {\lstinline[mathescape=true]$reduce_poly$}
-             (for {\lstinline[mathescape=true]$polynomial$} arguments)
+            <kbd>reduce_poly</kbd>
+             (for <kbd>polynomial</kbd> arguments)
             or 
-            {\lstinline[mathescape=true]$reduce_integers$}
+            <kbd>reduce_integers</kbd>
              (for 
             
-            {\lstinline[mathescape=true]$javascript_number$}
+            <kbd>javascript_number</kbd>
              arguments).
             You can now easily make the
             rational-arithmetic package reduce fractions to lowest terms by
             having 
-            {\lstinline[mathescape=true]$make_rat$}
-             call {\lstinline[mathescape=true]$reduce$} before combining the given
+            <kbd>make_rat</kbd>
+             call <kbd>reduce</kbd> before combining the given
             numerator and denominator to form a rational number.
             The system now
             handles rational expressions in either integers or polynomials.
             To test your program, try the example at the beginning of this
             extended exercise:
 
-            
-\begin{JavaScript}
+            <div class='snippet' id='javascript_45_13_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const p1 = make_polynomial("x", list(make_term(1, 1),
                                      make_term(0, 1)));
 const p2 = make_polynomial("x", list(make_term(3, 1),
@@ -1342,8 +1136,7 @@ const rf1 = make_rational(p1, p2);
 const rf2 = make_rational(p3, p4);
 
 add(rf1, rf2);
-\end{JavaScript}
-
+</pre></div></div>
 
             See if you get the correct answer, correctly reduced to lowest terms.
           }
@@ -1365,13 +1158,7 @@ add(rf1, rf2);
         the enormous size of the intermediate coefficients generated by the
         pseudodivisions.  One of the active areas in the development of
         algebraic-manipulation systems is the design of better algorithms for
-        computing polynomial GCDs.<a class='superscript' id='footnote-9' href='#footnote-9'>[9]</a>
-        
-        
-        
-        
-        
-      
+        computing polynomial GCDs.<a class='superscript' id='footnote-link-8' href='#footnote-8'>[8]</a>
         
         
         
@@ -1381,12 +1168,12 @@ add(rf1, rf2);
       </p></div>
 
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>On the other hand, we will allow
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>On the other hand, we will allow
         polynomials whose coefficients are themselves polynomials in other
         variables.  This will give us essentially the same representational
         power as a full multivariate system, although it does lead to coercion
-        problems, as discussed below.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>For univariate polynomials, giving
+        problems, as discussed below.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>For univariate polynomials, giving
         the value of a polynomial at a given set of points can be a
         particularly good representation.  This makes polynomial arithmetic
         extremely simple.  To obtain, for example, the sum of two polynomials
@@ -1396,13 +1183,13 @@ add(rf1, rf2);
         
         Lagrange interpolation
         formula, which shows how to recover the coefficients of a polynomial
-        of degree $n$ given the values of the polynomial at $n+1$ points.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>This operation is very much like the ordered
-        {\lstinline[mathescape=true]$union_set$} operation we developed in exercise~\ref{ex:union-set}.
+        of degree $n$ given the values of the polynomial at $n+1$ points.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>This operation is very much like the ordered
+        <kbd>union_set</kbd> operation we developed in exercise \ref{ex:union-set}.
         In fact, if we think of the terms of the polynomial as a set ordered
         according to the power of the indeterminate, then the program that
-        produces the term list for a sum is almost identical to {\lstinline[mathescape=true]$union_set$}.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>To make
+        produces the term list for a sum is almost identical to <kbd>union_set</kbd>.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>To make
         this work completely smoothly, we should also add to our generic
         arithmetic system the ability to coerce a <QUOTE>number</QUOTE> to a polynomial
         by regarding it as a polynomial of degree zero whose coefficient is
@@ -1413,64 +1200,40 @@ add(rf1, rf2);
           {\left[ x^2 +(y+1)x+5\right]+ \left[ x^2 +2x+1\right]}
           \]
         
-        which requires adding the coefficient $y+1$ to the coefficient 2.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>In these polynomial examples,
+        which requires adding the coefficient $y+1$ to the coefficient 2.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>In these polynomial examples,
         we assume that we have implemented the generic arithmetic system using
-        the type mechanism suggested in exercise~\ref{ex:internal-type-system}.
+        the type mechanism suggested in exercise \ref{ex:internal-type-system}.
         Thus, coefficients that are ordinary numbers will be represented as
-        the numbers themselves rather than as pairs whose {\lstinline[mathescape=true]$head$} is the
+        the numbers themselves rather than as pairs whose <kbd>head</kbd> is the
         symbol 
-      {\lstinline[mathescape=true]$javascript_number$}
-      .</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>Although
+      <kbd>javascript_number</kbd>
+      .</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>Although
         we are assuming that term
         lists are ordered, we have implemented 
       
-      {\lstinline[mathescape=true]$adjoin_term$}
+      <kbd>adjoin_term</kbd>
        to simply
-        {\lstinline[mathescape=true]$pair$} the new term onto the existing term list.  We can get away
+        <kbd>pair</kbd> the new term onto the existing term list.  We can get away
         with this so long as we guarantee that the
         functions
         (such as 
-      {\lstinline[mathescape=true]$add_terms$}
+      <kbd>add_terms</kbd>
       ) that use 
       
-      {\lstinline[mathescape=true]$adjoin_term$}
+      <kbd>adjoin_term</kbd>
        always call it with a higher-order
         term than appears in the list.  If we did not want to make such a
         guarantee, we could have implemented 
       
-      {\lstinline[mathescape=true]$adjoin_term$}
+      <kbd>adjoin_term</kbd>
        to be similar to the 
       
-      {\lstinline[mathescape=true]$adjoin_set$}
+      <kbd>adjoin_set</kbd>
        constructor for the ordered-list
-        representation of sets (exercise~\ref{ex:adjoin-set}).</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>Although
-        we are assuming that term
-        lists are ordered, we have implemented 
-      
-      {\lstinline[mathescape=true]$adjoin_term$}
-       to simply
-        {\lstinline[mathescape=true]$pair$} the new term onto the existing term list.  We can get away
-        with this so long as we guarantee that the
-        functions
-        (such as 
-      {\lstinline[mathescape=true]$add_terms$}
-      ) that use 
-      
-      {\lstinline[mathescape=true]$adjoin_term$}
-       always call it with a higher-order
-        term than appears in the list.  If we did not want to make such a
-        guarantee, we could have implemented 
-      
-      {\lstinline[mathescape=true]$adjoin_term$}
-       to be similar to the 
-      
-      {\lstinline[mathescape=true]$adjoin_set$}
-       constructor for the ordered-list
-        representation of sets (exercise~\ref{ex:adjoin-set}).</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>The fact
+        representation of sets (exercise \ref{ex:adjoin-set}).</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-7' href='#footnote-link-7'>[7] </a><FOOTNOTE>The fact
         that 
         
         
@@ -1487,8 +1250,8 @@ add(rf1, rf2);
         abstract point of view, this is what is needed to prove that Euclid's
         Algorithm works.  For the domain of integers, the measure $m$ of an
         integer is the absolute value of the integer itself.  For the domain
-        of polynomials, the measure of a polynomial is its degree.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>One extremely efficient and
+        of polynomials, the measure of a polynomial is its degree.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-8' href='#footnote-link-8'>[8] </a><FOOTNOTE>One extremely efficient and
           elegant method for computing 
           
           
@@ -1498,7 +1261,14 @@ add(rf1, rf2);
           
           Richard
           Zippel (1979).  The method is a probabilistic algorithm, as is the
-          fast test for primality that we discussed in chapter~1.  Zippel's book
+          fast test for primality that we discussed in chapter 1.  Zippel's book
           (1993) describes this method, together with other ways to compute
           polynomial GCDs.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section5/subsection2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/chapter3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+2.5.3  Example: Symbolic Algebra</div>	<div class='next-page'></div></div>

@@ -1,6 +1,15 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>2 Building Abstractions with Data</a>
+		<a name='top' class='permalink'>2  Building Abstractions with Data</a>
 	</div>
 </div>
 	<div class='chapter-text'>
@@ -8,7 +17,7 @@
 
   
 
-  \epigraph{
+  <blockquote class='blockquote'>
 
     We now come to the decisive step of mathematical abstraction: we
     forget about what the symbols stand for. … [The mathematician]
@@ -17,7 +26,11 @@
     stand for.
 
     
-    }{--- \textup{Hermann Weyl}, The Mathematical Way of Thinking}
+    <div class='chapter-text-ATTRIBUTION'>
+<span class='chapter-text-AUTHOR'>Hermann Weyl</span>
+<span class='chapter-text-TITLE'>The Mathematical Way of Thinking</span>
+</div>
+</blockquote>
 
 
   
@@ -26,7 +39,7 @@
 <a name='p1' class='permalink'></a><p>
     
     
-    We concentrated in chapter~1 on computational processes and on the
+    We concentrated in chapter 1 on computational processes and on the
     role of
     functions
     in program design.  We saw how to use primitive
@@ -58,12 +71,12 @@
 <a name='p2' class='permalink'></a><p>
     In this chapter we are going to look at more complex data.  All the
     functions
-    in chapter~1 operate on simple numerical data, and simple
+    in chapter 1 operate on simple numerical data, and simple
     data are not sufficient for many of the problems we wish to address
     using computation.  Programs are typically designed to model complex
     phenomena, and more often than not one must construct computational
     objects that have several parts in order to model real-world phenomena
-    that have several aspects.  Thus, whereas our focus in chapter~1 was
+    that have several aspects.  Thus, whereas our focus in chapter 1 was
     on building abstractions by combining
     functions
     to form compound
@@ -92,13 +105,13 @@
 <a name='p4' class='permalink'></a><p>
     
     Consider the task of designing a system to perform arithmetic with
-    rational numbers.  We could imagine an operation {\lstinline[mathescape=true]$add_rat$} that takes
+    rational numbers.  We could imagine an operation <kbd>add_rat</kbd> that takes
     two rational numbers and produces their sum.  In terms of
     simple data, a rational number can be thought of as two integers: a
     numerator and a denominator.  Thus, we could design a program in which
     each rational number would be represented by two integers (a numerator
     and a denominator) and where
-    {\lstinline[mathescape=true]$add_rat$}
+    <kbd>add_rat</kbd>
     would be implemented by two
     functions
     (one producing the numerator of the sum and one producing
@@ -140,7 +153,7 @@
     be numbers, because we can readily 
     declare the function
 
-    
+    <div class='snippet' id='javascript_22_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function linear_combination(a, b, x, y) {
@@ -149,9 +162,10 @@ function linear_combination(a, b, x, y) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGxmApgQwE4H0JwC2ARmprAgBSYA0ixdAHnQJ4CUiA3gFCJ+LZ0UENiSZEAKkSNEAanqTELANzcAvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAGxmApgQwE4H0JwC2ARmprAgBSYA0ixdAHnQJ4CUiA3gFCJ+LZ0UENiSZEAKkSNEAanqTELANzcAvt26oMOfEVJhy8MJQCMdAEx0AzHQAsbZUA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
     
 
   </p></div>
@@ -166,40 +180,36 @@ function linear_combination(a, b, x, y) {
     function
     of the form
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_22_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function linear_combination(a, b, x, y) {
     return add(mul(a, x), mul(b, y));
 }
-\end{JavaScript}
+</pre></div></div>
 
-
-    where {\lstinline[mathescape=true]$add$} and {\lstinline[mathescape=true]$mul$} are not the primitive
+    where <kbd>add</kbd> and <kbd>mul</kbd> are not the primitive
     functions
-    {\lstinline[mathescape=true]$+$}
-    and {\lstinline[mathescape=true]$*$} but rather more complex things that will perform the
+    <kbd>+</kbd>
+    and <kbd>*</kbd> but rather more complex things that will perform the
     appropriate operations for whatever kinds of data we pass in as the
-    arguments {\lstinline[mathescape=true]$a$}, {\lstinline[mathescape=true]$b$}, {\lstinline[mathescape=true]$x$}, and {\lstinline[mathescape=true]$y$}. The key point is
-    that the only thing {\lstinline[mathescape=true]$linear_combination$} should need to know about
-    {\lstinline[mathescape=true]$a$}, {\lstinline[mathescape=true]$b$}, {\lstinline[mathescape=true]$x$}, and {\lstinline[mathescape=true]$y$} is that the
+    arguments <kbd>a</kbd>, <kbd>b</kbd>, <kbd>x</kbd>, and <kbd>y</kbd>. The key point is
+    that the only thing <kbd>linear_combination</kbd> should need to know about
+    <kbd>a</kbd>, <kbd>b</kbd>, <kbd>x</kbd>, and <kbd>y</kbd> is that the
     functions
-    {\lstinline[mathescape=true]$add$}
-    and {\lstinline[mathescape=true]$mul$} will perform the appropriate manipulations.  From the
+    <kbd>add</kbd>
+    and <kbd>mul</kbd> will perform the appropriate manipulations.  From the
     perspective of the
     function
-    {\lstinline[mathescape=true]$linear_combination$}, it is
-    irrelevant what {\lstinline[mathescape=true]$a$}, {\lstinline[mathescape=true]$b$}, {\lstinline[mathescape=true]$x$}, and {\lstinline[mathescape=true]$y$} are and even
+    <kbd>linear_combination</kbd>, it is
+    irrelevant what <kbd>a</kbd>, <kbd>b</kbd>, <kbd>x</kbd>, and <kbd>y</kbd> are and even
     more irrelevant how they might happen to be represented in terms of
     more primitive data.  This same example shows why it is important that
     our programming language provide the ability to manipulate compound
     objects directly: Without this, there is no way for a
     function
     such
-    as {\lstinline[mathescape=true]$linear_combination$} to pass its arguments along to {\lstinline[mathescape=true]$add$}
-    and {\lstinline[mathescape=true]$mul$} without having to know their detailed
-    structure.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-    
-  
+    as <kbd>linear_combination</kbd> to pass its arguments along to <kbd>add</kbd>
+    and <kbd>mul</kbd> without having to know their detailed
+    structure.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
     
     
   </p></div>
@@ -226,7 +236,7 @@ function linear_combination(a, b, x, y) {
     compound data using no special <QUOTE>data</QUOTE> operations at all, only
     functions.  This will further blur the distinction between
     <QUOTE>function</QUOTE> and <QUOTE>data,</QUOTE> which was already becoming tenuous toward
-    the end of chapter~1.  We will also explore some conventional
+    the end of chapter 1.  We will also explore some conventional
     techniques for representing sequences and trees.  One key idea in
     dealing with compound data is the notion of 
     
@@ -284,40 +294,32 @@ function linear_combination(a, b, x, y) {
 
   
 
-  
-  &section2.1;
-
-  
-  &section2.2;
-
-  
-  &section2.3;
-
-  
-  &section2.4;
-
-  
-  &section2.5;
-
-<hr><div class='footnote'>
+  <hr><div class='footnote'>
 <a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>The ability to directly manipulate
       functions
       provides an analogous increase in the expressive power of a
       programming language.  For example, in
-      section~\ref{sec:procedures-as-parameters} we introduced the {\lstinline[mathescape=true]$sum$}
+      section \ref{sec:procedures-as-parameters} we introduced the <kbd>sum</kbd>
       function, which takes a
       function
-      {\lstinline[mathescape=true]$term$} as an argument and
-      computes the sum of the values of {\lstinline[mathescape=true]$term$} over some specified
-      interval.  In order to define {\lstinline[mathescape=true]$sum$}, it is crucial that we be able
+      <kbd>term</kbd> as an argument and
+      computes the sum of the values of <kbd>term</kbd> over some specified
+      interval.  In order to define <kbd>sum</kbd>, it is crucial that we be able
       to speak of a
       function
-      such as {\lstinline[mathescape=true]$term$} as an entity in its own
-      right, without regard for how {\lstinline[mathescape=true]$term$} might be expressed with more
+      such as <kbd>term</kbd> as an entity in its own
+      right, without regard for how <kbd>term</kbd> might be expressed with more
       primitive operations.  Indeed, if we did not have the notion of <QUOTE>a
         function,</QUOTE> it is doubtful that we would ever even think of the
-      possibility of defining an operation such as {\lstinline[mathescape=true]$sum$}.  Moreover,
+      possibility of defining an operation such as <kbd>sum</kbd>.  Moreover,
       insofar as performing the summation is concerned, the details of how
-      {\lstinline[mathescape=true]$term$} may be constructed from more primitive operations are
+      <kbd>term</kbd> may be constructed from more primitive operations are
       irrelevant.</FOOTNOTE></div>
-</CHAPTER>
+</CHAPTER><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section3/subsection4.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section1/section1.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+2  Building Abstractions with Data</div>	<div class='next-page'></div></div>

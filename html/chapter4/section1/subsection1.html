@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>4.1.1 
-    The Core of the Evaluator
-  </a>
+		<a name='top' class='permalink'>4.1.1  The Core of the Evaluator</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
   <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
@@ -23,7 +30,7 @@
 
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_original/ch4-Z-G-1}.svg}}
 \caption{The
-      {\lstinline[mathescape=true]$evaluate$}–{\lstinline[mathescape=true]$apply$} 
+      <kbd>evaluate</kbd>–<kbd>apply</kbd> 
       cycle exposes the essence of a computer language.
       }
 \label{fig:eval-apply}
@@ -34,18 +41,19 @@
     The evaluation process can be described as the interplay between two
     functions: 
     
-    {\lstinline[mathescape=true]$evaluate$}
+    <kbd>evaluate</kbd>
     
-    and {\lstinline[mathescape=true]$apply$}.
+    and <kbd>apply</kbd>.
   </p></div>
       
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     
       
       The function 
-      {\lstinline[mathescape=true]$evaluate$}
+      <kbd>evaluate</kbd>
     
-  
+  </h2></div>
 
   <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
@@ -54,7 +62,7 @@
 
     
       
-      The function {\lstinline[mathescape=true]$evaluate$}
+      The function <kbd>evaluate</kbd>
     
     takes as arguments 
     
@@ -65,7 +73,7 @@
     and directs its evaluation.  
     
       
-      The function {\lstinline[mathescape=true]$evaluate$}
+      The function <kbd>evaluate</kbd>
     
     is structured as a case analysis of the syntactic type of the expression
     to be evaluated.  In order to keep the
@@ -112,12 +120,12 @@
     
     Here is the definition of
     
-    {\lstinline[mathescape=true]$evaluate$}:
+    <kbd>evaluate</kbd>:
     
 
     
     
-    
+    <div class='snippet' id='javascript_73_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function evaluate(stmt, env) {
@@ -129,7 +137,7 @@ function evaluate(stmt, env) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG4EMA2J1WQCgGcoBbKAGhTFQEpEBvAKERYCdkoRWkZCB9QskzA+aLDlhgA5kVJQazFkuUB+FsTKLlLAFyJefMOhIEN8rdpZrMcOAGsQAB0PHkfDNgJGTfOCO+mcjSUyNQKlrr6-BAIxOhgUHwAJsgQmOisuPBgsmThEVYoHnwxYHEJyanpmbAIuRRUtBbKegYYrDDoAEaYbilpGVl1ZvkFamKY7hmdPX1Vg7U5ZiFhzUqt-OiEhDBSYCYJ9aMR48VbO3sHUPUrTQUbJQhJMItYogAejuzb2UdrqkU3qVnq9JshPt8dsM5Ldji0onxQJBFpVgDAwC9fiN-kpTm8kdBsqj0ZjoWRYTiHoIAI4gUIQQJ5HGFCYCZC0+mmdl0yBuOJ4K6EI4U+4InpwCB2P4FFnFcWSm6NOHrBHsTjcARQXDIK7SmV4yZqrhgTXa3XLJWUhHoRyOTAwCBDJZBZmINQ2u0AT3wEwkBDgjmQNTgrGFSvIroK9uIvhEHjpQoDQfiSSFI1hysiQdYIcVACIAKpgOxgOAAdyQ-J1oSgiCgnsD+iQvu1ejzNAA3IwAL5AA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG4EMA2J1WQCgGcoBbKAGhTFQEpEBvAKERYCdkoRWkZCB9QskzA+aLDlhgA5kVJQazFkuUB+FsTKLlLAFyJefMOhIEN8rdpZrMcOAGsQAB0PHkfDNgJGTfOCO+mcjSUyNQKlrr6-BAIxOhgUHwAJsgQmOisuPBgsmThEVYoHnwxYHEJyanpmbAIuRRUtBbKegYYrDDoAEaYbilpGVl1ZvkFamKY7hmdPX1Vg7U5ZiFhzUqt-OiEhDBSYCYJ9aMR48VbO3sHUPUrTQUbJQhJMItYogAejuzb2UdrqkU3qVnq9JshPt8dsM5Ldji0onxQJBFpVgDAwC9fiN-kpTm8kdBsqj0ZjoWRYTiHoIAI4gUIQQJ5HGFCYCZC0+mmdl0yBuOJ4K6EI4U+4InpwCB2P4FFnFcWSm6NOHrBHsTjcARQXDIK7SmV4yZqrhgTXa3XLJWUhHoRyOTAwCBDJZBZmINQ2u0AT3wEwkBDgjmQNTgrGFSvIroK9uIvhEHjpQoDQfiSSFI1hysiQdYIcVACIAKpgOxgOAAdyQ-J1oSgiCgnsD+iQvu1ejzNAA3IwAL6MRilYiIEievhfOBSTIkRAAXkQjgygnweYAjB2GHXWHS1wBmNfd9tdlt4fDD0c5ifGShQAAWbh1jnromoMBz+xrnaAA}{\usebox\lstbox}!*/
           ? eval_constant_declaration(stmt, env)
         : is_variable_declaration(stmt)
           ? eval_variable_declaration(stmt, env)
@@ -152,8 +160,9 @@ function evaluate(stmt, env) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     
 
@@ -166,7 +175,7 @@ function evaluate(stmt, env) {
     
     For clarity, 
     
-    {\lstinline[mathescape=true]$evaluate$}
+    <kbd>evaluate</kbd>
     has been implemented as a case analysis using
     
     conditional expressions.
@@ -179,7 +188,7 @@ function evaluate(stmt, env) {
     statements,
     and no new ones can be defined without editing the definition of 
     
-    {\lstinline[mathescape=true]$evaluate$}.
+    <kbd>evaluate</kbd>.
     
     In most
     interpreter
@@ -188,23 +197,24 @@ function evaluate(stmt, env) {
     data-directed style.  This allows a user to add new types of    
     
     statements and expressions that
-    {\lstinline[mathescape=true]$evaluate$}
+    <kbd>evaluate</kbd>
     
     can distinguish, without modifying the definition of 
     
-    {\lstinline[mathescape=true]$evaluate$}
+    <kbd>evaluate</kbd>
     itself.
-    (See exercise~\ref{ex:data-directed-eval}.)
+    (See exercise \ref{ex:data-directed-eval}.)
   </p></div>
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     Apply
-  
+  </h2></div>
 
   <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
     
-    The function {\lstinline[mathescape=true]$apply$}
+    The function <kbd>apply</kbd>
     
     takes two arguments, a
     
@@ -214,7 +224,7 @@ function evaluate(stmt, env) {
     function
     should be applied.  
     
-    The function {\lstinline[mathescape=true]$apply$}
+    The function <kbd>apply</kbd>
     
     classifies
     
@@ -226,7 +236,7 @@ function evaluate(stmt, env) {
     
       
       
-	{\lstinline[mathescape=true]$apply_primitive_function$}
+	<kbd>apply_primitive_function</kbd>
       
     
     to apply primitives; it applies compound
@@ -251,15 +261,15 @@ function evaluate(stmt, env) {
     
     function is to be applied, and the body's
     local names to a special value
-    {\lstinline[mathescape=true]$no_value_yet$}.
+    <kbd>no_value_yet</kbd>.
     The function
-    {\lstinline[mathescape=true]$local_names$}
+    <kbd>local_names</kbd>
     for computing the body's local names is also used for
     <EM>blocks</EM> and explained below.
     
-    Here is the definition of {\lstinline[mathescape=true]$apply$}:
+    Here is the definition of <kbd>apply</kbd>:
 
-    
+    <div class='snippet' id='javascript_73_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function apply(fun, args) {
@@ -271,7 +281,7 @@ function apply(fun, args) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwA6oDYE8AUowA0KATgOYDOAlIgN4BQijMwiOM5A+qsTALYywAbgFMO+aPDB5wlavUYLExYVBDEkaTFi49+Q0eNgJphEhUoBuBowC+iYRnLDEzVuw4Q4vVHHAATMXAJY3xZWmtFTzByKEQAIzg-LEQAXkRDSQ4EpJNLCIUomMQMOAhkR1Ti0vKOMGReYXIcbKw8xUZC2LqG8kqYaOFiKA5yjBNgsC5kYnqVQabQgnz2ldW1qrLHNvbOxChhbw5BcpBGyt40HAAPVIA+RDA4I5PRLBUl9c+vks2qKxXdscMKdemlNMIwH4cNMKB8vvDFPtDkCQZYAJAYhTLRC7ZTkEAYWIpbEKYQo5D7ZqJLBwhGkq77SEcCGCGDEBANMBQHAkukPWbkWl8xQoxpC4WMDIIZlgVnssCc7mhWT-dquNicZSqdTPYHCHB4glQMLyNZatRIc060UeBCM7mGwnbRR2BxOcKfK1IfzCYD9YR+VUuiKuxzOU2KQbs4gmIgAIgAqmAANaPADuSClSCgWFQzn6KHQ2DjzpsdBsQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwA6oDYE8AUowA0KATgOYDOAlIgN4BQijMwiOM5A+qsTALYywAbgFMO+aPDB5wlavUYLExYVBDEkaTFi49+Q0eNgJphEhUoBuBowC+iYRnLDEzVuw4Q4vVHHAATMXAJY3xZWmtFTzByKEQAIzg-LEQAXkRDSQ4EpJNLCIUomMQMOAhkR1Ti0vKOMGReYXIcbKw8xUZC2LqG8kqYaOFiKA5yjBNgsC5kYnqVQabQgnz2ldW1qrLHNvbOxChhbw5BcpBGyt40HAAPVIA+RDA4I5PRLBUl9c+vks2qKxXdscMKdemlNMIwH4cNMKB8vvDFPtDkCQZYAJAYhTLRC7ZTkEAYWIpbEKYQo5D7ZqJLBwhGkq77SEcCGCGDEBANMBQHAkukPWbkWl8xQoxpC4WMDIIZlgVnssCc7mhWT-dquNicZSqdTPYHCHB4glQMLyNZatRIc060UeBCM7mGwnbRR2BxOcKfK1IfzCYD9YR+VUuiKuxzOU2KQbs4gmIgAIgAqmAANaPADuSClSCgWFQzn6KHQ2DjzpsdDLdF2mBAoMQF2Tom4fAEMBEgUgRikiF5X2uRFad0QNwA1IgsD31nlNNgcNXBcV2NyAIxEABMKqAA}{\usebox\lstbox}!*/
       const names = insert_all(function_parameters(fun),
                                locals);
       const temp_values = map(x => no_value_yet,
@@ -295,8 +305,9 @@ function apply(fun, args) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     
     
@@ -305,31 +316,32 @@ function apply(fun, args) {
       
 	In order to return a value, JavaScript functions need to evaluate a return 
 	statement. If a function terminates without return, the value 
-	{\lstinline[mathescape=true]$undefined$}
+	<kbd>undefined</kbd>
 	is returned. Thus, if the evaluation of the function body yields a return
 	value, the content of the return value is retrieved, and otherwise the
-	value {\lstinline[mathescape=true]$undefined$} is returned.
+	value <kbd>undefined</kbd> is returned.
       
     
   </p></div>
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     
     Function
     arguments
-  
+  </h2></div>
 
   <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
     When
     
-    {\lstinline[mathescape=true]$evaluate$}
+    <kbd>evaluate</kbd>
     processes a
     
     function
     application, it uses 
     
-    {\lstinline[mathescape=true]$list_of_values$}
+    <kbd>list_of_values</kbd>
     
     to produce the
     list of arguments to which the
@@ -337,11 +349,13 @@ function apply(fun, args) {
     function
     is to be applied.
     
-    The function {\lstinline[mathescape=true]$list_of_values$}
+    The function <kbd>list_of_values</kbd>
     
     takes as an argument the operands of the combination.
     It evaluates each operand and returns a list of the corresponding
-    values:<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+    values:<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
+
+    <div class='snippet' id='javascript_73_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function list_of_values(exps, env) {
@@ -353,49 +367,28 @@ function list_of_values(exps, env) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGxgZygfTsTA3AQ2RAFM0AKEgDwAc0AaREsPASkQG8AoRXxGYInJg42GiQBOBMABMK1Oq3bc+qxBJJQQEpGBDJkAbh58Avk2RoSnE2vWbtSGgRgTKhYgSglywVxjFJaRlKWjRWRmY2els7ONVUAJx8IlIKDSTxKVl5MIimFiVjMy5TIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGxgZygfTsTA3AQ2RAFM0AKEgDwAc0AaREsPASkQG8AoRXxGYInJg42GiQBOBMABMK1Oq3bc+qxBJJQQEpGBDJkAbh58Avk2RoSnE2vWbtSGgRgTKhYgSglywVxjFJaRlKWjRWRmY2els7ONVUAJx8IlIKDSTxKVl5MIimFiVjMy5TLi4IBAxEAFsAT0wCGRkYWARMBQy0eCQAXkRnCStyACIARkQAakQAJkMR1mNErGSPNPJl8jHGesbm1p6O2i6exgB2CNj4vigACxJMAHNkOAAjIg6WVwQa5ihFoA}{\usebox\lstbox}!*/
    }
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-
-    
-  
-
-    
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function list_of_values(exps, env) {
-    if (no_operands(exps)) {
-        return null;
-    } else {
-        return pair(evaluate(first_operand(exps), env),
-                    list_of_values(rest_operands(exps), env));
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGxgZygfTsTA3AQ2RAFM0AKEgDwAc0AaREsPASkQG8AoRXxGYInJg42GiQBOBMABMK1Oq3bc+qxBJJQQEpGBDJkAbh58Avk2RoSnE2vWbtSGgRgTKhYgSglywVxjFJaRlKWjRWRmY2els7ONVUAJx8IlIKDSTxKVl5MIimFiVjMy5TIA}{\usebox\lstbox}!*/
-   }
-}
-
-\end{JavaScriptClickable}
-
-
+</div></div>
 
     
   </p></div>
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     Conditionals
-  
+  </h2></div>
 
   <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
     
     The function
-    {\lstinline[mathescape=true]$eval_conditional_expression$}
+    <kbd>eval_conditional_expression</kbd>
     
     evaluates the predicate part of an
     
@@ -407,7 +400,7 @@ function list_of_values(exps, env) {
 	the consequent is evaluated, otherwise the alternative:
     
 
-    
+    <div class='snippet' id='javascript_73_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function eval_conditional_expression(stmt, env) {
@@ -419,13 +412,14 @@ function eval_conditional_expression(stmt, env) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG4EMA2B9CCAmMsCW2yAHgA4BOyAznfGABR1QC2UANCmKgJSIA3gChE4xLSghqSGHWxRqIZMzRYQ6KKrxh8ZKtWw1k+Vhyj8uYibbv2H45H378bjxAH4UGTJu3MuvoUNLgIdOacVojuHnHOArEOAFw+Glo6BAahWFCRljxJcQ4J-ADcIgC+QA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG4EMA2B9CCAmMsCW2yAHgA4BOyAznfGABR1QC2UANCmKgJSIA3gChE4xLSghqSGHWxRqIZMzRYQ6KKrxh8ZKtWw1k+Vhyj8uYibbv2H45H378bjxAH4UGTJu3MuvoUNLgIdOacVojuHnHOArEOAFw+Glo6BAahWFCRljxJcQ4J-ADcIgC+IiK6bIjsAJ5hetnUiAC8iJTo1HSqAEQwwIjMSiqCQogAjGWIlSiY-cKIAExzlQPlIuo4QURMpCG0DEzMTS3BhjxQABbIZOyUUM0JMNQI7M6WZUA}{\usebox\lstbox}!*/
                       env);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
 
   </p></div>
@@ -435,10 +429,10 @@ function eval_conditional_expression(stmt, env) {
     
     The use of 
     
-    {\lstinline[mathescape=true]$is_true$}
+    <kbd>is_true</kbd>
     in 
     
-    {\lstinline[mathescape=true]$eval_conditional_expression$}
+    <kbd>eval_conditional_expression</kbd>
     
     highlights the issue of the
     connection between an implemented language and an implementation
@@ -449,7 +443,7 @@ function eval_conditional_expression(stmt, env) {
     implemented and thus yields a value in that language.  The interpreter
     predicate 
     
-    {\lstinline[mathescape=true]$is_true$}
+    <kbd>is_true</kbd>
      
     translates that value into a value that can be
     tested by the
@@ -458,14 +452,15 @@ function eval_conditional_expression(stmt, env) {
     in the implementation language: The
     metacircular representation of truth might not be the same as that of
     the underlying 
-    JavaScript.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+    JavaScript.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
   </p></div>
 
   <SPLIT>
     
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
 	Function definitions
-      
+      </h2></div>
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
 	The evaluation of a function definition expression creates
@@ -476,7 +471,7 @@ function eval_conditional_expression(stmt, env) {
 	is evaluated. According to the environment model, this is
 	the environment that needs to be extended, when the function
 	gets applied to actual arguments.
-	
+	<div class='snippet' id='javascript_73_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function eval_function_definition(stmt,env) {
@@ -488,34 +483,36 @@ function eval_function_definition(stmt,env) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG4EMA2B9UlYLYAmywMYMBYAFAM5QC2UANMmKgJSIDeAUIgMQAnZFBBCkDdAGtk2CHAYAHOOCK5w0eDX6C9+xFKXUw6BnLjBsp8810GHgvFsIkyFKtiXohZ0ciFaOkYoDg47RwNnTzdySm1sACM4IgBPYKZw+0iBNk4Abl4AXyA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG4EMA2B9UlYLYAmywMYMBYAFAM5QC2UANMmKgJSIDeAUIgMQAnZFBBCkDdAGtk2CHAYAHOOCK5w0eDX6C9+xFKXUw6BnLjBsp8810GHgvFsIkyFKtiXohZ0ciFaOkYoDg47RwNnTzdySm1sACM4IgBPYKZw+0iBNk4Abl4AX15eBTB6Q1SNJABeRG9A5GoAIgAPRFqAPkQOgCpe-JaOQrQsGpcwYlI4qmoGarxmRCgACzlkZShqvJghBHMwUPygA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 	
       </p></div>
     
   </SPLIT>
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     Sequences
-  
+  </h2></div>
 
   <SPLIT>
     
     
       <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
-	The function {\lstinline[mathescape=true]$eval_sequence$}
-	is used by {\lstinline[mathescape=true]$eval$}
+	The function <kbd>eval_sequence</kbd>
+	is used by <kbd>eval</kbd>
 	to evaluate a sequence of statements.
 	Note that the evaluation of the first component
 	of a sequence may yield a return value, in which
 	case the rest of the statement is not evaluated.
 
-	
+	<div class='snippet' id='javascript_73_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function eval_sequence(stmts, env) {
@@ -527,7 +524,7 @@ function eval_sequence(stmts, env) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG4EMA2B9AzsgRxGUmQApcoBbKXAGhTFQEpEBvAKEW8RmETIxc2ZFQAOUAJ55CxUhWq1mrTjzWIATsiggNScABNkwGGGQGA3Fx4BfFJny9+g4ZnSU8UdFFEkoCmlxldmt1dS0dPRQMTBBvchMND0p4qj8ApToSFis1O2QHZBCw7ggESkRE5MVsGOJEAF5EUJLuNCw4nzIqqE9U9MpA5iymZlySvgEhbAjdMFqOhJgk3sHeuuRg1VaeWaiezxoF2ORxsPzC4p3uPaR2nHwiEghyFuub5Gr+sFoMoJGcm9bC0bBwbEA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG4EMA2B9AzsgRxGUmQApcoBbKXAGhTFQEpEBvAKEW8RmETIxc2ZFQAOUAJ55CxUhWq1mrTjzWIATsiggNScABNkwGGGQGA3Fx4BfFJny9+g4ZnSU8UdFFEkoCmlxldmt1dS0dPRQMTBBvchMND0p4qj8ApToSFis1O2QHZBCw7ggESkRE5MVsGOJEAF5EUJLuNCw4nzIqqE9U9MpA5iymZlySvgEhbAjdMFqOhJgk3sHeuuRg1VaeWaiezxoF2ORxsPzC4p3uPaR2nHwiEghyFuub5Gr+sFoMoJGcm9bC0bBxQRwymAKlRpI85C9GogABbIdAGMheGCYMhidBJcgAIgAjBZEFANMRSQBmCwE5RjDj3GRPeQw5nw5AMKAokTiKQiJjLBBpH5jIA}{\usebox\lstbox}!*/
         const first_stmt_value = 
             evaluate(first_statement(stmts),env);
         if (is_return_value(first_stmt_value)) {
@@ -540,8 +537,9 @@ function eval_sequence(stmts, env) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	
       </p></div>
@@ -550,24 +548,25 @@ function eval_sequence(stmts, env) {
 
   <SPLIT>
     
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
 	Blocks
-      
+      </h2></div>
 
 
       <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
-	The function {\lstinline[mathescape=true]$eval_block$}
+	The function <kbd>eval_block</kbd>
 	is used by  
-	{\lstinline[mathescape=true]$evaluate$}
+	<kbd>evaluate</kbd>
 	to evaluate block statements. The constants and variables
 	declared in the block need to be local to the block. 
 	The evaluation of block statements evaluates the body of the
 	block with respect to an environment that extends the current
 	environment with a binding of the local names of the block
 	body to a special value
-        {\lstinline[mathescape=true]$no_value_yet$}.
-	
+        <kbd>no_value_yet</kbd>.
+	<div class='snippet' id='javascript_73_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function eval_block(stmt, env) {
@@ -579,13 +578,14 @@ function eval_block(stmt, env) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG4EMA2B9ARpuCAawAoBnKAWygBoUxUBKRAbwChFPEIELFc4AEwCeiALz8CxPEOHkqURgG4OXHmD5SsZcYi04w6SsjIkBI5QEguiVZ3V8oySgAdsGTCBO7K6FyQAPcQA+RDA4dywvbGFkWjsbRKTkrn0yZQSAJziQTKQ0KPQnM1kaBJSbZACnMEFsZAYYTIRjMCgSNLonV0jPEzoGpgyAXyA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAEHUFNQVwZ2gQ1AOxgG3YgTgT1AGYwoDGALgJYD2KoicoZkAtgA5XY74Bui6M0Ah1SJmkBgHcAFlQQAoEKAAmkElk6UaoKfVRUyoXJAMAjSJFqRe-REyUA6UABUp0VjGzsEoKgUauFMCJSTVoVAgoUClDQCgZ3bEh0fDIqUBJE2yRYKIBHAViVFEoyXABuQP9BYnJqWgkKTFQrSGxQMzpWVnQKSCU6FH7ohkSyD1prAsqACjRMAEpYhgpsRPQrRGL7ORIaOAMUKgB9ScgjowMAXlBpxcuAPlQMdArg2q10KhI+I5RRcWm+2YZEWAG85KBIbE-NM4kcEPkLCRIICyMD5mCIVDsbsUPtQECyAxrgiBKQzvssmJinBUeiKtjsaNxksjixWKV4ZBEeS6UT5ljGYyAPxPTCCoVQgBcsTxrTIRz46GmEslks+33Qv3+tIi2H28LIVIsZD5cAxABpVWrGRqfn8xLTmIgANYU7lk5EqgCQ3ptQsSBspTGpRLNGIxDKhAF9QElvODJczsLQ4bjKcUjio1DhbHU+QL-aBRT19tN00bM9n1HmaNqxAXC-6ZXDeNgKIgTOss6oa6EC9bJSW4qa2x2u2dq7nQvWUYSMYOhTK5i8JdG5Ou3jFIghsAqldMAB5wC2Gc2gRNQ5OpuC-Z5H82L0W4OCLlu3lfTMTMMzYaauRAlAfeZTxfBd-VFVhEBWf9IEA4DTx3eVFUwaYjUaBCz3Am0ZVabAOFg+DjxA0AACJmAwShumgKcNDqBhfBlUj5gqTcahiDYtS7L4XT5U8LG4TEcT2UwqCUfBrm4kgXSOEwxNwAso0hCtQDtdBiVUr57R1aY5PEli-ShCUVJDVgTj4AQNOdVgj1AB49HM-gzguK0izc20tPUliJWvONJiyXT5Nc9zIUgQ8mEGNkUG4FYaFDaY1JPRh2Ucyz+OiyMNzkHYRNAZhcFkjUXTs0AoP1FFSNBRhsAEMpQAAZjqgAWAAmOro2YipOMKnivwKqSXVPMhXDZNhOQE2KUFDFigA}{\usebox\lstbox}!*/
                 extend_environment(locals, temp_values, env));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	
       </p></div>
@@ -593,15 +593,15 @@ function eval_block(stmt, env) {
       <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
       The function 
-      {\lstinline[mathescape=true]$local_names$}
+      <kbd>local_names</kbd>
       collects all names declared in the body statements. For
       a name to be included in the list of
-      {\lstinline[mathescape=true]$local_names$}, it needs
+      <kbd>local_names</kbd>, it needs
       to be declared outside of any other block or function.
 
       
 
-      
+      <div class='snippet' id='javascript_73_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function local_names(stmt) {
@@ -613,7 +613,7 @@ function local_names(stmt) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGzhAhsg+mdBbAUwGcAKIqPKASkQG8AoRJxGYREmIrIggRxAKQCZCtRoNmkxBATlE5SkUQBeeXwFDuUdFAKEwUUguoBuRlKYAnAlBCWknLHoAOUAJ7d1giMONEq5haSAPyIYCDIyIFBTABcLGA8llBYmMgk0TEWqBjYuISkwDCW5Fo6eoJQIopUVAA0mVmSOZg4+MQkeOgA1gSe-N7C9ACQw01S1qXk5fqG1Ya1tWaSAL6IBMg8dI2I1rb2LFwyidoGWAAmBBDI6JY68GDzAeOhyJxVx9Nnl9e39whtQhPZ5NeKOAButxg6AARsg+j8bndYAgnjsLK93iRIZZoXCEVckf8wIDfKJauipPFwpFlswVvQVkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDMBnApgJygfQIYA2BAFAB6oA0iAnqgJSIDeAUIm4pulCJkjKjjAgiZeq3YSA-DVTiJbAFzIBQkQFt0agEZZiAC3R4AJqLpVadOnPltpABzwxM+wyfJnkaLLkIkojkndzeisbCSUsTDhnA2NTKgAiNWFYOwJ0RCN0CAI8TDxYBFREOGAlBLoAbmYAX2ZQSEKkAjgIQkE8DVRiVCg1KAYWCRhgRGJ+HAwARxB0SHQevoHB6wkIIqhEXv7igF4t9Bm5iHRJ-yhNOahu7YHqsI4uHj4BTTsoaknD2fnFndCHuxpKoCKswkoUBhsPgRGDAewWm0CB0usRgE5emcCpcwFA-tdLBQ4fDEIj2mBOuhumo8ABrU7TH4nYjMACQrJJEk4mN62I0uJuSxClnu7BqiHQBAwTDhnG4vGUOHWaH8uJwWRyeQK8DA+IBgOkBH4eOVvLVGty+SaKIWt0sxPYEIEADc8jA8Fp0urspbtQg9Q6pKTjcRXZh3Z7ThatdaKRo9fr4UoQaK2HU6swyci41TiA5MBhiAlTZtSIh9gBGSqkrg0cuIABMlQqVSAA}{\usebox\lstbox}!*/
                   local_names(first_statement(stmts)),
                   local_names(make_sequence(
 		               rest_statements(stmts))));
@@ -627,30 +627,33 @@ function local_names(stmt) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
+</div></div>
 
-
-      
+      <div class='snippet' id='javascript_73_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 local_names(parse("const x = 1; let y = 2;"));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYewxghsD6B2EFsCmBnAFABwgJxUtARGCLCgC4AEAHhQLwUCMA3BcEpQJ50UBMTBASgFMgA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=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-m2llbQVZWRpAnOI5LfK2ybX3AUEI-gNQAZ2lhXhTK7Lot-ZdUJ-SDq7JWfae6IzFxmqe6EJqj2WTePtHZyVw7NviQKfV9x1XCp5IoDW49mBtHPVAt9hrHiytZPKq2BjGayCAw8IVoHIH5ArLbMuPdEK6GfTUgUUrWgfvg7GAFfgDBUsHdhmYIHjXgd5ChqDfsJLSvI8KGaR7kOqlQ8AKp0MsCQFwAQYg5ANJ0EYMwf63AABMGGhA-KOtYYqnJnAEhdafcIpMg3UE+QAH3U81H5es5MafU3svS4QKKoAOC0SFEdrXKeyJ87trqpiOEcNdMwsNYSDjKODK1-1i7w0o3ERT4YEkJo5hmxS-yn193CA5pzuFXN0nGTkBzBGtaBafCQemCmABkmWguJoUzRArFTEskEcBFuh7pL0dv889ZaUWSsxZc7qoclXWiecs-9Fr-6bMKZq9g4tMhQtFuCwN9LYXG4jS8-Ezrh7eTU2Wv1wbg3-kLvKw0OjOHa0ircHN+z9XnNxc7YOUjuHnhtYk+wY7m2wPddm710+C3RtDcTUt8bK3rWXYY4xJjt3AjzeG4tx7y2ytWc2LcA1sGNVbYI7V3We3YtNcOzBk7iwzt9yR1ds9N3qu-b6-9x7D3M3Lbe-9dHn3WTfex9o3Hz3HsvbiBN9r8TwgV1XvHWzOOlOw8c-thH36y0s6rij4n8SBft0YqpXo6l67s6p-dvHhPG7A-+qL+prJO49Y54Fgn6bAfjaV0z8wo7fQkIDD92XqWucNYO3zwcRviX+lR+Vu3-9x1UknVDnbcuacK-p-rhpfLURK1NqrL9227sW7MNFnn8hYRqLLYrckys3d4nQI7976BjEBxxNdGXPLT7830JAWEHBhc1P9mbUiueUsAQL+yWEonS9CHL9gQOpvKd58C7XovdIADMjedbwr+WbjvAE6vc-hzHocoKlRp-+jSwf+Db6e877qwc0-KCDiE6S-vTA6VKnbaynrmVzcAW1wqv3kmp6Zxnuvhey-R-mH9bfC-A-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-boFfZ4JQQAFT312iP3P0KIOQ-0f3vW8yUEgD-0XCAMv0OQQCX0QOr4ACk0DtQsDwD4AyDYDX9uglByRaDXgGDjyr9YNz9SDDxAAhAVoQ54MQ2feANQ3ROQxPavu2bQ0Q8WU-XA+AJ2boCw7UJQe2TRBw7oPQ6Q8I-w7g9nTCIOI5KI2I1w0AyQw5M5FIxQ7I45CI-PQ-Uozw1o+o6w1Qwo7oA5F4CQ7oJQ54PEQiPBEPdsKBGXenOtlsmPbqpQRdKKK9YwJ41dO0NI15XvavnFTFWgyEwE4E9-avgAJKwCC5z26CxPxMRORMyMyDlrSBEBmAAAK0Th9tk4yOT0TltIc8EXiPBcKw9FdfdL5b5OGsMGpQEnIZgF02AOYbFAAViQGIERdsBQIxXpMPW3Sbp3YRP7boNOVeg01uEEJwTOKtJkGpY1MlvYy+CnSPXKqErRKqHIveCQ-1h0YwFU-4fWas44+XYsaFNsxcLswoknQ4+szkWfh0ZWdbMc2Hac8FMPcdlJIVDc3ZHs85Ac9zN8y44FJul8w83na7M0Dhlc387ULc-s-LopC81WaCw9f-veuze6UYlDdiQM3aImEYrkVC04xs9diIjmYExi7C11hGeM8S1FO80eILNS15bS1MHC8lJLGojybCvi9CE2tyYUmYI4MkDWcrF6YKXRH+ihUs0CPBPiiIrkT0MwOk6ZEkZwDMwcCknxKJluJuNuEAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
 	Return statements
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p13' class='permalink'></a><p>
-	The function {\lstinline[mathescape=true]$eval_return_statement$}
+	The function <kbd>eval_return_statement</kbd>
 	is used by  
-	{\lstinline[mathescape=true]$evaluate$}
+	<kbd>evaluate</kbd>
 	to evaluate return statements. As seen in the evaluation
 	of sequences, the result of evaluation of return statements
 	needs to be identifiable so that the evaluation of function
@@ -658,7 +661,7 @@ local_names(parse("const x = 1; let y = 2;"));
 	after the return statement. For this purpose,
 	the evaluation of a return statement wraps the result of
 	evaluating the return expression in a return value object.
-	
+	<div class='snippet' id='javascript_73_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function eval_return_statement(stmt, env) {
@@ -669,19 +672,21 @@ function eval_return_statement(stmt, env) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG4EMA2B9ATsqEXMbAZynSmQFtkwoAKc6qAGhTFQEpEBvAKERDE+QsUTV0Aa2R4CREhkwhkDQcI2ahaLCEqrRCshSq162ZAA8ADvlKl4YJlBZdW6rZ68duXANz8AL5AA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG4EMA2B9ATsqEXMbAZynSmQFtkwoAKc6qAGhTFQEpEBvAKERDE+QsUTV0Aa2R4CREhkwhkDQcI2ahaLCEqrRCshSq162ZAA8ADvlKl4YJlBZdW6rZ68duXANz8AL78-BAI5BIAnti2cADmuOjUiAC8iNbouKSqAES8iKCQsAgFDDz5huIAjH6IgaX+dTn+-DrK+gzU0bEJSexQABaycZhwAEZYFpwwuAhmUP5AA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	
       </p></div>
     
   </SPLIT>
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     Assignments and
     declarations
     
-  
+  </h2></div>
 
   <div class='permalink'>
 <a name='p14' class='permalink'></a><p>
@@ -690,15 +695,15 @@ function eval_return_statement(stmt, env) {
     function
     handles assignments to variables.  It calls
     
-    {\lstinline[mathescape=true]$evaluate$}
+    <kbd>evaluate</kbd>
     to find the value to be assigned and transmits the variable
     and the resulting value to 
     
-    {\lstinline[mathescape=true]$assign_name_to_value$}
+    <kbd>assign_name_to_value</kbd>
     
     to be installed  in the designated environment.
 
-    
+    <div class='snippet' id='javascript_73_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function eval_assignment(stmt, env) {
@@ -709,9 +714,10 @@ function eval_assignment(stmt, env) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG4EMA2B9dBnPGAczAFtkwoAKPKUqAGhTFQEpEBvAKEV8QgS1EGTCGSIAvChEh0UZFXyES5SthkLa9VkwpsA3Dz5LiYbGHTl1WMYoKnVUc5c10oO4TeS6WrQ30QAJ2QoEECkDUMAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG4EMA2B9dBnPGAczAFtkwoAKPKUqAGhTFQEpEBvAKEV8QgS1EGTCGSIAvChEh0UZFXyES5SthkLa9VkwpsA3Dz5LiYbGHTl1WMYoKnVUc5c10oO4TeS6WrQ30QAJ2QoEECkDUMAXy4uATAhUgBPbAAHQLgiQMtJRFT0QLwFACIOREwQxAAPXIBGfWrcgCYGqOK-LjQbOQVktIysyyYoAAtkbCJMOAAjLGw9GAyyCnd9IA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
     
     
@@ -724,10 +730,10 @@ function eval_assignment(stmt, env) {
       <div class='permalink'>
 <a name='p15' class='permalink'></a><p>
 	Declarations of constants and variables are handled in a similar
-	manner. Section~\ref{sec:eval-data-structures}
+	manner. Section \ref{sec:eval-data-structures}
 	explains how we distinguish variables and constants in the functions
 	and how we prevent assignment to constants.
-	
+	<div class='snippet' id='javascript_73_12_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function eval_variable_declaration(stmt, env) {
@@ -739,15 +745,16 @@ function eval_constant_declaration(stmt, env) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG4EMA2B9DAnGdAI02WwBNkJN091YEAKAZygFsoAaFMVASkQBvAFCIxiZsijYw6NmQyYQyRvkIkylarXrwwMuStYc+nUeItosIeirXFSFKjToN9i5S3ZRTPfmYtLXj4AbmEAX3FhUEg3FEVsCARWdDBpLRddJmMuPwERC0lpWXlcaxUksBS0p21XPQN5LxMAwLErJVtGSur05x03MqUjb19kYNa28f4w8KA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG4EMA2B9DAnGdAI02WwBNkJN091YEAKAZygFsoAaFMVASkQBvAFCIxiZsijYw6NmQyYQyRvkIkylarXrwwMuStYc+nUeItosIeirXFSFKjToN9i5S3ZRTPfmYtLXj4AbmEAX3FhUEg3FEVsCARWdDBpLRddJmMuPwERC0lpWXlcaxUksBS0p21XPQN5LxMAwLErJVtGSur05x03MqUjb19kYNa28f4w8OFhHqhENgBPbAAHPDgAczo2RABeRHXaSUYAIkFEUiWAD0PEAEYQxEXEFYeAJhf7gGp3l7hc6hYQdGxQFSrDZbXZybhQAAWZG2mDgRCw2GmMC2YHkaVCQA}{\usebox\lstbox}!*/
     set_name_value(constant_declaration_name(stmt),
         evaluate(constant_declaration_value(stmt), env),
         env);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	
       </p></div>
@@ -755,8 +762,8 @@ function eval_constant_declaration(stmt, env) {
       <div class='permalink'>
 <a name='p16' class='permalink'></a><p>
 	Note that the returned value of constant and variable
-	declaration is the value {\lstinline[mathescape=true]$undefined$},
-	as prescribed by the ECMAScript standard (Ecma 1997).
+	declaration is the value <kbd>undefined</kbd>,
+	as prescribed by the ECMAScript standard (<CITATION>Ecma 1997</CITATION>).
 	
       </p></div>
 
@@ -779,29 +786,29 @@ function eval_constant_declaration(stmt, env) {
     
     If the arguments to
     
-    {\lstinline[mathescape=true]$pair$}
+    <kbd>pair</kbd>
     
     in
     
-    {\lstinline[mathescape=true]$list_of_values$}
+    <kbd>list_of_values</kbd>
     
     are evaluated from left to right, then
     
-    {\lstinline[mathescape=true]$list_of_values$}
+    <kbd>list_of_values</kbd>
     
     will evaluate operands from left to right; and if the arguments to
     
-    {\lstinline[mathescape=true]$pair$}
+    <kbd>pair</kbd>
     
     are evaluated from right to left, then
     
-    {\lstinline[mathescape=true]$list_of_values$}
+    <kbd>list_of_values</kbd>
     
     will evaluate operands from right to left.
 
     Write a version of
     
-    {\lstinline[mathescape=true]$list_of_values$}
+    <kbd>list_of_values</kbd>
     
     that evaluates operands
     from left to right regardless of the order of evaluation in the underlying
@@ -809,7 +816,7 @@ function eval_constant_declaration(stmt, env) {
     
     Also write a version of
     
-    {\lstinline[mathescape=true]$list_of_values$}
+    <kbd>list_of_values</kbd>
     
     that evaluates operands from right to left.
     
@@ -818,22 +825,22 @@ function eval_constant_declaration(stmt, env) {
 
 
 <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>We could have simplified the 
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>We could have simplified the 
     
-    {\lstinline[mathescape=true]$is_application$}
+    <kbd>is_application</kbd>
     
     clause in
     
-    {\lstinline[mathescape=true]$evaluate$}
-    by using {\lstinline[mathescape=true]$map$}
-    (and stipulating that {\lstinline[mathescape=true]$operands$} returns a list)
+    <kbd>evaluate</kbd>
+    by using <kbd>map</kbd>
+    (and stipulating that <kbd>operands</kbd> returns a list)
     rather than writing an explicit 
     
-    {\lstinline[mathescape=true]$list_of_values$}
+    <kbd>list_of_values</kbd>
     
     
     function.
-    We chose not to use {\lstinline[mathescape=true]$map$} here to emphasize the
+    We chose not to use <kbd>map</kbd> here to emphasize the
     fact that the
     
     
@@ -847,13 +854,20 @@ function eval_constant_declaration(stmt, env) {
     even though the language that it supports will include higher-order
     
     functions.
-    </FOOTNOTE></div><hr><div class='footnote'>
+    </FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>In this case, the language being implemented and the
     implementation language are the same.  Contemplation of the meaning of
     
     
-    {\lstinline[mathescape=true]$is_true$}
+    <kbd>is_true</kbd>
     
     here yields expansion of consciousness without the abuse of
     substance.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section1/section1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section1/subsection2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+4.1.1  The Core of the Evaluator</div>	<div class='next-page'></div></div>

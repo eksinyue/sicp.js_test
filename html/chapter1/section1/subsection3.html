@@ -1,13 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>1.1.3 
-          Evaluating
-          Operator Combinations
-        </a>
+		<a name='top' class='permalink'>1.1.3  Evaluating Operator Combinations</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
         <SPLIT>
           
@@ -47,16 +53,17 @@
               Notice how succinctly the idea of recursion can be used to express
               what, in the case of a deeply nested combination, would otherwise be
               viewed as a rather complicated process.  For example, evaluating
-              
+              <div class='snippet' id='javascript_4_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 (2 + 4 * 6) * (3 + 12);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQJgBA1GAsYFRgGwEp5mAZkmAjCZA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=BQJgBA1GAsYFRgGwEp5mAZkmAjCZA3EA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
               requires that the evaluation rule be applied to four different
               combinations.  We can obtain a picture of this process by
               
@@ -125,10 +132,10 @@
               environment in determining the meaning of
               the names in expressions.  In
               JavaScript, it is meaningless to speak of the value of an expression such as
-              {\lstinline[mathescape=true]$x + 1$}
+              <kbd>x + 1</kbd>
               without specifying any information about the environment
               that would provide a meaning for the
-              name {\lstinline[mathescape=true]$x$}.
+              name <kbd>x</kbd>.
               As we shall see in chapter 3, the general notion of
               the environment as providing a context in which evaluation takes place
               will play an important role in our understanding of program execution.
@@ -146,17 +153,17 @@
               Notice that the
               evaluation rule given above does not handle constant declarations.
               For instance, evaluating
-              {\lstinline[mathescape=true]$const x = 3;$}
-              does not apply the {\lstinline[mathescape=true]$=$}
+              <kbd>const x = 3;</kbd>
+              does not apply the <kbd>=</kbd>
               operator to two arguments, one
               of which is the value of the name
-              {\lstinline[mathescape=true]$x$} and the other of which is
+              <kbd>x</kbd> and the other of which is
               3, since the purpose of the constant declaration
               is precisely to associate
-              {\lstinline[mathescape=true]$x$} with a value.
-              (That is, the part {\lstinline[mathescape=true]$x = 3$}
+              <kbd>x</kbd> with a value.
+              (That is, the part <kbd>x = 3</kbd>
               in the constant declaration
-              {\lstinline[mathescape=true]$const x = 3;$}
+              <kbd>const x = 3;</kbd>
               is not an operator combination.)
             </p></div>
           
@@ -167,7 +174,7 @@
           
             <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
-              The string <QUOTE>{\lstinline[mathescape=true]$const$}</QUOTE>
+              The string <QUOTE><kbd>const</kbd></QUOTE>
               in the constant declaration is rendered in bold letters to indicate that it
               is a <EM>keyword</EM> in JavaScript. Keywords are reserved words that
               carry a particular meaning, and thus cannot be used as names.
@@ -185,4 +192,11 @@
         </SPLIT>
 
       
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section1/subsection2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section1/subsection4.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+1.1.3  Evaluating Operator Combinations</div>	<div class='next-page'></div></div>

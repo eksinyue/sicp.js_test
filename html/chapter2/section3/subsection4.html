@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>2.3.4 
-        Example: Huffman Encoding Trees
-      </a>
+		<a name='top' class='permalink'>2.3.4  Example: Huffman Encoding Trees</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -134,7 +141,7 @@ BACADAEAFABBAAAGAH
 \label{fig:huffman}
 \end{figure}
 
-      Figure~\ref{fig:huffman} shows the Huffman tree for the A-through-H
+      Figure \ref{fig:huffman} shows the Huffman tree for the A-through-H
       code given above.  The weights at the leaves
       indicate that the tree was designed for messages in which A appears
       with relative frequency 8, B with relative frequency 3, and the
@@ -149,7 +156,7 @@ BACADAEAFABBAAAGAH
       decide which branch to follow by testing to see which branch either is
       the leaf node for the symbol or contains the symbol in its set.)  For
       example, starting from the root of the tree in
-      Figure~\ref{fig:huffman}, we arrive at the leaf for D by following a
+      Figure \ref{fig:huffman}, we arrive at the leaf for D by following a
       right branch, then a left branch, then a right branch, then a right
       branch; hence, the code for D is 1011.
       </p></div>
@@ -162,19 +169,20 @@ BACADAEAFABBAAAGAH
       point we start over from the root of the tree to find the next symbol.
       For example, suppose we are given the tree above and the sequence
       10001010.  Starting at the root, we move down the right branch, (since
-      the first bit of the string is~1), then down the left branch (since
-      the second bit is~0), then down the left branch (since the third bit
-      is also~0).  This brings us to the leaf for~B, so the first symbol of
-      the decoded message is~B.  Now we start again at the root, and we make
-      a left move because the next bit in the string is~0.  This brings us
-      to the leaf for~A.  Then we start again at the root with the rest of
-      the string 1010, so we move right, left, right, left and reach~C.
+      the first bit of the string is 1), then down the left branch (since
+      the second bit is 0), then down the left branch (since the third bit
+      is also 0).  This brings us to the leaf for B, so the first symbol of
+      the decoded message is B.  Now we start again at the root, and we make
+      a left move because the next bit in the string is 0.  This brings us
+      to the leaf for A.  Then we start again at the root with the rest of
+      the string 1010, so we move right, left, right, left and reach C.
       Thus, the entire message is BAC.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Generating Huffman trees
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
@@ -187,7 +195,7 @@ BACADAEAFABBAAAGAH
       
       
       We will not prove this optimality of Huffman codes here, but we will
-      show how Huffman trees are constructed.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+      show how Huffman trees are constructed.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
       </p></div>
       <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
@@ -204,7 +212,7 @@ BACADAEAFABBAAAGAH
       removing them from the set and replacing them with a node that has
       these two as its left and right branches. The process stops when
       there is only one node left, which is the root of the entire tree.
-      Here is how the Huffman tree of Figure~\ref{fig:huffman} was generated:
+      Here is how the Huffman tree of Figure \ref{fig:huffman} was generated:
       <SPLIT>
         
         
@@ -226,9 +234,10 @@ BACADAEAFABBAAAGAH
       right branch and which will be the left branch) is arbitrary.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Representing Huffman trees
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
@@ -240,9 +249,9 @@ BACADAEAFABBAAAGAH
       <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
       Leaves of the tree are represented by a list consisting of the
-      symbol {\lstinline[mathescape=true]$leaf$}, the symbol at the leaf, and the weight:
+      symbol <kbd>leaf</kbd>, the symbol at the leaf, and the weight:
 
-      
+      <div class='snippet' id='javascript_37_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_leaf(symbol, weight) {
@@ -254,7 +263,7 @@ function is_leaf(object) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ANp1YACgGcBPZAIzlwBpEB3TGAcwAsoBKRAbwChEggE6YoIIUlwwSUIgCJ8hOfXJUa9Jqw6cA3HwC+fUJFgJE0vAWJxKAK0zRu-QYhFiJiNgQAmRG-cdEAF4QxAUrOT1DY2h4JFVqXEtCIgAPJwFXUXEkL1RfKFQYXDTOXQMjcFizTXYoZOJ03kys91yfIkLizqKS9LKooA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ANp1YACgGcBPZAIzlwBpEB3TGAcwAsoBKRAbwChEggE6YoIIUlwwSUIgCJ8hOfXJUa9Jqw6cA3HwC+fUJFgJE0vAWJxKAK0zRu-QYhFiJiNgQAmRG-cdEAF4QxAUrOT1DY2h4JFVqXEtCIgAPJwFXUXEkL1RfKFQYXDTOXQMjcFizTXYoZOJ03kys91yfIkLizqKS9LKovj4IBBkUMgbglAwcRWI5AEFlRAAOcr5ajgaiZAm53SA}{\usebox\lstbox}!*/
 function symbol_leaf(x) {
   return head(tail(x));
 }
@@ -263,8 +272,9 @@ function weight_leaf(x) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
       
 
@@ -278,11 +288,11 @@ function weight_leaf(x) {
       When we make a tree by merging two nodes, we obtain the weight of the
       tree as the sum of the weights of the nodes, and the set of symbols as
       the union of the sets of symbols for the nodes.  Since our symbol sets are
-      represented as lists, we can form the union by using the {\lstinline[mathescape=true]$append$}
+      represented as lists, we can form the union by using the <kbd>append</kbd>
       function
-      we defined in section~\ref{sec:sequences}:
+      we defined in section \ref{sec:sequences}:
 
-      
+      <div class='snippet' id='javascript_37_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_code_tree(left,right) {
@@ -294,15 +304,16 @@ function make_code_tree(left,right) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9CcAmOUATppgBQA2mwUANMTAOYAWUAlIgN4BQi-iUlBDEklGAGcoVGvT4CFigY1Zyl6gagAOWzGHzkJAT2QAjOJQkza7OomNmLVlW3a35GpQHdMzNtY5EAGpEHz9pFw52AG4eAF8gA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAGwKbCgfQEYCcCGkAFgBRS6qoCUiA3gFCJOIVQi5JGr4AmZF1ANz0AvvVCRYCFjADmRLHkIRS5SjQbMWqNh0RdeZfDGT91VYWInR4SAM4BPALbY4yO2ep1GzVuyQwdpho+MCeVD5aUQD8KIFQJI4ubsHcYWrUEVHZAFz63HxQxqZFJuFUFqLi4DbSAO6ocgrh3lp+eoGpoeGR2UyxDU1YIekCWX3MeQaFxUZlpSVjFZVWNVJITvgA1qhdYUmuyAA0iIPyUBqR7UjI8SQARCP3JwduJ2cKK9WStoidIyQ4NgAFaoaCXXw6fz5QxA0HgxAAXmRiEeaXulm+tXszkOexIAA8IdpdJwCnNTESvtZ1qdGud8UTWkxrjCZvNZlTqWtfpsdpgIHAeLsMiQ0BgjrghsSWVC9Lc7AlxVAjr0Jm0hqr1X18AAHXWoMB8V7uMXoC4vXFuDxS84VLXaqIfJXmmgAajpQxIts+X3ogrAisQTgce0wAEYkcHtrsAfcAILPRAADkqAaDIbDACYo3zY2kHgAhJMAZkq9DzAqFIoEJEzIwjJ3raUwWYsQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
       
       
       If we make a tree in this way, we have the following selectors:
 
-      
+      <div class='snippet' id='javascript_37_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function left_branch(tree) {
@@ -314,7 +325,7 @@ function right_branch(tree) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGwKbCgfQEYCcCGkAFgBRS6qoCUiA3gFCJOIVQi5JGr4AmZF1ANz0AvvVCRYCFjADmRLHkIRS5SjQbMWqNh0RdeZfDGT91VYWInR4SAM4BPALbY4yO2ep1GzVuyQwdpho+MCeVD5aUQD8KIFQJI4ubsHcYWrUEVHZAFz63HxQxqZFJuFUFqLi4DbSAO6ocgrh3lp+eoGpoeGR2UyxDU1YIekCWX3MeQaFxUZlpSVjFZUiQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ANp1YACgGcBPZAIzlwBpEB3TGAcwAsoBKRAbwChEggE6YoIIUlwwSUIgCJ8hOfXJUa9Jqw6cA3HwC+fUJFgJE0vAWJxKAK0zRu-QYhFiJiNgQAmRG-cdEAF4QxAUrOT1DY2h4JFVqXEtCIgAPJwFXUXEkL1RfKFQYXDTOXQMjcFizTXYoZOJ03kys91yfIkLizqKS9LKoypM4xHxgesohVEg2TpFMDJdWnM8OqHny6KrTJCEtCamZucwF5qW3FbyC3uOFzaHq+IpEklvFlwuPC0VidZPOFpLJYAflG0lkCRoDTeAKBcIAXKt8j1ul0Sn87vcYjtGMw6m8zh9sl8SNCMbC4SDcfsyRtAZTEVcUeibmiYQMKnwIAgZCgyA1sABGYIoDA4H7yACCykQAA5ytywLzkPyftgAEwitBYaFyABCMoAzAqeVA+dgMVqxdhud4cBiiCqBYL6E61erynxahxHfzyTogA}{\usebox\lstbox}!*/
 function symbols(tree) {
     return is_leaf(tree)
            ? list(symbol_leaf(tree))
@@ -327,8 +338,9 @@ function weight(tree) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
       
       </p></div>
@@ -336,7 +348,7 @@ function weight(tree) {
 <a name='p12' class='permalink'></a><p>
       The
       functions
-      {\lstinline[mathescape=true]$symbols$} and {\lstinline[mathescape=true]$weight$} must do something
+      <kbd>symbols</kbd> and <kbd>weight</kbd> must do something
       slightly different depending on whether they are called with a leaf or
       a general tree.  These are simple examples of
       
@@ -345,13 +357,14 @@ function weight(tree) {
         functions</EM> (functions
       that can handle more than one kind of data),
       which we will have much more to say about in
-      sections~\ref{sec:multiple-reps} and~\ref{sec:generic-operators}.
+      sections \ref{sec:multiple-reps} and \ref{sec:generic-operators}.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         The decoding
           function
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p13' class='permalink'></a><p>
@@ -361,7 +374,7 @@ function weight(tree) {
       It takes as arguments a list of zeros and ones, together with
       a Huffman tree.
 
-      
+      <div class='snippet' id='javascript_37_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function decode(bits, tree) {
@@ -373,7 +386,7 @@ function decode(bits, tree) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAEwKYTmgFAIxlAZwBpEoAnVVASkQG8AoRJxUSWBFdTVAfQEZc+YogggyFMFB44yAQ0gALGg2arEMYIiwwCPMCAA2BwYSrLGayxShik+owG4LlgL6JUBgqjrPLzDGAEUIhgqAAeUjLyEAqIALwiCnBwXtJyilgKqLLIJgRURL5+xSXFouKokmnRSk6lTNa26roG2cBYoRHVilRF9cwA-IgADrIwZFgEAJ4AtjhwBjytsu2dkekxBX39xWgYaPxYUGPGeKYk5JRm2-0AXJz7vALHMKdCBSHh6zVUdX4uvgBqkaZCQe24hzOwku1CcANY0HgSBiyVSUQyZxI6M2PmBqBsoMQZ3icQSAAYboNEK1gN8MRslJSmPdiaSEnwmVSyDAAOYKOkxXAM3o7e4AUXEcAmACIcDkifhEABaJWJVG8bEKaVEM6-eguIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ANp1YACgGcBPZAIzlwBpEB3TGAcwAsoBKRAbwChEggE6YoIIUlwwSUIgCJ8hOfXJUa9Jqw6cA3HwC+fUJFgJE0vAWJxKAK0zRu-QYhFiJiNgQAmRG-cdEAF4QxAUrOT1DY2h4JFVqXEtCIgAPJwFXUXEkL1RfKFQYXDTOXQMjcFizTXYoZOJ03kys91yfIkLizqKS9LKoypM4lAwcCDhvHCgRTCJ8YChaIS0uZpdWnMQpGXnMRdoWjeONlbrDk8uXVAAHG8wwXwSaEj3FzhUKRNez7Q+jq4bWocN5rADUjGYdSIvy45WiVVMkn29UoQlQkDYnVmGVO2Q8eQKOMGMSRrlW2DRGIgWJmmEwuJcbi2hJ63TpDPhQ2q8S+L2x9MZwnxSAsimIHM4AJOAH5ttJZM8kuKBZzpccAFyeDpdEq61VlLmkkbA2SS9ZMkXmEgNA3qjZy022yX2lxa1n6z29A2GkmIkZTCZTIiUGBQEj0c3OFzGsyByY4ACMIbDEcQEHEIjAqPRmKFxxgwEQRAsYBAuBKofDZQtgM2HjLFb0V30iEwuBImFrgImYBkiDAmFSOepbGC6bYcDgncpuZpRFZVZI-zrq7XLgzQizI7zzdXzI8YqsREHw9no6l69liBuRSEpD5yuPp53NJXV9X8am2GT+qXH0QSVLw-N1EC-JM2UrVMAJfc9d3tQwNkQy02jAhwEx-FNw0jYkKljJAaSnGcqUxLD6BIt9uwPJAq2CUIAAZXUEOUFlfLEKLYYDAS1WiQiCRBEyYlw5VhOD5w4ri6y1ABRLc4HvORKHyRBaIAWlUiciJwDjlCrLk+F7ftkDIBof3HNAsFtOQAEFlEQAAOcpDKgFATPFbAACZzLGKyACE7IAZnKAyECMkyOW8yyg2mWYiGM0zE3oeL3I84LwPmBUiHo+hEoE+h6IA+LJR0IA}{\usebox\lstbox}!*/
                                     current_branch);
             return is_leaf(next_branch)
                    ? pair(symbol_leaf(next_branch),
@@ -392,8 +405,9 @@ function choose_branch(bit, branch) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 
      
@@ -403,26 +417,27 @@ function choose_branch(bit, branch) {
 <a name='p14' class='permalink'></a><p>
       The
       function
-      {\lstinline[mathescape=true]$decode_1$} takes two arguments: the list of remaining bits
+      <kbd>decode_1</kbd> takes two arguments: the list of remaining bits
       and the current position in the tree.  It keeps moving
       <QUOTE>down</QUOTE> the tree, choosing a left or a right branch according to
       whether the next bit in the list is a zero or a one.  (This is done
       with the
       function
-      {\lstinline[mathescape=true]$choose_branch$}.)  When it reaches a leaf, it
+      <kbd>choose_branch</kbd>.)  When it reaches a leaf, it
       returns the symbol at that leaf as the next symbol in the message by
-      {\lstinline[mathescape=true]$pair$}ing it onto the result of decoding
+      <kbd>pair</kbd>ing it onto the result of decoding
       the rest of the message, starting at the root of the tree.
-      Note the error check in the final clause of {\lstinline[mathescape=true]$choose_branch$}, which
+      Note the error check in the final clause of <kbd>choose_branch</kbd>, which
       complains if the
       function
       finds something other than a zero or a one in the
       input data.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Sets of weighted elements
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p15' class='permalink'></a><p>
@@ -442,16 +457,16 @@ function choose_branch(bit, branch) {
       
 	
 	
-	  {\lstinline[mathescape=true]$adjoin_set$}
+	  <kbd>adjoin_set</kbd>
 	
       
       function
       for constructing sets is similar to the one
-      described in exercise~\ref{ex:adjoin-set}; however, items are compared
+      described in exercise \ref{ex:adjoin-set}; however, items are compared
       by their weights, and the element being added to the set is
       never already in it.
 
-      
+      <div class='snippet' id='javascript_37_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function adjoin_set(x, set) {
@@ -463,12 +478,13 @@ function adjoin_set(x, set) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCYCs4zAfQM4CmUAFAB4A0ihUAlIgN4BQiLiATkSG0jHjmCAA2g4tRrNWk1gH5Eg3iVLipKgFyIA7gRgBzABaK6AHk3b9JPQTSiiNZSpWyADshhsylMRIeT1Lt8SW1mKUaJjY+EQeiFCuImJ2ANyMAL5AA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAGwKbCgfQEYCcCGkAFgBRS6qoCUiA3gFCJOIVQi5JGr4AmZF1ANz0AvvVCRYCFjADmRLHkIRS5SjQbMWqNh0RdeZfDGT91VYWInR4SAM4BPALbY4yO2ep1GzVuyQwdpho+MCeVD5aUQD8KIFQJI4ubsHcYWrUEVHZAFz63HxQxqZFJuFUFqLi4DbSAO6ocgrh3lp+eoGpoeGR2UyxDU1YIekCWX3MeQaFxUZlpSVjFZVWNVJITvgA1qhdYUmuyAA0iIPyUBqR7UjI8SQARCP3JwduJ2cKK9WStoidIyQ4NgAFaoaCXXw6fz5QxA0HgxAAXmRiEeaXulm+tXszkOexIAA8IdpdJwCnNTESvtZ1qdGud8UTWkxrjCZvNZlTqWtfrxgXAYGBMHYdISXjpiSyoR0gmAQMhTCKLr0+rFbnYEkSVbk6UNCTQADy684kaaJCXjCbMWIAB2MuDFiCVlqtiDydpgDrNzpOfIFQqVjoW5ouFUx9AgCA1iCcDj2mAAjEiY9tdgD7gBBZ6IAAclUjYGjsfjACZk5sdvj7gAhbMAZkq9D9guFouLI0Tvp4-JbgfbaUwJZOcoVYaAA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
      
       
@@ -482,17 +498,15 @@ function adjoin_set(x, set) {
       
 	
 	
-	  
-\begin{JavaScript}
+	  <div class='snippet' id='javascript_37_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 list(list("A", 4), list("B", 2), list("C", 1), list("D", 1))
-\end{JavaScript}
-
+</pre></div></div>
 	
       
       and constructs an initial ordered set of leaves, ready to be merged
       according to the Huffman algorithm:
 
-      
+      <div class='snippet' id='javascript_37_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_leaf_set(pairs) {
@@ -504,7 +518,7 @@ function make_leaf_set(pairs) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ANp1YbAZ0ygAoAHVGAJ2IEpEBvAKEQ5mEXJmOzAhcuKjXoMmbDtMS0yIWkkHCA3Ow4BfdYky5SLbdIgJiURMDqns1OogC8iABYEAJqMsM1MjnKgKkqC4AVnAwYCRk5IbeMRxoWHgEwOTOgeQW9FDWYgwANLGIAPSFiMQAnsgARtEFtd6pblA0IhlWNrQSeUUlwHIAjjV1KBg4+IQRFE0wIu2MEl6arBpAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ANp1YACgGcBPZAIzlwBpEB3TGAcwAsoBKRAbwChEggE6YoIIUlwwSUIgCJ8hOfXJUa9Jqw6cA3HwC+fUJFgJE0vAWJxKAK0zRu-QYhFiJiNgQAmRG-cdEAF4QxAUrOT1DY2h4JFVqXEtCIgAPJwFXUXEkL1RfKFQYXDTOXQMjcFizTXYoZOJ03kys91yfIkLizqKS9LKoypM4xHzbOBgwbBJRNJVRDJdWnPMSbDAQXBKZrhalpYB+RCkZUr39wQAuRmY60sQAHhutWTzfHbLzi8EjgAcioRzRAfL7fa7-GCAt6kBb0MYTKY7IFdbYLAYVGKmSSYYD1ShCVCQNidESYRYuNwraFQUnlaJVLGuF7YfGEiDEmmYMnNJaUjzU3okrno+nDMwJGgkIXc5wU7IeCyKYicsmgw7HaSyCVJJXSz7fJbXAXdFF6kVDapIWocPU8uVtVYNPVqlxHa31XUqzguq6eDqmgOCr1lOkWxloLANaazCFCEjk8zARBECwbLZEWPxhP2lZp3B6FyGFyYXAzO1LCAIGSIYCQmTYWPBP35DMA+MF-Z8pDwybR2Q+74RnC66G1uP1WOcejfAD0M+BFEoA4NBuNJTH9cnZXoc5rIgAjsv9kOo0jTZmQx3EIZDHwT0q+0QNacUBhh1Z5ABBZSIAAsU6PA17w-OQACEfwAJgAlcYMEYCUjkABhH8AEZoNgld4OIOQABFUO4AidCAA}{\usebox\lstbox}!*/
       return adjoin_set(
                  make_leaf(head(first_pair),        // symb
                            head(tail(first_pair))), // freq
@@ -513,8 +527,9 @@ function make_leaf_set(pairs) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
       
       </p></div>
@@ -525,7 +540,7 @@ function make_leaf_set(pairs) {
 
         Define an encoding tree and a sample message:
 
-        
+        <div class='snippet' id='javascript_37_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const sample_tree =
@@ -537,14 +552,15 @@ const sample_message =
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBBCGBbADgGwKYH0oCd3pgF4AoGMmReAay1ABMtd8AKSmzDeAM2YCIBBXgBoALAEohpctLa0QDbHnStqWTj14AhYQCYJU6YYqrM9RkpXt1fACLCAjPqPPysjum58Awg7F+xANzEoJCwCCgYmIjoEAgA5gSEAJApqTAGMKgAltDMAAxCMPaFxTAFZSWF5aXVlUVVgUA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ANp1YACgGcBPZAIzlwBpEB3TGAcwAsoBKRAbwChEggE6YoIIUlwwSUIgCJ8hOfXJUa9Jqw6cA3HwC+fUJFgJE0vAWJxKAK0zRu-QYhFiJiNgQAmRG-cdEAF4QxAUrOT1DY2h4JFVqXEtCIgAPJwFXUXEkL1RfKFQYXDTOXQMjcFizTXYoZOJ03kys91yfIkLizqKS9LKoypM4lAwcCDhvHCgRTCJ8YChaIS0uZpdWnMQpGXnMRdoWjeONlbrDk8uXVAAHG8wwXwSaEj3FzhUKRNez7Q+jq4bWocN5rADUjGYdSIvy45WiVVMkn29UoQlQkDYnVmGVO2Q8eQKOMGMSRrlW2DRGIgWJmmEwuJcbi2hJ63TpDPhQ2q8S+L2x9MZwnxSAsimIHM4AJOAH5ttJZM8kuKBZzpccAFyeDpdEq61VlLmkkbA2SS9ZMkXmEgNA3qjZy022yX2lxa1n6z29A2GwYTMAyRAkVDIG74bAc4JHNBYbATKYR2ZEGM4FVyACCygALP8rim45Npkn82mAELKABMucBgnz8aL9OTY1tcgAIsoAIzVmsbEtWeQAYU7hvK-sDwdD4eQmBIwZYmGCAEhlyvEEcdrIAAz0Ds7+jbxAH3eHvcnxDHi-73RAA}{\usebox\lstbox}!*/
     list(0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0);
 
 \end{JavaScriptClickable}
+</pre>
 
+</div></div>
 
-
-        Use the {\lstinline[mathescape=true]$decode$}
+        Use the <kbd>decode</kbd>
         function
         to decode the
         message, and give the result.
@@ -557,7 +573,7 @@ const sample_message =
 
 \begin{Answer}[ref={ex:sample-tree}]
 
-	  
+	  <div class='snippet' id='javascript_37_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 decode(sample_message, sample_tree);
@@ -565,9 +581,10 @@ decode(sample_message, sample_tree);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwxg9qAUDOCGBbADgGxAfUSWCDmIANAAQIroYAuATiCAJQDcAUAPSukAWEArqsMQBGIAFzEA2gCIAgpJJSAInIkzlUgEJrJm+ZIDCW2SQB2fVAF1LV80A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAEwKYTmgFAIxlAZwBpEoAnVVASkQG8AoRJxUSWBFdTVAfQEZc+YogggyFMFB44yAQ0gALGg2arEMYIiwwCPMCAA2BwYSrLGayxShik+owG4LlgL6JUBgqjrPLzDGAEUIhgqAAeUjLyEAqIALwiCnBwXtJyilgKqLLIJgRURL5+xSXFouKokmnRSk6lTNa26roG2cBYoRHVilRF9cwA-IgADrIwZFgEAJ4AtjhwBjytsu2dkekxBX39xWgYaPxYUGPGeKYk5JRm2-0AXJz7vALHMKdCBSHh6zVUdX4uvgBqkaZCQe24hzOwku1CcANY0HgSBiyVSUQyZxI6M2PmBqBsoMQZ3icQSAAYboNEK1gN8MRslJSmPdiaSEnwmVSyDAAOYKOkxXAM3o7e4AUXEcAmACIcDkifhEABaJWJVG8bEKaVEM6-egAgJBRAEWQzYatHgw+K+GayADWvEelooqCwtodSzaWGlAEFtQAWLbFd2OiEwt323jLdrSgBC2oATEH6iGeE7w6no96ACLavjJnaITNe6UAYTzZjMTkNwRNZotM1QBBNPO8cQAkJ2u4hfAYdFAsGSSHxhyQh4hxyOJ6Pp4gp-Ox3rwdg6+beI3m7JWyRVxaYXqAPQH41JQzIImoe4AbV92sQN9zJBvfqfcbvN-jr-Lr5fIUMBgAXSA4CAKAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	  
 	
 \end{Answer}
@@ -577,12 +594,12 @@ decode(sample_message, sample_tree);
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
 
-        The {\lstinline[mathescape=true]$encode$}
+        The <kbd>encode</kbd>
         function
         takes as arguments a message and a tree and
         produces the list of bits that gives the encoded message.
 
-        
+        <div class='snippet' id='javascript_37_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function encode(message, tree) {
@@ -594,21 +611,22 @@ function encode(message, tree) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAU0nAJsgFAW2QZ3wEMBzZAGkSgCdlkBKRAbwChF3FaoRqkZ8A+mBAAbEbgLEy9NhzkcA-ImFjZ8uQC5ERAA47U6LKggZkA-AE8cAIzjiAFsiKG8hUg0o069cmvX+5Y1MsKCIYcVcpDypaBnoAbhYAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=PTAEFMDsGMHsBNwH0DOBPAtgI1gG1AGYCuMALgJaySimyhbigDuATuaaVPWqCqUYkikUAKGJlK1KHEQAKDOBQoAhgHNwAGhotw4AJSgA3iNCnQO-i2rkUSSEVy55iler0mznswH5Q9xx5engBcoMoADuFQ8LLSCMjo2HiyABbgyjEKSmr6WqQ6uYFBxZ5xcqTK5E5Zrrnaunp6ANwiAL5AA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 
         <SPLIT>
-          Write the function {\lstinline[mathescape=true]$encode_symbol$}
+          Write the function <kbd>encode_symbol</kbd>
             that returns the list of bits that encodes a given symbol according to a given tree.
           
         </SPLIT>
-        You should design {\lstinline[mathescape=true]$encode_symbol$} so that it signals an
+        You should design <kbd>encode_symbol</kbd> so that it signals an
         error if the symbol is not in the tree at all.  Test your
         function
         by
-        encoding the result you obtained in exercise~\ref{ex:sample-tree} with
+        encoding the result you obtained in exercise \ref{ex:sample-tree} with
         the sample tree and seeing whether it is the same as the original
         sample message.
 
@@ -620,7 +638,7 @@ function encode(message, tree) {
 \begin{Answer}[ref={ex:encode-symbol}]
 
 
-	  
+	  <div class='snippet' id='javascript_37_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function encode_symbol(symbol, tree) {
@@ -632,7 +650,7 @@ function encode_symbol(symbol, tree) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAU0nAJsg+gZwJ4C2ARnADYAU+xZANIlAE7LICUiA3gFCI+KiSwEiCAigBDGGBy5CJClTl0IIBkzBQsjZmy689iJlBVICyYsgaVZtRArI5yy1ag1bWbAIQBeL4jAhSUgBubl4AX1CeGGBEchhpUmQxYHI3Fh1I-UNjPwDgzLCUUhxkDky9ESkoRETgVyZS31qNIgYxSAALVIaWEIBISpxqhhgAcw765kRfEfGWts7u7X7shiRK8UlpO3lrUjpmzR7y-X0AfkQABwlLAAY6VBFMGWpd14PkOqPtFhPT-QAXMJRBIpC85FZ3gYxhNvqw-v9zlcbuQAIwPNDPHaQxTQuZw9IIxG8IEWBhwSwAIh2fjg1WAcHA6EpvQKnDCQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAU0nAJsg+gZwJ4C2ARnADYAU+xZANIlAE7LICUiA3gFCI+KiSwEiCAigBDGGBy5CJClTl0IIBkzBQsjZmy689iJlBVICyYsgaVZtRArI5yy1ag1bWbAIQBeL4jAhSUgBubl4AX1CeGGBEchhpUmQxYHI3Fh1I-UNjPwDgzLCUUhxkDky9ESkoRETgVyZS31qNIgYxSAALVIaWEIBISpxqhhgAcw765kRfEfGWts7u7X7shiRK8UlpO3lrUjpmzR7y-X0AfkQABwlLAAY6VBFMGWpd14PkOqPtFhPT-QAXMJRBIpC85FZ3gYxhNvqw-v9zlcbuQAIwPNDPHaQxTQuZw9IIxG8IEWBhwSwAIh2fjg1WAcHA6EpvQKnAinHiWGQAEcQGIKI8MMhyJgniKcGICJdElhTDhJaNkHRJdLZWkaET-qqZdgNUSdbL5YrWEEgA}{\usebox\lstbox}!*/
     } else {
         const left_tree = left_branch(tree);
 	const right_tree = right_branch(tree);
@@ -645,8 +663,9 @@ function encode_symbol(symbol, tree) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	  
 	  
@@ -665,7 +684,7 @@ function encode_symbol(symbol, tree) {
         and generates a Huffman encoding tree according to the Huffman
         algorithm.
 
-        
+        <div class='snippet' id='javascript_37_12_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function generate_huffman_tree(pairs) {
@@ -674,20 +693,21 @@ function generate_huffman_tree(pairs) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAcwKZlQJwIZVQfQAsRhgBbbMfKTVVACgAdsZMBnASkQG8AoRAbSghMSNiAgRUbNjABuBMljT0KAawIAbVNmD42qKExbsOHANy8AvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ANp1YbAZ0ygAoAHVGAJ2IEpEBvAKEQ5mEXJmOzAhcuKjXoMmbDtMS0yIWkkHCA3Ow4BfdYky5SLbdIgJiURMDqns1OogC8iABYEAJqMsM1MjnKgKkqC4AVnAwYCRk5IbeMRxoWHgEwOTOgeQW9FDWYgwANLGIAPSFiMQAnsgARtEFtd6pblA0IhlWNrQSeUUlwHIAjjV1KBg4+IQRFE0wIu2MEl6arFqgkLAIwwljyeVVcLj5AO6YMADmjlCS2r7+iLh8FABEWw-5O5V7h8dnF2rL4NDwJB8RKEchwSpBTDQS7Sa6KJyuMEQqEXex2BxPJIPX6sFYA9ZvPYg5IADxhsnk8Ia5CmIjJniWuP+ayQR1O52J5DJBlhlKQ1NpNOaXM6OLxLMQgRCYQmXNeZHJPj5iGByhEpAugxkAH5bvcRVrpAAuRBs74ixAAHlNX3OKURGokhp1iHactKCudxtdYntaUd+SloXCGvdgsd80Z4sBt0wwCylVoqEgjhpckwiopfipiKg6YZf1WMdo7ITSZTacwGZ5vOz-NzwrzVcjhfxSEJekr1aktZuwK2XYYXt1d1M5A7nKbGaHQxNAsbjfzLaZRfWZrtU8zcKB-AHm+HNtLk-zXrnDemQovgs3osZxVKIAgEEwxGIMAAbjhkJhaCdMOZmRjKA4EQSp-wOEsoCgTAkEqMpSj8FwYKgFc20QP8wB-VBoOwRwQGAYA0HCKd3HEGssxuYhH2fV8Py-H8-3IeJRiSWVZhbIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 
 
         <SPLIT>
           
           
-            The function {\lstinline[mathescape=true]$make_leaf_set$} 
+            The function <kbd>make_leaf_set</kbd> 
             that transforms the
             list of pairs into an ordered set of leaves is given above.
-            Write the function {\lstinline[mathescape=true]$successive_merge$}
-            using {\lstinline[mathescape=true]$make_code_tree$} to
+            Write the function <kbd>successive_merge</kbd>
+            using <kbd>make_code_tree</kbd> to
             successively merge the smallest-weight elements of the set until there
             is only one element left, which is the desired Huffman tree.
           
@@ -708,7 +728,7 @@ function generate_huffman_tree(pairs) {
 
 \begin{Answer}[ref={ex:generate-huffman-tree}]
 
-    
+    <div class='snippet' id='javascript_37_13_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function successive_merge(leaves) {
@@ -720,14 +740,15 @@ function successive_merge(leaves) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxBCBTZyYDcMD6AthgE4DmGAFADYYCG+yAlIgN4BQi3ipGUIUkjphyUABa0GTVgF55iAIxceqngH5E4hgBMpjLMxVrVALhRpM2PIRIVqxk08T0dAKzgwwBZPyqPnQKJ6AGtCCDgdQig+am1XfRkAGgDAtPStXSooehgaRMNmZhSMwJy87Nz8ugMWIuYAbg4AXyA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9CcAmOUATppgBQA2mwUANMTAOYAWUAlIgN4BQi-iUlBDEklGAGcoVGvT4CFigY1Zyl6gagAOWzGHzkJAT2QAjOJQkza7OomNmLVlW3a35GpQHdMzNtY5EAGpEHz9pFw52AG4eAF8eUEhYBERqWmxTYlRIFnISMk5eBSERJBZMVAMCzBj4xPBoeCRIzOzc-NJa7g9BTGFRRAqq-NQYSk7CuoSkptSHc0tJ7uLlfrLESWxqVGBl9l71AH40yWkFi23KvZq3Q6UALiHK6rGJqDf9t1iZxpSkMKqfY9ErrQZbHY3LoHTz8E6AthXXb7e6KJ7DV7jUZYj446FuaYNZLNFAYHCQwwmRZ2BGBVZ9AZiM7kABEkJZdgulBpvlUhNm-02EiRezgpgAVphoEUPKVBhjyGLJdLEABedWINnXFk-IlzJBckXkAAeMv4cvKL2xE1N-L+JNpRtNIPNYMtI1x70+trtxNSVXFcBgYGwEn6Js5-TNa0ZQuwYBAlAmYY4qIUJ3EUhNMNhT1p2cQAB5Qrz-AqU3dYQITloxsQI-Yo2m0YhazB6+Wo3YA0GQymG57DFHvvUBSSmHpMNkoDgWCBgMA0CGauQ28QJNGGRsJCAIBBMBIJDAAG44ZBTifkNBYEWh8Nrje+-Wkm+Qu-SB+bmDARDkLYJpNVzrR8XVBWMAMoWIBASARMEsTBQIEPAwCkRBgHbKRsDXNVnhGT8oMUC1EB7YN33IZsNGvclrnIBV0PXKAsLrWwNAAelY+wqQoqslAVQd6MwtcCTsdi0NIABHbilCo29+0HT8R2g+pRJ3PcDyPU9sHPYgJzQ+1UigOBEFMBCvEYKAZyQUwjHsYRCDAKA9UFVT90PE8zwvCgdlPDdEKI6gwCYKA8m8g9OHVVVEAARm4k4FVCjduKeFz1PcrTPPInjFBIvtwykzwZLwQhsBXeLKh89wsqqzw+M+BLhPyjRB0HeqCV1HhkNQiRUGQLRqBKro1V6QqCCILorzJI0WQAQQ5RAABZKuqgQRuKldGoKyaKRZAAhOaACYluWxRVrGshMuOzbXxolkABE5qio7LukraboAYQegk6k6qB7B6vqcGACSQD0CAYAPHDM2kKHWVmuxFrsDbjph3aDpYpHlpRj67EexHnqylH7pxkceC2TBxJAVBk3+-qajxjQJzAKdUBnbA5wXJcBvO7rev6oHyZByBwcfaIgA}{\usebox\lstbox}!*/
                                     head(tail(leaves))),
                      tail(tail(leaves))));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     
     
@@ -739,7 +760,7 @@ function successive_merge(leaves) {
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled36}
+\label{ex:unlabeled39}
 
         
         The following eight-symbol alphabet with associated relative
@@ -753,9 +774,9 @@ function successive_merge(leaves) {
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_tex/ch2\string_3\string_4-4}.png}}
 \end{figure}
 
-        Use {\lstinline[mathescape=true]$generate_huffman_tree$} (exercise~\ref{ex:generate-huffman-tree})
+        Use <kbd>generate_huffman_tree</kbd> (exercise \ref{ex:generate-huffman-tree})
         to generate a corresponding Huffman tree, and use
-        {\lstinline[mathescape=true]$encode$} (exercise~\ref{ex:encode-symbol})
+        <kbd>encode</kbd> (exercise \ref{ex:encode-symbol})
         to encode the following message:
 
 <div class='permalink'>
@@ -777,13 +798,13 @@ Sha boom
         used a fixed-length code for the eight-symbol alphabet?
 
 	
-      \hfill{\hyperref[ex:unlabeled36-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled39-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled36}]
+\begin{Answer}[ref={ex:unlabeled39}]
 
 
-	  
+	  <div class='snippet' id='javascript_37_14_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const lyrics_frequencies = 	  
@@ -795,7 +816,7 @@ const lyrics_frequencies =
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBANgTwE4EtgQPoDMkFMCOArrmMCrhDALwwCQMMAUAw3CtABRucBEAgjwA0MAEwBKQcxbT47KBx4A5AcICMANglSZrOQoBCAeUMBZITFVadLbvJ4BlABIqYAZivXZvAOIBRACrm4pKeXnYAmgCSAArmAJwe1rYKAFKG+kGJOsk8AOp8jpliANyMoJCwiKjoGFB4uNQwAOYkuEgAhlC4GAAWhFhYALbtYLX1XMhomDgExKTkECVl4NDwk+iNydowAOR+-jvCO3yHu2n6h9s7TidHyqc793e3u0+vL48fb5+X0nsBDw+5weNwe33BX0hpyuELBH3yjgeUWiSJiqJRR2RvxYOyxmLR+IxuzxxIJu1BRyMph22iWTDgJCaUB6HBIoAAJrgJtUIMIqlMxrhcGIlgB6UUwAAcABYgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZxBCBTZyYDcMD6AthgE4DmGAFADYYCG+yAlIgN4BQi3ipGUIUkjphyUABa0GTVgF55iAIxceqngH5E4hgBMpjLMxVrVALhRpM2PIRIVqxk08T0dAKzgwwBZPyqPnQKJ6AGtCCDgdQig+am1XfRkAGgDAtPStXSooehgaRMNmZhSMwJy87Nz8ugMWIuYAbg4AXw5QSFgEREowMnooQnEQYGBg7xiMagAHXNIWdmM+ASELdCwcfGIySipgsIIa4B8-GZg5oqbW9uh4JAxISMJkAE8iACM4fJf3z6TECYwrE4qmunSQETA5TAyB8rw+Xzhv0QEEEfEhBABQNS3CWgiQJHeZCo33hfxJn2QVBRpDRUAxsSKiAAhAowCAaDQmqpWqoYMBEFQYDDDtkGVjnLiVmyOVyeM1EBgaL4Fs4IcgoIg6MA6QDELJNRhtQQ3qR6JBJJimgBINUa0gwcjiHWxPW8B1O42m82iyaNDhWyXghBQmHkhE-Gh-LXO33Y5yaU6kKgABj+9wiUVhEeJiMjBqNmKMpTMyODuWhWfhOYjf3tjpjgLj6QTsyoijTD0zYerpLd9fpvqLxZLZFIcCTACIw4gwHANcA4OAdBO-dyWm1wDcuunHrt1vRKH9MSqeIHEEKCNL8iRsAfG82Z+yaE3uOZ6FMpvc9Duu7mqPE9BvZA72Kf4GRKYdVB-ahymvfdKFAwtLg4W1NWee0IBhYA+AARxAdMYCwV0rW4RwaCFKBaAoqgJwAQQnP4ACZiibcj1RogA5ei-kUAA2FjAjYyiJwAIQAeTEgBZBilAE5whJogBlAAJbjEAAZjkpwFInABxABRAAVGTmIg7TqInABNABJAAFGSAE4tJMHSACkxJEkznLUHSAHVaOUry-VQmh0JgTCBwwV0ej6AYCCGEYxki2gwoi7CMDwgjDCaELUuQV0FMcAByAzDKKv4ito8rECK9yRPK4qVKqiquOqorWpa5qao67quvavqev6hrVBKoy2r6uq2qatrBtmgb5uq4q5pmvr-OUtqbNsja7O2raKs24aeCKg79p2069pqk7LrOmrpoq8SpKK4xVw4EQxEkaCUow5AozyyKLg4AB6QHEAADgAFiAA}{\usebox\lstbox}!*/
          list("YIP", 9),
          list("JOB", 2),
          list("WAH", 2));
@@ -812,8 +833,9 @@ length(encode(lyrics, lyrics_tree));
 // 84
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 We have an alphabet of $n = 8$ symbols,    
 and a message of $m = 36$ symbols.
 Then the minimum number of bits to encode a specific symbol using a fixed-length
@@ -844,7 +866,7 @@ $m \lceil \log_2{n} \rceil = 36 \times 3 = 108$.
     <div class='permalink'>
 <a name='p19' class='permalink'></a><p>
       The tree will be unbalanced, similar to the tree given in
-      figure~\ref{fig:unbalanced-tree}.
+      figure \ref{fig:unbalanced-tree}.
       Encoding the most frequent symbol requires one bit,
       whereas $n - 1$
       bits are required to encode the least frequent symbol.
@@ -856,28 +878,28 @@ $m \lceil \log_2{n} \rceil = 36 \times 3 = 108$.
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled37}
+\label{ex:unlabeled40}
 
         
         Consider the encoding
         function
         that you designed in
-        exercise~\ref{ex:encode-symbol}.  What is the order of growth in the
+        exercise \ref{ex:encode-symbol}.  What is the order of growth in the
         number of steps needed to encode a symbol?  Be sure to include the
         number of steps needed to search the symbol list at each node
         encountered.  To answer this question in general is difficult.
         Consider the special case where the relative frequencies of the $n$
-        symbols are as described in exercise~\ref{ex:huffman-count}, and give
+        symbols are as described in exercise \ref{ex:huffman-count}, and give
         the order of growth (as a function of $n$) of the number of steps
         needed to encode the most frequent and least frequent symbols in the
         alphabet.
     
-      \hfill{\hyperref[ex:unlabeled37-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled40-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled37}]
+\begin{Answer}[ref={ex:unlabeled40}]
 
-Consider the special case in exercise~\ref{ex:encode-symbol}.
+Consider the special case in exercise \ref{ex:encode-symbol}.
 At each step down the
 path of length $n$, we need to do a linear
 search in a list of length $n, n-1, \ldots, 1$.
@@ -891,7 +913,14 @@ $O(n^2)$.
 
     <hr><div class='footnote'>
 <a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>See
-        Hamming 1980
+        <CITATION>Hamming 1980</CITATION>
         
         for a discussion of the mathematical properties of Huffman codes.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section3/subsection3.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section4/section4.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+2.3.4  Example: Huffman Encoding Trees</div>	<div class='next-page'></div></div>

@@ -1,10 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>1.2.5 Greatest Common Divisors</a>
+		<a name='top' class='permalink'>1.2.5  Greatest Common Divisors</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
         
         
@@ -15,7 +24,7 @@
           and $b$ is
           defined to be the largest integer that divides both $a$ and
           $b$ with no remainder.  
-          For example, the GCD of 16 and 28 is 4.  In chapter~2,
+          For example, the GCD of 16 and 28 is 4.  In chapter 2,
           when we investigate how to implement rational-number arithmetic, we
           will need to be able to compute GCDs in order to reduce
           rational numbers to lowest terms.  (To reduce a rational number to
@@ -59,14 +68,14 @@
           performing repeated reductions will always eventually produce a pair
           where the second number is 0.  Then the GCD is the other
           number in the pair.  This method for computing the GCD is
-          known as <EM>Euclid's Algorithm</EM>.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+          known as <EM>Euclid's Algorithm</EM>.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
         </p></div>
 
         <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
               It is easy to express Euclid's Algorithm as a 
               function:
-        
+        <div class='snippet' id='javascript_15_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function gcd(a, b) {
@@ -75,9 +84,10 @@ function gcd(a, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAcwgEwBQEMA0iBGAlIgN4BQiliATgKZQjVL6IC87iADIgPyJaIAXCnQZ8eAQFIChANxkAvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAcwgEwBQEMA0iBGAlIgN4BQiliATgKZQjVL6IC87iADIgPyJaIAXCnQZ8eAQFIChANxkAvmTKpMAJk54AjGrlA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
         </p></div>
@@ -102,53 +112,9 @@ function gcd(a, b) {
           $k$ steps to
           compute the GCD of some pair, then the smaller number in the pair
           must be greater than or equal to the $k$th Fibonacci
-          number.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+          number.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
           </p></div>
-        <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>This theorem was proved in 1845 by Gabriel 
-            Lamé, a
-            
-            French mathematician and engineer known chiefly for his contributions
-            to mathematical physics.  To prove the theorem, we consider pairs
-            $(a_k ,b_k)$, where 
-            $a_k\geq b_k$, for which Euclid's Algorithm
-            terminates in $k$ steps.
-            The proof is based on the claim that, if
-            $(a_{k+1},\ b_{k+1}) \rightarrow (a_{k},\ b_{k})
-              \rightarrow (a_{k-1},\ b_{k-1})$ are three successive pairs in the
-            reduction process, then we must have 
-            $b_{k+1}\geq b_{k} + b_{k-1}$.
-            To verify the claim, consider that a reduction step is defined by
-            applying the transformation $a_{k-1} = b_{k}$, 
-            $b_{k-1} =
-              \text{ remainder of } a_{k}\text{ divided by }b_{k}$.  
-            The second equation means that $a_{k} = qb_{k} + b_{k-1}$ for some
-            positive integer $q$.  
-            And since $q$ must be at least 1 we have 
-            $a_{k}
-              = qb_{k} + b_{k-1} \geq b_{k} + b_{k-1}$.  
-            But in the previous
-            reduction step we have $b_{k+1}= a_{k}$.  
-            Therefore, $b_{k+1} =
-              a_{k}\geq b_{k} + b_{k-1}$.  This verifies the claim.  Now we can
-            prove the theorem by induction on $k$, 
-            the number of steps that the
-            algorithm requires to terminate.  
-            The result is true for $k=1$, since
-            this merely requires that $b$ be at least as large as 
-            $\text{Fib}(1)=1$.  
-            Now, assume that the result is true for all integers less
-            than or equal to $k$ and establish the result for 
-            $k+1$.  Let
-            $(a_{k+1},\ b_{k+1})\rightarrow(a_{k},\ b_{k})
-              \rightarrow(a_{k-1},\ b_{k-1})$ be successive pairs in the
-            reduction process.  By our induction hypotheses, we have $b_{k-1}\geq
-              {\textrm{Fib}}(k-1)$ and 
-            $b_{k}\geq {\textrm{Fib}}(k)$.  Thus, applying the claim we just
-            proved together with the definition of the Fibonacci numbers gives
-            $b_{k+1} \geq b_{k} + b_{k-1}\geq {\textrm{Fib}}(k) + {\textrm{Fib}}(k-1) 
-              ={\textrm{Fib}}(k+1)$, which
-            completes the proof of Lamé's Theorem.</FOOTNOTE></div></p></div>
+        </p></div>
 
         <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
@@ -174,19 +140,19 @@ function gcd(a, b) {
                 function
                 generates is of course dependent on the
                 rules used by the interpreter.  As an example, consider the iterative
-                {\lstinline[mathescape=true]$gcd$} 
+                <kbd>gcd</kbd> 
                 function
                 given above.
                 Suppose we were to interpret this 
                 function
                 using normal-order
-                evaluation, as discussed in section~\ref{sec:substitution-model}.
-                (The normal-order-evaluation rule for {\lstinline[mathescape=true]$if$} is described in
-                exercise~\ref{ex:normal-order-vs-appl-order-test}.)  
+                evaluation, as discussed in section \ref{sec:substitution-model}.
+                (The normal-order-evaluation rule for <kbd>if</kbd> is described in
+                exercise \ref{ex:normal-order-vs-appl-order-test}.)  
                 Using the
                 substitution method (for normal order), illustrate the process
                 generated in evaluating 
-                {\lstinline[mathescape=true]$gcd(206, 40)$}
+                <kbd>gcd(206, 40)</kbd>
                 and indicate the
 		
 		remainder
@@ -197,7 +163,7 @@ function gcd(a, b) {
 		remainder
 		operations are actually performed
                 in the normal-order evaluation of 
-                {\lstinline[mathescape=true]$gcd(206, 40)$}?
+                <kbd>gcd(206, 40)</kbd>?
                 In the applicative-order evaluation?
 		\hfill{\hyperref[ex:gcd-process-Answer]{Solution}}\\
 \end{Exercise}
@@ -211,8 +177,7 @@ function gcd(a, b) {
 \item{
 Using normal-order evaluation, the process undergoes 18 remainder operations.
    14 while evaluating the condition, rest during final reduction phase.
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_15_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 gcd(206, 40)
 40 === 0 ? 206 : gcd(40, 206 % 40)
 gcd(40, 206 % 40)
@@ -264,13 +229,11 @@ gcd((206 % 40) % (40 % (206 % 40)),
 (206 % 40) % (40 % (206 % 40))    
 // remainder operations (15), (16), (17), (18)
 2
-\end{JavaScript}
-
+</pre></div></div>
       }
 \item{ Using application order evaluation, the process performs
       4 remainder operations.
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_15_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 gcd(206, 40)
 40 === 0 ? 206 : gcd(40, 206 % 40)
 gcd(40, 206 % 40)
@@ -290,8 +253,7 @@ gcd(2, 4 % 2)
 gcd(2, 0)
 0 === 0 ? 2 : gcd(0, 2 % 0)
 2
-\end{JavaScript}
-
+</pre></div></div>
    }
 \end{enumerate}
 
@@ -301,15 +263,66 @@ gcd(2, 0)
 \end{Answer}
 
       <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Euclid's 
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Euclid's 
             Algorithm is so
             
             called because it appears in Euclid's <EM>Elements</EM> (Book 7, ca. 300
             {\scshape b.c}.  According to Knuth (1973), it can be considered the
             
             oldest known nontrivial algorithm.  The ancient Egyptian method of
-            multiplication (exercise~\ref{ex:it-pro-mult-int}) is surely older,
+            multiplication (exercise \ref{ex:it-pro-mult-int}) is surely older,
             but, as Knuth explains, Euclid's algorithm is the oldest known to have
             been presented as a general algorithm, rather than as a set of
-            illustrative examples.</FOOTNOTE></div>
-</SUBSECTION>
+            illustrative examples.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>This theorem was proved in 1845 by Gabriel 
+            Lamé, a
+            
+            French mathematician and engineer known chiefly for his contributions
+            to mathematical physics.  To prove the theorem, we consider pairs
+            $(a_k ,b_k)$, where 
+            $a_k\geq b_k$, for which Euclid's Algorithm
+            terminates in $k$ steps.
+            The proof is based on the claim that, if
+            $(a_{k+1},\ b_{k+1}) \rightarrow (a_{k},\ b_{k})
+              \rightarrow (a_{k-1},\ b_{k-1})$ are three successive pairs in the
+            reduction process, then we must have 
+            $b_{k+1}\geq b_{k} + b_{k-1}$.
+            To verify the claim, consider that a reduction step is defined by
+            applying the transformation $a_{k-1} = b_{k}$, 
+            $b_{k-1} =
+              \text{ remainder of } a_{k}\text{ divided by }b_{k}$.  
+            The second equation means that $a_{k} = qb_{k} + b_{k-1}$ for some
+            positive integer $q$.  
+            And since $q$ must be at least 1 we have 
+            $a_{k}
+              = qb_{k} + b_{k-1} \geq b_{k} + b_{k-1}$.  
+            But in the previous
+            reduction step we have $b_{k+1}= a_{k}$.  
+            Therefore, $b_{k+1} =
+              a_{k}\geq b_{k} + b_{k-1}$.  This verifies the claim.  Now we can
+            prove the theorem by induction on $k$, 
+            the number of steps that the
+            algorithm requires to terminate.  
+            The result is true for $k=1$, since
+            this merely requires that $b$ be at least as large as 
+            $\text{Fib}(1)=1$.  
+            Now, assume that the result is true for all integers less
+            than or equal to $k$ and establish the result for 
+            $k+1$.  Let
+            $(a_{k+1},\ b_{k+1})\rightarrow(a_{k},\ b_{k})
+              \rightarrow(a_{k-1},\ b_{k-1})$ be successive pairs in the
+            reduction process.  By our induction hypotheses, we have $b_{k-1}\geq
+              {\textrm{Fib}}(k-1)$ and 
+            $b_{k}\geq {\textrm{Fib}}(k)$.  Thus, applying the claim we just
+            proved together with the definition of the Fibonacci numbers gives
+            $b_{k+1} \geq b_{k} + b_{k-1}\geq {\textrm{Fib}}(k) + {\textrm{Fib}}(k-1) 
+              ={\textrm{Fib}}(k+1)$, which
+            completes the proof of Lamé's Theorem.</FOOTNOTE></div>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section2/subsection4.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section2/subsection6.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+1.2.5  Greatest Common Divisors</div>	<div class='next-page'></div></div>

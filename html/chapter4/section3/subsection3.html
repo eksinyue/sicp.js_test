@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>4.3.3 
-  Implementing the {\lstinline[mathescape=true]$amb$} Evaluator
-      </a>
+		<a name='top' class='permalink'>4.3.3  Implementing the <kbd> amb </kbd> Evaluator</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -28,20 +35,9 @@
       <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
   
-  We will construct the {\lstinline[mathescape=true]$amb$} evaluator for nondeterministic
+  We will construct the <kbd>amb</kbd> evaluator for nondeterministic
   JavaScript	
-  by modifying the analyzing evaluator of section~\ref{sec:separating-analysis}.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-  execution
-  function
-  produced by analysis of
-  that expression.  The difference between the interpretation of ordinary
-  JavaScript	
-  and the interpretation of nondeterministic
-  JavaScript	
-  will be entirely
-  in the execution
-  functions.
-      
+  by modifying the analyzing evaluator of section \ref{sec:separating-analysis}.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
   As in the analyzing evaluator, evaluation of an expression is
   accomplished by calling an 
   
@@ -57,11 +53,12 @@
   functions.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Execution
     functions
     and continuations
-      
+      </h2></div>
 
       
       <div class='permalink'>
@@ -73,7 +70,7 @@
   one argument: the environment of execution.  In contrast, the
   execution
   functions
-  in the {\lstinline[mathescape=true]$amb$} evaluator take three arguments:
+  in the <kbd>amb</kbd> evaluator take three arguments:
   the environment, and two
   functions
   called <EM>continuation
@@ -116,9 +113,9 @@
 <a name='p6' class='permalink'></a><p>
   A failure is triggered during evaluation (that is, a failure
   continuation is called) when a user program explicitly rejects the
-  current line of attack (for example, a call to {\lstinline[mathescape=true]$require$} may
-  result in execution of {\lstinline[mathescape=true]$amb()$}, an expression that always
-  fails—see section~\ref{sec:amb}).  The failure continuation in hand
+  current line of attack (for example, a call to <kbd>require</kbd> may
+  result in execution of <kbd>amb()</kbd>, an expression that always
+  fails—see section \ref{sec:amb}).  The failure continuation in hand
   at that point will cause the most recent choice point to choose
   another alternative.  If there are no more alternatives to be
   considered at that choice point, a failure at an earlier choice point
@@ -126,7 +123,7 @@
   the driver loop in response to a
   
     
-    {\lstinline[mathescape=true]$try-again$}
+    <kbd>try-again</kbd>
   
     request, to find
   another value of the expression.
@@ -146,8 +143,8 @@
 <a name='p8' class='permalink'></a><p>
   In summary, failure continuations are constructed by
   <UL>
-    <LI>{\lstinline[mathescape=true]$amb$} expressions—to provide a mechanism to make
-      alternative choices if the current choice made by the {\lstinline[mathescape=true]$amb$}
+    <LI><kbd>amb</kbd> expressions—to provide a mechanism to make
+      alternative choices if the current choice made by the <kbd>amb</kbd>
       expression leads to a dead end;
 
     </LI>
@@ -167,10 +164,10 @@
   Failures are initiated only when a dead end is encountered.
   This occurs
   <UL>
-    <LI> if the user program executes {\lstinline[mathescape=true]$amb()$};
+    <LI> if the user program executes <kbd>amb()</kbd>;
 
     </LI>
-    <LI> if the user types {\lstinline[mathescape=true]$try-again$} at the top-level driver.
+    <LI> if the user types <kbd>try-again</kbd> at the top-level driver.
     </LI>
 
   </UL>
@@ -186,8 +183,8 @@
       led to this assignment or to the top level.
 
     </LI>
-    <LI>When the failure continuation for an {\lstinline[mathescape=true]$amb$} runs out of choices,
-      it calls the failure continuation that was originally given to the {\lstinline[mathescape=true]$amb$},
+    <LI>When the failure continuation for an <kbd>amb</kbd> runs out of choices,
+      it calls the failure continuation that was originally given to the <kbd>amb</kbd>,
       in order to propagate the failure back to the previous choice point
       or to the top level.
     </LI>
@@ -195,25 +192,26 @@
   
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Structure of the evaluator
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
   
   The syntax- and data-representation
   functions
-  for the {\lstinline[mathescape=true]$amb$}
-  evaluator, and also the basic {\lstinline[mathescape=true]$analyze$}
+  for the <kbd>amb</kbd>
+  evaluator, and also the basic <kbd>analyze</kbd>
   function, are identical
-  to those in the evaluator of section~\ref{sec:separating-analysis},
+  to those in the evaluator of section \ref{sec:separating-analysis},
   except for the fact that we need additional syntax
   functions
   to
   recognize
-  {\lstinline[mathescape=true]$amb$} expressions:<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
-\begin{JavaScript}
+  <kbd>amb</kbd> expressions:<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
+  <div class='snippet' id='javascript_87_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function is_amb(stmt) {      
     return is_tagged_list(stmt, "application") && 
            is_name(operator(stmt)) && 
@@ -222,56 +220,38 @@ function is_amb(stmt) {
 function amb_choices(stmt) {
     return operands(stmt);
 }
-\end{JavaScript}
-
-      
-  
-\begin{JavaScript}
-function is_amb(stmt) {      
-    return is_tagged_list(stmt, "application") && 
-           is_name(operator(stmt)) && 
-           name_of_name(operator(stmt)) === "amb";
-}
-function amb_choices(stmt) {
-    return operands(stmt);
-}
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
-  We must also add to the dispatch in {\lstinline[mathescape=true]$analyze$} a clause that will
+  We must also add to the dispatch in <kbd>analyze</kbd> a clause that will
   recognize
   such expressions and generate an appropriate execution function:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 : is_amb(stmt)
   ? analyze_amb(stmt)
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p13' class='permalink'></a><p>
   The top-level
   function
-  {\lstinline[mathescape=true]$ambeval$} (similar to the version of
+  <kbd>ambeval</kbd> (similar to the version of
   
-  {\lstinline[mathescape=true]$evaluate$}
-  given in section~\ref{sec:separating-analysis}) analyzes the
+  <kbd>evaluate</kbd>
+  given in section \ref{sec:separating-analysis}) analyzes the
   given expression and applies the resulting execution
   function
   to the given environment, together with two given continuations:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function ambeval(exp, env, succeed, fail) {      
     return analyze(exp)(env, succeed, fail);
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -292,25 +272,24 @@ function ambeval(exp, env, succeed, fail) {
   function
   is
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 (env, succeed, fail) => {      
     // succeed is a function of the form: (value, fail) => ...
     // fail    is a function of the form: is () => ...
 }
-\end{JavaScript}
-
+</pre></div></div>
 
   For example, executing
 
-  
-\begin{JavaScript}
+  <kbd class='snippet'>
+    
+    
 ambeval($\textit{exp}$,      
     the_global_environment,
     (value, fail) => value,
     () => "failed");
-\end{JavaScript}
-
+    
+  </kbd>
 
   will attempt to evaluate the given expression and will return
   either the expression's value (if the evaluation succeeds) or
@@ -318,19 +297,19 @@ ambeval($\textit{exp}$,
   
     
     
-      string {\lstinline[mathescape=true]$"failed"$}
+      string <kbd>"failed"</kbd>
     
   
   (if the evaluation fails).
-  The call to {\lstinline[mathescape=true]$ambeval$} in the driver loop shown below uses
+  The call to <kbd>ambeval</kbd> in the driver loop shown below uses
   much more complicated continuation
   functions, which continue the
-  loop and support the {\lstinline[mathescape=true]$try-again$} request.
+  loop and support the <kbd>try-again</kbd> request.
       </p></div>
 
       <div class='permalink'>
 <a name='p15' class='permalink'></a><p>
-  Most of the complexity of the {\lstinline[mathescape=true]$amb$} evaluator results
+  Most of the complexity of the <kbd>amb</kbd> evaluator results
   from the mechanics of passing the continuations around as the
   execution
   functions
@@ -341,12 +320,13 @@ ambeval($\textit{exp}$,
   corresponding
   function
   for the ordinary evaluator given in
-  section~\ref{sec:separating-analysis}.
+  section \ref{sec:separating-analysis}.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Simple expressions
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p16' class='permalink'></a><p>
@@ -361,8 +341,7 @@ ambeval($\textit{exp}$,
   continuation that was passed to them.
 
   
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze_self_evaluating(stmt) {
     return (env, succeed, fail) => succeed(stmt, fail);
 }
@@ -382,8 +361,7 @@ function analyze_function_definition(stmt) {
         succeed(make_function(vars, bfun, env),
                 fail);
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -395,7 +373,7 @@ function analyze_function_definition(stmt) {
   
     
     
-      {\lstinline[mathescape=true]$lookup_name_value$}
+      <kbd>lookup_name_value</kbd>
     
   
   fails to find the
@@ -407,9 +385,10 @@ function analyze_function_definition(stmt) {
   currently being tried.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Conditionals and sequences
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p18' class='permalink'></a><p>
@@ -420,14 +399,14 @@ function analyze_function_definition(stmt) {
   
     
     
-      {\lstinline[mathescape=true]$analyze_conditional_expression$}
+      <kbd>analyze_conditional_expression</kbd>
     
   
   invokes the predicate execution
   
     
     function
-    {\lstinline[mathescape=true]$pfun$}
+    <kbd>pfun</kbd>
     
   
   with a success
@@ -437,7 +416,7 @@ function analyze_function_definition(stmt) {
   
     
     
-      {\lstinline[mathescape=true]$pfun$}
+      <kbd>pfun</kbd>
     
   
   fails, the original failure continuation for
@@ -450,8 +429,7 @@ function analyze_function_definition(stmt) {
   
   expression is called.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze_conditional_expression(stmt) {      
     const pfun = analyze(cond_expr_pred(stmt);
     const cfun = analyze(cond_expr_cons(stmt));
@@ -466,19 +444,17 @@ function analyze_conditional_expression(stmt) {
                     : afun(env, succeed, fail2),
                 fail);
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p19' class='permalink'></a><p>
   Sequences are also handled in the same way as in the previous
   evaluator, except for the machinations in the subfunction
-  {\lstinline[mathescape=true]$sequentially$} that are required for passing the continuations.
-  Namely, to sequentially execute {\lstinline[mathescape=true]$a$} and then {\lstinline[mathescape=true]$b$}, we call {\lstinline[mathescape=true]$a$} with a success continuation that calls {\lstinline[mathescape=true]$b$}.
+  <kbd>sequentially</kbd> that are required for passing the continuations.
+  Namely, to sequentially execute <kbd>a</kbd> and then <kbd>b</kbd>, we call <kbd>a</kbd> with a success continuation that calls <kbd>b</kbd>.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_7_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze_sequence(stmts) {
     function sequentially(a, b) {
         return (env, succeed, fail) => 
@@ -498,13 +474,13 @@ function analyze_sequence(stmts) {
            ? env => undefined
            : loop(head(funs), tail(funs));
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Declarations and assignments
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p20' class='permalink'></a><p>
@@ -518,7 +494,7 @@ function analyze_sequence(stmts) {
 	
 	  
 	  function
-	  {\lstinline[mathescape=true]$vfun$}
+	  <kbd>vfun</kbd>
 	  
 		  
   is called with the environment, a success continuation, and the
@@ -526,11 +502,11 @@ function analyze_sequence(stmts) {
 	
 	  
 	  
-	  {\lstinline[mathescape=true]$vfun$}
+	  <kbd>vfun</kbd>
 	  
 		  
   succeeds,
-  obtaining a value {\lstinline[mathescape=true]$val$} for the
+  obtaining a value <kbd>val</kbd> for the
 	
 	  
 	  
@@ -538,8 +514,7 @@ function analyze_sequence(stmts) {
 	    declared and the success is propagated:
 	  
 	
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_8_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze_variable_declaration(stmt) {	   
     const name = variable_declaration_name(stmt);
     const vfun = variable_declaration_value(stmt);
@@ -564,8 +539,7 @@ function analyze_constant_declaration(stmt) {
                    },
 	           fail);
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -579,7 +553,7 @@ function analyze_constant_declaration(stmt) {
   definitions.  It first attempts to obtain the new value to be assigned
   to the variable. If this evaluation of
   
-  {\lstinline[mathescape=true]$vfun$}  
+  <kbd>vfun</kbd>  
   fails, the assignment fails.
       </p></div>
 
@@ -587,20 +561,20 @@ function analyze_constant_declaration(stmt) {
 <a name='p22' class='permalink'></a><p>
 	If
 	
-	{\lstinline[mathescape=true]$vfun$}  
+	<kbd>vfun</kbd>  
 	succeeds, however, and we go on to make the assignment,
 	we must consider the possibility that this branch of the computation
 	might later fail, which will require us to backtrack out of the
 	assignment.  Thus, we must arrange to undo the assignment as
 	part of the backtracking 
-	process.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+	process.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
       </p></div>
 
       <div class='permalink'>
 <a name='p23' class='permalink'></a><p>
 	This is accomplished by giving
 	
-	{\lstinline[mathescape=true]$vfun$}  
+	<kbd>vfun</kbd>  
 	a success continuation
 	(marked with the comment <QUOTE>*1*</QUOTE> below) that saves the old value of
 	the variable before assigning the new value to the
@@ -610,13 +584,12 @@ function analyze_constant_declaration(stmt) {
 	before continuing the failure.
 	That is, a successful assignment provides a failure continuation that
 	will intercept a subsequent failure; whatever failure would otherwise
-	have called {\lstinline[mathescape=true]$fail2$} calls this
+	have called <kbd>fail2</kbd> calls this
 	function
 	instead, to undo the
-	assignment before actually calling {\lstinline[mathescape=true]$fail2$}.
+	assignment before actually calling <kbd>fail2</kbd>.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_9_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze_assignment(stmt) {
     const variable = assignment_variable(stmt);
     const vfun = analyze(assignment_value(stmt));
@@ -633,14 +606,14 @@ function analyze_assignment(stmt) {
                 },
 		fail);
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Function
     applications
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p24' class='permalink'></a><p>
@@ -650,18 +623,17 @@ function analyze_assignment(stmt) {
   for the technical complexity of managing the continuations.  This
   complexity arises in
   
-  {\lstinline[mathescape=true]$analyze_application$},  
+  <kbd>analyze_application</kbd>,  
   due to the need to
   keep track of the success and failure continuations as we evaluate the
   operands.  We use a
   
-  function {\lstinline[mathescape=true]$get_args$}
+  function <kbd>get_args</kbd>
     
   to evaluate the list of
-  operands, rather than a simple {\lstinline[mathescape=true]$map$} as in the ordinary evaluator.
+  operands, rather than a simple <kbd>map</kbd> as in the ordinary evaluator.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_10_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze_application(stmt) {	
     const ffun = analyze(operator(stmt));
     const afuns = map(analyze, operands(stmt));
@@ -676,8 +648,7 @@ function analyze_application(stmt) {
 				 fail2),
 		    fail); 
 }
-\end{JavaScript}
-
+</pre></div></div>
   
       </p></div>
 
@@ -685,34 +656,33 @@ function analyze_application(stmt) {
 <a name='p25' class='permalink'></a><p>
 	In
   
-  {\lstinline[mathescape=true]$get_args$},
+  <kbd>get_args</kbd>,
     
-  notice how {\lstinline[mathescape=true]$tail$}ing down the list of
+  notice how <kbd>tail</kbd>ing down the list of
   
-  {\lstinline[mathescape=true]$afun$},
+  <kbd>afun</kbd>,
     
   execution
   functions
-  and {\lstinline[mathescape=true]$pair$}ing up the resulting list of
-  {\lstinline[mathescape=true]$args$} is accomplished by calling each
+  and <kbd>pair</kbd>ing up the resulting list of
+  <kbd>args</kbd> is accomplished by calling each
   
-  {\lstinline[mathescape=true]$afun$}
+  <kbd>afun</kbd>
     
   in the list
   with a success continuation that recursively calls
   
-  {\lstinline[mathescape=true]$get_args$}.
+  <kbd>get_args</kbd>.
     
   Each of these recursive calls to
   
-  {\lstinline[mathescape=true]$get_args$}
+  <kbd>get_args</kbd>
     
   has a success
-  continuation whose value is the {\lstinline[mathescape=true]$pair$} of the newly obtained
+  continuation whose value is the <kbd>pair</kbd> of the newly obtained
   argument onto the list of accumulated arguments:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_11_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function get_args(afuns, env, succeed, fail) {      
     return is_null(afuns)
         ? succeed(null, fail)
@@ -729,8 +699,7 @@ function get_args(afuns, env, succeed, fail) {
 			           fail2),
 		      fail);
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -740,13 +709,12 @@ function get_args(afuns, env, succeed, fail) {
   application, which is
   performed by
   
-  {\lstinline[mathescape=true]$execute_application$},
+  <kbd>execute_application</kbd>,
     
   is accomplished in the same way as for the ordinary evaluator, except for
   the need to manage the continuations.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_12_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function execute_application(fun, args, succeed, fail) {
     return is_primitive_function(fun)
         ? succeed(apply_primitive_function(fun, args),
@@ -762,41 +730,40 @@ function execute_application(fun, args, succeed, fail) {
         : error(fun, "unknown function type in " +
                      "execute_application");
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
-      \subsubsection{
-  Evaluating {\lstinline[mathescape=true]$amb$} expressions
-      
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
+  Evaluating <kbd>amb</kbd> expressions
+      </h2></div>
 
       <div class='permalink'>
 <a name='p27' class='permalink'></a><p>
   
   The
   
-  {\lstinline[mathescape=true]$amb$} expression
+  <kbd>amb</kbd> expression
   
   is the key element in the nondeterministic
   language.  Here we see the essence of the interpretation process and
   the reason for keeping track of the continuations.  The execution
   function
-  for {\lstinline[mathescape=true]$amb$} defines a loop
+  for <kbd>amb</kbd> defines a loop
   
   
-    {\lstinline[mathescape=true]$try_next$}
+    <kbd>try_next</kbd>
   
   that cycles through the execution
   functions
   for all the possible values of the
-  {\lstinline[mathescape=true]$amb$} expression.  Each execution
+  <kbd>amb</kbd> expression.  Each execution
   function
   is called with a
   failure continuation that will try the next one.  When there are no
-  more alternatives to try, the entire {\lstinline[mathescape=true]$amb$} expression fails.
+  more alternatives to try, the entire <kbd>amb</kbd> expression fails.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_13_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze_amb(exp) {
     const cfuns = map(analyze, amb_choices(exp));
     return (env, succeed, fail) => {
@@ -811,82 +778,82 @@ function analyze_amb(exp) {
         return try_next(cfuns);
     };
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Driver loop
-      
+      </h2></div>
 
       
       <div class='permalink'>
 <a name='p28' class='permalink'></a><p>
   
-  The driver loop for the {\lstinline[mathescape=true]$amb$} evaluator is complex, due to
+  The driver loop for the <kbd>amb</kbd> evaluator is complex, due to
   the mechanism that permits the user to try again in evaluating an
   expression.  The driver uses a
   function
   called
   
   
-    {\lstinline[mathescape=true]$internal_loop$},
+    <kbd>internal_loop</kbd>,
   
   which takes as argument a
   function
   
   
-    {\lstinline[mathescape=true]$try_again$}.
+    <kbd>try_again</kbd>.
   
   The intent is
   that calling
   
   
-    {\lstinline[mathescape=true]$try_again$}
+    <kbd>try_again</kbd>
   
   should go on to the next untried
   alternative in the nondeterministic evaluation.
   
   The function
-    {\lstinline[mathescape=true]$internal_loop$}
+    <kbd>internal_loop</kbd>
   
   either calls
   
   
-    {\lstinline[mathescape=true]$try_again$}
+    <kbd>try_again</kbd>
   
   in response to the user typing
   
   
-    {\lstinline[mathescape=true]$try-again$}
+    <kbd>try-again</kbd>
   
   at the driver loop, or else starts a new evaluation by
-  calling {\lstinline[mathescape=true]$ambeval$}.  
+  calling <kbd>ambeval</kbd>.  
       </p></div>
 
       <div class='permalink'>
 <a name='p29' class='permalink'></a><p>
-  The failure continuation for this call to {\lstinline[mathescape=true]$ambeval$}
+  The failure continuation for this call to <kbd>ambeval</kbd>
   
   informs the user that there are no more values and re-invokes the driver loop.
       </p></div>
 
       <div class='permalink'>
 <a name='p30' class='permalink'></a><p>
-  The success continuation for the call to {\lstinline[mathescape=true]$ambeval$}
+  The success continuation for the call to <kbd>ambeval</kbd>
   
   is more subtle.  We print the obtained value and then invoke
   the internal loop again with a
   
   
-    {\lstinline[mathescape=true]$try_again$}
+    <kbd>try_again</kbd>
   
   function
   that will be
   able to try the next alternative.  This
   
   
-    {\lstinline[mathescape=true]$next_alternative$}
+    <kbd>next_alternative</kbd>
   
   function
   is the second argument that was passed to the
@@ -896,8 +863,7 @@ function analyze_amb(exp) {
   evaluation, so we can invoke the <QUOTE>failure</QUOTE> alternative branch in
   order to search for additional successful evaluations.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_14_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const input_prompt = "// Amb-Eval input:");
 const output_prompt =  "// Amb-Eval value:");
 function driver_loop() {
@@ -931,8 +897,7 @@ function driver_loop() {
                    return driver_loop();
                });
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -940,12 +905,12 @@ function driver_loop() {
 	The initial call to
 	
 	
-	  {\lstinline[mathescape=true]$internal_loop$}
+	  <kbd>internal_loop</kbd>
 	
 	uses a
 	
 	
-	  {\lstinline[mathescape=true]$try_again$}
+	  <kbd>try_again</kbd>
 	
   function
   that complains that there is no current
@@ -953,7 +918,7 @@ function driver_loop() {
   happen if the user types
 	
 	
-	  {\lstinline[mathescape=true]$try-again$}
+	  <kbd>try-again</kbd>
 	
   when there is no evaluation in progress.
       </p></div>
@@ -962,9 +927,9 @@ function driver_loop() {
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
 
-  Implement a new special form {\lstinline[mathescape=true]$ramb$} that is like {\lstinline[mathescape=true]$amb$} except that it searches alternatives in a random order, rather 
+  Implement a new special form <kbd>ramb</kbd> that is like <kbd>amb</kbd> except that it searches alternatives in a random order, rather 
   than from left to right.  Show how this can help with Alyssa's problem
-  in exercise~\ref{ex:sentence-generate}.
+  in exercise \ref{ex:sentence-generate}.
   
       
 \end{Exercise}
@@ -983,8 +948,7 @@ function driver_loop() {
   elements from a list and count the number of trials required to make a
   successful choice as follows:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_15_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 let count = 0;
 
 let x = an_element_of("a", "b", "c");
@@ -1001,8 +965,7 @@ list(x, y, count);
 try-again
 // Amb-Eval value:
 ["a", ["c", [3, null]]]
-\end{JavaScript}
-
+</pre></div></div>
 
   What values would have been displayed if we had used
   
@@ -1026,7 +989,7 @@ try-again
 	
 	
 	  kind of expression 
-	{\lstinline[mathescape=true]$if_fail$}
+	<kbd>if_fail</kbd>
 	
       
       that permits the user to
@@ -1034,7 +997,7 @@ try-again
       
 	
 	
-	  An application of {\lstinline[mathescape=true]$if_fail$}
+	  An application of <kbd>if_fail</kbd>
 	  to two expressions evaluates the first one as usual, and returns
 	  as usual if the evaluation succeeds.
 	
@@ -1042,8 +1005,7 @@ try-again
       If the evaluation fails,
   however, the value of the second expression is returned, as in the
   following example:
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_16_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 // Amb-Eval input:      
 if_fail( ( x => {
                require(is_even(x));
@@ -1062,8 +1024,7 @@ if_fail( ( x => {
 // Starting a new problem	   
 // Amb-Eval value:
 8
-\end{JavaScript}
-
+</pre></div></div>
       
 \end{Exercise}
 
@@ -1079,25 +1040,23 @@ if_fail( ( x => {
 	    the new kind of assignment
 	  
 	
-	as described in exercise~\ref{ex:permanent-set} and
+	as described in exercise \ref{ex:permanent-set} and
 	
 	  
 	  
-	    {\lstinline[mathescape=true]$if_fail$}
+	    <kbd>if_fail</kbd>
 	  
 	
 	as in
-  exercise~\ref{ex:if-fail}, what will be the result of evaluating
-  
-\begin{JavaScript}
+  exercise \ref{ex:if-fail}, what will be the result of evaluating
+  <div class='snippet' id='javascript_87_17_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 let pairs = null;      
 if_fail( ( p => {
                pairs = pair(p, pairs);
                amb();
            } )(prime_sum_pair(list(1, 3, 5, 8), list(20, 35, 110))),
          pairs);
-\end{JavaScript}
-
+</pre></div></div>
       
 \end{Exercise}
 
@@ -1107,23 +1066,22 @@ if_fail( ( p => {
 \begin{Exercise}
 
   
-  If we had not realized that {\lstinline[mathescape=true]$require$} could be implemented as an
+  If we had not realized that <kbd>require</kbd> could be implemented as an
   ordinary
   function
-  that uses {\lstinline[mathescape=true]$amb$}, to be defined by the user as
+  that uses <kbd>amb</kbd>, to be defined by the user as
   part of a nondeterministic program, we would have had to implement it
   
     
     
       in a way similar to the way we implemented
-      {\lstinline[mathescape=true]$amb$}.
+      <kbd>amb</kbd>.
     
   
   This would require syntax
   functions
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_18_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function is_require(stmt) {
     return is_tagged_list(stmt, "application") && 
            is_name(operator(stmt)) && 
@@ -1132,25 +1090,21 @@ function is_require(stmt) {
 function require_predicate(exp) {
     return operands(exp);
 }
-\end{JavaScript}
+</pre></div></div>
 
+  and a new clause in the dispatch in <kbd>analyze</kbd>
 
-  and a new clause in the dispatch in {\lstinline[mathescape=true]$analyze$}
-
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_19_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 : is_require(stmt)
   ? analyze_require(stmt)
-\end{JavaScript}
-
+</pre></div></div>
 
   as well the
   function
-  {\lstinline[mathescape=true]$analyze-require$} that handles {\lstinline[mathescape=true]$require$}
-  expressions.  Complete the following definition of {\lstinline[mathescape=true]$analyze-require$}.
+  <kbd>analyze-require</kbd> that handles <kbd>require</kbd>
+  expressions.  Complete the following definition of <kbd>analyze-require</kbd>.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_87_20_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze_require(stmt) {      
     return (env, succeed, fail) =>
         pfun(env,
@@ -1160,25 +1114,24 @@ function analyze_require(stmt) {
                  : succeed("ok", fail2),
              fail);
 }
-\end{JavaScript}
-
+</pre></div></div>
       
 \end{Exercise}
 
       
 
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>We chose to implement the lazy evaluator in
-    section~\ref{sec:lazy-evaluation} as a modification of the ordinary
-    metacircular evaluator of section~\ref{sec:core-of-evaluator}.  In
-    contrast, we will base the {\lstinline[mathescape=true]$amb$} evaluator on the analyzing evaluator
-    of section~\ref{sec:separating-analysis}, because the execution
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>We chose to implement the lazy evaluator in
+    section \ref{sec:lazy-evaluation} as a modification of the ordinary
+    metacircular evaluator of section \ref{sec:core-of-evaluator}.  In
+    contrast, we will base the <kbd>amb</kbd> evaluator on the analyzing evaluator
+    of section \ref{sec:separating-analysis}, because the execution
     functions
     in that evaluator provide a convenient framework for implementing
-    backtracking.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>We assume that the evaluator supports {\lstinline[mathescape=true]$let$}
-    (see exercise~\ref{ex:implement-analyze-let}),
-    which we have used in our nondeterministic programs.</FOOTNOTE></div><hr><div class='footnote'>
+    backtracking.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>We assume that the evaluator supports <kbd>let</kbd>
+    (see exercise \ref{ex:implement-analyze-let}),
+    which we have used in our nondeterministic programs.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>We didn't worry about undoing
 	declarations,
 	since we can
@@ -1186,5 +1139,12 @@ function analyze_require(stmt) {
     assume that internal
     declarations
     are scanned out
-    (section~\ref{sec:internal-definitions}).</FOOTNOTE></div>
-</SUBSECTION>
+    (section \ref{sec:internal-definitions}).</FOOTNOTE></div>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section3/subsection2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section4/section4.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+4.3.3  Implementing the <kbd> amb </kbd> Evaluator</div>	<div class='next-page'></div></div>

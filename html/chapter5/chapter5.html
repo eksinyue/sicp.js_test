@@ -1,6 +1,15 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>5 Computing with Register Machines</a>
+		<a name='top' class='permalink'>5  Computing with Register Machines</a>
 	</div>
 </div>
 	<div class='chapter-text'>
@@ -8,7 +17,7 @@
 
   
 
-  \epigraph{
+  <blockquote class='blockquote'>
 
     My aim is to show that the heavenly machine is not a kind of divine,
     live being, but a kind of clockwork (and he who believes that a clock
@@ -17,7 +26,11 @@
     force, just as all motions of the clock are caused by a single weight.
 
     
-    }{--- \textup{Johannes Kepler} ((letter to Herwart von Hohenburg, 1605))}
+    <div class='chapter-text-ATTRIBUTION'>
+<span class='chapter-text-AUTHOR'>Johannes Kepler</span>
+<span class='chapter-text-DATE'>(letter to Herwart von Hohenburg, 1605)</span>
+</div>
+</blockquote>
 
 
   
@@ -30,8 +43,8 @@
     written in JavaScript.  To explain the meanings of
     these
     functions, we used a succession of models of evaluation: the
-    substitution model of chapter~1, the environment model of chapter~3,
-    and the metacircular evaluator of chapter~4.  Our examination of the
+    substitution model of chapter 1, the environment model of chapter 3,
+    and the metacircular evaluator of chapter 4.  Our examination of the
     metacircular evaluator, in particular, dispelled much of the mystery
     of how JavaScript-like languages are interpreted.
     But even the metacircular evaluator leaves important questions
@@ -79,7 +92,7 @@
     we will develop mechanisms for implementing important programming
     constructs such as recursion.  We will also present a language for
     describing designs for register machines.  In
-    section~\ref{sec:simulator} we will
+    section \ref{sec:simulator} we will
     implement a JavaScript program that
     uses these descriptions to simulate the machines we design.
   </p></div>
@@ -91,24 +104,24 @@
     two registers, producing a result to be stored into a third register.
     Such an operation can be performed by easily described hardware.  In
     order to deal with list structure, however, we will also use the
-    memory operations {\lstinline[mathescape=true]$head$}, {\lstinline[mathescape=true]$tail$}, and {\lstinline[mathescape=true]$pair$}, which require
+    memory operations <kbd>head</kbd>, <kbd>tail</kbd>, and <kbd>pair</kbd>, which require
     an elaborate storage-allocation mechanism.  In
-    section~\ref{sec:storage-allocation} we study their implementation in
+    section \ref{sec:storage-allocation} we study their implementation in
     terms of more elementary operations.
   </p></div>
 
   <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
-    In section~\ref{sec:eceval}, after we have accumulated experience
+    In section \ref{sec:eceval}, after we have accumulated experience
     formulating simple
     functions
     as register machines, we will design a
     machine that carries out the algorithm described by the metacircular
-    evaluator of section~\ref{sec:mc-eval}.  This will fill in the gap in
+    evaluator of section \ref{sec:mc-eval}.  This will fill in the gap in
     our understanding of how JavaScript programs are interpreted, by
     providing an explicit model for the mechanisms of control in the
     evaluator.
-    In section~\ref{sec:compilation} we will study a simple compiler that
+    In section \ref{sec:compilation} we will study a simple compiler that
     translates JavaScript programs into sequences of instructions that can be
     executed directly with the registers and operations of the evaluator
     register machine.
@@ -117,19 +130,11 @@
   
 
   
-  &section5.1;
-
-  
-  &section5.2;
-
-  
-  &section5.3;
-
-  
-  &section5.4;
-
-  
-  &section5.5;
-
-
-</CHAPTER>
+</CHAPTER><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section4/subsection4.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section1/section1.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+5  Computing with Register Machines</div>	<div class='next-page'></div></div>

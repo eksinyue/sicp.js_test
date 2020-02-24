@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>5.4.1 
-  The Core of the Explicit-Control Evaluator
-      </a>
+		<a name='top' class='permalink'>5.4.1  The Core of the Explicit-Control Evaluator</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -14,17 +21,18 @@
       <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
   The central element in the evaluator is the sequence of instructions
-  beginning at {\lstinline[mathescape=true]$eval_dispatch$}.  This corresponds to the {\lstinline[mathescape=true]$evaluate$}
+  beginning at <kbd>eval_dispatch</kbd>.  This corresponds to the <kbd>evaluate</kbd>
   function
   of the metacircular evaluator described in
-  section~\ref{sec:core-of-evaluator}.  When the controller starts at {\lstinline[mathescape=true]$eval_dispatch$}, it evaluates the expression specified by {\lstinline[mathescape=true]$exp$} in
-  the environment specified by {\lstinline[mathescape=true]$env$}.  When evaluation is complete,
-  the controller will go to the entry point stored in {\lstinline[mathescape=true]$continue$}, and the
-  {\lstinline[mathescape=true]$val$} register will hold the value of the expression.  As with the
-  metacircular {\lstinline[mathescape=true]$eval$}, the structure of {\lstinline[mathescape=true]$eval_dispatch$} is a
+  section \ref{sec:core-of-evaluator}.  When the controller starts at <kbd>eval_dispatch</kbd>, it evaluates the expression specified by <kbd>exp</kbd> in
+  the environment specified by <kbd>env</kbd>.  When evaluation is complete,
+  the controller will go to the entry point stored in <kbd>continue</kbd>, and the
+  <kbd>val</kbd> register will hold the value of the expression.  As with the
+  metacircular <kbd>eval</kbd>, the structure of <kbd>eval_dispatch</kbd> is a
   case analysis on the syntactic type of the expression to be
-  evaluated.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-\begin{JavaScript}
+  evaluated.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
+
+  <div class='snippet' id='javascript_109_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 "eval_dispatch",
           test(op("is_self_evaluating"), reg("exp")),
           branch(label("ev_self_eval")),
@@ -45,52 +53,25 @@
           test(op("is_application"), reg("exp")),
           branch(label("ev_application")),
           go_to(label("unknown_expression_type")),
-\end{JavaScript}
-
-      
-
-  
-\begin{JavaScript}
-"eval_dispatch",
-          test(op("is_self_evaluating"), reg("exp")),
-          branch(label("ev_self_eval")),
-          test(op("is_variable"), reg("exp")),
-          branch(label("ev_variable")),
-          test(op("is_quoted"), reg("exp")),
-          branch(label("ev_quoted")), /// FIXME
-          test(op("is_assignment"), reg("exp")),
-          branch(label("ev_assignment")),
-          test(op("is_definition"), reg("exp")),
-          branch(label("ev_definition")),
-          test(op("is_conditional_statement"), reg("exp")),
-          branch(label("ev_if")),
-          test(op("is_function_expression"), reg("exp")),
-          branch(label("ev_lambda")),
-          test(op("is_block"), reg("exp")),
-          branch(label("ev_begin")),
-          test(op("is_application"), reg("exp")),
-          branch(label("ev_application")),
-          go_to(label("unknown_expression_type")),
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Evaluating simple expressions
-      
+      </h2></div>
 
       
       <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
   Numbers and strings (which are self-evaluating),
-  variables, quotations, and {\lstinline[mathescape=true]$function definition$} expressions have no
+  variables, quotations, and <kbd>function definition</kbd> expressions have no
   subexpressions to be evaluated.  For these, the evaluator simply
-  places the correct value in the {\lstinline[mathescape=true]$val$} register and continues
-  execution at the entry point specified by {\lstinline[mathescape=true]$continue$}.  Evaluation
+  places the correct value in the <kbd>val</kbd> register and continues
+  execution at the entry point specified by <kbd>continue</kbd>.  Evaluation
   of simple expressions is performed by the following controller code:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_109_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 "ev_self_eval",
     assign("val", reg("exp")),
     go_to(reg("continue")),
@@ -108,24 +89,24 @@
     assign("exp", op("lambda_body"), reg("exp")),
     assign("val", op("make_procedure"), reg("unev"), reg("exp"), reg("env")),
     go_to(reg("continue")),
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
-  Observe how {\lstinline[mathescape=true]$ev_lambda$} uses the {\lstinline[mathescape=true]$unev$} and {\lstinline[mathescape=true]$exp$}
+  Observe how <kbd>ev_lambda</kbd> uses the <kbd>unev</kbd> and <kbd>exp</kbd>
   registers to hold the parameters and body of the lambda expression so
-  that they can be passed to the {\lstinline[mathescape=true]$make_procedure$} operation, along
-  with the environment in {\lstinline[mathescape=true]$env$}.
+  that they can be passed to the <kbd>make_procedure</kbd> operation, along
+  with the environment in <kbd>env</kbd>.
   
       </p></div>
 
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
   Evaluating
     function
     applications
-      
+      </h2></div>
 
       
       
@@ -141,19 +122,19 @@
   arguments to which the
   function
   should be applied.  The metacircular
-  {\lstinline[mathescape=true]$eval$} handles applications by calling itself recursively to
+  <kbd>eval</kbd> handles applications by calling itself recursively to
   evaluate each element of the combination, and then passing the results
-  to {\lstinline[mathescape=true]$apply$}, which performs the actual
+  to <kbd>apply</kbd>, which performs the actual
   function
   application.  The
   explicit-control evaluator does the same thing; these recursive calls
-  are implemented by {\lstinline[mathescape=true]$goto$} instructions, together with 
+  are implemented by <kbd>goto</kbd> instructions, together with 
   
   use of the
   stack to save registers that will be restored after the recursive call
   returns.  Before each call we will be careful to identify which
   registers must be saved (because their values will be needed
-  later).<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+  later).<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
       </p></div>
 
       <div class='permalink'>
@@ -161,17 +142,16 @@
   We begin the evaluation of an application by evaluating the operator
   to produce a
   function, which will later be applied to the evaluated
-  operands.  To evaluate the operator, we move it to the {\lstinline[mathescape=true]$exp$}
-  register and go to {\lstinline[mathescape=true]$eval-dispatch$}.  The environment in the {\lstinline[mathescape=true]$env$} register is already the correct one in which to evaluate the
-  operator.  However, we save {\lstinline[mathescape=true]$env$} because we will need it later to
-  evaluate the operands.  We also extract the operands into {\lstinline[mathescape=true]$unev$}
-  and save this on the stack.  We set up {\lstinline[mathescape=true]$continue$} so that {\lstinline[mathescape=true]$eval-dispatch$} will resume at {\lstinline[mathescape=true]$ev-appl-did-operator$} after the
+  operands.  To evaluate the operator, we move it to the <kbd>exp</kbd>
+  register and go to <kbd>eval-dispatch</kbd>.  The environment in the <kbd>env</kbd> register is already the correct one in which to evaluate the
+  operator.  However, we save <kbd>env</kbd> because we will need it later to
+  evaluate the operands.  We also extract the operands into <kbd>unev</kbd>
+  and save this on the stack.  We set up <kbd>continue</kbd> so that <kbd>eval-dispatch</kbd> will resume at <kbd>ev-appl-did-operator</kbd> after the
   operator has been evaluated.  First, however, we save the old value of
-  {\lstinline[mathescape=true]$continue$}, which tells the controller where to continue after the
+  <kbd>continue</kbd>, which tells the controller where to continue after the
   application.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_109_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 "ev_application",
           save("continue"),
           save("env"),
@@ -180,8 +160,7 @@
           assign("exp", op("operator"), reg("exp")),
           assign("continue", label("ev_appl_did_operator")),
           go_to(label("eval_dispatch")),
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -189,14 +168,15 @@
   
   Upon returning from evaluating the operator subexpression, we proceed
   to evaluate the operands of the combination and to accumulate the
-  resulting arguments in a list, held in {\lstinline[mathescape=true]$argl$}.  First we restore
-  the unevaluated operands and the environment.  We initialize {\lstinline[mathescape=true]$argl$} to an empty list.  Then we assign to the {\lstinline[mathescape=true]$proc$} register the
+  resulting arguments in a list, held in <kbd>argl</kbd>.  First we restore
+  the unevaluated operands and the environment.  We initialize <kbd>argl</kbd> to an empty list.  Then we assign to the <kbd>proc</kbd> register the
   function
   that was produced by evaluating the operator.  If there are
-  no operands, we go directly to {\lstinline[mathescape=true]$apply-dispatch$}.  Otherwise we
-  save {\lstinline[mathescape=true]$proc$} on the stack and start the argument-evaluation
-  loop:<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
-\begin{JavaScript}
+  no operands, we go directly to <kbd>apply-dispatch</kbd>.  Otherwise we
+  save <kbd>proc</kbd> on the stack and start the argument-evaluation
+  loop:<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
+
+  <div class='snippet' id='javascript_109_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 "ev_appl_did_operator",
            restore("unev"),                  // the operands
            restore("env"),
@@ -205,38 +185,22 @@
            test(op("has_no_operands"), reg("unev")),
            branch(label("apply_dispatch")),
            save("fun"),
-\end{JavaScript}
-
-      
-
-  
-\begin{JavaScript}
-"ev_appl_did_operator",
-           restore("unev"),                  // the operands
-           restore("env"),
-           assign("argl", op("empty_arglist")),
-           assign("fun", reg("val")),       // the operator
-           test(op("has_no_operands"), reg("unev")),
-           branch(label("apply_dispatch")),
-           save("fun"),
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
   Each cycle of the argument-evaluation loop evaluates an operand
-  from the list in {\lstinline[mathescape=true]$unev$} and accumulates the result into {\lstinline[mathescape=true]$argl$}.
-  To evaluate an operand, we place it in the {\lstinline[mathescape=true]$exp$} register
-  and go to {\lstinline[mathescape=true]$eval_dispatch$}, after setting {\lstinline[mathescape=true]$continue$} so that
+  from the list in <kbd>unev</kbd> and accumulates the result into <kbd>argl</kbd>.
+  To evaluate an operand, we place it in the <kbd>exp</kbd> register
+  and go to <kbd>eval_dispatch</kbd>, after setting <kbd>continue</kbd> so that
   execution will resume with the argument-accumulation phase.  But first
-  we save the arguments accumulated so far (held in {\lstinline[mathescape=true]$argl$}), the
-  environment (held in {\lstinline[mathescape=true]$env$}), and the remaining operands to be evaluated
-  (held in {\lstinline[mathescape=true]$unev$}).  A special case is made for the evaluation of the
-  last operand, which is handled at {\lstinline[mathescape=true]$ev_appl_last_arg$}.
+  we save the arguments accumulated so far (held in <kbd>argl</kbd>), the
+  environment (held in <kbd>env</kbd>), and the remaining operands to be evaluated
+  (held in <kbd>unev</kbd>).  A special case is made for the evaluation of the
+  last operand, which is handled at <kbd>ev_appl_last_arg</kbd>.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_109_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 "ev_appl_operand_loop",
            save("argl"),
            assign("exp", (op("first_operand"), reg("unev")),
@@ -246,18 +210,16 @@
            save("unev"),
            assign("continue", (label("ev_appl_accumulate_arg"))),
            go_to(label("eval_dispatch")),
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
   When an operand has been evaluated, the value is accumulated into the
-  list held in {\lstinline[mathescape=true]$argl$}.  The operand is then removed from the list of
-  unevaluated operands in {\lstinline[mathescape=true]$unev$}, and the argument-evaluation continues.
+  list held in <kbd>argl</kbd>.  The operand is then removed from the list of
+  unevaluated operands in <kbd>unev</kbd>, and the argument-evaluation continues.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_109_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 "ev_appl_accumulate_arg",
           restore("unev"),
           restore("env"),
@@ -265,22 +227,22 @@
           assign("argl", op("adjoin_arg"), reg("val"), reg("argl")),
           assign("unev", op("rest_operands"), reg("unev")),
           go_to(label("ev_appl_operand_loop")),
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
   Evaluation of the last argument is handled differently.  There is no
   need to save the environment or the list of unevaluated operands
-  before going to {\lstinline[mathescape=true]$eval-dispatch$},
+  before going to <kbd>eval-dispatch</kbd>,
   since they will not be required after the last operand is evaluated.
-  Thus, we return from the evaluation to a special entry point {\lstinline[mathescape=true]$ev-appl-accum-last-arg$}, which restores the argument list, accumulates
+  Thus, we return from the evaluation to a special entry point <kbd>ev-appl-accum-last-arg</kbd>, which restores the argument list, accumulates
   the new argument, restores the saved
   function, and goes off to
   perform the 
-  application.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
-\begin{JavaScript}
+  application.<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
+
+  <div class='snippet' id='javascript_109_7_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 "ev_appl_last_arg",
       assign("continue", label("ev_appl_accum_last_arg")),
       go_to(label("eval_dispatch")),
@@ -290,23 +252,7 @@
       assign("argl", op("adjoin_arg"), reg("val"), reg("argl")),
       restore("fun"),
       go_to(label("apply_dispatch")),
-\end{JavaScript}
-
-      
-
-  
-\begin{JavaScript}
-"ev_appl_last_arg",
-      assign("continue", label("ev_appl_accum_last_arg")),
-      go_to(label("eval_dispatch")),
-
-"ev_appl_accum_last_arg",
-      restore(argl),
-      assign("argl", op("adjoin_arg"), reg("val"), reg("argl")),
-      restore("fun"),
-      go_to(label("apply_dispatch")),
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -315,101 +261,92 @@
   The details of the argument-evaluation loop determine the order in
   which the interpreter evaluates the operands of a combination (e.g.,
   left to right or right to left—see
-  exercise~\ref{ex:order-of-evaluation}).  This order is not determined
+  exercise \ref{ex:order-of-evaluation}).  This order is not determined
   by the metacircular evaluator, which inherits its control structure
-  from the underlying Scheme in which it is implemented.<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>{\lstinline[mathescape=true]$first\?operand$}
-  selector (used in {\lstinline[mathescape=true]$ev-appl-operand-loop$} to extract successive operands
-  from {\lstinline[mathescape=true]$unev$}) is implemented as {\lstinline[mathescape=true]$head$} and the {\lstinline[mathescape=true]$rest-operands$} selector is implemented as {\lstinline[mathescape=true]$tail$}, the
-  explicit-control evaluator will evaluate the operands of a combination
-  in left-to-right order.
-  
-       Because the {\lstinline[mathescape=true]$first\?operand$}
-  selector (used in {\lstinline[mathescape=true]$ev-appl-operand-loop$} to extract successive operands
-  from {\lstinline[mathescape=true]$unev$}) is implemented as {\lstinline[mathescape=true]$head$} and the {\lstinline[mathescape=true]$rest-operands$} selector is implemented as {\lstinline[mathescape=true]$tail$}, the
+  from the underlying Scheme in which it is implemented.<a class='superscript' id='footnote-link-5' href='#footnote-5'>[5]</a> Because the <kbd>first\?operand</kbd>
+  selector (used in <kbd>ev-appl-operand-loop</kbd> to extract successive operands
+  from <kbd>unev</kbd>) is implemented as <kbd>head</kbd> and the <kbd>rest-operands</kbd> selector is implemented as <kbd>tail</kbd>, the
   explicit-control evaluator will evaluate the operands of a combination
   in left-to-right order.
   
       </p></div>
 
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
   Function
     application
-      
+      </h2></div>
 
       
       <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
-  The entry point {\lstinline[mathescape=true]$apply-dispatch$} corresponds to the {\lstinline[mathescape=true]$apply$}
+  The entry point <kbd>apply-dispatch</kbd> corresponds to the <kbd>apply</kbd>
   function
-  of the metacircular evaluator.  By the time we get to {\lstinline[mathescape=true]$apply-dispatch$}, the {\lstinline[mathescape=true]$proc$} register contains the
+  of the metacircular evaluator.  By the time we get to <kbd>apply-dispatch</kbd>, the <kbd>proc</kbd> register contains the
   function
   to
-  apply and {\lstinline[mathescape=true]$argl$} contains the list of evaluated arguments to which
-  it must be applied.  The saved value of {\lstinline[mathescape=true]$continue$} (originally
-  passed to {\lstinline[mathescape=true]$eval-dispatch$} and saved at {\lstinline[mathescape=true]$ev-application$}),
+  apply and <kbd>argl</kbd> contains the list of evaluated arguments to which
+  it must be applied.  The saved value of <kbd>continue</kbd> (originally
+  passed to <kbd>eval-dispatch</kbd> and saved at <kbd>ev-application</kbd>),
   which tells where to return with the result of the
   function
   application, is on the stack.  When the application is complete, the
-  controller transfers to the entry point specified by the saved {\lstinline[mathescape=true]$continue$}, with the result of the application in {\lstinline[mathescape=true]$val$}.  As with
-  the metacircular {\lstinline[mathescape=true]$apply$}, there are two cases to consider.  Either
+  controller transfers to the entry point specified by the saved <kbd>continue</kbd>, with the result of the application in <kbd>val</kbd>.  As with
+  the metacircular <kbd>apply</kbd>, there are two cases to consider.  Either
   the
   function
   to be applied is a primitive or it is a compound
   function.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_109_8_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 "apply_dispatch",
           test(op("is_primitive_procedure"), reg("fun")),
           branch(label("primitive_apply")),
           test(op("is_compound_procedure"), reg("fun")),
           branch(label("compound_apply")),
           go_to(label("unknown_procedure_type")),
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
   
   We assume that each primitive is implemented so as to obtain its
-  arguments from {\lstinline[mathescape=true]$argl$} and place its result in {\lstinline[mathescape=true]$val$}.  To
+  arguments from <kbd>argl</kbd> and place its result in <kbd>val</kbd>.  To
   specify how the machine handles primitives, we would have to provide a
   sequence of controller instructions to implement each primitive and
   arrange for
   
     
-    {\lstinline[mathescape=true]$primitive_apply$}
+    <kbd>primitive_apply</kbd>
   
   to dispatch to the
   instructions for the primitive identified by the
   contents of
   
     
-    {\lstinline[mathescape=true]$fun$}.
+    <kbd>fun</kbd>.
   
   Since we are interested in the structure of
   the evaluation process rather than the details of the primitives, we
-  will instead just use an {\lstinline[mathescape=true]$apply-primitive-procedure$} operation
+  will instead just use an <kbd>apply-primitive-procedure</kbd> operation
   that applies the
   function
-  in {\lstinline[mathescape=true]$proc$} to the arguments in {\lstinline[mathescape=true]$argl$}.  For the purpose of simulating the evaluator with the simulator
-  of section~\ref{sec:simulator} we use the
+  in <kbd>proc</kbd> to the arguments in <kbd>argl</kbd>.  For the purpose of simulating the evaluator with the simulator
+  of section \ref{sec:simulator} we use the
   function
-  {\lstinline[mathescape=true]$apply-primitive-procedure$}, which calls on the underlying Scheme
+  <kbd>apply-primitive-procedure</kbd>, which calls on the underlying Scheme
   system to perform the application, just as we did for the metacircular
-  evaluator in section~\ref{sec:running-eval}.  After computing the
-  value of the primitive application, we restore {\lstinline[mathescape=true]$continue$} and go
+  evaluator in section \ref{sec:running-eval}.  After computing the
+  value of the primitive application, we restore <kbd>continue</kbd> and go
   to the designated entry point.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_109_9_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 "primitive_apply",
           assign("val", op("apply_primitive_procedure"), reg("fun"), reg("argl")),
           restore("continue"),
           go_to(reg("continue")),
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -423,26 +360,24 @@
   function, and evaluate in this
   extended environment the sequence of expressions that forms the body
   of the
-  function.  {\lstinline[mathescape=true]$Ev-sequence$}, described below in
-  section~\ref{sec:sequence-evaluation}, handles the evaluation
+  function.  <kbd>Ev-sequence</kbd>, described below in
+  section \ref{sec:sequence-evaluation}, handles the evaluation
   of the sequence.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_109_10_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 "compound_apply",
           assign("unev", op("procedure_parameters"), reg("fun")),
           assign("env", op("procedure_environment") reg("fun")),
           assign("env", op("extend_environment"), reg("unev"), reg("argl"), reg("env")),
           assign("unev", op("procedure_body"), reg("fun")),
           go_to(label("ev_sequence")),
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p14' class='permalink'></a><p>
-  {\lstinline[mathescape=true]$Compound-apply$} is the only place in the interpreter where the
-  {\lstinline[mathescape=true]$env$} register is ever assigned a new value.  Just as in the
+  <kbd>Compound-apply</kbd> is the only place in the interpreter where the
+  <kbd>env</kbd> register is ever assigned a new value.  Just as in the
   metacircular evaluator, the new environment is constructed from the
   environment carried by the
   function, together with the argument list
@@ -452,17 +387,17 @@
       </p></div>
 
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>In our controller, the dispatch is written as a
-    sequence of {\lstinline[mathescape=true]$test$} and {\lstinline[mathescape=true]$branch$} instructions.  Alternatively,
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>In our controller, the dispatch is written as a
+    sequence of <kbd>test</kbd> and <kbd>branch</kbd> instructions.  Alternatively,
     it could have been written in a data-directed style (and in a real
     system it probably would have been) to avoid the need to perform
     sequential tests and to facilitate the definition of new expression
-    types.  A machine designed to run JavaScript would probably include a {\lstinline[mathescape=true]$dispatch-on-type$} instruction that would efficiently execute such
-    data-directed dispatches.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>This is an important but subtle point in translating
+    types.  A machine designed to run JavaScript would probably include a <kbd>dispatch-on-type</kbd> instruction that would efficiently execute such
+    data-directed dispatches.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>This is an important but subtle point in translating
     algorithms from a procedural language, such as JavaScript, to a
     register-machine language.  As an alternative to saving only what is
-    needed, we could save all the registers (except {\lstinline[mathescape=true]$val$}) before each
+    needed, we could save all the registers (except <kbd>val</kbd>) before each
     recursive call. This is called a 
     
     
@@ -471,56 +406,59 @@
     an important consideration in a system where stack operations are
     expensive.  Saving registers whose contents will not be needed later
     may also hold onto useless data that could otherwise be
-    garbage-collected, freeing space to be reused.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>We add to the evaluator data-structure
+    garbage-collected, freeing space to be reused.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>We add to the evaluator data-structure
     functions
     in
-    section~\ref{sec:eval-data-structures} the following two
+    section \ref{sec:eval-data-structures} the following two
     functions
     for manipulating argument lists:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_109_11_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const empty_arglist = list();
 
  
 function adjoin_arg(arg, arglist) {
     return append(arglist, list(arg));
 }
-\end{JavaScript}
-
+</pre></div></div>
     We also use an additional syntax
     function
     to test for the
     last operand in a combination:
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_109_12_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function is_last_operand(ops) {
     return is_null(tail(ops));
 }
-\end{JavaScript}
-
-  </FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>The optimization of treating the last operand
+</pre></div></div>
+  </FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>The optimization of treating the last operand
     
     specially is known as <EM>evlis tail recursion</EM> (see 
     
-    Wand 1980).
+    <CITATION>Wand 1980</CITATION>).
     We could be somewhat more efficient
     in the argument evaluation loop if we made evaluation of the first
     operand a special case too.  This would permit us to postpone
-    initializing {\lstinline[mathescape=true]$argl$} until after evaluating the first operand, so
-    as to avoid saving {\lstinline[mathescape=true]$argl$} in this case.  The compiler in
-    section~\ref{sec:compilation} performs this optimization.  (Compare
-    the {\lstinline[mathescape=true]$construct-arglist$}
+    initializing <kbd>argl</kbd> until after evaluating the first operand, so
+    as to avoid saving <kbd>argl</kbd> in this case.  The compiler in
+    section \ref{sec:compilation} performs this optimization.  (Compare
+    the <kbd>construct-arglist</kbd>
     function
     of
-    section~\ref{sec:compiling-combinations}.)</FOOTNOTE></div><hr><div class='footnote'>
+    section \ref{sec:compiling-combinations}.)</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>The
     order of operand evaluation in the metacircular evaluator is
-    determined by the order of evaluation of the arguments to {\lstinline[mathescape=true]$pair$}
+    determined by the order of evaluation of the arguments to <kbd>pair</kbd>
     in the
     function
-    {\lstinline[mathescape=true]$list-of-values$} of section~\ref{sec:core-of-evaluator}
-    (see exercise~\ref{ex:arg-eval-order}).</FOOTNOTE></div>
-</SUBSECTION>
+    <kbd>list-of-values</kbd> of section \ref{sec:core-of-evaluator}
+    (see exercise \ref{ex:arg-eval-order}).</FOOTNOTE></div>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section4/section4.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section4/subsection2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+5.4.1  The Core of the Explicit-Control Evaluator</div>	<div class='next-page'></div></div>

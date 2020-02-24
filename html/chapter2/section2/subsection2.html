@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>2.2.2 
-        Hierarchical Structures
-      </a>
+		<a name='top' class='permalink'>2.2.2  Hierarchical Structures</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -18,19 +25,20 @@
         The representation of sequences in terms of lists generalizes
         naturally to represent sequences whose elements may
         themselves be sequences.  For example, we can regard the object
-        {\lstinline[mathescape=true]$[[1, [2, null]], [3, [4, null]]]$} constructed by
+        <kbd>[[1, [2, null]], [3, [4, null]]]</kbd> constructed by
 
-        
+        <div class='snippet' id='javascript_30_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 pair(list(1, 2), list(3, 4));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4QwlgTgFANmDOAXKBGANAAgEwEpNySgGZMAWHHAbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=A4QwlgTgFANmDOAXKBGANAAgEwEpNySgGZMAWHHAbiA}{\usebox\lstbox}
+</pre>
 
-
-        as a list of three items, the first of which is itself a list, {\lstinline[mathescape=true]$[1, [2, null]]$}. Figure~\ref{fig:cons-of-2-lists} shows
+</div></div>
+        as a list of three items, the first of which is itself a list, <kbd>[1, [2, null]]</kbd>. Figure \ref{fig:cons-of-2-lists} shows
         the representation of this structure in terms of pairs.
 
       <SPLIT>
@@ -41,7 +49,7 @@ pair(list(1, 2), list(3, 4));
 \centering
 
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch2-Z-G-15}.svg}}
-\caption{Structure formed by {\lstinline[mathescape=true]$pair(list(1, 2), list(3, 4))$}.
+\caption{Structure formed by <kbd>pair(list(1, 2), list(3, 4))</kbd>.
                 }
 \label{fig:cons-of-2-lists}
 \end{figure}
@@ -56,8 +64,8 @@ pair(list(1, 2), list(3, 4));
         Another way to think of sequences whose elements are sequences is as
         <EM>trees</EM>.  The elements of the sequence are the branches of the
         tree, and elements that are themselves sequences are subtrees.
-        Figure~\ref{fig:list-as-tree-javascript} shows the structure in
-        Figure~\ref{fig:cons-of-2-lists} viewed as a tree.
+        Figure \ref{fig:list-as-tree-javascript} shows the structure in
+        Figure \ref{fig:cons-of-2-lists} viewed as a tree.
 
         <SPLIT>
           
@@ -67,7 +75,7 @@ pair(list(1, 2), list(3, 4));
 \centering
 
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch2-Z-G-16}.svg}}
-\caption{The list structure in Figure~\ref{fig:cons-of-2-lists} viewed as a tree.
+\caption{The list structure in Figure \ref{fig:cons-of-2-lists} viewed as a tree.
               }
 \label{fig:list-as-tree-javascript}
 \end{figure}
@@ -83,28 +91,29 @@ pair(list(1, 2), list(3, 4));
         we can often reduce operations on trees to operations on their
         branches, which reduce in turn to operations on the branches of the
         branches, and so on, until we reach the leaves of the tree.
-        As an example, compare the {\lstinline[mathescape=true]$length$}
+        As an example, compare the <kbd>length</kbd>
         function
         of
-        section~\ref{sec:sequences} with the
+        section \ref{sec:sequences} with the
         
         
-        {\lstinline[mathescape=true]$count_leaves$}
+        <kbd>count_leaves</kbd>
         function, which
         returns the total number of leaves of a tree:
 
-        
+        <div class='snippet' id='javascript_30_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const x = pair(pair(1, pair(2,null)), pair(3, pair(4,null)));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAHjAvDADgQwJYCcAU7s4CMANKprgEzFgCuANnQJSOn64DMr5OALNfU2YBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDADgQwJYCcAU7s4CMANKprgEzFgCuANnQJSOn64DMr5OALNfU2YBuIA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_30_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 length(x);
@@ -112,11 +121,12 @@ length(x);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYUwdg5gLgFgFADwJQG4BQB6DACAzEA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDADgQwJYCcAU7s4CMANKprgEzFgCuANnQJSOn64DMr5OALNfU2YBuAFB0ApmADmUABY44jUQHplMdkA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_30_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 count_leaves(x);
@@ -124,11 +134,12 @@ count_leaves(x);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewrgdgLg+gNgUwIYDcEGcAUAPAlAbgCgB6YgAgBYg}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDADgQwJYCcAU7s4CMANKprgEzFgCuANnQJSOn64DMr5OALNfU2YBuAFAAzGmGBQM4GKElQA+nQCmaAG6qIOOIxgBvETBMwsqqDSxgYGCEtoNdjY6bemA-DAAMr924AuGABCW3s2Zz9-Ny9CKOiTIIUwZTVNbRwAC3UAE2d9AGp4hJNk1PUtHShMOnzRAF8RMpUKjL1RAHoOmB4gA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_30_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 list(x, x);
@@ -137,11 +148,12 @@ list(x, x);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYSwzgLgFAHgNAAhgSgNwCgD0mEG1+4CMiuATIgHYCuwwAunSQMwkAslN9DcWOe+xPOQTVa3PCzzsRnBoxli6QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDADgQwJYCcAU7s4CMANKprgEzFgCuANnQJSOn64DMr5OALNfU2YBuAFB0M0HHFJxGogPTyYAbVXKSKqjFoMAurtLLOKvtoH6DIxTBWqNyrTrr7Dx5aacXSn3UA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_30_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 length(list(x, x));
@@ -149,11 +161,12 @@ length(list(x, x));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYUwdg5gLgFgFMAlgZynAHgGgAToJR4DcAUAPSnYBMQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDADgQwJYCcAU7s4CMANKprgEzFgCuANnQJSOn64DMr5OALNfU2YBuAFB0ApmADmUABY46GaDjik4wkQHpNMCkA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_30_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 count_leaves(list(x, x));
@@ -161,45 +174,46 @@ count_leaves(list(x, x));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewrgdgLg+gNgUwIYDcEGcAUcCW6qYAeANAASECUFA3AFAD09pAHEA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDADgQwJYCcAU7s4CMANKprgEzFgCuANnQJSOn64DMr5OALNfU2YBuAFAAzGmGBQM4GKElQA+nQCmaAG6qIOOIxgBvETBMwsqqDSxgYGCEtoNdjY6bemA-DAAMr924AuGABCW3s2Zz9-Ny9CKOiTIIUwZTVNbRwAC3UAE2d9AGp4hJNk1PUtHShMOnzRAF8RMpUKjLo7KF1SPUZRAHo+mAAOIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
-        To implement {\lstinline[mathescape=true]$count_leaves$}, recall the recursive plan for computing
-        {\lstinline[mathescape=true]$length$}:
+        To implement <kbd>count_leaves</kbd>, recall the recursive plan for computing
+        <kbd>length</kbd>:
 
         <UL>
-          <LI> The {\lstinline[mathescape=true]$length$} of a list {\lstinline[mathescape=true]$x$} is 1 plus the {\lstinline[mathescape=true]$length$} of the
-            {\lstinline[mathescape=true]$tail$} of {\lstinline[mathescape=true]$x$}.
+          <LI> The <kbd>length</kbd> of a list <kbd>x</kbd> is 1 plus the <kbd>length</kbd> of the
+            <kbd>tail</kbd> of <kbd>x</kbd>.
           </LI>
           <LI>
-            The {\lstinline[mathescape=true]$length$} of the empty list is 0.
+            The <kbd>length</kbd> of the empty list is 0.
           </LI>
         </UL>
-        The function {\lstinline[mathescape=true]$count_leaves$} is similar.  The value for the empty list is the same:
+        The function <kbd>count_leaves</kbd> is similar.  The value for the empty list is the same:
         <UL>
           <LI>
-            {\lstinline[mathescape=true]$count_leaves$} of the empty list is 0.
+            <kbd>count_leaves</kbd> of the empty list is 0.
           </LI>
         </UL>
-        But in the reduction step, where we strip off the {\lstinline[mathescape=true]$head$} of the
-        list, we must take into account that the {\lstinline[mathescape=true]$head$} may itself be a
+        But in the reduction step, where we strip off the <kbd>head</kbd> of the
+        list, we must take into account that the <kbd>head</kbd> may itself be a
         tree whose leaves we need to count.  Thus, the appropriate reduction
         step is
         <UL>
           <LI>
-            {\lstinline[mathescape=true]$count_leaves$} of a tree {\lstinline[mathescape=true]$x$} is {\lstinline[mathescape=true]$count_leaves$} of the {\lstinline[mathescape=true]$head$} of {\lstinline[mathescape=true]$x$} plus {\lstinline[mathescape=true]$count_leaves$} of the
-            {\lstinline[mathescape=true]$tail$} of {\lstinline[mathescape=true]$x$}.
+            <kbd>count_leaves</kbd> of a tree <kbd>x</kbd> is <kbd>count_leaves</kbd> of the <kbd>head</kbd> of <kbd>x</kbd> plus <kbd>count_leaves</kbd> of the
+            <kbd>tail</kbd> of <kbd>x</kbd>.
           </LI>
         </UL>
-        Finally, by taking {\lstinline[mathescape=true]$head$}s we reach
+        Finally, by taking <kbd>head</kbd>s we reach
         actual leaves, so we need another base case:
         <UL>
           <LI>
-            {\lstinline[mathescape=true]$count_leaves$} of a leaf is 1.
+            <kbd>count_leaves</kbd> of a leaf is 1.
           </LI>
         </UL>
         To aid in writing recursive
@@ -208,11 +222,11 @@ count_leaves(list(x, x));
         predicate
         
         
-        {\lstinline[mathescape=true]$is_pair$}, which tests whether its argument is a pair.
+        <kbd>is_pair</kbd>, which tests whether its argument is a pair.
         Here is the complete
         function:
 
-        
+        <div class='snippet' id='javascript_30_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function count_leaves(x) {
@@ -224,13 +238,14 @@ function count_leaves(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABBO4oH0A2BTAhgN2wGcAKADwEpEBvAKEQcQCdsoQmkYj0wRNNyFeoxGMA-IgAMw0SIBciAISIu6AA64YTQTNkiJARl16GClGix5CpABZ4AJoKoBqYyYbmwGHAWIkomgKUFADctAC+QA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABBO4oH0A2BTAhgN2wGcAKADwEpEBvAKEQcQCdsoQmkYj0wRNNyFeoxGMA-IgAMw0SIBciAISIu6AA64YTQTNkiJARl16GClGix5CpABZ4AJoKoBqYyYbmwGHAWIkomgKUFADctAC+tLSe3lZ+GlokmFxQJAYANIgATBSZyUSpAMyZACwU5SFAA}{\usebox\lstbox}!*/
                count_leaves(tail(x));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
 
@@ -241,10 +256,10 @@ function count_leaves(x) {
 \begin{Exercise}
 
         Suppose we evaluate the expression
-        {\lstinline[mathescape=true]$list(1, list(2, list(3, 4)))$}.
+        <kbd>list(1, list(2, list(3, 4)))</kbd>.
         Give the result printed by the interpreter, the corresponding
         box-and-pointer structure, and the interpretation of this as a tree
-        (as in Figure~\ref{fig:list-as-tree-javascript}).
+        (as in Figure \ref{fig:list-as-tree-javascript}).
         
         
       \hfill{\hyperref[ex:nested-list-Answer]{Solution}}\\
@@ -255,11 +270,9 @@ function count_leaves(x) {
           
 \begin{enumerate}[a.]
 \item{
-              
-\begin{JavaScript}
+              <div class='snippet' id='javascript_30_9_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 [1, [[2, [[3, [4, null]], null]], null]]
-\end{JavaScript}
-
+</pre></div></div>
             }
 \item{
               
@@ -288,13 +301,12 @@ function count_leaves(x) {
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled22}
+\label{ex:unlabeled27}
 
-        Give combinations of {\lstinline[mathescape=true]$head$}s and {\lstinline[mathescape=true]$tail$}s that will pick 7 from
+        Give combinations of <kbd>head</kbd>s and <kbd>tail</kbd>s that will pick 7 from
         each of the following lists<SPLIT>, given as printed by our interpreter:</SPLIT>
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_30_10_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 [1, [3, [[5, [7, null]], [9, null]]]]
 
 [[7, null], null]
@@ -329,36 +341,29 @@ function count_leaves(x) {
   null
  ]
 ]
-\end{JavaScript}
-
+</pre></div></div>
   
-      \hfill{\hyperref[ex:unlabeled22-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled27-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled22}]
+\begin{Answer}[ref={ex:unlabeled27}]
 
     <UL>
       <LI>
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_30_11_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 head(tail(head(tail(tail(the_first_list)))));
-\end{JavaScript}
-
+</pre></div></div>
       </LI>
       <LI>
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_30_12_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 head(head(the_second_list));
-\end{JavaScript}
-
+</pre></div></div>
       </LI>
       <LI>
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_30_13_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 head(tail(head(tail(head(tail(head(tail(head(
     tail(head(tail(the_third_list))))))))))));
-\end{JavaScript}
-
+</pre></div></div>
       </LI>
     </UL>
   
@@ -368,11 +373,11 @@ head(tail(head(tail(head(tail(head(tail(head(
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled23}
+\label{ex:unlabeled28}
 
-        Suppose we define {\lstinline[mathescape=true]$x$} and {\lstinline[mathescape=true]$y$} to be two lists:
+        Suppose we define <kbd>x</kbd> and <kbd>y</kbd> to be two lists:
 
-        
+        <div class='snippet' id='javascript_30_14_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const x = list(1, 2, 3);
@@ -381,91 +386,98 @@ const y = list(4, 5, 6);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAHjAvDANgS2gCgIwBoYBM+AzAJQDcAUJaJLAJ5KoZSYAs+ArPgGwVA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDANgS2gCgIwBoYBM+AzAJQDcAUJaJLAJ5KoZSYAs+ArPgGwVA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         What result is printed by the interpreter in response to evaluating
         each of the following expressions:
 
-        
+        <div class='snippet' id='javascript_30_15_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 append(x, y);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYBxFMDsBMAoA8A0ACAngSgNxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDANgS2gCgIwBoYBM+AzAJQDcAUJaJLAJ5KoZSYAs+ArPgGwWUBDAA5CApmAAmmOPnoUgA}{\usebox\lstbox}
+</pre>
+
+</div></div>
 
 
-
-
-        
+        <div class='snippet' id='javascript_30_16_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 pair(x, y);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4QwlgTgFAHgNAAgJ4EoDcQ}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDANgS2gCgIwBoYBM+AzAJQDcAUJaJLAJ5KoZSYAs+ArPgGwWUAHAIZoATpjj56FIA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_30_17_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 list(x, y);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYSwzgLgFAHgNAAgJ4EoDcQ}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDANgS2gCgIwBoYBM+AzAJQDcAUJaJLAJ5KoZSYAs+ArPgGwWXoscfPQpA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 	
 	
-      \hfill{\hyperref[ex:unlabeled23-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled28-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled23}]
+\begin{Answer}[ref={ex:unlabeled28}]
 
 	  
 \begin{enumerate}[a.]
 \item{
-        
+        <div class='snippet' id='javascript_30_18_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 [1, [2, [3, [4, [5, [6, null]]]]]]
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=NoRgNABMBMnAzHALHArHAbJAdgVwDb4C6JpQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=IYBxFMDsBMAoA8A0ACAngSgNwCgDGB7SAZwBdl5kBeZAGwEtTYBGFAJhQGYts9DS0qtBiVgAWFAFYUANm4BtFsjnslHFHPFKpS6SkgBXGjQC6ps0A}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	    }
 \item{
-        
+        <div class='snippet' id='javascript_30_19_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 [[1, [2, [3, null]]], [4, [5, [6, null]]]]
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=NrCMBoAJgJi4DMUB2BXANuguj+AWeAVngDYUNscsg}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=A4QwlgTgFAHgNAAgJ4EoDcAoA2lgjIrAJgIGZEA7AVwBtqBdBggFgIFYCA2Cm+huoA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	    }
 \item{
-        
+        <div class='snippet' id='javascript_30_20_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 [[1, [2, [3, null]]], [[4, [5, [6, null]]], null]]
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=NrCMBoAJgJi4DMUB2BXANuguj+wAs8ArPAGwoba6RqY5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=DYSwzgLgFAHgNAAgJ4EoDcAoA2lgjIrAJgIGZEA7AV2GAF16CsAWAgVgIDYLq6GEqa9IA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	    }
 \end{enumerate}
 
@@ -476,31 +488,32 @@ list(x, y);
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled24}
+\label{ex:unlabeled29}
 
-        Modify your {\lstinline[mathescape=true]$reverse$}
+        Modify your <kbd>reverse</kbd>
         function
-        of exercise~\ref{ex:reverse} to
+        of exercise \ref{ex:reverse} to
         produce a
         
         
-        {\lstinline[mathescape=true]$deep_reverse$}
+        <kbd>deep_reverse</kbd>
         function
         that takes a list as argument
         and returns as its value the list with its elements reversed and with
         all sublists deep-reversed as well.  For example,
-        
+        <div class='snippet' id='javascript_30_21_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const x = list(list(1, 2), list(3, 4));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAHjAvDANgS2gCnVgjAGhgCYBKQnKTAZkIBYSSBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDANgS2gCnVgjAGhgCYBKQnKTAZkIBYSSBuIA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_30_22_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 x;
@@ -508,11 +521,12 @@ x;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=B4bgUA9BAEDasEYA0cBMKB2BXANjguvivAMzEAsmuBR02ehQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDANgS2gCnVgjAGhgCYBKQnKTAZkIBYSSBuAKDhYHp2YBtbgnooTABXFCgC64wrxo9aQ0RKkwRYyUA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_30_23_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 reverse(x);
@@ -520,12 +534,13 @@ reverse(x);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=E4UwbiwM4gFAHgSgNwCgD06AEBtHBmAGlwBZiA7AVwBtqBdO4vARiYCYKb7GsraGgA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDANgS2gCnVgjAGhgCYBKQnKTAZkIBYSSBuAKACcBTAN3dYnczhNmAemEwA2uJoTahMAFcUKALrLCkghKJzFKtTAVLVQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
-        
+        <div class='snippet' id='javascript_30_24_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 deep_reverse(x);
@@ -533,17 +548,18 @@ deep_reverse(x);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUxAcH0CcQNxNAziAFADwJQG4BQB6fAAgG0SAWAGlIGZqA7AVwBtmBdN6sgJi4EYGLdpyJNWHIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDANgS2gCnVgjAGhgCYBKQnKTAZkIBYSSBuAKAHpWYATAU24AcA+gCduAN25CI3GFBAwARtIDuQtFCjcwCgJ4xoAVx5gozHv2FiJUzHCZsOAbQe1CDmjDD6UKALo-XDkSuBB5evv6h3n5AA}{\usebox\lstbox}
+</pre>
+
+</div></div>
 
 
-
-
-      \hfill{\hyperref[ex:unlabeled24-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled29-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled24}]
+\begin{Answer}[ref={ex:unlabeled29}]
 
-  
+  <div class='snippet' id='javascript_30_25_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function deep_reverse(items){
@@ -555,14 +571,15 @@ function deep_reverse(items){
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAEwKaoA4H0BOqBuqOAzqgBQxSoC2xAlAN4BQirieUIOSMxWYIADaCKVWnRZspbAPyIBwydKkAuRLywYAhjByia9JcqlytGDKjDIyaTLgJFSZKDpGUDdOgBpER4-7ZtXRt0bDxCEnIAC1Qta3dxb18AlP8FQU8mAEhpNQTiAG4mAF8gA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDANgS2gCnVgjAGhgCYBKQnKTAZkIBYSSBuAKADMBXMYKNcGAEwCmggA4B9AE6CAboIkRBmNFEEBbCCQDezGLphSo7CWBgYxYdihRKV6kjr2O9AfhgWrDp44BcpiGJEAQzQJGzUNTy9HV0CREUEwfkwhUUkZOQVMKGDrZXCGQkio4r0gkOThcSlZeUUAC0FApLy7Mhgiks69dxQGZgBIJ18WiBYAX2ZmFKr02sw4JmYAeiWYAG012kI1mjdLFABdA+21om2CPasjwh6joA}{\usebox\lstbox}!*/
                            null))
 	     : items;
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 \end{Answer}
 
@@ -577,24 +594,25 @@ function deep_reverse(items){
 
         
         
-        {\lstinline[mathescape=true]$fringe$} that takes as argument a tree
+        <kbd>fringe</kbd> that takes as argument a tree
         (represented as a list) and returns a list whose elements are all the
         leaves of the tree arranged in left-to-right order.  For example,
 
         
 
-        
+        <div class='snippet' id='javascript_30_26_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const x = list(list(1, 2), list(3, 4));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAHjAvDANgS2gCnVgjAGhgCYBKQnKTAZkIBYSSBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDANgS2gCnVgjAGhgCYBKQnKTAZkIBYSSBuIA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_30_27_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 fringe(x);
@@ -602,11 +620,12 @@ fringe(x);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYJwlgdg5gpgFADwJQG4BQB6DACA2gRgBo8AmY3AZnIBZiIBXAG0YF02Wg}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDANgS2gCnVgjAGhgCYBKQnKTAZkIBYSSBuAKAHpWYAzAJzTAHMApjCggYAI2EB3XlCiCwEgJ4xoAVwAmCqMx58hmOEzYcA2gRimihUzUu1CYNShQBdd66A}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_30_28_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 fringe(list(x, x));
@@ -614,9 +633,10 @@ fringe(list(x, x));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYJwlgdg5gpgFAGzAZwC5wB4BoAEGCU+A3AFAD0ZOA2gIy5UBM9AzPQCz13VPWvUc4IAVwQIAuhMkSgA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDANgS2gCnVgjAGhgCYBKQnKTAZkIBYSSBuAKAHpWYAzAJzTAHMApjCggYAI2EB3XlCiCwEgJ4xoAVwAmCqMx58h2DJTiE4DFuxgBtAtaKErNa7Qe2r9606suYYNShQAXWCQ4KA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 
       \hfill{\hyperref[ex:fringe-Answer]{Solution}}\\
@@ -624,7 +644,7 @@ fringe(list(x, x));
 
 \begin{Answer}[ref={ex:fringe}]
 
-  
+  <div class='snippet' id='javascript_30_29_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function fringe(x) {
@@ -636,12 +656,13 @@ function fringe(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMATjMBzApgCgB4CUiA3gFCIWIpZQgpIwDOA+mCADbv4HmV+UB+RG069+fAFyImzAA4BDGCm5jxfIfNmysYACY5U6bDgAWWefsIEANMjSZcURVys814qeyZRuAblIAvkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAHjAvDANgS2gCnVgjAGhgCYBKQnKTAZkIBYSSBuAKADMBXMYKNcGVgE5owAcwCmmOCRgBvZjAUwBYqOwFgYGAPph2KFJJLzFJxQH4Yu-cdMmAXJohaADgEM0AwzdsmLr585iYAAmmILC4pgAFmKuoVJk-EKiElDuBglGPrYOFIYsAL7MbMmReXCECSwA9NUwANoEDUSE9TQNtK1N9S0N7fWdlnooALpj42NAA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 \end{Answer}
 
@@ -655,9 +676,9 @@ function fringe(x) {
         branch.  Each branch is a rod of a certain length, from which hangs
         either a weight or another binary mobile.  We can represent a binary
         mobile using compound data by constructing it from two branches (for
-        example, using {\lstinline[mathescape=true]$list$}):
+        example, using <kbd>list</kbd>):
 
-        
+        <div class='snippet' id='javascript_30_30_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_mobile(left, right) {
@@ -666,15 +687,16 @@ function make_mobile(left, right) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ZcBGMANpgBQnBQA0iATjAOYAWUAlIgN4BQivtmUELSREYAZyjlMlGvWZsA3FwC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ZcBGMANpgBQnBQA0iATjAOYAWUAlIgN4BQivtmUELSREYAZyjlMlGvWZsA3FwC+QA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        A branch is constructed from a {\lstinline[mathescape=true]$length$} (which must be a number)
-        together with a {\lstinline[mathescape=true]$structure$}, which may be either a number
+        A branch is constructed from a <kbd>length</kbd> (which must be a number)
+        together with a <kbd>structure</kbd>, which may be either a number
         (representing a simple weight) or another mobile:
 
-        
+        <div class='snippet' id='javascript_30_31_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_branch(length, structure) {
@@ -683,22 +705,23 @@ function make_branch(length, structure) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ARgJ1UgAsAKAG0zAHMpiAaRAZynxGhH0wEpEBvAFCJhXKJyTkYLClVoNmrdmK7cA3AIC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ARgJ1UgAsAKAG0zAHMpiAaRAZynxGhH0wEpEBvAFCJhXKJyTkYLClVoNmrdmK7cA3AIC+QA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
 \begin{enumerate}[a.]
 \item{
-            Write the corresponding selectors {\lstinline[mathescape=true]$left_branch$} and
-            {\lstinline[mathescape=true]$right_branch$}, which return the branches of a mobile, and
-                {\lstinline[mathescape=true]$branch_length$} and {\lstinline[mathescape=true]$branch_structure$}, which return
+            Write the corresponding selectors <kbd>left_branch</kbd> and
+            <kbd>right_branch</kbd>, which return the branches of a mobile, and
+                <kbd>branch_length</kbd> and <kbd>branch_structure</kbd>, which return
             the components of a branch.
           }
 \item{
             Using your selectors, define a
             function
-            {\lstinline[mathescape=true]$total_weight$}
+            <kbd>total_weight</kbd>
             that returns the total weight of a mobile.
           }
 \item{
@@ -716,7 +739,7 @@ function make_branch(length, structure) {
             Suppose we change the representation of mobiles so that the
             constructors are
 
-            
+            <div class='snippet' id='javascript_30_32_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_mobile(left, right) {
@@ -728,9 +751,10 @@ function make_branch(length, structure) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ZcBGMANpgBQnBQA0iATjAOYAWUAlIgN4BQivtmUELSQAHVDFrlMlGvWZsA3FwC+XUJFgIUGHPlqpITKWAZQmNAM5RaIaEMztuvOgKGjxkkibOXrtwfysSspAA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ZcBGMANpgBQnBQA0iATjAOYAWUAlIgN4BQivtmUELSQAHVDFrlMlGvWZsA3FwC+XUJFgIUGHPlqpITKWAZQmNAM5RaIaEMztuvOgKGjxkkibOXrtwfysSspAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
             How much do you need to change your programs to convert to the new
             representation?
@@ -747,7 +771,7 @@ function make_branch(length, structure) {
     
 \begin{enumerate}[a.]
 \item{
-    
+    <div class='snippet' id='javascript_30_33_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function left_branch(m) {
@@ -759,7 +783,7 @@ function right_branch(m) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGwKbCgfQEYCcCGkAFgBQC2AlIgN4BQiDiuqUIuSRq+AJuRQNy0AvrVCRYCJjADmRLHkIRSlGvUbNW7RJx4ko+GMj4Dho8NHhIFxTGjDSopbFTqMmLNhy69ngkWItJayVMAGcoXBBoNlQSZ1U3DU9tbz0DI2cTISA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ZcBGMANpgBQnBQA0iATjAOYAWUAlIgN4BQivtmUELSREYAZyjlMlGvWZsA3FwC+XUJFgIUGHPlqpITKWAZQmNCbRDQhmdt150BQkeMkkTZi1Cs3+rJVV1aHgRaShsPQMII2R7Hkd+QWFEJkxUABNSOMC1cBCtORZI-UNs+McnZKQ0zNIoVGJygJU8jVDEKMNsD1MjfArE5xTarIHc4M0kLpjsS2tksgHOBL5hmvSshqaBluUgA}{\usebox\lstbox}!*/
 function branch_length(b) {
     return head(b);
 }
@@ -768,11 +792,12 @@ function branch_structure(b) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       }
 \item{
-
+<div class='snippet' id='javascript_30_34_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_weight(x){
@@ -784,7 +809,7 @@ function total_weight(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQO4FMYHMAWUAFAB4CUA3gFCK2IBOWUI9SqaYIAtgEZb2kyAbioBfKqEiwEiKHCgBDADaYcBYuUTU6DJizbpseQoJo66AfkQkz5xAC5Z85auPEe9BZHxoUUeiDQLFhEtnbhEYhKWMBQaB5eEPiCZGSIANRhdnKKKkbqRAnevv6BzIyhkVV29G7xnt4pwmJAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAGwKbCgfQEYCcCGkAFgBQC2AlIgN4BQiDiuqUIuSRq+AJuRQNy0AvrVCRYCJjADmRLHkIRSlGvUbNW7RJx4ko+GMj4Dho8NHhIFxTGjDSopbFTqMmLNhy69ngkWItJayVMAGcoXBBoNlQSZ1U3DU9tbz0DI2cTf3MJJDJ8AGtUTDI4bENYtAwAGilZKBc1d00kZBhwkiqoWtwZOSyzcUtEfKKcAmJO1HtHWvDI6OZG9Q8tNo67ByI5iKjNVAGA3MR2zAB3VD6oEgAPClcVlpPQzDAQMmxUXFvDnOGoOD6ZDnS71H4JR7JU4XK4-JpuRAAfkQN3hbgAXIgAUCQbDgkQwrtFrE0QiyeSGF1xopSHcKFQANSktzY-DAmFg-GEhb7EjMikCupyamTOkDWgQBDhEaIAC8I0KxVK5TQfMFblGxXxJAAjAAGar8wWakplCrkRUipS6g2IABMFFqRvVDBN2oALLUAKz0x2IZ0ay3a-W1O0AZnp-DJtFZ7NBcj4-CAA}{\usebox\lstbox}!*/
         : total_weight(branch_structure(
                          left_branch(x))) +
           total_weight(branch_structure(
@@ -792,13 +817,14 @@ function total_weight(x) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     
       }
 \item{
-
+<div class='snippet' id='javascript_30_35_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_balanced(x) {
@@ -810,7 +836,7 @@ function is_balanced(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQEYEMA2XICmAJgBQAeAlIgN4BQiDiATgVCE0qmgO4EwDmACyjkqAHzH1G0ksnTY8hUhib4IgtCihMQ0dgRJTpxk6bMMcBYFEyrIg0RSoAyZ0dNcFa4iRVqNWjp6LIbmYeHSTALCtv6OLm5hUHBQuDx8QiJ+9praumwh7hHFxpbWsfbxiEXGAFSI2epolmD8UA5lNo0OlBQ10gC8Q-2Myak46dFZdk2B+fqhJUuRUxXqVSMM9d3NBK3tJFGZaz1OIxQA3LQAvkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQO4FMYHMAWUAFAB4CUA3gFCK2IBOWUI9SqaYIAtgEZb2kyAbioBfKqEiwEiKHCgBDADaYcBYuUTU6DJizbpseQoJo66AfkQkz5xAC5Z85auPEe9BZHxoUUeiDQLFhEtnbhEYhKWMBQaB5eEPiCZGSIANRhdnKKKkbqRAnevv6BzIyhkVV29G7xnt4pwmIS4NDwBvHKiVgAJoJaYYzlnfkmmgA+E1l0RMjoPN2QfYUNSSUBQRUz1bvm0bH1icnkqYgAZOc7dOyLSj39Ret+m+Uh13t7tepHjadplw+TlyrgKTx8LzKwUqn1hOgOcXBTUQQIAVIhwWhomBcFBkgjfkkUkCALxkoE5FxjdxrCGlLbvOFMhh1JH-FFVdGY7G45LfQiEk6pa7NcRUCAIPyILiIEnShQAaywaC4cB4MGiMN2XEVyqRACYAAwAGg5TJ1SpVao1IQtetpRAAjCbEPqyMagczaHbBUQACymgCsqXdZu1ut9+oAHEHUiJbksICsuMIgA}{\usebox\lstbox}!*/
           total_weight(branch_structure(
                                   left_branch(x))) 
           * branch_length(left_branch(x))
@@ -822,16 +848,16 @@ function is_balanced(x) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
       }
 \item{
 	With this alternative representation, the accessor functions for
 	mobile and branch need to change as follows:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_30_36_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function left_branch(m) {
   return head(m);
 }
@@ -844,8 +870,7 @@ function branch_length(b) {
 function branch_structure(b) {
   return tail(b);
 }
-\end{JavaScript}
-
+</pre></div></div>
 
       }
 \end{enumerate}
@@ -859,26 +884,27 @@ function branch_structure(b) {
       
       
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Mapping over trees
-      
+      </h2></div>
 
       
       
 
       <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-        Just as {\lstinline[mathescape=true]$map$} is a powerful abstraction for dealing with sequences,
-        {\lstinline[mathescape=true]$map$} together with recursion is a powerful abstraction for
-        dealing with trees.  For instance, the {\lstinline[mathescape=true]$scale_tree$}
-        function, analogous to {\lstinline[mathescape=true]$scale_list$} of
-        section~\ref{sec:sequences}, takes as arguments a numeric factor and a
+        Just as <kbd>map</kbd> is a powerful abstraction for dealing with sequences,
+        <kbd>map</kbd> together with recursion is a powerful abstraction for
+        dealing with trees.  For instance, the <kbd>scale_tree</kbd>
+        function, analogous to <kbd>scale_list</kbd> of
+        section \ref{sec:sequences}, takes as arguments a numeric factor and a
         tree whose leaves are numbers.  It returns a tree of the same shape,
         where each number is multiplied by the factor.
-        The recursive plan for {\lstinline[mathescape=true]$scale_tree$} is similar to the one for
-        {\lstinline[mathescape=true]$count_leaves$}:
+        The recursive plan for <kbd>scale_tree</kbd> is similar to the one for
+        <kbd>count_leaves</kbd>:
 
-        
+        <div class='snippet' id='javascript_30_37_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function scale_tree(tree, factor) {
@@ -890,26 +916,27 @@ function scale_tree(tree, factor) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwgQwDYFMD6UBOWWAFAUQDSLBrRz4CUiA3gFCLuKFQj5IzI4wIDBlKEs9Nh2kcA-IiEipM6QC5EAQkT8cABzQx8YopJVn5ZLIgBUVGlDrKzHdfsPFUmXJeIALLGgAJsYSlNS0DJROzs6e2HjipAailvRh9nT09ADcLAC+QA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwgQwDYFMD6UBOWWAFAUQDSLBrRz4CUiA3gFCLuKFQj5IzI4wIDBlKEs9Nh2kcA-IiEipM6QC5EAQkT8cABzQx8YopJVn5ZLIgBUVGlDrKzHdfsPFUmXJeIALLGgAJsYSlNS0DJROzs6e2HjipAailvRh9nT09ADcLAC+LCxx3okY-FDEAIyUZcgVAEw15cQAzJQALGmIAKxdtRUAbJQA7Fnk0SqVAAw5QA}{\usebox\lstbox}!*/
                     scale_tree(tail(tree), factor));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
       </p></div>
 
       <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
-        Another way to implement {\lstinline[mathescape=true]$scale_tree$} is to regard the
-        tree as a sequence of sub-trees and use {\lstinline[mathescape=true]$map$}.  We map
+        Another way to implement <kbd>scale_tree</kbd> is to regard the
+        tree as a sequence of sub-trees and use <kbd>map</kbd>.  We map
         over the sequence, scaling each sub-tree in turn, and return the list
         of results.  In the base case, where the tree is a leaf, we simply
         multiply by the factor:
 
-        
+        <div class='snippet' id='javascript_30_38_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function scale_tree(tree, factor) {
@@ -921,9 +948,10 @@ function scale_tree(tree, factor) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwgQwDYFMD6UBOWWAFAUQDSLBrRz4CUiA3gFCLuKFQj5IC2aAA7FkIAEZ5CWRAF4AfIhjIcgtDHwjxkovTYd9Bw0cQB+FOmzaSoiWSyVqtBnuOvjALhRa7iAFRUaKDpKFzd2O3oAbhYAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwgQwDYFMD6UBOWWAFAUQDSLBrRz4CUiA3gFCLuKFQj5IC2aAA7FkIAEZ5CWRAF4AfIhjIcgtDHwjxkovTYd9Bw0cQB+FOmzaSoiWSyVqtBnuOvjALhRa7iAFRUaKDpKFzd2O3oAbhYAXxYWVExcO2IMJShiAEZKNOQMgCYc9OIAZkoAFnpKAFYqxFyMgDZKAHZ6KtCjTIAGKKA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
@@ -938,13 +966,13 @@ function scale_tree(tree, factor) {
 
         Define a
         function
-        {\lstinline[mathescape=true]$square_tree$} analogous to the {\lstinline[mathescape=true]$square_list$}
+        <kbd>square_tree</kbd> analogous to the <kbd>square_list</kbd>
         function
-        of exercise~\ref{ex:square-list}.  That is, {\lstinline[mathescape=true]$square_tree$} should behave as follows:
+        of exercise \ref{ex:square-list}.  That is, <kbd>square_tree</kbd> should behave as follows:
 
         
 	
-        
+        <div class='snippet' id='javascript_30_39_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 square_tree(list(1,
@@ -956,12 +984,13 @@ square_tree(list(1,
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4RwrghgTgpg+gF1jAFAGwJbASgjAGgCgACUs8i0zbFAJn2OpwGYGAWASgYFYviTKgskxQA2BgHYO0gNyEA9POKxgYNAgBcxANoEd2tg23aAnEdzjiAOzVoAunYYKlQ1ztrcGNtPYdPFbuTGzJYGZta2fhE+DnZAA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=PTAEGcEcFcEMCcCmB9ALkxpUHtQCNMB3eAS1VUQDt8BPCVaAEytQCgo4k0MAKAGxLhUPAIwAaVqCnSZsqQKE8ATGNALhAZlUAWAJSqArPtCS5Z6ep4A2VQHZdDgNysQoJOGh9UALlABtcX8-bVU-PwBOUJEbUEpPPgBdBNUXMHN0-yUDVTi+RKSU1wzpMI0Y4MjY+IKqvKSEoA}{\usebox\lstbox}
+</pre>
 
-
-        Define {\lstinline[mathescape=true]$square_tree$} both directly (i.e., without using any
+</div></div>
+        Define <kbd>square_tree</kbd> both directly (i.e., without using any
         higher-order
-        functions) and also by using {\lstinline[mathescape=true]$map$} and recursion.
+        functions) and also by using <kbd>map</kbd> and recursion.
         
 	
       \hfill{\hyperref[ex:square-tree-Answer]{Solution}}\\
@@ -970,7 +999,7 @@ square_tree(list(1,
 \begin{Answer}[ref={ex:square-tree}]
 
 Directly:	  
-    
+    <div class='snippet' id='javascript_30_40_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function square_tree(tree) {
@@ -982,15 +1011,16 @@ function square_tree(tree) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9KXHACkJxwEpEBvAKEQcVyhCyRmTzBABsfSiFeoxGMA-Im59hokQC5EAQkQc8ABwwwsA8kNn6JaTLh2UZ+xgo1biR7PjIkAFjgwATUxQoAaWgEgLETtcAiJSTX5HLwoAbloAXyA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3NElgQp02HAH0oufBJw4SFajRx0GiGMlFgQAGy15psygqOIA-Ik07Dx6gC5EAQlXqADhhhY9kolevUzaTFxPGW9fIztXdzwAkXFJPAALHAwAE2DZIgAacgBIMOoY3DiZPTddfSJKzh5yQrF9PC01KDwARmz86ybkFoAmTMRuloBmAYAWLMQAVkmfTqohvAA2AYB2SqJOAHotxWRtKDsAbXbEI6OxgfOATivWlfNtLQBdZ4HyHfnrI96pgYsXq93p8vudhg8LrdHjogdDAc8gA}{\usebox\lstbox}!*/
 	            square_tree(tail(tree)));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-The version using {\lstinline[mathescape=true]$map$}:
-
+</div></div>
+The version using <kbd>map</kbd>:
+<div class='snippet' id='javascript_30_41_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function square_tree(tree) {
@@ -1002,9 +1032,10 @@ function square_tree(tree) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9KXHACkJxwEpEBvAKEQcVyhCyQFsMAHY5EAIwJFEAXgB8iAISIYyPFwwwsvAUPIV6jLdp27EAfhTpsJPoLKVNe63oBcRzLjWnVFigBorNhm4DctAF8gA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3NElgQp02HAH0oufBJw4SFajRx0GiALYYADnmQgARuMmIAvAD5EAQkQxkojRhhZtegzKKUFHz14UB+IZlwnfWlZd29w7wAufxEXfB1gySIAGjCIqhCiTh5yNACxELwAG2soPABGVPTPEuQygCZkxFqygGYmgBYUxABWbrTq5tK8ADYmgHYiKc4AehnFHSKoaIBtSsQVlY6mzYBOHfKxxDAQIqKAXXOm8jnBzxX6nqaTs8urxBv5wc3Wo63946nC7vF7A85AA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   
 \end{Answer}
 
@@ -1013,16 +1044,16 @@ function square_tree(tree) {
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
 
-        Abstract your answer to exercise~\ref{ex:square-tree} to produce a
+        Abstract your answer to exercise \ref{ex:square-tree} to produce a
         function
 
         
-        {\lstinline[mathescape=true]$tree_map$} with the property that {\lstinline[mathescape=true]$square_tree$}
+        <kbd>tree_map</kbd> with the property that <kbd>square_tree</kbd>
         could be defined as
 
         
 
-        
+        <div class='snippet' id='javascript_30_42_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function square_tree(tree) {
@@ -1031,16 +1062,17 @@ function square_tree(tree) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9KXHACkJxwEpEBvAKEQdyhCyTPwFsMAHYtTXABpE7CgG5aAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=PTAEBcCcFNofQLYEMAOED2oBG1QHdIBLccaAO2wE9QBncAVwBNzwAoAM3rIGNxD0KNAI70kMOFFgAKSdACUoAN6tQqmA0gVZiVFOGiYAGggx5AblYBfIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   
       \hfill{\hyperref[ex:tree-map-Answer]{Solution}}\\
 \end{Exercise}
 
 \begin{Answer}[ref={ex:tree-map}]
 
-    
+    <div class='snippet' id='javascript_30_43_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function tree_map(f, tree) {
@@ -1052,43 +1084,41 @@ function tree_map(f, tree) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABFATgUzQfQLYEMAOAFMADTLpoCUiA3gFCKOLpQgpJ5EDOIARpqgyIAvAD5EMLpjAgANrMI9+gqgybqNmrYgD8iGfLXbj2gFwSp+XDBSK+AipSMmXGvSpwFiZJQ4xPXQPVzYDtlRxJnFxVKAG46AF8gA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3NElgQp02HAH0oufBJw4SFarXpJpYgLYYADnjSZcAGkQqinHn2jxlk0eq3ADRspQU46DRDe0gARuMmIAvAB8iDDIomAgADaRnj5GTtSJSckpAPyIEdEJKTm5AFwhYRoYMFixvjJE2bk1yekq1pp4dijeFbLVtV2IBcDlRnqduUYm5OQ6Iu14kaFQeACMg92JM8hzAEwGq3MAzAYALEQGAKxHiEM123gAbAYA7ESPnAD0zzQ4yFFQBQDai4g-H77AyAgCcIPmtwyUUiAF1YQZyK9lkkfutjgZMnD4Yjkd1ATsoUDwdDojjSdjYUA}{\usebox\lstbox}!*/
                tree);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 \end{Answer}
 
 
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled25}
+\label{ex:unlabeled30}
 
         We can represent a
         
         set as a list of distinct elements, and we can
         represent the set of all subsets of the set as a list of lists.  For
-        example, if the set is {\lstinline[mathescape=true]$[1, [2, [3, null]]]$}, then the set of all subsets 
+        example, if the set is <kbd>[1, [2, [3, null]]]</kbd>, then the set of all subsets 
         
 	looks as follows:
-	
-\begin{JavaScript}
+	<div class='snippet' id='javascript_30_44_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 [null, [[3, null], [[2, null], [[2, [3, null]], 
     [[1, null], [[2, [3, null]], [[1, [2, null]], 
         [[1, [2, [3, null]]], null]]]]]]]]
-\end{JavaScript}
-
+</pre></div></div>
 	
 	 Complete the
         following definition of a
         function
         that generates the set of subsets
         of a set and give a clear explanation of why it works:
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_30_45_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function subsets(s) {
     if (is_null(s)) {
         return list(null);
@@ -1097,15 +1127,14 @@ function subsets(s) {
         return append(rest, map(??, rest));
     }
 }
-\end{JavaScript}
-
+</pre></div></div>
 	
-      \hfill{\hyperref[ex:unlabeled25-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled30-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled25}]
+\begin{Answer}[ref={ex:unlabeled30}]
 
-    
+    <div class='snippet' id='javascript_30_46_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function subsets(s) {
@@ -1117,17 +1146,18 @@ function subsets(s) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxAI2QUysgFMgSkQG8AoRCxGYRXGZAfTBABsX8CizKfEAnbCD5IW9KLmZsCAbnKUAvokwssJOb0QQEyKP0w7EAXhTosOXFACGMdoRnreAqEKSWADm8xgAJrgE6AGkQAW3dcAA8jAD5EN2s+XAALTEtfQiDwgiD-KE5ZHnlSeSA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZxAI2QUysgFMgSkQG8AoRCxGYRXGZAfTBABsX8CizKfEAnbCD5IW9KLmZsCAbnKUAvokwssJOb0QQEyKP0w7EAXhTosOXFACGMdoRnreAqEKSWADm8xgAJrgE6AGkQAW3dcAA8jAD5EN2s+XAALTEtfQiDwgiD-KE5ZHnlSQtJUDGw8UR1cAEYggCYggGY8oA}{\usebox\lstbox}!*/
     }
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
     The argument starts in a similar way as the argument for the function
-    {\lstinline[mathescape=true]$cc$}
-    in section~\ref{sec:tree-recursion}: 
+    <kbd>cc</kbd>
+    in section \ref{sec:tree-recursion}: 
     A subset either contains the first element $e$ of the given set,
     or it doesn't. If it doesn't, the problem becomes strictly smaller:
     Compute all subsets of the tail of the list that represents the given
@@ -1141,4 +1171,11 @@ function subsets(s) {
       
 
     
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section2/subsection1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section2/subsection3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+2.2.2  Hierarchical Structures</div>	<div class='next-page'></div></div>

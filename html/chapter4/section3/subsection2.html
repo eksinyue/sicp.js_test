@@ -1,27 +1,35 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>4.3.2 
-  Examples of Nondeterministic Programs
-      </a>
+		<a name='top' class='permalink'>4.3.2  Examples of Nondeterministic Programs</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
-  Section~\ref{sec:amb-implementation} describes the implementation of
-  the {\lstinline[mathescape=true]$amb$} evaluator.  First, however, we give some examples of how
+  Section \ref{sec:amb-implementation} describes the implementation of
+  the <kbd>amb</kbd> evaluator.  First, however, we give some examples of how
   it can be used.  The advantage of nondeterministic programming is that
   we can suppress the details of how search is carried out, thereby
   
   expressing our programs at a higher level of abstraction.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Logic Puzzles
-      
+      </h2></div>
 
       
       
@@ -30,7 +38,7 @@
       <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
   
-  The following puzzle (taken from Dinesman 1968) 
+  The following puzzle (taken from <CITATION>Dinesman 1968</CITATION>) 
   is typical of a large class of simple logic puzzles:
 
   
@@ -47,8 +55,9 @@
 
   We can determine who lives on each floor in a straightforward way by
   enumerating all the possibilities and imposing the given
-  restrictions:<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-\begin{JavaScript}
+  restrictions:<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
+
+  <div class='snippet' id='javascript_86_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function multiple_dwelling() {
     const baker = amb(1, 2, 3, 4, 5);
     const cooper = amb(1, 2, 3, 4, 5);
@@ -69,49 +78,20 @@ function multiple_dwelling() {
                 list("miller", miller),
                 list("smith", smith));
 }
-\end{JavaScript}
-
-      
-
-  
-\begin{JavaScript}
-function multiple_dwelling() {
-    const baker = amb(1, 2, 3, 4, 5);
-    const cooper = amb(1, 2, 3, 4, 5);
-    const fletcher = amb(1, 2, 3, 4, 5);
-    const miller = amb(1, 2, 3, 4, 5);
-    const smith = amb(1, 2, 3, 4, 5);
-    require(distinct(list(baker, cooper, fletcher, miller, smith)));
-    require(! baker === 5);
-    require(! cooper === 1);
-    require(! fletcher === 5);
-    require(! fletcher === 1);
-    require(! miller > cooper);
-    require(! math_abs(smith - fletcher) === 1);
-    require(! math_abs(fletcher - cooper) === 1);
-    return list(list("baker", baker),
-                list("cooper", cooper),
-                list("fletcher", fletcher),
-                list("miller", miller),
-                list("smith", smith));
-}
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
-  Evaluating the expression {\lstinline[mathescape=true]$multiple_dwelling()$} produces the
+  Evaluating the expression <kbd>multiple_dwelling()</kbd> produces the
   result
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_86_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 [["baker", [3, null]], 
  [["cooper", [2, null]],
   [["fletcher", [4, null]],
    [["miller", [5, null]],
     [["smith", [1, null]], null]]]]]
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -119,8 +99,8 @@ function multiple_dwelling() {
   Although this simple
   function
   works, it is very slow.
-  Exercises~\ref{ex:better-multiple-dwelling1}
-  and~\ref{ex:better-multiple-dwelling2} discuss some possible
+  Exercises \ref{ex:better-multiple-dwelling1}
+  and \ref{ex:better-multiple-dwelling2} discuss some possible
   improvements.
   
       </p></div>
@@ -191,7 +171,7 @@ function multiple_dwelling() {
 \begin{Exercise}
 
   
-  Solve the following <QUOTE>Liars</QUOTE> puzzle (from Phillips 1934):
+  Solve the following <QUOTE>Liars</QUOTE> puzzle (from <CITATION>Phillips 1934</CITATION>):
 
   
 \begin{quote}
@@ -223,23 +203,7 @@ function multiple_dwelling() {
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
 
-  Use the {\lstinline[mathescape=true]$amb$} evaluator to solve the following puzzle:<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
-\begin{quote}
-    Mary Ann Moore's father has a yacht and so has each of his four
-    friends:  Colonel Downing, Mr. Hall, Sir Barnacle Hood, and Dr.
-    Parker.  Each of the five also has one daughter and each has named his
-    yacht after a daughter of one of the others.  Sir Barnacle's yacht is
-    the Gabrielle, Mr. Moore owns the Lorna; Mr. Hall the Rosalind.  The
-    Melissa, owned by Colonel Downing, is named after Sir Barnacle's
-    daughter.  Gabrielle's father owns the yacht that is named after Dr.
-    Parker's daughter.  Who is Lorna's father?
-  \end{quote}
-
-  Try to write the program so that it runs efficiently (see
-  exercise~\ref{ex:better-multiple-dwelling2}).  Also determine how many
-  solutions there are if we are not told that Mary Ann's last name is
-  Moore.
-      
+  Use the <kbd>amb</kbd> evaluator to solve the following puzzle:<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
 
   
 \begin{quote}
@@ -254,7 +218,7 @@ function multiple_dwelling() {
   \end{quote}
 
   Try to write the program so that it runs efficiently (see
-  exercise~\ref{ex:better-multiple-dwelling2}).  Also determine how many
+  exercise \ref{ex:better-multiple-dwelling2}).  Also determine how many
   solutions there are if we are not told that Mary Ann's last name is
   Moore.
       
@@ -270,16 +234,17 @@ function multiple_dwelling() {
   
   
   
-  Exercise~\ref{ex:8queens} described the <QUOTE>eight-queens puzzle</QUOTE> of
+  Exercise \ref{ex:8queens} described the <QUOTE>eight-queens puzzle</QUOTE> of
   placing queens on a chessboard so that no two attack each other.
   Write a nondeterministic program to solve this puzzle.
       
 \end{Exercise}
 
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Parsing natural language
-      
+      </h2></div>
 
       
       
@@ -293,26 +258,15 @@ function multiple_dwelling() {
   followed by a verb, such as <QUOTE>The cat eats.</QUOTE>  To accomplish such an
   analysis, we must be able to identify the parts of speech of
   individual words.  We could start with some lists that classify
-  various words:<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
-\begin{JavaScript}
+  various words:<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
+
+  <div class='snippet' id='javascript_86_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const nouns = list("noun", "student", "professor", "cat", "class");
 
 const verbs = list("verb", "studies", "lectures", "eats", "sleeps");
 
 const articles = list("article", "the", "a");
-\end{JavaScript}
-
-      
-
-  
-\begin{JavaScript}
-const nouns = list("noun", "student", "professor", "cat", "class");
-
-const verbs = list("verb", "studies", "lectures", "eats", "sleeps");
-
-const articles = list("article", "the", "a");
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -325,13 +279,11 @@ const articles = list("article", "the", "a");
   consists of an article followed by a noun.  With this grammar, the
   sentence <QUOTE>The cat eats</QUOTE> is parsed as follows:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_86_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 ["sentence", [["noun-phrase", [["article", ["the", null]], 
                                ["noun", ["cat", null]]]],
               ["verb", ["eats", null]]]]
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -340,33 +292,29 @@ const articles = list("article", "the", "a");
   functions
   for each of the grammatical rules.  To parse a sentence, we
   identify its two constituent pieces and return a list of
-  these two elements, tagged with the symbol {\lstinline[mathescape=true]$sentence$}:
+  these two elements, tagged with the symbol <kbd>sentence</kbd>:
 
   
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_86_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function parse_sentence() {      
     return list("sentence",
                 parse_noun_phrase(),
                 parse_word(verbs));
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
   A noun phrase, similarly, is parsed by finding an article followed by a
   noun:
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_86_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function parse_noun_phrase() {
     return list("noun-phrase",
                 parse_word(articles),
                 parse_word(nouns));
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -378,7 +326,7 @@ function parse_noun_phrase() {
   
     
     
-      {\lstinline[mathescape=true]$unparsed$},
+      <kbd>unparsed</kbd>,
     
   
   which is the input that has not yet been
@@ -386,7 +334,7 @@ function parse_noun_phrase() {
   
     
     
-      {\lstinline[mathescape=true]$unparsed$},
+      <kbd>unparsed</kbd>,
     
   
   must be non-empty and that it should begin with a word from the
@@ -394,13 +342,14 @@ function parse_noun_phrase() {
   
     
     
-      {\lstinline[mathescape=true]$unparsed$},
+      <kbd>unparsed</kbd>,
     
   
   and
   return the word together with its part of speech (which is found at
-  the head of the list):<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
-\begin{JavaScript}
+  the head of the list):<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
+
+  <div class='snippet' id='javascript_86_7_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function parse_word(word_list) {      
     require(! is_null(unparsed));
     require(member(head(unparsed), tail(word_list)) !== null);
@@ -408,21 +357,7 @@ function parse_word(word_list) {
     unparsed = tail(unparsed);
     return list(head(word_list), found_word);
 }
-\end{JavaScript}
-
-      
-
-  
-\begin{JavaScript}
-function parse_word(word_list) {      
-    require(! is_null(unparsed));
-    require(member(head(unparsed), tail(word_list)) !== null);
-    const found_word = head(unparsed);
-    unparsed = tail(unparsed);
-    return list(head(word_list), found_word);
-}
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -431,15 +366,14 @@ function parse_word(word_list) {
   
     
     
-      {\lstinline[mathescape=true]$unparsed$},
+      <kbd>unparsed</kbd>,
     
   
 	to be
   the entire input, try to parse a sentence, and check that nothing is
   left over:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_86_8_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 let unparsed = null;
 
 function parse_input(input) {
@@ -448,8 +382,7 @@ function parse_input(input) {
     require(is_null(unparsed));
     return sent;
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -457,8 +390,7 @@ function parse_input(input) {
   We can now try the parser and verify that it works for our simple test
   sentence:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_86_9_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 // Amb-Eval input:      
 parse_input(list("the",  "cat",  "eats"));
 // Starting a new problem
@@ -466,14 +398,13 @@ parse_input(list("the",  "cat",  "eats"));
 ["sentence", [["noun-phrase", [["article", ["the", null]], 
                                ["noun", ["cat", null]]]],
               ["verb", ["eats", null]]]]
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
-  The {\lstinline[mathescape=true]$amb$} evaluator is useful here because it is convenient to
-  express the parsing constraints with the aid of {\lstinline[mathescape=true]$require$}.
+  The <kbd>amb</kbd> evaluator is useful here because it is convenient to
+  express the parsing constraints with the aid of <kbd>require</kbd>.
   Automatic search and backtracking really pay off, however, when we
   consider more complex grammars where there are choices for how the
   units can be decomposed.
@@ -483,32 +414,29 @@ parse_input(list("the",  "cat",  "eats"));
 <a name='p13' class='permalink'></a><p>
   Let's add to our grammar a list of prepositions:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_86_10_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const prepositions = list("prep", "for", "to",  "in", "by", "with");
-\end{JavaScript}
-
+</pre></div></div>
 
   and define a prepositional phrase (e.g., <QUOTE>for the cat</QUOTE>) to be
   a preposition followed by a noun phrase:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_86_11_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function parse_prepositional_phrase() {      
     return list("prep-phrase",
                 parse_word(prepositions),
                 parse_noun_phrase());
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p14' class='permalink'></a><p>
   Now we can define a sentence to be a noun phrase followed by a verb
   phrase, where a verb phrase can be either a verb or a verb phrase
-  extended by a prepositional phrase:<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
-\begin{JavaScript}
+  extended by a prepositional phrase:<a class='superscript' id='footnote-link-5' href='#footnote-5'>[5]</a>
+
+  <div class='snippet' id='javascript_86_12_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function parse_sentence() {
     return list("sentence",
 
@@ -524,29 +452,7 @@ function parse_verb_phrase() {
     }		   
     return maybe_extend(parse_word(verbs));
 }
-\end{JavaScript}
-
-      
-
-  
-\begin{JavaScript}
-function parse_sentence() {
-    return list("sentence",
-
-
-}
-
-function parse_verb_phrase() {
-    function maybe_extend(verb_phrase) {
-        return amb(verb_phrase,
-                   maybe_extend(list("verb-phrase",
-                                     verb_phrase,
-                                     parse_prepositional_phrase())));
-    }		   
-    return maybe_extend(parse_word(verbs));
-}
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -557,8 +463,7 @@ function parse_verb_phrase() {
   phrase will now be either a simple noun phrase or a noun phrase
   extended by a prepositional phrase:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_86_13_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function parse_simple_noun_phrase() {      
     return list("simple-noun-phrase",
                 parse_word(articles),
@@ -574,24 +479,20 @@ function parse_noun_phrase() {
     }
     return maybe_extend(parse_simple_noun_phrase());
 }
-\end{JavaScript}
-
+</pre></div></div>
   
       </p></div>
 
       <div class='permalink'>
 <a name='p16' class='permalink'></a><p>
   Our new grammar lets us parse more complex sentences.  For example
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_86_14_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 parse_input(list("the", "student", "with", "the", "cat", "sleeps", "in", "the", "class"));
-\end{JavaScript}
-
+</pre></div></div>
 
   produces
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_86_15_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 ["sentence",
  [["noun-phrase",
   [["simple-noun-phrase", 
@@ -611,8 +512,7 @@ parse_input(list("the", "student", "with", "the", "cat", "sleeps", "in", "the", 
          [["simple-noun-phrase", 
           [["article", ["the", null]],
            ["noun", ["class", null]]]]]]]]]]
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -623,17 +523,14 @@ parse_input(list("the", "student", "with", "the", "cat", "sleeps", "in", "the", 
   student has the cat.  Our nondeterministic program finds both
   possibilities:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_86_16_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 parse_input(list("the", "professor", "lectures",
                  "to", "the", "student", "with", "the", "cat"));
-\end{JavaScript}
-
+</pre></div></div>
 
   produces
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_86_17_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 ["sentence",
  [["simple-noun-phrase", 
    [["article", ["the", null]],
@@ -653,15 +550,13 @@ parse_input(list("the", "professor", "lectures",
           ["simple-noun-phrase", 
            [["article", ["the", null]],
             [["noun", ["cat", null]]]]]]]]]]]
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p18' class='permalink'></a><p>
   Asking the evaluator to try again yields
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_86_18_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 ["sentence",
  [["simple-noun-phrase", 
    [["article", ["the", null]],
@@ -682,8 +577,7 @@ parse_input(list("the", "professor", "lectures",
           ["simple-noun-phrase", 
            [["article", ["the", null]],
             [["noun", ["cat", null]]]]]]]]]]]
-\end{JavaScript}
-
+</pre></div></div>
 
   
       </p></div>
@@ -706,9 +600,9 @@ parse_input(list("the", "professor", "lectures",
 \begin{Exercise}
 
   
-  The evaluators in sections~\ref{sec:mc-eval} and \ref{sec:lazy-evaluation}
+  The evaluators in sections \ref{sec:mc-eval} and \ref{sec:lazy-evaluation}
   do not determine what order operands are evaluated in.
-  We will see that the {\lstinline[mathescape=true]$amb$} evaluator evaluates them from left to right.
+  We will see that the <kbd>amb</kbd> evaluator evaluates them from left to right.
   Explain why our parsing program wouldn't work if the operands were evaluated
   in some other order.
       
@@ -723,20 +617,18 @@ parse_input(list("the", "professor", "lectures",
   a verb phrase followed by a prepositional phrase, it would be much more
   straightforward to define the
   function
-  {\lstinline[mathescape=true]$parse-verb-phrase$} as
+  <kbd>parse-verb-phrase</kbd> as
   follows (and similarly for noun phrases):
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_86_19_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function parse_verb_phrase() {
     return amb(parse_word(verbs),      
                list("verb-phrase",
                     parse_verb_phrase(),
                     parse_prepositional_phrase()));
 }
-\end{JavaScript}
-
+</pre></div></div>
   Does this work?  Does the program's behavior change if we interchange
-  the order of expressions in the {\lstinline[mathescape=true]$amb$}?
+  the order of expressions in the <kbd>amb</kbd>?
       
 \end{Exercise}
 
@@ -747,7 +639,7 @@ function parse_verb_phrase() {
 
   Extend the grammar given above to handle more complex sentences.  For
   example, you could extend noun phrases and verb phrases to include
-  adjectives and adverbs, or you could handle compound sentences.<a class='superscript' id='footnote-6' href='#footnote-6'>[6]</a>
+  adjectives and adverbs, or you could handle compound sentences.<a class='superscript' id='footnote-link-6' href='#footnote-6'>[6]</a>
       
 \end{Exercise}
 
@@ -763,15 +655,14 @@ function parse_verb_phrase() {
   
     
     function
-    {\lstinline[mathescape=true]$parse_word$}
+    <kbd>parse_word</kbd>
     
   
     so that it ignores the <QUOTE>input
     sentence</QUOTE> and instead always succeeds and generates an appropriate
   word, we can use the programs we had built for parsing to do
   generation instead.  Implement Alyssa's idea, and show the first
-  half-dozen or so sentences generated.<a class='superscript' id='footnote-7' href='#footnote-7'>[7]</a>
-      
+  half-dozen or so sentences generated.<a class='superscript' id='footnote-link-7' href='#footnote-7'>[7]</a>
   
       
 \end{Exercise}
@@ -780,12 +671,11 @@ function parse_verb_phrase() {
       
 
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-7' href='#footnote-link-7'>[7] </a><FOOTNOTE>Our program uses the following
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Our program uses the following
     function
     to determine 
     if the elements of a list are distinct:
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_86_20_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function distinct(items) {	
     return is_null items 
         ? true
@@ -795,41 +685,40 @@ function distinct(items) {
             ? distinct(tail(items))
             : false;
 }
-\end{JavaScript}
-
+</pre></div></div>
 
 
   
   
-    The function {\lstinline[mathescape=true]$member_equal$} is like {\lstinline[mathescape=true]$member$}
-    except that it uses {\lstinline[mathescape=true]$equal$} instead
-    of {\lstinline[mathescape=true]$===$} to test for equality.
+    The function <kbd>member_equal</kbd> is like <kbd>member</kbd>
+    except that it uses <kbd>equal</kbd> instead
+    of <kbd>===</kbd> to test for equality.
   
 
-</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-7' href='#footnote-link-7'>[7] </a><FOOTNOTE>This is taken from a booklet called <QUOTE>Problematical
+</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>This is taken from a booklet called <QUOTE>Problematical
       Recreations,</QUOTE> published in the 1960s by Litton Industries, where it
-    is attributed to the <EM>Kansas State Engineer</EM>.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-7' href='#footnote-link-7'>[7] </a><FOOTNOTE>Here we use the convention that the first element of each list
-    designates the part of speech for the rest of the words in the list.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-7' href='#footnote-link-7'>[7] </a><FOOTNOTE>Notice that
+    is attributed to the <EM>Kansas State Engineer</EM>.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Here we use the convention that the first element of each list
+    designates the part of speech for the rest of the words in the list.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Notice that
   
     
     
-      {\lstinline[mathescape=true]$parse_word$},
+      <kbd>parse_word</kbd>,
     
   
   uses
   assignment
   to modify the
-  unparsed input list.  For this to work, our {\lstinline[mathescape=true]$amb$} evaluator must
+  unparsed input list.  For this to work, our <kbd>amb</kbd> evaluator must
   undo the effects of
   assignment
-  operations when it backtracks.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-7' href='#footnote-link-7'>[7] </a><FOOTNOTE>Observe that this
+  operations when it backtracks.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>Observe that this
     definition is recursive—a verb may be followed by any number
-    of prepositional phrases.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-7' href='#footnote-link-7'>[7] </a><FOOTNOTE>This kind of grammar can become arbitrarily complex, but it
+    of prepositional phrases.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>This kind of grammar can become arbitrarily complex, but it
     
     is only a toy as far as real language understanding is concerned.
     Real natural-language understanding by computer requires an elaborate
@@ -837,13 +726,20 @@ function distinct(items) {
     other hand, even toy parsers can be useful in supporting flexible
     command languages for programs such as information-retrieval systems.
     
-    Winston 1992 discusses computational approaches to real
+    <CITATION>Winston 1992</CITATION> discusses computational approaches to real
     language understanding and also the applications of simple grammars to
-    command languages.</FOOTNOTE></div><hr><div class='footnote'>
+    command languages.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-7' href='#footnote-link-7'>[7] </a><FOOTNOTE>Although Alyssa's idea works just fine (and is
     surprisingly simple), the sentences that it generates are a bit
     boring—they don't sample the possible sentences of this language in
     a very interesting way.  In fact, the grammar is highly recursive in
     many places, and Alyssa's technique <QUOTE>falls into</QUOTE> one of these recursions and
-    gets stuck.  See exercise~\ref{ex:ramb} for a way to deal with this.</FOOTNOTE></div>
-</SUBSECTION>
+    gets stuck.  See exercise \ref{ex:ramb} for a way to deal with this.</FOOTNOTE></div>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section3/subsection1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section3/subsection3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+4.3.2  Examples of Nondeterministic Programs</div>	<div class='next-page'></div></div>

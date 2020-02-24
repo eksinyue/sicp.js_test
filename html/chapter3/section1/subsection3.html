@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>3.1.3 
-        The Costs of Introducing Assignment
-      </a>
+		<a name='top' class='permalink'>3.1.3  The Costs of Introducing Assignment</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -22,7 +29,7 @@ enables us to model objects
         substitution model of
         function
         application that we introduced in
-        section~\ref{sec:substitution-model}.  Moreover, no simple model with
+        section \ref{sec:substitution-model}.  Moreover, no simple model with
         <QUOTE>nice</QUOTE> mathematical properties can be an adequate framework for
         dealing with objects and assignment in programming languages.
       </p></div>
@@ -46,13 +53,13 @@ enables us to model objects
 <a name='p3' class='permalink'></a><p>
         
         To understand how assignment complicates matters, consider a
-        simplified version of the {\lstinline[mathescape=true]$make_withdraw$}
+        simplified version of the <kbd>make_withdraw</kbd>
         function
         of
-        section~\ref{sec:local-state-variables} that does not bother to check
+        section \ref{sec:local-state-variables} that does not bother to check
         for an insufficient amount:
 
-        
+        <div class='snippet' id='javascript_50_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_simplified_withdraw(balance) {
@@ -64,9 +71,10 @@ function make_simplified_withdraw(balance) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AzjZABwBsZgZMATbAdxigAtKAnVGgCgCNVjVJMAlIgDeAKEQTEzTFBDMkqZHHBREAXgB8I8ZN16J3Xv3WJDfCJkQBaRIuVgoAbh37X02fNM9zmZ690Avs4BQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AzjZABwBsZgZMATbAdxigAtKAnVGgCgCNVjVJMAlIgDeAKEQTEzTFBDMkqZHHBREAXgB8I8ZN16J3Xv3WJDfCJkQBaRIuVgoAbh37X02fNM9zmZ690Avs4BoqIQCLiqNCZoWHgEJGQU1HSMLGzsAEwArALOohyZAAx5EgD0ZYjKUIQgUABciNmhHACMJY7lldW1DdbZQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 
 
@@ -79,10 +87,10 @@ function make_simplified_withdraw(balance) {
 <a name='p4' class='permalink'></a><p>
         Compare this
         function
-        with the following {\lstinline[mathescape=true]$make_decrementer$}
+        with the following <kbd>make_decrementer</kbd>
         function, which does not use assignment:
 
-        
+        <div class='snippet' id='javascript_50_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_decrementer(balance) {
@@ -91,9 +99,10 @@ function make_decrementer(balance) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AJpiAJ02UzCk0IAoAjVAG1UkwEpEBvAKER8WKhCEkqZHHBREAXgB8iOo2aIAtIhFjyAbk4BfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AJpiAJ02UzCk0IAoAjVAG1UkwEpEBvAKER8WKhCEkqZHHBREAXgB8iOo2aIAtIhFjyAbk4BfIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
@@ -101,85 +110,90 @@ function make_decrementer(balance) {
         
 	
 	  The function
-	  {\lstinline[mathescape=true]$make_decrementer$}
+	  <kbd>make_decrementer</kbd>
 	
 	returns a
         function
         that subtracts its input
-        from a designated amount {\lstinline[mathescape=true]$balance$},
+        from a designated amount <kbd>balance</kbd>,
 	but there is no accumulated effect
         over successive calls,
-	as with {\lstinline[mathescape=true]$make_simplified_withdraw$}:
+	as with <kbd>make_simplified_withdraw</kbd>:
 
-        
+        <div class='snippet' id='javascript_50_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const d = make_decrementer(25);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAJjAvDAtgQwNYFMD6cvABOWKWYUWhAFAEwCsAlANxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AJpiAJ02UzCk0IAoAjVAG1UkwEpEBvAKER8WKhCEkqZHHBREAXgB8iOo2aIAtIhFjyAbk4BfThAQBnCbikoMOfERJkK1AEwBWFhqA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_50_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 d(20); // output: 5
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYCgTADAlA3ABAegXA9gVwC4AdMC44CsQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=MYewdgzgLgBAJjAvDAtgQwNYFMD6cvABOWKWYUWhAFAEwCsAlANwBQAZgK5jBQCW4qTLnxESZCtQBGaADZpuWBjADeLGOpjEoHQmBhoUILrEQA+GNLkKYAWn2HjrAL4s4tAAzMYAem8wjUAAOHFAAXDB0QA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_50_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 d(10); // output: 15
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYCgjADAlA3ABAegXA9gVwC4AdMC45gCsQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=CYCgTADAlA3ABAegXA9gVwC4AdMC44CsAUAMYoB2AzhnMHALxwC2AhgNYCmA+sByQE4cmHchg79wBWEQBmaciQwBLCs3bdeAoSLESARiwA2LBRyhwA3kTg24gjGn7k4LJulEMAfHAPHTcAFoXN3kMGCIAXyJQAEZoeCRUTBwMfBiCIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
-        We can use the substitution model to explain how {\lstinline[mathescape=true]$make_decrementer$} works.  For instance, let us analyze the evaluation
+        We can use the substitution model to explain how <kbd>make_decrementer</kbd> works.  For instance, let us analyze the evaluation
         of the expression
 
-        
+        <div class='snippet' id='javascript_50_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 (make_decrementer(25))(20);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQWwhg1gpg+gJlAxgJyiKA7ALlZwBMArAJTEEAMxA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AJpiAJ02UzCk0IAoAjVAG1UkwEpEBvAKER8WKhCEkqZHHBREAXgB8iOo2aIAtIhFjyAbk4BfTlTRY8BYqXKUqAJgCsLFpYAMLDUA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         We first simplify the operator of the combination by substituting $25$
-        for {\lstinline[mathescape=true]$balance$} in the body of {\lstinline[mathescape=true]$make-decrementer$}.  This reduces
+        for <kbd>balance</kbd> in the body of <kbd>make-decrementer</kbd>.  This reduces
         the expression to
 
-        
+        <div class='snippet' id='javascript_50_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 (amount => 25 - amount)(20);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQQwtg9grgdgLgAgLwD4ECYCsCC0DzTwCUw6ADEQNxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=BQQwtg9grgdgLgAgLwD4ECYCsCC0DzTwCUw6ADEQNxA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
-        Now we apply the operator by substituting 20 for {\lstinline[mathescape=true]$amount$} in the
+        Now we apply the operator by substituting 20 for <kbd>amount</kbd> in the
         body of the
 	
 	  
@@ -187,16 +201,17 @@ d(10); // output: 15
 	
 	  expression:
 
-        
+        <div class='snippet' id='javascript_50_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 25 - 20;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EwVgBAtGwAwNxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=EwVgBAtGwAwNxA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         The final answer is 5.
       </p></div>
@@ -204,60 +219,49 @@ d(10); // output: 15
       <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
         Observe, however, what happens if we attempt a similar substitution
-        analysis with {\lstinline[mathescape=true]$make_simplified_withdraw$}:
+        analysis with <kbd>make_simplified_withdraw</kbd>:
 
-        
+        <div class='snippet' id='javascript_50_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 (make_simplified_withdraw(25))(20);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQWwhg1gpg+gzgSxABwDYIGYKgExgdwQBcALHAJzH2ACYBWASgdoAYGBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AzjZABwBsZgZMATbAdxigAtKAnVGgCgCNVjVJMAlIgDeAKEQTEzTFBDMkqZHHBREAXgB8I8ZN16J3Xv3WJDfCJkQBaRIuVgoAbh37X02fNM9zmZ690Avs4BouxoWHgEJGQU1HSMLGzsAEwArAICKQAMAo5AA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
         We first simplify the operator by substituting 25 for
-	{\lstinline[mathescape=true]$balance$} in
+	<kbd>balance</kbd> in
         
 	the return expression of
-	{\lstinline[mathescape=true]$make_simplified_withdraw$}.
-        This reduces the expression to<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-\begin{JavaScript}
+	<kbd>make_simplified_withdraw</kbd>.
+        This reduces the expression to<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
+
+        <div class='snippet' id='javascript_50_10_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 (amount => {
      balance = 25 - amount; 
      return 25;
  })(20);
-\end{JavaScript}
-
-      
-
-        
-\begin{JavaScript}
-(amount => {
-     balance = 25 - amount; 
-     return 25;
- })(20);
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
         Now we apply the function
-	by substituting 20 for {\lstinline[mathescape=true]$amount$} in the
+	by substituting 20 for <kbd>amount</kbd> in the
         body of the 
 	function:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_50_11_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 balance = 25 - 20;
 return 25;
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -265,11 +269,11 @@ return 25;
         If we adhered to the substitution model, we would have to say that the
         meaning of the
         function
-        application is to first set {\lstinline[mathescape=true]$balance$} to
+        application is to first set <kbd>balance</kbd> to
         5 and then return 25 as the value of the expression.  This gets the
         wrong answer.  In order to get the correct answer, we would have to
-        somehow distinguish the first occurrence of {\lstinline[mathescape=true]$balance$} (before the
-        effect of the assignment)  from the second occurrence of {\lstinline[mathescape=true]$balance$}
+        somehow distinguish the first occurrence of <kbd>balance</kbd> (before the
+        effect of the assignment)  from the second occurrence of <kbd>balance</kbd>
         (after the effect of the assignment), and the substitution model
         cannot do this.
       </p></div>
@@ -286,7 +290,7 @@ return 25;
             value of a variable can change, a variable can no longer be simply a
             name.  Now a variable somehow refers to a place where a value can be
             stored, and the value stored at this place can change.  In
-            section~\ref{sec:environment-model}
+            section \ref{sec:environment-model}
             we will see how environments play this role of <QUOTE>place</QUOTE> in our
             computational model.
             
@@ -294,9 +298,10 @@ return 25;
 	</SPLIT>
 	</p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Sameness and change
-      
+      </h2></div>
 
       
       
@@ -313,12 +318,12 @@ return 25;
       <div class='permalink'>
 <a name='p14' class='permalink'></a><p>
         Suppose we call 
-{\lstinline[mathescape=true]$make_decrementer$}
+<kbd>make_decrementer</kbd>
 twice with the same argument to
         create two
         functions:
 
-        
+        <div class='snippet' id='javascript_50_12_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const d1 = make_decrementer(25);
@@ -327,30 +332,31 @@ const d2 = make_decrementer(25);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAJgRhgXhgWwIYGsCmB9OHYAJxzRzCh2IAoAmAVgEoBuAKDdEljjpXWz5CJMhSq1GrIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AJpiAJ02UzCk0IAoAjVAG1UkwEpEBvAKER8WKhCEkqZHHBREAXgB8iOo2aIAtIhFjyAbk4BfThAQBnCbgCMUlBhz4iJMhWoAmAKwstew8Yfm0WPAWKk5JRUzq5AA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p15' class='permalink'></a><p>
         Are 
-{\lstinline[mathescape=true]$d1$}
+<kbd>d1</kbd>
 and 
-{\lstinline[mathescape=true]$d2$}
+<kbd>d2</kbd>
 the same?  An acceptable answer is yes,
         because 
-{\lstinline[mathescape=true]$d1$}
+<kbd>d1</kbd>
 and 
-{\lstinline[mathescape=true]$d2$}
+<kbd>d2</kbd>
 have the same computational
         behavior—each is a
         function
         that subtracts its input from 25.  In
         fact, 
-{\lstinline[mathescape=true]$d1$}
+<kbd>d1</kbd>
 could be substituted for 
-{\lstinline[mathescape=true]$d2$}
+<kbd>d2</kbd>
 in any computation
         without changing the result.
       </p></div>
@@ -358,8 +364,8 @@ in any computation
       <div class='permalink'>
 <a name='p16' class='permalink'></a><p>
         Contrast this with making two calls to 
-{\lstinline[mathescape=true]$make_simplified_withdraw$}:
-        
+<kbd>make_simplified_withdraw</kbd>:
+        <div class='snippet' id='javascript_50_13_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const w1 = make_simplified_withdraw(25);
@@ -368,70 +374,74 @@ const w2 = make_simplified_withdraw(25);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBA7gRhgXhgWwIYGsCmB9CASzQAcAbQgM0JwBM85CoALWgJwzgAoAmAVgCUAbgBQI0JFhweKdNnxFSFanQZNWHbv2FA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AzjZABwBsZgZMATbAdxigAtKAnVGgCgCNVjVJMAlIgDeAKEQTEzTFBDMkqZHHBREAXgB8I8ZN16J3Xv3WJDfCJkQBaRIuVgoAbh37X02fNM9zmZ690Avs4BohAIuKo0AIwmaFh4BCRkFNR0jCxs7ABMAKwCzqHhkVmxGDj4RKTkVLT0TKwcuflAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p17' class='permalink'></a><p>
         Are 
-{\lstinline[mathescape=true]$w1$}
+<kbd>w1</kbd>
 and 
-{\lstinline[mathescape=true]$w2$}
+<kbd>w2</kbd>
 the same?  Surely not, because calls to 
-{\lstinline[mathescape=true]$w1$}
+<kbd>w1</kbd>
 and 
-{\lstinline[mathescape=true]$w2$}
+<kbd>w2</kbd>
 have distinct effects, as shown by the following
         sequence of interactions:
-        
+        <div class='snippet' id='javascript_50_14_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 w1(20);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4RgFATADAlA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=MYewdgzgLgBA7gRhgXhgWwIYGsCmB9CASzQAcAbQgM0JwBM85CoALWgJwzgAoAmAVgCUAbgBQI0JFhweKdNnxFSFanQZNWHbv2EjKAVzDAohcHNwFi5KjXqMW7TlwBGGMhkM4BMAN4iY-mDYcKD02MBgMNBADWGQAPh8-AOSU-xc3D1l092AcGABaCKiY0VSy-yCQsJhsj1Ly-wBfUUaRRF4ABmEgA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_50_15_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 w1(20);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4RgFATADAlA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=O4RgFATADAlA3AKAMYHsB2BnALgAlDgXhwFsBDAawFMB9DAS2IAcAbOgMzsoBNrg6sAFlwBOpYJACs8BMnTY8EQiQo16TVh269+Q0eIhTEbAK5okWOumVVaDFu048+gkWLAAjUs1JnKMHADeCDghOMKUWMbCaDikxCimuAQAfIHBoRmZIZ7evko5PkiUOAC0sfGJiFnVIeGR0TgFvlU1IQC+iG0IoJCwcEA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_50_16_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 w2(20);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4JgFCAMCUDcQ}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=O4RgFATADAlA3AKFJWiDGB7AdgZwC4AEoBAvAQLYCGA1gKYD6OAluQA4A2TAZk7QCb1gTPAAs+AJ0rBIAVngIEmXIWARSFGg2ZtOPfoOFjJ0iHMRcArljR4m2DXUYsO3XgKGiJUsACNK7SmtaGAIAbwQCSIJxWjwLcSwCSnIMK0ISAD4wiKjcvMi-AKD1QsC0WgIAWiSUtMR8hsiYuISCUqD6xsiAX0RupAgUeCA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p18' class='permalink'></a><p>
         Even though 
-{\lstinline[mathescape=true]$w1$}
+<kbd>w1</kbd>
 and 
-{\lstinline[mathescape=true]$w2$}
+<kbd>w2</kbd>
 are <QUOTE>equal</QUOTE> in the sense that they
         are both created by evaluating the same expression, 
-{\lstinline[mathescape=true]$make_simplified_withdraw(25)$}, it is not true that 
-{\lstinline[mathescape=true]$w1$}
+<kbd>make_simplified_withdraw(25)</kbd>, it is not true that 
+<kbd>w1</kbd>
 could be
         substituted for 
-{\lstinline[mathescape=true]$w2$}
+<kbd>w2</kbd>
 in any expression without changing the result
         of evaluating the expression.
       </p></div>
@@ -473,7 +483,7 @@ in any expression without changing the result
         situation where Peter and Paul have a bank account with \$100 in
         it.  There is a substantial difference between modeling this as
 
-        
+        <div class='snippet' id='javascript_50_17_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const peter_acc = make_account(100);
@@ -481,13 +491,14 @@ const paul_acc = make_account(100);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBADgUyggTgfQIbGDAvDAWwwGsFNsQBXMKACgEYAGRgSgG4AoUSWODSgDbkc+IqWFUaDZuyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9VEJzhQAUARqgDaqSYCUiA3gFCKuKiSwKIDuMUACwAmAJ1Q9iqZITBR6zNosQxgiMpWoRMiAHwBeRFJlzGLJefJUaiA5c3aAtIelEA3GfOKRmKCBFI7GndPRABfREwKAGdtBRC2b19-RAAiAEkwKJBgYBgIGExZdnAhKJTgz1CPMOqOaHgkIUwABzgo-kkXWXlqxUCtG0R+7QBqZ2MK80S-AI0g6qrFOq5GmCjm1CgIAWJkHpCVNWQbPQMUvkFRcRT9+NZp5IvhMR5JpXDImOVVXZOzpta7SgN1Md3uPhmiABbX4b0UH2isV6ngeSBSAFUwOgwHAeEhvABHECYKJQRBOJwAWQAggBpACiDmpAGFmQB5dEAOQAKuVkaxFmxBeCkqt1pttu4qgRMmTmj5MCJcPhBmgsMqCERiABGAAMuto7hlpMQGxAFA1qowODwmtkOv1hqAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         and modeling it as
 
-        
+        <div class='snippet' id='javascript_50_18_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const peter_acc = make_account(100);
@@ -495,9 +506,10 @@ const paul_acc = peter_acc;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBADgUyggTgfQIbGDAvDAWwwGsFNsQBXMKACgEYAGRgSgG4AoUSWODSgDbkc+RMnRZgbIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9VEJzhQAUARqgDaqSYCUiA3gFCKuKiSwKIDuMUACwAmAJ1Q9iqZITBR6zNosQxgiMpWoRMiAHwBeRFJlzGLJefJUaiA5c3aAtIelEA3GfOKRmKCBFI7GndPRABfREwKAGdtBRC2b19-RAAiAEkwKJBgYBgIGExZdnAhKJTgz1CPMOqOaHgkIUwABzgo-kkXWXlqxUCtG0R+7QBqZ2MK80S-AI0g6qrFOq5GmCjm1CgIAWJkHpCVNWQbPQMUvkFRcRT9+NZp5IvhMR5JpXDImOVVXZOzpta7SgN1Md3uPhmiABbX4b0UH2isV6ngeSBSAFUwOgwHAeEhvABHECYKJQRBOJwAWQAggBpACiDmpAGFmQB5dEAOQAKuVkaxFmxBeCkqt1pttu4qgRMmTmj5MCJcPhBmgsMqCERiABGAAMuto7hlpMQGxAFA1g3lUEVGtcQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
@@ -505,27 +517,27 @@ const paul_acc = peter_acc;
         In the first situation, the two bank accounts are distinct.
         Transactions made by Peter will not affect Paul's account, and vice
         versa.  In the second situation, however, we have defined 
-{\lstinline[mathescape=true]$paul_acc$}
+<kbd>paul_acc</kbd>
 to be <EM>the same thing</EM> as 
-{\lstinline[mathescape=true]$peter_acc$}
+<kbd>peter_acc</kbd>
 In effect,
         Peter and Paul now have a joint bank account, and if Peter makes a
         withdrawal from 
-{\lstinline[mathescape=true]$peter_acc$}
+<kbd>peter_acc</kbd>
 Paul will observe less money in 
-{\lstinline[mathescape=true]$paul_acc$}.
+<kbd>paul_acc</kbd>.
 These two similar but distinct situations can cause
         confusion in building computational models.  With the shared account,
         in particular, it can be especially confusing that there is one object
         (the bank account) that has two different names 
-({\lstinline[mathescape=true]$peter_acc$}
+(<kbd>peter_acc</kbd>
 and
-{\lstinline[mathescape=true]$paul_acc$}); 
+<kbd>paul_acc</kbd>); 
 if we are searching for all the places in our program where 
-{\lstinline[mathescape=true]$paul_acc$}
+<kbd>paul_acc</kbd>
 can be changed, we must remember to look also at
         things that change 
-{\lstinline[mathescape=true]$peter_acc$}.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+<kbd>peter_acc</kbd>.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
       </p></div>
 
       <div class='permalink'>
@@ -552,9 +564,10 @@ can be changed, we must remember to look also at
         
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Pitfalls of imperative programming
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p24' class='permalink'></a><p>
@@ -567,8 +580,8 @@ can be changed, we must remember to look also at
         computational models, programs written in imperative style are
         susceptible to bugs that cannot occur in functional programs.  For
         example, recall the iterative factorial program from
-        section~\ref{sec:recursion-and-iteration}:
-        
+        section \ref{sec:recursion-and-iteration}:
+        <div class='snippet' id='javascript_50_19_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function factorial(n) {
@@ -580,7 +593,7 @@ function factorial(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRS0SWBRGKAUwzwAcM4ATEaAGgjjgmGYuUrj6wRHgFDmiAHyIipChPUZGUEBiTsuPKAG41EgL6JGOAM6NV6jVp1IGzGYLDCAVPu59TDoGBsp7MANQAjIQmDmamceKa2rr0wngRvFEmZkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRS0SWBRGKAUwzwAcM4ATEaAGgjjgmGYuUrj6wRHgFDmiAHyIipChPUZGUEBiTsuPKAG41EgL6JGOAM6NV6jVp1IGzGYLDCAVPu59TDoGBsp7MANQAjIQmDmamceKa2rr0wngRvFEmcWSo6Fi4eACs0UA}{\usebox\lstbox}!*/
                        counter+1);
       }
    }
@@ -588,12 +601,13 @@ function factorial(n) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
         Instead of passing arguments in the internal iterative loop, we could
         adopt a more imperative style by using explicit assignment
-        to update the values of the variables {\lstinline[mathescape=true]$product$} and {\lstinline[mathescape=true]$counter$}:
-        
+        to update the values of the variables <kbd>product</kbd> and <kbd>counter</kbd>:
+        <div class='snippet' id='javascript_50_20_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function factorial(n) {
@@ -605,7 +619,7 @@ function factorial(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSnAUykQAcM4ATEaRAXkQEYBuCqrUQQ44KNQyce-SsnDR4SGOIx5i5WbJjBEeEWImIAfIiKkBmzRlogMSRizZQZlgL6JqOAM7Vzlyw6s7Fz6YCqIAFQMTEHOFv7ComGGIUnhANTS8f7WULZKKmoumq4WpbK5+YjKEkVkrkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSnAUykQAcM4ATEaRAXkQEYBuCqrUQQ44KNQyce-SsnDR4SGOIx5i5WbJjBEeEWImIAfIiKkBmzRlogMSRizZQZlgL6JqOAM7Vzlyw6s7Fz6YCqIAFQMTEHOFv7ComGGIUnhANTS8f7WULZKKmoumq4WpbK5+YjKEkVkpWSo6Fi4eACshLxAA}{\usebox\lstbox}!*/
       } else {
           product = counter * product;
           counter = counter + 1;
@@ -616,33 +630,32 @@ function factorial(n) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
         
         
         This does not change the results produced by the program, but it does
         introduce a subtle trap.  How do we decide the order of the assignments?
         As it happens, the program is correct as written.  But
         writing the assignments in the opposite order
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_50_21_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 counter = counter + 1;
 product = counter * product;
-\end{JavaScript}
-
+</pre></div></div>
         would have produced a different, incorrect result.
         In general, programming with assignment forces us to
         carefully consider the relative orders of the assignments to make sure
         that each statement is using the correct version of the variables that
         have been changed.  This issue simply does not arise in functional
-        programs.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+        programs.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
       </p></div>
 
       <div class='permalink'>
 <a name='p25' class='permalink'></a><p>
         The complexity of imperative programs becomes even worse if we
         consider applications in which several processes execute concurrently.  We
-        will return to this in section~\ref{sec:time-is-of-the-essence}.
+        will return to this in section \ref{sec:time-is-of-the-essence}.
         First, however, we will address the issue of providing a computational
         model for expressions that involve assignment, and explore the uses of
         objects with local state in designing simulations.
@@ -651,35 +664,35 @@ product = counter * product;
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled43}
+\label{ex:unlabeled46}
 
         
         Consider the bank account objects created by 
-{\lstinline[mathescape=true]$make_account$}, 
+<kbd>make_account</kbd>, 
 with
         the password modification described in
-        exercise~\ref{ex:password-protection}.  Suppose that our banking
+        exercise \ref{ex:password-protection}.  Suppose that our banking
         system requires the ability to make joint accounts.  Define a
         function
         
-{\lstinline[mathescape=true]$make_joint$}
+<kbd>make_joint</kbd>
 that accomplishes this.  
-The function {\lstinline[mathescape=true]$make_joint$}
+The function <kbd>make_joint</kbd>
         should take three arguments.  The first is a password-protected
         account.  The second argument must match the password with which the
         account was defined in order for the 
-{\lstinline[mathescape=true]$make_joint$}
+<kbd>make_joint</kbd>
 operation to
         proceed.  The third argument is a new password.  
-The function {\lstinline[mathescape=true]$make_joint$}
+The function <kbd>make_joint</kbd>
 is to create an additional access to the original account using the new
         password.  For example, if 
-({\lstinline[mathescape=true]$peter_acc$}
+(<kbd>peter_acc</kbd>
 is a bank account with
         password 
-({\lstinline[mathescape=true]$"open sesame"$}, 
+(<kbd>"open sesame"</kbd>, 
 then
-        
+        <div class='snippet' id='javascript_50_22_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 // make_joint function to be written by students
@@ -688,26 +701,27 @@ const paul_acc =
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAEFsEMGsFMH0BWB7AlgOwC6gGYFd0BjTVZdUTZUAI1lAHcAnVTTWc6gT1AGdM8AJu0w8AUITJ9QAB0h4ANvEiFCoALyhRobRBgIUGTAAppsNoyUqANKABEyU+R6wekcLFs3bjZM+qDbAEoAbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=PTAEFsEMGsFMH0BWB7AlgOwC6gGYFd0BjTVZdUTZUAI1lAHcAnVTTWc6gT1AGdM8AJu0w8AUITJ9QAB0h4ANvEiFCoALyhRobRBgIUGTAAppsNoyUqANKABEyU+R6wekcLFs3bjZM+qDbAEoAbiA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
         will allow one to make transactions on 
-({\lstinline[mathescape=true]$peter_acc$}
+(<kbd>peter_acc</kbd>
 using the name
-{\lstinline[mathescape=true]$paul_acc$}
-and the password {\lstinline[mathescape=true]$"rosebud"$}.  You may wish to modify
-        your solution to exercise~\ref{ex:password-protection} to accommodate
+<kbd>paul_acc</kbd>
+and the password <kbd>"rosebud"</kbd>.  You may wish to modify
+        your solution to exercise \ref{ex:password-protection} to accommodate
         this new feature.
 
      	
   
 
-      \hfill{\hyperref[ex:unlabeled43-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled46-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled43}]
+\begin{Answer}[ref={ex:unlabeled46}]
 
-    
+    <div class='snippet' id='javascript_50_23_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_joint(linked_acc, linked_pw, joint_pw) {
@@ -719,7 +733,7 @@ function make_joint(linked_acc, linked_pw, joint_pw) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AVnGMKACgBtCsATbVCCAGkXLCuwAcB3R-QqdjgJSIA3gChEExACdMUEFKTFkmAM4rUAc0yNCbEH05CAvAD4R4yZYuWJAeluIAwgAtMEdIlT7XRGBFSwCIjAcFKIPESedHDgUNY2MMCIxLr6-IgAhEZG4QRE-EJiNsXSsvJIAB6IpogARADqUggaubxREDGRbKhqHKGUtQDc8ZYAvoiYpCqY5iU2HWAqUO2qKtjMVNVMFJjUtBBKq5ra2yy7BcNzVleS9k6u7p7emL7+gUghYRu77Z1xNxJEsl9qt1jtKMQAAzGbJ1ACSkFCMmgiAACj0VH0pANCiMAXcQWowWcIdDEJQ4KpPOTMGw4CoYMsHBxGc5KFJUBxUKREHAkpCdEh+pgpHibncoHBEFBVMtPtLXPDEVJkct0b1+rUUEctAA6RBiq4yOQKRBVGoNJpgFrfSi-WKIboa7FDQ1jCZTGZFAGWO4AQVIPK8UB8sDe8CQTumlEYxvKKzUP32f2lUpA01FPsscdNhLWtsuANGhuLY2GoyAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AVnGMKACgBtCsATbVCCAGkXLCuwAcB3R-QqdjgJSIA3gChEExACdMUEFKTFkmAM4rUAc0yNCbEH05CAvAD4R4yZYuWJAeluIAwgAtMEdIlT7XRGBFSwCIjAcFKIPESedHDgUNY2MMCIxLr6-IgAhEZG4QRE-EJiNsXSsvJIAB6IpogARADqUggaubxREDGRbKhqHKGUtQDc8ZYAvoiYpCqY5iU2HWAqUO2qKtjMVNVMFJjUtBBKq5ra2yy7BcNzVleS9k6u7p7emL7+gUghYRu77Z1xNxJEsl9qt1jtKMQAAzGbJ1ACSkFCMmgiAACj0VH0pANCiMAXcQWowWcIdDEJQ4KpPOTMGw4CoYMsHBxGc5KFJUBxUKREHAkpCdEh+pgpHibncoHBEFBVMtPtLXPDEVJkct0b1+rUUEctAA6RBiq4yOQKRBVGoNJpgFrfSi-WKIboa7FDQ1jCZTGZFAGWO4AQVIPK8UB8sDe8CQTumlEYxvKKzUP32f2lUpA01FPsscdNhLWtsuANGhuLY2GxdECyWjtkIpodC2aCw9Y6sWIAEZIQK6nA2C9ENN1MpagJhsQ+zKpC3iLUWSH2Zzaoxar3+4PUMOBAIO9DBog7vVWQuOCpEJ3ROPa1P9jO52yORwl3UAEYvEfbgAsu-3DgRHRVbhqhiWKUKIoh3AAshgMwAFJ5MsfrRLElYINW3QgKQLaNtBeDwZek4tsuq5IOuw7Lk00zPiAOLDBe6GYTes5Hg+T61BRmBUTi24AKzfgezGcqevGMCozgxKQdo5kgX5AA}{\usebox\lstbox}!*/
         } else {
             const access_linked = linked_acc(message, linked_pw);
             
@@ -737,8 +751,9 @@ function make_joint(linked_acc, linked_pw, joint_pw) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     
     
@@ -753,7 +768,7 @@ function make_joint(linked_acc, linked_pw, joint_pw) {
         
         
         When we defined the evaluation model in
-        section~\ref{sec:evaluating-combinations}, we said that the first step
+        section \ref{sec:evaluating-combinations}, we said that the first step
         in evaluating an expression is to evaluate its subexpressions.  But we
         never specified the order in which the subexpressions should be
         evaluated (e.g., left to right or right to left).  When we introduce
@@ -762,8 +777,8 @@ function make_joint(linked_acc, linked_pw, joint_pw) {
         are
         evaluated can make a difference to the result.  Define a simple
         function
-        {\lstinline[mathescape=true]$f$} such that evaluating {\lstinline[mathescape=true]$f(0) + f(1)$} will
-        return 0 if the arguments to {\lstinline[mathescape=true]$+$} are evaluated from left to right
+        <kbd>f</kbd> such that evaluating <kbd>f(0) + f(1)</kbd> will
+        return 0 if the arguments to <kbd>+</kbd> are evaluated from left to right
         but will return 1 if the arguments are evaluated from right to left.
         
       
@@ -774,17 +789,17 @@ function make_joint(linked_acc, linked_pw, joint_pw) {
       
 
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>We don't substitute for
-          the occurrence of {\lstinline[mathescape=true]$balance$} in the assignment statement because
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>We don't substitute for
+          the occurrence of <kbd>balance</kbd> in the assignment statement because
           the name in an assignment is not evaluated.
           If we did substitute for it, we would get
-          {\lstinline[mathescape=true]$25 = 25 - amount;$}, which makes no sense.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>The phenomenon of a
+          <kbd>25 = 25 - amount;</kbd>, which makes no sense.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>The phenomenon of a
           single computational object being accessed by more than one name is
           known as 
           
           <EM>aliasing</EM>.  The joint bank account situation illustrates
-          a very simple example of an alias.  In section~\ref{sec:mutable-data}
+          a very simple example of an alias.  In section \ref{sec:mutable-data}
           we will see much more complex examples, such as <QUOTE>distinct</QUOTE> compound
           data structures that share parts.  Bugs can occur in our programs if
           
@@ -800,8 +815,8 @@ function make_joint(linked_acc, linked_pw, joint_pw) {
           
           
           
-          (Lampson et al.~1981; 
-          Morris, Schmidt, and Wadler 1980).</FOOTNOTE></div><hr><div class='footnote'>
+          (<CITATION>Lampson et al. 1981</CITATION>; 
+          <CITATION>Morris, Schmidt, and Wadler 1980</CITATION>).</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>In view of this, it is ironic that introductory programming
           is most often taught in a highly imperative style.  This may be a
           vestige of a belief, common throughout the 1960s and 1970s, that
@@ -809,7 +824,8 @@ function make_joint(linked_acc, linked_pw, joint_pw) {
           functions
           must inherently be less efficient than
           programs that perform assignments.  
-          (Steele (1977) 
+          (<CITATION><div class='permalink'>
+<a name='p26' class='permalink'></a><p>Steele (1977)</p></div>Steele 1977</CITATION> 
           
           debunks this
           argument.)  Alternatively it may reflect a view that step-by-step
@@ -819,4 +835,11 @@ function make_joint(linked_acc, linked_pw, joint_pw) {
           Whatever the reason, it often saddles beginning programmers with
           <QUOTE>should I set this variable before or after that one</QUOTE> concerns that can
           complicate programming and obscure the important ideas.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section1/subsection2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section2/section2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+3.1.3  The Costs of Introducing Assignment</div>	<div class='next-page'></div></div>

@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>5.1.1 
-  A Language for Describing Register Machines
-      </a>
+		<a name='top' class='permalink'>5.1.1  A Language for Describing Register Machines</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -49,14 +56,14 @@
       
       
     </LI>
-    <LI>A {\lstinline[mathescape=true]$test$} instruction, that performs a specified test.
+    <LI>A <kbd>test</kbd> instruction, that performs a specified test.
 
       
       
       
       
     </LI>
-    <LI>A conditional branch ({\lstinline[mathescape=true]$branch$} instruction) to a
+    <LI>A conditional branch (<kbd>branch</kbd> instruction) to a
       location indicated by a controller label, based on the result of the
       previous test.  (The test and branch together correspond to a diamond
       in the controller diagram.)  If the test is false, the controller
@@ -66,7 +73,7 @@
       
       
     </LI>
-    <LI>An unconditional branch ({\lstinline[mathescape=true]$go_to$} instruction) naming a
+    <LI>An unconditional branch (<kbd>go_to</kbd> instruction) naming a
       controller label at which to continue execution.
     </LI>
 
@@ -83,8 +90,7 @@
   
 \begin{figure}[H]
 \centering
-
-\begin{JavaScript}
+<pre class='prettyprint no-eval'>
 data_paths(
     registers(
         list(
@@ -111,8 +117,7 @@ controller(
         "b<-t",                     // button push
         go_to(label("test-b"))),     // unconditional branch
     "gcd-done");                    // label
-\end{JavaScript}
-\caption{A specification of the GCD machine.}
+</pre>\caption{A specification of the GCD machine.}
 \label{fig:gcd-machine-spec}
 \end{figure}
 
@@ -120,7 +125,7 @@ controller(
 
       <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-  Figure~\ref{fig:gcd-machine-spec} shows the GCD machine described in
+  Figure \ref{fig:gcd-machine-spec} shows the GCD machine described in
   this way.  This example only hints at the generality of these
   descriptions, since the GCD machine is a very simple case: Each
   register has only one button, and each button and test is used only
@@ -142,29 +147,28 @@ controller(
 <a name='p7' class='permalink'></a><p>
   To obtain this form of description, we will replace the arbitrary
   button and operation names by the definitions of their behavior.  That
-  is, instead of saying (in the controller) <QUOTE>Push button {\lstinline[mathescape=true]$t<-r$}</QUOTE>
-  and separately saying (in the data paths) <QUOTE>Button {\lstinline[mathescape=true]$t<-r$} assigns
-    the value of the {\lstinline[mathescape=true]$rem$} operation to register {\lstinline[mathescape=true]$t$}</QUOTE> and <QUOTE>The
-    {\lstinline[mathescape=true]$rem$} operation's inputs are the contents of registers
+  is, instead of saying (in the controller) <QUOTE>Push button <kbd>t<-r</kbd></QUOTE>
+  and separately saying (in the data paths) <QUOTE>Button <kbd>t<-r</kbd> assigns
+    the value of the <kbd>rem</kbd> operation to register <kbd>t</kbd></QUOTE> and <QUOTE>The
+    <kbd>rem</kbd> operation's inputs are the contents of registers
     
     
     
     
     
     
-    {\lstinline[mathescape=true]$a$} and {\lstinline[mathescape=true]$b$},</QUOTE> we will say (in the controller) <QUOTE>Push the
-    button that assigns to register {\lstinline[mathescape=true]$t$} the value of the {\lstinline[mathescape=true]$rem$}
-    operation on the contents of registers {\lstinline[mathescape=true]$a$} and {\lstinline[mathescape=true]$b$}.</QUOTE>
-  Similarly, instead of saying (in the controller) <QUOTE>Perform the {\lstinline[mathescape=true]$=$} test</QUOTE> and separately saying (in the data paths) <QUOTE>The {\lstinline[mathescape=true]$=$} test operates on the contents of register {\lstinline[mathescape=true]$b$} and the
-    constant 0,</QUOTE> we will say <QUOTE>Perform the {\lstinline[mathescape=true]$=$} test on the
+    <kbd>a</kbd> and <kbd>b</kbd>,</QUOTE> we will say (in the controller) <QUOTE>Push the
+    button that assigns to register <kbd>t</kbd> the value of the <kbd>rem</kbd>
+    operation on the contents of registers <kbd>a</kbd> and <kbd>b</kbd>.</QUOTE>
+  Similarly, instead of saying (in the controller) <QUOTE>Perform the <kbd>=</kbd> test</QUOTE> and separately saying (in the data paths) <QUOTE>The <kbd>=</kbd> test operates on the contents of register <kbd>b</kbd> and the
+    constant 0,</QUOTE> we will say <QUOTE>Perform the <kbd>=</kbd> test on the
     
     
-    contents of register {\lstinline[mathescape=true]$b$} and the constant 0.</QUOTE>  We will omit the
+    contents of register <kbd>b</kbd> and the constant 0.</QUOTE>  We will omit the
   data-path description, leaving only the controller sequence.  Thus,
   the GCD machine is described as follows:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_95_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 controller(
      "test-b",
      list(test(list(op("="), reg(b), constant(0))),
@@ -174,14 +178,13 @@ controller(
           assign("b", reg(t)),
           go_to(label("test-b"))),
      "gcd-done");
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
   This form of description is easier to read than the kind illustrated
-  in Figure~\ref{fig:gcd-machine-spec}, but it also has disadvantages:
+  in Figure \ref{fig:gcd-machine-spec}, but it also has disadvantages:
   <UL>
     
     <LI>It is more verbose for large machines,
@@ -220,16 +223,17 @@ controller(
 
   
   Use the register-machine language to describe
-  the iterative factorial machine of exercise~\ref{ex:iterative-fact}.
+  the iterative factorial machine of exercise \ref{ex:iterative-fact}.
   
       
 \end{Exercise}
 
 
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Actions
-      
+      </h2></div>
 
       
       
@@ -239,7 +243,7 @@ controller(
   Let us modify the GCD machine so that we can type in the numbers
   whose GCD we want and get the answer printed at our terminal.  We will
   not discuss how to make a machine that can read and print, but will
-  assume (as we do when we use {\lstinline[mathescape=true]$prompt$} and {\lstinline[mathescape=true]$display$} in
+  assume (as we do when we use <kbd>prompt</kbd> and <kbd>display</kbd> in
   JavaScript) that
   they are available as primitive operations.
       </p></div>
@@ -247,19 +251,19 @@ controller(
       <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
   
-  The operation {\lstinline[mathescape=true]$read$} is like the operations we have been using in that it
-  produces a value that can be stored in a register.  But {\lstinline[mathescape=true]$read$}
+  The operation <kbd>read</kbd> is like the operations we have been using in that it
+  produces a value that can be stored in a register.  But <kbd>read</kbd>
   does not take inputs from any registers; its value depends on
   something that happens outside the parts of the machine we are
   designing.  We will allow our machine's operations to have such
-  behavior, and thus will draw and notate the use of {\lstinline[mathescape=true]$read$} just as
+  behavior, and thus will draw and notate the use of <kbd>read</kbd> just as
   we do any other operation that computes a value.
       </p></div>
 
       <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
   
-  The operation {\lstinline[mathescape=true]$print$}, on the other hand, differs from the operations we have
+  The operation <kbd>print</kbd>, on the other hand, differs from the operations we have
   been using in a fundamental way: It does not produce an output value
   to be stored in a register.  Though it has an effect, this effect is
   not on a part of the machine we are designing.  We will refer to this
@@ -271,25 +275,23 @@ controller(
   button makes the action happen.  To make a controller push an action
   
   
-  button we use a new kind of instruction called {\lstinline[mathescape=true]$perform$}.  Thus,
-  the action of printing the contents of register {\lstinline[mathescape=true]$a$} is represented
+  button we use a new kind of instruction called <kbd>perform</kbd>.  Thus,
+  the action of printing the contents of register <kbd>a</kbd> is represented
   in a controller sequence by the instruction
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_95_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 perform(list(op("print"), reg("a")))
-\end{JavaScript}
-
+</pre></div></div>
     
       </p></div>
 
       <div class='permalink'>
 <a name='p13' class='permalink'></a><p>
-  Figure~\ref{fig:gcd-with-io} shows the data paths and controller for
+  Figure \ref{fig:gcd-with-io} shows the data paths and controller for
   the new GCD machine.  Instead of having the machine stop after
   printing the answer, we have made it start over, so that it repeatedly
   reads a pair of numbers, computes their GCD, and prints the result.
   This structure is like the driver loops we used in the interpreters of
-  chapter~4.
+  chapter 4.
 
   <SPLIT>
     
@@ -299,8 +301,7 @@ perform(list(op("print"), reg("a")))
 \centering
 
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/Fig5.4c.std}.svg}}
-
-\begin{JavaScript}
+<pre class='prettyprint no-eval'>
 controller(
     list(      
        "gcd-loop",
@@ -316,8 +317,7 @@ controller(
        "gcd-done",
        perform(list(op("print"), reg("a"))),
        go_to(label("gcd-loop"))));
-\end{JavaScript}
-\caption{A GCD machine that reads inputs and prints results.}
+</pre>\caption{A GCD machine that reads inputs and prints results.}
 \label{fig:gcd-with-io}
 \end{figure}
 
@@ -330,4 +330,11 @@ controller(
       </p></div>
 
     
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section1/section1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section1/subsection2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+5.1.1  A Language for Describing Register Machines</div>	<div class='next-page'></div></div>

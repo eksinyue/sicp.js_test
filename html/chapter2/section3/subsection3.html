@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>2.3.3 
-        Example: Representing Sets
-      </a>
+		<a name='top' class='permalink'>2.3.3  Example: Representing Sets</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -28,32 +35,32 @@
       Informally, a set is simply a collection of distinct objects.  To give
       a more precise definition we can employ the method of data
       abstraction.  That is, we define <QUOTE>set</QUOTE> by specifying the operations
-      that are to be used on sets.  These are {\lstinline[mathescape=true]$union_set$},
-      {\lstinline[mathescape=true]$intersection_set$}, {\lstinline[mathescape=true]$is_element_of_set$}, and {\lstinline[mathescape=true]$adjoin_set$}.
+      that are to be used on sets.  These are <kbd>union_set</kbd>,
+      <kbd>intersection_set</kbd>, <kbd>is_element_of_set</kbd>, and <kbd>adjoin_set</kbd>.
       
-      The function {\lstinline[mathescape=true]$is_element_of_set$} is a predicate that determines whether a given
+      The function <kbd>is_element_of_set</kbd> is a predicate that determines whether a given
       element is a member of a set.
       
-      The function {\lstinline[mathescape=true]$adjoin_set$} takes an object and a
+      The function <kbd>adjoin_set</kbd> takes an object and a
       set as arguments and returns a set that contains the elements of the
       original set and also the adjoined element.
       
-      The function {\lstinline[mathescape=true]$union_set$} computes
+      The function <kbd>union_set</kbd> computes
       the union of two sets, which is the set containing each element that
       appears in either argument.
       
-      The function {\lstinline[mathescape=true]$intersection_set$} computes the
+      The function <kbd>intersection_set</kbd> computes the
       intersection of two sets, which is the set containing only elements
       that appear in both arguments.  From the viewpoint of data abstraction, we
       are free to design any representation that implements these operations
-      in a way consistent with the interpretations given above.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-      
+      in a way consistent with the interpretations given above.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
       
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Sets as unordered lists
-      
+      </h2></div>
 
       
       
@@ -62,19 +69,19 @@
 <a name='p3' class='permalink'></a><p>
       One way to represent a set is as a list of its elements in which no
       element appears more than once.  The empty set is represented by the
-      empty list.  In this representation, {\lstinline[mathescape=true]$is_element_of_set$} is similar
+      empty list.  In this representation, <kbd>is_element_of_set</kbd> is similar
       to the
       function
       
 	
-	{\lstinline[mathescape=true]$member$}
-	of section~\ref{sec:strings}.	
+	<kbd>member</kbd>
+	of section \ref{sec:strings}.	
 	
       
-      It uses {\lstinline[mathescape=true]$is_equal$}
-      instead of {\lstinline[mathescape=true]$===$} so that the set elements need not be primitive values:
+      It uses <kbd>is_equal</kbd>
+      instead of <kbd>===</kbd> so that the set elements need not be primitive values:
 
-      
+      <div class='snippet' id='javascript_36_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_element_of_set(x, set) {
@@ -85,18 +92,19 @@ function is_element_of_set(x, set) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQKYBsMFsNhRpzBooZQAUAHgDSLlQCUiA3gFCJcBOFI3SAITJ0YEFiyVGLAGQzEnLkuWURmAI4gAhpLqIAFhi0ATKRSYsAPpYXK7S1Jhz5CxUoxr0oWmJOksmAG52AF8gA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQKYEcQEMA2AFLgDSIBGAlIgN4BQijiAThlCM0oamgA64xmxagDIRydP0GEqiMQyaLFPbHiIALDLgAmwspp0zKo8SpwFCUAUVyUyVmESrGFSxQB93iV28a5EALxBFADcdAC+dKCQsAgSmPgYALYYYFBocMBoKGyEAB5kOVDU9Eys7JyIAITxYCD4REUm3r5MhPGqFgWIBrpN1J4trUwqiSlpGVlF+fbWhP2IlGGRdKPJqemZ2bkAjACsJD46AFZwMGDbUIQ7AAxkJ2cX0-v32qfnl4QATHeIdQ3GYwhIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       
       </p></div>
       <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
-        Using this, we can write {\lstinline[mathescape=true]$adjoin_set$}.  If the object to be adjoined
+        Using this, we can write <kbd>adjoin_set</kbd>.  If the object to be adjoined
       is already in the set, we just return the set.  Otherwise, we use
-      {\lstinline[mathescape=true]$pair$} to add the object to the list that represents the set:
+      <kbd>pair</kbd> to add the object to the list that represents the set:
 
-      
+      <div class='snippet' id='javascript_36_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function adjoin_set(x, set) {
@@ -107,20 +115,21 @@ function adjoin_set(x, set) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCYCs4zAfQM4CmUAFAB4A0ihUAlIgN4BQiLiATkSG0jHjgQBsCAWwJgoOOMHxEylajWatlrAPxUiSlcoBciAA7IYbORtoBuRgF8gA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQKYBsMFsNhRpzBooZQAUAHgDSLlQCUiA3gFCJcBOFI3SAITJ0YEFiyVGLAGQzEnLkuWURmAI4gAhpLqIAFhi0ATKRSYsAPpYXK7S1Jhz5CxUoxr0oWmJOksmAG52AF92UEhYBDUMTR1KLXoAIxYOZV4ofiRKRwAHH24E2Xk8gsoUxDlFe2VHWO1JQxMi+ibTFOKYuMlvXxbEXskOpmqaxGtbMa4tRABeecQk4LCI6HgkEwArOBgwMgpPBnM2UYysmOcCIhJ9qj1pUZqAfiOoR-sALkR8mEL782W7HYWx2ew8AEYAAz0EG7W6UcEAVhhxm2cI8ACZoYgxBILEEgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       
       </p></div>
       <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-        For {\lstinline[mathescape=true]$intersection_set$} we can use a recursive strategy.  If we
-        know how to form the intersection of {\lstinline[mathescape=true]$set2$} and the {\lstinline[mathescape=true]$tail$}
-            of {\lstinline[mathescape=true]$set1$}, we only need to decide whether to include
-            the {\lstinline[mathescape=true]$head$} of {\lstinline[mathescape=true]$set1$} in this.  But this depends on whether {\lstinline[mathescape=true]$head(set1)$} is also in {\lstinline[mathescape=true]$set2$}.  Here is the resulting
+        For <kbd>intersection_set</kbd> we can use a recursive strategy.  If we
+        know how to form the intersection of <kbd>set2</kbd> and the <kbd>tail</kbd>
+            of <kbd>set1</kbd>, we only need to decide whether to include
+            the <kbd>head</kbd> of <kbd>set1</kbd> in this.  But this depends on whether <kbd>head(set1)</kbd> is also in <kbd>set2</kbd>.  Here is the resulting
       function:
 
-      
+      <div class='snippet' id='javascript_36_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function intersection_set(set1, set2) {
@@ -132,49 +141,50 @@ function intersection_set(set1, set2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDMUCmAnAzm68wD6OUAFMQIwA0ixATAJSIDeAUIu4hmlCBkjFgJgQAGxFlu5RgB9pyQcLESoDNh3UcA-IkUi1G9QC55BNCLQBbNKgJxgRbiQAWaAIYATZVOp16+g+raAA6uMBjObp4U9JT+AfHIqJg4eAgOpFCh4tE+3Ax+CUaJ6Ni4sGnEJJkw2ZIxNHn0ANwsAL5AA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQKYBsMFsNhRpzBooZQAUAHgDSLlQCUiA3gFCJcBOFI3SAITJ0YEFiyVGLAGQzEnLkuWURmAI4gAhpLqIAFhi0ATKRSYsAPpYXK7S1Jhz5CxUoxr0oWmJOksmAG52AF92UEhYBDUMTR1KLXoAIxYOZV4ofiRKRwAHH24E2Xk8gsoUxDlFe2VHWO1JQxMi+ibTFOKYuMlvXxbEXskOpmqaxGtbMa4tRABeecQk4LCI6HgkGEIMbnI1hDIKMygARnpGACZU0YystTEJI+OrG0d7vwpL0ZqAfkQ3r-sAC4Ys4CEQSAcqG1Hkwzh8RlNlL98jBCtDGE9aADEbUtjsMHswJDKIMYXCoJcETjEMDNlBtrsokSPKSMbCGPDlux2HSGQSmcTqiYAFZwTbE44ABnoIrFzMO52liFl4o8AGYlW8LLChcZRarDlKZXq5RKAKzG-XyqiK+ha7WBIA}{\usebox\lstbox}!*/
              : intersection_set(tail(set1), set2);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       
       </p></div>
       <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
       In designing a representation, one of the issues we should be
       concerned with is efficiency.  Consider the number of steps required by our set
-        operations.  Since they all use {\lstinline[mathescape=true]$is_element_of_set$}, the speed
+        operations.  Since they all use <kbd>is_element_of_set</kbd>, the speed
       of this operation has a major impact on the efficiency of the set
       implementation as a whole.  Now, in order to check whether an object
-        is a member of a set, {\lstinline[mathescape=true]$is_element_of_set$} may have to scan the
+        is a member of a set, <kbd>is_element_of_set</kbd> may have to scan the
       entire set. (In the worst case, the object turns out not to be in the
-        set.)  Hence, if the set has $n$ elements, {\lstinline[mathescape=true]$is_element_of_set$}
+        set.)  Hence, if the set has $n$ elements, <kbd>is_element_of_set</kbd>
       might take up to $n$ steps.  Thus, the number of steps
       required grows as $\Theta(n)$.
-      The number of steps required by {\lstinline[mathescape=true]$adjoin-set$}, which uses this operation,
-        also grows as $\Theta(n)$.  For {\lstinline[mathescape=true]$intersection_set$}, which does an {\lstinline[mathescape=true]$is_element_of_set$} check for each element of {\lstinline[mathescape=true]$set1$}, the number of steps
+      The number of steps required by <kbd>adjoin-set</kbd>, which uses this operation,
+        also grows as $\Theta(n)$.  For <kbd>intersection_set</kbd>, which does an <kbd>is_element_of_set</kbd> check for each element of <kbd>set1</kbd>, the number of steps
       required grows as the product of the sizes of the sets involved, or
-        $\Theta(n^{2})$ for two sets of size $n$.  The same will be true of {\lstinline[mathescape=true]$union_set$}.
+        $\Theta(n^{2})$ for two sets of size $n$.  The same will be true of <kbd>union_set</kbd>.
       </p></div>
 
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled38}
+\label{ex:unlabeled41}
 
         Implement the
         
-        {\lstinline[mathescape=true]$union_set$} operation for the unordered-list
+        <kbd>union_set</kbd> operation for the unordered-list
         representation of sets.
   
-      \hfill{\hyperref[ex:unlabeled38-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled41-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled38}]
+\begin{Answer}[ref={ex:unlabeled41}]
 
-    
+    <div class='snippet' id='javascript_36_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function union_set(set1, set2) {
@@ -186,9 +196,10 @@ function union_set(set1, set2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABOeYD6BnAplAFNqARgBpECAmASkQG8AoRRxAJxxGaRgzTBABs++HIUoMm4pgH4yOcmIniAXIgCGAEwBWcGOgK4AFlnVCilUvIWXkYVJhy4oKmIIIjSFSpQDcdAL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQKYBsMFsNhRpzBooZQAUAHgDSLlQCUiA3gFCJcBOFI3SAITJ0YEFiyVGLAGQzEnLkuWURmAI4gAhpLqIAFhi0ATKRSYsAPpYXK7S1Jhz5CxUoxr0oWmJOksmAG52AF92UEhYBEQTACs4GDAyCk8GczZFHj4BNWw8AiISZKo9aUz7LgB+NKhyioAuRAAHH25U6WCwiOh4JHBe4rMoAEZ6RgAmFg5lXih+JEcxCSHhpjr7aon1u0a4hKSPQxMVpnptiqV+hEHvXxOxikmg0PZ2K4OUzL3EweGABno3w+VHGAJixniPw8AGYwUssBZTl8IftfmCgb8AKyAlFQlKg+jwxFBIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 
   
@@ -198,13 +209,13 @@ function union_set(set1, set2) {
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled39}
+\label{ex:unlabeled42}
 
         We specified that a set would be represented as a list with no
         duplicates.  Now suppose we allow duplicates.  For instance,
-        the set $\{1,2,3\}$ could be represented as the list {\lstinline[mathescape=true]$list(2, 3, 2, 1, 3, 2, 2)$}.  Design
+        the set $\{1,2,3\}$ could be represented as the list <kbd>list(2, 3, 2, 1, 3, 2, 2)</kbd>.  Design
         functions
-        {\lstinline[mathescape=true]$is_element_of_set$}, {\lstinline[mathescape=true]$adjoin_set$}, {\lstinline[mathescape=true]$union_set$}, and {\lstinline[mathescape=true]$intersection_set$} that operate on this
+        <kbd>is_element_of_set</kbd>, <kbd>adjoin_set</kbd>, <kbd>union_set</kbd>, and <kbd>intersection_set</kbd> that operate on this
         representation.  How does the efficiency of each compare with the
         corresponding
         function
@@ -212,17 +223,17 @@ function union_set(set1, set2) {
         there applications for which you would use this representation in
         preference to the non-duplicate one?
 	
-      \hfill{\hyperref[ex:unlabeled39-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled42-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled39}]
+\begin{Answer}[ref={ex:unlabeled42}]
 
-	  The functions {\lstinline[mathescape=true]$is_element_of_set$} and
-	  {\lstinline[mathescape=true]$intersection_set$}
+	  The functions <kbd>is_element_of_set</kbd> and
+	  <kbd>intersection_set</kbd>
 	  remain unchanged. Here is the new implementation of
-	  {\lstinline[mathescape=true]$adjoin_set$} and
-	  {\lstinline[mathescape=true]$union_set$}.
-	  
+	  <kbd>adjoin_set</kbd> and
+	  <kbd>union_set</kbd>.
+	  <div class='snippet' id='javascript_36_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function adjoin_set(x, set) {
@@ -234,21 +245,22 @@ function union_set(set1, set2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCYCs4zAfQM4CmUAFAB4A0ihUAlIgN4BQiiATkSK0gA7IytlK1GgG5GAX0ahIsBInDxc1YtQCMQogCY6TFuyickybtwJhUKouqpbREoA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQKYBsMFsNhRpzBooZQAUAHgDSLlQCUiA3gFCJcBOFI3SAITJ0YEFiyVGLAGQzEnLkuWURmAI4gAhpLqIAFhi0ATKRSYsAPpYXK7S1Jhz5CxUoxr0oWmJOksmAG52AF92UEhYBGRCDG5yaHgwMgozKABGekYAJhYOZV4ofiRHMQk09KsbUvE-ClzFeyUAfkQyrEamxAAuNWw8AiISFKpDEwqmLPqmTq7EVoAHH25KMdNGStpZufsYWPiMRIQRym9fCamoXJmdpV69qDiEqOSPM7qMyYZp4LCIo6QJgAVnA9ic9NI2IpCsVEEsYCsIeZfuFwADEOAkicNpdclCeHwBIgtAsFgR1hRMt8rkFQux2Jjjh5GsDQa9UukAAz0VlgjzZbnE4wgvmpADMgvaFkmLOFbJOXJ5ctFVHSAFYlSL2VQBfQpdLAkA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
     In the version with no duplicates,
     the required number of steps for
-    {\lstinline[mathescape=true]$is_element_of_set$} and 
-    {\lstinline[mathescape=true]$adjoin_set$} has
+    <kbd>is_element_of_set</kbd> and 
+    <kbd>adjoin_set</kbd> has
     an order of growth of
     $O(n)$, where
     $n$ is the number of 
     element occurrences in the given representation, and
     the required number of steps for
-    {\lstinline[mathescape=true]$intersection_set$} and 
-    {\lstinline[mathescape=true]$union_set$} has
+    <kbd>intersection_set</kbd> and 
+    <kbd>union_set</kbd> has
     an order of growth of
     $O(n m)$, where
     $n$ is the number of 
@@ -256,10 +268,10 @@ function union_set(set1, set2) {
     $m$ is the number of 
     element occurrences in the representation of the second set.
     In the version that allows duplicates, the number of steps for
-    {\lstinline[mathescape=true]$adjoin_set$} shrinks to
+    <kbd>adjoin_set</kbd> shrinks to
     $O(n)$, and
     the number of steps for
-    {\lstinline[mathescape=true]$union_set$} shrinks to
+    <kbd>union_set</kbd> shrinks to
     $O(n)$. However, note that the
     number of element occurrences may be much larger in the second
     version, because many duplicates may accumulate.
@@ -272,9 +284,10 @@ function union_set(set1, set2) {
       
       
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Sets as ordered lists
-      
+      </h2></div>
 
       
       
@@ -288,25 +301,25 @@ function union_set(set1, set2) {
       object and then compare the elements by comparing the corresponding
       numbers.  To keep our discussion simple, we will consider only the
       case where the set elements are numbers, so that we can compare
-      elements using {\lstinline[mathescape=true]$>$} and {\lstinline[mathescape=true]$<$}.
+      elements using <kbd>></kbd> and <kbd><</kbd>.
       We will represent a set of
       numbers by listing its elements in increasing order.  Whereas our
       first representation above allowed us to represent the set
       $\{1,3,6,10\}$ by listing the elements in any order, our new
       representation allows only the list
       
-      {\lstinline[mathescape=true]$list(1, 3, 6, 10)$}.
+      <kbd>list(1, 3, 6, 10)</kbd>.
       </p></div>
       <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
 	One advantage of ordering shows up in
 	
-	{\lstinline[mathescape=true]$is_element_of_set$}: In
+	<kbd>is_element_of_set</kbd>: In
       checking for the presence of an item, we no longer have to scan the
       entire set.  If we reach a set element that is larger than the item we
       are looking for, then we know that the item is not in the set:
 
-      
+      <div class='snippet' id='javascript_36_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_element_of_set(x,set) {
@@ -318,13 +331,14 @@ function is_element_of_set(x,set) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQKYBsMFsNhRpzBooZQAUAHgDTlQCUiA3gFCKeIBOFI3SAITJ0YEFiyUGzAGQzEHLkq6VE1RAF4tiABYYAhgBMpFRs0XLLAfkRRuIDBctKAXGsQAeXQePSnzpRtgfSxyfwDON1RMHHxCYlIGGlpbfRhJaUYAbjYAXyA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQKYBsMFsNhRpzBooZQAUAHgDTlQCUiA3gFCKeIBOFI3SAITJ0YEFiyUGzAGQzEHLkq6VE1RAF4tiABYYAhgBMpFRs0XLLAfkRRuIDBctKAXGsQAeXQePSnzpRtgfSxyfwDON1RMHHxCYlIGGlpbfRhJaUYAbjYAXzY2aOw8AiISMgpKAEYAVhSsVCoqgAYU2pSAJmazLKA}{\usebox\lstbox}!*/
                : is_element_of_set(x, tail(set));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       
       </p></div>
       <div class='permalink'>
@@ -344,22 +358,22 @@ function is_element_of_set(x,set) {
       </p></div>
       <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
-      We obtain a more impressive speedup with {\lstinline[mathescape=true]$intersection_set$}.  In
+      We obtain a more impressive speedup with <kbd>intersection_set</kbd>.  In
       the unordered representation this operation required
-      $\Theta(n^2)$ steps, because we performed a complete scan of {\lstinline[mathescape=true]$set2$} for
-      each element of {\lstinline[mathescape=true]$set1$}.  But with the ordered representation, we
+      $\Theta(n^2)$ steps, because we performed a complete scan of <kbd>set2</kbd> for
+      each element of <kbd>set1</kbd>.  But with the ordered representation, we
       can use a more clever method.  Begin by comparing the initial
-      elements, {\lstinline[mathescape=true]$x1$} and {\lstinline[mathescape=true]$x2$}, of the two sets.  If {\lstinline[mathescape=true]$x1$}
-      equals {\lstinline[mathescape=true]$x2$}, then that gives an element of the intersection, and
-      the rest of the intersection is the intersection of the {\lstinline[mathescape=true]$tail$}s of
-      the two sets.  Suppose, however, that {\lstinline[mathescape=true]$x1$} is less than {\lstinline[mathescape=true]$x2$}.
-      Since {\lstinline[mathescape=true]$x2$} is the smallest element in {\lstinline[mathescape=true]$set2$}, we can
-      immediately conclude that {\lstinline[mathescape=true]$x1$} cannot appear anywhere in {\lstinline[mathescape=true]$set2$} and hence is not in the intersection.  Hence, the intersection
-      is equal to the intersection of {\lstinline[mathescape=true]$set2$} with the {\lstinline[mathescape=true]$tail$} of {\lstinline[mathescape=true]$set1$}.  Similarly, if {\lstinline[mathescape=true]$x2$} is less than {\lstinline[mathescape=true]$x1$}, then the
-      intersection is given by the intersection of {\lstinline[mathescape=true]$set1$} with the {\lstinline[mathescape=true]$tail$} of {\lstinline[mathescape=true]$set2$}.  Here is the
+      elements, <kbd>x1</kbd> and <kbd>x2</kbd>, of the two sets.  If <kbd>x1</kbd>
+      equals <kbd>x2</kbd>, then that gives an element of the intersection, and
+      the rest of the intersection is the intersection of the <kbd>tail</kbd>s of
+      the two sets.  Suppose, however, that <kbd>x1</kbd> is less than <kbd>x2</kbd>.
+      Since <kbd>x2</kbd> is the smallest element in <kbd>set2</kbd>, we can
+      immediately conclude that <kbd>x1</kbd> cannot appear anywhere in <kbd>set2</kbd> and hence is not in the intersection.  Hence, the intersection
+      is equal to the intersection of <kbd>set2</kbd> with the <kbd>tail</kbd> of <kbd>set1</kbd>.  Similarly, if <kbd>x2</kbd> is less than <kbd>x1</kbd>, then the
+      intersection is given by the intersection of <kbd>set1</kbd> with the <kbd>tail</kbd> of <kbd>set2</kbd>.  Here is the
       function:
 
-      
+      <div class='snippet' id='javascript_36_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function intersection_set(set1, set2) {
@@ -371,7 +385,7 @@ function intersection_set(set1, set2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDMUCmAnAzm68wD6OUAFMQIwA0ixATAJSIDeAUIu8sIiTFgWCAA2gsmijlGAH0nI+A4aKgNGrDmsQYxIDEnmCA3Gw4BfRGkE5mRtRARYoiAB7lEAXkQALNAEMAJoolDdURbMHsnWjdPH386eiD1TShtJGc3V3dHWmtgtQB+RAAHbxgMEmdqFHRsXFgEIjESKBKRCnpKHNyu7p72ZphWsWV6Tq6ALicXAB4IxBYASFyCqswcPHriJpaA9pohkd61CZWa9cJNig7D6+7+waV6eJzjFmMgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDMUCmAnAzm68wD6OUAFMQIwA0ixATAJSIDeAUIu8sIiTFgWCAA2gsmijlGAH0nI+A4aKgNGrDmsQYxIDEnmCA3Gw4BfRGkE5mRtRARYoiAB7lEAXkQALNAEMAJoolDdURbMHsnWjdPH386eiD1TShtJGc3V3dHWmtgtQB+RAAHbxgMEmdqFHRsXFgEIjESKBKRCnpKHNyu7p72ZphWsWV6Tq6ALicXAB4IxBYASFyCqswcPHriJpaA9pohkd61CZWa9cJNig7D6+7+waV6eJzjFheWE7W688brQV5ScgABmotGBiAAzID2r9-iQgdRyABWEFQ+JAA}{\usebox\lstbox}!*/
       return x1 === x2
              ? pair(x1, intersection_set(tail(set1),
                                         tail(set2)))
@@ -383,16 +397,17 @@ function intersection_set(set1, set2) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       
       </p></div>
       <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
       To estimate the number of steps required by this process, observe that at each
       step we reduce the intersection problem to computing intersections of
-      smaller sets—removing the first element from {\lstinline[mathescape=true]$set1$} or {\lstinline[mathescape=true]$set2$} or both.  Thus, the number of steps required is at most the sum
-      of the sizes of {\lstinline[mathescape=true]$set1$} and {\lstinline[mathescape=true]$set2$}, rather than the product of
+      smaller sets—removing the first element from <kbd>set1</kbd> or <kbd>set2</kbd> or both.  Thus, the number of steps required is at most the sum
+      of the sizes of <kbd>set1</kbd> and <kbd>set2</kbd>, rather than the product of
       the sizes as with the unordered representation.  This is $\Theta(n)$ growth
       rather than $\Theta(n^2)$—a considerable speedup, even for sets of
       moderate size.
@@ -403,8 +418,8 @@ function intersection_set(set1, set2) {
 
         Give an implementation of
         
-        {\lstinline[mathescape=true]$adjoin_set$} using the ordered
-        representation.  By analogy with {\lstinline[mathescape=true]$is_element_of_set$} show how to
+        <kbd>adjoin_set</kbd> using the ordered
+        representation.  By analogy with <kbd>is_element_of_set</kbd> show how to
         take advantage of the ordering to produce a
         function
         that requires on
@@ -417,7 +432,7 @@ function intersection_set(set1, set2) {
 
 \begin{Answer}[ref={ex:adjoin-set}]
 
-    
+    <div class='snippet' id='javascript_36_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function adjoin_set(x, set) {
@@ -429,15 +444,16 @@ function adjoin_set(x, set) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCYCs4zAfQM4CmUAFAB4A0ihUAlIgN4BQiLiATkSG0jHjmCAA2g4tRrNWk1gH5Eg3iVLipKgFyJSiALw7EACwJpRROhJVTZ1M+dbrNAHn2HUx2tZszEAB2Qw2ZSjF3D0R1Hz9iAyMxSmCQlTRMbHwiAMQoXxExGhoAbkYAXyA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwCYCs4zAfQM4CmUAFAB4A0ihUAlIgN4BQiLiATkSG0jHjmCAA2g4tRrNWk1gH5Eg3iVLipKgFyJSiALw7EACwJpRROhJVTZ1M+dbrNAHn2HUx2tZszEAB2Qw2ZSjF3D0R1Hz9iAyMxSmCQlTRMbHwiAMQoXxExGhoAbkYAX0ZGRKxcamIARgAGSlLkisqAVjqMMpSSACZaxAFhHLygA}{\usebox\lstbox}!*/
                ? pair(x, set)
                : pair(head(set), 
                       adjoin_set(x, tail(set)));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 \end{Answer}
 
 
@@ -448,7 +464,7 @@ function adjoin_set(x, set) {
         
         Give a $\Theta(n)$ implementation of
         
-        {\lstinline[mathescape=true]$union_set$} for sets
+        <kbd>union_set</kbd> for sets
         represented as ordered lists.
     
       \hfill{\hyperref[ex:union-set-Answer]{Solution}}\\
@@ -456,7 +472,7 @@ function adjoin_set(x, set) {
 
 \begin{Answer}[ref={ex:union-set}]
 
-    
+    <div class='snippet' id='javascript_36_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function union_set(set1, set2) {
@@ -468,7 +484,7 @@ function union_set(set1, set2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABOeYD6BnAplAFNqARgBpECAmASkQG8AoRRxGYRXGDNMEAGx-xyFK1ekzGIATjhASkFANwMmAX0RYe2Zq3adufAVCoil4gJBSoMuYMVjV6zaPEQEGKIgAehRAF5EACywAQwATAyFbZ1d3D3JfAOCwikpIsQsrT28fbM9yE3FxAH5EAAcgmAlcL1IUBEwcXChy-gIhYnyCzq7uppgWnCNKDq6ALkzEAB5cxGHu4rKKqpJkMFR6vF7+okpSZKHugrGFytia1bqCcNJNg0HUxGU6ZSA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABOeYD6BnAplAFNqARgBpECAmASkQG8AoRRxGYRXGDNMEAGx-xyFK1ekzGIATjhASkFANwMmAX0RYe2Zq3adufAVCoil4gJBSoMuYMVjV6zaPEQEGKIgAehRAF5EACywAQwATAyFbZ1d3D3JfAOCwikpIsQsrT28fbM9yE3FxAH5EAAcgmAlcL1IUBEwcXChy-gIhYnyCzq7uppgWnCNKDq6ALkzEAB5cxGHu4rKKqpJkMFR6vF7+okpSZKHugrGFytia1bqCcNJNg0HUxGU6R7pa9EuTUIArOBg3hsIAAykL4-P54chAxAg37rXAAZkheh4wh2HxC3xhl0BwPRoNhhAArDiMWDcBDSEiUSkgA}{\usebox\lstbox}!*/
       const x1 = head(set1);
       const x2 = head(set2);
       return x1 === x2
@@ -481,10 +497,11 @@ function union_set(set1, set2) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
-    
+    <div class='snippet' id='javascript_36_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 union_set(
@@ -493,9 +510,10 @@ union_set(
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=K4Owlg9iD6DOCmAXAFAKAASYIYBMBWEYMCKAjAAwA06uBRcSyATFTfocYwMysjAA2-AJQjKGbO3olkFarQ4MyAVjmTOKFtT6CRIgNxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwCYCs4zAfQM4CmUAFAB4A0ihUAlIgN4BQiLiATkSG0jHjmCAA2g4tRrNWk1gH5Eg3iVLipKgFyJSiALw7EACwJpRROhJVTZ1M+dbrNAHn2HUx2tZszEAB2Qw2ZSjF3D0R1Hz9iAyMxSmCQlTRMbHwiAMQoXxExGhoAbkYAX0ZweFxqYjNErDLUgEYABkoq5PKAJkaUDGqUkgBmDoFhHJpySq6Wuo7mmpJagFYm8ZnidspBwWG8oA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
     
   
 \end{Answer}
@@ -504,9 +522,10 @@ union_set(
       
 
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Sets as binary trees
-      
+      </h2></div>
 
       
       
@@ -523,7 +542,7 @@ union_set(
       elements smaller than the one at the node, and the <QUOTE>right</QUOTE> link to
 
       elements greater than the one at the node.
-      Figure~\ref{fig:binary-tree} shows some trees that represent the set
+      Figure \ref{fig:binary-tree} shows some trees that represent the set
       $\{1,3,5,7,9,11\}$.  The same set may be represented by a tree in a
       number of different ways.  The only thing we require for a valid
       representation is that all elements in the left subtree be smaller
@@ -552,7 +571,7 @@ union_set(
       searching a tree of size $n$ to searching a tree of size $n/2$.  Since
       the size of the tree is halved at each step, we should expect that the
       number of steps needed to search a tree of size $n$ grows as $\Theta(\log
-        n)$.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a> For large sets, this will
+        n)$.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a> For large sets, this will
       be a significant speedup over the previous representations.
       </p></div>
       <div class='permalink'>
@@ -563,7 +582,9 @@ union_set(
       subtree.  A left or a right subtree of the empty list will indicate
       that there is no subtree connected there.  We can describe this
       representation by the following
-      functions:<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+      functions:<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
+
+      <div class='snippet' id='javascript_36_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function entry(tree) {
@@ -575,7 +596,7 @@ function left_branch(tree) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUzFATgTwBQecgSkQG8AoRC9ZKEdJAC2QEMATXKwgblIF9TRIsBIgA2yYFAD6AI3RNI9dviJkKiKjTqJGrXExgilhAtz4Do8JOhgBzelNnyIivIRLlK1Wg2Zso+w38DIwJQ035wC2EAWyYAa2RJV2xUDEwAGjEJdOs7KBUPdS8tERgAZygUtCxM8Sgc23sTXiA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAUzFATgTwBQecgSkQG8AoRC9ZKEdJAC2QEMATXKwgblIF9TRIsBIgA2yYFAD6AI3RNI9dviJkKiKjTqJGrXExgilhAtz4Do8JOhgBzelNnyIivIRLlK1Wg2Zso+w38DIwJQ035wC2EAWyYAa2RJV2xUDEwAGjEJdOs7KBUPdS8tERgAZygUtCxM8Sgc23sTXlJSVKxsDyyHOQVOtXVGnqdFQrVYhKSObABGAAZ0sYHltTAQERFFle3x+MTkgGYFpZ3TgYn96YAmBbWN9LuRAi2z14HH0M-OIA}{\usebox\lstbox}!*/
 function right_branch(tree) {
    return head(tail(tail(tree)));
 }
@@ -584,48 +605,21 @@ function make_tree(entry,left,right) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-
-      
-
-      
-
-      
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function entry(tree) {
-   return head(tree);
-}
-function left_branch(tree) {
-   return head(tail(tree));
-}
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUzFATgTwBQecgSkQG8AoRC9ZKEdJAC2QEMATXKwgblIF9TRIsBIgA2yYFAD6AI3RNI9dviJkKiKjTqJGrXExgilhAtz4Do8JOhgBzelNnyIivIRLlK1Wg2Zso+w38DIwJQ035wC2EAWyYAa2RJV2xUDEwAGjEJdOs7KBUPdS8tERgAZygUtCxM8Sgc23sTXiA}{\usebox\lstbox}!*/
-function right_branch(tree) {
-   return head(tail(tail(tree)));
-}
-function make_tree(entry,left,right) {
-   return list(entry,left,right);
-}
-
-\end{JavaScriptClickable}
-
-
+</div></div>
 
       
 
       </p></div>
       <div class='permalink'>
 <a name='p15' class='permalink'></a><p>
-        Now we can write the {\lstinline[mathescape=true]$is_element_of_set$}
+        Now we can write the <kbd>is_element_of_set</kbd>
       function
       using the strategy
       described above:
 
-      
+      <div class='snippet' id='javascript_36_12_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_element_of_set(x, set) {
@@ -637,30 +631,31 @@ function is_element_of_set(x, set) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQKYBsMFsNhRpzBooZQAUAHgDSLlQCUiA3gFCJeIBOFIPJAEJk6MCCxZKjFgDJZnbku6VE1RAF4tiAlB4BPaRRYAfE4uWXV6gDw7CBo8wuXLAflGYc+QsVKMaehxgIgAjHgBDSAALJyYmF1clAC5PbDxdPzIKQN4YAHNosMiYuISk5XKKxCYAbnYAXyA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAUzFATgTwBQecgSkQG8AoRC9ZKEdJAC2QEMATXKwgblIF9TRIsBIgA2yYFAD6AI3RNI9dviJkKiKjTqJGrXExgilhAtz4Do8JOhgBzelNnyIivIRLlK1Wg2Zso+w38DIwJQ035wC2EAWyYAa2RJV2xUDEwAGjEJdOs7KBUPdS8tERgAZygUtCxM8Sgc23sTXgjBS0RyyWQxaNTJOGBJMupsAA90xGH89zUizSQAQg6yyTAQEUMpogAybcLZ2exEUcQAXnOUapwtxAAfW-2Dw+PEAB5LtOwtx6fZgH5ll0en0BkMRuNRHUZHIFF9qKEfr8KAAuQHdZC9ND9QZTMYTXL2aFORRbAiIp5kpFqZp8UiddGYqSg3EAJgADBN9rEEkkONgAIwc8lrDbpcncxLJADMQqpaglvPw2HZExFIlV6xEBDFcooatCJiAA}{\usebox\lstbox}!*/
              )
            );
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
       </p></div>
       <div class='permalink'>
 <a name='p16' class='permalink'></a><p>
       Adjoining an item to a set is implemented similarly and also requires
-      $\Theta(\log n)$ steps.  To adjoin an item {\lstinline[mathescape=true]$x$}, we compare {\lstinline[mathescape=true]$x$} with
-      the node entry to determine whether {\lstinline[mathescape=true]$x$} should be added to the
-      right or to the left branch, and having adjoined {\lstinline[mathescape=true]$x$} to the
+      $\Theta(\log n)$ steps.  To adjoin an item <kbd>x</kbd>, we compare <kbd>x</kbd> with
+      the node entry to determine whether <kbd>x</kbd> should be added to the
+      right or to the left branch, and having adjoined <kbd>x</kbd> to the
       appropriate branch we piece this newly constructed branch together
-      with the original entry and the other branch.  If {\lstinline[mathescape=true]$x$} is equal to
+      with the original entry and the other branch.  If <kbd>x</kbd> is equal to
       the entry, we just return the node.  If we are asked to adjoin
-      {\lstinline[mathescape=true]$x$} to an empty tree, we generate a tree that has {\lstinline[mathescape=true]$x$} as the
+      <kbd>x</kbd> to an empty tree, we generate a tree that has <kbd>x</kbd> as the
       entry and empty right and left branches.  Here is the
       function:
 
-      
+      <div class='snippet' id='javascript_36_13_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function adjoin_set(x,set) {
@@ -672,7 +667,7 @@ function adjoin_set(x,set) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCYCs4zAfQM4CmUAFAB4A0hUAlIgN4BQiziATkSK0jHjmCABsBxKtSYsJLAPyIAtsgDWBHFHYEy5RPyGbtAsZMMAuRKUQBeS4gJhVATxFEDhwzKriXEk2YA8126wOoh6eEjLySipqxDb2jjTkIaGeaJjY+EQaiAIEwFA4AEasyJAAFvHU1InJNawwAOal+UUlEOWizjXMJhHKqgTqsYEV1V2eOXmFxWUjSWMsqVi4VFl1jc3TbRWVANwMAL5AA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAUzFATgTwBQecgSkQG8AoRC9ZKEdJAC2QEMATXKwgblIF9TRIsBIgA2yYFAD6AI3RNI9dviJkKiKjTqJGrXExgilhAtz4Do8JOhgBzelNnyIivIRLlK1Wg2Zso+w38DIwJQ035wC2EAWyYAa2RJV2xUDEwAGjEJdOs7KBUPdS8tERgAZygUtCxM8Sgc23sTXgjBS0RWACs4GDBJMupsAA90gfz3NSLNJHLJMBARQzGCQsnJgH5EWISkjmH0xHnFg6ORFbWLgC5EIcQAXgeUapxl1Yu1TbG398Rr24AeJ5pbCvH7vTbbRLJVJYEHUAjpb5gi5dHp9Mb7UR1GRyBRw-IIpHIya5ew4pyKZbnYlqa6Q3b4KrA5aImlgrIOXHOfGEtk-VG9fqDEbqRqcik8sItUgC9GDACMAAYDrKhZV5QBWFUsbqCjEAJmVhwWZzCQA}{\usebox\lstbox}!*/
                ? make_tree(entry(set),
                      adjoin_set(x, left_branch(set)),
                      right_branch(set))
@@ -682,8 +677,9 @@ function adjoin_set(x,set) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
       <div class='permalink'>
 <a name='p17' class='permalink'></a><p>
@@ -697,31 +693,22 @@ function adjoin_set(x,set) {
       number of elements, so that each subtree contains about half the
       elements of its parent.  But how can we be certain that the trees we
       construct will be balanced?  Even if we start with a balanced tree,
-      adding elements with {\lstinline[mathescape=true]$adjoin_set$} may produce an unbalanced
+      adding elements with <kbd>adjoin_set</kbd> may produce an unbalanced
       result.  Since the position of a newly adjoined element depends on how
       the element compares with the items already in the set, we can expect
       that if we add elements <QUOTE>randomly</QUOTE> the tree will tend to be balanced
       on the average.  But this is not a guarantee.  For example, if we
       start with an empty set and adjoin the numbers 1 through 7 in sequence
       we end up with the highly unbalanced tree shown in
-      Figure~\ref{fig:unbalanced-tree}.  In this tree all the left subtrees
+      Figure \ref{fig:unbalanced-tree}.  In this tree all the left subtrees
       are empty, so it has no advantage over a simple ordered list.  One
       way to solve this problem is to define an operation that transforms an
       arbitrary tree into a balanced tree with the same elements.  Then we
-      can perform this transformation after every few {\lstinline[mathescape=true]$adjoin_set$}
+      can perform this transformation after every few <kbd>adjoin_set</kbd>
       operations to keep our set in balance.  There are also other ways to
       solve this problem, most of which involve designing new data
       structures for which searching and insertion both can be done in
-      $\Theta(\log n)$ steps.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
-\begin{figure}[H]
-\centering
-
-\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_original/ch2-Z-G-52}.svg}}
-\caption{Unbalanced tree produced by adjoining 1 through 7 in sequence.}
-\label{fig:unbalanced-tree}
-\end{figure}
-
-      
+      $\Theta(\log n)$ steps.<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
 
         
 \begin{figure}[H]
@@ -746,7 +733,7 @@ function adjoin_set(x,set) {
         
         binary tree to a list.
         
-        
+        <div class='snippet' id='javascript_36_14_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function tree_to_list_1(tree) {
@@ -758,13 +745,14 @@ function tree_to_list_1(tree) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABFATgUzQfSnTAbGAZykwEYAKVDASkQG8AoRZxdKEFJIzMEPPSujTUmLMSwD8iXv1HixALkQBDAA6q0YACaCM2XAWJlyeNMBIAjFMsgALXcOoAaOfLdjVymCnKbUATwdnV3dQsSosHHwiEgoUGABzW0trOyDqDIBuBgBfIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAUzFATgTwBQecgSkQG8AoRC9ZKEdJAC2QEMATXKwgblIF9TRIsBIgA2yYFAD6AI3RNI9dviJkKiKjTqJGrXExgilhAtz4Do8JOhgBzelNnyIivIRLlK1Wg2Zso+w38DIwJQ035wC2EAWyYAa2RJV2xUDEwAGjEJdOs7KBUPdS8tERgAZygUtCxM8Sgc23sTXgjBS0RXJLhJUorJAEYQ9zUizSRyyTAQEUCOAkKRkYB+RCmZhcWKAC5EJgAHPdQ-Di6e8qlBrIc5BRCCdI3Np4o9-XQqtJCH55-nzqhur0LthcvYZDdnHcwrwgA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-        
+</div></div>
+        <div class='snippet' id='javascript_36_15_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function tree_to_list_2(tree) {
@@ -776,7 +764,7 @@ function tree_to_list_2(tree) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABFATgUzQfSnTAbGAZykwCYAKVDASkQG8AoRZxUSWBRCOABwE9suAsUro0AGkTpCIPCWFRajFiqlooIFEiKYwsvKJpNVJlgH41MufiJRjpkwC4uvAThsi8aYCQBGKAENIAAtDNGpxewdoxB4AmBRyNDBUPjCIqJisl35BDyhyFBgAc2C-QJD0yOya1WlZeVtqZoBuKIBfKPQNLRy3IVswyT08PGo29qA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAUzFATgTwBQecgSkQG8AoRC9ZKEdJAC2QEMATXKwgblIF9TRIsBIgA2yYFAD6AI3RNI9dviJkKiKjTqJGrXExgilhAtz4Do8JOhgBzelNnyIivIRLlK1Wg2Zso+w38DIwJQ035wC2EAWyYAa2RJV2xUDEwAGjEJdOs7KBUPdS8tERgAZygUtCxM8Sgc23sTXgjBS0RXJLhJUorJACYQ9zVEcyEkCDgAB0wunvLK13SispARKV784ZG1DW9EcskwNcCOAkKdy8QAfhW1jYWLq5GALkRJmbnN7CyHOQUQukns9nlN9OgqmlAcCQbD3tNZlBut9cvYZP9nNC4dirlRVut5hVQs0RnwRnstB9EciFkZlscRCJmjwgA}{\usebox\lstbox}!*/
                           copy_to_list(right_branch(tree),
                               result_list)));
     }
@@ -784,8 +772,9 @@ function tree_to_list_2(tree) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
         
 \begin{enumerate}[a.]
 \item{
@@ -794,7 +783,7 @@ function tree_to_list_2(tree) {
             produce the same result for every tree?  If
             not, how do the results differ?  What lists do the two
             functions
-            produce for the trees in Figure~\ref{fig:binary-tree}?
+            produce for the trees in Figure \ref{fig:binary-tree}?
             
           }
 \item{
@@ -816,8 +805,8 @@ function tree_to_list_2(tree) {
 \begin{enumerate}[a.]
 \item{
 	      The two procedures produce the same results.
-	      For the trees in Figure~\ref{fig:binary-tree}, the result
-	      will always be {\lstinline[mathescape=true]$list(1, 3, 5, 7, 9, 11)$}.
+	      For the trees in Figure \ref{fig:binary-tree}, the result
+	      will always be <kbd>list(1, 3, 5, 7, 9, 11)</kbd>.
 	    }
 \item{
   A balanced tree with $n$ elements
@@ -825,33 +814,33 @@ function tree_to_list_2(tree) {
   $O(n)$ nodes.
   To convert the tree into a list using function
   
-  {\lstinline[mathescape=true]$tree_to_list_1$},
+  <kbd>tree_to_list_1</kbd>,
   we call 
   
-  {\lstinline[mathescape=true]$tree_to_list_1$}
+  <kbd>tree_to_list_1</kbd>
   $O(n)$ times. We call
   
-  {\lstinline[mathescape=true]$append$} at
+  <kbd>append</kbd> at
   each node of the tree,  but at each level, we apply 
   
-  {\lstinline[mathescape=true]$append$}
+  <kbd>append</kbd>
   with a combined $O(n)$ elements in the first arguments.
   Thus, the runtime of
   
-  {\lstinline[mathescape=true]$tree_to_list_1$}
+  <kbd>tree_to_list_1</kbd>
   has an order of growth of 
   $O(n\log{n})$. Instead of
   
-  {\lstinline[mathescape=true]$append$},
+  <kbd>append</kbd>,
   the function
   
-  {\lstinline[mathescape=true]$tree_to_list_2$}
+  <kbd>tree_to_list_2</kbd>
   gets away with calling 
   
-  {\lstinline[mathescape=true]$pair$}
+  <kbd>pair</kbd>
   at each node, and thus
   
-  {\lstinline[mathescape=true]$tree_to_list_2$}
+  <kbd>tree_to_list_2</kbd>
   has an order of growth of 
   $O(n)$.
 	    }
@@ -870,17 +859,17 @@ function tree_to_list_2(tree) {
         
         The following
         function
-        {\lstinline[mathescape=true]$list_to_tree$} converts an ordered list to a
+        <kbd>list_to_tree</kbd> converts an ordered list to a
         balanced binary tree.  The helper
         function
-        {\lstinline[mathescape=true]$partial_tree$} takes
+        <kbd>partial_tree</kbd> takes
         as arguments an integer $n$ and list of at least $n$ elements and
         constructs a balanced tree containing the first $n$ elements of the
-        list.  The result returned by {\lstinline[mathescape=true]$partial_tree$} is a pair (formed
-        with {\lstinline[mathescape=true]$pair$}) whose {\lstinline[mathescape=true]$head$} is the constructed tree and whose
-        {\lstinline[mathescape=true]$tail$} is the list of elements not included in the tree.
+        list.  The result returned by <kbd>partial_tree</kbd> is a pair (formed
+        with <kbd>pair</kbd>) whose <kbd>head</kbd> is the constructed tree and whose
+        <kbd>tail</kbd> is the list of elements not included in the tree.
 
-        
+        <div class='snippet' id='javascript_36_16_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function list_to_tree(elements) {
@@ -892,7 +881,7 @@ function partial_tree(elts, n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGxgZygfSnbAnAUwIAoDkCBbAsKNASkQG8AoRNwqEPJACwIEMAJsQAO-PLH7J8RUuSo00AGnJgA5lB5zK1WnX0BuZgF9moSLASIxEmFJkkytJYjAMWbNjGCJiSALyBiAAM7qyenhxcSGIweH4gyMhKTvRGEcaIZGgETOERiBAIGCgEwFhoMABeuf6IFPyamMDIcHDxfogAtIgAjAwA9IgATHTpBYXFUKXlmIRoidN1NpLSUISOyM4zFdUEY-kRRWAl5LPrRIh1fELEZ1jziwcTkyfTYAiY95ipV4hQ-BgyDuZQeBAWW2eE2OJTwMDUPF2NT+SB6INmlWRAGo+lCCjDppp0D8aHgAJ5-G7CD5gL6gn5bNKHTwExBwhFgiFLaziVYOYgAoF+T7fVJ0JTMl5S6Uy9jwxGYTH7cb4qZs+VYC61RBU4jshWPSEqo5qwgNGBgC1qBm0P6C4H6zlPY2RAicbg8uLEBoAawI-KJaBJ6zJLklsoj3y1YYjsYijoc4vDEbNgMt6htTIyJiAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAUzFATgTwBQecgSkQG8AoRC9ZKEdJAC2QEMATXKwgblIF9TRIsBIgA2yYFAD6AI3RNI9dviJkKiKjTqJGrXExgilhAtz4Do8JOhgBzelNnyIivIRLlK1Wg2Zso+w38DIwJQ035wC2EAWyYAa2RJV2xUDEwAGjEJdOs7KBUPdS8tERgAZygUtCxM8Sgc23sTXgjBS1FyqSg4JI4UsWjUsoK1DW9tX2wAByZ0WCYRXvx+5EG0MtqwGyhFZAGh0OazSKEkGbmYBaXkfqgNxDARtRhgRGwkAF4vxAAGJ7VPJozvp0O8QCIROk9ndmgCeCgRGVkO4AWoIAgKqI6pIyjAAF7Ij6IWI7STAERwOCg96IAC0iAAjEQAPSIABMsNRiHRYExWSkVDK4KgiCJ53mi2S0Pu-Jx+K4hQBPL52NcoomullguFnNRypFYAQkll0vVQUMWuQQpE+W4XO5GJFuXscoJ6qQ9OwstxboA1IzdUrHYgduVJKksOqdGxDWBjdjpYG0cHnQKrcL1eLLpK+ub3kaTTbhulFfay+WK6NGlIfQr7fr1NXrlHJqnJNqbUmKA2qLEYGB+zZw0WzQFsG2O7bS4DxjMYKDYglrrh6GGIxlENPK9vZa50pvt4eAW3XAQS0fUb39AOtsOYXa1Hw+KRShUkj1kq-Kgyfvu2b-EAAZj+EwgA}{\usebox\lstbox}!*/
     } else {
        const left_size = math_floor((n - 1) / 2);
        const left_result = partial_tree(elts, left_size);
@@ -912,18 +901,19 @@ function partial_tree(elts, n) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
         
         
 \begin{enumerate}[a.]
 \item{
-            Write a short paragraph explaining as clearly as you can how {\lstinline[mathescape=true]$partial_tree$} works.  Draw the tree produced by {\lstinline[mathescape=true]$list_to_tree$} for
-            the list {\lstinline[mathescape=true]$list(1, 3, 5, 7, 9, 11)$}.
+            Write a short paragraph explaining as clearly as you can how <kbd>partial_tree</kbd> works.  Draw the tree produced by <kbd>list_to_tree</kbd> for
+            the list <kbd>list(1, 3, 5, 7, 9, 11)</kbd>.
             
           }
 \item{
-            What is the order of growth in the number of steps required by {\lstinline[mathescape=true]$list_to_tree$} to convert a list of $n$ elements?
+            What is the order of growth in the number of steps required by <kbd>list_to_tree</kbd> to convert a list of $n$ elements?
           }
 \end{enumerate}
 
@@ -936,26 +926,26 @@ function partial_tree(elts, n) {
     
 \begin{enumerate}[a.]
 \item{
-	The function {\lstinline[mathescape=true]$partial_tree(elts, n)$}
+	The function <kbd>partial_tree(elts, n)</kbd>
 	returns a pair whose head is a balanced tree for the first
 	$\lfloor (n - 1) / 2 \rfloor$
-	elements of {\lstinline[mathescape=true]$elts$}, and whose tail
+	elements of <kbd>elts</kbd>, and whose tail
 	is the list containing the remaining elements of
-	{\lstinline[mathescape=true]$elts$}. It works by calling itself
+	<kbd>elts</kbd>. It works by calling itself
 	recursively, to construct the left subtree and right subtree, and
 	then makes the tree, and the required return pair. Thus, the overall
-	function {\lstinline[mathescape=true]$list_to_tree$} just needs
-	to call {\lstinline[mathescape=true]$partial_tree$} with the
+	function <kbd>list_to_tree</kbd> just needs
+	to call <kbd>partial_tree</kbd> with the
 	given list and its length, and return the head of the result.
 	<div class='permalink'>
 <a name='p18' class='permalink'></a><p></p></div>
 	The tree for
-	{\lstinline[mathescape=true]$list(1, 3, 5, 7, 9, 11)$}
-	is the tree on the right in Figure~\ref{fig:binary-tree}.
+	<kbd>list(1, 3, 5, 7, 9, 11)</kbd>
+	is the tree on the right in Figure \ref{fig:binary-tree}.
       }
 \item{
 	The order of growth for the runtime of
-	function {\lstinline[mathescape=true]$list_to_tree$} is
+	function <kbd>list_to_tree</kbd> is
 	$O(n)$ because for every node of
 	the result tree, only a constant amount of work is needed.
       }
@@ -971,11 +961,9 @@ function partial_tree(elts, n) {
 
         
         
-        Use the results of exercises~\ref{ex:tree-to-list} and
-        ~\ref{ex:list-to-tree} to give $\Theta(n)$ implementations of {\lstinline[mathescape=true]$union_set$} and {\lstinline[mathescape=true]$intersection_set$} for sets implemented as
-        (balanced) binary trees.<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
-  
-      
+        Use the results of exercises \ref{ex:tree-to-list} and
+         \ref{ex:list-to-tree} to give $\Theta(n)$ implementations of <kbd>union_set</kbd> and <kbd>intersection_set</kbd> for sets implemented as
+        (balanced) binary trees.<a class='superscript' id='footnote-link-5' href='#footnote-5'>[5]</a>
         
   
       \hfill{\hyperref[ex:tree-ops-Answer]{Solution}}\\
@@ -983,7 +971,7 @@ function partial_tree(elts, n) {
 
 \begin{Answer}[ref={ex:tree-ops}]
 
-    
+    <div class='snippet' id='javascript_36_17_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function union_set_as_tree(set1, set2) {
@@ -994,13 +982,14 @@ function union_set_as_tree(set1, set2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABOeYD6BnAplNBDDNKAJyywApsoBGAGkSoCYBKRAbwChFvEIEMoiADYwB1RAF5EJMkThoRAtI0o5qzANxcefMAOGiojSdNJY5Cw8tVHN27qSghiSRbijyZFFAkw5ybnQGAix2AL5AA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABOeYD6BnAplAFNqARgBpECAmASkQG8AoRRxGYRXGDNMEAGx-xyFK1ekzGIATjhASkFANwMmAX0RYe2Zq3adufAVCoil4gJBSoMuYMVjV6zaPEQEGKIgAehRAF5EACywAQwATAyFbZ1d3D3JfAOCwikpIsQsrT28fbM9yE3FxAH5EAAcgmAlcL1IUBEwcXChy-gIhYnyCzq7uppgWnCNKDq6ALkzEAB5cxGHu4rKKqpJkMFR6vF7+okpSZKHugrGFytia1bqCcNJNg0HUxGU6R9BIWAREHg4oNCg4H6ksLh1FgALZYMBQDDGJjpWQJUK4MoSWBBHj-LCA4FgiEYYg8cEAcyg-iB+OxkOEKSedBe0FQpSCyJgqPRmJ4kNIYGhTBYbCQ2T8AAZueJYUhjrg9DxiOoKfd7BosLRZi4wG4PlhgN8MDAAF5KvwgoLEtDAHhwOCVSWIAC0iCEiAA9IgqPcmKr1fitWgpBheO4-EiUWioADSRyNd6dfqqZ0Pe4vd9Qxj4oEEYmfVg-ezYwV44gwHUM7KMPEbhnff7c1E1e4JDACf5tXqDQXbWwM9GlQBqe3VsT54kcNDg0MAT1TiUlRc13xL-fd0UkDabmezAYZTJZycBN0L6GL7Kh7QOp7PXXrjebMbdjHzl9XO8nCIf30rOdviHvoPKqzABJHI8y2aXBXzXKtPzFBlFiNABrLBWUafxh1HCQx1IWZz26DMdwwrD8LAncdkw08pCNGA-wA+d5WpWk3iQHcfj+T43DQchGgBEVEDo+kXBKMcmLQFiNgBUh32+YSuLSaQ4WHKUOIxfYsOKcShK+EjDi-OB+ME4TcAzAAjCQgkgEkiJPfDxAlVCxwUrBiMsg4+IE341LcUCV2+IyTIgMzOIsxzSKzf03KgSkaOkyw4Wc3SvjszleB4KlnnAOl3lqdACDQIJOB3K4yAGLj82ErJEEY1zhLY8J+2Kr44j8crmK+KrknuKDKtcvKMvWfSvmWYSjEUR46Ea0KqpWNYspyxCZkCxgOr+PK9OWABmUgAFZSAAdmEALHIWxC9PIUgABZSAANlIAAOYREGoFIgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
     
     
-    
+    <div class='snippet' id='javascript_36_18_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function intersection_set_as_tree(set1, set2) {
@@ -1011,9 +1000,10 @@ function intersection_set_as_tree(set1, set2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDMUCmAnAzm68wD6OUBAhlgVBmmgBTECMANIsQEwCUiA3gFCIDEEBFiiIANjFEMAvFRqU4BSaIJt6aKAw4BufoOFhREqVDZzqaRctNqNZ3foHUoIDEhUkoS+XRTpsXFgEIk1aT2YTUU5HAF8gA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDMUCmAnAzm68wD6OUAFMQIwA0ixATAJSIDeAUIu8sIiTFgWCAA2gsmijlGAH0nI+A4aKgNGrDmsQYxIDEnmCA3Gw4BfRGkE5mRtRARYoiAB7lEAXkQALNAEMAJoolDdURbMHsnWjdPH386eiD1TShtJGc3V3dHWmtgtQB+RAAHbxgMEmdqFHRsXFgEIjESKBKRCnpKHNyu7p72ZphWsWV6Tq6ALicXAB4IxBYASFyCqswcPHriJpaA9pohkd61CZWa9cJNig7D6+7+waV6eJzjFhfQSDqkQV4oAig4P6aNAkcxoAC2aFQWBU1iSKWifhIxQwsG8gkBaGBoIhUMogkhAHMoB4QficVBoY9DG9wGcit4UTA0RisYIKdQwDC1DAuCQkBl3AAGLnBOE6emlPlCQSUcwUp5qUzmSyqYKhcL44C-LAwABeaCiYO8xIIwEEcDgZT5iAAtIgJIgAPSIBgJdTqhya36aLBCBzuZGo9FQIGk9mIL1EPVoBVquyetBallRLyIyM+v2x93xxBgeqRuVYKJ3EjptC+tlZmw5jAwAkebXRqJIO2lxON-WIADU9qrHA9iGJvAIkJDAE8UzE+fn2yO2dC3dWwg5a-XveW-VFA0zg6GS3nCAX5+1Rjcz6K6w2o-q++wB6uryHMZPEQ-1xWoLeQjXwSUwCgCTnCli22N8CAzStFw4MUkGKSUjQAazQFkmg8YdRwwMdqFPc9gkjJ80Gw3DDjAgiT2IjRfxQACgIXZ5XhYd46QIv4AW+ewCFoJogRFdgmM+b9CjHViCHY0gCOoCDfjE3jEi0cVhz0bjMQOG4Cik0Sfhw3IJlsISRLEtskwAIwwbxIBJMirgoiUygwsdlJjaybOrfT-k0+wSDA0zzIgSyeOclzRQ3NkPM-Kl6LUGDBOE9zDIk3NpSeGkPnwZBUFWWp8AaX5vD4AiAmoOIrCXDUfnIVwWLin5OJ2RcBzE2hKqBAyaq4uJF2isSRIKk41k+HLS3K6hGoil4WCqti2pIdLqn67LiAIPKULmGzuvcgrDKoRAAGZqAAVmoAAOR5AvPdaAU2n4SFoag9sQAA2Y7HkQRh4iAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
     
     
@@ -1024,9 +1014,10 @@ function intersection_set_as_tree(set1, set2) {
       
       
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Sets and information retrieval
-      
+      </h2></div>
 
       
 
@@ -1056,7 +1047,7 @@ function intersection_set_as_tree(set1, set2) {
       the key is, when we define the record as a data structure we should
       include a
       
-      {\lstinline[mathescape=true]$key$} selector
+      <kbd>key</kbd> selector
       function
       that retrieves the key
       associated with a given record.
@@ -1066,15 +1057,15 @@ function intersection_set_as_tree(set1, set2) {
       Now we represent the data base as a set of records. To locate the
       record with a given key we use a
       function
-      {\lstinline[mathescape=true]$lookup$}, which takes
+      <kbd>lookup</kbd>, which takes
       as arguments a key and a data base and which returns the record that
-      has that key, or false if there is no such record.  The function {\lstinline[mathescape=true]$lookup$}
-      is implemented in almost the same way as {\lstinline[mathescape=true]$is_element_of_set$}.  For
+      has that key, or false if there is no such record.  The function <kbd>lookup</kbd>
+      is implemented in almost the same way as <kbd>is_element_of_set</kbd>.  For
       example, if the set of records is implemented as an unordered list, we
       could use
 
       
-      
+      <div class='snippet' id='javascript_36_19_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function lookup(given_key, set_of_records) {
@@ -1086,12 +1077,13 @@ function lookup(given_key, set_of_records) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGznA1iADgCgOYwBuApmAPrrECeANIgM7FRlzBkBOxEc7AJvQEpEAbwBQiCYk5QQ7JAEJEMemTAhkyHI2asOXHvyEAyI+MnnJOJSuIBHEAENNBEuUq1E7nAAtiD3lpMLGyc3HyCAgJmFjEA-Ii+-oE6IfrhUTGZAFwoaJi4LqQU1HRQDjCa2sF6YYYZmZICANyiAL5AA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQKYEcQEMA2AFLgDSIBGAlIgN4BQijiAThlCM0oamgA64xmxagDIRydP0GEqiMQyaLFPbHiIALDLgAmwspp0zKo8SpwFCUAUVyUyVmESrGFSxQB93iV28a5EALxBFADcdAC+dKCQsAiIALa4ANYYaKwQcMy6KQCeZNq4VtQ0AJCMPqzsnIhSQrn5hbZhkdHQ8Ei5hOmZ2sWKFWwcSAa63VmUzVHgbXEFVl0YGeO0A1VIDkRjvZOtsUj4cHBJILyEAOYwAG4YYGj1iChsaHDAaYs9KMWrQ4gAhBJoMAgfBER5QZ6vLafOQiHy+QgA1QWC7XW73TojQhgiFvJbaT4uXxuAD8iEx2JeuI+lDhRIAXIgDkcTucrjc7hg8ogNlinpSoYSiYwJhE6HQmcdTgBmMj4VBQQiJFJUrKEABMZAARAA1G4gFCauzeIVuJWpLaEACsWoAUicYFAMMxDSRaUKzSrdAAWLUAWVwzANdjdRI9FpliE1AFEA1B1C6Q74w+9VQA2LUAZUKQ0NxhCQA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       
       </p></div>
       <div class='permalink'>
@@ -1115,7 +1107,7 @@ function lookup(given_key, set_of_records) {
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
 
-        Implement the {\lstinline[mathescape=true]$lookup$}
+        Implement the <kbd>lookup</kbd>
         function
         for the case
         where the set of records is structured as a binary tree, ordered by
@@ -1127,7 +1119,7 @@ function lookup(given_key, set_of_records) {
 
 \begin{Answer}[ref={ex:set-lookup-binary-tree}]
 
-     
+     <div class='snippet' id='javascript_36_20_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function lookup(given_key, tree_of_records) {
@@ -1139,7 +1131,7 @@ function lookup(given_key, tree_of_records) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGznA1iADgCgOYwBuApmAPrrECeANIlAE7HFlzBlMRwMAmAzgEpEAbwBQiCYhjBEOGHzJgQyZDkbNW7Tt34ChYyYcRMoIBkiUqA3OMkBfRMWR9iI20cRcwfKPQAW8mSkjFSIALyOYCFqTCxsHMRcvII2HhJePv6BlKEROWoBCsEMVAKpaSZmSAQk5DnhYRFQhRTUiO5pRgD8WUVRJR2dkgBciDWkraEAPL2Tg0OSPagY2PhEEzl08wsLyMTAUGQARgwAhpB+MRrx2sl62wujy5i443XUWztfkgwweH6HE7nCCXdRxLSJHSCModOyiOxAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAUzFATgTwBQecgSkQG8AoRC9ZKEdJAC2QEMATXKwgblIF9TRIsBIgA2yYFAD6AI3RNI9dviJkKiKjTqJGrXExgilhAtz4Do8JOhgBzelNnyIivIRLlK1Wg2Zso+w38DIwJQ035wC2EAWyYAa2RJV2xUDEwAGjEJdOs7KBUPdS8tERgAZygUtCxM8Sgc23sTXgjBS0RYhMkqCDh0NgSMxBYmfxUASApCos0kAAd9dGxB9OHRpmazSKEkQewevpYVNURpjW9tX33kXv7N1qikEf9r26P3E-OtIMMDu-DzDtRHA4HEQHNsDYYAA3VCSFaIVySODAbo3Q5lAonGDARDYcqSMAgESBDjI1F-FiYrEnNRfJBEkncE48FAiMrID60ii9MAVRH0AmpLCIAC8KGqOCRKLRb0xzO5iF5-KggrK8OQmDFiD2qqFkuaipmFyhsLAGq1oqtAoJg1ORsVAH4berhZhpg6KAAuRCmuF2gA8LotHs9FGdIhBYIhfvNCNDYYdWQccgURnJsoxoQTnp9kdB4MhMP9mtWOcT3Ny9hkqec6ZllOpCoofD4pGVUA6mEkwCY0MkcxE8moZTF006iWSE8z-WwABZVgAiACyTHQZUXBHS43LtOnU-iiUp2AATEuAGqoEAbrf2iuexkidK7+-7jjYafHgDMS4AomvVU3Z97xA2lH1WR9QmAis33wD9DxnNgADYlwAZVGbwgJfGCEIPLpjwAViXAApcEYCgZB0Cw0CaMQcC6OJEQt2wxNIOaUh82jbAfy7Hs+wHIcwBHEwgA}{\usebox\lstbox}!*/
         return given_key === this_key 
                ? this_entry
                : given_key < this_key
@@ -1151,58 +1143,59 @@ function lookup(given_key, tree_of_records) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
   
 \end{Answer}
 
 
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>If
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>If
         we want to be more formal, we can specify <QUOTE>consistent with the
           interpretations given above</QUOTE> to mean that the operations satisfy a
         collection of rules such as these:
 
         <UL>
-          <LI>For any set {\lstinline[mathescape=true]$S$} and any object {\lstinline[mathescape=true]$x$},
-            {\lstinline[mathescape=true]$is_element_of_set(x,S)$}
+          <LI>For any set <kbd>S</kbd> and any object <kbd>x</kbd>,
+            <kbd>is_element_of_set(x,S)</kbd>
             is true (informally: <QUOTE>Adjoining an object to a set produces a set that contains the object</QUOTE>).
 
           </LI>
           <LI>
-            For any sets {\lstinline[mathescape=true]$S$} and {\lstinline[mathescape=true]$T$} and any object {\lstinline[mathescape=true]$x$},
-            {\lstinline[mathescape=true]$is_element_of_set(x,union_set(S,T))$}
+            For any sets <kbd>S</kbd> and <kbd>T</kbd> and any object <kbd>x</kbd>,
+            <kbd>is_element_of_set(x,union_set(S,T))</kbd>
             is equal to
-            {\lstinline[mathescape=true]$is_element_of_set(x,S) || is_element_of_set(x,T)$}
-            (informally: <QUOTE>The elements of {\lstinline[mathescape=true]$union(S,T)$} are the elements that
-              are in {\lstinline[mathescape=true]$S$} or in {\lstinline[mathescape=true]$T$}</QUOTE>).
+            <kbd>is_element_of_set(x,S) || is_element_of_set(x,T)</kbd>
+            (informally: <QUOTE>The elements of <kbd>union(S,T)</kbd> are the elements that
+              are in <kbd>S</kbd> or in <kbd>T</kbd></QUOTE>).
 
           </LI>
           <LI>
-            For any object {\lstinline[mathescape=true]$x$},
-            {\lstinline[mathescape=true]$is_element_of_set(x,null)$}
+            For any object <kbd>x</kbd>,
+            <kbd>is_element_of_set(x,null)</kbd>
             is false (informally: <QUOTE>No object is an element of the empty set</QUOTE>).
 
           </LI>
         </UL>
-      </FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>Halving the size of the problem at each step is the
+      </FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Halving the size of the problem at each step is the
         distinguishing characteristic of
         
         logarithmic growth, as we saw with
-        the fast-exponentiation algorithm of section~\ref{sec:exponentiation}
+        the fast-exponentiation algorithm of section \ref{sec:exponentiation}
         and the half-interval search method of
-        section~\ref{sec:proc-general-methods}.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>We are
+        section \ref{sec:proc-general-methods}.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>We are
         representing sets in terms of trees, and trees in terms of lists—in
         effect, a data abstraction built upon a data abstraction.  We can
         regard the
         functions
-        {\lstinline[mathescape=true]$entry$}, {\lstinline[mathescape=true]$left_branch$}, {\lstinline[mathescape=true]$right_branch$}, and {\lstinline[mathescape=true]$make_tree$} as a way of isolating the
+        <kbd>entry</kbd>, <kbd>left_branch</kbd>, <kbd>right_branch</kbd>, and <kbd>make_tree</kbd> as a way of isolating the
         abstraction of a <QUOTE>binary tree</QUOTE> from the particular way we might wish
-        to represent such a tree in terms of list structure.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>Examples of such structures include
+        to represent such a tree in terms of list structure.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Examples of such structures include
         
         
         
@@ -1212,8 +1205,15 @@ function lookup(given_key, tree_of_records) {
         
         
         
-        Leiserson, and Rivest 1990.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>Exercises~\ref{ex:tree-to-list}–\ref{ex:tree-ops}
+        <CITATION>Leiserson, and Rivest 1990</CITATION>.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>Exercises \ref{ex:tree-to-list}–\ref{ex:tree-ops}
           
           are due to Paul Hilfinger.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section3/subsection2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section3/subsection4.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+2.3.3  Example: Representing Sets</div>	<div class='next-page'></div></div>

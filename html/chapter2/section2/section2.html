@@ -1,6 +1,15 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>2.2 Hierarchical Data and the Closure Property</a>
+		<a name='top' class='permalink'>2.2  Hierarchical Data and the Closure Property</a>
 	</div>
 </div>
 	<div class='chapter-text'>
@@ -13,10 +22,10 @@
 <a name='p1' class='permalink'></a><p>
       As we have seen, pairs provide a primitive <QUOTE>glue</QUOTE> that we can use to
       construct compound data objects.
-      Figure~\ref{fig:first-box-and-pointer} shows a standard way to
+      Figure \ref{fig:first-box-and-pointer} shows a standard way to
       visualize a 
       
-      pair—in this case, the pair formed by {\lstinline[mathescape=true]$pair(1,2)$}.
+      pair—in this case, the pair formed by <kbd>pair(1,2)</kbd>.
 
       <SPLIT>
 	
@@ -27,7 +36,7 @@
 \centering
 
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch2-Z-G-11}.svg}}
-\caption{Box-and-pointer representation of {\lstinline[mathescape=true]$pair(1,2)$}.
+\caption{Box-and-pointer representation of <kbd>pair(1,2)</kbd>.
                 }
 \label{fig:first-box-and-pointer}
 \end{figure}
@@ -40,28 +49,22 @@
       
       <EM>pointer</EM> to a box.  The box for a pair
       has two parts, the left part containing the head of the pair and the
-      right part containing the tail.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+      right part containing the tail.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
 	  
 	
-      <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>In this JavaScript adaptation, we choose
-      to draw primitive objects directly inside of the boxes of the pairs that contain
-      them, in an attempt to be consistent with a similar practice introduced in
-      section~\ref{sec:environment-model}. The box-and-pointer diagrams
-      in the original version of the textbook include separate boxes for primitive
-      objects, such as 1 and 2, each containing a representation of the object.</FOOTNOTE></div></SPLIT>
+      </SPLIT>
 
 
     </p></div>
 
     <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
-      We have already seen that {\lstinline[mathescape=true]$pair$} can be used to combine not
+      We have already seen that <kbd>pair</kbd> can be used to combine not
       only numbers but pairs as well.  (You made use of this fact, or
-      should have, in doing exercises~\ref{ex:segments1}
-      and~\ref{ex:rectangles}.)  As a consequence, pairs provide a universal
+      should have, in doing exercises \ref{ex:segments1}
+      and \ref{ex:rectangles}.)  As a consequence, pairs provide a universal
       building block from which we can construct all sorts of data
-      structures.  Figure~\ref{fig:box-and-pointer-two-ways} 
+      structures.  Figure \ref{fig:box-and-pointer-two-ways} 
       shows two ways to use pairs to combine the numbers 1, 2, 3, and 4.
 
       <SPLIT>
@@ -89,16 +92,11 @@
       this ability as the 
       
       
-      <EM>closure property</EM> of {\lstinline[mathescape=true]$pair$}.  In general,
+      <EM>closure property</EM> of <kbd>pair</kbd>.  In general,
       an operation for combining data objects satisfies the closure property
       if the results of combining things with that operation can themselves
       be combined using the same 
-      operation.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
-      
-      <EM>
-        hierarchical</EM> structures—structures made up of parts, which
-      themselves are made up of parts, and so on.
-    
+      operation.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
       Closure is the key to power in
       any means of combination because it permits us to create 
       
@@ -110,7 +108,7 @@
 
     <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
-      From the outset of chapter~1, we've made essential use of closure in
+      From the outset of chapter 1, we've made essential use of closure in
       dealing with
       functions, because all but the very simplest programs
       rely on the fact that the elements of a combination can themselves be
@@ -118,23 +116,17 @@
       for compound data.  We describe some conventional techniques for using
       pairs to represent sequences and trees, and we exhibit a graphics
       language that illustrates closure in a vivid 
-      way.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+      way.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
     </p></div>
 
-    
-    &subsection2.2.1;
-
-    
-    &subsection2.2.2;
-
-    
-    &subsection2.2.3;
-
-    
-    &subsection2.2.4;
-
-  <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>The use of the word 
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>In this JavaScript adaptation, we choose
+      to draw primitive objects directly inside of the boxes of the pairs that contain
+      them, in an attempt to be consistent with a similar practice introduced in
+      section \ref{sec:environment-model}. The box-and-pointer diagrams
+      in the original version of the textbook include separate boxes for primitive
+      objects, such as 1 and 2, each containing a representation of the object.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>The use of the word 
         
         <QUOTE>closure</QUOTE> here comes from abstract algebra,
         where a set of elements is said to be closed under an operation if
@@ -148,7 +140,7 @@
 	  
 	
 	We do not use the word <QUOTE>closure</QUOTE> in
-        this second sense in this book.</FOOTNOTE></div><hr><div class='footnote'>
+        this second sense in this book.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>The notion that a means of
         
         combination should satisfy closure is a straightforward idea.
@@ -179,4 +171,11 @@
           casual cooperation.  It is better to have 100 functions operate on one
           data structure than to have 10 functions operate on 10 data
           structures.</QUOTE></FOOTNOTE></div>
-</SECTION>
+</SECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section1/subsection4.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section2/subsection1.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+2.2  Hierarchical Data and the Closure Property</div>	<div class='next-page'></div></div>

@@ -1,6 +1,15 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>3.2 The Environment Model of Evaluation</a>
+		<a name='top' class='permalink'>3.2  The Environment Model of Evaluation</a>
 	</div>
 </div>
 	<div class='chapter-text'>
@@ -15,10 +24,10 @@
 <a name='p1' class='permalink'></a><p>
       When we introduced compound
       functions
-      in chapter~1, we used the
+      in chapter 1, we used the
       
       substitution model of evaluation
-      (section~\ref{sec:substitution-model}) to define what is meant by
+      (section \ref{sec:substitution-model}) to define what is meant by
       applying a
       function
       to arguments:
@@ -38,7 +47,7 @@
 <a name='p2' class='permalink'></a><p>
       Once we admit assignment into our programming language, such a
       definition is no longer adequate.  In particular,
-      section~\ref{sec:costs-of-assignment} argued that, in the presence of
+      section \ref{sec:costs-of-assignment} argued that, in the presence of
       assignment, a variable can no longer be considered to be merely a name
       for a value.  Rather, a variable must somehow designate a <QUOTE>place</QUOTE> in
       which values can be stored.  In our new model of evaluation, these
@@ -95,22 +104,22 @@
 
     <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
-      Figure~\ref{fig:environment-structure} shows a simple environment
+      Figure \ref{fig:environment-structure} shows a simple environment
       structure consisting of three frames, labeled I, II, and III.  In the
       diagram, A, B, C, and D are pointers to environments.  C and D point
-      to the same environment.  The variables {\lstinline[mathescape=true]$z$} and {\lstinline[mathescape=true]$x$} are bound
-      in frame II, while {\lstinline[mathescape=true]$y$} and {\lstinline[mathescape=true]$x$} are bound in frame I.  The
-      value of {\lstinline[mathescape=true]$x$} in environment D is 3.  The value of {\lstinline[mathescape=true]$x$} with
+      to the same environment.  The variables <kbd>z</kbd> and <kbd>x</kbd> are bound
+      in frame II, while <kbd>y</kbd> and <kbd>x</kbd> are bound in frame I.  The
+      value of <kbd>x</kbd> in environment D is 3.  The value of <kbd>x</kbd> with
       respect to environment B is also 3.  This is determined as follows: We
       examine the first frame in the sequence (frame III) and do not find a
-      binding for {\lstinline[mathescape=true]$x$}, so we proceed to the enclosing environment D and
-      find the binding in frame I.  On the other hand, the value of {\lstinline[mathescape=true]$x$}
+      binding for <kbd>x</kbd>, so we proceed to the enclosing environment D and
+      find the binding in frame I.  On the other hand, the value of <kbd>x</kbd>
       in environment A is 7, because the first frame in the sequence (frame
-      II) contains a binding of {\lstinline[mathescape=true]$x$} to 7.  With respect to environment
-      A, the binding of {\lstinline[mathescape=true]$x$} to 7 in frame II is said to 
+      II) contains a binding of <kbd>x</kbd> to 7.  With respect to environment
+      A, the binding of <kbd>x</kbd> to 7 in frame II is said to 
       
       <EM>shadow</EM> the
-      binding of {\lstinline[mathescape=true]$x$} to 3 in frame I.
+      binding of <kbd>x</kbd> to 3 in frame I.
     </p></div>
 
     <div class='permalink'>
@@ -126,8 +135,8 @@
   
   
       Even the interpretation of an expression as
-      straightforward as {\lstinline[mathescape=true]$display(1)$} depends on an understanding that one
-      is operating in a context in which {\lstinline[mathescape=true]$display$} refers to the primitive function
+      straightforward as <kbd>display(1)</kbd> depends on an understanding that one
+      is operating in a context in which <kbd>display</kbd> refers to the primitive function
       that displays a value. Thus, in our model of evaluation we will always speak of evaluating an
       expression with respect to some environment.  To describe interactions
       with the interpreter, we will suppose that there is a 
@@ -137,9 +146,9 @@
       environment) that includes values for the symbols associated with the
       primitive
       functions.  
-      For example, the idea that {\lstinline[mathescape=true]$display$} is the
+      For example, the idea that <kbd>display</kbd> is the
       primitive function for displaying a value is captured by saying that the variable 
-      {\lstinline[mathescape=true]$display$} is
+      <kbd>display</kbd> is
       bound in the global environment to the respective primitive 
       function.
   
@@ -147,16 +156,11 @@
     </p></div>
 
     
-    &subsection3.2.1;
-
-    
-    &subsection3.2.2;
-
-    
-    &subsection3.2.3;
-
-    
-    &subsection3.2.4;
-
-  
-</SECTION>
+</SECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section1/subsection3.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section2/subsection1.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+3.2  The Environment Model of Evaluation</div>	<div class='next-page'></div></div>

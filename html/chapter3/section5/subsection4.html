@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>3.5.4 
-    Streams and Delayed Evaluation
-  </a>
+		<a name='top' class='permalink'>3.5.4  Streams and Delayed Evaluation</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>\begin{center}\fbox{\textcolor{red}{Note: this section is a work in progress!}}\end{center}
+		<div class='SUBSECTION'><SUBSECTION>\begin{center}\fbox{\textcolor{red}{Note: this section is a work in progress!}}\end{center}
 
   
   
@@ -14,24 +21,22 @@
 
   <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
-    The {\lstinline[mathescape=true]$integral$}
+    The <kbd>integral</kbd>
     function
     at the end of the preceding section shows
     how we can use streams to model signal-processing systems that contain
     
     feedback loops.  The feedback loop for the adder shown in
-    figure~\ref{fig:integral} is modeled by the fact that {\lstinline[mathescape=true]$integral$}'s
+    figure \ref{fig:integral} is modeled by the fact that <kbd>integral</kbd>'s
     
-    internal stream {\lstinline[mathescape=true]$int$} is defined in terms of itself:
+    internal stream <kbd>int</kbd> is defined in terms of itself:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_69_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const integ = pair(initial_value, 
     () => add_streams(scale_stream(integrand, dt),
                       integ);
         );
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <SPLIT>
@@ -39,11 +44,11 @@ const integ = pair(initial_value,
     
       The interpreter's ability to deal with such an implicit definition
       depends on the delay resulting from wrapping the call of
-      {\lstinline[mathescape=true]$add_streams$} into a function definition.
+      <kbd>add_streams</kbd> into a function definition.
       Without this delay, the interpreter could not
-      construct {\lstinline[mathescape=true]$integ$} before evaluating both
-      arguments to {\lstinline[mathescape=true]$pair$}, which would require
-      that {\lstinline[mathescape=true]$integ$} already be defined.
+      construct <kbd>integ</kbd> before evaluating both
+      arguments to <kbd>pair</kbd>, which would require
+      that <kbd>integ</kbd> already be defined.
       In general, such a delay is crucial for using streams to model
       signal-processing systems that contain loops.  Without a delay,
       our models would have to be formulated so that the inputs to any
@@ -59,7 +64,7 @@ const integ = pair(initial_value,
 	Unfortunately, stream models of systems with loops
 	may require uses of a delay beyond the stream programming pattern seen so far.
 	For instance,
-	figure~\ref{fig:analog-computer} shows a signal-processing system for
+	figure \ref{fig:analog-computer} shows a signal-processing system for
 	solving the 
 	
 	differential equation $dy/dt=f(y)$ where $f$ is a given
@@ -88,52 +93,50 @@ const integ = pair(initial_value,
     could try to model this system using the
     function
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_69_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function solve(f, y0, dt) {
     const y = integral(dy, y0, dt);
     const dy = stream_map(f, y);
     return y;
 }
-\end{JavaScript}
-
+</pre></div></div>
     This
     function
-    does not work, because in the first line of {\lstinline[mathescape=true]$solve$}
-    the call to {\lstinline[mathescape=true]$integral$} requires that the input {\lstinline[mathescape=true]$dy$} be
-    defined, which does not happen until the second line of {\lstinline[mathescape=true]$solve$}.
+    does not work, because in the first line of <kbd>solve</kbd>
+    the call to <kbd>integral</kbd> requires that the input <kbd>dy</kbd> be
+    defined, which does not happen until the second line of <kbd>solve</kbd>.
   </p></div>
 
   <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
     On the other hand, the intent of our definition does make sense,
-    because we can, in principle, begin to generate the {\lstinline[mathescape=true]$y$} stream
-    without knowing {\lstinline[mathescape=true]$dy$}.
+    because we can, in principle, begin to generate the <kbd>y</kbd> stream
+    without knowing <kbd>dy</kbd>.
     
       
       
-	Indeed, {\lstinline[mathescape=true]$integral$} and many other
+	Indeed, <kbd>integral</kbd> and many other
 	stream operations can generate part of the answer given only
 	partial information about the arguments.
       
     
-    For {\lstinline[mathescape=true]$integral$}, the
-    first element of the output stream is the specified {\lstinline[mathescape=true]$initial_value$}.  Thus, we can generate the first element of the output
-    stream without evaluating the integrand {\lstinline[mathescape=true]$dy$}.  Once we know the
-    first element of {\lstinline[mathescape=true]$y$}, the
+    For <kbd>integral</kbd>, the
+    first element of the output stream is the specified <kbd>initial_value</kbd>.  Thus, we can generate the first element of the output
+    stream without evaluating the integrand <kbd>dy</kbd>.  Once we know the
+    first element of <kbd>y</kbd>, the
     
       
       
-	{\lstinline[mathescape=true]$stream_map$}
+	<kbd>stream_map</kbd>
       
     
     in the second line of
-    {\lstinline[mathescape=true]$solve$} can begin working to generate the first element of {\lstinline[mathescape=true]$dy$}, which will produce the next element of {\lstinline[mathescape=true]$y$}, and so on.
+    <kbd>solve</kbd> can begin working to generate the first element of <kbd>dy</kbd>, which will produce the next element of <kbd>y</kbd>, and so on.
   </p></div>
 
   <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-    To take advantage of this idea, we will redefine {\lstinline[mathescape=true]$integral$} to
+    To take advantage of this idea, we will redefine <kbd>integral</kbd> to
     expect the integrand stream to be a 
     
     
@@ -142,46 +145,42 @@ function solve(f, y0, dt) {
     
       
       
-	The function {\lstinline[mathescape=true]$integral$} will force
+	The function <kbd>integral</kbd> will force
       
     
     the integrand to be evaluated only when it
     is required to generate more than the first element of the output stream:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_69_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function integral(delayed_integrand, intial_value, dt) {
     const integrand = delayed_integrand();
     const integ =      
         pair(intial_value,
             add_streams(scale_stream(integrand, dt), int));
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
-    Now we can implement our {\lstinline[mathescape=true]$solve$}
+    Now we can implement our <kbd>solve</kbd>
     function
     by delaying the
-    evaluation of {\lstinline[mathescape=true]$dy$} in the definition of {\lstinline[mathescape=true]$y$}:
+    evaluation of <kbd>dy</kbd> in the definition of <kbd>y</kbd>:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_69_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function solve(f, y0, dt) {
     const y = integral( () => dy, y0, dt);
     const dy = stream_map(f, y);
     return y;
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
   <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
-    In general, every caller of {\lstinline[mathescape=true]$integral$} must now
+    In general, every caller of <kbd>integral</kbd> must now
     delay
-    the integrand argument.  We can demonstrate that the {\lstinline[mathescape=true]$solve$}
+    the integrand argument.  We can demonstrate that the <kbd>solve</kbd>
     function
     works by approximating 
     
@@ -189,27 +188,25 @@ function solve(f, y0, dt) {
     $y=1$ of the solution to the differential equation $dy/dt=y$ with
     initial condition $y(0)=1$:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_69_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 stream_ref(solve(y => y, 1, 0.001), 1000);
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
 
-    The {\lstinline[mathescape=true]$integral$}
+    The <kbd>integral</kbd>
     function
     used above was analogous to the
     <QUOTE>implicit</QUOTE> definition of the infinite stream of integers in
-    section~\ref{sec:infinite-streams}.  Alternatively, we can give a
-    definition of {\lstinline[mathescape=true]$integral$} that is more like {\lstinline[mathescape=true]$integers-starting-from$} (also in section~\ref{sec:infinite-streams}):
+    section \ref{sec:infinite-streams}.  Alternatively, we can give a
+    definition of <kbd>integral</kbd> that is more like <kbd>integers-starting-from</kbd> (also in section \ref{sec:infinite-streams}):
 
       
 
-      
+      <div class='snippet' id='javascript_69_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function integral(integrand, intial_value, dt) {
@@ -221,20 +218,21 @@ function integral(integrand, intial_value, dt) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDMUCmBzATgQwDYAUK62OYAJgDTKoz4D6AbviGteVAJSIDeAUIkGIsaKCCxIADjhhYitBszytKAoepgBnemBB5CxTLgrcA-Il3616m4gBcNErkKaoInAFt6UGQdRGyck5VW1ChDkQAKkQACzQccnknQO4AahoYWEUWNj4ASDCOTk4Abj4AXyA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABDMUCmBzATgQwDYAUK62OYAJgDTKoz4D6AbviGteVAJSIDeAUIkGIsaKCCxIADjhhYitBszytKAoepgBnemBB5CxTLgrcA-Il3616m4gBcNErkKaoInAFt6UGQdRGyck5VW1ChDkQAKkQACzQccnknQO4AahoYWEUWNj4ASDCOTk4Abj4AXyA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
       When used in systems with loops, this
       function
       has the same problem
-      as does our original version of {\lstinline[mathescape=true]$integral$}.  Modify the
+      as does our original version of <kbd>integral</kbd>.  Modify the
       function
-      so that it expects the {\lstinline[mathescape=true]$integrand$} as a delayed argument and hence
-      can be used in the {\lstinline[mathescape=true]$solve$}
+      so that it expects the <kbd>integrand</kbd> as a delayed argument and hence
+      can be used in the <kbd>solve</kbd>
       function
       shown above.
       
@@ -267,8 +265,8 @@ function integral(integrand, intial_value, dt) {
     contains a loop. This is because the value of $d^{2}y/dt^{2}$ depends
     upon the values of $y$ and $dy/dt$ and both of these are determined by
     integrating $d^{2}y/dt^{2}$.  The diagram we would like to encode is
-    shown in Figure~\ref{fig:2nd-order}.  Write a
-    function {\lstinline[mathescape=true]$solve_2nd$}
+    shown in Figure \ref{fig:2nd-order}.  Write a
+    function <kbd>solve_2nd</kbd>
     that
     takes as arguments the constants $a$, $b$, and $dt$ and the initial
     values $y_{0}$ and $dy_{0}$ for $y$ and $dy/dt$ and generates the
@@ -283,8 +281,8 @@ function integral(integrand, intial_value, dt) {
 
     
     Generalize the 
-    {\lstinline[mathescape=true]$solve-2nd$} function
-    of exercise~\ref{ex:2nd-order} so
+    <kbd>solve-2nd</kbd> function
+    of exercise \ref{ex:2nd-order} so
     that it can be used to solve general second-order differential
     equations $d^{2} y/dt^{2}=f(dy/dt,\, y)$.
   
@@ -299,7 +297,7 @@ function integral(integrand, intial_value, dt) {
     
     
     A <EM>series RLC circuit</EM> consists of a resistor, a capacitor, and an
-    inductor connected in series, as shown in Figure~\ref{fig:series-rlc}.
+    inductor connected in series, as shown in Figure \ref{fig:series-rlc}.
     If $R$, $L$, and $C$ are the resistance, inductance, and capacitance,
     then the relations between voltage ($v$) and current ($i$)
     for the three components are described by the equations
@@ -323,7 +321,7 @@ function integral(integrand, intial_value, dt) {
     \frac {di_{L}}{dt} &=& \frac{1}{L}v_{C}-\frac{R}{L}i_{L}
     \end{eqnarray*}
     The signal-flow diagram representing this system of differential
-    equations is shown in Figure~\ref{fig:rlc-signal-flow}.
+    equations is shown in Figure \ref{fig:rlc-signal-flow}.
     
 \begin{figure}[H]
 \centering
@@ -347,16 +345,16 @@ function integral(integrand, intial_value, dt) {
 
     Write a
     function
-    {\lstinline[mathescape=true]$RLC$} that takes as arguments the parameters
+    <kbd>RLC</kbd> that takes as arguments the parameters
     $R$, $L$, and $C$ of the circuit and the time increment $dt$.  In a
-    manner similar to that of the {\lstinline[mathescape=true]$RC$}
+    manner similar to that of the <kbd>RC</kbd>
     function
     of
-    exercise~\ref{ex:rc-circuit}, {\lstinline[mathescape=true]$RLC$} should produce a
+    exercise \ref{ex:rc-circuit}, <kbd>RLC</kbd> should produce a
     function
     that takes the initial values of the state variables, $v_{C_{0}}$ and
-    $i_{L_{0}}$, and produces a pair (using {\lstinline[mathescape=true]$pair$}) of the streams of
-    states $v_{C}$ and $i_{L}$.  Using {\lstinline[mathescape=true]$RLC$}, generate the pair of
+    $i_{L_{0}}$, and produces a pair (using <kbd>pair</kbd>) of the streams of
+    states $v_{C}$ and $i_{L}$.  Using <kbd>RLC</kbd>, generate the pair of
     streams that models the behavior of a series RLC circuit with $R = 1$
     ohm, $C= 0.2$ farad, $L = 1$ henry, $dt = 0.1$ second, and initial
     values $i_{L_{0}} = 0$ amps and $v_{C_{0}} = 10$ volts.
@@ -366,9 +364,10 @@ function integral(integrand, intial_value, dt) {
   
   
 
-  \subsubsection{ 
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
     Normal-order evaluation
-  
+  </h2></div>
 
   
   
@@ -382,14 +381,14 @@ function integral(integrand, intial_value, dt) {
     
     provides great programming flexibility, but the
     same examples also show how this can make our programs more complex.
-    Our new {\lstinline[mathescape=true]$integral$}
+    Our new <kbd>integral</kbd>
     function,
     for instance, gives us the power to
     model systems with loops, but we must now remember that
-    {\lstinline[mathescape=true]$integral$}
+    <kbd>integral</kbd>
     should be called with a delayed integrand, and every
     function
-    that  uses {\lstinline[mathescape=true]$integral$} must be aware of this.  In effect,
+    that  uses <kbd>integral</kbd> must be aware of this.  In effect,
     we have created two classes of
     functions:
     ordinary
@@ -401,7 +400,7 @@ function integral(integrand, intial_value, dt) {
     functions
     forces us to create separate classes of higher-order
     functions
-    as well.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+    as well.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
   </p></div>
 
   <div class='permalink'>
@@ -416,11 +415,11 @@ function integral(integrand, intial_value, dt) {
     (for example, when they are required by a primitive operation).  This
     would transform our language to use normal-order evaluation, which we
     first described when we introduced the substitution model for
-    evaluation in section~\ref{sec:substitution-model}.  Converting to
+    evaluation in section \ref{sec:substitution-model}.  Converting to
     normal-order evaluation provides a uniform and elegant way to simplify
     the use of delayed evaluation, and this would be a natural strategy to
     adopt if we were concerned only with stream processing.  In
-    section~\ref{sec:lazy-evaluation}, after we have studied the evaluator,
+    section \ref{sec:lazy-evaluation}, after we have studied the evaluator,
     we will see how to transform our language in just this way.
     Unfortunately, including delays in
     function
@@ -431,8 +430,8 @@ function integral(integrand, intial_value, dt) {
       
       
 	Even a single delay in the tail of a pair can cause
-	great confusion, as illustrated by exercise~\ref{ex:delayed1}
-	and~\ref{ex:delayed2}.
+	great confusion, as illustrated by exercise \ref{ex:delayed1}
+	and \ref{ex:delayed2}.
       
     
     As far as anyone knows, mutability and delayed
@@ -461,14 +460,14 @@ function integral(integrand, intial_value, dt) {
     function
     
       
-      {\lstinline[mathescape=true]$fun$}
+      <kbd>fun</kbd>
     
     over all the elements in a sequence</QUOTE> by a single higher-order
     function
     such as
     
       
-      {\lstinline[mathescape=true]$stream_map$}.
+      <kbd>stream_map</kbd>.
     
     Rather, we would need a different mapping
     function
@@ -476,7 +475,7 @@ function integral(integrand, intial_value, dt) {
     for a
     
       
-      {\lstinline[mathescape=true]$fun$}.
+      <kbd>fun</kbd>.
     
     Maintaining a practical notion of
     <QUOTE>data type</QUOTE> in the presence of higher-order
@@ -487,7 +486,7 @@ function integral(integrand, intial_value, dt) {
     
     
     
-    (Gordon, Milner, and Wadsworth 1979), 
+    (<CITATION>Gordon, Milner, and Wadsworth 1979</CITATION>), 
     whose <QUOTE>polymorphic data types</QUOTE>
     include templates for higher-order transformations between data types.
     Moreover, data types for most
@@ -498,4 +497,11 @@ function integral(integrand, intial_value, dt) {
       to deduce the data types for newly defined
       functions.
     </FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section5/subsection3.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section5/subsection5.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+3.5.4  Streams and Delayed Evaluation</div>	<div class='next-page'></div></div>

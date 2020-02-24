@@ -1,13 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>1.3.1 
-          Functions
-          as Arguments
-        </a>
+		<a name='top' class='permalink'>1.3.1  Functions as Arguments</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
         
         
@@ -18,8 +24,8 @@
           Consider the following three
           functions.
 	  The first computes the sum
-          of the integers from {\lstinline[mathescape=true]$a$} through {\lstinline[mathescape=true]$b$}:
-        
+          of the integers from <kbd>a</kbd> through <kbd>b</kbd>:
+        <div class='snippet' id='javascript_18_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sum_integers(a, b) {
@@ -30,15 +36,16 @@ function sum_integers(a, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxAWwPozFApgc1wCdkAKAQwBpEAjASkQG8AoRNxI3KEIpcxAHy1W7UewD8iAAwixogFyJ+AahTosOAsTIrEARmr0A3MwC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZxAWwPozFApgc1wCdkAKAQwBpEAjASkQG8AoRNxI3KEIpcxAHy1W7UewD8iAAwixogFyJ+AahTosOAsTIrEARmr0A3MwC+zZqkzY8hEqQP6pdI0A}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
 	
         
         The second computes the sum of the cubes of the integers in the given range:
-        
+        <div class='snippet' id='javascript_18_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sum_cubes(a, b) {
@@ -49,9 +56,10 @@ function sum_cubes(a, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxAWwPoRAIwKbIAUAhgDSI4CUiA3gFCKOIBOeUIzSxiAfBQ00FMA-IgAMAoYIBcibPhLUA1CnRZcBEohUBGclQDcdAL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABBEAjApgCgB4EpEDeAUIqYgE7pQjlLaIBUi9T2A3EQL5GiSwKIAziAC2AfRQZBmAIYAaRKnzEyFKjSQzEAPkUlVBxAH5EABn2GyALmRosM-AGohoiXelbnARgVKO3ImFxSXRpAGYFAHZcNiA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
               
         
           The third computes the sum of a sequence of terms in the
@@ -60,29 +68,9 @@ function sum_cubes(a, b) {
             \[ \frac{1}{1\cdot3}+\frac{1}{5\cdot7}+\frac{1}{9\cdot11}+\cdots \]
           
           which converges to $\pi/8$ 
-          (very slowly):<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-        
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function pi_sum(a, b) {
-    return a > b
-           ? 0
-           : 1.0 / (a * (a + 2)) + 
-             pi_sum(a + 4, b);
-}
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABxgfQM4gLYAoCGANIgEYCUiA3gFCJ2IBOAplCA0vogHym33-0A-IgAMfAfwBciAIwA6EYgD0iAogBUqzgGpEAJjIVd4if1SYca3QBZi5ANzUAvkA}{\usebox\lstbox}
-
-
-
-
-        
-	
-        
+          (very slowly):<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
           
-        
+        <div class='snippet' id='javascript_18_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function pi_sum(a, b) {
@@ -94,9 +82,10 @@ function pi_sum(a, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABxgfQM4gLYAoCGANIgEYCUiA3gFCJ2IBOAplCA0vogHym33-0A-IgAMfAfwBciAIwA6EYgD0iAogBUqzgGpEAJjIVd4if1SYca3QBZi5ANzUAvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABABxgfQM4gLYAoCGANIgEYCUiA3gFCJ2IBOAplCA0vogHym33-0A-IgAMfAfwBciAIwA6EYgD0iAogBUqzgGpEAJjIVd4if1SYca3QBZi5ANzUAvtWoAODSnRY8M4jJFAsnsgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 
         
@@ -110,21 +99,19 @@ function pi_sum(a, b) {
           They are for the most part identical, differing only in the name of
           the
           function,
-	  the function of {\lstinline[mathescape=true]$a$} used to compute the term to be added,
-          and the function that provides the next value of {\lstinline[mathescape=true]$a$}.
+	  the function of <kbd>a</kbd> used to compute the term to be added,
+          and the function that provides the next value of <kbd>a</kbd>.
 	  We could generate each of the
           functions
           by filling in slots in the same template:
 
-          
-\begin{JavaScript}
+          <div class='snippet' id='javascript_18_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function name(a, b) {
     return a > b
            ? 0
            : term(a) + name(next(a), b);
 }
-\end{JavaScript}
-
+</pre></div></div>
         </p></div>
 
         <div class='permalink'>
@@ -164,34 +151,32 @@ function name(a, b) {
 	    parameters:
 	    
 	  
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_18_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function sum(term, a, next, b) {
     return a > b
            ? 0
            : term(a) + sum(term, next(a), next, b);
 }
-\end{JavaScript}
-
+</pre></div></div>
               
         </p></div>
         <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-          Notice that {\lstinline[mathescape=true]$sum$} takes as its arguments the lower and upper bounds
-          {\lstinline[mathescape=true]$a$}~and~{\lstinline[mathescape=true]$b$} together with the
+          Notice that <kbd>sum</kbd> takes as its arguments the lower and upper bounds
+          <kbd>a</kbd> and <kbd>b</kbd> together with the
           functions
-          {\lstinline[mathescape=true]$term$} and {\lstinline[mathescape=true]$next$}.
-          We can use {\lstinline[mathescape=true]$sum$} just as we would any
+          <kbd>term</kbd> and <kbd>next</kbd>.
+          We can use <kbd>sum</kbd> just as we would any
           function.  For example, we can
           use it (along with a
           function
-          {\lstinline[mathescape=true]$inc$} that increments its argument by 1)
-          to define {\lstinline[mathescape=true]$sum_cubes$}:
+          <kbd>inc</kbd> that increments its argument by 1)
+          to define <kbd>sum_cubes</kbd>:
         
               
               
 
-        
+        <div class='snippet' id='javascript_18_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function inc(n) {
@@ -203,9 +188,10 @@ function sum_cubes(a, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDSAKMBKRBvAUIgxAJwFMoQikkBqRARgG5cBfXUSWBRAZxAFsA+hBAAjEt1QBDADSIRWPIWJkKSXn1TCxsmckiz5TZkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABBEAjApgCgB4EpEDeAUIqYgE7pQjlLaIBUi9T2A3EQL5GiSwKIAziAC2mKOnIiANIgCGssOmxRZqfMTIUqNJHMQA+RKhJaziAPyIADKfNkAXIglTMc-AGoho8ZJmIlFTdcRWVVY1wObl5oeCQYSEwwDTttaloAxC8ARiiecFiBYREAfRQMQTc1FK1KdKRizHL0WQVEBIhqvKJisrR0SuzZbOtIoA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
         </p></div>
 
         <div class='permalink'>
@@ -213,16 +199,17 @@ function sum_cubes(a, b) {
           Using this, we can compute the sum of the cubes of the integers from 1
           to 10:
 
-        
+        <div class='snippet' id='javascript_18_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 sum_cubes(1, 10);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4Vwtg+gxiBGCmwAUBGANAAhQBgJQG4g}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABDSAKMBKRBvAUIgxAJwFMoQikkBqRARgG5cBfXUSWBRAZxAFsA+hBAAjEt1QBDADSIRWPIWJkKSXn1TCxsmckiz5TVu2jwkWkqgAeC-IVLlKiK4gBUzt86NtwprutQoEiI+HVkwEisoA1slB1VESUQAPjk7JQyAfkQABnSMwgAuRCCQqSxaANLQxAio8vDI6LkMb3UhUXFUOlk6HNagA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
         </p></div>
 
         <div class='permalink'>
@@ -230,13 +217,13 @@ sum_cubes(1, 10);
           With the aid of an identity
           function
           to compute the term, we can define
-          {\lstinline[mathescape=true]$sum_integers$}
-          in terms of {\lstinline[mathescape=true]$sum$}:
+          <kbd>sum_integers</kbd>
+          in terms of <kbd>sum</kbd>:
 
           
           
 
-        
+        <div class='snippet' id='javascript_18_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function identity(x) {
@@ -245,13 +232,14 @@ function identity(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAJgUzLKBPAFADwEpEBvAKEUsQCc0oRql8BuMgXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABDAJgUzLKBPAFADwEpEBvAKEUsQCc0oRql8BuMgXzLNQyzwBYATIWZA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
 
-        
+        <div class='snippet' id='javascript_18_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sum_integers(a, b) {
@@ -260,55 +248,34 @@ function sum_integers(a, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxAWwPozFApgc1wCdkAKAQwBpEAjASkQG8AoRNxI3KEIpVNUjAAmuHDCgBPalUTYI1egG5mAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZxAWwBRQKYCc0A0iAhkWNgB5REBGAlIgN4BQibiu2UIuSxiAPkQ1W7MewD8iAAyjxYgFyIc+DMQYBqFOix5CiclTV0ylasLoBuZgF9moSLASIYkDGAYsxnbrwOItAEZrOwdoeCQYABNsMFgoAE8MCk85Di4eJAoQ+3Bw51Q0AH1XHABzPGQ1WlTvDL9CjGjY+ISiUhdIGpzmQpK47ArcKsCiQOkrIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
           Then we can add up the integers from 1 to 10:
-        
+        <div class='snippet' id='javascript_18_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 sum_integers(1, 10);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4Vwtg+glgdgLgUwOYIE7ABQEYA0ACLABgEoBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZxAWwPozFApgc1wCdkAKAQwBpEAjASkQG8AoRNxI3KEIpVNUjAAmuHDCgBPalUTYI1egG5mAX2ahIsBCnSk8RNNOphcADygKGLdhy48k5RAD5arG+8QB+RAAY3H9gAuRH0BcgYAah0BUOMzKAo6OPNLZTUNaHgkOVIwK39bbl5EJCiARjT1cEztYVFYSVJTfJtOIqRTSv4sHAJiMjLqMp86RSA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
         </p></div>
 
         <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
           We can also 
-          declare {\lstinline[mathescape=true]$pi_sum$}
-          in the same way:<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
-
-        
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function pi_sum(a, b) {
-    function pi_term(x) {
-        return 1.0 / (x * (x + 2));
-    }
-    function pi_next(x) {
-        return x + 4;
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABxgfQM4gLYAoCGANIgEYCUiA3gFCJ2KiSwIrpQCmATngB4U31BiTuyghOSAIwA6AAyIA9Ilw9EAKmWqA1IgBMZMgG5a9AL4m6jaPCSo0Ydjygr+FoSLETE2xABZjguaCHuJIWHh2HNzERKz2jlDE5MamQA}{\usebox\lstbox}!*/
-    }
-    return sum(pi_term, a, pi_next, b);
-}
-
-\end{JavaScriptClickable}
-
-
-
-        
+          declare <kbd>pi_sum</kbd>
+          in the same way:<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
 
               
 
-        
+        <div class='snippet' id='javascript_18_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function pi_sum(a, b) {
@@ -320,14 +287,15 @@ function pi_sum(a, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABxgfQM4gLYAoCGANIgEYCUiA3gFCJ2KiSwIrpQCmATngB4U31BiTuyghOSAIwA6AAyIA9Ilw9EAKmWqA1IgBMZMgG5a9AL4m6jaPCSo0Ydjygr+FoSLETE2xABZjguaCHuJIWHh2HNzERKz2jlDE5MamQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZxAWwBRQKYCc0A0iAhkWNgB5REBGAlIgN4BQibiu2UIuSxiAPkQ1W7MewD8iAAyjxYgFyIc+DMQYBqFOix5CiclTV0ylasLoBuZgF9moSLASIADjAD6qTKQtM5iB2h4JDd3FUwKBhZ5Nk5uXkQARgA6aUQAekQMCkQAKiycrQAmOit-OzFApxCPQyhsqP8xOJ4kQsQAFmsxCvYWhK8MUPCiH1C62jK7ZgAOPNcPQcSiROk1qyA}{\usebox\lstbox}!*/
     }
     return sum(pi_term, a, pi_next, b);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         </p></div>
 
@@ -337,21 +305,22 @@ function pi_sum(a, b) {
           functions, we can compute an approximation to 
           $\pi$:
 
-        
+        <div class='snippet' id='javascript_18_12_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 8 * pi_sum(1, 1000);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BwAgVCAOCWD6DOBXAtgCgIwBoToAz4EoBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABABxgfQM4gLYAoCGANIgEYCUiA3gFCJ2KiSwIrpQCmATngB4U31BiTuyghOSAIwA6AAyIA9Ilw9EAKmWqA1IgBMZMgG5a9AL4m6jaPCSo0Ydjygr+FoSLETE2xABZjguaCHuJIWHh2HNzERKz2jlDE5MbmVsxhOLhR2DHEDk5JrsGioYj4iAB8pG5CdAD8iLI1tQBciNkEFDrhWVw5iPnO+GR5CYUp1AAc6nE9ksSSsktGQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
         </p></div>
 
         <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
-          Once we have {\lstinline[mathescape=true]$sum$}, we can use it as a building block in
+          Once we have <kbd>sum</kbd>, we can use it as a building block in
           formulating further concepts.  For instance, the 
           
           definite integral of a
@@ -371,7 +340,7 @@ function pi_sum(a, b) {
           function:
 
           
-        
+        <div class='snippet' id='javascript_18_13_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function integral(f, a, b, dx) {
@@ -383,33 +352,36 @@ function integral(f, a, b, dx) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDMUCmBzATgQwDYAUwANIjqQEakAmAHgJSIDeAUIu4qJLAmddQH06BBszYcJWNFBBYktRAGpEdANzj2AXw2IpMuYgDOIALZFSOJSoUB6RACYL-IbUqMAVNfWagA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZxAWwBRQKYCc0A0iAhkWNgB5REBGAlIgN4BQibiu2UIuSxiAPkQ1W7MewD8iAAyjxYgFyIc+DMQYBqFOix5CiclTV0ylasLoBuZgF9moSLASIYYHAHNcxADYZgRUmEiABMKBhYxB2h4PmDggH1QjDCmOXFObl5ECkQtUOsxOzEMniRUTH8SXMRQxAB6RAAmALjEiloGACoaims7ZlcPL18IEBpsImkiAEZJgDppaasgA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_18_14_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 integral(cube, 0, 1, 0.01);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=JYOwLgpg5gTghgGwBQGMCuAjCAaABABjwEY98A6fIgSgG4g}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABBEAjApgCgB4EpEDeAUIqYgE7pQjlLaIBUi9T2A3EQL5GiSwKIYYKOgDm5AIYAbTMAA0iCQtQKAJnkIkyvaPCQTVqgPrqc+YmUsUqNOogDUidR0vdLlarUQBnEAFtZBQkHJ3oAekQAJiDDE2xlfCZnLh5wXQFfAJFyPyCFMHRsKATNdxsvYIA+RFQtK0sAfkQABjr60gAuRGyAiXxHTMwe-MKoTD6RooSObiERcWlMFAwFZoUARlWAOmb13DYgA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_18_15_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 integral(cube, 0, 1, 0.005);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=JYOwLgpg5gTghgGwBQGMCuAjCAaABABjwEY98A6ffAVgEoBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABBEAjApgCgB4EpEDeAUIqYgE7pQjlLaIBUi9T2A3EQL5GiSwKIYYKOgDm5AIYAbTMAA0iCQtQKAJnkIkyvaPCQTVqgPrqc+YmUsUqNOogDUidR0vdLlarUQBnEAFtZBQkHJ3oAekQAJiDDE2xlfCZnLh5wXQFfAJFyPyCFMHRsKATNdxsvYIA+RFQtK0sAfkQABjr60gAuRGyAiXxHTMwe-MKoTD6RooSObiERcWlMFAwFZoUARlWAOmbmgFZcNiA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        (The exact value of the integral of {\lstinline[mathescape=true]$cube$} 
+        (The exact value of the integral of <kbd>cube</kbd> 
         between 0 and 1 is 1/4.)
         </p></div>
 
@@ -435,9 +407,9 @@ integral(cube, 0, 1, 0.005);
           the value of the integral, computed using Simpson's Rule.
           Use your
           function
-          to integrate {\lstinline[mathescape=true]$cube$} between 0 and 1
+          to integrate <kbd>cube</kbd> between 0 and 1
           (with $n=100$ and $n=1000$), and compare the results to those of the
-          {\lstinline[mathescape=true]$integral$}
+          <kbd>integral</kbd>
           function
           shown above.
    
@@ -447,7 +419,7 @@ integral(cube, 0, 1, 0.005);
 
 \begin{Answer}[ref={ex:simpsons-rule}]
        
-      
+      <div class='snippet' id='javascript_18_16_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function inc(k) {
@@ -459,7 +431,7 @@ function simpsons_rule_integral(f, a, b, n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDSAKA1gSkQbwFCKGIBOAplCMUuogNSICMA3HgL56iSwKIDOMAWwAOvBLwD6xEABtS4lFFIBzYgENpqYABpEqnQCMdYbPiKJO0eEgAWpaUNLFU1kwTNEL3JAE8MJxG7u7mQUVOaoGIgAVIgudLqYLEGE7ACQnlaIisQCfriByYQhlNSIALwViAAMiAA+tYg0FWWIYAWFyQD8iL5Y7R3uAFyNiACkiABM5ZVV-QPu3VMxvZhz80TDACzRPX5JyeyFxWG8ILnZAjpVOigQRtgxzogA9IgAzIkFh0THNnYOTlQ+kQAFoEi9Wp9WEA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZxAWwBRQKYCc0A0iAhkWNgB5REBGAlIgN4BQibiu2UIuSxiAPkQ1W7MewD8iAAyjxYgFyIc+DMQYBqFOix5CiclTV0ylasLoBuZgF9moSLASIYkDAGsGLMZ269E7ohaAIzWdg7Q8EjIMGgADsgIyAD6uCAANtjJrjgA5rjE6RjARKTCZF5yiBFOSAAW2OlxeBh1lfJsNVGIAJ4eXohVHRxcPEjAGB6IAFSIbUEkVkPsdgCQXc4qmJ5My-K+YwGIALynMogAPhdHp8cGe8NiUn2eD49sSoEApIgATCdnWTvYFSf6zF50N7AxBKAAsM16-WswzswwO-lQmC2RGkRFcEAqCNaiAA9IgAMxLMSo9jo+qNZq4SY0RAAWkWpIMSzszBi8USYBSaUy2TAeQKRQgIBo2BxRGC8uk0isQA}{\usebox\lstbox}!*/
             return f((k * h) + a);
         }
 	function term(k) {
@@ -475,8 +447,9 @@ function simpsons_rule_integral(f, a, b, n) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
 \end{Answer}
 
@@ -488,7 +461,7 @@ function simpsons_rule_integral(f, a, b, n) {
 \label{ex:unlabeled10}
  
           
-          The {\lstinline[mathescape=true]$sum$}
+          The <kbd>sum</kbd>
           function
           above generates a linear recursion.  The
           function
@@ -497,8 +470,7 @@ function simpsons_rule_integral(f, a, b, n) {
           following
 	  
 	  declaration:
-          
-\begin{JavaScript}
+          <div class='snippet' id='javascript_18_17_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function sum(term, a, next, b) {
     function iter(a, result) {
         return ??
@@ -507,15 +479,14 @@ function sum(term, a, next, b) {
     }
     return iter(??, ??);
 }
-\end{JavaScript}
-
+</pre></div></div>
  
         \hfill{\hyperref[ex:unlabeled10-Answer]{Solution}}\\
 \end{Exercise}
 
 \begin{Answer}[ref={ex:unlabeled10}]
      
-   
+   <div class='snippet' id='javascript_18_18_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sum(term, a, next, b) {
@@ -527,13 +498,14 @@ function sum(term, a, next, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxAWwBRQKYCc0A0iAhkWNgB5REBGAlIgN4BQibioksCiMOuGUolzZUAGygMW7GcOxQQuJMUQA+RDVazt7APxzxULTu0AuXvwzkqgukRGHEAakT9MxOnQDcxxAF9fEQUlCzxBIgAGb2Y-IA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZxAWwBRQKYCc0A0iAhkWNgB5REBGAlIgN4BQibioksCiMOuGUolzZUAGygMW7GcOxQQuJMUQA+RDVazt7APxzxULTu0AuXvwzkqgukRGHEAakT9MxOnQDcxxAF9fEQUlCzxBIgAGb2YA5k5oeCQYSCspQPlFJCQXAEYfAPjuJFQ0AH0IEBpRcI00mSDMlHQMCqqiIWSIWmiAkvLK6pyiHKivIA}{\usebox\lstbox}!*/
     return iter(a, 0);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
    
@@ -548,50 +520,22 @@ function sum(term, a, next, b) {
           
           
 \begin{enumerate}[a.]
-\item{The {\lstinline[mathescape=true]$sum$}
+\item{The <kbd>sum</kbd>
               function
               is only the simplest of a vast number of
               similar abstractions that can be captured as higher-order
-              functions.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>function
-              called {\lstinline[mathescape=true]$product$} that returns the product of the values of a
-              function at points over a given range.
-              Show how to define 
-              
-              {\lstinline[mathescape=true]$factorial$} in terms of
-              {\lstinline[mathescape=true]$product$}.  Also use {\lstinline[mathescape=true]$product$} to compute approximations to
-              
-              $\pi$ using the 
-              formula<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
-                \[
-                \frac{\pi}{4}=\frac{2\cdot 4\cdot 4\cdot 6\cdot 6\cdot 8\cdots}{3\cdot
-                3\cdot 5\cdot 5\cdot 7\cdot 7\cdots}
-                \]
-              
-            
-              
-                \[
-                \frac{\pi}{4}=\frac{2\cdot 4\cdot 4\cdot 6\cdot 6\cdot 8\cdots}{3\cdot
-                3\cdot 5\cdot 5\cdot 7\cdot 7\cdots}
-                \]
-              
-              
+              functions.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>  
               Write an analogous
               function
-              called {\lstinline[mathescape=true]$product$} that returns the product of the values of a
+              called <kbd>product</kbd> that returns the product of the values of a
               function at points over a given range.
               Show how to define 
               
-              {\lstinline[mathescape=true]$factorial$} in terms of
-              {\lstinline[mathescape=true]$product$}.  Also use {\lstinline[mathescape=true]$product$} to compute approximations to
+              <kbd>factorial</kbd> in terms of
+              <kbd>product</kbd>.  Also use <kbd>product</kbd> to compute approximations to
               
               $\pi$ using the 
-              formula<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
-                \[
-                \frac{\pi}{4}=\frac{2\cdot 4\cdot 4\cdot 6\cdot 6\cdot 8\cdots}{3\cdot
-                3\cdot 5\cdot 5\cdot 7\cdot 7\cdots}
-                \]
-              
-            
+              formula<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
               
                 \[
                 \frac{\pi}{4}=\frac{2\cdot 4\cdot 4\cdot 6\cdot 6\cdot 8\cdots}{3\cdot
@@ -600,7 +544,7 @@ function sum(term, a, next, b) {
               
             }
 \item{
-              If your {\lstinline[mathescape=true]$product$}
+              If your <kbd>product</kbd>
               function
               generates a recursive process, write one that generates
               an iterative process.
@@ -622,7 +566,7 @@ function sum(term, a, next, b) {
       
       
 	    
-      
+      <div class='snippet' id='javascript_18_19_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 //recursive process
@@ -635,7 +579,7 @@ function product_r(term, a, next, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTBOFMGMFdQZwJYDdwAIAOoD2lxzgFABm0AdpAC4JakbYAm0lA+qABQXigC2ANKgEN+pcAA8K-AEYBKVAG8CqJaggVYtAagB8qSYuUHlAflQBGfYYMAuVJx5sBsgFR0sjFuzt9UI8Q+nCYhK60gDcBAC+BAQgCHYCVCiuuPjEZJTUtJhuTBTMCBxc3kI+QVKyCgYk5FQ0qHFcDvwQcNAANhQVFoaq6oLaut2WhiYt7RRDw8o2Dey+FP78Xv6oLmMdYd1RBr2gtLNNZpsRQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=PTBOFMGMFdQZwJYDdwAIAOoD2lxzgFABm0AdpAC4JakbYAm0lA+qABQXigC2ANKgEN+pcAA8K-AEYBKVAG8CqJaggVYtAagB8qSYuUHlAflQBGfYYMAuVJx5sBsgFR0sjFuzt9UI8Q+nCYhK60gDcBAC+BAQgCHYCVCiuuPjEZJTUtJhuTBTMCBxc3kI+QVKyCgYk5FQ0qHFcDvwQcNAANhQVFoaq6oLaut2WhiYt7RRDw8o2Dey+FP78Xv6oLmMdYd1RBr2gtLNNZptRxAKUWKAIAm1sAKybIBgFpgDsYUA}{\usebox\lstbox}!*/
 //iterative process
 function product_i(term, a, next, b) {
     function iter(a, result) {
@@ -647,8 +591,9 @@ function product_i(term, a, next, b) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
 \end{Answer}
 
@@ -663,36 +608,34 @@ function product_i(term, a, next, b) {
           
 \begin{enumerate}[a.]
 \item{
-              Show that {\lstinline[mathescape=true]$sum$} and {\lstinline[mathescape=true]$product$}
-              (exercise~\ref{ex:product}) are both special cases of a still more
-              general notion called {\lstinline[mathescape=true]$accumulate$} that combines a 
+              Show that <kbd>sum</kbd> and <kbd>product</kbd>
+              (exercise \ref{ex:product}) are both special cases of a still more
+              general notion called <kbd>accumulate</kbd> that combines a 
               collection of
               terms, using some general accumulation function:
-              
-\begin{JavaScript}
+              <div class='snippet' id='javascript_18_20_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 accumulate(combiner, null_value, term, a, next, b);
-\end{JavaScript}
-
+</pre></div></div>
               
-            The function {\lstinline[mathescape=true]$accumulate$}
+            The function <kbd>accumulate</kbd>
               takes as arguments the same term and range
-              specifications as {\lstinline[mathescape=true]$sum$} and {\lstinline[mathescape=true]$product$}, together with a {\lstinline[mathescape=true]$combiner$}
+              specifications as <kbd>sum</kbd> and <kbd>product</kbd>, together with a <kbd>combiner</kbd>
               function
               (of two arguments) that specifies how the current
               term is to be combined with the accumulation of the preceding terms
               and a 
               
-            {\lstinline[mathescape=true]$null_value$}
+            <kbd>null_value</kbd>
               that specifies what base value to use
-              when the terms run out.  Write {\lstinline[mathescape=true]$accumulate$}
-              and show how {\lstinline[mathescape=true]$sum$} and {\lstinline[mathescape=true]$product$} can both be
+              when the terms run out.  Write <kbd>accumulate</kbd>
+              and show how <kbd>sum</kbd> and <kbd>product</kbd> can both be
 	      
 	      declared
 	      as simple calls to 
-	      {\lstinline[mathescape=true]$accumulate$}.
+	      <kbd>accumulate</kbd>.
             }
 \item{
-              If your {\lstinline[mathescape=true]$accumulate$}
+              If your <kbd>accumulate</kbd>
               function
               generates a recursive process, write one that generates
               an iterative process.
@@ -709,7 +652,7 @@ accumulate(combiner, null_value, term, a, next, b);
 
 \begin{Answer}[ref={ex:accumulate}]
         
-      
+      <div class='snippet' id='javascript_18_21_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 //recursive process
@@ -721,7 +664,7 @@ function accumulate_r(combiner, null_value, term, a, next, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTBOFMGMFdQZwJYDdwAIAOoD2lxzgFABm0AdpAC4JamoCGkMAttADZ0XgD6oAFJFiYAjBKXCgANKlJtWXJHVbRwUzqCZS6UsQA8KUoQEpUAbwKoLqCBVi06qAHyoh5y28sB+abPmLlr9zcALlQBYVFxXjUmXjpDKQDApMCGZjYObj4wkTFJVETkwqK3GVY5BSUVfOKamujtcD1Y+OlG-WdDQwBuAgBfAgIQBDUOZDRMHDxCEnIqGnpGaBZ2Ti4EfkEc8W0fCuVVcQ16Br0DYzM3GcpqWmHIrSs8NgpzgstrW3pHZzfCrwg4M9fskQnc+LoKM0pNkInxolDHoDWC9uol+m4PqBbmpYjsyr5Kqj+lc5rRAUw1lFDpoTu0jKZEiSbhglHBeDopABPV7JTG0HSoADUqE5PTc6Pe4BsWIWaRW3HW6FZUgADAd1DTWqcOj1iWRrvMJgATaCUHhUjXHLV0nmWJnzKhMPDsrm2wJ81ACgBUIrFlglFg9qSW6VWcIQTrgUgAjOqjg8IWddUA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=PTBOFMGMFdQZwJYDdwAIAOoD2lxzgFABm0AdpAC4JamoCGkMAttADZ0XgD6oAFJFiYAjBKXCgANKlJtWXJHVbRwUzqCZS6UsQA8KUoQEpUAbwKoLqCBVi06qAHyoh5y28sB+abPmLlr9zcALlQBYVFxXjUmXjpDKQDApMCGZjYObj4wkTFJVETkwqK3GVY5BSUVfOKamujtcD1Y+OlG-WdDQwBuAgBfAgIQBDUOZDRMHDxCEnIqGnpGaBZ2Ti4EfkEc8W0fCuVVcQ16Br0DYzM3GcpqWmHIrSs8NgpzgstrW3pHZzfCrwg4M9fskQnc+LoKM0pNkInxolDHoDWC9uol+m4PqBbmpYjsyr5Kqj+lc5rRAUw1lFDpoTu0jKZEiSbhglHBeDopABPV7JTG0HSoADUqE5PTc6Pe4BsWIWaRW3HW6FZUgADAd1DTWqcOj1iWRrvMJgATaCUHhUjXHLV0nmWJnzKhMPDsrm2wJ81ACgBUIrFlglFg9qSW6VWcIQTrgUgAjOqjg8IWddQMiAwKFhQAhFLwAKzdIA}{\usebox\lstbox}!*/
                                    null_value, 
                                    term, next(a), next, b));
 }
@@ -749,8 +692,9 @@ function product_r(term, a, next, b) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
     
 \end{Answer}
@@ -761,20 +705,20 @@ function product_r(term, a, next, b) {
 \begin{Exercise}
  
           
-          You can obtain an even more general version of {\lstinline[mathescape=true]$accumulate$}
-          (exercise~\ref{ex:accumulate}) by introducing the notion of a 
+          You can obtain an even more general version of <kbd>accumulate</kbd>
+          (exercise \ref{ex:accumulate}) by introducing the notion of a 
           
           <EM>
             filter</EM> on the terms to be combined.  That is, combine only those
           terms derived from values in the range that satisfy a specified
           condition.  The resulting 
-          {\lstinline[mathescape=true]$filtered_accumulate$}
+          <kbd>filtered_accumulate</kbd>
           abstraction takes the same arguments as accumulate, together with an additional
           predicate of one argument that specifies the filter.  
-          Write {\lstinline[mathescape=true]$filtered_accumulate$} as a
+          Write <kbd>filtered_accumulate</kbd> as a
           function.  
           Show how to express the
-          following using {\lstinline[mathescape=true]$filtered_accumulate$}:
+          following using <kbd>filtered_accumulate</kbd>:
 
           
 \begin{enumerate}[a.]
@@ -783,13 +727,13 @@ function product_r(term, a, next, b) {
               $a$ to
               $b$ 
               (assuming that you have a 
-              {\lstinline[mathescape=true]$is_prime$} 
+              <kbd>is_prime</kbd> 
               predicate already written)
             }
 \item{
               the product of all the positive integers less than $n$
               
-              that are relatively prime to~$n$ 
+              that are relatively prime to $n$ 
               (i.e., all positive integers
               $i < n$ such that 
               $\textrm{GCD}(i,n)=1$).
@@ -805,7 +749,7 @@ function product_r(term, a, next, b) {
 
 \begin{Answer}[ref={ex:filtered-accumulate}]
 
-      
+      <div class='snippet' id='javascript_18_22_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function filtered_accumulate(combiner, null_value,
@@ -817,7 +761,7 @@ function filtered_accumulate(combiner, null_value,
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMGAbKBTAThgJgfQEMIIQBbEVQzACgjjICMYxsAaRMS1fAN0NQgMbAFCJxEyVOkzEmLGQ6EOrAB5QOjDinTYAlIgDeYiTiggsSQogB8iRidmIA-J258BQx7IBcyNPI0hHreTq70TCzYNPJkQXocoU5SOvJ4RCTklNQYdAzMrFgq7vyCwohJyVXVsSoY6vF16onVrW1a-rpYeiGtfqnY6cSkFFS0EQXsbqg8pUItbYtStZz1UI2rzRVLO+IdA90A3CIAvkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABMGAbKBTAThgJgfQEMIIQBbEVQzACgjjICMYxsAaRMS1fAN0NQgMbAFCJxEyVOkzEmLGQ6EOrAB5QOjDinTYAlIgDeYiTiggsSQogB8iRidmIA-J258BQx7IBcyNPI0hHreTq70TCzYNPJkQXocoU5SOvJ4RCTklNQYdAzMrFgq7vyCwohJyVXVsSoY6vF16onVrW1a-rpYeiGtfqnY6cSkFFS0EQXsbqg8pUItbYtStZz1UI2rzRVLO+IdA90A3CIAviIioJCwCIgADlgwZBj4AM4AjiCEOC+v5EGaBmMkku0HgSFugheNFUHAAnoDKogzBYkKpEABqRCw46SM6SZGWTppAjDLJjXIQkAvDgABlEu1a70+OCUHBYEE0CwZyRgP3ujwwemOZxB1yQODGMF4z35T3w9zguBA0BoYEBkm8orBcgFUJhWIRsgJqMQACosTiJHiJFqbjBcBgwLAoLDoYaZMbEKpLeJreJbUhMC91jB3dJPQBzCC4GgwFQGAC8ScQAEYfYg-UiMOZCQchplRjkYrqOCn6dyeQ6nTAXaW2ZAVOWK7Ig1AhadzrLnkyvhgfi8-gAWUs0oWIAD048QAHZByJJ1nJdL5Q85QqlSqABxjhcpmkAViAA}{\usebox\lstbox}!*/
                    filtered_accumulate(combiner, null_value, 
                                        term, next(a), next, 
                                        b, filter))
@@ -827,8 +771,9 @@ function filtered_accumulate(combiner, null_value,
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
 	  
 \end{Answer}
@@ -836,7 +781,7 @@ function filtered_accumulate(combiner, null_value,
         
         
       <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>This series,
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>This series,
             
             
             usually written in the equivalent form 
@@ -844,14 +789,38 @@ function filtered_accumulate(combiner, null_value,
               {3}+\frac{1}{5}-\frac{1}{7}+\cdots$, 
             is due to Leibniz.  We'll see how
             to use this as the basis for some fancy numerical tricks in
-            section~\ref{sec:exploiting-streams}.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>Notice
-            that we have used block structure (section~\ref{sec:black-box}) to
+            section \ref{sec:exploiting-streams}.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Notice
+            that we have used block structure (section \ref{sec:black-box}) to
             embed the 
-            declarations of {\lstinline[mathescape=true]$pi_next$} and 
-            {\lstinline[mathescape=true]$pi_term$} within {\lstinline[mathescape=true]$pi_sum$}, since these
+            declarations of <kbd>pi_next</kbd> and 
+            <kbd>pi_term</kbd> within <kbd>pi_sum</kbd>, since these
             functions
             are unlikely to be useful for any
             other purpose.  We will see how to get rid of them altogether in
-            section~\ref{sec:lambda}.</FOOTNOTE></div>
-</SUBSECTION>
+            section \ref{sec:lambda}.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>The intent of
+                exercises \ref{ex:product}–\ref{ex:filtered-accumulate} is to
+                demonstrate the expressive power that is attained by using an
+                appropriate abstraction to consolidate many seemingly disparate
+                operations.  However, though accumulation and filtering are elegant
+                ideas, our hands are somewhat tied in using them at this point since
+                we do not yet have data structures to provide suitable means of
+                combination for these abstractions.  We will return to these ideas in
+                section \ref{sec:sequences-conventional-interfaces} when we show how
+                to use <EM>sequences</EM> as interfaces for combining filters and
+                accumulators to build even more powerful abstractions.  We will see
+                there how these methods really come into their own as a powerful and
+                elegant approach to designing programs.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>This formula was discovered by the 
+                seventeenth-century
+                
+                English mathematician John Wallis.</FOOTNOTE></div>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section3/section3.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section3/subsection2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+1.3.1  Functions as Arguments</div>	<div class='next-page'></div></div>

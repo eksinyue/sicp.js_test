@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>5.5.7 
-  Interfacing Compiled Code to the Evaluator
-      </a>
+		<a name='top' class='permalink'>5.5.7  Interfacing Compiled Code to the Evaluator</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -16,13 +23,13 @@
 <a name='p1' class='permalink'></a><p>
   We have not yet explained how to load compiled code into the evaluator machine
   or how to run it.  We will assume that the explicit-control-evaluator machine
-  has been defined as in section~\ref{sec:running-evaluator}, with the
-  additional operations specified in footnote~\ref{foot:compiler-ops}.
+  has been defined as in section \ref{sec:running-evaluator}, with the
+  additional operations specified in footnote \ref{foot:compiler-ops}.
   We will implement
   a
   function
   
-  {\lstinline[mathescape=true]$compile-and-go$} that compiles a Scheme expression, loads the
+  <kbd>compile-and-go</kbd> that compiles a Scheme expression, loads the
   resulting object code into the evaluator machine,
   and causes the machine to run the code in the
   evaluator global environment, print the result, and
@@ -35,7 +42,7 @@
   into the machine and use the
   evaluator to call it:
 
-  
+  <div class='snippet' id='javascript_120_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 compile_and_go(
@@ -47,7 +54,7 @@ compile_and_go(
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewtgDglgNgpgfQIYDsAmCDmIAUAoAAiIIiQCcBnOfY2ggIgDMBXFYAFyhBQMaQ5BkoSGDhQBKAgG9CdOQTJx2zMjx4BeTQQCMBWfIMB+HfoNyAXAR4AqXv3aDhongFod4gNym6AX3rjPPDwPEIIAUQBhFzCANxECOJhmOHM8EABrIJCPcKjY+KgUCGZ2VJw+ASF4gFZxYNDI6MSEkWTU7QAmAAYgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=MYewtgDglgNgpgfQIYDsAmCDmIAUAoAAiIIiQCcBnOfY2ggIgDMBXFYAFyhBQMaQ5BkoSGDhQBKAgG9CdOQTJx2zMjx4BeTQQCMBWfIMB+HfoNyAXAR4AqXv3aDhongFod4gNym6AX3rjPPDwPEIIAUQBhFzCANxECOJhmOHM8EABrIJCPcKjY+KgUCGZ2VJw+ASF4gFZxYNDI6MSEkWTU7QAmAAYgA}{\usebox\lstbox}!*/
          }"));
 
 ;;; EC-Eval value:
@@ -59,8 +66,9 @@ ok
 120
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
@@ -68,14 +76,15 @@ ok
   To allow the evaluator to handle compiled
   functions
   (for example,
-  to evaluate the call to {\lstinline[mathescape=true]$factorial$} above),
-  we need to change the code at {\lstinline[mathescape=true]$apply_dispatch$}
-  (section~\ref{sec:procedure-application}) so that it recognizes
+  to evaluate the call to <kbd>factorial</kbd> above),
+  we need to change the code at <kbd>apply_dispatch</kbd>
+  (section \ref{sec:procedure-application}) so that it recognizes
   compiled
   functions
   (as distinct from compound or primitive
   functions) and transfers control directly to the entry point of the
-  compiled code:<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+  compiled code:<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
+  <div class='snippet' id='javascript_120_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 "apply_dispatch",
@@ -87,7 +96,7 @@ ok
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EQQwDmA2CeD6AmBLAzmEAXAxgC2AGgCgACEo9AU2XQAoB7Ma4MAJ0QFtF1EA3c2F2pnLwArs3LAAlHiLiA5owGYp04qQBGzEADsc1SCHXlIi1hy69Y4KNBWFSZSjXqNMtNmFojt8fs0HCYhLSsuQKTP7KkqoOmjp6BkYmwG4eXj5WEDB2aiQUVHQMKe5giJDCfgGi4lIy8qaCObFautj6hsauJWUV1tnR9qRytLDotO1JjN4A1tq0AO7alULVfOjQYMGqBMUePb59toMk4lS04l3aXNoiwcdEIMjIiHLajNwgkPhEkCjORalSuVfEpAuJYOQrsxbCF6hFGtEYkMRmNqHCPl8BkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=EQQwDmA2CeD6AmBLAzmEAXAxgC2AGgCgACEo9AU2XQAoB7Ma4MAJ0QFtF1EA3c2F2pnLwArs3LAAlHiLiA5owGYp04qQBGzEADsc1SCHXlIi1hy69Y4KNBWFSZSjXqNMtNmFojt8fs0HCYhLSsuQKTP7KkqoOmjp6BkYmwG4eXj5WEDB2aiQUVHQMKe5giJDCfgGi4lIy8qaCObFautj6hsauJWUV1tnR9qRytLDotO1JjN4A1tq0AO7alULVfOjQYMGqBMUePb59toMk4lS04l3aXNoiwcdEIMjIiHLajNwgkPhEkCjORalSuVfEpAuJYOQrsxbCF6hFGtEYkMRmNqHCPl8BkA}{\usebox\lstbox}!*/
     branch(label("compiled_apply")),
     go_to(label("unknown_procedure_type")),
 
@@ -97,89 +106,50 @@ ok
     go_to(reg("val")),
 
 \end{JavaScriptClickable}
+</pre>
 
-
-      
-  
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-"apply_dispatch",
-    test(op("primitive_procedure"), reg("proc")),
-    branch(label("primitive_apply")),
-    test(op("compound_procedure"), reg("proc")),
-    branch(label("compound_apply")),
-    test(op("compiled_procedure"), reg("proc")),
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EQQwDmA2CeD6AmBLAzmEAXAxgC2AGgCgACEo9AU2XQAoB7Ma4MAJ0QFtF1EA3c2F2pnLwArs3LAAlHiLiA5owGYp04qQBGzEADsc1SCHXlIi1hy69Y4KNBWFSZSjXqNMtNmFojt8fs0HCYhLSsuQKTP7KkqoOmjp6BkYmwG4eXj5WEDB2aiQUVHQMKe5giJDCfgGi4lIy8qaCObFautj6hsauJWUV1tnR9qRytLDotO1JjN4A1tq0AO7alULVfOjQYMGqBMUePb59toMk4lS04l3aXNoiwcdEIMjIiHLajNwgkPhEkCjORalSuVfEpAuJYOQrsxbCF6hFGtEYkMRmNqHCPl8BkA}{\usebox\lstbox}!*/
-    branch(label("compiled_apply")),
-    go_to(label("unknown_procedure_type")),
-
-"compiled_apply",
-    restore("continue"),
-    assign("val", list(op("compiled_procedure_entry"), reg("proc"))),
-    go_to(reg("val")),
-
-\end{JavaScriptClickable}
-
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
-  Note the restore of {\lstinline[mathescape=true]$continue$} at {\lstinline[mathescape=true]$compiled_apply$}.  Recall that the
-  evaluator was arranged so that at {\lstinline[mathescape=true]$apply_dispatch$}, the continuation would
+  Note the restore of <kbd>continue</kbd> at <kbd>compiled_apply</kbd>.  Recall that the
+  evaluator was arranged so that at <kbd>apply_dispatch</kbd>, the continuation would
   be at the top of the stack.  The compiled code entry point, on the other hand,
-  expects the continuation to be in {\lstinline[mathescape=true]$continue$}, so {\lstinline[mathescape=true]$continue$} must be
+  expects the continuation to be in <kbd>continue</kbd>, so <kbd>continue</kbd> must be
   restored before the compiled code is executed.
       </p></div>
 
       <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
   To enable us to run some compiled code when we start the evaluator
-  machine, we add a {\lstinline[mathescape=true]$branch$} instruction at
+  machine, we add a <kbd>branch</kbd> instruction at
   the beginning of the evaluator machine, which causes the machine to
-  go to a new entry point if the {\lstinline[mathescape=true]$flag$} register 
-  is set.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
+  go to a new entry point if the <kbd>flag</kbd> register 
+  is set.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
+
+  <kbd class='snippet'>
+    
+    
 branch(label("external_entry")), // branches if flag is set
 "read_eval_print_loop",
 perform(op("initialize-stack")),
 $\langle\ldots\rangle$
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJwhgdgxgFgFAGzMApguAiFAPALikCMBAfRQlxAE8MBKWgGgAIB6Fp0SWFAZyYEsAZk0FIA5gL48UuAFAYQKMABMyAN2IkADiH4USCAPaGtGBrK0FBhkAFs4JzHv65+xfgC8UAWh64wUADWdIyyACQAOkgQYggoUcqGuDwR4DFxYUA}{\usebox\lstbox}
-
-
-      
-
-  
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-branch(label("external_entry")), // branches if flag is set
-"read_eval_print_loop",
-perform(op("initialize-stack")),
-$\langle\ldots\rangle$
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJwhgdgxgFgFAGzMApguAiFAPALikCMBAfRQlxAE8MBKWgGgAIB6Fp0SWFAZyYEsAZk0FIA5gL48UuAFAYQKMABMyAN2IkADiH4USCAPaGtGBrK0FBhkAFs4JzHv65+xfgC8UAWh64wUADWdIyyACQAOkgQYggoUcqGuDwR4DFxYUA}{\usebox\lstbox}
-
-
+    
+  </kbd>
       </p></div>
 
       <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-  {\lstinline[mathescape=true]$External_entry$} assumes that the machine is started with
-  {\lstinline[mathescape=true]$val$} containing the location of an instruction sequence that
-  puts a result into {\lstinline[mathescape=true]$val$} and ends with {\lstinline[mathescape=true]$go_to(reg("continue"))$}.  Starting at this entry point jumps to the location designated
-  by {\lstinline[mathescape=true]$val$}, but first assigns {\lstinline[mathescape=true]$continue$} so that execution will return
-  to {\lstinline[mathescape=true]$print_result$}, which prints the value in {\lstinline[mathescape=true]$val$} and then goes to
+  <kbd>External_entry</kbd> assumes that the machine is started with
+  <kbd>val</kbd> containing the location of an instruction sequence that
+  puts a result into <kbd>val</kbd> and ends with <kbd>go_to(reg("continue"))</kbd>.  Starting at this entry point jumps to the location designated
+  by <kbd>val</kbd>, but first assigns <kbd>continue</kbd> so that execution will return
+  to <kbd>print_result</kbd>, which prints the value in <kbd>val</kbd> and then goes to
   the beginning of the evaluator's read-eval-print 
-  loop.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+  loop.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
+
+  <div class='snippet' id='javascript_120_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 "external_entry",
@@ -190,26 +160,10 @@ $\langle\ldots\rangle$
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EQUwHgLiBOB2CGAbA+iWFoE9gBoBQABEQQA4wBmA9tALYAUlJdwAlrCxC0iwF4jIBnCPADGAa2ABKSfmIF4AgSwDmsZmgBuuAo2bKQEZMsSUARklSwNLaJVg00EKTMLEFS1cxF3OsAK4g2ojwpiCIzCTQbIbQIAJ+iE7SssTKlMgQlHSxyswaSM44QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=EQUwHgLiBOB2CGAbA+iWFoE9gBoBQABEQQA4wBmA9tALYAUlJdwAlrCxC0iwF4jIBnCPADGAa2ABKSfmIF4AgSwDmsZmgBuuAo2bKQEZMsSUARklSwNLaJVg00EKTMLEFS1cxF3OsAK4g2ojwpiCIzCTQbIbQIAJ+iE7SssTKlMgQlHSxyswaSM44QA}{\usebox\lstbox}
+</pre>
 
-
-  
-      
-
-  
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-"external_entry",
-    perform(op("initialize_stack")),
-    assign("env", op("get_global_environment")),
-    assign("continue", label("print_result")),
-    go_to(reg("val")),
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EQUwHgLiBOB2CGAbA+iWFoE9gBoBQABEQQA4wBmA9tALYAUlJdwAlrCxC0iwF4jIBnCPADGAa2ABKSfmIF4AgSwDmsZmgBuuAo2bKQEZMsSUARklSwNLaJVg00EKTMLEFS1cxF3OsAK4g2ojwpiCIzCTQbIbQIAJ+iE7SssTKlMgQlHSxyswaSM44QA}{\usebox\lstbox}
-
-
+</div></div>
   
       </p></div>
 
@@ -222,18 +176,18 @@ $\langle\ldots\rangle$
   definition,
   execute the compiled code, and run the read-eval-print loop so we can try the
   function.  Because we want the compiled code to return to the location in
-  {\lstinline[mathescape=true]$continue$} with its result in {\lstinline[mathescape=true]$val$}, we compile the expression with a
-  target of {\lstinline[mathescape=true]$val$} and a linkage of {\lstinline[mathescape=true]$return$}.  In order to transform the
+  <kbd>continue</kbd> with its result in <kbd>val</kbd>, we compile the expression with a
+  target of <kbd>val</kbd> and a linkage of <kbd>return</kbd>.  In order to transform the
   object code produced by the compiler into executable instructions for the
   evaluator register machine, we use the
   function
-  {\lstinline[mathescape=true]$assemble$} from the
-  register-machine simulator (section~\ref{sec:assembler}).  We then initialize
-  the {\lstinline[mathescape=true]$val$} register to point to the list of instructions, set the
-  {\lstinline[mathescape=true]$flag$} so that the evaluator will go to {\lstinline[mathescape=true]$external_entry$}, and start
+  <kbd>assemble</kbd> from the
+  register-machine simulator (section \ref{sec:assembler}).  We then initialize
+  the <kbd>val</kbd> register to point to the list of instructions, set the
+  <kbd>flag</kbd> so that the evaluator will go to <kbd>external_entry</kbd>, and start
   the evaluator.
 
-  
+  <div class='snippet' id='javascript_120_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function compile_and_go(expression) {
@@ -245,22 +199,23 @@ function compile_and_go(expression) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABBOBbADjANgUwPoCGYAJngOZwAUOAHugE44DOT8YAlIgN4BQi-yBEyiIYYYfRDQ2TRAF5EBFjlQAjXJWEEoKnGChNKKDNhzU6jFmwA0iAEQA3Alju27jKCHpg77dm5wIHCcXdgBuPgEoAAscAFoyLDhVZzi9Bxh6BFQ9EQUmHE90NLAMrLAc-UpwyP4CqDxGMhhhHHo8FH1cwztA4OdXexDBsQkpWCEagUR6xpxm1vbOnX0evuG3YCwCMkGoSRwpgQ8vJC16KEpeoOGagF8gA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABBOBbADjANgUwPoCGYAJngOZwAUOAHugE44DOT8YAlIgN4BQi-yBEyiIYYYfRDQ2TRAF5EBFjlQAjXJWEEoKnGChNKKDNhzU6jFmwA0iAEQA3Alju27jKCHpg77dm5wIHCcXdgBuPgEoAAscAFoyLDhVZzi9Bxh6BFQ9EQUmHE90NLAMrLAc-UpwyP4CqDxGMhhhHHo8FH1cwztA4OdXexDBsQkpWCEagUR6xpxm1vbOnX0evuG3YCwCMkGoSRwpgQ8vJC16KEpeoOGagF8gA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
   
   If we have set up stack monitoring, as at the end of
-  section~\ref{sec:running-evaluator}, we can examine the
+  section \ref{sec:running-evaluator}, we can examine the
   stack usage of compiled code:
 
-  
+  <div class='snippet' id='javascript_120_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 compile_and_go(
@@ -272,7 +227,7 @@ compile_and_go(
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewtgDglgNgpgfQIYDsAmCDmIAUAoAAiIIiQCcBnOfY2ggIgDMBXFYAFyhBQMaQ5BkoSGDhQBKAgG9CdOQTJx2zMjx4BeTQQCMBWfIMB+HfoNyAXAR4AqXv3aDhongFod4gNym6AX3rjPPDwcB3YRFwhmCgALOAoCdQIABgIwJAAPKDBmMBc0OAh2aITk8TwPCoIAUQBhFyqANxECJphmOHM8EABrIIqParrG5qgUSPZOnD4BIWaAVjKQkDCYCKjY+MSAZl00zOzc-MLixO0AFjL+wfrWlpF2zu0AJiSgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=MYewtgDglgNgpgfQIYDsAmCDmIAUAoAAiIIiQCcBnOfY2ggIgDMBXFYAFyhBQMaQ5BkoSGDhQBKAgG9CdOQTJx2zMjx4BeTQQCMBWfIMB+HfoNyAXAR4AqXv3aDhongFod4gNym6AX3rjPPDwcB3YRFwhmCgALOAoCdQIABgIwJAAPKDBmMBc0OAh2aITk8TwPCoIAUQBhFyqANxECJphmOHM8EABrIIqParrG5qgUSPZOnD4BIWaAVjKQkDCYCKjY+MSAZl00zOzc-MLixO0AFjL+wfrWlpF2zu0AJiSgA}{\usebox\lstbox}!*/
          }"));
 
 (total-pushes = 0 maximum-depth = 0)
@@ -286,24 +241,26 @@ ok
 120
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
   
-  Compare this example with the evaluation of {\lstinline[mathescape=true]$factorial(5)$} using
+  Compare this example with the evaluation of <kbd>factorial(5)</kbd> using
   the interpreted version of the same
   function, shown at the end of
-  section~\ref{sec:running-evaluator}.  The interpreted version required
+  section \ref{sec:running-evaluator}.  The interpreted version required
   144 pushes and a maximum stack depth of 28.  This illustrates the
   optimization that results from our compilation strategy.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Interpretation and compilation
-      
+      </h2></div>
 
       
       
@@ -311,8 +268,7 @@ ok
 <a name='p9' class='permalink'></a><p>
   With the programs in this section, we can now experiment with the
   alternative execution strategies of interpretation and
-  compilation.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a><a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
-        An interpreter raises
+  compilation.<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>  An interpreter raises
   the machine to the level of the user program; a compiler lowers the
   user program to the level of the machine language.  We can regard the
   Scheme language (or any programming language) as a coherent family of
@@ -323,7 +279,7 @@ ok
   execute faster, because the steps of program execution are organized
   in terms of the machine language, and the compiler is free to make
   optimizations that cut across the higher-level
-  abstractions.<a class='superscript' id='footnote-6' href='#footnote-6'>[6]</a>
+  abstractions.<a class='superscript' id='footnote-link-5' href='#footnote-5'>[5]</a>
       </p></div>
 
       <div class='permalink'>
@@ -343,7 +299,7 @@ ok
   UNIX$^{\textrm{TM}}$
   operating system's failure to check whether the input buffer has
   
-  overflowed in the finger daemon. (See Spafford 1989.)
+  overflowed in the finger daemon. (See <CITATION>Spafford 1989</CITATION>.)
       </p></div>
 
       <div class='permalink'>
@@ -352,23 +308,16 @@ ok
   
   different strategies for porting languages to new computers. Suppose
   that we wish to implement JavaScript for a new machine.  One strategy is
-  to begin with the explicit-control evaluator of section~\ref{sec:eceval}
+  to begin with the explicit-control evaluator of section \ref{sec:eceval}
   and translate its instructions to instructions for the
   new machine.  A different strategy is to begin with the compiler and
   change the code generators so that they generate code for the new
   machine.  The second strategy allows us to run any JavaScript program on
   the new machine by first compiling it with the compiler running on our
   original JavaScript system, and linking it with a compiled version of the
-  run-time library.<a class='superscript' id='footnote-7' href='#footnote-7'>[7]</a>JavaScript programs.<a class='superscript' id='footnote-8' href='#footnote-8'>[8]</a>~\ref{sec:mc-eval} to
-  produce an interpreter that runs on the new machine.
-        Or we can
-  compile one of the interpreters of section~\ref{sec:mc-eval} to
-  produce an interpreter that runs on the new machine.
-        Better yet, we can compile the compiler itself, and run
-  this on the new machine to compile other JavaScript programs.<a class='superscript' id='footnote-9' href='#footnote-9'>[9]</a>~\ref{sec:mc-eval} to
-  produce an interpreter that runs on the new machine.
-        Or we can
-  compile one of the interpreters of section~\ref{sec:mc-eval} to
+  run-time library.<a class='superscript' id='footnote-link-6' href='#footnote-6'>[6]</a>  Better yet, we can compile the compiler itself, and run
+  this on the new machine to compile other JavaScript programs.<a class='superscript' id='footnote-link-7' href='#footnote-7'>[7]</a>  Or we can
+  compile one of the interpreters of section \ref{sec:mc-eval} to
   produce an interpreter that runs on the new machine.
       </p></div>
 
@@ -390,14 +339,14 @@ ok
   
 \begin{enumerate}[a.]
 \item{
-      Exercise~\ref{ex:rec-fact} asked you to determine, as a function of
+      Exercise \ref{ex:rec-fact} asked you to determine, as a function of
       $n$, the number of pushes and the maximum stack depth needed by the
       evaluator to compute $n!$ using the recursive factorial
       function
-      given above.  Exercise~\ref{ex:measure-fact} asked you to do the same
+      given above.  Exercise \ref{ex:measure-fact} asked you to do the same
       measurements for the special-purpose factorial machine shown in
-      Figure~\ref{fig:fact-machine}. Now perform the same analysis using the
-      compiled {\lstinline[mathescape=true]$factorial$}
+      Figure \ref{fig:fact-machine}. Now perform the same analysis using the
+      compiled <kbd>factorial</kbd>
       function.
 
       Take the ratio of the number of pushes in the compiled version to the
@@ -433,11 +382,11 @@ ok
   
   
   Carry out an analysis like the one in
-  exercise~\ref{ex:measure-factorial-ratio} to determine the effectiveness of
+  exercise \ref{ex:measure-factorial-ratio} to determine the effectiveness of
   compiling the tree-recursive Fibonacci
   function
 
-  
+  <div class='snippet' id='javascript_120_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function fib(n) {
@@ -448,13 +397,14 @@ function fib(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMGAjAFGAlIg3gKESMQCcBTKEEpJAHkQCZFDjWB+RMF1ogLmTSZEAWkQBGHAGoBGJKIZYA3PgC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABMGAjAFGAlIg3gKESMQCcBTKEEpJAHkQCZFDjWB+RMF1ogLmTSZEAWkQBGHAGoBGJKIZYA3PgC+QA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
   compared to the effectiveness of using the special-purpose Fibonacci machine of
-  figure~\ref{fig:fib-machine}.  (For measurement of the interpreted
-  performance, see exercise~\ref{ex:rec-fib}.)
+  figure \ref{fig:fib-machine}.  (For measurement of the interpreted
+  performance, see exercise \ref{ex:rec-fib}.)
   For Fibonacci, the time resource used is not linear in $n$; hence the
   ratios of stack operations will not approach a limiting value that is
   independent of $n$.
@@ -478,39 +428,35 @@ function fib(n) {
   and compiled
   functions, but interpreted
   functions
-  as well.  This requires modifying {\lstinline[mathescape=true]$compile_procedure_call$}
+  as well.  This requires modifying <kbd>compile_procedure_call</kbd>
   to handle the case of compound (interpreted)
   functions.
-  Be sure to handle all the same {\lstinline[mathescape=true]$target$} and {\lstinline[mathescape=true]$linkage$} combinations
-  as in {\lstinline[mathescape=true]$compile_proc_appl$}.  To do the actual
+  Be sure to handle all the same <kbd>target</kbd> and <kbd>linkage</kbd> combinations
+  as in <kbd>compile_proc_appl</kbd>.  To do the actual
   function
   application,
-  the code needs to jump to the evaluator's {\lstinline[mathescape=true]$compound_apply$} entry point.
+  the code needs to jump to the evaluator's <kbd>compound_apply</kbd> entry point.
   This label cannot be directly referenced in object code
   (since the assembler requires that all labels referenced by the
   code it is assembling be defined there), so we will add a register
-  called {\lstinline[mathescape=true]$compapp$} to the evaluator machine to hold this
+  called <kbd>compapp</kbd> to the evaluator machine to hold this
   entry point, and add an instruction to initialize it:
-  
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
+  <kbd class='snippet'>
+    
+    
 assign("compapp", label("compound_apply")),
-branch(label("external_entry")),      
+branch(label("external_entry")),      <EM>; branches if <kbd>flag</kbd> is set</EM>
 "read_eval_print_loop"
 $\ldots$
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYZxEsHMDsAoCIDGB7AtgB2O98A0ACAG2ACMBTQhFDZAV2gBMB9LdQgT3gEovcAoEgCdg0RAAtYxcpXhkAHgBcyg6MEJMy0BYM48C+Awb7xBZYMzIA3NU3SDwWpoWTIcfACQAdQg2QKQ7kA}{\usebox\lstbox}
-
-
+    
+  </kbd>
   To test your code, start by defining a
   function
-  {\lstinline[mathescape=true]$f$} that calls a
+  <kbd>f</kbd> that calls a
   function
-  {\lstinline[mathescape=true]$g$}.  Use {\lstinline[mathescape=true]$compile_and_go$} to compile the definition
-  of {\lstinline[mathescape=true]$f$} and start the evaluator.  Now, typing at the evaluator,
-  define {\lstinline[mathescape=true]$g$} and try to call {\lstinline[mathescape=true]$f$}.
+  <kbd>g</kbd>.  Use <kbd>compile_and_go</kbd> to compile the definition
+  of <kbd>f</kbd> and start the evaluator.  Now, typing at the evaluator,
+  define <kbd>g</kbd> and try to call <kbd>f</kbd>.
   
       
 \end{Exercise}
@@ -521,13 +467,13 @@ $\ldots$
 \begin{Exercise}
 
   
-  The {\lstinline[mathescape=true]$compile_and_go$} interface implemented in this section is
+  The <kbd>compile_and_go</kbd> interface implemented in this section is
   awkward, since the compiler can be called only once (when the
   evaluator machine is started).  Augment the compiler-interpreter
-  interface by providing a {\lstinline[mathescape=true]$compile_and_run$} primitive that can be
+  interface by providing a <kbd>compile_and_run</kbd> primitive that can be
   called from within the explicit-control evaluator as follows:
 
-  
+  <div class='snippet' id='javascript_120_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 compile_and_run(
@@ -539,7 +485,7 @@ compile_and_run(
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewtgDglgNgpgfQIYDsAmCBOBXFAKAKAAISiIlMBnOQ0uogIgDNdgAXKEFIppdkTFCQw8KAJREA3sXqyimOG2yZu3ALwaiARiIy5+gPza9+2QC4i3AFQ8+bAUJHcAtNrEBuE-QC+DMR4ICd2CiAFEAYWdQgDdhIliYbDgzAhAAa0Dg9zDImLioFAhsNhS8Xn5BOIBWMSCQiKiE+OEklK0AJgAGIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=MYewtgDglgNgpgfQIYDsAmCBOBXFAKAKAAISiIlMBnOQ0uogIgDNdgAXKEFIppdkTFCQw8KAJREA3sXqyimOG2yZu3ALwaiARiIy5+gPza9+2QC4i3AFQ8+bAUJHcAtNrEBuE-QC+DMR4ICd2CiAFEAYWdQgDdhIliYbDgzAhAAa0Dg9zDImLioFAhsNhS8Xn5BOIBWMSCQiKiE+OEklK0AJgAGIA}{\usebox\lstbox}!*/
          }"));
 
 ;;; EC-Eval value:
@@ -551,8 +497,9 @@ ok
 120
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       
 \end{Exercise}
 
@@ -568,7 +515,7 @@ ok
   executes the resulting code, and prints the result.  This is easy to
   run in our simulated setup, since we can arrange to call the
   functions
-  {\lstinline[mathescape=true]$compile$} and {\lstinline[mathescape=true]$assemble$} as <QUOTE>register-machine
+  <kbd>compile</kbd> and <kbd>assemble</kbd> as <QUOTE>register-machine
     operations.</QUOTE>
   
       
@@ -581,7 +528,7 @@ ok
 
   
   Use the compiler to compile the metacircular evaluator of
-  section~\ref{sec:mc-eval} and run this program using the register-machine
+  section \ref{sec:mc-eval} and run this program using the register-machine
   simulator.  (To compile more than one definition at a time, you can
   package the definitions in a sequence.)  The resulting interpreter
   will run very slowly because of the multiple levels of interpretation,
@@ -597,7 +544,7 @@ ok
   
   Develop a rudimentary implementation of JavaScript in C (or some other
   low-level language of your choice) by translating the explicit-control
-  evaluator of section~\ref{sec:eceval} into C.  In order to run this code
+  evaluator of section \ref{sec:eceval} into C.  In order to run this code
   you will need to also
   provide appropriate storage-allocation routines and other run-time
   support.
@@ -613,12 +560,12 @@ ok
   
   
   
-  As a counterpoint to exercise~\ref{ex:interp-in-C}, modify the compiler
+  As a counterpoint to exercise \ref{ex:interp-in-C}, modify the compiler
   so that it compiles 
   JavaScript functions
   into sequences of C
   instructions.  Compile the metacircular evaluator of
-  section~\ref{sec:mc-eval} to produce a
+  section \ref{sec:mc-eval} to produce a
   JavaScript  
   interpreter written in C.
   
@@ -630,19 +577,19 @@ ok
       
 
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>Of course, compiled
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Of course, compiled
     functions
     as well as interpreted
     functions
     are compound (nonprimitive).  For compatibility with
     the terminology used in the explicit-control evaluator, in this
     section we will use <QUOTE>compound</QUOTE> to mean interpreted (as opposed
-    to compiled).</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>Now that the evaluator machine starts
-    with a {\lstinline[mathescape=true]$branch$}, we must always initialize the {\lstinline[mathescape=true]$flag$} register
+    to compiled).</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Now that the evaluator machine starts
+    with a <kbd>branch</kbd>, we must always initialize the <kbd>flag</kbd> register
     before starting the evaluator machine.  To start the machine at
     its ordinary read-eval-print loop, we could use
-    
+    <div class='snippet' id='javascript_120_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function start_eceval() {
@@ -653,18 +600,19 @@ function start_eceval() {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZygQwE5QPoFMK4BuaANgBQCUiA3gFCIOJQAWu2A5iXAEal5iEYGBAFtcYKIgC8KXFBAAHfoOFgxEygG56jZHOwZc7GKlwZsEBFHFRkZfEVIAaRACJgJNO1cvgpPRTajIiG8hhIqJhQ9gTEJIG0AL5AA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAZygQwE5QPoFMK4BuaANgBQCUiA3gFCIOJQAWu2A5iXAEal5iEYGBAFtcYKIgC8KXFBAAHfoOFgxEygG56jZHOwZc7GKlwZsEBFHFRkZfEVIAaRACJgJNO1cvgpPRTajIiG8hhIqJhQ9gTEJIG0AL5AA}{\usebox\lstbox}
+</pre>
 
-</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>Since a compiled
+</div></div></FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Since a compiled
     function
     is an
     object that the system may try to print, we also modify the system
-    print operation {\lstinline[mathescape=true]$user_print$} (from section~\ref{sec:running-eval})
+    print operation <kbd>user_print</kbd> (from section \ref{sec:running-eval})
     so that it will not attempt to print the
     components of a compiled
     function:
-    
+    <div class='snippet' id='javascript_120_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function user_print(object) {
@@ -676,7 +624,7 @@ function user_print(object) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABCAzgUwE4H0AOGZhQAUcARgFZrQCUiA3gFCLOIzCJERwC2Oc4AE1wY4ENAJAY0JClSjVajFssQCYKHABsAhgE8im9cSYrTAIi69+YIXlHjJaMwBoTp5XbESpubRm3caFCYKDKUNK7uKp4OPqRwAvpk4fKRUSxmADyWODCamAC0aGAAbgB8ZgoA3G6IAL6IaJrorOycPLn5tiJejmFyCvS1ymoaOvpZOXmFMd5oFdQ1yg1NLUruo1p6-TRLLHUMdUA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABCAzgUwE4H0AOGZhQAUcARgFZrQCUiA3gFCLOIzCJERwC2Oc4AE1wY4ENAJAY0JClSjVajFssQCYKHABsAhgE8im9cSYrTAIi69+YIXlHjJaMwBoTp5XbESpubRm3caFCYKDKUNK7uKp4OPqRwAvpk4fKRUSxmADyWODCamAC0aGAAbgB8ZgoA3G6IAL6IaJrorOycPLn5tiJejmFyCvS1ymoaOvpZOXmFMd5oFdQ1yg1NLUruo1p6-TRLLHUMdUA}{\usebox\lstbox}!*/
             "<compiler-env>"));
     } else if (compiled_procedure(object)) {
         display("<compiler-procedure>");
@@ -686,14 +634,15 @@ function user_print(object) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-  </FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>We can do even better by extending the compiler
+</div></div>
+  </FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>We can do even better by extending the compiler
     to allow compiled code to call interpreted
     functions.  See
-    exercise~\ref{ex:compiled-call-interpreted}.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>Independent of the strategy of execution, we
+    exercise \ref{ex:compiled-call-interpreted}.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>Independent of the strategy of execution, we
     
     incur significant overhead if we insist that errors encountered in
     execution of a user program be detected and signaled, rather than being
@@ -706,22 +655,8 @@ function user_print(object) {
     code with such checks, should avoid redundant checks, and should allow
     programmers to control the extent and type of error checking in the
     compiled code.
-  </FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>Independent of the strategy of execution, we
-    
-    incur significant overhead if we insist that errors encountered in
-    execution of a user program be detected and signaled, rather than being
-    allowed to kill the system or produce wrong answers.  For example, an
-    out-of-bounds array reference can be detected by checking the validity
-    of the reference before performing it.  The overhead of checking,
-    however, can be many times the cost of the array reference itself, and
-    a programmer should weigh speed against safety in determining whether
-    such a check is desirable.  A good compiler should be able to produce
-    code with such checks, should avoid redundant checks, and should allow
-    programmers to control the extent and type of error checking in the
-    compiled code.
-  </FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>Of course, with either the
+  </FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>Of course, with either the
     interpretation or the compilation strategy we must also implement for
     the new machine storage allocation, input and output, and all the
     various operations that we took as <QUOTE>primitive</QUOTE> in our discussion of
@@ -730,16 +665,8 @@ function user_print(object) {
     compile them for the new machine.  Ultimately, everything reduces to a
     small kernel (such as garbage collection and the mechanism for
     applying actual machine primitives) that is hand-coded for the new
-    machine.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>
-    This strategy leads to amusing tests of correctness of
-    the compiler, such as checking
-    whether the compilation of a program on the new machine, using the
-    compiled compiler, is identical with the
-    compilation of the program on the original JavaScript system.  Tracking
-    down the source of differences is fun but often frustrating, because
-    the results are extremely sensitive to minuscule details.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>
+    machine.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-7' href='#footnote-link-7'>[7] </a><FOOTNOTE>
     This strategy leads to amusing tests of correctness of
     the compiler, such as checking
     whether the compilation of a program on the new machine, using the
@@ -747,4 +674,11 @@ function user_print(object) {
     compilation of the program on the original JavaScript system.  Tracking
     down the source of differences is fun but often frustrating, because
     the results are extremely sensitive to minuscule details.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section5/subsection6.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/others/02foreword02.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+5.5.7  Interfacing Compiled Code to the Evaluator</div>	<div class='next-page'></div></div>

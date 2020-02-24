@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>4.1.5 
-  Data as Programs
-      </a>
+		<a name='top' class='permalink'>4.1.5  Data as Programs</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -22,7 +29,7 @@
   infinitely large) machine.  For example, consider the familiar
   program to compute factorials:
 
-  
+  <div class='snippet' id='javascript_77_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function factorial(n) {
@@ -34,8 +41,9 @@ function factorial(n) {
 \end{lrbox}
 
 \href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSxDAUyhAySQF5XEBGCq7qgfg649uALmRoombPiQBaDsQBUiMAG4yAXyA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
       </p></div>
 
@@ -46,7 +54,7 @@ function factorial(n) {
   parts that decrement, multiply, and test for equality, together with a
   two-position switch and another factorial machine. (The factorial
   machine is infinite because it contains another factorial machine
-  within it.)  Figure~\ref{fig:fact-proc-as-machine} is a flow diagram for the
+  within it.)  Figure \ref{fig:fact-proc-as-machine} is a flow diagram for the
   factorial machine, showing how the parts are wired together.
 
   
@@ -68,7 +76,7 @@ function factorial(n) {
   machine that takes as input a description of a machine.  Given this
   input, the evaluator configures itself to emulate the machine
   described.  For example, if we feed our evaluator the definition of
-  {\lstinline[mathescape=true]$factorial$}, as shown in Figure~\ref{fig:eval-factorial}, the
+  <kbd>factorial</kbd>, as shown in Figure \ref{fig:eval-factorial}, the
   evaluator will be able to compute factorials.
 
   <SPLIT>
@@ -95,7 +103,7 @@ function factorial(n) {
   From this perspective, our evaluator is seen to be a <EM>universal machine</EM>.
   It mimics other machines when these are described as 
   JavaScript 
-  programs.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+  programs.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
       </p></div>
 
       <div class='permalink'>
@@ -106,7 +114,7 @@ function factorial(n) {
   this input, the circuit evaluator would then behave like a filter with
   the same description.  Such a universal electrical circuit is
   almost unimaginably complex.  It is remarkable that the program
-  evaluator is a rather simple program.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+  evaluator is a rather simple program.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
       </p></div>
 
       <div class='permalink'>
@@ -121,7 +129,7 @@ function factorial(n) {
   From
   the perspective of the user, an input expression such as 
   
-    {\lstinline[mathescape=true]$x * x$}
+    <kbd>x * x</kbd>
   is an expression in the programming language, which the evaluator
   should execute.
   
@@ -145,38 +153,15 @@ function factorial(n) {
   of confusion.  In fact, it is sometimes convenient to ignore this
   distinction, and to give the user the ability to explicitly evaluate a
   string as a JavaScript expression, using JavaScript's primitive function
-  {\lstinline[mathescape=true]$eval$}
+  <kbd>eval</kbd>
   that takes as argument a string. It parses the string and—provided
   that it syntactically correct—evaluates the resulting representation
-  in the environment in which {\lstinline[mathescape=true]$eval$} is
-  applied.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
-  
-      
+  in the environment in which <kbd>eval</kbd> is
+  applied.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
   
   
       </p></div>
-	<hr><div class='footnote'>
-<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Warning:
-    
-    This {\lstinline[mathescape=true]$eval$} primitive is not
-    identical to the {\lstinline[mathescape=true]$evaluate$}
-    function we implemented in
-    section~\ref{sec:core-of-evaluator}, because it
-    uses <EM>actual</EM> JavaScript environments rather than the sample environment
-    structures we
-    built in section~\ref{sec:eval-data-structures}.  These actual
-    environments cannot be manipulated by the user as ordinary lists; they
-    must be accessed via {\lstinline[mathescape=true]$eval$} or other special
-    operations.
-    
-    Similarly, the {\lstinline[mathescape=true]$apply$} primitive we saw
-    in section~\ref{sec:data-directed} is not identical
-    to the metacircular {\lstinline[mathescape=true]$apply$}, because it uses
-    actual JavaScript functions
-    rather than the function
-    objects we constructed in
-    sections~\ref{sec:eval-data-structures}
-    and~\ref{sec:running-eval}.</FOOTNOTE></div>
+	
       </SPLIT>
 	
       
@@ -186,33 +171,32 @@ function factorial(n) {
   
   Given a one-argument
   function
-  {\lstinline[mathescape=true]$p$} and an object {\lstinline[mathescape=true]$a$}, {\lstinline[mathescape=true]$p$}
-  is said to <QUOTE>halt</QUOTE> on {\lstinline[mathescape=true]$a$} if evaluating
+  <kbd>p</kbd> and an object <kbd>a</kbd>, <kbd>p</kbd>
+  is said to <QUOTE>halt</QUOTE> on <kbd>a</kbd> if evaluating
   the expression
   
-  {\lstinline[mathescape=true]$p(a)$}
+  <kbd>p(a)</kbd>
   returns a value (as opposed to terminating with an error message
   or running forever).  Show that it is impossible to write a
   
   function
   
-  {\lstinline[mathescape=true]$halts$}
+  <kbd>halts</kbd>
   
-  that correctly determines whether {\lstinline[mathescape=true]$p$}
-  halts on {\lstinline[mathescape=true]$a$} for any
+  that correctly determines whether <kbd>p</kbd>
+  halts on <kbd>a</kbd> for any
   
   function
-  {\lstinline[mathescape=true]$p$} and object {\lstinline[mathescape=true]$a$}.
+  <kbd>p</kbd> and object <kbd>a</kbd>.
   Use the following
   reasoning: If you had such a
   
   function
   
-  {\lstinline[mathescape=true]$halts$},
+  <kbd>halts</kbd>,
   
   you could implement the following program:
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_77_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function run_forever() {
     return run_forever();      
 }
@@ -221,17 +205,15 @@ function try(p) {
            ? run_forever();
            : "halted";
 }
-\end{JavaScript}
-
+</pre></div></div>
   Now consider evaluating the expression
   
-  {\lstinline[mathescape=true]$try(try)$}
+  <kbd>try(try)</kbd>
   
   and show that
   any possible outcome (either halting or running forever) violates the
   intended behavior of
-  {\lstinline[mathescape=true]$halts$}.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
-      
+  <kbd>halts</kbd>.<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
   
       
 \end{Exercise}
@@ -239,7 +221,7 @@ function try(p) {
       
 
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>The fact that the machines are described in 
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>The fact that the machines are described in 
     JavaScript 
     is inessential.  If we give our evaluator a 
     JavaScript 
@@ -277,7 +259,7 @@ function try(p) {
     that behaves as an evaluator for Turing-machine programs.  He used
     this framework to demonstrate that there are well-posed problems that
     cannot be computed by Turing machines (see
-    exercise~\ref{ex:halting-theorem}), and so by implication cannot be
+    exercise \ref{ex:halting-theorem}), and so by implication cannot be
     formulated as <QUOTE>effective processes.</QUOTE>  Turing went on to make
     fundamental contributions to practical computer science as well.  For
     example, he invented the idea of 
@@ -285,9 +267,9 @@ function try(p) {
     structuring programs using
     general-purpose subroutines.  See 
     
-    Hodges 1983 for a biography of
-    Turing.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Some people find it
+    <CITATION>Hodges 1983</CITATION> for a biography of
+    Turing.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Some people find it
     counterintuitive that an evaluator, which is implemented by a
     relatively simple
     function, 
@@ -300,10 +282,31 @@ function try(p) {
     
     Douglas Hofstadter's beautiful
     book <EM>Gödel, Escher, Bach</EM> (1979) 
-    explores some of these ideas.</FOOTNOTE></div><hr><div class='footnote'>
+    explores some of these ideas.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Warning:
+    
+    This <kbd>eval</kbd> primitive is not
+    identical to the <kbd>evaluate</kbd>
+    function we implemented in
+    section \ref{sec:core-of-evaluator}, because it
+    uses <EM>actual</EM> JavaScript environments rather than the sample environment
+    structures we
+    built in section \ref{sec:eval-data-structures}.  These actual
+    environments cannot be manipulated by the user as ordinary lists; they
+    must be accessed via <kbd>eval</kbd> or other special
+    operations.
+    
+    Similarly, the <kbd>apply</kbd> primitive we saw
+    in section \ref{sec:data-directed} is not identical
+    to the metacircular <kbd>apply</kbd>, because it uses
+    actual JavaScript functions
+    rather than the function
+    objects we constructed in
+    sections \ref{sec:eval-data-structures}
+    and \ref{sec:running-eval}.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Although we stipulated that
   
-  {\lstinline[mathescape=true]$halts$}
+  <kbd>halts</kbd>
 
   is given a
   
@@ -311,7 +314,7 @@ function try(p) {
     object,
     notice that this reasoning still applies even if
     
-    {\lstinline[mathescape=true]$halts$}
+    <kbd>halts</kbd>
     
     can gain access to the
     
@@ -325,4 +328,11 @@ function try(p) {
     
     function.
   </FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section1/subsection4.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section1/subsection6.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+4.1.5  Data as Programs</div>	<div class='next-page'></div></div>

@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>2.2.1 
-        Representing Sequences
-      </a>
+		<a name='top' class='permalink'>2.2.1  Representing Sequences</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       <div class='permalink'>
@@ -35,10 +42,10 @@
           sequence</EM>—an ordered collection of data objects.  There are, of
         course, many ways to represent sequences in terms of pairs.  One
         particularly straightforward representation is illustrated in
-        figure~\ref{fig:sequence-of-pairs}, where the sequence 1, 2, 3, 4 is
-        represented as a chain of pairs.  The {\lstinline[mathescape=true]$head$} of each pair is the
-        corresponding item in the chain, and the {\lstinline[mathescape=true]$tail$} of the pair is
-        the next pair in the chain.  The {\lstinline[mathescape=true]$tail$} of the final pair
+        figure \ref{fig:sequence-of-pairs}, where the sequence 1, 2, 3, 4 is
+        represented as a chain of pairs.  The <kbd>head</kbd> of each pair is the
+        corresponding item in the chain, and the <kbd>tail</kbd> of the pair is
+        the next pair in the chain.  The <kbd>tail</kbd> of the final pair
         signals the end of the sequence by pointing to a distinguished
         value that is not a pair, 
         represented in box-and-pointer diagrams as a diagonal line
@@ -48,12 +55,12 @@
         
         
 	  
-	  JavaScript's value {\lstinline[mathescape=true]$null$}
+	  JavaScript's value <kbd>null</kbd>
 	  
 	  .
-        The entire sequence is constructed by nested {\lstinline[mathescape=true]$pair$} operations:
+        The entire sequence is constructed by nested <kbd>pair</kbd> operations:
 
-        
+        <div class='snippet' id='javascript_29_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 pair(1, 
@@ -63,9 +70,10 @@ pair(1,
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4QwlgTgFAjANAAgFANa0koCZErf9caAZlwPPw2gBZEA7AVwBsmBKd1gbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=A4QwlgTgFAjANAAgFANa0koCZErf9caAZlwPPw2gBZEA7AVwBsmBKd1gbiA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
@@ -76,28 +84,30 @@ pair(1,
         primitive called 
         
         
-        {\lstinline[mathescape=true]$list$} to help in constructing 
-        lists.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+        <kbd>list</kbd> to help in constructing 
+        lists.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
       </p></div>
 
       <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
-        The above sequence could be produced by {\lstinline[mathescape=true]$list(1, 2, 3, 4)$}.  In
+        The above sequence could be produced by <kbd>list(1, 2, 3, 4)</kbd>.  In
         general, 
 
-        
-\begin{JavaScript}
+        <kbd class='snippet'>
+          
+          
 list(a$_{1}$, a$_{2}$, $\ldots$, a$_{n}$)
-\end{JavaScript}
-
+        
+        </kbd>
 
         is equivalent to
 
-        
-\begin{JavaScript}
+        <kbd class='snippet'>
+          
+          
 pair(a$_{1}$, pair(a$_{2}$, pair($\ldots$, pair(a$_{n}$, null)$\ldots$)))
-\end{JavaScript}
-
+        
+        </kbd>
       </p></div>
 
       <SPLIT>
@@ -107,28 +117,29 @@ pair(a$_{1}$, pair(a$_{2}$, pair($\ldots$, pair(a$_{n}$, null)$\ldots$)))
 <a name='p4' class='permalink'></a><p>
             Our interpreter prints pairs using a textual representation of
 	    box-and-pointer diagrams. The result of
-	    {\lstinline[mathescape=true]$pair(1, 2)$}
-            is printed as {\lstinline[mathescape=true]$[1, 2]$}, and
+	    <kbd>pair(1, 2)</kbd>
+            is printed as <kbd>[1, 2]</kbd>, and
 	    the data object in
-          figure~\ref{fig:sequence-of-pairs} 
+          figure \ref{fig:sequence-of-pairs} 
           is printed as 
-          {\lstinline[mathescape=true]$[1, [2, [3, [4, null]]]]$}:
+          <kbd>[1, [2, [3, [4, null]]]]</kbd>:
           </p></div>
         
       </SPLIT>
 
       <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-        
+        <div class='snippet' id='javascript_29_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const one_through_four = list(1, 2, 3, 4);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBOCmB9KALATiArgcxYgZlmjALwwA2AltABQCMANDAExMDMTALAJQDcQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBOCmB9KALATiArgcxYgZlmjALwwA2AltABQCMANDAExMDMTALAJQDcAUPwTJ0WXASICA9FJgATagAdyAQwCeEAFwwA2o12tdHXZyZhM5cgF0bVoA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	
         
 
@@ -148,19 +159,19 @@ const one_through_four = list(1, 2, 3, 4);
         We can think of 
         
         
-        {\lstinline[mathescape=true]$head$} as selecting the first item in the list, and
+        <kbd>head</kbd> as selecting the first item in the list, and
         of 
         
-        {\lstinline[mathescape=true]$tail$} as selecting the sublist consisting of all but the first
-        item.  Nested applications of {\lstinline[mathescape=true]$head$} and {\lstinline[mathescape=true]$tail$} can be used to
+        <kbd>tail</kbd> as selecting the sublist consisting of all but the first
+        item.  Nested applications of <kbd>head</kbd> and <kbd>tail</kbd> can be used to
         extract the second, third, and subsequent items in the
         list.
         The constructor 
         
-        {\lstinline[mathescape=true]$pair$} makes a list like the original one, 
+        <kbd>pair</kbd> makes a list like the original one, 
         but with an additional item at the beginning.
 
-        
+        <div class='snippet' id='javascript_29_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 head(one_through_four);
@@ -168,13 +179,14 @@ head(one_through_four);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BYUwhgJgFA9gdiA+gF2AJxgVwObEQMyzQEoBuAKAHpKACNEAZ0wBtkAuGgRiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBOCmB9KALATiArgcxYgZlmjALwwA2AltABQCMANDAExMDMTALAJQDcAUCngBDACY0EydFlwEiffgHpFMNPAiZyUAFww6QA}{\usebox\lstbox}
+</pre>
+
+</div></div>
 
 
 
-
-
-        
+        <div class='snippet' id='javascript_29_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 tail(one_through_four);
@@ -182,11 +194,12 @@ tail(one_through_four);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=C4QwlgNgFA9gdgUwPrABYCcYFcDmqkBm26AlANwBQA9FQAToIDOWEwAXLQNoBMANFwGZ+nACz84LCAF0ZQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBOCmB9KALATiArgcxYgZlmjALwwA2AltABQCMANDAExMDMTALAJQDcAUFACGlcjQTJ0WXASJ9+AegUw08CJnJQAXDADarPRz2cmYDeQC6VoA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_29_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 head(tail(one_through_four));
@@ -194,11 +207,12 @@ head(tail(one_through_four));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BYUwhgJgFALmCWAbKB7AdiA+jYAnFArgObCYBmhuAlFQNwBQA9IwAS4gDOBiMAXCwCYgA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBOCmB9KALATiArgcxYgZlmjALwwA2AltABQCMANDAExMDMTALAJQDcAUCngBDACY0owyuRoJk6LLgJFuffgHp1MNPAiZyUAFwsgA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_29_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 pair(10, one_through_four);
@@ -206,14 +220,15 @@ pair(10, one_through_four);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4QwlgTgFAjADAGgAQHsB2BTA+gFwBYQoCuA5nlgGbEQCUA3AFAD0TSEGAzkQDY4BcSANrxkw0QCZRAZlEAWZGh7cAuqtVA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBOCmB9KALATiArgcxYgZlmjALwwA2AltABQCMANDAExMDMTALAJQDcAUAAcAhpTT0ADEwTJ0WXASJ9+AehUw08CJnJQAXDADadKUcZHWRjkc5MwO8gF1nzoA}{\usebox\lstbox}
+</pre>
+
+</div></div>
 
 
 
 
-
-
-        
+        <div class='snippet' id='javascript_29_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 pair(5, one_through_four);
@@ -221,9 +236,10 @@ pair(5, one_through_four);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4QwlgTgFArANAAgPYDsCmB9ALgCwkgVwHMcMAzQiASgG4AoAegYQjQGcCAbLALgQG14AgIyJ+AJjEBmMQBZEKLpwC6q1UA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBOCmB9KALATiArgcxYgZlmjALwwA2AltABQCMANDAExMDMTALAJQDcAUAAcAhpTQ0ArEwTJ0WXASJ9+AehUw08CJnJQAXDADaUo4yOsjHI5yZgd5ALpOnQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
       </p></div>
 
@@ -232,7 +248,7 @@ pair(5, one_through_four);
         
       <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
-        The value {\lstinline[mathescape=true]$null$}, 
+        The value <kbd>null</kbd>, 
         used to terminate the chain of pairs, can be
         thought of as a sequence of no elements, the 
         
@@ -242,9 +258,10 @@ pair(5, one_through_four);
         
       </SPLIT>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         List operations
-      
+      </h2></div>
 
       
       
@@ -255,24 +272,24 @@ pair(5, one_through_four);
         lists by successively 
         
         
-        <QUOTE>{\lstinline[mathescape=true]$tail$}ing down</QUOTE> the lists.  For example, 
+        <QUOTE><kbd>tail</kbd>ing down</QUOTE> the lists.  For example, 
         the
         function
         
-        {\lstinline[mathescape=true]$list_ref$} takes as arguments a list and a number
+        <kbd>list_ref</kbd> takes as arguments a list and a number
         $n$ and returns the $n$th item of the list.  It is customary to
         number the elements of the list beginning with 0.  The method for
-        computing {\lstinline[mathescape=true]$list_ref$} is the following:
+        computing <kbd>list_ref</kbd> is the following:
 
         <UL>
-          <LI>For $n=0$, {\lstinline[mathescape=true]$list_ref$} should return the {\lstinline[mathescape=true]$head$} of the list.
+          <LI>For $n=0$, <kbd>list_ref</kbd> should return the <kbd>head</kbd> of the list.
           </LI>n
-          <LI>Otherwise, {\lstinline[mathescape=true]$list_ref$} should return  the $(n-1)$st item of the
-            {\lstinline[mathescape=true]$tail$} of the list.
+          <LI>Otherwise, <kbd>list_ref</kbd> should return  the $(n-1)$st item of the
+            <kbd>tail</kbd> of the list.
           </LI>
         </UL>
 
-        
+        <div class='snippet' id='javascript_29_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function list_ref(items, n) {
@@ -283,11 +300,12 @@ function list_ref(items, n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGxgZygfQE4FNgAUMUuAtmgDSJgCUiA3gFCIuJ5QjZJIC8fiABmasRrAPyIAFrgCGAEyIlyNYaJEAuFOix5CUGTGSKyaGlSQBaRAEYaAbkYBfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAGxgZygfQE4FNgAUMUuAtmgDSJgCUiA3gFCIuJ5QjZJIC8fiABmasRrAPyIAFrgCGAEyIlyNYaJEAuFOix5CUGTGSKyaGlSQBaRAEYaAbkYBfRowgIMiNAEcQMvGkQeLQwCayoAFioATiprADYqACYAVntGVAwcfAJvX38qAGY0gHpitlw0EGQoTXigA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_29_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const squares = list(1, 4, 9, 16, 25);
@@ -296,9 +314,10 @@ list_ref(squares, 3);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBBCOBXAhgJwKYRgXhgGwEtoAKARgBoYAWSgTktIDZKAmAVgEoBuAKEOgD6GAGbEEKDBEoBmbjwD08mJMR4oALhhMgA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBBCOBXAhgJwKYRgXhgGwEtoAKARgBoYAWSgTktIDZKAmAVgEoBuAKEOgD6GAGbEEKDBEoBmbjwD08mJMR4oALhhMgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
 
@@ -308,20 +327,20 @@ list_ref(squares, 3);
 
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
-        Often we {\lstinline[mathescape=true]$tail$} down the whole list.  To aid in this, our JavaScript environment includes
+        Often we <kbd>tail</kbd> down the whole list.  To aid in this, our JavaScript environment includes
           a predicate
         
         
-        {\lstinline[mathescape=true]$is_null$}, which tests whether its argument is
+        <kbd>is_null</kbd>, which tests whether its argument is
         the empty list.  The
         function
         
         
-        {\lstinline[mathescape=true]$length$}, which
+        <kbd>length</kbd>, which
         returns the number of items in a list, illustrates this typical
         pattern of use:
 
-        
+        <div class='snippet' id='javascript_29_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function length(items) {
@@ -332,23 +351,24 @@ function length(items) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGwKZgOZQBYAoZSoC2AzgJSIDeAUInYgE6pQgNIwkD6YIyy+hUmVr1R9APyIADCLGiAXIgCMiANQp0WPFACGMfgWLkyAbmoBfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAGwKZgOZQBYAoZSoC2AzgJSIDeAUInYgE6pQgNIwkD6YIyy+hUmVr1R9APyIADCLGiAXIgCMiANQp0WPFACGMfgWLkyAbmoBfatQgISURHAAmjkogC8KDlFxKANIgBmfwBWfwB2U2o0TBxcJxdIgHpExmZWMBJFABYgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
       </p></div>
 
       <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
-        The {\lstinline[mathescape=true]$length$}
+        The <kbd>length</kbd>
         function
         implements a simple recursive plan. The
         reduction step is:
 
         <UL>
-          <LI>The {\lstinline[mathescape=true]$length$} of any list is 1 plus the {\lstinline[mathescape=true]$length$} of the
-            {\lstinline[mathescape=true]$tail$} of the list.
+          <LI>The <kbd>length</kbd> of any list is 1 plus the <kbd>length</kbd> of the
+            <kbd>tail</kbd> of the list.
           </LI>
         </UL>
       </p></div>
@@ -358,16 +378,16 @@ function length(items) {
         This is applied successively until we reach the base case:
 
         <UL>
-          <LI>The {\lstinline[mathescape=true]$length$} of the empty list is 0.
+          <LI>The <kbd>length</kbd> of the empty list is 0.
           </LI>
         </UL>
       </p></div>
 
       <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
-        We could also compute {\lstinline[mathescape=true]$length$} in an iterative style:
+        We could also compute <kbd>length</kbd> in an iterative style:
 
-        
+        <div class='snippet' id='javascript_29_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function length(items) {
@@ -379,13 +399,14 @@ function length(items) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGwKZgOZQBYAoZSoC2AzgJSIDeAUInYqJLAiultgPoGoBOuAhgBpEEOOCgUa9aYh6ooIHkhgkOYEMmQCytGXvoB+EWLBRd+vQC5WmHF0J8o-GFv5lho8YgDUiAIxkANzmiAC+IXIKSjbs9rz4hKTCAAxB1KFAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAGwKZgOZQBYAoZSoC2AzgJSIDeAUInYqJLAiultgPoGoBOuAhgBpEEOOCgUa9aYh6ooIHkhgkOYEMmQCytGXvoB+EWLBRd+vQC5WmHF0J8o-GFv5lho8YgDUiAIxkANzmiAC+IXIKSjbs9rz4hKTCAAxB1OHUomAkUIhwACb5JIgAvCgqULh+wgDMwgCswgDsaWi2eAVFaQD03bLyitnWACxAA}{\usebox\lstbox}!*/
     return length_iter(items, 0);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
@@ -393,46 +414,49 @@ function length(items) {
         Another conventional programming technique is to 
         
         
-        <QUOTE>{\lstinline[mathescape=true]$pair$} up</QUOTE> an
-        answer list while {\lstinline[mathescape=true]$tail$}ing down a list, as in the
+        <QUOTE><kbd>pair</kbd> up</QUOTE> an
+        answer list while <kbd>tail</kbd>ing down a list, as in the
         function
         
         
-        {\lstinline[mathescape=true]$append$}, which takes two lists as arguments and combines their
+        <kbd>append</kbd>, which takes two lists as arguments and combines their
         elements to make a new list:
 
-        
+        <div class='snippet' id='javascript_29_12_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 append(squares, odds);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYBxFMDsBMAoGcCOBXYAnc8A0ACA9tNPAJQDcQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwA6oKZgCYAoA2MAzlAIwA0ihJATAJSIDeAUIm4gE4ZQgdLEB9MCHz4CxMnVbsZ7APxUJNabJkAuRKmQwOuABYZkeapMppMOXFG1iTpOpRP06AbmYBfZhAQlERAI4gyFxEiAC8iiS4FIgALJQAnJSkAGyUNACsrl4+UH6BwRihESbRlADMlBmUAOzZ5lh4AUEhlHDY2ETZzAD0PZzcvGBEGgDaMaPxiKNJ06mUo5kLE5XT1dM1lMKiALp7+-tAA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_29_13_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 // returns: [1, [4, [9, [16, [25, [1, [3, [5, [7, null]]]]]]]]]
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAECcFMBcFdwHYGcBcoDaBGANBgLLugJyGYBshATAKymEDMhtGA7LgrADacC6f--IA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=PTAECcFMBcFdwHYGcBcoDaBGANBgLLugJyGYBshATAKymEDMhtGA7LgrADacC6f--IA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_29_14_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 append(odds, squares);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYBxFMDsBMAoHtrQM4BoAEyCOBXYAncZASgG4g}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwA6oKZgCYAoA2MAzlAIwA0ihJATAJSIDeAUIm4gE4ZQgdLEB9MCHz4CxMnVbsZ7APxUJNabJkAuRKmQwOuABYZkeapMppMOXFG1iTpOpRP06AbmYBfZhAQlERAI4gyFxEiAC8iiS4FIgALJQAnJSkAGyUNACsrl4+UH6BwRihESbRlADMlBmUAOzZ5lh4cNjYRJQBQSHZzAD0PZzcvGBEGgDaMaOViKPV0zWU4wvx00nTqQuZlMKiALp7+-tAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
 
@@ -442,21 +466,21 @@ append(odds, squares);
       <div class='permalink'>
 <a name='p14' class='permalink'></a><p>
         
-	The function {\lstinline[mathescape=true]$append$}
+	The function <kbd>append</kbd>
 	
 	is also implemented using a recursive plan.
-	To {\lstinline[mathescape=true]$append$}
-        lists {\lstinline[mathescape=true]$list1$} and {\lstinline[mathescape=true]$list2$},
+	To <kbd>append</kbd>
+        lists <kbd>list1</kbd> and <kbd>list2</kbd>,
 	do the following:
         <UL>
-          <LI>If {\lstinline[mathescape=true]$list1$} is the empty list, then the result is just {\lstinline[mathescape=true]$list2$}.
+          <LI>If <kbd>list1</kbd> is the empty list, then the result is just <kbd>list2</kbd>.
           </LI>
-          <LI>Otherwise, {\lstinline[mathescape=true]$append$} the {\lstinline[mathescape=true]$tail$} of {\lstinline[mathescape=true]$list1$} and 
-            {\lstinline[mathescape=true]$list2$}, and {\lstinline[mathescape=true]$pair$} the {\lstinline[mathescape=true]$head$} of {\lstinline[mathescape=true]$list1$} onto the result:
+          <LI>Otherwise, <kbd>append</kbd> the <kbd>tail</kbd> of <kbd>list1</kbd> and 
+            <kbd>list2</kbd>, and <kbd>pair</kbd> the <kbd>head</kbd> of <kbd>list1</kbd> onto the result:
           </LI>
         </UL>
 
-        
+        <div class='snippet' id='javascript_29_15_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function append(list1, list2) {
@@ -467,9 +491,10 @@ function append(list1, list2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwA6oKZgCYAoA2MAzlAIwA0ihJATAJSIDeAUIm4gE4ZQgdLEB9MCHz4CxMnVbsZ7APxUJNabJkAuRKmQwOuABYZkeapMppMOXFG1iTpOpRP06AbmYBfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwA6oKZgCYAoA2MAzlAIwA0ihJATAJSIDeAUIm4gE4ZQgdLEB9MCHz4CxMnVbsZ7APxUJNabJkAuRKmQwOuABYZkeapMppMOXFG1iTpOpRP06AbmYBfIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       
@@ -481,13 +506,13 @@ function append(list1, list2) {
 
         
         
-        {\lstinline[mathescape=true]$last_pair$} that returns the list that contains only
+        <kbd>last_pair</kbd> that returns the list that contains only
         the last element of a given (nonempty) list:
 
         
 
 	
-        
+        <div class='snippet' id='javascript_29_16_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 last_pair(list(23, 72, 149, 34));
@@ -495,16 +520,17 @@ last_pair(list(23, 72, 149, 34));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYQwzgLg+gDiCWAnAFMelkCYDMAaABAOyYECMALAJwHbkCUdA3AFAD0r+iApmAK7AQAXPgDatAgDt+wALpA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=PTAEBsEMGcBcH0AOkCWAnUsD2oBGBTUAcxQDd8A7PAT1DgFcATS2AKCjiVTQApwU4PAEwBmADSgA7EIkBGACwBOCSPkBKNQG5WIUGnzR64WAC5QAbVUSKR8AF0gA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
       \hfill{\hyperref[ex:last-Answer]{Solution}}\\
 \end{Exercise}
 
 \begin{Answer}[ref={ex:last}]
 
-    
+    <div class='snippet' id='javascript_29_17_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function last_pair(items) {
@@ -515,9 +541,10 @@ function last_pair(items) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGwIYGcoH0AOqYBOAFDFAKYC26AlIgN4BQiziBZUIBSM6WYIyZESj4hpSjWpMWMlgH5E4qtNkyAXCgzY8hYaJLkq1agG4GAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAGwIYGcoH0AOqYBOAFDFAKYC26AlIgN4BQiziBZUIBSM6WYIyZESj4hpSjWpMWMlgH5E4qtNkyAXCgzY8hYaJLkq1agG4GAXwYM0mXPmLIeUIgCYAzABpEAdhdeAjAAsAJxeboHGZgD0Uaxk6AJQGgDa4V78ggC6QA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   
 \end{Answer}
 
@@ -531,10 +558,10 @@ function last_pair(items) {
 
         
         
-        {\lstinline[mathescape=true]$reverse$} that takes a list as argument and
+        <kbd>reverse</kbd> that takes a list as argument and
         returns a list of the same elements in reverse order:
 
-        
+        <div class='snippet' id='javascript_29_18_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 reverse(list(1, 4, 9, 16, 25));
@@ -542,16 +569,17 @@ reverse(list(1, 4, 9, 16, 25));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=E4UwbiwM4gFANgSygF1gRgDQAIAsOBOHdANhwCYBWASmoG4AoAeie1CgFd4UAubAbSo5+pYUQH4BWbADsu8ALpKlQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=E4UwbiwM4gFANgSygF1gRgDQAIAsOBOHdANhwCYBWASmoG4AoAeie1CgFd4UAubAbSo5+pYUQH4BWbADsu8ALpKlQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
       \hfill{\hyperref[ex:reverse-Answer]{Solution}}\\
 \end{Exercise}
 
 \begin{Answer}[ref={ex:reverse}]
 
-	
+	<div class='snippet' id='javascript_29_19_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 // naive reverse (what is the runtime?)
@@ -563,14 +591,15 @@ function reverse(items) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAEDsEMEsDcFNQCd4KQZ0QCgO4AtIAXUadUQvRJAV3EOgFt4B+ASgCgAzWgY3oHtwyVPAzws0QvAbpWoAN7tQy4YWpIhpAPrhqAGz0SpMjirNnmEfXqXnzALlCQADs-jgAJlhRpMWQjCGktKyrAA07ACQdnbOMEhYlJBewSZhVgasrADc7AC+QA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=PTAEDsEMEsDcFNQCd4KQZ0QCgO4AtIAXUadUQvRJAV3EOgFt4B+ASgCgAzWgY3oHtwyVPAzws0QvAbpWoAN7tQy4YWpIhpAPrhqAGz0SpMjirNnmEfXqXnzALlCQADs-jgAJlhRpMWQjCGktKyrAA07ACQdnbOMEhYlJBewSZhVgasrADc7AC+7Ow+on56pIRYAIzpACzpAJzplQBs6QBMAKxZuSDC6PqEjgDanelDLWONoEN109UZegC6y8tAA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
+</div></div>
 
-
- 
+ <div class='snippet' id='javascript_29_20_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 // a better version
@@ -582,15 +611,16 @@ function reverse(items) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAEENQIwUwFzjATqAbsgzgSwPYDsAoAMwFc8BjOXPUJGdJDGACi0QFsMBKUAbwNCDQpClXy16mGAH02yVhwwAaCRhIAbOD35DdEuCSQ0sGaXg3qFMTlwF77QgPyqNcOw-sAuCQyazESMxw4FiWcjZKBACQHrF6AA4hgQAWMOAAJlYRLppcXADc7qAAvkV0BkY+Uv7y4cqg5urqBQTFQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=PTAEENQIwUwFzjATqAbsgzgSwPYDsAoAMwFc8BjOXPUJGdJDGACi0QFsMBKUAbwNCDQpClXy16mGAH02yVhwwAaCRhIAbOD35DdEuCSQ0sGaXg3qFMTlwF77QgPyqNcOw-sAuCQyazESMxw4FiWcjZKBACQHrF6AA4hgQAWMOAAJlYRLppcXADc7qAAvkV0BkY+Uv7y4cqg5urqBQSlBHS+LOomcMwAjCoALCoAnCp9AGwqAEwArHmFIDlw3gDacyqrk5tjoKvDewMNFgC6Z2dAA}{\usebox\lstbox}!*/
 	                      pair(head(items), result));
     }
     return reverse_iter(items, null);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
   
 \end{Answer}
 
@@ -598,22 +628,22 @@ function reverse(items) {
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled26}
+\label{ex:unlabeled24}
  
         <div class='permalink'>
 <a name='p15' class='permalink'></a><p>
           Consider the 
           
           change-counting program of
-          section~\ref{sec:tree-recursion}.  It would be nice to be able to
+          section \ref{sec:tree-recursion}.  It would be nice to be able to
           easily change the currency used by the program, so that we could
           compute the number of ways to change a British pound, for example.  As
           the program is written, the knowledge of the currency is distributed
           partly into the
           function
-          {\lstinline[mathescape=true]$first_denomination$} and partly into the
+          <kbd>first_denomination</kbd> and partly into the
           function
-          {\lstinline[mathescape=true]$count_change$} (which knows that there are five
+          <kbd>count_change</kbd> (which knows that there are five
           kinds of U.S. coins).  It would be nicer to be able to
           supply a list of coins to be used for making change.
         </p></div>
@@ -621,11 +651,11 @@ function reverse(items) {
 <a name='p16' class='permalink'></a><p>
           We want to rewrite the
           function
-          {\lstinline[mathescape=true]$cc$} so that its
+          <kbd>cc</kbd> so that its
           second argument is a list of the values of the
           coins to use rather than an integer specifying which coins to use.  We
           could then have lists that defined each kind of currency:
-        
+        <div class='snippet' id='javascript_29_21_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const us_coins = list(50, 25, 10, 5, 1);
@@ -633,30 +663,32 @@ const uk_coins = list(100, 50, 20, 10, 5, 2, 1, 0.5);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBArhA+qAlpGBeGAbF0AUArAAwA0MATIeQIxkzUw0CUA3AFCiSxwDWyINBEw48UfHXolyFenXKMKtcsQB0hNkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBArhA+qAlpGBeGAbF0AUArAAwA0MATIeQIxkzUw0CUA3AFCiSxwDWyINBEw48UfHXolyFenXKMKtcsQB0hNkA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
+          We could then call <kbd>cc</kbd> as follows:
 
-          We could then call {\lstinline[mathescape=true]$cc$} as follows:
-
-        
+        <div class='snippet' id='javascript_29_22_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 cc(100, us_coins);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MbAUEYAZIGgAgK4GcD6wD2BLAdkglANxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABBCAKAhgWzuKAaZOGMAfQDd0AbEAUwGcBKRAbwChEPEAnGqELpFhxgoiALwTEABnac5nAPyIAjLPlyAXIiG5EAHmmIAPkcRg4JbD1QQipCtXoM16uUpmv1WlBmy48rACQnhw0AB4QNAAOUCTAMFx0sQAmNOaYxOiwCDZ25FS0jM4h6gDULiXIaDoiiAC0iPGJKWlwGWBZ8GC5xPmOjAQVlRy2vQ6FDADcrAC+rAD0840JSSSp6ZnZYAThkTFxKy0bHVsLS+hgyWYWVjSIUHCIAEZ3AOYwZGnPAJ6ISSDrKCsWxgJKIEB0EijUHiRCUGBJVAAVikBAATEiCMpUYhMSopsCEGCQABrKF2Oiw+GI7E4lHonHYgh4tFYghSAB0SIJPlpBAh5OIjEmQA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-          To do this will require changing the program {\lstinline[mathescape=true]$cc$} somewhat.  It will
+          To do this will require changing the program <kbd>cc</kbd> somewhat.  It will
           still have the same form, but it will access its second argument
           differently, as follows:
 
         
 
-        
+        <div class='snippet' id='javascript_29_23_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function cc(amount, coin_values) {
@@ -668,7 +700,7 @@ function cc(amount, coin_values) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABBCAKAhgWzuKAaZOGMAfQDd0AbEAUwGcBKRAbwChEPEAnGqELpFhxgoiALwTEABnac5nAPyIAjLPlyAXIiG5EAHmmIAPkcRg4JbD1QQipCtXoM16uUpmv1WlBmy48rACQnhw0AB4QNAAOUCTAMFx0sQAmNOaYxOiwCDZ25FS0jM4h6gDULiXIaDoiiAC0iPGJKWlwGWBZ8GC5xPmOjAQVlRy2vQ6FDADcrAC+QA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=PTAEDMEsCcGcBcD6ATApgOwPYFtLoIbySboA0oqAHgMaoAOSUcSaWuBRJAUCKPuslBZE2TNFSh4mUACMJAc0gA3DLICeoBAFdW8LuC3pqndKGrUAFPlGH45apjyIl+ADZbUsAJSgA3l1BA0HF4LWhTa0xbUABeONAABgCglKCAflAARmTUlIAuPht0eFAAHkTQAB9KoUwRMVQLBycXd08vHNyUjKSu3ILzKyK7LgBIPsCqWgZEJgQUDBw8QmJ0Jsd0ZzcPbw6J3IBqTv2zS0jogFoIGHnWJY5V9Zbt9vJjk8DmzdadrwBuLgAXy4XEGmQSCXIWlgiC+3j+QA}{\usebox\lstbox}!*/
 	          except_first_denomination(coin_values))
                +
                cc(amount - first_denomination(coin_values), 
@@ -676,24 +708,25 @@ function cc(amount, coin_values) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         </p></div>
         <div class='permalink'>
 <a name='p17' class='permalink'></a><p>
           Define the
           functions
-          {\lstinline[mathescape=true]$first_denomination$}, {\lstinline[mathescape=true]$except_first_denomination$}, and {\lstinline[mathescape=true]$no_more$} in terms of primitive
-          operations on list structures.  Does the order of the list {\lstinline[mathescape=true]$coin_values$} affect the answer produced by {\lstinline[mathescape=true]$cc$}?  Why or why not?
+          <kbd>first_denomination</kbd>, <kbd>except_first_denomination</kbd>, and <kbd>no_more</kbd> in terms of primitive
+          operations on list structures.  Does the order of the list <kbd>coin_values</kbd> affect the answer produced by <kbd>cc</kbd>?  Why or why not?
         </p></div>
 
-      \hfill{\hyperref[ex:unlabeled26-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled24-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled26}]
+\begin{Answer}[ref={ex:unlabeled24}]
 
-    
+    <div class='snippet' id='javascript_29_24_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function first_denomination(coin_values) {
@@ -705,15 +738,16 @@ function except_first_denomination(coin_values) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMGAnAzlA+gEwKZhwC2MYAhrAgBQRylYBuZANiHugJSIDeAUIgMSo8UEKiQALPGRw06YRizacA3LwC+vUJEpI8ADwh4ADthQZs+QiXK659Jq3Zc+goSLFIoZGM3sLHZQ41TW1oeCRCLCI4YX9FJ04efkFhUXFEGHQsMBBmP1oHJWcQoA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABBCAKAhgWzuKAaZOGMAfQDd0AbEAUwGcBKRAbwChEPEAnGqELpFhxgoiALwTEABnac5nAPyIAjLPlyAXIiG5EAHmmIAPkcRg4JbD1QQipCtXoM16uUpmv1WlBmy48rACQnhw0AB4QNAAOUCTAMFx0sQAmNOaYxOiwCDZ25FS0jM4h6gDULiXIaDoiiAC0iPGJKWlwGWBZ8GC5xPmOjAQVlRy2vQ6FDADcrAC+rKCQ2UhNSSSp6ZlLPfYFTiwuPHwCiAAWNOjJ230T03ML0F2I4ZExcQmr622bXVfje2xyQ78JBQdAwSi-XaMW7zcAPBBmCxWGiQ-pMAGcIHHGB0EhgECUCGjHZomGsHzKKRSAggXHE6FAA}{\usebox\lstbox}!*/
 function no_more(coin_values) {
     return is_null(coin_values);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-    The order of the list {\lstinline[mathescape=true]$coin_values$}
+</div></div>
+    The order of the list <kbd>coin_values</kbd>
     does not affect the answer given by any correct solution of the problem,
     because the given list represents an unordered collection of denominations.
 
@@ -728,108 +762,13 @@ function no_more(coin_values) {
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled27}
+\label{ex:unlabeled25}
 
 	In the presence of higher-order functions, it is not strictly necessary
 	for functions to have multiple parameters; one would
-	suffice.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>{\lstinline[mathescape=true]$plus$} that
-	naturally requires two parameters, we could write a variant of the function
-	to which we pass the arguments one at
-	at time. An application of the variant to the first argument could return a
-	function that we can then apply to the second argument, and so on. This
-	practice—called
-	<EM>currying</EM> and named after the American mathematician and
-	logician Haskell Brooks Curry—is quite common
-	in programming languages such as Haskell (the reader might venture a guess 
-	after whom this programming language is named) and Ocaml. In JavaScript, a curried
-	version of {\lstinline[mathescape=true]$plus$} looks as follows.
-	
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function plus_curried(x) {	    
-    return y => x + y;
-}
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwDYgM4H0IgE54wCmAJgBQAeAlIgN4CQiTiAUM4nkVPkgJ6IBeAHyIKiANSJeAbhYBfIA}{\usebox\lstbox}
-
-
-	
-	Write a function {\lstinline[mathescape=true]$brooks$}, that
-	takes a curried function as first argument and as second argument a list
-	of arguments to which the curried function is then applied, one by one,
-	in the given order. For example, the following application of
-	{\lstinline[mathescape=true]$brooks$} should have the
-	same effect as the call {\lstinline[mathescape=true]$plus_curried(3)(4)$} above.
-
-
-	
-
-	
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-brooks(plus_curried, list(3, 4));
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOAUAOAbArtA+gY2SEBLApgCYA0ABIrtAC6wDMZALAJRMDcQA}{\usebox\lstbox}
-
-
-
-	While we are at it, we might as well curry the function
-	{\lstinline[mathescape=true]$brooks$}! Write
-	a function 
-	{\lstinline[mathescape=true]$brooks_curried$} that
-	can be applied as follows, to yield the same result 7:
-
-	
-
-	
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-brooks_curried(list(plus_curried, 3, 4));
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOD6DGBXEICWBTAJgCgDaugBdsAHXROJFDTAGgAIBmBgFgEo2BuIA}{\usebox\lstbox}
-
-
-
-	With this function 
-	{\lstinline[mathescape=true]$brooks_curried$}
-	what are the results of evaluating the following two statements?
-
-	
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-brooks_curried(list(brooks_curried,
-                    list(plus_curried, 3, 4)));
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOD6DGBXEICWBTAJgCgDaugBdtQIYFk0sAaAKAAJGnmWX8jsAHXROJFDJmr0AzMIAsASmkBuIA}{\usebox\lstbox}
-
-
-
-	
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-brooks_curried(list(brooks_curried,
-                    list(brooks_curried, 
-                         list(plus_curried, 3, 4))));
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOD6DGBXEICWBTAJgCgDaugBdtQIYFk0sAaAKAAJGnmWX8iTwo4kUNNq9BqxGim7YgAdciHpX6CAzIIAsASg1qA3EA}{\usebox\lstbox}
-
-
-		
-	
-	
-      
+	suffice.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
 	If we have
-	a function such as {\lstinline[mathescape=true]$plus$} that
+	a function such as <kbd>plus</kbd> that
 	naturally requires two parameters, we could write a variant of the function
 	to which we pass the arguments one at
 	at time. An application of the variant to the first argument could return a
@@ -839,8 +778,8 @@ brooks_curried(list(brooks_curried,
 	logician Haskell Brooks Curry—is quite common
 	in programming languages such as Haskell (the reader might venture a guess 
 	after whom this programming language is named) and Ocaml. In JavaScript, a curried
-	version of {\lstinline[mathescape=true]$plus$} looks as follows.
-	
+	version of <kbd>plus</kbd> looks as follows.
+	<div class='snippet' id='javascript_29_25_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function plus_curried(x) {	    
@@ -849,55 +788,58 @@ function plus_curried(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwDYgM4H0IgE54wCmAJgBQAeAlIgN4CQiTiAUM4nkVPkgJ6IBeAHyIKiANSJeAbhYBfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABABwDYgM4H0IgE54wCmAJgBQAeAlIgN4CQiTiAUM4nkVPkgJ6IBeAHyIKiANSJeAbhYBfFizSYc+QqTIBmKmQAsVaUA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	
-	Write a function {\lstinline[mathescape=true]$brooks$}, that
+	Write a function <kbd>brooks</kbd>, that
 	takes a curried function as first argument and as second argument a list
 	of arguments to which the curried function is then applied, one by one,
 	in the given order. For example, the following application of
-	{\lstinline[mathescape=true]$brooks$} should have the
-	same effect as the call {\lstinline[mathescape=true]$plus_curried(3)(4)$} above.
+	<kbd>brooks</kbd> should have the
+	same effect as the call <kbd>plus_curried(3)(4)</kbd> above.
 
 
 	
 
-	
+	<div class='snippet' id='javascript_29_26_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 brooks(plus_curried, list(3, 4));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOAUAOAbArtA+gY2SEBLApgCYA0ABIrtAC6wDMZALAJRMDcQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABABwDYgM4H0IgE54wCmAJgBQAeAlIgN4CQiTiAUM4nkVPkgJ6IBeAHyIKiANSJeAbhYBfFgHpFiAEZ44cANYZEUOGqKIA7oShQiSVfygALIxm4lLUFus06yaTDnyFSADSIqDCOZADMQQAsVFTSQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 	While we are at it, we might as well curry the function
-	{\lstinline[mathescape=true]$brooks$}! Write
+	<kbd>brooks</kbd>! Write
 	a function 
-	{\lstinline[mathescape=true]$brooks_curried$} that
+	<kbd>brooks_curried</kbd> that
 	can be applied as follows, to yield the same result 7:
 
 	
 
-	
+	<div class='snippet' id='javascript_29_27_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 brooks_curried(list(plus_curried, 3, 4));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOD6DGBXEICWBTAJgCgDaugBdsAHXROJFDTAGgAIBmBgFgEo2BuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABABwDYgM4H0IgE54wCmAJgBQAeAlIgN4CQiTiAUM4nkVPkgJ6IBeAHyIKiANSJeAbhYBfFgHpFiAEZ44cANbZcBYiURQ4aoogDuhKFCJJV-KAAszGbiVtQW6zTpz5CpGSoMK5kaJh++qQANIgAzLEALFRU0kA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 	With this function 
-	{\lstinline[mathescape=true]$brooks_curried$}
+	<kbd>brooks_curried</kbd>
 	what are the results of evaluating the following two statements?
 
-	
+	<div class='snippet' id='javascript_29_28_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 brooks_curried(list(brooks_curried,
@@ -905,11 +847,12 @@ brooks_curried(list(brooks_curried,
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOD6DGBXEICWBTAJgCgDaugBdtQIYFk0sAaAKAAJGnmWX8jsAHXROJFDJmr0AzMIAsASmkBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABABwDYgM4H0IgE54wCmAJgBQAeAlIgN4CQiTiAUM4nkVPkgJ6IBeAHyIKiANSJeAbhYBfFgHpFiAEZ44cANbZcBYiURQ4aoogDuhKFCJJV-KAAszGbiVtQW6zTpz5CpGSoMK5k3tq6-gYANGzs8QnswaFomH76pNGIAMxZACxUhdJAA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-	
+	<div class='snippet' id='javascript_29_29_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 brooks_curried(list(brooks_curried,
@@ -918,21 +861,22 @@ brooks_curried(list(brooks_curried,
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOD6DGBXEICWBTAJgCgDaugBdtQIYFk0sAaAKAAJGnmWX8iTwo4kUNNq9BqxGim7YgAdciHpX6CAzIIAsASg1qA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABABwDYgM4H0IgE54wCmAJgBQAeAlIgN4CQiTiAUM4nkVPkgJ6IBeAHyIKiANSJeAbhYBfFgHpFiAEZ44cANbZcBYiURQ4aoogDuhKFCJJV-KAAszGbiVtQW6zTpz5CpGSoMK5k3tq6-gYANGzs8QnswaHhvnoBJNGsiTm5iMlQZGiYfvqkWQDMWQAsVHVU0kA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 		
 	
 	
-      \hfill{\hyperref[ex:unlabeled27-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled25-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled27}]
+\begin{Answer}[ref={ex:unlabeled25}]
 
 	  
 \begin{enumerate}[a.]
 \item{
-	      
+	      <div class='snippet' id='javascript_29_30_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function brooks(f, items) {
@@ -943,12 +887,13 @@ function brooks(f, items) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAIwE5zgawM4ApgA0iMUApgLbYCUiA3gFCJOKqlQipIzYD6YIAGwG4SFao2aTmAfkTAJUyQC4U6LHmC4AFqQCGAExFlKVKkSi6Yw0SaoBuegF8gA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABABwDYgM4H0IgE54wCmAJgBQAeAlIgN4CQiTiAUM4nkVPkgJ6IBeAHyIKiANSJeAbhYBfFqEiwEiAEZ44cANYYywADSIYUIgFsMNWm2adueJDGxgQqVGRPnLN9r4D8iMA+vswAXOqaOnrAZAAWRACG5J4WVFRGUAkw7imWVLIKLBpaumRomDj4hKRGqE5QZADMRgAsadJAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	    }
 \item{
-	
+	<div class='snippet' id='javascript_29_31_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function brooks_curried(items) {
@@ -957,13 +902,14 @@ function brooks_curried(items) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAIwE5zgawM4H0IiqowCmAJgBQxQkC22AlIgN4BQiHiqJUhSaGHBQAWJAIaVqdRgBpEUMTAA2VGvQYMA3KwC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAIwE5zgawM4ApgA0iMUApgLbYCUiA3gFCJOKqlQipIzYD6YIAGwG4SFao2aTmAfkTAJUyQC4U6LHmC4AFqQCGAExFlKVKkSi6Yw0SaoBuegF96oSLASIADgJC8IHVBhSQwAPGloASEkFFjYOJABPRABeAD5EEMQAakQEh2dXaHgkNAwcHn9UQOCjMXCY1nZOVTK8HQNak3NLa2Nqeyd6elL1CoCgwwFuKFxvXzGqiaIAZiIAFlM7IA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	    }
 \item{
 The statement 
-	
+	<div class='snippet' id='javascript_29_32_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 brooks_curried(list(brooks_curried,
@@ -971,13 +917,14 @@ brooks_curried(list(brooks_curried,
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOD6DGBXEICWBTAJgCgDaugBdtQIYFk0sAaAKAAJGnmWX8jsAHXROJFDJmr0AzMIAsASmkBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABABwDYgM4H0IgE54wCmAJgBQAeAlIgN4CQiTiAUM4nkVPkgJ6IBeAHyIKiANSJeAbhYBfFqEiwEiAEZ44cANbZcBYuRhQiAWww1abZp254kGrbrIALIgEMjJ81QA0iKHcYVDJjMwsqWQUlaHgHTR0MMmB-MJ86ayZbHkQYbDAQVBC0i0z2dgB+RGAy8qYALnUE52BXDy9wqj8AoOLvCKiWR0ScfEJSMlQ8qDJh3VGDUl9autWmKYwZtEwF8ZJ-AGZ-ABYuyKA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	of course evaluates to 7, as does
 	    }
 \item{
-	
+	<div class='snippet' id='javascript_29_33_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 brooks_curried(list(brooks_curried,
@@ -986,9 +933,10 @@ brooks_curried(list(brooks_curried,
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYJw9mDWDOD6DGBXEICWBTAJgCgDaugBdtQIYFk0sAaAKAAJGnmWX8iTwo4kUNNq9BqxGim7YgAdciHpX6CAzIIAsASg1qA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABABwDYgM4H0IgE54wCmAJgBQAeAlIgN4CQiTiAUM4nkVPkgJ6IBeAHyIKiANSJeAbhYBfFqEiwEiAEZ44cANbZcBYuRhQiAWww1abZp254kGrbrIALIgEMjJ81QA0iKHcYVDJjMwsqWQUlaHgHTR0MMmB-MJ86ayZbHkQYbDAQVBC0i0z2dgB+RGAy8qYALnUE52BXDy9wqj8AoOLvCKiWR0ScfEJSMlQ8qDJh3VGDUl9autWmKYwZub0xw38VtcP16bI0TAXxkn8AZn8AFi6u6SA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	    }
 \end{enumerate}
 
@@ -996,18 +944,14 @@ brooks_curried(list(brooks_curried,
 \end{Answer}
 
       
-    <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Exercise 2.20 of the original textbook deals with Scheme
-	operators that take variable numbers of arguments. This concept exists
-	in JavaScript, but plays a less prominent role. The textbook adaptors
-	decided to sneak in currying on this occasion.
-      </FOOTNOTE></div>
+    
       
       </SPLIT>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Mapping over lists
-      
+      </h2></div>
 
       
       
@@ -1020,7 +964,7 @@ brooks_curried(list(brooks_curried,
         scales each number in a list by
         a given factor:
 
-        
+        <div class='snippet' id='javascript_29_34_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function scale_list(items, factor) {
@@ -1032,9 +976,10 @@ function scale_list(items, factor) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwgQwDYFMD6GbJQAUMUWAtsgDSLBrRwBOAlIgN4BQi3ijWUIRkgI4wIDBhJlKzLj3k8A-IjES5C+QC5EABzQxGRABZY0AEykVkrAFS16UJjXUbX3VJlz5CRKPsmkVsw0dAwszADcHAC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwgQwDYFMD6GbJQAUMUWAtsgDSLBrRwBOAlIgN4BQi3ijWUIRkgI4wIDBhJlKzLj3k8A-IjES5C+QC5EABzQxGRABZY0AEykVkrAFS16UJjXUbX3VJlz5CRKPsmkVsw0dAwszADcHAC+HBwe2HgExN7EAIw0AEw0AMw0ACw0AKzBiGkADJFAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
       </p></div>
@@ -1044,9 +989,9 @@ function scale_list(items, factor) {
         We can abstract this general idea and capture it as a common pattern
         expressed as a higher-order
         function, just as in
-        section~\ref{sec:higher-order-procedures}.  The higher-order
+        section \ref{sec:higher-order-procedures}.  The higher-order
         function
-        here is called {\lstinline[mathescape=true]$map$}.  The function {\lstinline[mathescape=true]$map$} takes as arguments a
+        here is called <kbd>map</kbd>.  The function <kbd>map</kbd> takes as arguments a
         function
         of one argument
         and a list, and returns a list of the results produced by
@@ -1057,7 +1002,7 @@ function scale_list(items, factor) {
       
 
         
-        
+        <div class='snippet' id='javascript_29_35_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function map(fun, items) {
@@ -1069,37 +1014,40 @@ function map(fun, items) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYAcAUowBpExQCmyAzgJSIDeAUIvYgE5FQiNIykD6YIANn0yESFOg3EMA-Il4CxE8QC5E6VDEbZwmABZFUAEyHEy5cvnkLL9NFhz4oawcJOmA3DQC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYAcAUowBpExQCmyAzgJSIDeAUIvYgE5FQiNIykD6YIANn0yESFOg3EMA-Il4CxE8QC5E6VDEbZwmABZFUAEyHEy5cvnkLL9NFhz4oawcJOmA3DQC+NGjcyoARqT4fJxQmAC0AIwADPgATAB0AKz4UZEJAGz4kQDsbkA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_29_36_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 map(abs, list(-10, 2.5, -11.6, 17));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=LYQwDgFCBGDOA0ACANgS1gFwgWgIwAYkAmAOgFYk9cSA2JXAdgEomBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwEYGcAUAPAlIgbwChFTEAnAUyhHKW0QD4BeRABkQH5EGAuRALTYA3EQC+RUJFgJEAW2QAHTFIA0iGFEpz0+YmQrVaSGOgD6YEABsrmTdt0kDzroks2nLsv0XIY5FXBMAAtKZAATOy0dXFx1Ty9EhWU1RCg-W3sY2NEJZMw0dHUrUyhMAQBGNnUAJgA6AFZ1Soq6gDZ1CoB2HKA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_29_37_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 map(x => x * x, list(1, 2, 3, 4));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=LYQwDgFAHgBAvAPhrAVMgNDANgSwM4AuEAjJgEyYDMmALAJR0DcQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYAcAUowBpExQCmyAzgJSIDeAUIvYgE5FQiNIykD6YIANn0yESFOg3EMA-Il4CxE8QC5E6VDEbZwmABZFUAEyHEy5cvnkLL9NFhz4oawcJOmA3DQC+NG5gAeiAF4APkR-ACpQ-D5OKEwARnwAJnwAZnwAFjcgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p20' class='permalink'></a><p>
-        Now we can give a new definition of {\lstinline[mathescape=true]$scale_list$} in terms of {\lstinline[mathescape=true]$map$}:
-        
+        Now we can give a new definition of <kbd>scale_list</kbd> in terms of <kbd>map</kbd>:
+        <div class='snippet' id='javascript_29_38_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function scale_list(items, factor) {
@@ -1108,33 +1056,34 @@ function scale_list(items, factor) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwgQwDYFMD6GbJQAUMUWAtsgDSLBrRwBOAlIgN4BQi3ijWUIRknJoADkQAeiALwA+RFIBUtelCY1SFZMwDcHAL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwgQwDYFMD6GbJQAUMUWAtsgDSLBrRwBOAlIgN4BQi3ijWUIRknJoADkQAeiALwA+RFIBUtelCY1SFZMwDcHAL4cOqTLnyEi54gEYaAJhoBmGgBYaAVmY1rABl1A}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p21' class='permalink'></a><p>
         
-	The function {\lstinline[mathescape=true]$map$}
+	The function <kbd>map</kbd>
 	
 	is an important construct, not only because it captures a
         common pattern, but because it establishes a higher level of
-        abstraction in dealing with lists.  In the original definition of {\lstinline[mathescape=true]$scale_list$}, the recursive structure of the program draws attention to
-        the element-by-element processing of the list.  Defining {\lstinline[mathescape=true]$scale_list$} in terms of {\lstinline[mathescape=true]$map$} suppresses that level of detail and
+        abstraction in dealing with lists.  In the original definition of <kbd>scale_list</kbd>, the recursive structure of the program draws attention to
+        the element-by-element processing of the list.  Defining <kbd>scale_list</kbd> in terms of <kbd>map</kbd> suppresses that level of detail and
         emphasizes that scaling transforms a list of elements to a list of
         results.  The difference between the two definitions is not that the
         computer is performing a different process (it isn't) but that we
-        think about the process differently.  In effect, {\lstinline[mathescape=true]$map$} helps
+        think about the process differently.  In effect, <kbd>map</kbd> helps
         establish an abstraction barrier that isolates the implementation of
         functions
         that transform lists from the details of how the
         elements of the list are extracted and combined.  Like the barriers
-        shown in figure~\ref{fig:abstraction-barriers}, this abstraction gives
+        shown in figure \ref{fig:abstraction-barriers}, this abstraction gives
         us the flexibility to change the low-level details of how sequences
         are implemented, while preserving the conceptual framework of
         operations that transform sequences to sequences.
-        section~\ref{sec:sequences-conventional-interfaces} expands on this use
+        section \ref{sec:sequences-conventional-interfaces} expands on this use
         of sequences as a framework for organizing programs.
       </p></div>
 
@@ -1144,12 +1093,12 @@ function scale_list(items, factor) {
 
         The
         function
-        {\lstinline[mathescape=true]$square_list$} takes a list of
+        <kbd>square_list</kbd> takes a list of
         numbers as argument and returns a list of the squares of those
         numbers.
 
 
-        
+        <div class='snippet' id='javascript_29_39_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 square_list(list(1, 2, 3, 4));
@@ -1157,14 +1106,15 @@ square_list(list(1, 2, 3, 4));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4RwrghgTgpg+gGwJbAC4AplvQRgDQAEATIQMyEAsAlFQNwBQA9IwbKmFAHbABcBA2vgEVC-AJyicANkKcwCBAF1lioA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=M4RwrghgTgpg+gGwJbAC4AplvQRgDQAEATIQMyEAsAlFQNwBQA9IwbKmFAHbABcBA2vgEVC-AJyicANkKcwCBAF1lioA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        Here are two different definitions of {\lstinline[mathescape=true]$square_list$}.  Complete
+        Here are two different definitions of <kbd>square_list</kbd>.  Complete
         both of them by filling in the missing expressions:
 
-        
+        <div class='snippet' id='javascript_29_40_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function square_list(items) {
@@ -1175,11 +1125,12 @@ function square_list(items) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9AGxmSgAoYocBbZASkQG8AoRVxXKELJYvMEAgXKUa9FmwlsA-In6DxkiQC5EABwwwspKVIA0iHbQDcTAL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9AGxmSgAoYocBbZASkQG8AoRVxXKELJYvMEAgXKUa9FmwlsA-In6DxkiQC5EABwwwspKVIA0iHbQDcTAL5MmaTLkLEyREqQCM+gEz6AzPoAstY0wB6APYcTm5kFQBtF0RI731IgE4EpwA2fTkCAF0crKA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_29_41_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function square_list(items) {
@@ -1188,9 +1139,10 @@ function square_list(items) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9AGxmSgAoYocBbZASkQG8AoRV3KELJKjAB1ID8AgDSIhtANxMAvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9AGxmSgAoYocBbZASkQG8AoRV3KELJKjAB1ID8AgDSIhtANxMAvkyZpMuQsTJESpAIyiATKIDMogCy1JTAPRnE7TmGQAuRAG0tTw6McBOdxoBsosCAEBAC6ocFAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 	
       \hfill{\hyperref[ex:square-list-Answer]{Solution}}\\
@@ -1198,7 +1150,7 @@ function square_list(items) {
 
 \begin{Answer}[ref={ex:square-list}]
 
-    
+    <div class='snippet' id='javascript_29_42_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function square_list(items) {
@@ -1210,10 +1162,11 @@ function square_list(items) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9AGxmSgAoYocBbZASkQG8AoRVxXKELJYvMEAgXKUatFmwlsA-In6DxkiQC5EABwwwspNJlykAFjgwATYdTq0ANEwCQiiTuz4iJUlA1CK52j4DcTAF8gA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3NElgQp02HAH0ANjGRQ8MKDgC2yEhWo0cdBoimiwIceNnylRSmvOIA-Ij0GzF6gC5EABwwwseNJlx4AFjgYACZGispEADTkAJAO1N4iElIyUO6GcmFEWZw85Am4SdJ4kkUAjBGIAEwVAMwVACzZ5AD0zeqaYMjOANrliN31Fd0AnEOlAGwVtuIAunMzQA}{\usebox\lstbox}
+</pre>
 
-
-  
+</div></div>
+  <div class='snippet' id='javascript_29_43_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function square_list(items) {
@@ -1222,9 +1175,10 @@ function square_list(items) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9AGxmSgAoYocBbZASkQG8AoRVxXKELJKjAB1JpMuADSIK1OgG4mAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3NElgQp02HAH0ANjGRQ8MKDgC2yEhWo0cdBogUYADnjSZcAGkRzFyzj3KGREqTMnS8ARlMAmUwGZTAFiJEnAD0QeqaYMgAXIgA2m6xvqYxAJxJLgBspmAg4uIAugV5QA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 
   
@@ -1235,15 +1189,15 @@ function square_list(items) {
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
  
-        Louis Reasoner tries to rewrite the first {\lstinline[mathescape=true]$square_list$}
+        Louis Reasoner tries to rewrite the first <kbd>square_list</kbd>
         function
         of
-        exercise~\ref{ex:square-list} so that it evolves an iterative
+        exercise \ref{ex:square-list} so that it evolves an iterative
         process:
 
         
 	
-        
+        <div class='snippet' id='javascript_29_44_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function square_list(items) {
@@ -1255,23 +1209,24 @@ function square_list(items) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9AGxmSgAoYocBbZASkQG8AoRVxUSWBRCnLUqAAsYYAObIANIgxhkAdz71mbFYlxQQWJMTxgQBAgOFi6iFqotsA-NNkKs5yxYBcPSvygYYhoSPG0pRydg1gAHL340TFxSQRwMABMjPzoAsxCMixl5RVoAbiCAXyD1TW13ckoaKT0DfKZCoA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3IHpfEAFQASASQDKiCYgByAeUGIAgogDCcgEoaAoqsXi5AGQCqg0XJnlQkWAhTpsOAPoAbGMih4YUHAFtkJBTUiNbQ8EjeOFh4UAAWMGAA5sgANIgYYMgA7lGBlMHUtPQRyE5gIC4uMfFJAYj5BY1UAPzpmTlYDU0FAFyIkdFQGDBVcQnJRGld3TOIAA7D0WiYuHixOBgAJtXjAZP1s4eNGdm5RJzBPMFFDP0+0ZH+aeWV59zk5MuOru6ebh54ACMaQATGkAMxpAAsRDe-BoODoDGQfQA2sDEKioWlUQBOHGAgBszwqLgAuhSyUA}{\usebox\lstbox}!*/
                            answer));
     }
     return iter(items, null);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
+</div></div>
 
-
-        Unfortunately, defining {\lstinline[mathescape=true]$square_list$} this way produces the answer
+        Unfortunately, defining <kbd>square_list</kbd> this way produces the answer
         list in the reverse order of the one desired.  Why?
 
         Louis then tries to fix his bug by interchanging the arguments to
-        {\lstinline[mathescape=true]$pair$}:
+        <kbd>pair</kbd>:
 
-        
+        <div class='snippet' id='javascript_29_45_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function square_list(items) {
@@ -1283,15 +1238,16 @@ function square_list(items) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmB9AGxmSgAoYocBbZASkQG8AoRV0SWBRCnLUqABYwwAc2QAaRBjDIA7r3rNWy1riggsSYnjAgCBfkNF0WKsyoD8UmfKynz5gFzdKfKBhgHBwsbUn2HQOUABw8+aTlefyCYhzRMXFIBHAwAE0MfOlpsgG57AF97NQ0tV3JKGkldfVo8-KA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3IHpfEAFQASASQDKiCYgByAeUGIAgogDCcgEoaAoqsXi5AGQCqg0XJnlQkWAhTpsOAPoAbGMih4YUHAFtkJBTU1tDwSN44WHhQABYwYADmyAA0iBhgyADukYGU1NS09OHITmAgLi7RcYkBefn11AD8aRnZWHUN9QBciBFRUBgwlbHxSUSpHZ1TVAAOg1HpWZET06udaJi4eDE4GAAmVaMBRCec1DwFOHQMvT5REf6pZRVEnDzkG46u7p5uHngARlSACZUgBmVIAFlOfAEhQYyB6AG0gYgkZDUkiAJyYgEANie5RcAF1ScSgA}{\usebox\lstbox}!*/
                           square(head(things))));
    }
    return iter(items, null);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         This doesn't work either.  Explain.
         
@@ -1309,7 +1265,7 @@ function square_list(items) {
       given order, from first to last, but squares are added successively to the
       front of the answer list via
       
-      {\lstinline[mathescape=true]$pair$}.
+      <kbd>pair</kbd>.
       The last element of the list is the last one to be added to the answer
       and thus ends up as the first element of the result list.
     }
@@ -1333,13 +1289,13 @@ function square_list(items) {
 
         
         
-	{\lstinline[mathescape=true]$for_each$}
-	is similar to {\lstinline[mathescape=true]$map$}.  It takes as arguments a
+	<kbd>for_each</kbd>
+	is similar to <kbd>map</kbd>.  It takes as arguments a
         
 	function
         and a list of elements.  However, rather than forming a list of the  results,
 	
-	{\lstinline[mathescape=true]$for_each$}
+	<kbd>for_each</kbd>
 	just applies the
 	
 	function
@@ -1348,7 +1304,7 @@ function square_list(items) {
         
 	function
         to the elements are not used at
-        all—{\lstinline[mathescape=true]$for_each$} is used with
+        all—<kbd>for_each</kbd> is used with
         
 	functions
         that perform an action, such as printing.  For example, 
@@ -1357,7 +1313,7 @@ function square_list(items) {
 
 	
 
-        
+        <div class='snippet' id='javascript_29_46_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 for_each(x => display(x), 
@@ -1365,19 +1321,20 @@ for_each(x => display(x),
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYewTg+gpghgxgCwBQA8AEBeAfGgJgSwGcAHAGxgE9UBKAGjQCg1mWXSiAXJAVgHZ6AzACYAjPQAc46tQDcQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=PTAEDMHsCcH0FMCGBjAFqALpUAjeoBzASwDd4A7XAT1AGcMBXAEwowCgo4k0AKAD1ABeAHygmRWgAcANoir8AlABpQbUOo0bpEjDwCsAdhUBmAEwBGFQA4rChQG4gA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         The value returned by the call to
 	
-	{\lstinline[mathescape=true]$for_each$}
+	<kbd>for_each</kbd>
 	
 	(not illustrated above)
         can be something arbitrary, such as true.  Give an
         implementation of
 	
-	{\lstinline[mathescape=true]$for_each$}.
+	<kbd>for_each</kbd>.
         
  
       \hfill{\hyperref[ex:for-each-Answer]{Solution}}\\
@@ -1385,7 +1342,7 @@ for_each(x => display(x),
 
 \begin{Answer}[ref={ex:for-each}]
 
-    
+    <div class='snippet' id='javascript_29_47_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function for_each(fun, items) {
@@ -1397,13 +1354,14 @@ function for_each(fun, items) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMOAnA+gUwIYQBYAUoYANIjFJgLYDOAlIgN4BQib5wiBMN6YIAGwHdKtOnRbspiVJighUScABNMwGGEzKA3K3YBfRJgE1MTPdOTgCeHMpHV6dXZbYoMOfEXBko2GMIUjuIuBsz6QA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABMOAnA+gUwIYQBYAUoYANIjFJgLYDOAlIgN4BQib5wiBMN6YIAGwHdKtOnRbspiVJighUScABNMwGGEzKA3K3YBfRJgE1MTPdOTgCeHMpHV6dXZbYoMOfEXBko2GMIUjuIuBsz6zMzuWLiEAB6IALwAfIjKPAAOAtgAngRxdGQWlgI8UAQArADsZADMAEwAjGQAHC0hQA}{\usebox\lstbox}!*/
     }
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
   
 \end{Answer}
 
@@ -1411,10 +1369,22 @@ function for_each(fun, items) {
       
 
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>In this book, we use <EM>list</EM> to mean a chain of
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>In this book, we use <EM>list</EM> to mean a chain of
           pairs terminated by the end-of-list marker.  In contrast, the term
           
           
           <EM>list structure</EM> refers to any data structure made out of pairs, 
-          not just to lists.</FOOTNOTE></div>
-</SUBSECTION>
+          not just to lists.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Exercise 2.20 of the original textbook deals with Scheme
+	operators that take variable numbers of arguments. This concept exists
+	in JavaScript, but plays a less prominent role. The textbook adaptors
+	decided to sneak in currying on this occasion.
+      </FOOTNOTE></div>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section2/section2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section2/subsection2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+2.2.1  Representing Sequences</div>	<div class='next-page'></div></div>

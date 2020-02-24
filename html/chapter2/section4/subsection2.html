@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>2.4.2 
-        Tagged data
-      </a>
+		<a name='top' class='permalink'>2.4.2  Tagged data</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -19,7 +26,7 @@
       
       
       <QUOTE>principle of least commitment.</QUOTE>  In implementing the complex-number
-      system in section~\ref{sec:representations-complex-numbers}, we can
+      system in section \ref{sec:representations-complex-numbers}, we can
       use either Ben's rectangular representation or Alyssa's polar
       representation.  The abstraction barrier formed by the selectors and
       constructors permits us to defer to the last possible moment the
@@ -35,12 +42,12 @@
       Alyssa's representation.  If both representations are included in a
       single system, however, we will need some way to distinguish data in
       polar form from data in rectangular form.  Otherwise, if we were
-      asked, for instance, to find the {\lstinline[mathescape=true]$magnitude$} of the pair $(3,4)$,
+      asked, for instance, to find the <kbd>magnitude</kbd> of the pair $(3,4)$,
       we wouldn't know whether to answer 5 (interpreting the number in
-      rectangular form) or 3~(interpreting the number in polar form).  A
+      rectangular form) or 3 (interpreting the number in polar form).  A
       straightforward way to accomplish this distinction is to include a
       
-      <EM>type tag</EM>—the symbol {\lstinline[mathescape=true]$rectangular$} or {\lstinline[mathescape=true]$polar$}—as
+      <EM>type tag</EM>—the symbol <kbd>rectangular</kbd> or <kbd>polar</kbd>—as
       part of each complex number.  Then when we need to manipulate a
       complex number we can use the tag to decide which selector to apply.
       </p></div>
@@ -49,15 +56,15 @@
       In order to manipulate tagged data,
       we will assume that we have
       functions
-      {\lstinline[mathescape=true]$type_tag$} and {\lstinline[mathescape=true]$contents$} that extract from a data object the tag and the actual
+      <kbd>type_tag</kbd> and <kbd>contents</kbd> that extract from a data object the tag and the actual
       contents (the polar or rectangular coordinates, in the case of a
       complex number).  We will also postulate a
       function
-      {\lstinline[mathescape=true]$attach_tag$} that takes a tag and contents and produces a tagged data
+      <kbd>attach_tag</kbd> that takes a tag and contents and produces a tagged data
       object.  A straightforward way to implement this is to use ordinary
       list structure:
 
-      
+      <div class='snippet' id='javascript_40_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function attach_tag(type_tag, contents) {
@@ -69,7 +76,7 @@ function type_tag(datum) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQylZEAWB9dBzACigE8AHAU12TwBpEIEpywoBnASkQG8AoRfxACdyUEIKSlkMQUTKV8dBi2Zt2Abh4BfHqEiwEiEhSqEAJqhABbTrwFCRYpDFbZJ0gudHW+d34gD8iJjkyKYeFt5+vgBciACigoJwMgBEAEahhtR45KaInlaIMEhG8tQpdAXWGtq60PBISkwsrOFeNj78wqLiRS5uMlXsnVEBWTAANm1Ww6MCsQlJqRl5+Dl5VUWNjCqsFfkR6lpAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQylZEAWB9dBzACigE8AHAU12TwBpEIEpywoBnASkQG8AoRfxACdyUEIKSlkMQUTKV8dBi2Zt2Abh4BfHqEiwEiEhSqEAJqhABbTrwFCRYpDFbZJ0gudHW+d34gD8iJjkyKYeFt5+vgBciACigoJwMgBEAEahhtR45KaInlaIMEhG8tQpdAXWGtq60PBISkwsrOFeNj78wqLiRS5uMlXsnVEBWTAANm1Ww6MCsQlJqRl5+Dl5VUWNjCqsFfkR6lo8PEqsUIjA2ACMiAC8iBPOUAQpAIL7ACxHZxeWxNhgMIAI4gZgQAG3B4jVDoLAmV5A8ig8EAp7nfZXa5HHilBH-QEgsGQSHqIA}{\usebox\lstbox}!*/
            : Error("bad tagged datum in type_tag", datum);
 }
 function contents(datum) {
@@ -79,8 +86,9 @@ function contents(datum) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
       
       
@@ -88,20 +96,18 @@ function contents(datum) {
       <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
       Using these
-      functions, we can define predicates {\lstinline[mathescape=true]$is_rectangular$}
-      and {\lstinline[mathescape=true]$is_polar$}, which recognize polar and rectangular numbers,
+      functions, we can define predicates <kbd>is_rectangular</kbd>
+      and <kbd>is_polar</kbd>, which recognize polar and rectangular numbers,
       respectively:
 
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_40_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function is_rectangular(z) {
     return type_tag(z) === "rectangular";
 }
 function is_polar(z) {
     return type_tag(z) === "polar";
 }
-\end{JavaScript}
-
+</pre></div></div>
 
       </p></div>
       <div class='permalink'>
@@ -113,13 +119,13 @@ function is_polar(z) {
       In addition, Ben and Alyssa must make sure that the names of their
       functions
       do not conflict.  One way to do this is for Ben to append
-      the suffix {\lstinline[mathescape=true]$rectangular$} to the name of each of his representation
+      the suffix <kbd>rectangular</kbd> to the name of each of his representation
       functions
-      and for Alyssa to append {\lstinline[mathescape=true]$polar$} to the names of hers.
+      and for Alyssa to append <kbd>polar</kbd> to the names of hers.
       Here is Ben's revised rectangular representation from
-      section~\ref{sec:representations-complex-numbers}:
+      section \ref{sec:representations-complex-numbers}:
 
-      
+      <div class='snippet' id='javascript_40_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function real_part_rectangular(z) {
@@ -131,7 +137,7 @@ function imag_part_rectangular(z) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAJwKYEMA2B9ADu5KbNadMAcxEwIAoAvASkQG8AoRDlVKEZJACwwATegwDcrAL6tQkWAkQwAtunJ4CRElDKVqyUS3ac0PPom0xMoidNnR4SFeTAweQ1MVSkKVWo0OcXKaO6FD82ADOAI6ENNEgBKg0aFjqhJ7eun4MDEaB+QDUefmc8Yk0yqppml7aPnqiOTYy4PYKOpgeWjq++v5sgSa8IWHYoWQVTtUZdVl9DAA0xSUlKTj46d312eJSLXIOiCoA1h7AyHBKnqmValtzNAAeC4gAnkwDxtzDiKHaEOFtOQaAAie69EFLFbQlb4GD6Z5vJp7OzyEKnbDnS7YKY6GY9BrIF7oD7FIZmP7oAHYIGg8F6SHLGHQuH6ZCIABUR1C4QgcAiNBJL3ZXJUowiMDAgpyu0kQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQylZEAWB9dBzACigE8AHAU12TwBpEIEpywoBnASkQG8AoRfxACdyUEIKSlkMQUTKV8dBi2Zt2Abh4BfHqEiwEiEhSqEAJqhABbTrwFCRYpDFbZJ0gudHW+d34gD8iJjkyKYeFt5+vgBciACigoJwMgBEAEahhtR45KaInlaIMEhG8tQpdAXWGtq60PBISkwsrOFeNj78wqLiRS5uMlXsnVEBWTAANm1Ww6MCsQlJqRl5+Dl5VUWNjCqsFfkR6lo64PUGrACOIMjCBAAeHXbdjoh3iABUrzUneg32yBNXDcoNhhNBkGA8CAJjcCAAvR4CZ69YKheFHWqnfROSzUIGCEFg9CQ6GwhHcEbIkpSKYI751bGIXF4MAwUSmShEiFQmEycm2JEOXq4qA4S4EgiXa63YQA-GE8jgkm89GzOaIADUIyiUpu5AIMGZ8tBiuJPLJ7Et9Kxf25E05pu5pL5iK6QqQIpwqAhBqNkgJJqV5pdNG16v+gP9CqDztV1t+BlxAGtKMAkpYTXLDXiucrYXc6MRXfYekhUOgsCYCClc8GKmHw74BvdC1bjgy-snU+nsEbuYGzbHBHRkMWqSg0BgcPhq7XnfXG+rm4IPkzUDgGK1R3QV59PdhWMUCKO29oeEpWFBEGlmC4GNgwIUALxrlPYNNwDN9yEDp0qgCQ-ANou-AAMwAHQAAx0JB4EAOxHDw2Z4Mac4qk0uwEDeYB3nAD4zOoQA}{\usebox\lstbox}!*/
 function magnitude_rectangular(z) {
     return math_sqrt(square(real_part_rectangular(z))
            +
@@ -151,13 +157,14 @@ function make_from_mag_ang_rectangular(r, a) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       
       
       and here is Alyssa's revised polar representation:
 
-      
+      <div class='snippet' id='javascript_40_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function real_part_polar(z) {
@@ -169,7 +176,7 @@ function imag_part_polar(z) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAJwKYEMA2B9ADu5KPOTAgCgC8BKRAbwChEmVUoRkkBbdAczBjYATVMVLJKNAFSJuUABbYIcAM5l0YHphG4S5alQDc9AL71QkWAkQxuPPASI6xEuo2Zo2HGb35Dtu8WpEaVkFZRgwNQ0tUT0qQxMzcGh4Lh8BEGFYwJoGZhZPJDkMQQkjU3MUq3VNf2cgvPdWdiQodBhMMsTKyzSAaxFgZDhObDQsbBtebLIADwAaRABPXLcmDxbEdCg2iAU2njIAIicCI-m1-Kvr5nwYcVDsZQBHQjIXkAJUOZoAakQPl8yCsqBcbuCIUxHtt1MDFvoEhVkr1vANsEMRthbNgajNkIt0Kt8hsvNtdvteMdTshzpdIeC7uJ8Vt4uUgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQylZEAWB9dBzACigE8AHAU12TwBpEIEpywoBnASkQG8AoRfxACdyUEIKSlkMQUTKV8dBi2Zt2Abh4BfHqEiwEiEhSqEAJqhABbTrwFCRYpDFbZJ0gudHW+d34gD8iJjkyKYeFt5+vgBciACigoJwMgBEAEahhtR45KaInlaIMEhG8tQpdAXWGtq60PBISkwsrOFeNj78wqLiRS5uMlXsnVEBWTAANm1Ww6MCsQlJqRl5+Dl5VUWNjCqsFfkR6lo64PUGrACOIMjCBAAeHXbdjoh3iABUrzUneg32yBNXDcoK44BMbgQAF6PATPXqWahgGCiUyUUhgiHQj6IBFQHAMVrIMB4CZojEyaFHWqnfROBF4IGCEHo8EUmFdBzwxHIkCo0GsqGcT64nCsYoEIkkskCynfOq0nHclHSzHs+w9JDBUKCuU0v6S0n81XcEZwkpSKbQ3W-AwIgDWlGASUs2GEAOwMHpRpkdzoxDVZpQaAwOHwBBSLJuFRGc1GAwIIuwlyZBEu11uD0QAGpEGmbuQCP72DQY7Gy4nUETC3RKVSfmckPbHc7sF7Jd6CII6MgA5ykKh0FgTOHI4Jo2Wy-Guyh2HWeEpWFAUBNiKxWMgXAxsGBCgBeRUO7BOuAutvEjuliejADMADoAAx0e+3gDsRx4nuojOZ5IITV2EormuG7YFuO7WOoQA}{\usebox\lstbox}!*/
 function magnitude_polar(z) {
     return head(z);
 }
@@ -187,8 +194,9 @@ function make_from_mag_ang_polar(r, a) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
       
       
@@ -201,14 +209,14 @@ function make_from_mag_ang_polar(r, a) {
       function
       for handling
       data of that type.  For example, to obtain the real part of a complex
-      number, {\lstinline[mathescape=true]$real_part$} examines the tag to determine whether to use
-      Ben's {\lstinline[mathescape=true]$real_part_rectangular$} or Alyssa's {\lstinline[mathescape=true]$real_part_polar$}.
-      In either case, we use {\lstinline[mathescape=true]$contents$} to extract the bare, untagged
+      number, <kbd>real_part</kbd> examines the tag to determine whether to use
+      Ben's <kbd>real_part_rectangular</kbd> or Alyssa's <kbd>real_part_polar</kbd>.
+      In either case, we use <kbd>contents</kbd> to extract the bare, untagged
       datum and send this to the rectangular or polar
       function
       as required:
 
-      
+      <div class='snippet' id='javascript_40_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function real_part(z) {
@@ -220,7 +228,7 @@ function real_part(z) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAJwKYEMA2B9ADu5KACgC8BKRAbwChE6VUoRkkYBnbNadMAcxEwFSZWvTH0A-Ayx4CUTqm58BQiAiiowUNsJHj9ALkTs8cQcmGj94qWhn5Cp80TVbN23Vev0jAUWTIcBYARACqYADWYHAA7khQAJ64qMZIdjgOUMEANIjkANzUAL7UoJCwCMYAtui8soTCVF5oTCzGHFxQPPzO5F7WUjA1dZkKSj2q6u465HredEYmuGZCffNig8P18svOrhpaM2Rz64h+AUFEYZHRcYiJyanVtds5eWSFJWXQ8EjDYDAmAATVCNGhiFrMVgdRRdZS9E7eKT-QEgEFjOETCz7aaeU6LDi7VaI+bI2oA4GoJyTNyHPGnM6IfyBELhKKxeJJFIwP7k1Egt4FYqlcA-SrdTCg8hNCGMKHtDHdFQWNbrKQSqmdJV7KZ02b9QwKokqklIxAa6nY3UefUMxnMy7Xdl3B7cpAawUfYpAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQE4FNoEMwDmIANrhgBQBeAlIgN4BQizi2UIGSUAngA5ZoouAlVoBeCYgBE2PIRJkpAbgYBfBqEiwEydLzikKNekxZsOXPgKEjjEsdP2HlajeGjwkuKEIgALQWFyHn5AggAaRAgEKCwwKBRaRhZWLHZORF5cGAoQ62FI6Pi4hOoVdU0PHTyw8gATbxAAWyTTZnMM1DQsnPrGlraUlIB+RD8sXDq+9gGhuYAuRABRDAw4CikAI0nEGwIsOsQGmeRLUJspSOPmstdK7SQi2PiUaZuTFI6kLp6Ka9m5iNdtliG8AYDmIsVmsNttDnsDkd+qcojESihLkiZrcKu4HqlcMRumQoJgcEJ5IZRB8zGkLGMJlMaOU3FpPMgmsJiRhSbIKUQqcZkrT0lwQaIWfd2ZyCGAYOw6gI+fgBWRqcL2nSMpyoAEUABHHnkA0gMhYcjYQnc3nklUKIzUaiDQEAamdcxNZvIMBl1rJclVDsdkrx7JVxCVtspaqFgy+iB1AW8+G9vqyPP9-PtonC7ohmqt6ZtAezNBxrKqSE5AGsBMA1k0yVafVzldGKAAPSLcVqfLVeHy4fy1GRRwOXPP5ua-chdxA98tSnQ1usNtC+lWZu1UjCRXC9kX07y+AI2cijkvOXNTm+ZbIUDCIABUCe8AWir33kUfL8TaBQMBgOQ+7BncoY6J62CzgemqiogHbPvBIZsjolpEkW3QGDGMGpHBMpygqAhONhiF-h+wGEBGmGCqBuIod8aYktRJEarh9L4fKICKsxDqkW+-6ARRBBUcRQbIZWr6ypx3Gieqcb9gykwSmB9GIOGRFYbxrHxkIMCgsyKkSSuaD1nAjZoWgLYEDxs7djh8bHkOp5BFIokTre+Yzn+BpGpB5odrQLqIH55ALteHm3n+yZAdwkRlou4FVrgtYmWuG6EDZu5qfZCmOcOZ6uZp7kRYCM5ZSB4n4hZRZyX2cFdG2gaiJOLCjNVTGNdmTzoqITo3osPyac1HltRM6FMbJ3UvL1LUpFCqzrOeACqYDVmAcAAO5nFgKLtTymIGXRElWdatWHp06CdTRs2IKMJ0YVdapTQkM39boNk0DdzB3YxGaTWi01ll9iDzTCy2retW27FYKL3SSB0JapHGEWdsH0g1Y6ln1U6jMjXGRpeT0Ay9QNvYN10jZJBH4zZz2vKTt6g4tUgrWtm3bSieOKgjlVhpR5qxnV6OXZjFM42p-Nbu25B069U4DXoQ2fZT6m08T9OOsDTMbKzkMc4BEvCVgPOuAwRQoFAanENwKAoLg6DRGgYDNIgDjGaZjbpdZskAJDMMDEUAMwAHQAAyRKHwcAOy3AwcNGoSNt2w7cBOzcShAA}{\usebox\lstbox}!*/
 }
 function imag_part(z) {
     return is_rectangular(z)
@@ -245,8 +253,9 @@ function angle(z) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 
       
@@ -257,22 +266,20 @@ function angle(z) {
       To implement the complex-number arithmetic operations, we can use the
       same
       functions
-      {\lstinline[mathescape=true]$add_complex$}, {\lstinline[mathescape=true]$sub_complex$}, {\lstinline[mathescape=true]$mul_complex$}, and {\lstinline[mathescape=true]$div_complex$} from
-      section~\ref{sec:representations-complex-numbers}, because the
+      <kbd>add_complex</kbd>, <kbd>sub_complex</kbd>, <kbd>mul_complex</kbd>, and <kbd>div_complex</kbd> from
+      section \ref{sec:representations-complex-numbers}, because the
       selectors they call are generic, and so will work with either
       representation.  For example, the
       function
-      {\lstinline[mathescape=true]$add_complex$} is still
+      <kbd>add_complex</kbd> is still
 
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_40_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function add_complex(z1, z2) {
    return make_from_real_imag(
               real_part(z1) + real_part(z2),
               imag_part(z1) + imag_part(z2));
 }
-\end{JavaScript}
-
+</pre></div></div>
 
       Finally, we must choose whether to construct complex numbers using
       Ben's representation or Alyssa's representation.  One reasonable
@@ -280,7 +287,7 @@ function add_complex(z1, z2) {
       imaginary parts and to construct polar numbers whenever we have
       magnitudes and angles:
 
-      
+      <div class='snippet' id='javascript_40_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_from_real_imag(x, y) {
@@ -292,9 +299,10 @@ function make_from_mag_ang(r, a) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9YAnOZbPTVAG2xjQHMAKADwBpEBPASkQG8AoRPxElBB4kaLLgJES5SjWKZoqMNRBlUeBs3YBubgF9uoSLAQoMOfIWxyldPM1Qce-AZiEiz4y0RvLsABzg1DXtER109IA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAJwKYEMA2B9ADu5KACgC8BKRAbwChE6VUoRkkYBnbNadMAcxEwFSZWvTH0A-Ayx4CUTqm58BQiAiiowUNsJHj9ALkTs8cQcmGj94qWhn5Cp80TVbN23Vev0jAUWTIcBYARACqYADWYHAA7khQAJ64qMZIdjgOUMEANIjkANzUAL7UoJCwCMYAtui8soTCVF5oTCzGHFxQPPzO5F7WUjA1dZkKSj2q6u465HredEYmuGZCffNig8P18svOrhpaM2Rz64h+AUFEYZHRcYiJyanVtds5eWSFJWXQ8EjDYDAmAATVCNGhiFrMVgdRRdZS9E7eKT-QEgEFjOETCz7aaeU6LDi7VaI+bI2oA4GoJyTNyHPGnM6IfyBELhKKxeJJFIwP7k1Egt4FYqlcA-SrdTCg8hNCGMKHtDHdFQWNbrKQSqmdJV7KZ02b9QwKokqklIxAa6nY3UefUMxnMy7Xdl3B7cpAawUfYXfCrQxXw4ky+iQtqu7BdXiNAC8McQwS1AeQwU+IvKvyNKxNQboIc5yXDtWjseCxuT3tFvvNUC6EAAFgXI2GI7kcYcKODg3K2vgYBYm7UW9a2F6vhX0-3I0D0Ewqu3ml2-T2LFOZ6abIhaxggUQVyBZwbxOcWVcAEboIH3Wq8VAX3dVJ4Tt53kepsVIVseZ-ZhitRfoXs7tOe5rhsl4wJggGrgeYhHo6Z4XhG163kB948ogH5sE+KEvj66bpNs-pYmC86-huW7CCmuGVEMLyjAmRHSh2OYLmBEFCqOaaVCilKEcqxGyqRNRQPWbAAI4NGJIAEKC+F0bC2rEiB9AANTQfQknSUQNEjHIvEIsclFjuKfCSnpgZMT+8pCfW048FpWxyeMfHkNkanWLJun0c5BnlpxvIRFSwCBFUCgyNpZkWAAHrkCRzgJ8rTjW9YRlcXnmDkbkMkuRDRYgsU4UZ-mBcF2BbN0EVEMguToHFnakYl6B1g2qXyYmGV2vM2XIIgABUiDWdgag6DVuTdX1A1sDyRA1T5HFvogGloDltXMaRkW9YgkWGX50gZLpxr8XVVl8jxB3SuN071kN00mVSZ2za+lbhaM93frm-UnWid2Zo0F3Cdgk1gDdvCmfdBU7dxX2Wodq3ypu54Ub580Wq9FnvV04GI3NlY1AF2BBXAIX4c9P25bFb0sQ1TUpSWmbtR1+jZRN4nEItoKRRQykLaJUlLflrkM6cA22UDCS5LM4PzbjxWE6VLzlQdVXmitlltFTyWFrT6UC4L4hddVD1UUV+MlcTww5TFKvvdLJuy2bLxpUIZOSzj6B4wTIVlXwlUGxTgluzLnvy3w0NKzVKbUK4bBQOamAJGwbDoBwajYGAe6IFGH3uyVXuRgAkHQmWCwAzAAdAADLk5elwA7F61DPXI01xwnSeDXAqfAfkQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
       
       
@@ -318,7 +326,7 @@ function make_from_mag_ang(r, a) {
         </SPLIT>
 
       The resulting complex-number system has the structure shown in
-      figure~\ref{fig:generic-complex-system}.  The system has been
+      figure \ref{fig:generic-complex-system}.  The system has been
       decomposed into three relatively independent parts: the
       complex-number-arithmetic operations, Alyssa's polar
       implementation, and Ben's rectangular implementation.  The polar and
@@ -341,17 +349,24 @@ function make_from_mag_ang(r, a) {
       representations: Within a given representation implementation (say,
       Alyssa's polar package) a complex number is an untyped pair
       (magnitude, angle).  When a generic selector operates on a number of
-      {\lstinline[mathescape=true]$polar$} type, it strips off the tag and passes the contents on to
+      <kbd>polar</kbd> type, it strips off the tag and passes the contents on to
       Alyssa's code.  Conversely, when Alyssa constructs a number for general
       use, she tags it with a type so that it can be appropriately
       recognized by the higher-level
       functions.  This discipline of
       stripping off and attaching tags as data objects are passed from level
       to level can be an important organizational strategy, as we shall see
-      in section~\ref{sec:generic-operators}.
+      in section \ref{sec:generic-operators}.
       
       
       
       </p></div>
     
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section4/subsection1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section4/subsection3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+2.4.2  Tagged data</div>	<div class='next-page'></div></div>

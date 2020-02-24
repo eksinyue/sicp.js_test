@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>4.2.1 
-    Normal Order and Applicative Order
-  </a>
+		<a name='top' class='permalink'>4.2.1  Normal Order and Applicative Order</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
   
 
@@ -14,7 +21,7 @@
 <a name='p1' class='permalink'></a><p>
     
     
-    In section~\ref{sec:elements-of-programming}, where we began our
+    In section \ref{sec:elements-of-programming}, where we began our
     discussion of models of evaluation, we noted that
     
     JavaScript
@@ -38,27 +45,12 @@
     last possible moment (e.g., until they are required by a primitive
     operation) is called 
     
-    <EM>lazy evaluation</EM>.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-    function
-
-    
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function try_me(a, b) {
-    return a === 0 ? 1 : b;	
-}
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABFATgTwPoFsCmAKAQwBpEAjASkQG8AoRexFHKEFJAxAXm8QAZEA-IgCMiAFxkA3AEgaAXyA}{\usebox\lstbox}
-
-
-  
+    <EM>lazy evaluation</EM>.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
     Consider the
     
     function
 
-    
+    <div class='snippet' id='javascript_81_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function try_me(a, b) {
@@ -68,8 +60,9 @@ function try_me(a, b) {
 \end{lrbox}
 
 \href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABFATgTwPoFsCmAKAQwBpEAjASkQG8AoRexFHKEFJAxAXm8QAZEA-IgCMiAFxkA3AEgaAXyA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
@@ -77,7 +70,7 @@ function try_me(a, b) {
     Evaluating
     
       
-      {\lstinline[mathescape=true]$try_me(0, head(null));$}
+      <kbd>try_me(0, head(null));</kbd>
     
     generates an error in
     
@@ -88,7 +81,7 @@ function try_me(a, b) {
     would return 1, because the argument
     
       
-      {\lstinline[mathescape=true]$head(null)$}
+      <kbd>head(null)</kbd>
     
     would never be evaluated.
   </p></div>
@@ -97,31 +90,29 @@ function try_me(a, b) {
 <a name='p3' class='permalink'></a><p>
     An example that exploits lazy evaluation is the definition of a
     function
-    {\lstinline[mathescape=true]$unless$}
+    <kbd>unless</kbd>
 
-    
+    <div class='snippet' id='javascript_81_2_div'><div class='pre-prettyprint'></div></div>
 
     that can be used in expressions such as
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_81_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 unless(xs === null,
        head(xs),	
        display("error: xs should not be null"));
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
     This won't work in an applicative-order language because both the
     usual value and the exceptional value will be evaluated before
-    {\lstinline[mathescape=true]$unless$}
-    is called (compare exercise~\ref{ex:new-if}).
+    <kbd>unless</kbd>
+    is called (compare exercise \ref{ex:new-if}).
     An advantage of lazy evaluation is that some
     
     functions,
-    such as {\lstinline[mathescape=true]$unless$}, can do useful computation
+    such as <kbd>unless</kbd>, can do useful computation
     even if evaluation of some of their arguments would produce errors or
     would not terminate.
   </p></div>
@@ -146,7 +137,7 @@ unless(xs === null,
     is 
     
     <EM>strict</EM> in that
-    argument.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+    argument.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
   </p></div>
 
   <div class='permalink'>
@@ -163,7 +154,7 @@ unless(xs === null,
     functions
     may be
     either strict or non-strict.  There are also languages (see
-    exercise~\ref{ex:user-controlled-strictness}) that give programmers
+    exercise \ref{ex:user-controlled-strictness}) that give programmers
     detailed control over the strictness of the
     
     functions
@@ -178,17 +169,17 @@ unless(xs === null,
     that can usefully be made non-strict
     is
     
-    {\lstinline[mathescape=true]$pair$}
+    <kbd>pair</kbd>
     (or, in general, almost any constructor for data structures).
     One can do useful computation, combining elements to form
     data structures and operating on the resulting data structures,
     even if the values of the elements are not known.  It makes perfect
     sense, for instance, to compute the length of a list without knowing
     the values of the individual elements in the list.  We will exploit
-    this idea in section~\ref{sec:lazy-cons} to implement the
-    streams of chapter~3 as lists formed of non-strict
+    this idea in section \ref{sec:lazy-cons} to implement the
+    streams of chapter 3 as lists formed of non-strict
     
-    {\lstinline[mathescape=true]$pair$}
+    <kbd>pair</kbd>
     pairs.
   </p></div>
 
@@ -202,25 +193,23 @@ unless(xs === null,
 	Suppose that (in ordinary applicative-order JavaScript) we define
       
     
-    {\lstinline[mathescape=true]$unless$}
-    as shown above and then define {\lstinline[mathescape=true]$factorial$} in terms
-    of {\lstinline[mathescape=true]$unless$} as
+    <kbd>unless</kbd>
+    as shown above and then define <kbd>factorial</kbd> in terms
+    of <kbd>unless</kbd> as
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_81_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function factorial(n) {
     return unless(n === 1,
                   n * factorial(n - 1),
                   1);
 }
-\end{JavaScript}
-
+</pre></div></div>
 
     
 
     What happens if we attempt to evaluate
     
-    {\lstinline[mathescape=true]$factorial(5)$}?
+    <kbd>factorial(5)</kbd>?
     
     Will our definitions work in a normal-order language?
   
@@ -234,15 +223,15 @@ function factorial(n) {
     
     
     Ben Bitdiddle and Alyssa P. Hacker disagree over the importance of
-    lazy evaluation for implementing things such as {\lstinline[mathescape=true]$unless$}.
-    Ben points out that it's possible to implement {\lstinline[mathescape=true]$unless$}
+    lazy evaluation for implementing things such as <kbd>unless</kbd>.
+    Ben points out that it's possible to implement <kbd>unless</kbd>
     in applicative order as a
     
     new kind of expression,
     akin to conditional expressions.
     
     Alyssa counters that, if one did that,
-    {\lstinline[mathescape=true]$unless$} would be merely syntax, not a
+    <kbd>unless</kbd> would be merely syntax, not a
     
     function
     that could be used in conjunction with higher-order
@@ -253,11 +242,11 @@ function factorial(n) {
       
       
 	Show how to define the evaluation of 
-	{\lstinline[mathescape=true]$unless$} as a new kind of expression
+	<kbd>unless</kbd> as a new kind of expression
 	(as we defined the evaluation of conditional expressions in
-	section~\ref{sec:conditionals}),
+	section \ref{sec:conditionals}),
 	and give an example of a situation where it might be useful to have
-	{\lstinline[mathescape=true]$unless$} available as a function,
+	<kbd>unless</kbd> available as a function,
 	rather than as a new expression syntax.
       
     
@@ -269,13 +258,13 @@ function factorial(n) {
   
 
 <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>The difference between the
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>The difference between the
     <QUOTE>lazy</QUOTE> terminology and the <QUOTE>normal-order</QUOTE> terminology
     is somewhat fuzzy.  Generally, <QUOTE>lazy</QUOTE> refers to the mechanisms of
     particular evaluators, while <QUOTE>normal-order</QUOTE>
     refers to the semantics of languages, independent of any particular
     evaluation strategy.  But this is not a hard-and-fast distinction, and
-    the two terminologies are often used interchangeably.</FOOTNOTE></div><hr><div class='footnote'>
+    the two terminologies are often used interchangeably.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>The <QUOTE>strict</QUOTE> versus <QUOTE>non-strict</QUOTE>
     terminology means essentially the same thing as <QUOTE>applicative-order</QUOTE>
     versus <QUOTE>normal-order,</QUOTE> except that it refers to individual
@@ -289,4 +278,11 @@ function factorial(n) {
     functions
     take their arguments by lazy
     evaluation.</QUOTE></FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section2/section2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section2/subsection2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+4.2.1  Normal Order and Applicative Order</div>	<div class='next-page'></div></div>

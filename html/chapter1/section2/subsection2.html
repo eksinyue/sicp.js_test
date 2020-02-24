@@ -1,10 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>1.2.2 Tree Recursion</a>
+		<a name='top' class='permalink'>1.2.2  Tree Recursion</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
         
         
@@ -40,7 +49,7 @@
               function for computing Fibonacci numbers:
 
               
-        
+        <div class='snippet' id='javascript_12_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function fib(n) {
@@ -52,12 +61,13 @@ function fib(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMGAjAFGAlIg3gKESMQCcBTKEEpJAXnsQAZDjXiB+Jlt1gLkToMAjNx6tOIsT34oMSALSIhOANTI0mRIoBMWANz4AvkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABMGAjAFGAlIg3gKESMQCcBTKEEpJAXnsQAZDjXiB+Jlt1gLkToMAjNx6tOIsT34oMSALSIhOANTI0mRIoBMWANz4Avvnyz0ANn1A}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
 
@@ -68,7 +78,7 @@ function fib(n) {
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_original/ch1-Z-G-13}.svg}}
 \caption{The tree-recursive process generated in computing
                 
-                  {\lstinline[mathescape=true]$fib(5)$}
+                  <kbd>fib(5)</kbd>
                 .
           }
 \label{fig:fib-tree}
@@ -80,32 +90,32 @@ function fib(n) {
 <a name='p3' class='permalink'></a><p>
           Consider the pattern of this computation.  To compute
           
-            {\lstinline[mathescape=true]$fib(5)$}
+            <kbd>fib(5)</kbd>
           ,
           we compute
           
-            {\lstinline[mathescape=true]$fib(4)$}
+            <kbd>fib(4)</kbd>
           
             and
           
-            {\lstinline[mathescape=true]$fib(3)$}
+            <kbd>fib(3)</kbd>
           .
           To compute
           
-            {\lstinline[mathescape=true]$fib(4)$}
+            <kbd>fib(4)</kbd>
           ,
           we compute
           
-            {\lstinline[mathescape=true]$fib(3)$}
+            <kbd>fib(3)</kbd>
           
           and
           
-            {\lstinline[mathescape=true]$fib(2)$}
+            <kbd>fib(2)</kbd>
           .  In general, the evolved
-          process looks like a tree, as shown in figure~\ref{fig:fib-tree}.
+          process looks like a tree, as shown in figure \ref{fig:fib-tree}.
           Notice that the branches split into two at each level (except at the
           bottom); this reflects the fact that the
-          {\lstinline[mathescape=true]$fib$}
+          <kbd>fib</kbd>
           function
           calls itself twice each time it is invoked.
         </p></div>
@@ -116,16 +126,16 @@ function fib(n) {
           function
           is instructive as a prototypical tree recursion, but it
           is a terrible way to compute Fibonacci numbers because it does so much
-          redundant computation.  Notice in figure~\ref{fig:fib-tree} that
+          redundant computation.  Notice in figure \ref{fig:fib-tree} that
           the entire computation of
-          {\lstinline[mathescape=true]$fib(3)$}—almost half the work—is
+          <kbd>fib(3)</kbd>—almost half the work—is
           duplicated.  In fact, it is not hard to show that the number of times
-          the function will compute {\lstinline[mathescape=true]$fib(1)$} or {\lstinline[mathescape=true]$fib(0)$} (the number
+          the function will compute <kbd>fib(1)</kbd> or <kbd>fib(0)</kbd> (the number
           of leaves in the above tree, in general) is precisely $\textrm{Fib}(n+1)$.  To get an idea of how bad this is, one can show that the
           value of $\textrm{Fib}(n)$
           
           grows exponentially with $n$.  More precisely
-          (see exercise~\ref{ex:fib-proof}),
+          (see exercise \ref{ex:fib-proof}),
           $\textrm{Fib}(n)$ is the closest
           integer to $\phi^{n} /\sqrt{5}$, where
           
@@ -168,7 +178,7 @@ function fib(n) {
 
               
 
-        
+        <div class='snippet' id='javascript_12_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function fib(n) {
@@ -180,13 +190,14 @@ function fib_iter(a, b, count) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMGAjAFGAlIg3gKESMQCcBTKEEpFVAfRijJPQEYAaRABk+wG58AX3yhIsBMjQMmLAIadUnCHHBQcBYqQpUky1YgC8R7oU1nEAfkSpT54gC5J9Rs3SzEAamud5iPWChEAFpEViwBQSA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABMGAjAFGAlIg3gKESMQCcBTKEEpFVAfRijJPQEYAaRABk+wG58AX3yhIsBMjQMmLAIadUnCHHBQcBYqQpUky1YgC8R7oU1nEAfkSpT54gC5J9Rs3SzEAamud5iPWChEAFpEViwBYRE0dAA2cKA}{\usebox\lstbox}!*/
            : fib_iter(a + b, a, count - 1);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
               This second method for computing $\textrm{Fib}(n)$ is a linear iteration.  The
               difference in number of steps required by the two methods—one linear in $n$,
@@ -199,25 +210,10 @@ function fib_iter(a, b, count) {
               One should not conclude from this that tree-recursive processes are
               useless.  When we consider processes that operate on hierarchically
               structured data rather than numbers, we will find that tree recursion
-              is a natural and powerful tool.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>{\lstinline[mathescape=true]$fib$}
-              function
-              is much less efficient than the second one, it is more
-              straightforward, being little more than a translation into
-              
-                  
-                  
-                    JavaScript
-                  
-                
-              of the
-              definition of the Fibonacci sequence.  To formulate the iterative
-              algorithm required noticing that the computation could be recast as an
-              iteration with three
-	      state names.
-         But even in numerical operations,
+              is a natural and powerful tool.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a> But even in numerical operations,
               tree-recursive processes can be useful in helping us to understand and
               design programs.  For instance, although the first
-              {\lstinline[mathescape=true]$fib$}
+              <kbd>fib</kbd>
               function
               is much less efficient than the second one, it is more
               straightforward, being little more than a translation into
@@ -234,9 +230,10 @@ function fib_iter(a, b, count) {
 	      state names.
         </p></div>
 
-        \subsubsection{
+        <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
           Example: Counting change
-        
+        </h2></div>
         
 
         <div class='permalink'>
@@ -290,17 +287,7 @@ function fib_iter(a, b, count) {
           to problems of changing smaller amounts or using fewer kinds of coins.
           Consider this reduction rule carefully, and convince yourself that we
           can use it to describe an algorithm if we specify the following
-          degenerate cases:<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a><UL>
-            <LI>
-              If $a$ is exactly 0, we should count that as 1 way to make change.
-            </LI>
-            <LI>
-              If $a$ is less than 0, we should count that as 0 ways to make change.
-            </LI>
-            <LI> If $n$ is 0, we should count that as 0 ways to make change.
-            </LI>
-          </UL>
-        
+          degenerate cases:<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
 
           <UL>
             <LI>
@@ -319,7 +306,7 @@ function fib_iter(a, b, count) {
           We can easily translate this description into a recursive
           function:
 
-        
+        <div class='snippet' id='javascript_12_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function count_change(amount) {
@@ -331,7 +318,7 @@ function cc(amount, kinds_of_coins) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABBO4oH0IAsCGYDmApgBQ4C2qYUAlIgN4BQiziAToVCK0hBKRWgA0iAKzUA3AwC+DUJFgJkfcpSjCA1jDAATAM7o4wTHC27ajFmw5ckKtIgC8TxAAYmlj4gD8iAIzvPFgAuRDsqRAAeV0QAHxiAwJZNHX1DY1NHZzdEjx9snOClflUNLT0DIxQMgFo-agSCxABqBoLeYvta4BhWXQxtQjA4Mi0cBTBiVsbp5mTytKqwM0EpxrnUypMliWlZcGh4JG7e-sHh0fHidYr07foE9k5uRGuFrd1Mhz9vb6DVpLKG1uHycXwATD8RIg-mtATdFiDnABmH6+FzQ-6zOFvDKgxAAFh+YKhMIKr02uOcUJ8InRIRckikQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABBO4oH0IAsCGYDmApgBQ4C2qYUAlIgN4BQiziAToVCK0hBKRWgA0iAKzUA3AwC+DUJFgJkfcpSjCA1jDAATAM7o4wTHC27ajFmw5ckKtIgC8TxAAYmlj4gD8iAIzvPFgAuRDsqRAAeV0QAHxiAwJZNHX1DY1NHZzdEjx9snOClflUNLT0DIxQMgFo-agSCxABqBoLeYvta4BhWXQxtQjA4Mi0cBTBiVsbp5mTytKqwM0EpxrnUypMliWlZcGh4JG7e-sHh0fHidYr07foE9k5uRGuFrd1Mhz9vb6DVpLKG1uHycXwATD8RIg-mtATdFiDnABmH6+FzQ-6zOFvDKgxAAFh+YKhMIKr02uOcUJ8InRIRckhkDBQaEwuAIJDRLgkQA}{\usebox\lstbox}!*/
            : amount < 0 ||
              kinds_of_coins === 0
              ? 0
@@ -350,15 +337,16 @@ function first_denomination(kinds_of_coins) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
                   
         </p></div>
 
         <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
           (The
-          {\lstinline[mathescape=true]$first_denomination$}
+          <kbd>first_denomination</kbd>
           function
           takes as input the number of
           kinds of coins available and returns the denomination of the first
@@ -366,24 +354,25 @@ function first_denomination(kinds_of_coins) {
           largest to smallest, but any order would do as well.)  We can now
           answer our original question about changing a dollar:
 
-        
+        <div class='snippet' id='javascript_12_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 count_change(100);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewrgdgLg+sAWBDCBzApgCgIwAYcEoBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABBO4oH0IAsCGYDmApgBQ4C2qYUAlIgN4BQiziAToVCK0hBKRWgA0iAKzUA3AwC+DUJFgJkfcpSjCA1jDAATAM7o4wTHC27ajFmw5ckKtIgC8TxAAYmlj4gD8iAIzvPFgAuRDsqRAAeV0QAHxiAwJZNHX1DY1NHZzdEjx9snOClflUNLT0DIxQMgFo-agSCxABqBoLeYvta4BhWXQxtQjA4Mi0cBTBiVsbp5mTytKqwM0EpxrnUypMliWlZcGh4JG7e-sHh0fHidYr07foE9k5uRGuFrd1Mhz9vb6DVpLKG1uHycXwATD8RIg-mtATdFiDnABmH6+FzQ-6zOFvDKgxAAFh+YKhMIKr02uOcUJ8InRIRckhkKDQmFwBBIaJcEiAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
         </p></div>
 
         <div class='permalink'>
 <a name='p13' class='permalink'></a><p>
-          The function {\lstinline[mathescape=true]$count_change$}
+          The function <kbd>count_change</kbd>
           generates a tree-recursive process with
           redundancies similar to those in our first implementation of
-          {\lstinline[mathescape=true]$fib$}.
+          <kbd>fib</kbd>.
           (It will take quite a while for that 292 to be computed.)  On
           the other hand, it is not obvious how to design a better algorithm
           for computing the result, and we leave this problem as a challenge.
@@ -396,11 +385,7 @@ count_change(100);
           functions
           into more efficient
           functions
-          that compute the same result.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
-          
-          
-          
-        
+          that compute the same result.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
           
           
           
@@ -410,7 +395,7 @@ count_change(100);
         
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled6}
+\label{ex:unlabeled1}
 
                 A function $f$ is defined by the rule that $f(n)=n$ if $n<3$ and
                 $f(n)={f(n-1)}+2f(n-2)+3f(n-3)$ if $n\ge 3$.  Write a JavaScript function that
@@ -419,12 +404,12 @@ count_change(100);
       
        
        
-        \hfill{\hyperref[ex:unlabeled6-Answer]{Solution}}\\
+        \hfill{\hyperref[ex:unlabeled1-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled6}]
+\begin{Answer}[ref={ex:unlabeled1}]
 
-       
+       <div class='snippet' id='javascript_12_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 // iterative function
@@ -436,7 +421,7 @@ function f_iterative(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAEEsBcFMCcENLgG7VAMwK4DsDGSB7bAKCz0OwwH0o5EVoAKbASlAG9jRvRZpJMsSpQA8oAMxce0ngH5QJGUoBc1WgiSoaAWwAOAG0YAmADSgAjGYAMZygFpQRlgG5iAX1I584ImpgaGHQNGeDMAIzNcSIIcSDZOaT4BIVBcGOxIUABeHNArKSU5UHgCwtBVdBp-ei1wPUN4UABqR1AAKlAw5ol21LNQzujY0AdzF3cgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=PTAEEsBcFMCcENLgG7VAMwK4DsDGSB7bAKCz0OwwH0o5EVoAKbASlAG9jRvRZpJMsSpQA8oAMxce0ngH5QJGUoBc1WgiSoaAWwAOAG0YAmADSgAjGYAMZygFpQRlgG5iAX1I584ImpgaGHQNGeDMAIzNcSIIcSDZOaT4BIVBcGOxIUABeHNArKSU5UHgCwtBVdBp-ei1wPUN4UABqR1AAKlAw5ol21LNQzujY0AdzF3diUiq6TSYAVhcgA}{\usebox\lstbox}!*/
 function f_iterative_impl(a, b, c, count) {
     return count === 0
            ? a
@@ -444,10 +429,11 @@ function f_iterative_impl(a, b, c, count) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
+</div></div>
 
-
-
+<div class='snippet' id='javascript_12_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 //recursive function
@@ -459,13 +445,14 @@ function f_recursive(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTBOFMGMFdQZwJYDdwAIBm0B2kAuCB7LAKEx3yIwH0IZ5lwAKLASlQG9jVvUJdYsqQQB5UAZi48pPAPxDJ0qQC5qtWIhTNUAWlQBGNgGpiASGkAmVACpVUdQy27zR09LHXbdDU0G6xLAG5iAF8gA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=PTBOFMGMFdQZwJYDdwAIBm0B2kAuCB7LAKEx3yIwH0IZ5lwAKLASlQG9jVvUJdYsqQQB5UAZi48pPAPxDJ0qQC5qtWIhTNUAWlQBGNgGpiASGkAmVACpVUdQy27zR09LHXbdDU0G6xLAG5iAF9iUho7ek0AVkCgA}{\usebox\lstbox}!*/
 	     3 * f_recursive(n - 3);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 \end{Answer}
 
@@ -473,7 +460,7 @@ function f_recursive(n) {
         
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled7}
+\label{ex:unlabeled2}
 
                 
                 The following pattern of numbers is called
@@ -493,21 +480,17 @@ function f_recursive(n) {
                 
                 The numbers at the edge of the triangle are all 1, and
                 each number inside the triangle is the sum of the two numbers
-                above it.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>function that computes elements of Pascal's triangle by means
-                of a recursive process.
-
-        
-        
+                above it.<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
                 Write a function that computes elements of Pascal's triangle by means
                 of a recursive process.
 
         
-        \hfill{\hyperref[ex:unlabeled7-Answer]{Solution}}\\
+        \hfill{\hyperref[ex:unlabeled2-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled7}]
+\begin{Answer}[ref={ex:unlabeled2}]
                 
-        
+        <div class='snippet' id='javascript_12_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function pascal_triangle(row, index) {
@@ -519,14 +502,15 @@ function pascal_triangle(row, index) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwIYGcKoDYH0oBOMqYA5tgKYAUBcA7gDSIxgAmFAHgJSIDeAUIiGICFKCAJIW7DogB8I+oOErhAfkTAc6CstUqAXMzadEAXguIAjIgA+t4zItnadPfpUar7j0KNpMHHwiEnJqV0QAWmsmaVNoqy5+AEgPAGoUjwCsPEJiMkoaeiiYx04uAG5+AF8gA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABABwIYGcKoDYH0oBOMqYA5tgKYAUBcA7gDSIxgAmFAHgJSIDeAUIiGICFKCAJIW7DogB8I+oOErhAfkTAc6CstUqAXMzadEAXguIAjIgA+t4zItnadPfpUar7j0KNpMHHwiEnJqV0QAWmsmaVNoqy5+AEgPAGoUjwCsPEJiMkoaeiiYx04uAG5+AF9+fmygvNDCgFYGABZKoA}{\usebox\lstbox}!*/
 	       +
 	       pascal_triangle(row - 1, index);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 \end{Answer}
 
@@ -538,7 +522,7 @@ function pascal_triangle(row, index) {
                 Prove that $\textrm{Fib}(n)$ is the closest integer to $\phi^n/\sqrt{5}$,
                 where $\phi= (1+\sqrt{5})/2$.  Hint: Let $\psi= (1-\sqrt{5})/2$.  Use
                 induction and the definition of the Fibonacci numbers (see
-                section~\ref{sec:tree-recursion}) to prove that $\textrm{Fib}(n)=(\phi^n
+                section \ref{sec:tree-recursion}) to prove that $\textrm{Fib}(n)=(\phi^n
                   -\psi^n)/\sqrt{5}$.
                 
         
@@ -546,14 +530,14 @@ function pascal_triangle(row, index) {
 
 
       <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>An example of this was hinted
-                at in section~\ref{sec:evaluating-combinations}:
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>An example of this was hinted
+                at in section \ref{sec:evaluating-combinations}:
                 The interpreter itself evaluates expressions
-                using a tree-recursive process.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>For example, work through in detail how the
+                using a tree-recursive process.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>For example, work through in detail how the
             reduction rule applies to the problem of making change for 10 cents
-            using pennies and nickels.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>One
+            using pennies and nickels.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>One
             approach to coping with redundant computations is to arrange matters
             so that we automatically construct a table of values as they
             are computed.  Each time we are asked to apply the
@@ -565,10 +549,10 @@ function pascal_triangle(row, index) {
             <EM>tabulation</EM> or <EM>memoization</EM>, can be
             implemented in a straightforward way.  Tabulation can sometimes be
             used to transform processes that require an exponential number of
-            steps (such as {\lstinline[mathescape=true]$count-change$})
+            steps (such as <kbd>count-change</kbd>)
             into processes whose space and time
             requirements grow linearly with the input.  See
-            exercise~\ref{ex:memoization}.</FOOTNOTE></div><hr><div class='footnote'>
+            exercise \ref{ex:memoization}.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>The elements of Pascal's triangle are
                   called the <EM>binomial coefficients</EM>, because the
                   $n$th row consists of
@@ -591,4 +575,11 @@ function pascal_triangle(row, index) {
                   works of the twelfth-century Persian poet and mathematician Omar
                   Khayyam, and in the works of the twelfth-century Hindu mathematician
                   Bháscara Áchárya.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section2/subsection1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section2/subsection3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+1.2.2  Tree Recursion</div>	<div class='next-page'></div></div>

@@ -1,6 +1,15 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>4 Metalinguistic Abstraction</a>
+		<a name='top' class='permalink'>4  Metalinguistic Abstraction</a>
 	</div>
 </div>
 	<div class='chapter-text'>
@@ -9,7 +18,7 @@
   
 
 
-  \epigraph{
+  <blockquote class='blockquote'>
     <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
       …It's in words that the magic
@@ -28,7 +37,11 @@
     </p></div>
     
 
-    }{--- \textup{John Barth}, Chimera}
+    <div class='chapter-text-ATTRIBUTION'>
+<span class='chapter-text-AUTHOR'>John Barth</span>
+<span class='chapter-text-TITLE'>Chimera</span>
+</div>
+</blockquote>
 
 
   
@@ -55,7 +68,7 @@
     complex problem by adopting a new language that enables us to describe
     (and hence to think about) the problem in a different way, using
     primitives, means of combination, and means of abstraction that are
-    particularly well suited to the problem at hand.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+    particularly well suited to the problem at hand.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
   </p></div>
 
   <div class='permalink'>
@@ -115,7 +128,7 @@
 <a name='p7' class='permalink'></a><p>
     In fact, we can regard almost any program as the evaluator for some
     language.  For instance, the polynomial manipulation system of
-    section~\ref{sec:symbolic-algebra} embodies the rules of polynomial
+    section \ref{sec:symbolic-algebra} embodies the rules of polynomial
     arithmetic and implements them in terms of operations on
     list-structured data.  If we augment this system with
     functions
@@ -123,8 +136,8 @@
     read and print polynomial expressions, we have the core of a
     special-purpose language for dealing with problems in symbolic
     mathematics.  The digital-logic simulator of
-    section~\ref{sec:circuit-simulator} and the constraint propagator of
-    section~\ref{sec:constraints} are legitimate languages in their own
+    section \ref{sec:circuit-simulator} and the constraint propagator of
+    section \ref{sec:constraints} are legitimate languages in their own
     right, each with its own primitives, means of combination, and means
     of abstraction.  Seen from this perspective, the technology for coping
     with large-scale computer systems merges with the technology for
@@ -164,7 +177,7 @@
     important to include in a production-quality 
     JavaScript system.
     Nevertheless, this simple evaluator is adequate to execute most of the
-    programs in this book.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+    programs in this book.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
   </p></div>
 
   <div class='permalink'>
@@ -175,14 +188,14 @@
     describing these as modifications to the evaluator program.  One place
     where we can use this power to good effect is to gain extra control
     over the ways in which computational models embody the notion of time,
-    which was so central to the discussion in chapter~3.  There, we
+    which was so central to the discussion in chapter 3.  There, we
     mitigated some of the complexities of state and assignment by using
     streams to decouple the representation of time in the world from time
     in the computer.  Our stream programs, however, were
     sometimes cumbersome, because they were constrained by
     the applicative-order evaluation of 
     JavaScript.
-    In section~\ref{sec:lazy-evaluation}, we'll change
+    In section \ref{sec:lazy-evaluation}, we'll change
     the underlying language to provide for a more elegant approach, by modifying
     the evaluator to provide for <EM>normal-order evaluation</EM>.
   </p></div>
@@ -196,20 +209,8 @@
   
   
 
-  
-  &section4.1;
-    
-  
-  &section4.2;
-
-  
-  &section4.3;
-
-  
-  &section4.4;
-
-<hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>The same idea
+  <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>The same idea
       is pervasive throughout all of engineering.  For example, electrical
       engineers use many different languages for describing circuits.  Two
       of these are the language of electrical <EM>networks</EM> and the
@@ -231,7 +232,7 @@
       given application problem; the physical feasibility of the parts is
       assumed.  This layered collection of languages is another example of
       the stratified design technique illustrated by the picture
-      language of section~\ref{sec:graphics}.</FOOTNOTE></div><hr><div class='footnote'>
+      language of section \ref{sec:graphics}.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>The most important features that our evaluator leaves out
       are mechanisms for handling errors and supporting debugging.  For a
       more extensive discussion of evaluators, see 
@@ -241,4 +242,11 @@
       via a sequence of evaluators written in 
       the Scheme 
     dialect of Lisp.</FOOTNOTE></div>
-</CHAPTER>
+</CHAPTER><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section5/subsection5.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section1/section1.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+4  Metalinguistic Abstraction</div>	<div class='next-page'></div></div>

@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>5.4.4 
-  Running the Evaluator
-      </a>
+		<a name='top' class='permalink'>5.4.4  Running the Evaluator</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -14,12 +21,12 @@
 <a name='p1' class='permalink'></a><p>
   
   With the implementation of the explicit-control evaluator we come to
-  the end of a development, begun in chapter~1, in which we have
+  the end of a development, begun in chapter 1, in which we have
   explored successively more precise models of the evaluation process.
   We started with the relatively informal substitution model, then
-  extended this in chapter~3 to the environment model, which enabled us
+  extended this in chapter 3 to the environment model, which enabled us
   to deal with state and change.  In the metacircular evaluator of
-  chapter~4, we used Scheme itself as a language for making more explicit
+  chapter 4, we used Scheme itself as a language for making more explicit
   the environment structure constructed during evaluation of an
   expression.  Now, with register machines, we have taken a close look
   at the evaluator's mechanisms for storage management,
@@ -36,14 +43,15 @@
   
   
   We will install a driver loop in our evaluator machine.  This plays
-  the role of the {\lstinline[mathescape=true]$driver_loop$}
+  the role of the <kbd>driver_loop</kbd>
   function
   of
-  section~\ref{sec:running-eval}.  The evaluator will repeatedly print a
-  prompt, read an expression, evaluate the expression by going to {\lstinline[mathescape=true]$eval_dispatch$}, and print the result.  The following instructions form
+  section \ref{sec:running-eval}.  The evaluator will repeatedly print a
+  prompt, read an expression, evaluate the expression by going to <kbd>eval_dispatch</kbd>, and print the result.  The following instructions form
   the beginning of the explicit-control evaluator's controller
-  sequence:<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-\begin{JavaScript}
+  sequence:<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
+
+  <div class='snippet' id='javascript_112_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 "read_eval_print_loop",
           perform(op("initialize_stack")),
           perform(op("prompt_for_input"), const("/// EC_Eval input:")),
@@ -56,26 +64,7 @@
           perform(op("announce_output"), const(";;; EC_Eval value:")),
           perform(op("user_print"), reg("val")),
           go_to(label("read_eval_print_loop")),
-\end{JavaScript}
-
-      
-
-  
-\begin{JavaScript}
-"read_eval_print_loop",
-          perform(op("initialize_stack")),
-          perform(op("prompt_for_input"), const("/// EC_Eval input:")),
-          assign("exp", op("read")),
-          assign("env", op("get_global_environment")),
-          assign("continue", label("print_result")),
-          go_to(label("eval_dispatch")),
-          <!__  \indcode*{print_result} __>
-      "print_result",
-          perform(op("announce_output"), const(";;; EC_Eval value:")),
-          perform(op("user_print"), reg("val")),
-          go_to(label("read_eval_print_loop")),
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -86,9 +75,10 @@
   function
   (such as the <QUOTE>unknown
     function
-    type error</QUOTE> indicated at {\lstinline[mathescape=true]$apply_dispatch$}), we print an
-  error message and return to the driver loop.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
-\begin{JavaScript}
+    type error</QUOTE> indicated at <kbd>apply_dispatch</kbd>), we print an
+  error message and return to the driver loop.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
+
+  <div class='snippet' id='javascript_112_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 "unknown_expression_type",
           assign("val", const("unknown_expression_type_error")),
           go_to(label("signal_error")),
@@ -103,36 +93,14 @@
       "signal_error",
           perform(op("user_print"), reg("val")),
           go_to(label("read_eval_print_loop")),
-\end{JavaScript}
-
-      
-
-  
-\begin{JavaScript}
-"unknown_expression_type",
-          assign("val", const("unknown_expression_type_error")),
-          go_to(label("signal_error")),
-
-      
-      "unknown_procedure_type",
-          restore("continue"),    /// clean up stack (from apply_dispatch)
-          assign(val(const("unknown_procedure_type_error"))),
-          go_to(label("signal_error")),
-
-      
-      "signal_error",
-          perform(op("user_print"), reg("val")),
-          go_to(label("read_eval_print_loop")),
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
   For the purposes of the simulation, we initialize the stack each time
   through the driver loop, since it might not be empty after an error
-  (such as an undefined variable) interrupts an evaluation.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
-      
+  (such as an undefined variable) interrupts an evaluation.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
   
       </p></div>
 
@@ -142,10 +110,9 @@
   If we combine all the code fragments presented in sections
   \ref{sec:eceval-core}–\ref{sec:running-evaluator}, we can create an
   evaluator machine model that we can run using the register-machine simulator
-  of section~\ref{sec:simulator}.
+  of section \ref{sec:simulator}.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_112_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function eceval() {
     return make_machine(list("exp", "env", "val", "proc", "argl", "continue", "unev"),
                         eceval_operations,
@@ -153,8 +120,7 @@ function eceval() {
                              ... /* entire machine controller as given above */ 
                              ));
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -166,28 +132,24 @@ function eceval() {
   the same
   functions
   we used for the metacircular evaluator in
-  section~\ref{sec:mc-eval}, together with the few additional ones
-  defined in footnotes throughout section~\ref{sec:eceval}.
-  
-\begin{JavaScript}
+  section \ref{sec:mc-eval}, together with the few additional ones
+  defined in footnotes throughout section \ref{sec:eceval}.
+  <div class='snippet' id='javascript_112_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const eceval_operations = 
     list(list("is_self_evaluating", is_self_evaluating),
          ... /* complete list of operations for eceval machine */
          );
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
   Finally, we can initialize the global environment and run the evaluator:
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_112_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const the_global_environment = setup_environment();
 
 start(eceval);
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -201,9 +163,10 @@ start(eceval);
   
       </p></div>
 
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
   Monitoring the performance of the evaluator
-      
+      </h2></div>
 
       
       <div class='permalink'>
@@ -217,11 +180,11 @@ start(eceval);
   observe the number of stack operations required to evaluate various
   expressions by defining the evaluator register machine with the
   version of the simulator that collects statistics on stack use
-  (section~\ref{sec:monitor}), and adding an instruction at the
-  evaluator's {\lstinline[mathescape=true]$print_result$} entry point to print the
+  (section \ref{sec:monitor}), and adding an instruction at the
+  evaluator's <kbd>print_result</kbd> entry point to print the
   statistics:
 
-  
+  <div class='snippet' id='javascript_112_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 "print_result",
@@ -231,16 +194,16 @@ start(eceval);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EQBwTglgdgLg+mApgZwK4BsbADQCgAEhRxIiYAZgPZgC2AFJSHaJLHMjAIYDGA1u1xgQOEbsmABKCdnwB6Wfk4ATJYiX5oHMKm5DKUAsSOkK1eo2acoUSqijdEcWzBCos0-N30dm8hQFEAYQBafwA3TnR8CPRURAAuSWlDIyJZACp8ADoc-GROGkRFZHwAI0QqJGzc9NkgA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=EQBwTglgdgLg+mApgZwK4BsbADQCgAEhRxIiYAZgPZgC2AFJSHaJLHMjAIYDGA1u1xgQOEbsmABKCdnwB6Wfk4ATJYiX5oHMKm5DKUAsSOkK1eo2acoUSqijdEcWzBCos0-N30dm8hQFEAYQBafwA3TnR8CPRURAAuSWlDIyJZACp8ADoc-GROGkRFZHwAI0QqJGzc9NkgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
   Interactions with the evaluator now look like this:
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_112_7_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 /// EC-Eval input:
 function factorial (n) {
 return n === 1 ?
@@ -255,8 +218,7 @@ factorial(5);
 (total-pushes = 144 maximum-depth = 28)
 /// EC-Eval value:
 120
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -275,14 +237,13 @@ factorial(5);
   
   
   Use the monitored stack to explore the tail-recursive property of the
-  evaluator (section~\ref{sec:sequence-evaluation}).  Start the
-  evaluator and define the iterative {\lstinline[mathescape=true]$factorial$}
+  evaluator (section \ref{sec:sequence-evaluation}).  Start the
+  evaluator and define the iterative <kbd>factorial</kbd>
   function
   from
-  section~\ref{sec:recursion-and-iteration}:
+  section \ref{sec:recursion-and-iteration}:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_112_8_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function factorial(n) {
     function iter(product, counter, max_count) {
         return counter > max_count
@@ -294,8 +255,7 @@ function factorial(n) {
 
     return iter(1, 1, n);
 }
-\end{JavaScript}
-
+</pre></div></div>
 
   Run the
   function
@@ -325,20 +285,18 @@ function factorial(n) {
 \begin{Exercise}
 
   
-  For comparison with exercise~\ref{ex:tail-rec-fact}, explore the
+  For comparison with exercise \ref{ex:tail-rec-fact}, explore the
   behavior of the following
   function
   for computing factorials
   recursively:
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_112_9_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function factorial(n) {
     return n === 1 
            ? 1
            : n * factorial(n - 1);
 }
-\end{JavaScript}
-
+</pre></div></div>
   By running this
   function
   with the monitored stack, determine, as a
@@ -371,11 +329,11 @@ function factorial(n) {
   
   
   Modify the definition of the evaluator by changing
-  {\lstinline[mathescape=true]$eval_sequence$} as described in
-  section~\ref{sec:sequence-evaluation} so that the evaluator is no
+  <kbd>eval_sequence</kbd> as described in
+  section \ref{sec:sequence-evaluation} so that the evaluator is no
   longer tail-recursive.  Rerun your experiments from
-  exercises~\ref{ex:tail-rec-fact} and~\ref{ex:rec-fact} to demonstrate
-  that both versions of the {\lstinline[mathescape=true]$factorial$}
+  exercises \ref{ex:tail-rec-fact} and \ref{ex:rec-fact} to demonstrate
+  that both versions of the <kbd>factorial</kbd>
   function
   now require space
   that grows linearly with their input.
@@ -390,19 +348,17 @@ function factorial(n) {
   
   Monitor the stack operations in the tree-recursive Fibonacci computation:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_112_10_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function fib(n) {
     return n < 2 ? n : fib(n - 1) + fib(n - 2);
 }
-\end{JavaScript}
-
+</pre></div></div>
   
 \begin{enumerate}[a.]
 \item{
       Give a formula in terms of $n$ for the maximum depth of the stack
       required to compute ${\textrm{Fib}}(n)$ for $n \geq 2$.  Hint: In
-      section~\ref{sec:tree-recursion} we argued that the space used by this
+      section \ref{sec:tree-recursion} we argued that the space used by this
       process grows linearly with $n$.
     }
 \item{
@@ -439,36 +395,7 @@ function fib(n) {
   we run the evaluator using the register-machine simulator, these
   errors are caught by the underlying Scheme system.  This is analogous
   to the computer crashing when a user program makes an
-  error.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
-\begin{enumerate}[a.]
-\item{
-      Errors that occur in the evaluation process, such as an attempt to
-      access an unbound variable, could be caught by changing the lookup
-      operation to make it return a distinguished condition code, which cannot
-      be a possible value of any user variable.  The evaluator can test
-      for this condition code and then do what is necessary to go to {\lstinline[mathescape=true]$signal-error$}.  Find all of the places in the evaluator where such a
-      change is necessary and fix them.  This is lots of work.
-    }
-\item{
-      Much worse is the problem of handling errors that are signaled by
-      applying primitive
-      functions, such as an attempt to divide by zero or
-      an attempt to extract the {\lstinline[mathescape=true]$head$} of a symbol.  In a professionally
-      written high-quality system, each primitive application is checked for
-      safety as part of the primitive.  For example, every call to {\lstinline[mathescape=true]$head$}
-      could first check that the argument is a pair.  If the argument is not
-      a pair, the application would return a distinguished condition code to
-      the evaluator, which would then report the failure.  We could arrange
-      for this in our register-machine simulator by making each primitive
-      function
-      check for applicability and returning an appropriate distinguished
-      condition code on failure. Then the {\lstinline[mathescape=true]$primitive-apply$} code in the
-      evaluator can check for the condition code and go to {\lstinline[mathescape=true]$signal-error$} if necessary.  Build this structure and make it work.
-      This is a major project.
-    }
-\end{enumerate}
-
-        It is a large project to make a real
+  error.<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>  It is a large project to make a real
   error system work, but it is well worth the effort to understand what
   is involved here.
   
@@ -478,24 +405,24 @@ function fib(n) {
       access an unbound variable, could be caught by changing the lookup
       operation to make it return a distinguished condition code, which cannot
       be a possible value of any user variable.  The evaluator can test
-      for this condition code and then do what is necessary to go to {\lstinline[mathescape=true]$signal-error$}.  Find all of the places in the evaluator where such a
+      for this condition code and then do what is necessary to go to <kbd>signal-error</kbd>.  Find all of the places in the evaluator where such a
       change is necessary and fix them.  This is lots of work.
     }
 \item{
       Much worse is the problem of handling errors that are signaled by
       applying primitive
       functions, such as an attempt to divide by zero or
-      an attempt to extract the {\lstinline[mathescape=true]$head$} of a symbol.  In a professionally
+      an attempt to extract the <kbd>head</kbd> of a symbol.  In a professionally
       written high-quality system, each primitive application is checked for
-      safety as part of the primitive.  For example, every call to {\lstinline[mathescape=true]$head$}
+      safety as part of the primitive.  For example, every call to <kbd>head</kbd>
       could first check that the argument is a pair.  If the argument is not
       a pair, the application would return a distinguished condition code to
       the evaluator, which would then report the failure.  We could arrange
       for this in our register-machine simulator by making each primitive
       function
       check for applicability and returning an appropriate distinguished
-      condition code on failure. Then the {\lstinline[mathescape=true]$primitive-apply$} code in the
-      evaluator can check for the condition code and go to {\lstinline[mathescape=true]$signal-error$} if necessary.  Build this structure and make it work.
+      condition code on failure. Then the <kbd>primitive-apply</kbd> code in the
+      evaluator can check for the condition code and go to <kbd>signal-error</kbd> if necessary.  Build this structure and make it work.
       This is a major project.
     }
 \end{enumerate}
@@ -505,8 +432,8 @@ function fib(n) {
 
       
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE><div class='permalink'>
-<a name='p12' class='permalink'></a><p>We assume here that {\lstinline[mathescape=true]$read$} and the
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE><div class='permalink'>
+<a name='p12' class='permalink'></a><p>We assume here that <kbd>read</kbd> and the
       various printing operations are
       available as primitive machine operations, which is useful for our
       simulation, but completely unrealistic in practice.  These
@@ -516,27 +443,25 @@ function fib(n) {
     </p></div>
     <div class='permalink'>
 <a name='p13' class='permalink'></a><p>
-      To support the {\lstinline[mathescape=true]$get_global_environment$} operation we define
+      To support the <kbd>get_global_environment</kbd> operation we define
 
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_112_11_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const the_global_environment = setup_environment();
 
 
 function get_global_environment() {
     return the_global_environment;
 }
-\end{JavaScript}
-
+</pre></div></div>
     </p></div>
-  </FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>There are other
+  </FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>There are other
     errors that we would like the interpreter to handle, but these are not
-    so simple.  See exercise~\ref{ex:interp-errors}.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>We
+    so simple.  See exercise \ref{ex:interp-errors}.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>We
     could perform the stack initialization only after errors, but doing it in
     the driver loop will be convenient for monitoring the evaluator's
-    performance, as described below.</FOOTNOTE></div><hr><div class='footnote'>
+    performance, as described below.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Regrettably, this is the normal state of affairs in
     
     conventional compiler-based language systems such as C.  
@@ -548,4 +473,11 @@ function get_global_environment() {
     The Macintosh$^{\textrm{TM}}$ displays a
     picture of an exploding bomb and offers you the opportunity to reboot
     the computer—if you're lucky.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section4/subsection3.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section5/section5.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+5.4.4  Running the Evaluator</div>	<div class='next-page'></div></div>

@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>3.5.2 
-    Infinite Streams
-  </a>
+		<a name='top' class='permalink'>3.5.2  Infinite Streams</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
   
   
@@ -20,7 +27,7 @@
     represent sequences that are infinitely long.  For instance, consider
     the following definition of the stream of positive integers:
 
-    
+    <div class='snippet' id='javascript_67_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function integers_starting_from(n) {
@@ -31,24 +38,25 @@ function integers_starting_from(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDMUCmBzNAnAzgfVygENtYwN9hs4BbACjAEpEBvAKES8WzShGxIADsRjZGAGk7cZs7vRYBeAHzJUmHASKlylanUaIA1IgCMTaXKtMA3OwC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABDMUCmBzNAnAzgfVygENtYwN9hs4BbACjAEpEBvAKES8WzShGxIADsRjZGAGk7cZs7vRYBeAHzJUmHASKlylanUaIA1IgCMTaXKtMA3OwC+7dmgBuxADaEovYgxTosPC8dFD0aBgB2JglEAGYABlsgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
     
   </p></div>
 
   <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
-    This makes sense because {\lstinline[mathescape=true]$integers$} will be a pair whose
+    This makes sense because <kbd>integers</kbd> will be a pair whose
     
       
-      {\lstinline[mathescape=true]$head$}
+      <kbd>head</kbd>
     
     is 1 and whose
     
       
-      {\lstinline[mathescape=true]$tail$}
+      <kbd>tail</kbd>
     
     is a promise to produce the integers beginning with 2. This is an infinitely long
     stream, but in any given time we can examine only a finite portion of it.  Thus,
@@ -57,10 +65,10 @@ function integers_starting_from(n) {
 
   <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
-    Using {\lstinline[mathescape=true]$integers$} we can define other infinite streams, such as
+    Using <kbd>integers</kbd> we can define other infinite streams, such as
     the stream of integers that are not divisible by 7:
 
-    
+    <div class='snippet' id='javascript_67_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_divisible(x, y) {
@@ -73,9 +81,10 @@ const no_sevens =
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQCYwG6pgIwBsBTACgA8AaRATwEpEBvAKETcQCdioQOlzEAUlqIAvOMQAGANzMAvs2YQEKKIjBw0KYtmJgUY1u1VcAhgFs0wGISjEOFMQD5EAQmTosuFARIVqAOx0lEbsYeFhMGB2AOb2KHTSQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9YGAGygzQAoAHTAEwBoUBKRAbwChFPFMoQ0kYyPGBBEi5ZIw5cZXAPyIRY6bJkAuRNQw1yAC2w7JU1SYWUsMCvqyHGdFScedyzALwA+FOmz5CJMlS0DA5OoWGqqJi4eFAW4kbG4RqRPgTEpBRa9CHh4SnRscQSjIwA3GwAvmygkLAIXlH4hfHeuMzsMjx8SM0SrTiMLuVVEAioiDBgpADmZMiIrpoWFACMDC4LnjY0ePk4yOQIGMgMkzNzJeU10PBI27v9B8hrKABM7Q5d-A2pozgARpMMORyAAPF6g96bRDgxAAahhrwYz2R72G1XAN3qezwmGAEgYYA+nQwvG+SFclMQAAYcrIFNZbHT1D9oni+o0YnFioTEABaRArMqVDG1W6s-A4LCUcjAZHErhfARCJTxRJOBSq5lcDTmSyyvQGYp2bVODYeCV4KUyuWW3oJdHXOpIHHAOBoPDYCC6WXgeWsBwwYCIciCYSiNUK1RKxDoEAYcoyCqIDBEZAYAOOGqGmzGxMmGOu92erDe31gZH9LlFIz5zhVKpO8U4v6AsDA20ot5R7ik7oTFURiRCxAAMlHA-DYgk72ZmojzI0YdVw+YAB815OV8hZ44FGQ0O7yKqGAAicAYUGUDDQbSKCMTF1V1tA0-q2S65YGxmrug-nclMEuTOG4ngtnAAJArKlacvaQr2MBiGhDi9rvJcIqjGA4xHPMix6qs6ygYgOHCk29RhjQMAAG6CDA-xEMCoIMAAnj2MagogACkiDMQsVLUuibCYeMYBwLsGBURgWELA4rrpAEHEWgAhJOlE0cgdEMWCDAAOwmkhnBnBgsxoJI5RsBJWBEA8jTHmJ6aSVhDCvAAzGUQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
     
 
@@ -87,24 +96,25 @@ const no_sevens =
     Then we can find integers not divisible by 7 simply by accessing
     elements of this stream:
 
-    
+    <div class='snippet' id='javascript_67_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 stream_ref(no_sevens, 100);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4FwTgpghgtg+pAZgCgHYHs7AgNwq4AGgAIBGABnIEoBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABDAzgfQCYwG6pgIwBsBTACgA8AaRATwEpEBvAKETcQCdioQOlzEAUlqIAvOMQAGANzMAvs2YQEKKIjBw0KYtmJgUY1u1VcAhgFs0wGISjEOFMQD5EAQmTosuFARIVqAOx0lEbsYeFhMGB2AOb2KHSyoJCwCIgmxBZoXMCkKNRgDCxhXDx86mISkqERbAD8iAAWmRh5dDW1AFzpUGaWOXm9mZZQpjZtBYgAtIgAjInyzMnQ8EgZWeamAA6kwNQJTDWlvEioaGAghIRtHRENF1e34d1bYw65zaatCcFPtWGkBiiFzrSybHZ7Hp9NCjcY-BYKZapNZDLLAOAcNCZCCNXbgfZFGowYCIUhnB7XH6Hf7Hcq9EDEWRhOSIYiEbTU2rJUifb50BY07gnKHDKwYrGmHF4sD7VEjMaU-lM9gKBSg7LEXIaLQ6PT5OaSSSJIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-    In analogy with {\lstinline[mathescape=true]$integers$}, we can define the infinite stream of
+    In analogy with <kbd>integers</kbd>, we can define the infinite stream of
     Fibonacci numbers:
 
-    
+    <div class='snippet' id='javascript_67_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function fibgen(a, b) {
@@ -115,51 +125,52 @@ const fibs = fibgen(0, 1);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMGAjA5gUzACgIYA0iqAlIgN4BQiNiATplCHUgA54x35E5kC8APmRosuVETyIA1MRIkA3JQC+lShAQBnKMNQbEfHaJwAGIgEYFQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABMGAjA5gUzACgIYA0iqAlIgN4BQiNiATplCHUgA54x35E5kC8APmRosuVETyIA1MRIkA3JQC+lShAQBnKMNQbEfHaJwAGIgEYFQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
     
       
-      The function {\lstinline[mathescape=true]$fibs$}
+      The function <kbd>fibs</kbd>
     
     is a pair whose
     
       
-      {\lstinline[mathescape=true]$head$}
+      <kbd>head</kbd>
     
     is 0 and whose
     
       
-      {\lstinline[mathescape=true]$tail$}
+      <kbd>tail</kbd>
     
     is a promise to evaluate
     
       
-      {\lstinline[mathescape=true]$fibgen(1, 1)$}.
+      <kbd>fibgen(1, 1)</kbd>.
     
     When we evaluate this delayed
     
       
-      {\lstinline[mathescape=true]$fibgen(1, 1)$},
+      <kbd>fibgen(1, 1)</kbd>,
     
     it will produce a pair whose
     
       
-      {\lstinline[mathescape=true]$head$}
+      <kbd>head</kbd>
     
     is 1 and whose
     
       
-      {\lstinline[mathescape=true]$tail$}
+      <kbd>tail</kbd>
     
     is a promise to evaluate
     
       
-      {\lstinline[mathescape=true]$fibgen(1, 2)$},
+      <kbd>fibgen(1, 2)</kbd>,
     
     and so on.
   </p></div>
@@ -170,43 +181,13 @@ const fibs = fibgen(0, 1);
     For a look at a more exciting infinite stream, we can generalize the
     
       
-      {\lstinline[mathescape=true]$no_sevens$}
+      <kbd>no_sevens</kbd>
     
     example to construct the infinite stream of prime
     numbers, using a method known as the
     
     <EM>sieve of
-    Eratosthenes</EM>.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>{\lstinline[mathescape=true]$S$},
-    form a stream whose first element is the first element of
-    {\lstinline[mathescape=true]$S$} and
-    the rest of which is obtained by filtering all multiples of the first element
-    of {\lstinline[mathescape=true]$S$} out of the rest of
-    {\lstinline[mathescape=true]$S$} and sieving the result. This
-    process is readily described in terms of stream operations:
-
-    
-    
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function sieve(stream) {
-    return pair(head(stream),
-                () => sieve(stream_filter(
-                                x => !is_divisible(x,
-                                          head(stream)),
-			        stream_tail(stream)
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxgUwG5oBTKgJzQEMBbASkQG8AoROxQqEfJAByJn2wAtiATXAWLkANLXoTJ9bBQC8APhTosgwqQD6wGABsoaLuKlHjJgB6IFiAIQxk6vjAy2YAI205TYk95+-eRATw1cjIxAEgI4yDhdSgObVVhMmoIsKNk30y6ZLSpMgBuagBfIA}{\usebox\lstbox}!*/
-			       )
-                           )
-	       );
-}
-
-\end{JavaScriptClickable}
-
-
-  
+    Eratosthenes</EM>.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
     We start with the integers beginning with 2, which is the first prime.
     To get the rest of the primes, we start by filtering the multiples of
     2 from the rest of the integers.  This leaves a stream beginning with
@@ -214,16 +195,16 @@ function sieve(stream) {
     rest of this stream.  This leaves a stream beginning with 5, which is
     the next prime, and so on.  In other words, we construct the primes by
     a sieving process, described as follows: To sieve a stream
-    {\lstinline[mathescape=true]$S$},
+    <kbd>S</kbd>,
     form a stream whose first element is the first element of
-    {\lstinline[mathescape=true]$S$} and
+    <kbd>S</kbd> and
     the rest of which is obtained by filtering all multiples of the first element
-    of {\lstinline[mathescape=true]$S$} out of the rest of
-    {\lstinline[mathescape=true]$S$} and sieving the result. This
+    of <kbd>S</kbd> out of the rest of
+    <kbd>S</kbd> and sieving the result. This
     process is readily described in terms of stream operations:
 
     
-    
+    <div class='snippet' id='javascript_67_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sieve(stream) {
@@ -235,61 +216,40 @@ function sieve(stream) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxgUwG5oBTKgJzQEMBbASkQG8AoROxQqEfJAByJn2wAtiATXAWLkANLXoTJ9bBQC8APhTosgwqQD6wGABsoaLuKlHjJgB6IFiAIQxk6vjAy2YAI205TYk95+-eRATw1cjIxAEgI4yDhdSgObVVhMmoIsKNk30y6ZLSpMgBuagBfIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9YGAGygzQAoAHTAEwBoUBKRAbwChFPFMoQ0kYyPGBBEi5ZIw5cZXAPyIRY6bJkAuRNQw1yAC2w7JU1SYWUsMCvqyHGdFScedyzALwA+FOmz5CJMlS0DA5OoWGqqJi4eFAW4kbG4RqRPgTEpBRa9CHh4SnRscQSjIwA3GwAvmygkLAIXlH4hfHeuMzsMjx8SM0SrTiMLuVVNdDwAkI0MABugjAARkQY5AAeDACe7Q5d-IgriACkiOuIrmeIAAzDbGwQCKiKcHjIGNMYYMinDvm+6QH7HkQAEJEII8FNZsgFktVgwAOx2HLhGBgUgAczIknKdw+UFBqIwGLQn1cmgsFAAjAwXKdPDYaM9+shyAgMMgGCj0ZiSuVRnUkPTGY1mcgqSgAExbToYXi7H54O44eYo5arMUrSW0vYUxAAaj24oYoqNkuufPGDVSmGAEgYYClXB2SCQZ1JFyRMgU1lsHq4yX6eGtfUaMTixTtiAAtIgKWVKtVwGN6vKcFhKORgEaHZwnaChEp4oknAoC77OBpzJYM3oDMVEblZDTASm0xmjQHegkzYn+ZbosA4Gg8NgILoM+As6wHDBgIhyGCC3Wp45c+gQBhyjIKogMEQXsuTDUazY65uTLn5QOhyOxzV2yHOzyHFURj2LfLFcqwMtMygxchNQ6R0ZW6PNhFEeJY0QAAyaCwMXACi1kEsII9DQFwgiQoIAH2w+DMMQj0FDINBB3IAsGAAInADAVkoDBoG0RQIPxPt8E-FVKKQ9QySrG1vSwuwBMQuxEDLRs3E8D84CVFU2zY0MilFesG1Upx5U7SUnyqHEHlZEleMpalJMQfS43NZMYFeZYfmzbgQN2SsrFrWz7DUpspKst5g1SPwMnIcS1NkAFPCBMEITmRZljWQKgtyYT+hKewAEhUscDSw1sthUuSkxuLimQpFy1Q4wqIA}{\usebox\lstbox}!*/
 			       )
                            )
 	       );
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
     Now to find a particular prime we need only ask for it:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_67_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 stream_ref(primes, 50);
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
     It is interesting to contemplate the signal-processing system set up
-    by {\lstinline[mathescape=true]$sieve$}, shown in the
+    by <kbd>sieve</kbd>, shown in the
     
     <QUOTE>Henderson diagram</QUOTE> in
-    Figure~\ref{fig:primesieve}.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a><QUOTE>un{\lstinline[mathescape=true]$pair$}er</QUOTE> that separates the first element of the stream from the
-    rest of the stream.
-    The first element is used to construct a divisibility filter, through
-    which the rest is passed, and the output of the filter is fed to
-    another sieve box.  Then the original first element is {\lstinline[mathescape=true]$pair$}ed onto the
-    output of the internal sieve to form the output stream.  Thus, not
-    only is the stream infinite, but the signal processor is also
-    infinite, because the sieve contains a sieve within it.
-
-    
-\begin{figure}[H]
-\centering
-
-\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_original/ch3-Z-G-35}.svg}}
-\caption{The prime sieve viewed as a signal-processing system.
-      }
-\label{fig:primesieve}
-\end{figure}
-
-
-  
+    Figure \ref{fig:primesieve}.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
     The input stream feeds into an
-    <QUOTE>un{\lstinline[mathescape=true]$pair$}er</QUOTE> that separates the first element of the stream from the
+    <QUOTE>un<kbd>pair</kbd>er</QUOTE> that separates the first element of the stream from the
     rest of the stream.
     The first element is used to construct a divisibility filter, through
     which the rest is passed, and the output of the filter is fed to
-    another sieve box.  Then the original first element is {\lstinline[mathescape=true]$pair$}ed onto the
+    another sieve box.  Then the original first element is <kbd>pair</kbd>ed onto the
     output of the internal sieve to form the output stream.  Thus, not
     only is the stream infinite, but the signal processor is also
     infinite, because the sieve contains a sieve within it.
@@ -307,50 +267,54 @@ stream_ref(primes, 50);
 
   </p></div>
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     Defining streams implicitly
-  
+  </h2></div>
 
   
 
   <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
-    The {\lstinline[mathescape=true]$integers$} and {\lstinline[mathescape=true]$fibs$}
+    The <kbd>integers</kbd> and <kbd>fibs</kbd>
     streams above were defined by specifying <QUOTE>generating</QUOTE>
     functions
     that explicitly compute the
     stream elements one by one. An alternative way to specify streams is
     to take advantage of delayed evaluation to define streams implicitly.
     For example, the following expression defines the stream
-    {\lstinline[mathescape=true]$ones$} to be an infinite stream of ones:
+    <kbd>ones</kbd> to be an infinite stream of ones:
 
-    
+    <div class='snippet' id='javascript_67_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const ones = pair(1, () => ones);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBOCmEYF4YAcCGBLATgCgEYAaGPAShQD44xEyBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=MYewdgzgLgBOCmEYF4YAcCGBLATgCgEYAaGPAShQD44xEyBuIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
     This works much like the definition of a recursive
-    function: {\lstinline[mathescape=true]$ones$} is a pair whose {\lstinline[mathescape=true]$head$} is 1 and whose {\lstinline[mathescape=true]$tail$} is a promise
-    to evaluate {\lstinline[mathescape=true]$ones$}.  Evaluating the {\lstinline[mathescape=true]$tail$} gives us again a 1
-    and a promise to evaluate {\lstinline[mathescape=true]$ones$}, and so on.
+    function: <kbd>ones</kbd> is a pair whose <kbd>head</kbd> is 1 and whose <kbd>tail</kbd> is a promise
+    to evaluate <kbd>ones</kbd>.  Evaluating the <kbd>tail</kbd> gives us again a 1
+    and a promise to evaluate <kbd>ones</kbd>, and so on.
   </p></div>
 
   <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
     We can do more interesting things by manipulating streams with
     operations such as
-    {\lstinline[mathescape=true]$add_streams$},
+    <kbd>add_streams</kbd>,
     which produces the elementwise
-    sum of two given streams:<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+    sum of two given streams:<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
+
+  <div class='snippet' id='javascript_67_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function add_streams(s1, s2) {
@@ -359,51 +323,39 @@ function add_streams(s1, s2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCaoPoGcoCcCmyAtlgBRYCMANIlgEwCUiA3gFCIeIFQi5I4FiGCHCIAjGGHylSAD2qJZjRAF4AfIoqIA1Iro1KBxgG5WAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9TYACmQBpEwBKRAbwChFHFMoQ0kkBebxABgaaCmAfkQALbABMSlAUMEAuFOmz5CJFbjxQsMADYzySALSIAjJQDcdAL51QkWAmWYtOLAAciwcsmr1BFjYkGGQ8MBA9Az85eUZRCKjYuKUPXTRvIgksaT9KUmS4+SJqTgA+F1U8dy8fSq0dfRlKK1t7cGh4JFRXfGA4NDxsCDFvcF9-WJhgRCJQ8MjoltpCxiD2RHQQDGtBG0QMPWQMFaKHLKlm3bj17s0+gaGsEbGwX3vtXSXWvbaHTucPSqjWi90mgQwrA2II0vUoJWsdn+TjuvTwEDgOAARjAwBhvL4zL4AEzgpi3RDzRLRCyIABkdMpYWpJFJq0QCUW7KUVMWJFpAB8BUyFlFWbIiqIMGg0AMiNTyAAicAYAAeHgw0Awkgoi0pqKqGOxuIwiolKUQaRgGWI2VyFlIdvF+UQ7LiJUQ5Xq+CNOLxBO9nyayAdbqK4YjTCBDS+ztaSI6KMQOUkeGjOGQ-JJZLWkOCgd9JqIRFVRMQqtJnoqpcQAGpy8TCdnEUA}{\usebox\lstbox}
+</pre>
 
-
-  
-
-  
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function add_streams(s1, s2) {
-    return stream_combine((x1, x2) => x1 + x2, s1, s2);
-}
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCaoPoGcoCcCmyAtlgBRYCMANIlgEwCUiA3gFCIeIFQi5I4FiGCHCIAjGGHylSAD2qJZjRAF4AfIoqIA1Iro1KBxgG5WAXyA}{\usebox\lstbox}
-
-
+</div></div>
   </p></div>
       
   <div class='permalink'>
 <a name='p13' class='permalink'></a><p>
     Now we can define the integers as follows:
 
-    
+    <div class='snippet' id='javascript_67_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const integers = pair(1, () => add_streams(ones, integers));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAlmKBTA5kgThGBeGAHAQznQAoBGAGhhIEocA+GAgE2YH1p0kCBbCE8EghUEyNJho0A3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAQwCaoPoGcoCcCmyAtlgBRYCMANIlgEwCUiA3gFCIeIFQi5I4FiGCHCIAjGGHylSAD2qJZjRAF4AfIoqIA1Iro1KBxgG5WAX1ahIsBLTyEiGAsHI0wTNpy74efREhVAxAAGdi9wxAB+RAALQlRyBjCIzgAuO0FHZ3J7IShkGAAbRLdEAFpECgZTCytoeH5cxyJkAAdSYAMPZO9fJBgsDDAQQuKsJJSvaOHRnpT01oLcDtI4tESGKjnJ8NImdQyHDBb2zsO8grGGa5rLcHrbASPgOFwMQggYjvAulh6YYCIUgDIYjK7dSbcXhIPAgfCmLxmRD4QpYfB-SZWVbxDYIlJQvxPIQvN4fL5WAxNDD5Iq4noWWr3GyNTLUy45TIQzgEmHsolEBh7W51ZnnRwicSSaRnQy0ZSebk+aGIEEzMZVRAAMk1KsGavIjG2HGmYKNiHSqrB5A1AB8bbrQaMDRMUtF8LhcK9SGqaAAicD4WStfDQfCofxglUso4SiRSX0uiILJYrNYJSibNPOzaIM0pPaqDT84SiOPSymsmnqzZ5nZ1+vFqvZ6rmVgiMA4RAIfBYVSIRYwZYKAsHbvjUztzuSKD4ADm7t7Kn7KeH+w0aEw-LIY5o07nC5uQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p14' class='permalink'></a><p>
-    This defines {\lstinline[mathescape=true]$integers$} to be a stream whose first element is 1
-    and the rest of which is the sum of {\lstinline[mathescape=true]$ones$} and
-    {\lstinline[mathescape=true]$integers$}.  Thus, the
-    second element of {\lstinline[mathescape=true]$integers$} is 1 plus the first element of
-    {\lstinline[mathescape=true]$integers$},
-    or 2; the third element of {\lstinline[mathescape=true]$integers$} is 1 plus the second
-    element of {\lstinline[mathescape=true]$integers$}, or 3; and so on.  This definition works
-    because, at any point, enough of the {\lstinline[mathescape=true]$integers$} stream has been
+    This defines <kbd>integers</kbd> to be a stream whose first element is 1
+    and the rest of which is the sum of <kbd>ones</kbd> and
+    <kbd>integers</kbd>.  Thus, the
+    second element of <kbd>integers</kbd> is 1 plus the first element of
+    <kbd>integers</kbd>,
+    or 2; the third element of <kbd>integers</kbd> is 1 plus the second
+    element of <kbd>integers</kbd>, or 3; and so on.  This definition works
+    because, at any point, enough of the <kbd>integers</kbd> stream has been
     generated so that we can feed it back into the definition to produce
     the next integer.
   </p></div>
@@ -412,7 +364,7 @@ const integers = pair(1, () => add_streams(ones, integers));
 <a name='p15' class='permalink'></a><p>
     We can define the Fibonacci numbers in the same style:
 
-    
+    <div class='snippet' id='javascript_67_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const fibs = pair(0,
@@ -424,16 +376,17 @@ const fibs = pair(0,
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAZgSwEYRgXhgBwIYIE4AUADADQBQMlV1NVBAlOgHxa6ECM5t3PPDzMbABMhAfWh4AptgC2EAhOkzRUXABsCFXtp26diFPXpa9e46ar0A3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAQwCaoPoGcoCcCmyAtlgBRYCMANIlgEwCUiA3gFCIeIFQi5I4FiGCHCIAjGGHylSAD2qJZjRAF4AfIoqIA1Iro1KBxgG5WAX1YiwORMBhisqxAAdkMXKQAMVdpz---UiZ1FzcPal8AqOiAoNUNNEwBQhJyPBSMKDcAG1JImILCopi7BwYGfOLCiqrOBmMgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p16' class='permalink'></a><p>
-    This definition says that {\lstinline[mathescape=true]$fibs$} is a stream beginning
+    This definition says that <kbd>fibs</kbd> is a stream beginning
     with 0 and 1, such that the rest of the stream can be generated by adding
-    {\lstinline[mathescape=true]$fibs$} to itself shifted by one place:
+    <kbd>fibs</kbd> to itself shifted by one place:
     <SPLIT>
       
       
@@ -451,13 +404,13 @@ const fibs = pair(0,
   <div class='permalink'>
 <a name='p17' class='permalink'></a><p>
     The function
-      {\lstinline[mathescape=true]$scale_stream$}
+      <kbd>scale_stream</kbd>
     is also useful
     in formulating such stream definitions.
     This multiplies each item in a stream by a given
     constant:
 
-    
+    <div class='snippet' id='javascript_67_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function scale_stream(stream, factor) {
@@ -467,24 +420,26 @@ function scale_stream(stream, factor) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwgQwDYFMD6yoBOWaAtgBT5GkA0iwa0cBAlIgN4BQi3iRUIBJJWIkcJNAAcyAD0QBeAHyJZAKjoMoTalx669+nsNLMA3BwC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9TYACmQBpEwBKRAbwChFHFMoQ0kkBebxABgaaCmAfkQALbABMSlAUMEAuFOmz5CJFbjxQsMADYzySALSIAjJQDcdAL51QkWAmWYtOLAAciwcsmr1BFjYkGGQ8MBA9Az85eUZRCKjYuKUPXTRvIgksaT9KUmS4+SJqTgA+F1U8dy8fSq0dfRlKK1t7cGh4JFRXfGA4NDxsCDFvcF9-WJhgRCJQ8MjoltpCxiD2RHQQDGtBG0QMPWQMFaKHLKlm3bj17s0+gaGsEbGwX3vtXSXWvbaHTucPSqjWi90mgQwrA2II0vUoJWsdn+Tm6ECwegweCBuFhqnIwGeUAG4KYt3q+BqRAAHohyogaQAqRAE6ADApFDlCbE4Vo2IA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p18' class='permalink'></a><p>
     For example,
-    
+    <div class='snippet' id='javascript_67_12_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const double = pair(1, () => scale_stream(double, 2));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAJiArgIwDYFMYF4YAcCGAlgE4AUAjADQykCU2AfDBMPhgPrTHr4C2pCFBmoAmWrQDcQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZwgQwDYFMD6yoBOWaAtgBT5GkA0iwa0cBAlIgN4BQi3iRUIBJJWIkcJNAAcyAD0QBeAHyJZAKjoMoTalx669+nsNLMA3BwC+HCAnyIAJnBAAjbPMQS0MAmQCMtMqyKKOjYeIQiZA7O2LQATMymQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
     produces the stream of powers of 2: $1, 2, 4, 8, 16, 32,$ ….
   </p></div>
 
@@ -494,7 +449,7 @@ const double = pair(1, () => scale_stream(double, 2));
     starting with the integers and filtering them by testing for
     primality.  We will need the first prime, 2, to get started:
 
-    
+    <div class='snippet' id='javascript_67_13_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const primes = pair(2,
@@ -505,9 +460,10 @@ const primes = pair(2,
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBADgJwJYFsCmEYF54EMkIAUATADQBQMV1NtthAlNgHwzQJq4oD6AZkgBsoaIpTriJEpBG6JUaUjHIBIVXSRhhAcxEzouBFA1a+CECkIBmBgxXLqDANxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABDAzgfQA4CcYFsCmAFGAJSIDeAUIjYlvlCFkkgLzuIq4CGANr-hRQ0AExgA3VHCzESAbkoBfSqEiwEnHv0HCxklNNkVqteo2aJgMMCNESpMsABpEAJnlKV4aPCRWbdvqGzohQOoEOZFS0NGZMSCgAjiDc9IRhQhEGWGQAfIhgJjHFiAD8BUUltABciHowIoLp4fXZLqSVVbTlGbr22Z1diLX+tq3BLr1Z0ogA1IgAjB7Kqj4a9Y0ohNwuAEZRlXEWu4gApIjciOysiAAMCive6gnJqUQAHgcxR0jviABUiHeDy8al8nCg9G4uDQVl4YRk2HwIhcKC+pgY8WQ6DAIH4hDRg2K5Vx-CJMVqSJEhAAFvhuNS0SRycTEBhuDAZHSGQSSE4WUMaIQyKx8kIoTC4QjCFSXALBQqhuL6TCoBzeLySMzFcMIRLYTB4fhEfQUfKdcVldC0GrDZqQatnnqVTb1QTISr0bFMRZbRqrbgSMKHU9wdYwgBzY3oISpWBgCOwrBwXBGaIY8xIdmc4j8i1CkX5cP4KNYGNqrDxxPAZOppDzJbm2jLSgQBBCNk4AgoK5sjkyVx5-MxYVXMUe61S42EJvD7GYLv4OUASFXJWLpfLces1drhAAzFrKGuaPIgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
@@ -518,7 +474,7 @@ const primes = pair(2,
     divisible by a prime (not by just any integer) less than or equal to
     $\sqrt{n}$:
 
-    
+    <div class='snippet' id='javascript_67_14_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_prime(n) {
@@ -530,34 +486,34 @@ function is_prime(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQA4CcYFsCmAFGAJSIDeAUIjYqJLAslPloRimVbT4lvlBBYkKAI4gAhv0IALfBIAm7TmQB8iMNV7baAfkRQsIfFp3aAXMnQKYAN1QwARgBsiYADSI5i5SRKmzbX1gCWcUE0CzSxgWNhRDeVw0KAkYZ18SAG4AgF8A-kFhZlZ2HAJObJygA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3NElgSIYyAPoATGADdhMAEYAbfAQA0iAJ4kK1GjjoM2iAKTrEAXnOIADJx7kICZFERg4I5Dkk4wyM5WqPcDABbEWAYeSgcLEIzAD5EAEIhUQlpZDlFQlUAdiJlP21CoqEwSIBzKOQiTj5oeCQAnGDQ8MjogAdcMVUqsgKdPSRhETAQeXk8Kv7igH5nMflpooAuRE6cMTwACybNqqIl2bWMGGidjD28w+KivBJTeMbmsIiovHXuxGubn9-Cp5CUBOE32Bz+VFWAJarw6XXy4IR2ihQPCkyI1W4vHAdUEyOBkyggSCmn6tHoSBRIMJTWJdxsdgcThgpRwFSwPlMx1OeAAjKo7nFEBcxG5qcFkHgEDhkKpmeVKuiatiBEhhaKiRLkHyUAAmEnaMn6KH2IKyZn4Qjagh6wUEHmIADUbB1PW1yD19NqKpQYpCuGAk1UYH11ENSCQ5k5lm+VDm50uMcQkN9In9BKJIkpaKDiAAtIgeRieF76j6M0EMO08MAeiGqGHkiMFmjE3NRuNE6t2idogH42irojtAKHmWaSIK1Wa2PmlnQZ7laWocA4FgRE0IFtq+Ba31tDBgIg8MN2yD0Xvig3CSAcJxtFxEDh5O4L0U+NtdgO75fdOSZyEVzXDctz4HoUznRV+h4YtF1xFMTTNMB8GnLUehtLRQ1-fQT2bLUSAAMnwxtT0mPVrjbBZrlWHDxkmQtEAAHwY4jcLIm45iiLBVzwU9VAAInAHACHaHBoA2eZxhKf8RAQ80+LBYoux7asPwuOi8n7d10VURNh3uR54LgU1zWrMCMznQt4SHazijxVEtMgnh7G8JwpQ5Llom1Ed4jcjFnMcNYsBgIJpTMDy8BdXSbm86SXjaPAops4ZOmCnAdIASEyoo5VZSpRWwWAwDKUIuKCPAAGZ0XILKqAxEtBGSoKQp4usBj-CMLGQCtxmlKBxCkYRuODBd+CXbrFEcfq0iG1qGzCMARVSQbojAVQPUxeqkHmxaBuQIbVEiSalr2rBWrao10GwfBDr647VxIeIwF0ttdNWJaxGlPAbqm5agwU8E5m+u6sES1Ztp+k6eIO3qIdXR0CyLLFRsEd7PowVRZFmrCkFkIwhTMCxrA22ChhZNlREcArmWK4BSpa19zqQbtuVWxKqBinLyfyrBCppumkCdQs2cRzbGxS5rgwZ0WYHi9pegwooGzQTBcFUzY5fPR62cBrAbzZ6iUl2jJ8FWxB+w1-7ETmYAMGfHA2YhIR4rsiYLe-KgeANbGnbecXpSLIA}{\usebox\lstbox}!*/
                  : iter(stream_tail(ps));
     }
     return iter(primes);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p21' class='permalink'></a><p>
-    This is a recursive definition, since {\lstinline[mathescape=true]$primes$} is defined in terms
+    This is a recursive definition, since <kbd>primes</kbd> is defined in terms
     of the
-    {\lstinline[mathescape=true]$is_prime$}
+    <kbd>is_prime</kbd>
     predicate,
-    which itself uses the {\lstinline[mathescape=true]$primes$}
+    which itself uses the <kbd>primes</kbd>
     stream.  The reason this
     function
     works is that, at any point, enough
-    of the {\lstinline[mathescape=true]$primes$} stream has been generated to test the primality of
+    of the <kbd>primes</kbd> stream has been generated to test the primality of
     the numbers we need to check next.  That is, for every $n$ we test for
     primality, either $n$ is not prime (in which case there is a prime
     already generated that divides it) or $n$ is prime (in which case
     there is a prime already generated—i.e., a prime less than
-    $n$—that is greater than $\sqrt{n}$).<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
-  
+    $n$—that is greater than $\sqrt{n}$).<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
     
   </p></div>
 
@@ -567,16 +523,17 @@ function is_prime(n) {
 
     Without running the program, describe the elements of the
     stream defined by
-    
+    <div class='snippet' id='javascript_67_15_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const s = pair(1, () => add_streams(s, s));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBBMF4YAcCGBLATgCgIwBoZsBKRAPhlQBMqB9aTAU1QFsJsJCJjiBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAQwCaoPoGcoCcCmyAtlgBRYCMANIlgEwCUiA3gFCIeIFQi5I4FiGCHCIAjGGHylSAD2qJZjRAF4AfIoqIA1Iro1KBxgG5WAX1YiwOWqsQAHZDFykFpJupTpseQiXIGDAzGQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   
 \end{Exercise}
 
@@ -591,14 +548,14 @@ const s = pair(1, () => add_streams(s, s));
     
     
     
-    {\lstinline[mathescape=true]$mul_streams$},
+    <kbd>mul_streams</kbd>,
     analogous to
-    {\lstinline[mathescape=true]$add_streams$},
+    <kbd>add_streams</kbd>,
     that produces the elementwise product of its two input streams.
-    Use this together with the stream of {\lstinline[mathescape=true]$integers$} to complete the
+    Use this together with the stream of <kbd>integers</kbd> to complete the
     following definition of the stream whose $n$th element (counting from 0)
     is $n+1$ factorial:
-    
+    <div class='snippet' id='javascript_67_16_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 // mul_streams to be written by students
@@ -606,9 +563,10 @@ const factorials = pair(1, () => mul_streams(???, ???));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAEFsFcBsH0GcAuAnApgQ3PUiD2oAjVUAd2QEtFFUA7QgT1CUgBNbF4AoAY1xqVAAzdNzwV00bAF5QAB3TlkACgCMAGlBKAlKCkA+CDAQoMWJQH5LGy+a1aA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=PTAEFsFcBsH0GcAuAnApgQ3PUiD2oAjVUAd2QEtFFUA7QgT1CUgBNbF4AoAY1xqVAAzdNzwV00bAF5QAB3TlkACgCMAGlBKAlKCkA+CDAQoMWJQH5LGy+a1aA3EA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   
 \end{Exercise}
 
@@ -622,7 +580,7 @@ const factorials = pair(1, () => mul_streams(???, ???));
     
     
       
-      {\lstinline[mathescape=true]$partial_sums$}
+      <kbd>partial_sums</kbd>
     
     that takes as argument a
     stream $S$ and returns the stream whose
@@ -630,7 +588,7 @@ const factorials = pair(1, () => mul_streams(???, ???));
     For example,
     
       
-      {\lstinline[mathescape=true]$partial_sums(integers)$}
+      <kbd>partial_sums(integers)</kbd>
      should be the stream
     $1, 3, 6, 10, 15,$ ….
     
@@ -650,25 +608,25 @@ const factorials = pair(1, () => mul_streams(???, ???));
     simply test each integer in turn to see whether it has any factors
     other than 2, 3, and 5.  But this is very inefficient, since, as the
     integers get larger, fewer and fewer of them fit the requirement.  As
-    an alternative, let us call the required stream of numbers {\lstinline[mathescape=true]$S$} and
+    an alternative, let us call the required stream of numbers <kbd>S</kbd> and
     notice the following facts about it.
     <UL>
       <LI>
-        {\lstinline[mathescape=true]$S$} begins with 1.
+        <kbd>S</kbd> begins with 1.
 
       </LI>
       <LI>
-        The elements of {\lstinline[mathescape=true]$scale_stream(S, 2)$} are also
-        elements of {\lstinline[mathescape=true]$S$}.
+        The elements of <kbd>scale_stream(S, 2)</kbd> are also
+        elements of <kbd>S</kbd>.
 
       </LI>
       <LI>
-        The same is true for {\lstinline[mathescape=true]$scale_stream(S, 3)$}
-        and {\lstinline[mathescape=true]$scale_stream(5, S)$}.
+        The same is true for <kbd>scale_stream(S, 3)</kbd>
+        and <kbd>scale_stream(5, S)</kbd>.
 
       </LI>
       <LI>
-        These are all the elements of {\lstinline[mathescape=true]$S$}.
+        These are all the elements of <kbd>S</kbd>.
       </LI>
     </UL>
 
@@ -676,10 +634,10 @@ const factorials = pair(1, () => mul_streams(???, ???));
     Now all we have to do is combine elements from these sources.
     For this we define a
     function
-    {\lstinline[mathescape=true]$merge$} that combines two ordered
+    <kbd>merge</kbd> that combines two ordered
     streams into one ordered result stream, eliminating repetitions:
 
-    
+    <div class='snippet' id='javascript_67_17_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function merge(s1, s2) {
@@ -691,7 +649,7 @@ function merge(s1, s2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwKYCcDmqAUBnARgBpE8AmASkQG8AoRBxGYRHGPAfTBABsf8CFKnUajE6VFBDok5ANz1GAX0SoeeVExZtO3PvkrDFY8ZOmyCC0SrUaaxsRAR4opAgAtUAQwAmiALyInr4CFFYmiE5gLqRkwX6B8QZhDqLMrITxiAA8sfFGEWISUjKIAA5eMOgC8USphQ0MOFT+AHwoGNj4UBJeyBxQlfyEFCTkFPWNESmFNuqa6TXefu3k+fZTpiVIFVUGtZObYs0B7WhYuIRjPd79gzDDhodHDDMRc3YiU8XmHRfdvTuQ1C10BA2B4zeJiUDhhSiAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9KLGAGwApVNcBKRAbwChEnFMoQ0lCTz1scrSVANz0AvvVCRYCRDgxoA5hnIBGADQoATDQbNEMYIlIxkeMCGJlkKqjsZ7mrdkmSaRe0YgzFkGfYeNTc0tybTsHRww2DhQVd2ZPb186ewiIBFRYgAtsABNEAF5EHKxc1WFUh3SwTNcS-KL60IqIpgMja3rEAB4tevDWvScYgAciNFV6tUrB2eZBQoA+WXklHkp8LisbDVcqGbnBltbEnz92ybzEZbq8gbnhpDGYCdvS6cPPoxoC5blFZTWXa8XAEIhWMIHL56Y4RU7JXSHR4rAHrPhg7jWKjAjYYiG2eJwyriURAA}{\usebox\lstbox}!*/
         const s1head = head(s1);
         const s2head = head(s2);
         if (s1head < s2head) {
@@ -709,22 +667,24 @@ function merge(s1, s2) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
+</div></div>
 
-
-    Then the required stream may be constructed with {\lstinline[mathescape=true]$merge$}, as
+    Then the required stream may be constructed with <kbd>merge</kbd>, as
     follows:
 
-    
+    <div class='snippet' id='javascript_67_18_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const S = pair(1, () => merge(??, ??));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAyjAvDADgQwJYCcAUBGAGhhwEokA+GAWwFMsBzGnAfmaNZJIG4g}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwKYCcDmqAUBnARgBpE8AmASkQG8AoRBxGYRHGPAfTBABsf8CFKnUajE6VFBDok5ANz1GAX0SoeeVExZtO3PvkrDFY8ZOmyCC0SrUaaxsRAR4opAgAtUAQwAmiALyInr4CFFYmiE5gLqRkwX6B8QZhDqLMrITxiAA8sfFGEWISUjKIAA5eMOgC8USphQ0MOFT+AHwoGNj4UBJeyBxQlfyEFCTkFPWNESmFNuqa6TXefu3k+fZTpiVIFVUGtZObYs0B7WhYuIRjPd79gzDDhodHDDMRc3YiU8XmHRfdvTuQ1C10BA2B4zeJiUDhhMKiMQAygFypVqsRWC0zp1cAB+XEkfFCORAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
     Fill in the missing expressions in the places marked ?? above.
     
@@ -738,31 +698,30 @@ const S = pair(1, () => merge(??, ??));
 
     
     How many additions are performed when we compute the $n$th
-    Fibonacci number using the definition of {\lstinline[mathescape=true]$fibs$} based on the
+    Fibonacci number using the definition of <kbd>fibs</kbd> based on the
     
       
-      {\lstinline[mathescape=true]$add_streams$}
+      <kbd>add_streams</kbd>
     
     
       
       function, implemented using
-      {\lstinline[mathescape=true]$pair(..., () => ...)$}
+      <kbd>pair(..., () => ...)</kbd>
       as described in the beginning of
-      section~\ref{sec:delayed-lists}?
+      section \ref{sec:delayed-lists}?
     
     
       
       
 	Show that the number of additions is
 	exponentially greater than if we had implemented
-	{\lstinline[mathescape=true]$add_streams$}
+	<kbd>add_streams</kbd>
 	using the optimization using
-	{\lstinline[mathescape=true]$pair(..., memo( () => ... ))$}
+	<kbd>pair(..., memo( () => ... ))</kbd>
 	described in the last part of
       
     
-	section~\ref{sec:delayed-lists}.<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
-  
+	section \ref{sec:delayed-lists}.<a class='superscript' id='footnote-link-5' href='#footnote-5'>[5]</a>
     
     
   
@@ -779,7 +738,7 @@ const S = pair(1, () => merge(??, ??));
       function
     :
 
-    
+    <div class='snippet' id='javascript_67_19_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function expand(num, den, radix) {	
@@ -789,16 +748,17 @@ function expand(num, den, radix) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwB4AcCGYAmAKMEAWwBpEdkwyAnTHGVASkQG8BIAKEW8WuShDUkWGNTwBHEHFiUoBYogBUvOgzIUwjElx669PNFlx55RJSvpNEAUnKV19iw0aMA3BwC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAUwB4AcCGYAmAKMEAWwBpEdkwyAnTHGVASkQG8BIAKEW8WuShDUkWGNTwBHEHFiUoBYogBUvOgzIUwjElx669PNFlx55RJSvpNEAUnKV19iw0aMA3BwC+QA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
     
     
     
       
       
-	where the function {\lstinline[mathescape=true]$quotient$} computes 
+	where the function <kbd>quotient</kbd> computes 
 	integer division, in which the fractional part (remainder) is discarded.
       
     
@@ -806,14 +766,14 @@ function expand(num, den, radix) {
     
       
       
-	{\lstinline[mathescape=true]$expand(1, 7, 10)$}$\,$?
+	<kbd>expand(1, 7, 10)</kbd>$\,$?
       
     
     What is produced by
     
       
       
-	{\lstinline[mathescape=true]$expand(3, 8, 10)$}$\,$?
+	<kbd>expand(3, 8, 10)</kbd>$\,$?
       
     
     
@@ -828,7 +788,7 @@ function expand(num, den, radix) {
     
   
   
-  In section~\ref{sec:symbolic-algebra} we saw how to implement a
+  In section \ref{sec:symbolic-algebra} we saw how to implement a
   polynomial arithmetic system representing polynomials as lists of
   terms.  In a similar way, we can work with <EM>power series</EM>, such as
   
@@ -865,30 +825,30 @@ function expand(num, den, radix) {
       
       
 	
-	{\lstinline[mathescape=true]$integrate_series$}
+	<kbd>integrate_series</kbd>
       
       that takes as input a stream
-      $a_0, a_1, a_2,$ …~representing
+      $a_0, a_1, a_2,$ … representing
       a power series and returns the stream
       $a_0, \frac{1}{2}a_1, \frac{1}{3}a_2,$
-      …~of coefficients of the non-constant terms of the integral of the series.
+      … of coefficients of the non-constant terms of the integral of the series.
       (Since the result has no constant term, it doesn't represent a power
-      series; when we use {\lstinline[mathescape=true]$integrate-series$},
+      series; when we use <kbd>integrate-series</kbd>,
       we will
       
 	
-	{\lstinline[mathescape=true]$pair$} with
+	<kbd>pair</kbd> with
       
       the appropriate constant.)
     }
 \item{
       The function $x\mapsto e^x$ is its own
       derivative.  This implies that $e^x$ and the integral
-      of~$e^x$ are the
+      of $e^x$ are the
       same series, except for the constant term, which is $e^0 = 1$.
       Accordingly, we can generate the series for
       $e^x$ as
-      
+      <div class='snippet' id='javascript_67_20_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const exp_series = 
@@ -896,18 +856,17 @@ const exp_series =
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBApgDwA4H0JwE4Es4RgXhgCgZSYkBDLDACgEYAaGGgSgID4Yswo4BzDBV5pMOCDUSp02XCxYBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=MYewdgzgLgBApgDwA4H0JwE4Es4RgXhgCgZSYkBDLDACgEYAaGGgSgID4Yswo4BzDBV5pMOCDUSp02XCxYBuIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       Show how to generate the series for sine and cosine, starting from the facts
       that the derivative of sine is cosine and the derivative of cosine is
       the negative of sine:
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_67_21_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const cosine_series = pair(1, ??);	  
 const sine_series = pair(0, ??);
-\end{JavaScript}
-
+</pre></div></div>
     }
 \end{enumerate}
 
@@ -924,23 +883,21 @@ const sine_series = pair(0, ??);
     
     
     With power series represented as streams of coefficients as in
-    exercise~\ref{ex:powerseries}, adding series is implemented by {\lstinline[mathescape=true]$add-streams$}.  Complete the definition of the following
+    exercise \ref{ex:powerseries}, adding series is implemented by <kbd>add-streams</kbd>.  Complete the definition of the following
     function
     for
     multiplying series:
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_67_22_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function mul_series(s1, s2) {
     pair(??, add_streams(??, ??));
 }
-\end{JavaScript}
-
+</pre></div></div>
 
     You can test your
     function
     by verifying that
     $sin^2 x + cos^2 x = 1$,
-    using the series from exercise~\ref{ex:powerseries}.
+    using the series from exercise \ref{ex:powerseries}.
     
   
 \end{Exercise}
@@ -951,7 +908,7 @@ function mul_series(s1, s2) {
 \begin{Exercise}
 
     Let $S$ be a power series
-    (exercise~\ref{ex:powerseries})
+    (exercise \ref{ex:powerseries})
     whose constant term is 1.  Suppose we want
     to find the power series $1/S$, that is,
     the series $X$ such that
@@ -972,16 +929,16 @@ function mul_series(s1, s2) {
     function
     
       
-      {\lstinline[mathescape=true]$invert_unit_series$}
+      <kbd>invert_unit_series</kbd>
     
     that computes $1/S$ for a power series
     $S$ with constant term 1.
     You will need to use
     
       
-      {\lstinline[mathescape=true]$mul_series$}
+      <kbd>mul_series</kbd>
     
-    from exercise~\ref{ex:mul-series}.
+    from exercise \ref{ex:mul-series}.
     
   
 \end{Exercise}
@@ -994,32 +951,32 @@ function mul_series(s1, s2) {
     
     
     
-    Use the results of exercises~\ref{ex:mul-series}
-    and~\ref{ex:invert-unit-series} to define a
+    Use the results of exercises \ref{ex:mul-series}
+    and \ref{ex:invert-unit-series} to define a
     function
     
       
-      {\lstinline[mathescape=true]$div_series$}
+      <kbd>div_series</kbd>
     
     that divides two power series.
     
       
-      The function {\lstinline[mathescape=true]$div_series$}
+      The function <kbd>div_series</kbd>
     
     should work for any
     two series, provided that the denominator series begins with a
     nonzero constant term.  (If the denominator has a zero constant term, then
     
       
-      {\lstinline[mathescape=true]$div_series$}
+      <kbd>div_series</kbd>
     
     should signal an error.)
     Show how to use
     
       
-      {\lstinline[mathescape=true]$div_series$}
+      <kbd>div_series</kbd>
     
-    together with the result of exercise~\ref{ex:powerseries}
+    together with the result of exercise \ref{ex:powerseries}
     to generate 
     the power series for tangent.
   
@@ -1029,7 +986,7 @@ function mul_series(s1, s2) {
   
 
 <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>Eratosthenes, a third-century {\scshape b.c.}
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Eratosthenes, a third-century {\scshape b.c.}
     
     
     Alexandrian Greek philosopher, is famous for giving the first accurate
@@ -1042,26 +999,26 @@ function mul_series(s1, s2) {
     however, these methods have been superseded by outgrowths of the
     
     probabilistic techniques discussed in
-    section~\ref{sec:primality}.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>We
+    section \ref{sec:primality}.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>We
     have named these figures after
     
     Peter Henderson, who
     was the first person to show us diagrams of this sort as a way of
     thinking about stream processing.  Each solid line represents a stream
-    of values being transmitted.  The dashed line from the {\lstinline[mathescape=true]$head$} to
-    the {\lstinline[mathescape=true]$pair$} and the {\lstinline[mathescape=true]$filter$} indicates that this is a single
-    value rather than a stream.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>
+    of values being transmitted.  The dashed line from the <kbd>head</kbd> to
+    the <kbd>pair</kbd> and the <kbd>filter</kbd> indicates that this is a single
+    value rather than a stream.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>
     <SPLIT>
       
       
-	This uses the function {\lstinline[mathescape=true]$stream_merge$}
-	from exercise~\ref{ex:combine-streams}.
+	This uses the function <kbd>stream_merge</kbd>
+	from exercise \ref{ex:combine-streams}.
       
     </SPLIT>
-  </FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>This last point is
+  </FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>This last point is
     very subtle and relies on the fact that $p_{n+1} \leq p_{n}^2$.
     (Here, $p_{k}$ denotes the $k$th prime.)  Estimates such as these are
     very difficult to establish.  The ancient proof by
@@ -1077,14 +1034,21 @@ function mul_series(s1, s2) {
     that $p_{n+1}\leq 2p_{n}$ for all $n$.  This result, originally
     conjectured in 1845, is known as <EM>Bertrand's hypothesis</EM>.  A proof
     can be found in section 22.3 of
-    Hardy and Wright 1960.</FOOTNOTE></div><hr><div class='footnote'>
+    <CITATION>Hardy and Wright 1960</CITATION>.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>This
 	exercise shows how call-by-need is closely related to
     
     
-    ordinary memoization as described in exercise~\ref{ex:memoization}.
+    ordinary memoization as described in exercise \ref{ex:memoization}.
     In that exercise, we used assignment to explicitly construct a local
     table.  Our call-by-need stream optimization effectively constructs
     such a table automatically, storing values in the previously forced
     parts of the stream.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section5/subsection1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section5/subsection3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+3.5.2  Infinite Streams</div>	<div class='next-page'></div></div>

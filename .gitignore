@@ -21,3 +21,4 @@ rails-html
 sicp.zip
 sicp.tar
 texput.log
+*.html

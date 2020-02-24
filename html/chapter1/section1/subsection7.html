@@ -1,10 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>1.1.7 Example: Square Roots by Newton's Method</a>
+		<a name='top' class='permalink'>1.1.7  Example: Square Roots by Newton s Method</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
         
 
         <div class='permalink'>
@@ -44,14 +53,12 @@
                 Indeed, it tells us almost
               nothing about how to actually find the square root of a given number.  It
               will not help matters to rephrase this definition in pseudo-JavaScript:
-                
-\begin{JavaScript}
+                <div class='snippet' id='javascript_8_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function sqrt(x) {
     return the y with y >= 0 &&
                       square(y) === x;
 }
-\end{JavaScript}
-
+</pre></div></div>
               This only begs the question.
             </p></div>
 
@@ -76,9 +83,7 @@ function sqrt(x) {
               
               mathematics we are usually concerned with declarative (what is)
               descriptions, whereas in computer science we are usually concerned
-              with imperative (how to) descriptions.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-              
-            
+              with imperative (how to) descriptions.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
               
               
             </p></div>
@@ -93,21 +98,9 @@ function sqrt(x) {
           number $x$,
           we can perform a simple manipulation to get a better guess (one closer
           to the actual square root) by averaging $y$ with
-          $x/y$.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>~1:
-          
-            
-\begin{figure}[H]
-\centering
-
-\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_tex/ch1\string_1\string_7-1}.png}}
-\end{figure}
-
-          
-          Continuing this process, we obtain better and better
-          approximations to the square root.
-        
+          $x/y$.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
           For example, we can compute
-          the square root of 2 as follows.  Suppose our initial guess is~1:
+          the square root of 2 as follows.  Suppose our initial guess is 1:
           
             
 \begin{figure}[H]
@@ -137,7 +130,7 @@ function sqrt(x) {
                   
                 
 
-              
+              <div class='snippet' id='javascript_8_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sqrt_iter(guess, x) {
@@ -148,9 +141,10 @@ function sqrt_iter(guess, x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoH0ZQKboAUA5iHssgDSIAeAlIgN4BQibi6eUI6SxccACZY8YOCGIALEmQrV6rdkvYB+RKXLJFypQC4UGbLgKEYAWwAO6OADc8MzfLpOA3MwC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAcznAJgfQKZjiZACwApkRsBnCgGkQA8BKRAbwChEPEAnbKELpAEMARhWIUAjiEE9S5KkwC09JgB5EABgB0GjQEYA3KwC+rUJFgJEIsYxbtOPPgPqIAfAF5NiAPyuAXIiKdEam5tDwSJLSsnZsnNy8-Eh0iABU9KFm4BFWMAC2AA5ccABu2HKUNCr2CU7J1uVcgsgVZFW0qQD0KPIUDFnhlkJNLRV01ACeTPGOSS7EqQDUiNOIPQBMgznDiJJcUJgwUNhclVSdMw4c9S6oGDh4BCTtFyrXCQl+rxQfnxyBfaHY6nYgFYplNp9S6XLKsIFHE5nADM1A2AFYBkA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
               
         </p></div>
 
@@ -158,7 +152,7 @@ function sqrt_iter(guess, x) {
 <a name='p6' class='permalink'></a><p>
           A guess is improved by averaging
           it with the quotient of the radicand and the old guess:
-          
+          <div class='snippet' id='javascript_8_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function improve(guess, x) {
@@ -167,13 +161,14 @@ function improve(guess, x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAtgBwE5wG4FMAUA5iLgM6kA0iAHgJSIDeAUIq4hrlCBkgIZ4ZehAsTKUaiAPSJR5WgG4mAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwG4FMBOyDm6AUAHgDQCeAlIgN4BQi9im6UImSRiA1IhYgPSIATAG4aAXxqhIsBIhgBbAA6Y4GfDhDoAzluKJClWg0bNWSNFlwEN23fv6IbO8qIk0Fy1QQDMewQFYXIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
           
             where
             
-            
+            <div class='snippet' id='javascript_8_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function average(x,y) {
@@ -182,9 +177,10 @@ function average(x,y) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwG4FMBOyDm6AUAHgDQCeAlIgN4BQi9im6UImSRiA1IhYgPSIATAG4aAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwG4FMBOyDm6AUAHgDQCeAlIgN4BQi9im6UImSRiA1IhYgPSIATAG4aAXxo00WXAQDMxRADZywoA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
             
           </p></div>
 
@@ -195,12 +191,12 @@ function average(x,y) {
 <a name='p7' class='permalink'></a><p>
               We also have to say what we mean by <QUOTE>good enough.</QUOTE>  The
               following will do for illustration, but it is not really a very good
-              test.  (See exercise~\ref{ex:ex-sqrt-end-test}.)
+              test.  (See exercise \ref{ex:ex-sqrt-end-test}.)
               The idea is to improve the answer until it is close enough so that its
               square differs from the radicand by less than a predetermined
               tolerance (here 0.001):
               
-              
+              <div class='snippet' id='javascript_8_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function good_enough(guess, x) {
@@ -209,9 +205,10 @@ function good_enough(guess, x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAcznAJgfQKZjiZACwApkRsBnCgGkQA8BKRAbwChEPEAnbKELpAEMARhWIUAjiEE9S5KkwC09JgB5EABgB0GjQEYA3KwC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwEYGcAUAPAlIgbwChFTEAnAUyhHKW0QD4BeRABkQH5EGAuRALTYA3EQC+RUJFgJE6AI4hkVHPmJkK1WvUQAqHqIlTo8JAHM4cACYB9SmDggzAC0xmQldOgA0PNSTIqGjoUDEwFJRV3T3R8AT9EAB52ADo2NgBGQyIiC2s7BydXDJSAFgzfACZcYSA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
               
             </p></div>
           
@@ -225,7 +222,7 @@ function good_enough(guess, x) {
               Finally, we need a way to get started.  For instance, we can
               always guess that the square root of any number is 1:
               
-              
+              <div class='snippet' id='javascript_8_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sqrt(x) {
@@ -234,9 +231,10 @@ function sqrt(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzF0BTKEdJNTAfRikvSwEYAaRfAbmIBfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4CcoH0ZQKboAUA5iHssgDSIAeAlIgN4BQibi6eUI6SxccACZY8YOCGIALEmQrV6rdkvYB+RKXLJFypQC4UGbLgKEYAWwAO6OADc8MzfLpOA3MwC+zUJFgJ1A4VFxKQc5WgYWJU5uXkQAQwAjZEI0EDjOUOQGAFpwxAAeRAAGADoiooBGN09vaHgkROT6Jm0OLh4kGkQAPgBeYsQ1Lv1smmqvcDq-VPT7Zsj2aI7aRAAqWnHa3yRzK1t7DTD51qXYuLt0OOID2SoVgHp1W7pNye34i6u5ygBPCJP2rFCF0ANSIP6IR4AJlePnqBkwwP+UUBSDQmBw+CIFVcHmYzHRUEIAE4XkA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
             </p></div>
           
 
@@ -251,7 +249,7 @@ function sqrt(x) {
 	      declarations
 	    
 	  
-	  to the interpreter, we can use {\lstinline[mathescape=true]$sqrt$}
+	  to the interpreter, we can use <kbd>sqrt</kbd>
               just as we can use any
                 
                   
@@ -260,51 +258,55 @@ function sqrt(x) {
                   
                 
 
-                
+                <div class='snippet' id='javascript_8_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 sqrt(9);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4RwTgLgFAnAlAbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzF0BTKEdJNTAfRikvSwEYAaRfAbmIBfYqEiwEKDFGat2AcxCVkyHviKlyVGnURy4cACaNKYOCDkALLAqUreeDeSdkA-LsXLHz8gC5JTFjYsGABbAAd0OAA3SmsPO3xVPAFhUWh4JD1DY1NzKxtlJPUnLVokAEMAI2QsNBByqjjbAgBae0QAHkQABgA6bu6OFJFwdIkqmrUSEuoy3kQAPgBeHsQ3HEQ-FpxhtPF6VHrGqa9SnQ2AKl5d0f3EUIjo2IKEgmnNWZ1ymPRyuWf4qpEAB6dzNG5iDKIb5sP6xHBcACeb1OnyQuEQAGpEMiQYgAEzDBjYACcySAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
                 
 
-              
+              <div class='snippet' id='javascript_8_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 sqrt(100 + 37);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4RwTgLgFAjADHABAakQZgOwEoDcQ}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzF0BTKEdJNTAfRikvSwEYAaRfAbmIBfYg2wcADOMQBqRAGYA7Hj5A}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-              
+              <div class='snippet' id='javascript_8_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 sqrt(sqrt(2) + sqrt(3));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4RwTgLgFKlQTASgAQGpm2gZkYg3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzF0BTKEdJNTAfRikvSwEYAaRfAbmIBfYg2yisAJgIBqFBmwBmPHj5A}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-              
+              <div class='snippet' id='javascript_8_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 square(sqrt(1000));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4RwrghgTgpgFKKAXOBGADJglFg3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzF0BTKEdJNTAfRikvSwEYAaRfAbmIBfYmhABDKlgbYOABnl48fIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
               
               
@@ -316,7 +318,7 @@ square(sqrt(1000));
             <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
               
-              The {\lstinline[mathescape=true]$sqrt$} program also illustrates that the simple functional
+              The <kbd>sqrt</kbd> program also illustrates that the simple functional
               language we have introduced so far is sufficient for writing any
               purely numerical program that one could write in, say, C or
               Pascal.  This might seem surprising, since we have not
@@ -325,23 +327,18 @@ square(sqrt(1000));
               
               (looping) constructs that direct the
               computer to do something over and over again. The function
-              {\lstinline[mathescape=true]$sqrt_iter$}, on the
+              <kbd>sqrt_iter</kbd>, on the
               other hand, demonstrates how iteration can be accomplished using no
               special construct other than the ordinary ability to call a
-              function.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
-            
+              function.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
               
             </p></div>
-          <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Readers who are worried about the efficiency
-                issues involved in using function calls to implement iteration should
-                note the remarks on <QUOTE>tail recursion</QUOTE> in
-                section~\ref{sec:recursion-and-iteration}.</FOOTNOTE></div>
+          
         </SPLIT>
         
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled2}
+\label{ex:unlabeled9}
 
         <SPLIT>
           
@@ -349,15 +346,15 @@ square(sqrt(1000));
             
             
             Alyssa P. Hacker doesn't like the syntax of conditional
-	    expressions, involving the characters {\lstinline[mathescape=true]$?$}
-	    and {\lstinline[mathescape=true]$:$}.
+	    expressions, involving the characters <kbd>?</kbd>
+	    and <kbd>:</kbd>.
 	    <QUOTE>Why can't I just declare an
             ordinary conditional function whose application 
 	    works just like conditional expressions?</QUOTE> she asks.
             Alyssa's friend Eva Lu Ator claims this can indeed be done, and
-            she declares a {\lstinline[mathescape=true]$conditional$}
+            she declares a <kbd>conditional</kbd>
 	    function as follows:
-                
+                <div class='snippet' id='javascript_8_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function conditional(predicate, then_clause, else_clause) {		    
@@ -366,36 +363,39 @@ function conditional(predicate, then_clause, else_clause) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABBBATGsEEMA2AKABwCcBTdCLKEgGkSgAsSwB9CHLEAZxsRJ29bsuJAJSIA3gEhJiWYgBQcxKSggiSYmRgUqiAPx1GLNh26IAXL34lBpkgG55AXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABBBATGsEEMA2AKABwCcBTdCLKEgGkSgAsSwB9CHLEAZxsRJ29bsuJAJSIA3gEhJiWYgBQcxKSggiSYmRgUqiAPx1GLNh26IAXL34lBpkgG55AXyA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
                 Eva demonstrates the program for Alyssa:
-                
+                <div class='snippet' id='javascript_8_12_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 conditional(2 === 3, 0, 5);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgJglgLl4EMA2AKATAAgLw4wZgBoMAGIgVgEoBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABBBATGsEEMA2AKABwCcBTdCLKEgGkSgAsSwB9CHLEAZxsRJ29bsuJAJSIA3gEhJiWYgBQcxKSggiSYmRgUqiAPx1GLNh26IAXL34lBpkgG55AX3kow6TGFx4ATIgC8gYgAzLQADLQArCL2QA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 		evaluates as expected to 5, and
-                
+                <div class='snippet' id='javascript_8_13_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 conditional(1 === 1, 0, 5);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgJglgLl4EMA2AKAjAAgLw42gNBgAyECsAlANxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABBBATGsEEMA2AKABwCcBTdCLKEgGkSgAsSwB9CHLEAZxsRJ29bsuJAJSIA3gEhJiWYgBQcxKSggiSYmRgUqiAPx1GLNh26IAXL34lBpkgG55AX3kow6TGFx4AjIgC8gYg+tAAMtACsIvZAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 		evaluates as expected to 0.
                 Delighted, Alyssa uses
-		{\lstinline[mathescape=true]$conditional$} to rewrite the square-root
+		<kbd>conditional</kbd> to rewrite the square-root
                 program:
-                
+                <div class='snippet' id='javascript_8_14_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sqrt_iter(guess, x) {
@@ -407,34 +407,35 @@ function sqrt_iter(guess, x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoH0ZQKboAUA5iHssgDSIAeAlIgN4BQibi6eUI6SECAE1zwwAQwA2JOHAFY8YOCGIALEmQrV6lVu1179u0uSo6DZ-Wkw58RGAFsADujgA3PGuOa62877-t6OgBuZgBfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABBBATGsEEMA2AKABwCcBTdCLKEgGkSgAsSwB9CHLEAZxsRJ29bsuJAJSIA3gEhJiWYgBQcxKSggiSYmRgUqiAPx1GLNh26IAXL34lBpkgG55AX3mhImJAHM4cVMyZwIJ70eJ4gJJyctAAeYuKKcipqSFgARpx4nACOIFikoeGRYgC0iLGIADyIAAwAdNXVAIyOLm7Q8EgwALbEcABuJAURUWVxCbJJ6ohYA0RYnoNhwzGIAPSIS0UtruDtCIjZRFDMGCREQ5ExY0qTSChg6B64oT5+AUEhmyOx1ONK-wD-l9foDQaDDsdTudur0BhdviIQWDkSjZLERNt5BCTlRzgBmagAJgArBigA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
                 What happens when Alyssa attempts to use this to compute square roots?
                 Explain.
                 
 		
           
         </SPLIT>
-        \hfill{\hyperref[ex:unlabeled2-Answer]{Solution}}\\
+        \hfill{\hyperref[ex:unlabeled9-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled2}]
+\begin{Answer}[ref={ex:unlabeled9}]
 
 		  Any call of
-		  {\lstinline[mathescape=true]$sqrt_iter$}
+		  <kbd>sqrt_iter</kbd>
 		  leads immediately to an infinite loop. The reason
 		  for this is our applicative-order evaluation. The
 		  evaluation of the return expression of
-		  {\lstinline[mathescape=true]$sqrt_iter$}
+		  <kbd>sqrt_iter</kbd>
 		  needs to evaluate its arguments first, including
 		  the recursive call of
-		  {\lstinline[mathescape=true]$sqrt_iter$},
+		  <kbd>sqrt_iter</kbd>,
 		  regardless whether the predicate evaluates to
 		  <EM>true</EM> or <EM>false</EM>. The same of course
 		  happens with the recursive call, and thus the
 		  function
-		  {\lstinline[mathescape=true]$conditional$}
+		  <kbd>conditional</kbd>
 		  never actually gets applied.
 		
 \end{Answer}
@@ -449,7 +450,7 @@ function sqrt_iter(guess, x) {
                 
                   
                   
-                    {\lstinline[mathescape=true]$good_enough$}
+                    <kbd>good_enough</kbd>
                   
                 
                 test used in computing square roots will not be
@@ -462,11 +463,11 @@ function sqrt_iter(guess, x) {
                 
                   
                   
-                    {\lstinline[mathescape=true]$good_enough$}
+                    <kbd>good_enough</kbd>
                   
                 
                   is to watch how
-                {\lstinline[mathescape=true]$guess$}
+                <kbd>guess</kbd>
                 changes from one iteration to the next and to stop when the
                 change is a very small fraction of the guess.  Design a square-root
                 
@@ -486,7 +487,7 @@ function sqrt_iter(guess, x) {
 
       The absolute tolerance of 0.001 is too large when computing the square
       root of a small value.
-      For example, {\lstinline[mathescape=true]$sqrt(0.0001)$}
+      For example, <kbd>sqrt(0.0001)</kbd>
       results in 0.03230844833048122 instead of the expected value 0.01,
       an error of over 200%.
       <div class='permalink'>
@@ -498,7 +499,7 @@ function sqrt_iter(guess, x) {
 <a name='p12' class='permalink'></a><p></p></div>
       The following program alleviates the problem by replacing an absolute
       tolerance with a relative tolerance.
-      
+      <div class='snippet' id='javascript_8_15_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const error_threshold = 0.01;
@@ -510,13 +511,14 @@ function relative_error(estimate, reference) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBApgJwSBB9KALBcIZAGwBMYBeGABgDpyBGAbgCgAzAVzGCgEtwYBzEEIVRwwIFrwwAKXixwQANAA8AlDADeDGFpjYoLBGB1x8AQy4A3OMKQppsiApicAtgAdklu3PkwVyzdqB2gA88DZomNi4BISMAL7MbBzchtimFlaIyAiSOFzOZnA+2EyIIsBwqhqBuvqGJgBGELnQLoUwALRGpdjslTAA9N1lffFAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwEYGcAUAPAlIgbwChFTEAnAUyhHKW0QD4BeRABkQH5EGAuRALTYA3EQC+RUJFgIUAN0rlkAc0o4ANAE98xMhWq0kORAGpE2xAHpEAJlESp0eEnQBHclBw6SZKjTqIbh4A+jBQipgAjOo8uPaS4E6yMAC2AA7kcAqYyiCU6OgxeIQ+pH6G8ooqarn5hTxWiLUFceIJ0s6B7lCh4eQ5eQVF3nrlAcpwcAAmwZRgcCDKABYDdcOlenrczegbm6T8QT1hEakZWTWD9XjD8RAI6FCIipnkwVBLVOhLcAA2U4hWGwAHRsSKiRwyJATaazeaLFY7dTFXS+AwBKi-ZCwBSzcivVZDRBnTLZJGxXB7fYAHme+Lgbw+Xx+-3ikM6mOxMFxLwZmHysBS2MoMSowEUcwglBGaP8SDQWAFqWFgn04qokGljTFEs18SIR0wAGY4kA}{\usebox\lstbox}!*/
     return abs(estimate - reference) / reference;
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
 \end{Answer}
 
@@ -544,7 +546,7 @@ function relative_error(estimate, reference) {
                 analogous to the
                 square-root
                 function.
-                (In section~\ref{sec:proc-returned-values} we
+                (In section \ref{sec:proc-returned-values} we
                 will see how to implement Newton's method in general as an abstraction
                 of these square-root and cube-root
                 functions.)
@@ -555,7 +557,7 @@ function relative_error(estimate, reference) {
 
 \begin{Answer}[ref={ex:cube-root-newton}]
 
-
+<div class='snippet' id='javascript_8_16_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function good_enough(guess, x) {
@@ -567,7 +569,7 @@ function div3(x, y) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAcznAJgfQKZjiZACwApkRsBnCgGkQA8BKRAbwChEPEAnbKELpAEMARhWIQQw7KXJUmAWnpMAPIgAMAOjVqAjAG5WAX1ahIsBInQwAbgGZidWgE8mbThx58BiB4gDUiC6IAPSItgbGptDwSDAAtgAOXHDW0mSUNEos7Jye-EhWdr6hMhmIAFQoshQMtABMFVUZDBEm4NEWElKYyXBQpVS0jNnued6oGDh4BCTpg0o57kvuAPxNVIvLywBciF3Yvf3xSSlp1UO1ShFAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwEYGcAUAPAlIgbwChFTEAnAUyhHKW0QD4BeRABkQH5EGAuRALTYA3EQC+RUJFgJEEEKko58xMhWq16iAFQ8dPURKnR4SAOZw4AEwD6lMHBBmAFpjMhK6dABoeKkmRUNHQoGJjyim4eXvgCfogAPOwAdGxsAIyGkuAmslYwAG4AzDi+AJ7+aurBSDiIANSIFYgA9IhFWcYySDAAtgAO5HAFSu6ePvGqgRoh+cV1bVHj+mMxvgBMK9HouJ053XIKlDZDcFBLXr54hAGkQZqIFtZ2Dk6uqxN4t1U-XI-b31+an4EUop3OfUGw1G2yuuDhWSIoJOlnORW86wA7LsgA}{\usebox\lstbox}!*/
 function improve(guess, x) {
     return div3(x / (guess * guess), 2 * guess);
 }
@@ -578,14 +580,15 @@ function cube_root(guess, x) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 \end{Answer}
 
 
       <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Declarative and
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Declarative and
                 imperative descriptions are intimately related, as indeed are
                 mathematics and computer science.  For instance, to say that the
                 answer produced by a program is
@@ -608,8 +611,8 @@ function cube_root(guess, x) {
                 specified by
                 the programmer, they can generate <QUOTE>how to</QUOTE> knowledge automatically.
                 This cannot be done in general, but there are important areas where
-                progress has been made.  We shall revisit this idea in chapter~4.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>This square-root algorithm is actually
+                progress has been made.  We shall revisit this idea in chapter 4.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>This square-root algorithm is actually
             a special case
             of Newton's method, which is a general technique for finding roots of
             equations.  The square-root algorithm itself was developed by Heron of
@@ -623,5 +626,16 @@ function cube_root(guess, x) {
                   
                 
                 in
-            section~\ref{sec:proc-returned-values}.</FOOTNOTE></div>
-</SUBSECTION>
+            section \ref{sec:proc-returned-values}.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Readers who are worried about the efficiency
+                issues involved in using function calls to implement iteration should
+                note the remarks on <QUOTE>tail recursion</QUOTE> in
+                section \ref{sec:recursion-and-iteration}.</FOOTNOTE></div>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section1/subsection6.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section1/subsection8.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+1.1.7  Example: Square Roots by Newton s Method</div>	<div class='next-page'></div></div>

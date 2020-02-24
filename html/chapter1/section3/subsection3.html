@@ -1,13 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>1.3.3 
-            Functions
-            as General Methods
-          </a>
+		<a name='top' class='permalink'>1.3.3  Functions as General Methods</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
           
           
@@ -18,14 +24,14 @@
           We introduced compound
           functions
           in
-          section~\ref{sec:compound-procedures} as a mechanism for abstracting
+          section \ref{sec:compound-procedures} as a mechanism for abstracting
           patterns of numerical operations so as to make them independent of the
           particular numbers involved.  With higher-order
           functions, such as
-          the {\lstinline[mathescape=true]$integral$}
+          the <kbd>integral</kbd>
           function
           of
-          section~\ref{sec:procedures-as-parameters}, we began to see a more
+          section \ref{sec:procedures-as-parameters}, we began to see a more
           powerful kind of abstraction:
           functions
           used to express general
@@ -36,9 +42,10 @@
           functions.
           </p></div>
 
-          \subsubsection{
+          <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
             Finding roots of equations by the half-interval method
-          
+          </h2></div>
 
           <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
@@ -68,18 +75,13 @@
           Here is a
           
 	    
-	    function that implements this strategy:<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+	    function that implements this strategy:<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
 	    
-	  <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Note that we slightly extend the
-	    syntax of conditional statements described in
-	    section~\ref{sec:lambda}
-	    by allowing another conditional statement
-	    in place of the block following {\lstinline[mathescape=true]$else$}.</FOOTNOTE></div>
+	  
 
         
 
-        
+        <div class='snippet' id='javascript_20_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function search(f, neg_point, pos_point) {
@@ -91,7 +93,7 @@ function search(f, neg_point, pos_point) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwKYEMBOEAWAKYAGkTFQHMB9ABzhjCmJuWtvoEpEBvAKET8QgJkURAFsYAExp0RAXkToAbqkzoyqPKUrT6hJixlsA3L34xgiPBAA2cNBVRg4IMvi0HdifTqhsOPfkDETFQoEEwkcSlWKBNAgF9EVGs0LlMggSERKFRhCkV0axBURHlgPCifY3Sg80smGFhlPBy8gqLUPzSMjJCwiJQMbHwiEnIPBjFJKriexOTUus1ydCaNVqh8wuKugJ7AvvCkNCxcAmJKmMY7Cer9+ZSSvf2+Q4HLmVmM+Jqf+KA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwG4FMBOyDm6AUAHgDQCeAlIgN4BQi9im6UImSRiA1IhYgPSIATAG4aAXxqhIsBIgAOcAM4xYGIpSqNmrJIUQA+RAAZhiCVOjwkYdDmSqChDVpZtEegDzHT58JdkQADZK6AD66GBwIDgAFkRkGnQMTK5IyABGihwAtDyUXkYAdEZGAIyivtJWKJnq1En0KTruBgC8xogA-C0AXIjZhBWSfjJIiujImBBxwMSINjihCjBgUHMKiktwK1CJDIgQCIpQiAC2MAAmy6uI7WhYuAQLWzvEGy+r5KL7MMCI+EEQuFItE4s9rmt5EoPrs9vtkto3OcrttVt8GGJEOhAuN6vCGIcwMdEFB0MdQqhkIEQOhbohgPhkRCvg14b9-hsVDA1KTyZTqehyHD8fsmm5xpNpvhZvNbDC5kzUbt0fjMdjcez8At7NyCLyoBSqTShXiRaLEWMJlMZgrLhD1tDmSr4WqcbTaGbzakznalc79hIA+IaDQJdaOK1DHoAFQtXKlOZGOaCL5AA}{\usebox\lstbox}!*/
         if (positive(test_value)) {
             return search(f, neg_point, midpoint);
         } else if (negative(test_value)) {
@@ -103,8 +105,9 @@ function search(f, neg_point, pos_point) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 
         
@@ -122,13 +125,15 @@ function search(f, neg_point, pos_point) {
           we continue the process with a new interval running from the original
           negative point to the midpoint.  If the test value is negative, we
           continue with the interval from the midpoint to the positive point.
-          Finally, there is the possibility that the test value is~0, in which
+          Finally, there is the possibility that the test value is 0, in which
           case the midpoint is itself the root we are searching for.
 
           To test whether the endpoints are <QUOTE>close enough</QUOTE> we can use a
           function
-          similar to the one used in section~\ref{sec:sqrt} for
-          computing square roots:<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+          similar to the one used in section \ref{sec:sqrt} for
+          computing square roots:<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
+
+          <div class='snippet' id='javascript_20_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function close_enough(x,y) {
@@ -137,25 +142,10 @@ function close_enough(x,y) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABBANnAzgUwPqbHEAcwAsAKADwBoBPASkQG8AoRVxAJ0yhHaQEMARugqIAtIjqIAPIgAMAOlmyAjAG4mAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwEYGcAUAPAlIgbwChFTEAnAUyhHKW0QD4BeRABkQH5EGAuRALTYA3EQC+RUJFgJEEADZx0lAPqUwcEAHMAFjgA0AT3zEyFarSRosDAYmOIAPOwB0bNgEZREogqWr1TV1MAHYXEIA2AFYAFn1EMMiIiNxhIA}{\usebox\lstbox}
+</pre>
 
-
-
-          
-          
-
-          
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function close_enough(x,y) {
-    return abs(x - y) < 0.001;
-}
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABBANnAzgUwPqbHEAcwAsAKADwBoBPASkQG8AoRVxAJ0yhHaQEMARugqIAtIjqIAPIgAMAOlmyAjAG4mAXyA}{\usebox\lstbox}
-
-
+</div></div>
 
           
           </p></div>
@@ -166,21 +156,23 @@ function close_enough(x,y) {
 	      
 	      
 		The function 
-		{\lstinline[mathescape=true]$search$}
+		<kbd>search</kbd>
 	      
 	    
 	    is awkward to use directly, because
           we can accidentally give it points at which $f$'s
           values do not have the required sign, in which case we get a wrong answer.
-          Instead we will use {\lstinline[mathescape=true]$search$} via the following
+          Instead we will use <kbd>search</kbd> via the following
           function, which
           checks to see which of the endpoints has a negative function value and
-          which has a positive value, and calls the {\lstinline[mathescape=true]$search$}
+          which has a positive value, and calls the <kbd>search</kbd>
           function
           accordingly.  If the function has the same sign on the two given
           points, the half-interval method cannot be used, in which case the
           function
-          signals an error.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+          signals an error.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
+
+          <div class='snippet' id='javascript_20_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function half_interval_method(f, a, b) {
@@ -192,14 +184,15 @@ function half_interval_method(f, a, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABACwIYBtgH0ZigUwCcA3DLAW3ymTgBMAKYAGkVRYCMBKRAbwChEgxBAQBnKKyyl0IfIgC8iYPVScA3AKEiw4xOykZZCpfS4ahiQlRCEkYfAHNUsYvhUGZ+bgDJviAA5wojAubvrSspyaFjEA-Iii+KiEEMiMLGx6UTE5AFyI9k6hph6RiL4BQSEwru4RXtE5FvGJyanpehnZTTH5RIRwhPQARPWirFYFcBJwwIhw-oHBBAkwDmDD6nwAvkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwKYEMBOEAWAKYAGkTFQHMB9ABzhjCmJuWtvoEpEBvAKET8QgJkURAFsYAExp0RAXkToAbqkzoyqPKUrT6hJixlsA3L34xgiPBAA2cNBVRg4IMvi0HdifTqhsOPfkDETFQoEEwkcSlWKBNAgF9EVGs0LlMggSERKFRhCkV0axBURHlgPCifY3Sg80smGFhlPBy8gqLUPzSMjJCwiJQMbHwiEnIPBjFJKriexOTUus1ydCaNVqh8wuKugJ7AvvCkNCxcAmJKmMY7Cer9+ZSSvf2+Q4HLmVmM+Jqfn9BILAEAplKp1HgAB6EACe-hqbyQkMQAGpELDEAB6RAAJhM-3A0HgSAaa0h-mCoSOiAhiAAfIgAAxGRD4wFEsZkVYwZoQ8kI6mIAA8jOZrMJwJsdlQDicLnwUPRzwp-SQ6AARsgkQBaNEcYUMgB0DIZAEY8dwAeLVRqyd1+PyabT5AzEAB+AUALkQWoh5stQKQOEKwAoMhU7QoolCODgEnOCmIarhgUEYGECi2HVKiHK6Du-FT6bVmeK2fKSa+yqpWi5zXQJc6iAAZE2vHZGtyNMX2jsaj13SdhvH0Im2H2Ml6a6Tu9tGy228gO3WG2OXoEB0MzqM1cQ8+Oel6VJg4Jg8AAiHu5BQhEhwERwCxwKgkkqLshgM-VH7cIPWENhzAIyjKAYzjURVhwChFzAYhsSNYgABYjWMIA}{\usebox\lstbox}!*/
              ? search(f, b, a)
              : error("values are not of opposite sign");
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	  <SPLIT>
 	    
@@ -212,22 +205,23 @@ function half_interval_method(f, a, b) {
           The following example uses the half-interval method to approximate $\pi$
           as the root between 2 and 4 of $\sin\, x = 0$:
 
-          
+          <div class='snippet' id='javascript_20_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 half_interval_method(math_sin, 2.0, 4.0);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BYQwNgZg+glgdgFwKYCcBu4oFskOAewBMAKLEPKAZ3gBoACAJgDoAGegFlYEoBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABACwIYBtgH0ZigUwCcA3DLAW3ymTgBMAKYAGkVRYCMBKRAbwChEgxBAQBnKKyyl0IfIgC8iYPVScA3AKEiw4xOykZZCpfS4ahiQlRCEkYfAHNUsYvhUGZ+bgDJviAA5wojAubvrSspyaFjEA-Iii+KiEEMiMLGx6UTE5AFyI9k6hph6RiL4BQSEwru4RXtE5FvGJyanpehnZTTH5RIRwhPQARPWirFYFcBJwwIhw-oHBBAkwDmDD6nwAvnygkLAICUkpacwFjliBuFAsS1dwN9z8Ftq65DC013jGqK6EqAcbkKDxuTHu3ygWwsMDm9Ag6CC+Cw+DAcBADjSIMhdyCoLwnGejQsVigNiQHy+jzw5iE20Q+HQiV4xK0YgkBHEpTkimUlMh0KasMQ9CW1VqnKg3MJLJ6JOstmObTOLGx1NuiH56sFOXpjOZwvohWcNTckulRLlQlJ5KVpw6WrBlVE+KhtN1DKZcheVssCopn0h7piuwsu12+2g8CQfyIgLcAA8mABPS3W-0ihOIADUiFTiAA9IgAEwaCPgKNHMXFBPPP1kxVZgB8iAADGpEOWDtGLkVTfRa7x67aswAeNsdruVpAIpEotEYtJJ-M+wQ2xWodiiAeIAC0ee449bADpW62AIxlvYVw4xrcDtNrjPNxStxDxLP5XcJq9oTA4PAiGkCgqBoBhyGcZAsGCMAWGLU8WAAFlPdQgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
           Here is another example, using the half-interval method
           to search for a root of the equation $x^3 - 2x - 3 = 0$
           between 1 and 2:
 
-          
+          <div class='snippet' id='javascript_20_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 half_interval_method(
@@ -237,78 +231,17 @@ half_interval_method(
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BYQwNgZg+glgdgFwKYCcBu4oFskOAewBMAKAKAAJyAPcgXgD5ryAqJ1mgWnICYWmuAzABoK5AIwA6AAwjK3aQEoA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABACwIYBtgH0ZigUwCcA3DLAW3ymTgBMAKYAGkVRYCMBKRAbwChEgxBAQBnKKyyl0IfIgC8iYPVScA3AKEiw4xOykZZCpfS4ahiQlRCEkYfAHNUsYvhUGZ+bgDJviAA5wojAubvrSspyaFjEA-Iii+KiEEMiMLGx6UTE5AFyI9k6hph6RiL4BQSEwru4RXtE5FvGJyanpehnZTTH5RIRwhPQARPWirFYFcBJwwIhw-oHBBAkwDmDD6nwAvnygkLAICUkpacwFjliBuFAsS1dwN9z8Ftq65DC013jGqK6EqAcbkKDxuTHu3ygWwsMDm9Ag6CC+Cw+DAcBADjSIMhdyCoLwnGejQsVigNiQHy+jzw5iE20Q+HQiV4xK0YgkBHEpTkimUlMh0KasMQ9CW1VqnKg3MJLJ6JOstmObTOLGx1NuiH56sFOXpjOZwvohWcNTckulRLlQlJ5KVpw6WrBlVE+KhtN1DKZcheVssCopn0h7piuwsu12+2g8CQfyIgLcAA8mABPS3W-0ihOIADUiFTiAA9IgAEwaCPgKNHMXFBPPP1kxVZgB8iAADGpEOWDtGLkVTfRa7x67aswAeNsdruVpAIpEotEYtJJ-M+wQ2xWodiiAeIAC0ee449bADpW62AIxlvYVw4xrcDtNrjPNxStxDxLP5XcJq9oTA4PAiGkCgqBoBhNCzeQWyzAAqRBYPgvcS0QOCs33ABmJhNHPU8sMEYtT3UIA}{\usebox\lstbox}
+</pre>
 
-
-          
-          
-
-          
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function half_interval_method(f, a, b) {
-    const a_value = f(a);
-    const b_value = f(b);
-    return negative(a_value) && positive(b_value)
-           ? search(f, a, b)
-           : negative(b_value) && positive(a_value)
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABACwIYBtgH0ZigUwCcA3DLAW3ymTgBMAKYAGkVRYCMBKRAbwChEgxBAQBnKKyyl0IfIgC8iYPVScA3AKEiw4xOykZZCpfS4ahiQlRCEkYfAHNUsYvhUGZ+bgDJviAA5wojAubvrSspyaFjEA-Iii+KiEEMiMLGx6UTE5AFyI9k6hph6RiL4BQSEwru4RXtE5FvGJyanpehnZTTH5RIRwhPQARPWirFYFcBJwwIhw-oHBBAkwDmDD6nwAvkA}{\usebox\lstbox}!*/
-             ? search(f, b, a)
-             : error("values are not of opposite sign");
-}
-
-\end{JavaScriptClickable}
-
-
-
-	  <SPLIT>
-	    
-	    
-              
-	    
-	  </SPLIT>
-
-          
-          The following example uses the half-interval method to approximate $\pi$
-          as the root between 2 and 4 of $\sin\, x = 0$:
-
-          
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-half_interval_method(math_sin, 2.0, 4.0);
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BYQwNgZg+glgdgFwKYCcBu4oFskOAewBMAKLEPKAZ3gBoACAJgDoAGegFlYEoBuIA}{\usebox\lstbox}
-
-
-
-          Here is another example, using the half-interval method
-          to search for a root of the equation $x^3 - 2x - 3 = 0$
-          between 1 and 2:
-
-          
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-half_interval_method(
-  x => x * x * x - 2 * x - 3,
-  1.0,
-  2.0);
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BYQwNgZg+glgdgFwKYCcBu4oFskOAewBMAKAKAAJyAPcgXgD5ryAqJ1mgWnICYWmuAzABoK5AIwA6AAwjK3aQEoA3EA}{\usebox\lstbox}
-
-
+</div></div>
           
           </p></div>
 
-          \subsubsection{
+          <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
             Finding fixed points of functions
-          
+          </h2></div>
 
           <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
@@ -326,13 +259,13 @@ half_interval_method(
           until the value does not change very much.  Using this idea, we can
           devise a
           function
-          {\lstinline[mathescape=true]$fixed_point$} that takes as inputs a function
+          <kbd>fixed_point</kbd> that takes as inputs a function
           and an initial guess and produces an approximation to a fixed point of
           the function.  We apply the function repeatedly until we find two
           successive values whose difference is less than some prescribed
           tolerance:
 
-          
+          <div class='snippet' id='javascript_20_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const tolerance = 0.00001;
@@ -344,7 +277,7 @@ function fixed_point(f, first_guess) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBFIBsCmAnAhmYSYF4YAYA6fE-ARgG4AoAMwFdMoBLcGGpgDyQBMB9ABxBMwUABQ0ANGyYpovAOZ0kECAEoYAbyowdbBsGatgCEBCS8kYEHXkALURykBPdVt3uYKJFDoowMNAAjCAcYAFoYFxgAHjhEVAwsancAX21dekYWfygUJ14AdyYoe0VlNU10jxhQSFgwJA5YPBpRMpVVZOrPb19-Y1NzS2s7NqUVKQam1SrujwB+GCmoWbndAC44PMLi+2XO2bT3Lx8-LfyikvEZOXa1ahSgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwEYGcAUAPAlIgbwChFTEAnAUyhHKW0QD4BeRABkQH5EGAuRALTYA3EQC+RCAnRREUOABtK5ZJEqJWbAHRtdbAIyjQkWAkTAY2SgBMA+gAc4MMFEzAANOZjkZtgOYglOjo+MRk5uDQ8EgQCnDolLaUYHAgfgAWOJ4AnqEk4WRUNHQoGDiCiLmIADxyisqqEJSi4RLhxlFmUOTZtgDuMFCZAUEhhPkFiFJgMohglNiyrMCYI8G4LZMU1LQxcQlJKWnDgcGe84u4E1sF3BdQ1zdk-N29A0OY9xvXbYU7Ja9+oNMhYfFB-KcQqIJEQLFY7I5nK4ALbIIa2KToTz6HQbIA}{\usebox\lstbox}!*/
         const next = f(guess);
         return close_enough(guess, next)
                ? next
@@ -354,8 +287,9 @@ function fixed_point(f, first_guess) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
           </p></div>
 
           <div class='permalink'>
@@ -364,29 +298,19 @@ function fixed_point(f, first_guess) {
           
           For example, we can use this method to approximate the fixed point of
           the cosine function, starting with 1 as an initial
-          approximation:<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
+          approximation:<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
           
+          <div class='snippet' id='javascript_20_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 fixed_point(math_cos, 1.0);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYSwHgpgJg+gDgexAOwC4AoC2BDVALGAYwQGcAaAAgEYA6ABgEoBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBFIBsCmAnAhmYSYF4YAYA6fE-ARgG4AoAMwFdMoBLcGGpgDyQBMB9ABxBMwUABQ0ANGyYpovAOZ0kECAEoYAbyowdbBsGatgCEBCS8kYEHXkALURykBPdVt3uYKJFDoowMNAAjCAcYAFoYFxgAHjhEVAwsancAX21dekYWfygUJ14AdyYoe0VlNU10jxhQSFgwJA5YPBpRMpVVZOrPb19-Y1NzS2s7NqUVKQam1SrujwB+GCmoWbndAC44PMLi+2XO2bT3Lx8-LfyikvEZOXa1ajTMg2yA4IdXWZO+mA4YAD48PgYItfpswhwHrRODwBEIRKIALZoEq8UAQKRkYidIA}{\usebox\lstbox}
+</pre>
 
-
-          
-          
-          
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-fixed_point(math_cos, 1.0);
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYSwHgpgJg+gDgexAOwC4AoC2BDVALGAYwQGcAaAAgEYA6ABgEoBuIA}{\usebox\lstbox}
-
-
+</div></div>
           </p></div>
 
           <div class='permalink'>
@@ -394,7 +318,7 @@ fixed_point(math_cos, 1.0);
           Similarly, we can find a solution to the equation
           $y=\sin y + \cos y$:
           
-          
+          <div class='snippet' id='javascript_20_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 fixed_point(
@@ -403,15 +327,16 @@ fixed_point(
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYSwHgpgJg+gDgexAOwC4AoBQACX2Ce2AvAHzYC2AhqgBYwDOK6+AlNgNQXV0DGC9zFgBoceAIwA6AAwsA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBFIBsCmAnAhmYSYF4YAYA6fE-ARgG4AoAMwFdMoBLcGGpgDyQBMB9ABxBMwUABQ0ANGyYpovAOZ0kECAEoYAbyowdbBsGatgCEBCS8kYEHXkALURykBPdVt3uYKJFDoowMNAAjCAcYAFoYFxgAHjhEVAwsancAX21dekYWfygUJ14AdyYoe0VlNU10jxhQSFgwJA5YPBpRMpVVZOrPb19-Y1NzS2s7NqUVKQam1SrujwB+GCmoWbndAC44PMLi+2XO2bT3Lx8-LfyikvEZOXa1ajTMg2yA4IdXWZO+mA4YAD48PgYItfpswhwHrRODwBEIRKJZk5cH8YABbNAlXgQYSiKIAajRGNsvFAIRcElmZGInSAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
           </p></div>
 
           <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
           The fixed-point process is reminiscent of the process we used for
-          finding square roots in section~\ref{sec:sqrt}.  Both are based on the
+          finding square roots in section \ref{sec:sqrt}.  Both are based on the
           idea of repeatedly improving a guess until the result satisfies some
           criterion.  In fact, we can readily formulate the
           
@@ -420,34 +345,11 @@ fixed_point(
           some number $x$ requires finding a
           $y$ such that $y^2 = x$.  Putting
           this equation into the equivalent form $y = x/y$, we recognize that we
-          are looking for a fixed point of the function<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>$y \mapsto x/y$, and we
-          can therefore try to compute square roots as
-
-          
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function sqrt(x) {
-    return fixed_point(y => x / y, 1.0);
-}
-// warning: does not converge!
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzF0BTKEdJYGHSgEwH0AHOGMbAT0QC8APkQ5EAekS8ANIgCMAOgAMeANzEAvsXGSA7gEM63AOYAuRMziVkiMHCiIICAG6V0xygEIgA}{\usebox\lstbox}
-
-
-              
-
-          Unfortunately, this fixed-point search does not converge.  Consider an
-          initial guess $y_1$.  The next guess is $y_2 = x/y_1$ and the next
-          guess is $y_3 = x/y_2 = x/(x/y_1) = y_1$.  This results in an infinite
-          loop in which the two guesses $y_1$ and $y_2$ repeat over and over,
-          oscillating about the answer.
-          
+          are looking for a fixed point of the function<a class='superscript' id='footnote-link-5' href='#footnote-5'>[5]</a>
           $y \mapsto x/y$, and we
           can therefore try to compute square roots as
 
-          
+          <div class='snippet' id='javascript_20_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sqrt(x) {
@@ -457,9 +359,10 @@ function sqrt(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzF0BTKEdJYGHSgEwH0AHOGMbAT0QC8APkQ5EAekS8ANIgCMAOgAMeANzEAvsXGSA7gEM63AOYAuRMziVkiMHCiIICAG6V0xygEIgA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBFIBsCmAnAhmYSYF4YAYA6fE-ARgG4AoAMwFdMoBLcGGpgDyQBMB9ABxBMwUABQ0ANGyYpovAOZ0kECAEoYAbyowdbBsGatgCEBCS8kYEHXkALURykBPdVt3uYKJFDoowMNAAjCAcYAFoYFxgAHjhEVAwsancAX21dekYWfygUJ14AdyYoe0VlNU10jxhQSFgwJA5YPBpRMpVVZOrPb19-Y1NzS2s7NqUVKQam1SrujwB+GCmoWbndAC44PMLi+2XO2bT3Lx8-LfyikvEZOXa1ajTMg2yA4IdXWZO+mA4YAD48PgYItfpswhwHrR9IZ-BAAI4oMQcD7HXpndhcPiCYRiJy4P4-GAAekiUjIxAOaSJJIKaD8wnkm24IGUSxAsFqADdUPIkABCKhUeGI0QAVk6QA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
               
 
           Unfortunately, this fixed-point search does not converge.  Consider an
@@ -484,7 +387,7 @@ function sqrt(x) {
           of looking for a fixed point of
           $y \mapsto \frac{1}{2}(y+x/y)$:
 
-          
+          <div class='snippet' id='javascript_20_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sqrt(x) {
@@ -495,13 +398,14 @@ function sqrt(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzF0BTKEdJYGHSgEwH0AHOGMbU8-gWQCeiALwA+RAEMAbpXRSA5pSxCANIhyIA9IiF41fQcYCMAOgAMeANzEAvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBFIBsCmAnAhmYSYF4YAYA6fE-ARgG4AoAMwFdMoBLcGGpgDyQBMB9ABxBMwUABQ0ANGyYpovAOZ0kECAEoYAbyowdbBsGatgCEBCS8kYEHXkALURykBPdVt3uYKJFDoowMNAAjCAcYAFoYFxgAHjhEVAwsancAX21dekYWfygUJ14AdyYoe0VlNU10jxhQSFgwJA5YPBpRMpVVZOrPb19-Y1NzS2s7NqUVKQam1SrujwB+GCmoWbndAC44PMLi+2XO2bT3Lx8-LfyikvEZOXa1ajTMg2yA4IdXWZO+mA4YAD48PgYItfpswhwHrR9IZ-GgAG4JeRIBwSKJuXRfM6hADUkXUAHoYAAmSFPGEwCAARxQYg4H2OvTO7C4fEEwjEqzWkVwfwCCPQSNETikv0JLgknLWZGIBzSVCpNNEAFZOkA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
           (Note that $y=\frac{1}{2}(y+x/y)$ is a simple transformation of the
           equation $y=x/y$; to derive it, add $y$ to both sides of the equation
-          and divide by~2.)
+          and divide by 2.)
           </p></div>
 
           <div class='permalink'>
@@ -514,7 +418,7 @@ function sqrt(x) {
           same as the one generated by our original square-root
           function
           of
-          section~\ref{sec:sqrt}.  This approach of averaging
+          section \ref{sec:sqrt}.  This approach of averaging
           successive approximations to a solution, a technique we call
           
           <EM>average damping</EM>, often aids the convergence of fixed-point
@@ -526,22 +430,22 @@ function sqrt(x) {
           
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled11}
+\label{ex:unlabeled12}
 
             
             
             Show that the golden ratio $\phi$
-            (section~\ref{sec:tree-recursion})
+            (section \ref{sec:tree-recursion})
             is a fixed point of the transformation $x \mapsto 1 + 1/x$,
             and use this fact to compute $\phi$ by
             means of the
-            {\lstinline[mathescape=true]$fixed_point$}
+            <kbd>fixed_point</kbd>
             function.
 
-          \hfill{\hyperref[ex:unlabeled11-Answer]{Solution}}\\
+          \hfill{\hyperref[ex:unlabeled12-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled11}]
+\begin{Answer}[ref={ex:unlabeled12}]
 
 The fixed point of the function is
 
@@ -557,16 +461,17 @@ Using the quadratic equation to solve for
 $x$, we find that one of the roots of
 this equation is the golden ratio
 $(1+\sqrt{5})/2$.
-      
+      <div class='snippet' id='javascript_20_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 fixed_point(x => 1 + (1 / x), 1.0);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYSwHgpgJg+gDgexAOwC4AowAIC8A+LARiwGot1iB6LMASgBoiA6ABloG4g}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBFIBsCmAnAhmYSYF4YAYA6fE-ARgG4AoAMwFdMoBLcGGpgDyQBMB9ABxBMwUABQ0ANGyYpovAOZ0kECAEoYAbyowdbBsGatgCEBCS8kYEHXkALURykBPdVt3uYKJFDoowMNAAjCAcYAFoYFxgAHjhEVAwsancAX21dekYWfygUJ14AdyYoe0VlNU10jxhQSFgwJA5YPBpRMpVVZOrPb19-Y1NzS2s7NqUVKQam1SrujwB+GCmoWbndAC44PMLi+2XO2bT3Lx8-LfyikvEZOXa1ajTMg2yA4IdXWZO+mA4YAD48PgYItfpswhwHrRODwBEIRKEcH8YGQYABqGCiFEAeh+qikZGInSAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
     
 \end{Answer}
 
@@ -575,23 +480,23 @@ fixed_point(x => 1 + (1 / x), 1.0);
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
 
-            Modify {\lstinline[mathescape=true]$fixed_point$} so that it prints the sequence of
+            Modify <kbd>fixed_point</kbd> so that it prints the sequence of
             approximations it generates, using
-            the primitive function {\lstinline[mathescape=true]$display$}
-            shown in exercise~\ref{ex:search-for-primes}.
+            the primitive function <kbd>display</kbd>
+            shown in exercise \ref{ex:search-for-primes}.
             Then find a solution to $x^x = 1000$ by finding a fixed
             point of $x \mapsto \log(1000)/\log(x)$.  
 
             
 	      
 	      (Use the primitive function
-	      {\lstinline[mathescape=true]$math_log$}
+	      <kbd>math_log</kbd>
               which computes natural logarithms.)
 	      ,
               
 	      Compare the number of steps this takes with and without
             average damping.  (Note that you cannot start
-            {\lstinline[mathescape=true]$fixed_point$} with a
+            <kbd>fixed_point</kbd> with a
             guess of 1, as this would cause division by $\log(1)=0$.)
             
 
@@ -602,9 +507,9 @@ fixed_point(x => 1 + (1 / x), 1.0);
 
 \begin{Answer}[ref={ex:log-fixed-point}]
 
-	      We modify the function {\lstinline[mathescape=true]$fixed_point$}
+	      We modify the function <kbd>fixed_point</kbd>
 	      as follows:
-          
+          <div class='snippet' id='javascript_20_12_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const tolerance = 0.00001;
@@ -616,7 +521,7 @@ function fixed_point(f, first_guess) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBFIBsCmAnAhmYSYF4YAYA6fE-ARgG4AoAMwFdMoBLcGGpgDyQBMB9ABxBMwUABQ0ANGyYpovAOZ0kECAEoYAbyowdbBsGatgCEBCS8kYEHXkALURykBPdVt3uYKJFDoowMNAAjCAcYAFoYFxgAHjhEVAwsancAX21dekYWfygUJ14AdyYoe0VlNU10jxhuJgh+BDQnUTKVVWTqmFBIWDAkDlg8GhalNo7qrx8-LpMzCysbUtGIKT6B1SrOjwB+GDWoTa3dAC44PMLi+332zbT3Sd8c86KS8Rk5VrVqFKA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwEYGcAUAPAlIgbwChFTEAnAUyhHKW0QD4BeRABkQH5EGAuRALTYA3EQC+RCAnRREUOABtK5ZJEqJWbAHRtdbAIyjQkWAkTAY2SgBMA+gAc4MMFEzAANOZjkZtgOYglOjo+MRk5uDQ8EgQCnDolLaUYHAgfgAWOJ4AnqEk4WRUNHQoGDiCiLmIADxyisqqEJSi4RLhxlFmUOTZtgDuMFCZAUEhhPkFiNYw6PYKyNmYI8G4LZOIUmAyiGCU2LKswEuBK2uTRbQxcQlJKWnDJ+ieu-u4E+sF3C9Q7x9k-N1egMhphvqt3m1CtRLnIev1BpkLD4oP5HuCJEQLFY7I5nK4GMxGIgALbIIa2OJ+TD6PT4AD0JLJ6QpcCpeE8ACYdKsgA}{\usebox\lstbox}!*/
         display(guess);
         const next = f(guess);
         return close_enough(guess, next)
@@ -627,11 +532,12 @@ function fixed_point(f, first_guess) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 Here is a version with average dampening built-in:
 
-          
+          <div class='snippet' id='javascript_20_13_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function fixed_point_with_average_dampening(f, first_guess) {
@@ -643,7 +549,7 @@ function fixed_point_with_average_dampening(f, first_guess) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMGAPApgEwPoAc4xhTYDuMUAFtgIYBu6ATtQObrabUC2u6YhzACmAAaZDAYBnYsxDoJEgJSIA3gChEG5OGjwkEADZwJbXnBDMKA1KICeStZseIG6KCAZJqAIwlXEAWkQ7RAAeRCg4fUZqSHQAbnVNAF9EjVBIWARwhhtScksZOUUVVKdMGAlcfWobAUL5BQSnTQgEKUQwdFQoRABeRDrZeUQAamRBooUlAHpEACYm5udXdz1DY2xTcwKhiVFO7oVSpccAfg6uqGOTjQAubNyySgEDqEbSlMcXNw8HvOeUJJpLt3kkgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwEYGcAUAPAlIgbwChFTEAnAUyhHKW0QD4BeRABkQH5EGAuRALTYA3EQC+RUJFgJEwGNkoATAPoAHODDBQVAdxhQAFiuQA3SuWQBzSiqXIAtmspgtVzMAA0cmOXQ6rEEp0dHxiMjlwaHgkCAAbOHRbFzgQK0McbwBPMJIIsioaOhQMHEFEHMQAHkQoODiLZEhKUQiJCKlo2ShyLL0DDMDg0MI8-MQlGHQ1OOQszCGQ3FbxxAgEf0QwSmwoRFYFoJDEAGo5Q+HcfAB6RAAmFfHC2liEpJUUtMGj9G9t3dwY1W+W4-ygQOBZH4PT6+iMmDByyB7QK1BetV6-Xh8j8AR+SIkkgUynUmm0WOMZkaNjsjmcrjA7gYzEYiAcyCMKgS7gAjGx+Tc2RzjNycLhvHcAHRsZZAA}{\usebox\lstbox}!*/
         const next = (guess + f(guess)) / 2;
         return close_enough(guess, next)
                ? next
@@ -653,8 +559,9 @@ function fixed_point_with_average_dampening(f, first_guess) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	  
 
@@ -685,7 +592,7 @@ function fixed_point_with_average_dampening(f, first_guess) {
                 expansion with the $N_i$ and the
                 $D_i$ all equal to 1 produces
                 $1/\phi$, where $\phi$
-                is the golden ratio (described in section~\ref{sec:tree-recursion}).
+                is the golden ratio (described in section \ref{sec:tree-recursion}).
                 One way to approximate an
                 infinite continued fraction is to truncate the expansion after a given
                 number of terms.  Such a truncation—a so-called
@@ -698,7 +605,7 @@ function fixed_point_with_average_dampening(f, first_guess) {
                   \dfrac{N_K}{D_K}}}}
                   \]
                 
-                Suppose that {\lstinline[mathescape=true]$n$} and {\lstinline[mathescape=true]$d$} are
+                Suppose that <kbd>n</kbd> and <kbd>d</kbd> are
                 functions
                 of one argument (the
                 term index $i$) that return the
@@ -706,16 +613,16 @@ function fixed_point_with_average_dampening(f, first_guess) {
                 of the terms of the continued fraction.  
                 
 		Declare a function
-                {\lstinline[mathescape=true]$cont_frac$}
+                <kbd>cont_frac</kbd>
                 such that evaluating
-                {\lstinline[mathescape=true]$cont_frac(n, d, k)$}
+                <kbd>cont_frac(n, d, k)</kbd>
                 computes the value of the $k$-term finite
                 continued fraction.  Check your
                 function
                 by approximating $1/\phi$ using
                 
 
-                
+                <div class='snippet' id='javascript_20_14_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 cont_frac(i => 1.0,
@@ -724,15 +631,16 @@ cont_frac(i => 1.0,
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgLg+gZgTgQ2ACgJYAIC8A+dBGAOgAYAaAKHUquox32POqfQGsBKAbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=PTAEGMHsDsBcH0BmAnAhuUtKgEYFNQB3ZAS1lj2lwE9QBnWAVwBNLYBuevAvADz2TgSdAgEYAdAGYA7ACgocJGnAAKEqAC8APlASADABpZoE6bPrtu8YeNm7AawCU7IA}{\usebox\lstbox}
+</pre>
 
-
-                for successive values of {\lstinline[mathescape=true]$k$}.
-                How large must you make {\lstinline[mathescape=true]$k$}
+</div></div>
+                for successive values of <kbd>k</kbd>.
+                How large must you make <kbd>k</kbd>
                 in order to get an approximation that is accurate to 4 decimal places?
               </LI>
               <LI>
-                If your {\lstinline[mathescape=true]$cont_frac$}
+                If your <kbd>cont_frac</kbd>
                 function
                 generates a recursive process, write one that generates
                 an iterative process.
@@ -747,7 +655,7 @@ cont_frac(i => 1.0,
 
 \begin{Answer}[ref={ex:continued-fractions}]
 
-
+<div class='snippet' id='javascript_20_15_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 //recursive process
@@ -759,15 +667,16 @@ function cont_frac(n, d, k) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTBOFMGMFdQZwJYDdwAIAOoD2lxzgFABm0AdpAC4JamqQ0UD6RoAhpABSkA0qAJrwDWASlQBvAqimoS5KjRltK1UhwSiJ0raggVYtBKgB8qQZO0XpAflQAGc5YsAuVKvWpgqDnzWiA1Irs8m6oAQCMwsIA3A6oAL6xuvqByjQcETFxQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=PTBOFMGMFdQZwJYDdwAIAOoD2lxzgFABm0AdpAC4JamqQ0UD6RoAhpABSkA0qAJrwDWASlQBvAqimoS5KjRltK1UhwSiJ0raggVYtBKgB8qQZO0XpAflQAGc5YsAuVKvWpgqDnzWiA1Irs8m6oAQCMwsIA3A6oAL6xuvqByjQcETEJBPSkTCzsaqgAvCZhAHS23LEWhiWo5ZXV2gBMttFAA}{\usebox\lstbox}!*/
     }
     return fraction(1);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-
+</div></div>
+<div class='snippet' id='javascript_20_16_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 //iterative process
@@ -779,16 +688,17 @@ function cont_frac(n, d, k) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTCWBcFMCcEN1AN0gAgA7QPYGNIGc8AoAMwFcA7bBTclbG8AfWLmwApyAaFAE24GsAlCgDehFBJRlK1Wi1hVQNNqG7ZS0aJHLhhYyQZRbwG2qBQBeKygAM4ww8kB+Ohq077jhwC4prWSooALQoAIzc5CrCwChsPFEoANSumtq6ggDcnigAvtnGpn4KAfzcNpmEOUA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=PTCWBcFMCcEN1AN0gAgA7QPYGNIGc8AoAMwFcA7bBTclbG8AfWLmwApyAaFAE24GsAlCgDehFBJRlK1Wi1hVQNNqG7ZS0aJHLhhYyQZRbwG2qBQBeKygAM4ww8kB+Ohq077jhwC4prWSooALQoAIzc5CrCwChsPFEoANSumtq6ggDcnigAvtnGpn4KAfzcNpmEeYT0OsysgRYAfGEAdDac2Q7mTa3tnYYATOUZQA}{\usebox\lstbox}!*/
     }
     return fraction(k, 0);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
+</div></div>
 
-
-                
+                <div class='snippet' id='javascript_20_17_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 cont_frac(i => 1.0,
@@ -797,9 +707,10 @@ cont_frac(i => 1.0,
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgLg+gZgTgQ2ACgJYAIC8A+dBGAOgAYAaAKHUquox32POqfQCYiBKAbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=PTAEGMHsDsBcH0BmAnAhuUtKgEYFNQB3ZAS1lj2lwE9QBnWAVwBNLYBuevAvADz2TgSdAgEYAdAGYA7ACgocJGnAAKEqAC8APlASADABpZoE6bPrtu8YeNm7AJj0BKdkA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	
       
 \end{Answer}
@@ -808,7 +719,7 @@ cont_frac(i => 1.0,
           
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled12}
+\label{ex:unlabeled13}
 
             
             In 1737, the Swiss mathematician Leonhard Euler published a memoir
@@ -824,21 +735,21 @@ cont_frac(i => 1.0,
             your 
             
 	      
-	      {\lstinline[mathescape=true]$cont_frac$} function
+	      <kbd>cont_frac</kbd> function
 	    
             from
-            exercise~\ref{ex:continued-fractions} to approximate $e$, based on
+            exercise \ref{ex:continued-fractions} to approximate $e$, based on
             Euler's expansion.
 
 
 
 
-	  \hfill{\hyperref[ex:unlabeled12-Answer]{Solution}}\\
+	  \hfill{\hyperref[ex:unlabeled13-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled12}]
+\begin{Answer}[ref={ex:unlabeled13}]
 
-
+<div class='snippet' id='javascript_20_18_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 2 + cont_frac(i => 1,  
@@ -847,9 +758,10 @@ cont_frac(i => 1.0,
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EwAg1CDGD2B2AuB9AZgJwIaQBQEsQF4A+EARgBoQQAoS2u+vIkXcUgShAFIQBmEAHlIgA-CFAAqZnggkOAel4gAXKTI16GysAAMbANxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=PTCWBcFMCcEN1AN0gAgA7QPYGNIGc8AoAMwFcA7bBTclbG8AfWLmwApyAaFAE24GsAlCgDehFBJRlK1Wi1hVQNNqG7ZS0aJHLhhYyQZRbwG2qBQBeKygAM4ww8kB+Ohq077jhwC4prWSooALQoAIzc5CrCwChsPFEoANSumtq6ggDcnigAvtnGpn4KAfzcNpmEeQBMSXQMzKyBFgB8Ydwo2V4S5i2x5smhwgCkKADMKAA8YSguNQBUfbWDKDHjvuGdXVXlGUA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 \end{Answer}
 
@@ -857,7 +769,7 @@ cont_frac(i => 1.0,
           
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled13}
+\label{ex:unlabeled14}
 
             
             
@@ -876,7 +788,7 @@ cont_frac(i => 1.0,
             
             
 	      
-	      Declare a function {\lstinline[mathescape=true]$tan_cf(x, k)$}
+	      Declare a function <kbd>tan_cf(x, k)</kbd>
 	    
             that computes an approximation
             to the tangent function based on Lambert's
@@ -884,20 +796,20 @@ cont_frac(i => 1.0,
 	    
 	      
 	      
-		As in exercise~\ref{ex:continued-fractions}, 
-		{\lstinline[mathescape=true]$k$} specifies the number
+		As in exercise \ref{ex:continued-fractions}, 
+		<kbd>k</kbd> specifies the number
 		of terms to compute.
 	      
 	    
 
 
 	    
-          \hfill{\hyperref[ex:unlabeled13-Answer]{Solution}}\\
+          \hfill{\hyperref[ex:unlabeled14-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled13}]
+\begin{Answer}[ref={ex:unlabeled14}]
 
-
+<div class='snippet' id='javascript_20_19_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function tan_cf(x, k) {
@@ -908,15 +820,21 @@ function tan_cf(x, k) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABFAhmA+hYAKAHgGkQGsBKRAbwChEbEAnAUyhDqQgSnWDpQmxkQBeAHyIBgiYgCMiAPyJciAFyIAtAsQAqBYUTVaBw0ZrjRAJi1i10-PuP2DpANyUAvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=PTCWBcFMCcEN1AN0gAgA7QPYGNIGc8AoAMwFcA7bBTclbG8AfWLmwApyAaFAE24GsAlCgDehFBJRlK1Wi1hVQNNqG7ZS0aJHLhhYyQZRbwG2qBQBeKygAM4ww8kB+Ohq077jhwC4prWSooALQoAIzc5CrCwChsPFEoANSumtq6ggDcnigAvtnGpn4KAfzcNpmEedKKNCjgsOSM2MRsAB4CevmQJtC09DrMrIEWAHwo5lYWYSgurSi+IXMAVCjtEtlemxNjAEwoK+Yh4RubjkJZeYT1jc1sALbwABaMAAoAktyhACwVICgP4Ge13uT1eb0yQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 
 \end{Answer}
 
       <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>We have used 0.001 as a
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Note that we slightly extend the
+	    syntax of conditional statements described in
+	    section \ref{sec:lambda}
+	    by allowing another conditional statement
+	    in place of the block following <kbd>else</kbd>.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>We have used 0.001 as a
             representative <QUOTE>small</QUOTE> number to indicate a
             tolerance for the acceptable error in a calculation.
             The appropriate
@@ -924,26 +842,26 @@ function tan_cf(x, k) {
             and the limitations of the computer and the algorithm.  This is often
             
             a very subtle consideration, requiring help from a numerical analyst
-            or some other kind of magician.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>This
+            or some other kind of magician.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>This
 
-            can be accomplished using {\lstinline[mathescape=true]$error$},
+            can be accomplished using <kbd>error</kbd>,
             
 	      
 	      which takes as
 	      argument a string that is printed as error message along
 	      with the number of the program line that gave rise to the call of
-	      {\lstinline[mathescape=true]$error$}.
+	      <kbd>error</kbd>.
 	      
 	    
-	    </FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>Try this during a boring lecture:
+	    </FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Try this during a boring lecture:
             Set your calculator to
             
             
             
             radians mode and then repeatedly press the $\cos$ button until you
-            obtain the fixed point.</FOOTNOTE></div><hr><div class='footnote'>
+            obtain the fixed point.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>$\mapsto$
             
             
@@ -953,8 +871,15 @@ function tan_cf(x, k) {
             $y \mapsto x/y$ means
 	    
 	      
-	      {\lstinline[mathescape=true]$y => x / y$},
+	      <kbd>y => x / y</kbd>,
 	    
             that is, the function whose value at $y$ is
             $x/y$.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section3/subsection2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section3/subsection4.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+1.3.3  Functions as General Methods</div>	<div class='next-page'></div></div>

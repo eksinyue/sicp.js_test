@@ -1,10 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>1.1.2 Naming and the Environment</a>
+		<a name='top' class='permalink'>1.1.2  Naming and the Environment</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
         
 
         <SPLIT>
@@ -18,7 +27,10 @@
               
               names to refer to computational objects,
 	      
-              and our first such means are .
+              and our first such means are <EM>constants</EM>.
+	      We say that the name identifies a constant whose
+	      <EM>value</EM> is the object.
+	    .
 	      We say that the name identifies a constant whose
 	      <EM>value</EM> is the object.
 	    </p></div>
@@ -27,52 +39,55 @@
 	      In JavaScript, we name constants using <EM>constant declarations</EM>.
               
 	      Typing
-              
+              <div class='snippet' id='javascript_3_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const size = 2;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBBCWAvApjAvDATAbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBBCWAvApjAvDATAbiA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
               causes the interpreter to associate the value 2 with the
-              name {\lstinline[mathescape=true]$size$}.
+              name <kbd>size</kbd>.
 	      The purpose of the constant declaration is to
 	      create this association,
 	      and not to compute a particular value as for
               expression statements. The JavaScript specification
               demands that the special
-              value {\lstinline[mathescape=true]$undefined$} shall
+              value <kbd>undefined</kbd> shall
 	      be the result of evaluating such constant declarations.
             </p></div>
             <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
-              Once the name {\lstinline[mathescape=true]$size$}
+              Once the name <kbd>size</kbd>
               has been associated with the number 2, we can
               refer to the value 2 by name as in
-              
+              <div class='snippet' id='javascript_3_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 size;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4SwXgpg3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBBCWAvApjAvDATAbgFAJWyA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	      or
-              
+              <div class='snippet' id='javascript_3_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 5 * size;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=KwAgVCDOCWBeCmBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBBCWAvApjAvDATAbgFAFYYAqOJZbIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
             </p></div>
           
         </SPLIT>
@@ -92,66 +107,71 @@ size;
           
             <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-              Here are further examples of the use of {\lstinline[mathescape=true]$const$}:
-              
+              Here are further examples of the use of <kbd>const</kbd>:
+              <div class='snippet' id='javascript_3_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const pi = 3.14159;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBADgSxgXhgZgHQEYAsWCsAnANxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBADgSxgXhgZgHQEYAsWCsAnANxA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-              
+              <div class='snippet' id='javascript_3_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const radius = 10;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBATgQwCYEsCuEYF4YEYAMA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBATgQwCYEsCuEYF4YEYAMA3EA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-              
+              <div class='snippet' id='javascript_3_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 pi * radius * radius;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4SwBAVGBOCGAmICuBnSMHJQbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBADgSxgXhgZgHQEYAsWCsAnANwBQoksATgIYAmCArhCjFgAxmIwBUMtDZr370mEYkA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-              
+              <div class='snippet' id='javascript_3_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const circumference = 2 * pi * radius;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBMCWAnYBXAtgMwKaK2YWMAvDAEwwBUMADvJTIgIYAm8KEA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBADgSxgXhgZgHQEYAsWCsAnANwBQoksATgIYAmCArhCjFgAxkXQzAJXBGAWwBmAUypiwwMawBMMAFTwky2g2bEgA}{\usebox\lstbox}
+</pre>
 
-
-              
+</div></div>
+              <div class='snippet' id='javascript_3_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 circumference;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYSwTsCuC2BmCmZ4DtjwNxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBMCWAnYBXAtgMwKaK2YWMAvDAEwwBUMADvJTIgIYAm8KEA3AFALLra58WDkA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
               
               Constant declaration is our language's
               simplest means of abstraction, for it allow us to use simple names to
               refer to the results of compound operations, such as the
-              {\lstinline[mathescape=true]$circumference$}
+              <kbd>circumference</kbd>
               computed above.  In general, computational objects may have very
               complex structures, and it would be extremely inconvenient to
               have to remember and repeat their details each time we want to use
@@ -174,11 +194,18 @@ circumference;
               
               <EM>global environment</EM>, since we will see later that a
               computation may involve a number of different
-              environments).<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+              environments).<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
             </p></div>
 
       <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Chapter~3 will show that this notion of
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Chapter 3 will show that this notion of
                 environment is crucial, both for understanding how the interpreter
                 works and for implementing interpreters.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section1/subsection1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section1/subsection3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+1.1.2  Naming and the Environment</div>	<div class='next-page'></div></div>

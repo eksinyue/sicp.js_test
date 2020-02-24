@@ -1,13 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>1.3.4 
-    Functions
-    as Returned Values
-  </a>
+		<a name='top' class='permalink'>1.3.4  Functions as Returned Values</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
   
   
@@ -31,14 +37,14 @@
 <a name='p2' class='permalink'></a><p>
     We can illustrate this idea by looking again at the fixed-point
     example described at the end of
-    section~\ref{sec:proc-general-methods}.  We formulated a new version
+    section \ref{sec:proc-general-methods}.  We formulated a new version
     of the square-root
     function
     as a fixed-point search, starting with
     the observation that $\sqrt{x}$ is a fixed-point of the function
     $y\mapsto x/y$.  Then we used average damping to make the
     approximations converge.  Average damping is a useful general
-    technique in itself.  Namely, given a function~$f$, we consider the
+    technique in itself.  Namely, given a function $f$, we consider the
     function whose value at $x$ is equal to the average of $x$ and $f(x)$.
   </p></div>
   
@@ -47,7 +53,7 @@
     We can express the idea of average damping by means of the
     following
     function:
-    
+    <div class='snippet' id='javascript_21_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function average_damp(f) {
@@ -56,9 +62,10 @@ function average_damp(f) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwG4FMBOyDm6D6AJsgLYAOAFMAJSIDeAUIs4pulCJkgB6IC8APhQZseCtwA0iYOOrUA3AwC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwG4FMBOyDm6AUAHgDQCeAlIgN4BQi9im6UImSRiA1IhYgPSIATAG4aAXxqhIsBCgzY8AfQAmyALYAHfMEq0GjZqySFEAXgB8crLgIlEwIuXKiJNNNaWrN+AM4BHEGQmcnwARgAGZyA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
@@ -67,27 +74,27 @@ function average_damp(f) {
       
       
         The function
-        {\lstinline[mathescape=true]$average_damp$}
+        <kbd>average_damp</kbd>
       
     
     is a
     function
     that takes as its argument a
     function
-    {\lstinline[mathescape=true]$f$} and returns as its value a
+    <kbd>f</kbd> and returns as its value a
     function
     (produced by the 
-    function definition expression) that, when applied to a number {\lstinline[mathescape=true]$x$}, produces the
-    average of {\lstinline[mathescape=true]$x$} and 
-    {\lstinline[mathescape=true]$f(x)$}.  
+    function definition expression) that, when applied to a number <kbd>x</kbd>, produces the
+    average of <kbd>x</kbd> and 
+    <kbd>f(x)</kbd>.  
     For example, applying 
     
       
       
-        {\lstinline[mathescape=true]$average_damp$}
+        <kbd>average_damp</kbd>
       
     
-    to the {\lstinline[mathescape=true]$square$}
+    to the <kbd>square</kbd>
     function
     produces a
     function
@@ -97,39 +104,30 @@ function average_damp(f) {
     Applying this resulting
     function
     to 10 returns the average of 10 and 100, or
-    55:<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+    55:<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
+    <div class='snippet' id='javascript_21_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 average_damp(square)(10);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYNwpgTsDmYPoBNgFsAOAKAzgRwK7AjAEp0BGABiIG4g}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwG4FMBOyDm6D6AJsgLYAOAFMAJSIDeAUIs4pulCJkgB6IC8APhQZseCtwA0iYOOrUA3AwC+DUJFgJhWXOnESAnrUYtW7TknGIA1IkOIA9IgBMilWujwkAZwCOIZGyy9EwsbBxciLwAVJGuDGjaeESklL7+bNQUAIwADApAA}{\usebox\lstbox}
+</pre>
 
-
-  
-    
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-average_damp(square)(10);
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYNwpgTsDmYPoBNgFsAOAKAzgRwK7AjAEp0BGABiIG4g}{\usebox\lstbox}
-
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
     
     Using 
-    {\lstinline[mathescape=true]$average_damp$},
+    <kbd>average_damp</kbd>,
     we can reformulate the square-root
     function
     as follows:
 
-    
+    <div class='snippet' id='javascript_21_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sqrt(x) {
@@ -139,9 +137,10 @@ function sqrt(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzF0BTKEdJYGHSgEwH0AHOGMbAQwDdK6XgHNKrZrwC27LAE9EAXgB8iHIgD0iOXgA0pcoaPHDARgB0ABjwBuYgF8gA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwG4FMBOyDm6D6AJsgLYAOAFMAJSIDeAUIs4pulCJkgB6IC8APhQZseCtwA0iYOOrUA3AwC+DUJFgJhWXOnESAnrUYtW7TknGIA1IkOIA9IgBMilRAQBnKIihwANtqQ6PyIAAwAdKFRoQCMimrQ8EjAMNzohPhkcDBgUFRSKZhe+Dgg6B4eRkwsCRpIEH5wHgToYHAgOAAWerZVJiZsHFwoAEYelgC0vYgAPD7+gRDoiiYqJrVJPpj6+ADuMFDdpeWV9NX9iO5gXohg6NzefNIUxxUK5-2D5peNzfit7S6LzKFSkdwe1A+F36AH5bvcoFDoSwAFxbHb7Q4UcFQd6rD5fYZQbZ7A7dQrFV6VVyqcCJTTIMayM4DMzDXgCJ6hRBw3hoibcGkbTQeACOmDy3D6LEJyVS6Uy2VyFDQ2jwRFIlH0-CEvEchgkSORxpikXeKgYYolFAAbAogA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
     
 
   </p></div>
@@ -152,7 +151,7 @@ function sqrt(x) {
     method: fixed-point search, average damping, and the function
     $y\mapsto x/y$.  It is instructive to compare this formulation of the
     square-root method with the original version given in
-    section~\ref{sec:sqrt}.  Bear in mind that these
+    section \ref{sec:sqrt}.  Bear in mind that these
     functions
     express
     the same process, and notice how much clearer the idea becomes when we
@@ -170,7 +169,9 @@ function sqrt(x) {
     
     
     cube
-    roots:<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+    roots:<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
+
+    <div class='snippet' id='javascript_21_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function cube_root(x) {
@@ -180,44 +181,27 @@ function cube_root(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABBEAjApgfQE5zlACgA8BKRAbwChEbFt0oRslgYj0ATTABzhjEIBDAG7psggOZYOggLbcCAT0QBeAHyIiiAPSIAzgEcQg+kpIkANNVo3bdmwEYAdAAYSAbkoBfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwG4FMBOyDm6D6AJsgLYAOAFMAJSIDeAUIs4pulCJkgB6IC8APhQZseCtwA0iYOOrUA3AwC+DUJFgJhWXOnESAnrUYtW7TknGIA1IkOIA9IgBMilRAQBnKIihwANtqQ6PyIAAwAdKFRoQCMimrQ8EjAMNzohPhkcDBgUFRSKZhe+Dgg6B4eRkwsCRpIEH5wHgToYHAgOAAWerZVJiZsHFwoAEYelgC0vYgAPD7+gRDoiiYqJrVJPpj6+ADuMFDdpeWV9NX9iO5gXohg6NzefNIUxxUK5-2D5peNzfit7S6LzKFSkdwe1A+F36AH5bvcoFDoSwAFxbHb7Q4UcFQd6rD5fYZQbZ7A7dQrFV6VVyqcCJTTIMayM4DMzDXgCJ6hRBw3hoibcGkbTQeACOIGQbGZxhYhJ4iAAVIhBcpaepNhAQCMCJg4HA8tw+rK2clUulMtlchQ0No8ERSJR9PwhLxHGKJVLDNQJEjkX6YpF3ioGJrtfhdfqKE4AOwKIA}{\usebox\lstbox}
+</pre>
 
-
-
-    
-
-    
-  
-
-    
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function cube_root(x) {
-    return fixed_point(average_damp(y => x / square(y)),
-                       1.0);
-}
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABBEAjApgfQE5zlACgA8BKRAbwChEbFt0oRslgYj0ATTABzhjEIBDAG7psggOZYOggLbcCAT0QBeAHyIiiAPSIAzgEcQg+kpIkANNVo3bdmwEYAdAAYSAbkoBfIA}{\usebox\lstbox}
-
-
+</div></div>
 
     
 
     
   </p></div>
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     Newton's method
-  
+  </h2></div>
 
   <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
     
     When we first introduced the square-root
     function, in
-    section~\ref{sec:sqrt}, we mentioned that this was a special case of
+    section \ref{sec:sqrt}, we mentioned that this was a special case of
     <EM>Newton's method</EM>.  
     If $x\mapsto g(x)$ is a differentiable function, then a solution of
     the equation $g(x)=0$ is a fixed point of the function $x\mapsto f(x)$
@@ -233,13 +217,10 @@ function cube_root(x) {
     Newton's
     method is the use of the fixed-point method we saw above to
     approximate a solution of the equation by finding a fixed point of
-    the function $f$.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>$g$ and for sufficiently good initial guesses for
-    $x$, Newton's method converges very rapidly to a solution of
-    $g(x)=0$.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
-  
+    the function $f$.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
     For many functions $g$ and for sufficiently good initial guesses for
     $x$, Newton's method converges very rapidly to a solution of
-    $g(x)=0$.<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
+    $g(x)=0$.<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
   </p></div>
 
   <div class='permalink'>
@@ -263,7 +244,7 @@ function cube_root(x) {
     0.00001) as the
     function
 
-    
+    <div class='snippet' id='javascript_21_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function deriv(g) {
@@ -272,32 +253,34 @@ function deriv(g) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAEwKYCcYDcAUBzASkQG8AoRCxdVKEdJAD0QF4A+RfHJgahQaIC0iPFwJEA9HwDcpAL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAEwKYCcYDcAUBzASkQG8AoRCxdVKEdJAD0QF4A+RfHJgahQaIC0iPFwJEA9HwDcpAL6lSoSLASIIIAEapRJKjTqNEAKkRMTDKYnmk0mXOq0EcAVgJSgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
     along with the
     
     declaration
 
-    
+    <div class='snippet' id='javascript_21_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const dx = 0.00001;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAJgDxgXhgBgHRu2gjAbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBAJgDxgXhgBgHRu2gjAbiA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
     
     Like 
-    {\lstinline[mathescape=true]$average_damp$},
-    {\lstinline[mathescape=true]$deriv$} is a
+    <kbd>average_damp</kbd>,
+    <kbd>deriv</kbd> is a
     function
     that takes a
     function
@@ -307,7 +290,7 @@ const dx = 0.00001;
     to approximate the derivative of $x \mapsto x^3$ at 5 (whose exact
     value is 75) we can evaluate
 
-    
+    <div class='snippet' id='javascript_21_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function cube(x) { return x * x * x; }
@@ -316,18 +299,19 @@ deriv(cube)(5);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABBEAjApgCgB4EpEDeiATulCMUtogFSLV3YDciAvgFDsAm6xMAbphQZcmAKy4mQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBAJgDxgXhgBgHRu2gjAbgCgAzAVzGCgEtx4BTAJyoDcAKAcwEoYBvQmATAZ0opBmBhJkAPhgdWSANTwE3ALQx2CztwD0KogF8S5SjQnBSAIzrbeQkWIlIAVJJhuE+GMcJxGLKyWNpysAKyc+EA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
     
   </p></div>
 
   <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
-    With the aid of {\lstinline[mathescape=true]$deriv$}, we can express Newton's method as a
+    With the aid of <kbd>deriv</kbd>, we can express Newton's method as a
     fixed-point process:
 
-    
+    <div class='snippet' id='javascript_21_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function newton_transform(g) {
@@ -339,18 +323,19 @@ function newtons_method(g, guess) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABGApgdygg+lATgQzAGdg5cBbACgHMBKRAbwChFXcUoRckAPRAXgB8iPgFpE1Sj3oB6RABMUuGADcatKbQDcTAL5NQkWAmTpMxLOQ4ALOPJoAaCSBREi9Zq0TtO3RMBgeFHksAAc4GDAoSlQMbDxCEjIqOidqFzdtPSA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBFIBsCmAnAhmYSYF4YAYA6fE-ARgG4AoAMwFdMoBLcGGpgDyQBMB9ABxBMwUABQ0ANGyYpovAOZ0kECAEoYAbyowdbBsGatgCEBCS8kYEHXkALURykBPdVt3uYKJFDoowMNAAjCAcYAFoYFxgAHjhEVAwsancAX21dekYWfygUJ14AdyYoe0VlNU10jxhQSFgwJA5YPBpRMpVVZOrPb19-Y1NzS2s7NqUVKQam1SrujwB+GCmoWbndAC44PMLi+2XO2bT3Lx8-LfyikvEZOXa1ajTMg2yA4IdXWZO+mA4YAD48PgYItfpswhwHlRatAYNxfoDiKRKLR9IZ-NxUEwAG5tD7HXpneF-GBtUIAalhHHUEXk73UAHpKZCnmilkgCvAwLxchgIDQQCgALa4yq6L6E3DE34094wRkYlDY3HvZmol4NDngCC8QXeWwgbhtKR3PE6cX+dhcPiCYRiDWc7noSD8oW443je5UNJUCAARxQYgAbJ0gA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
     
     
   </p></div>
   <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
-    The {\lstinline[mathescape=true]$newton_transform$}
+    The <kbd>newton_transform</kbd>
     function
     expresses the formula at the
-    beginning of this section, and {\lstinline[mathescape=true]$newtons_method$} is readily defined
+    beginning of this section, and <kbd>newtons_method</kbd> is readily defined
     in terms of this.  It takes as arguments a
     function
     that computes the
@@ -359,29 +344,11 @@ function newtons_method(g, guess) {
     
     square root of $x$, we can use
     Newton's method to find a zero of the function $y\mapsto y^2-x$ starting with
-    an initial guess of 1.<a class='superscript' id='footnote-6' href='#footnote-6'>[6]</a>function:
-
-    
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function sqrt(x) {
-    return newtons_method(y => square(y) - x,
-                          1.0);
-}
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzF0BTKEdJMSgdygWQH0BbagCzgBMsAT0QBeAHwpUIAIZUhBALSIcAGlLkNmrdoCMAOgAMeANzEAvkA}{\usebox\lstbox}
-
-
-    
-    
-    
-  
+    an initial guess of 1.<a class='superscript' id='footnote-link-5' href='#footnote-5'>[5]</a>
     This provides yet another form of the square-root
     function:
 
-    
+    <div class='snippet' id='javascript_21_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sqrt(x) {
@@ -391,18 +358,20 @@ function sqrt(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzF0BTKEdJMSgdygWQH0BbagCzgBMsAT0QBeAHwpUIAIZUhBALSIcAGlLkNmrdoCMAOgAMeANzEAvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABGApgdygg+lATgQzAGdg5cBbACgHMBKRAbwChFXcUoRckAPRAXgB8iPgFpE1Sj3oB6RABMUuGADcatKbQDcTAL5NQkWAmTpMxLOQ4ALOPJoAaCSBREi9Zq0TtO3RMBgeFHksAAc4GDAoSlQMbDxCEjIqOidqFzdtPSYIBCIoREwAGyVCCBQBRAAGADoq+qqARh1DaHgkAKCQ8Mjo4CcA3HysdNd3RhYvVuMkCCK4IhQsFDA4EGprKScATw9Jry8fLiR8ACMiKURxXcQAHkK4EoJIFB0D-QPp9sLcbaw0GBQTajTITA4HXLEAqoHgFfj+GgZdxvcFsDjHRBzBZLFZrDaIsZOGFQWj7VGogD8plhZPJBwAXD8-gCgTEULCsu8yUc-HhmYDNoNhiDkdkviYzhdpGDDui-HxBPCqogqXxGaIeDp9JD8go+Eq6g1mgZwG0TIplGo6DK0b5eAJhDRLgBqPX0cSSaSyPVak1Gb5EACOIHw7E0Nu8cvtACoRL7xUgg7hotLPLK7aY4hYrEC7JRtg7EEGQ2GbuIeA5aXTqwdGnUsvomEnogA2bRAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
     
     
     
   </p></div>
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     Abstractions and first-class
     functions
-  
+  </h2></div>
 
   <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
@@ -418,7 +387,7 @@ function sqrt(x) {
     general idea itself as a
     function:
 
-    
+    <div class='snippet' id='javascript_21_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function fixed_point_of_transform(g, transform, guess) {
@@ -427,9 +396,10 @@ function fixed_point_of_transform(g, transform, guess) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMGAPApgEwPoAc4xhTZzDZQBOAhmAM7BwUC2AFAOYA0ilN9jTXNiHS1aASkQBvAFCI5iCuiggKSFBhz5CUFjzoNm7MYOGixAbmkBfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBFIBsCmAnAhmYSYF4YAYA6fE-ARgG4AoAMwFdMoBLcGGpgDyQBMB9ABxBMwUABQ0ANGyYpovAOZ0kECAEoYAbyowdbBsGatgCEBCS8kYEHXkALURykBPdVt3uYKJFDoowMNAAjCAcYAFoYFxgAHjhEVAwsancAX21dekYWfygUJ14AdyYoe0VlNU10jxhQSFgwJA5YPBpRMpVVZOrPb19-Y1NzS2s7NqUVKQam1SrujwB+GCmoWbndAC44PMLi+2XO2bT3Lx8-LfyikvEZOXa1ajTMg2yA4IdXWZO+mA4YAD48PgYItfpswhwHrR9IZ-OwuHxBMIoLwQDReLkMBAaCAUABbNpSDGQbF4qR3D7HXpnOE8ARCESiIlYnH4+SqMnje5UNJUCAARxQYgAbJ0gA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
     
   </p></div>
 
@@ -439,10 +409,10 @@ function fixed_point_of_transform(g, transform, guess) {
     function
     takes as its arguments a
     function
-    {\lstinline[mathescape=true]$g$}
+    <kbd>g</kbd>
     that computes some function, a
     function
-    that transforms {\lstinline[mathescape=true]$g$}, and
+    that transforms <kbd>g</kbd>, and
     an initial guess.  The returned result is a fixed point of the
     transformed function.
   </p></div>
@@ -455,7 +425,7 @@ function fixed_point_of_transform(g, transform, guess) {
     a fixed point of the average-damped version of $y \mapsto x/y$)
     as an instance of this general method:
 
-    
+    <div class='snippet' id='javascript_21_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sqrt(x) {
@@ -467,9 +437,10 @@ function sqrt(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzF0BTKEdJYGHSgEwH0AHOGMKVuYVlHQBDMMmBx0AWyyly8hWQCeiALwA+RDkQB6REoA0cxSeEA3SiIDmlVs2FT2Rky4CMAOgAMeANzEAvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABMGAPApgEwPoAc4xhTZzDZQBOAhmAM7BwUC2AFAOYA0ilN9jTXNiHS1aASkQBvAFCI5iCuiggKSFBhz5CUFjzoNm7MYOGixAbmkBfaRAS0o3OABt01SOkQBeRAAYAdL5BvgCMlqCQsAjIaFh4BEQswFwoFA7YQiLiUrLyEdDwSBDOcLTo2OhgcCBsABYsqFwAnhIy8u0KSipIVABGtA2IALSILYgAPE6u7hDolu027flRSJRN2ADuMFD1mWY5HfJ2dI5g6KiOPsDspuLzh53KqojFpeWV1XU3WVxnF2K5B6HAD8iD+UEBQPaAC5uBR1lsdixwRZIYt5Ionqt4ZttvVUuk9ndrNJloVEH0BqhWpDMd1EKhEAA+Hy+RCgxmwoaoSw2MnRKgANzcVDY5UwVCYuCSNPadOejK8TIpwuoYoaKQaYlRfPABQFqtF6A1YzaGK6z0GAGpRhIAPSIABMvNJepWiFoAEcKDpqQdzViYhp4toSGQ9HxDJCoXImt5lYyHU0ONGY0KRWLsBKpSmYx0QoEddJpF6fSwAGwWIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
     
     
   </p></div>
@@ -484,7 +455,7 @@ function sqrt(x) {
 
     
     
-    
+    <div class='snippet' id='javascript_21_12_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sqrt(x) {
@@ -496,9 +467,10 @@ function sqrt(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzF0BTKEdJYGHSgEwH0AHOGMKVuYVlHQBDMMmBx0AWyyly8hWQCeiALwA+FKhDCqWJQQC0iHABo5iy2EoB3KAkEixE6ecvuAjADoADHgDcxAC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABMGAPApgEwPoAc4xhTZzDZQBOAhmAM7BwUC2AFAOYA0ilN9jTXNiHS1aASkQBvAFCI5iCuiggKSFBhz5CUFjzoNm7MYOGixAbmkBfaRAS0o3OABt01SOkQBeRAAYAdL5BvgCMlqCQsAjIaFh4BEQswFwoFA7YQiLiUrLyEdDwSBDOcLTo2OhgcCBsABYsqFwAnhIy8u0KSipIVABGtA2IALSILYgAPE6u7hDolu027flRSJRN2ADuMFD1mWY5HfJ2dI5g6KiOPsDspuLzh53KqojFpeWV1XU3WVxnF2K5B6HAD8iD+UEBQPaAC5uBR1lsdixwRZIYt5Ionqt4ZttvVUuk9ndrNJloVEH0BqhWpDMd1EKhEAA+Hy+RCgxmwoaoSw2MnRWgARxAVEUDRp7Tpz0ZACoGbzSeACtEzhsoAhyO4+IY2BK5FKkIyvEyGcNEGxxYgAPSITBuGAANyM4oV-KQqvVdGwTCUtTgmHYJiyese9PUcS0iQ9Gr02tYuqDZgVxwctqNfkCwTCisi5LtFEdRgOGK60u8JvYgwA1GmJCMLdSJDbMDySW7EEKKDpqcX9aW1LFNAliKRNbwDKxIVC5E1yx3haL0CwxiNGlPp9GwGP9PwOOuoSFAqibNJOzoAGwWIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
     
 
@@ -506,7 +478,7 @@ function sqrt(x) {
 
   <div class='permalink'>
 <a name='p16' class='permalink'></a><p>
-    We began section~\ref{sec:higher-order-procedures} with the observation
+    We began section \ref{sec:higher-order-procedures} with the observation
     that compound
     functions
     are a crucial abstraction mechanism, because they permit us to
@@ -541,25 +513,7 @@ function sqrt(x) {
     
     <EM>first-class</EM> status.  Some
     of the <QUOTE>rights and privileges</QUOTE> of first-class 
-    elements are:<a class='superscript' id='footnote-7' href='#footnote-7'>[7]</a><UL>
-      <LI>
-	
-	  
-	  They may be referred to using names.
-	
-      </LI>
-      <LI>They may be passed as arguments to
-      functions.
-      </LI>
-      <LI>They may be returned as the results of
-      functions.
-      </LI>
-      <LI>They may be included in data structures.<a class='superscript' id='footnote-8' href='#footnote-8'>[8]</a>
-      </LI>
-    <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-8' href='#footnote-link-8'>[8] </a><FOOTNOTE>We'll see
-      examples of this after we introduce data structures in chapter~2.</FOOTNOTE></div></UL>
-  
+    elements are:<a class='superscript' id='footnote-link-6' href='#footnote-6'>[6]</a>
     <UL>
       <LI>
 	
@@ -573,13 +527,9 @@ function sqrt(x) {
       <LI>They may be returned as the results of
       functions.
       </LI>
-      <LI>They may be included in data structures.<a class='superscript' id='footnote-9' href='#footnote-9'>[9]</a>
+      <LI>They may be included in data structures.<a class='superscript' id='footnote-link-7' href='#footnote-7'>[7]</a>
       </LI>
-    <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>We'll see
-      examples of this after we introduce data structures in chapter~2.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>We'll see
-      examples of this after we introduce data structures in chapter~2.</FOOTNOTE></div></UL>
+    </UL>
   </p></div>
   
   <div class='permalink'>
@@ -591,42 +541,43 @@ function sqrt(x) {
     functions
     full first-class status.  This poses challenges for efficient
     implementation, but the resulting gain in expressive power is
-    enormous.<a class='superscript' id='footnote-10' href='#footnote-10'>[10]</a>
+    enormous.<a class='superscript' id='footnote-link-8' href='#footnote-8'>[8]</a>
   </p></div>
 
   
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled14}
+\label{ex:unlabeled15}
              
     
     Declare a function
-    {\lstinline[mathescape=true]$cubic$} that can be used together with the 
-    {\lstinline[mathescape=true]$newtons_method$}
+    <kbd>cubic</kbd> that can be used together with the 
+    <kbd>newtons_method</kbd>
     function
     in expressions of the form
 
     
 
-    
+    <div class='snippet' id='javascript_21_13_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 newtons_method(cubic(a, b, c), 1);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=HYUw7gLg9sDOD6BbEEAWUAmAKAxgVwCMBLHLAQwBoACA6nASmoEZ6BuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABGApgdygg+lATgQzAGdg5cBbACgHMBKRAbwChFXcUoRckAPRAXgB8iPgFpE1Sj3oB6RABMUuGADcatKbQDcTAL5NQkWAmTpMxLOQ4ALOPJoAaCSBREi9Zq0TtO3RMBgeFHksAAc4GDAoSlQMbDxCEjIqOidqFzdtPSYIBCIoREwAGyVCCBQBRAAGADoq+qqARh1DaHgkAKCQ8Mjo4CcA3HysdNd3RhYvVuMkCCK4IhQsFDA4EGprKScATw9Jry8fLiR8ACMiKURxXcQAHkK4EoJIFB0D-QPp9sLcbaw0GBQTajTITA4HXLEAqoHgFfj+GgZdxvcFsDjHRBzBZLFZrDaIsZOGFQWj7VGogD8plhZPJBwAXD8-gCgTEULCsu8yUc-HhmYDNoNhiDkdkviYzhdpGDDui-HxBPCqogqXxGaIeDp9JD8go+Eq6g1mgZwG0TIplGo6DK0b5eAJhDRLgBqPX0cSSaSyPVapgyOQQECnGAQB6IU4VNDKKBQFbh7aIfIgRRRLSJlAVACiAA1MwAlADCAEkAMqZxCNGoAFiqTFi5iIlhsdkogeDEEo+CcpycEFoTka2iAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
     to approximate zeros of the cubic $x^3 +ax^2 +bx +c$.
     
-  \hfill{\hyperref[ex:unlabeled14-Answer]{Solution}}\\
+  \hfill{\hyperref[ex:unlabeled15-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled14}]
+\begin{Answer}[ref={ex:unlabeled15}]
 
-      
+      <div class='snippet' id='javascript_21_14_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function cubic(a, b, c) {
@@ -635,9 +586,10 @@ function cubic(a, b, c) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABBEAjGEAUBDANI1fCASkQG8AoRaxAJwFMoRakAPRAXgD5k17NWpANSJsiAFSIAzgEcQ2BgOEEJidiIgBuCgF8gA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3NElgSIIIAEb5iZStVr1GLNvI7de4aPCTCRMCHgwAaRCIMQSFajRx0GCgLwA+IaPEkA1Igzy0mXIVeHFiG4QnDzkYDgA7lAIyAD6ALaWABZwACZ4mtp4AIwGALQALAYADEQG2UTsQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
       
       
@@ -648,11 +600,11 @@ function cubic(a, b, c) {
   
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled15}
+\label{ex:unlabeled16}
 
     
     Declare a function
-    {\lstinline[mathescape=true]$double$} that takes a
+    <kbd>double</kbd> that takes a
     function
     of one
     argument as argument and
@@ -661,14 +613,14 @@ function cubic(a, b, c) {
     that applies the original
     function
     twice.  For
-    example, if {\lstinline[mathescape=true]$inc$} is a
+    example, if <kbd>inc</kbd> is a
     function
     that adds 1 to its argument,
     then
     
       
       
-	{\lstinline[mathescape=true]$double(inc)$}
+	<kbd>double(inc)</kbd>
       
     
     should be a
@@ -678,23 +630,24 @@ function cubic(a, b, c) {
 
     
 
-    
+    <div class='snippet' id='javascript_21_15_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 double(double(double))(inc)(5); // ?
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYewrgRgNgpgFKSsHmjAlOuBLAdgYywFZ0BuAAgHpLyB+IA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=PTAEBMHsFcCMBsCmoAulS2QdwE4EsUVEA7DAT1AGcVpwSUBuKxZAUQA1WAlAYQEkAyq1ABGAHQAWEQCgAZtGIBjFHkik8SgBTEAlKADe00MdA5ENHKVIBqUQ2kBfaVDhJNLhIncxPOnZo1FfwBWHSYQUAB+IA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
     
-  \hfill{\hyperref[ex:unlabeled15-Answer]{Solution}}\\
+  \hfill{\hyperref[ex:unlabeled16-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled15}]
+\begin{Answer}[ref={ex:unlabeled16}]
        
-      
+      <div class='snippet' id='javascript_21_16_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function double(f) {
@@ -703,9 +656,10 @@ function double(f) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAEziARgGwKYApgCUiA3gFCIWIBO2UIVSAHogLwB8iw+ujBBA3KQC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAEziARgGwKYApgCUiA3gFCIWIBO2UIVSAHogLwB8iw+ujBBA3KQC+pUqgw5c4rHmk4+uGJAK4ArAMQB6TdVr0wAZ0QAmAIxA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
       
       
@@ -723,23 +677,24 @@ function double(f) {
   $f$ after $g$ is defined to be the function $x\mapsto f(g(x))$.            
   
   Declare a function
-  {\lstinline[mathescape=true]$compose$} that implements composition.  For
-  example, if {\lstinline[mathescape=true]$inc$} is a
+  <kbd>compose</kbd> that implements composition.  For
+  example, if <kbd>inc</kbd> is a
   function
   that adds 1 to its argument,
 
   
 
-  
+  <div class='snippet' id='javascript_21_17_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 compose(square, inc)(6);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewtgDiDOCmAU0COBXAhgJ1gGgAQEsA7YASngDYSBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=PTAEGMHsFsAdIM4FNQBdKgEYoO4CcBLVVJAOywE9QFUBXAEzNQG5qkUBRADQ4CUBhAJIBlDqACMAOgAsAJgBQAM1qlwqApHIIAjrQCGeJAAoAHgEpQAb3mhboQ3TzkToAFSgTzeQF8lKtRrkBKpGpBbWdvZIjuTkANQSXr5QcIjGOvqGADSgweBmRgBsZsxAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   returns 49.
   
   \hfill{\hyperref[ex:compose-Answer]{Solution}}\\
@@ -747,7 +702,7 @@ compose(square, inc)(6);
 
 \begin{Answer}[ref={ex:compose}]
 
-    
+    <div class='snippet' id='javascript_21_18_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function compose(f, g) {
@@ -756,9 +711,10 @@ function compose(f, g) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABBOBbADnAzgUwBTAA0iA5gJSIDeAUInYgE45QgNIAeiAvAHyLB4SedmTIBuagF8gA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABBOBbADnAzgUwBTAA0iA5gJSIDeAUInYgE45QgNIAeiAvAHyLB4SedmTIBuagF9q1FBmz4sARxABDJsRiQyeAGzjEAekONmrMFkQAWAJxA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
     
     
@@ -798,19 +754,20 @@ function compose(f, g) {
 
     
 
-    
+    <div class='snippet' id='javascript_21_19_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 repeated(square, 2)(5);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=E4UwDiCGAuICYAoDOBHArpUAaABAJgEoEBWAgbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3IHpeaOAA44MUHABNEUOIgBGORAHcsMKOKRyAnijoScYKOxQ5FAUQAaZgEoBhAJIBlM4gCMAOgAsAZnK4RYpJ4aJi4ADSIAExEeACsROxAA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-    Hint: You may find it convenient to use {\lstinline[mathescape=true]$compose$} from
-    exercise~\ref{ex:compose}.
+    Hint: You may find it convenient to use <kbd>compose</kbd> from
+    exercise \ref{ex:compose}.
     
     
   \hfill{\hyperref[ex:repeated-Answer]{Solution}}\\
@@ -818,7 +775,7 @@ repeated(square, 2)(5);
 
 \begin{Answer}[ref={ex:repeated}]
 
-      
+      <div class='snippet' id='javascript_21_20_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function repeated(f, n) {
@@ -829,9 +786,10 @@ function repeated(f, n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAJwKYAdUEMqoCYAUwANImAJSIDeAUIvSqlCMkkgLyeIAMdD-DAPyIAHonYA+UXwH8AXIghwAtujgBnVEVJpMOfNrKIAtIgCM5cgG4aAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABBOBbADnAzgUwBTAA0iA5gJSIDeAUInYgE45QgNIAeiAvAHyLB4SedmTIBuagF9qoSLASMc6HAEMoOACYFiYCjXqKWbREi5nEABloGbiAPyJOvR9dv0AXMjSZc2xcrVNPyQAWkQARlEJaWomAPUtLABHEBUmYgAmMjwAVnFEAHoCxAA2DJygA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
       
       
@@ -853,7 +811,7 @@ function repeated(f, n) {
   point $x$ is the average of $f(x-dx)$,
   $f(x)$, and $f(x+dx)$.  Write a
   function
-  {\lstinline[mathescape=true]$smooth$} that takes as input a
+  <kbd>smooth</kbd> that takes as input a
   function
   that computes
   $f$ and returns a
@@ -863,8 +821,8 @@ function repeated(f, n) {
   the smoothed function, and so on) to obtained the <EM>$n$-fold
   smoothed function</EM>.  Show how to generate the
   $n$-fold smoothed
-  function of any given function using {\lstinline[mathescape=true]$smooth$} and
-  {\lstinline[mathescape=true]$repeated$} from exercise~\ref{ex:repeated}.
+  function of any given function using <kbd>smooth</kbd> and
+  <kbd>repeated</kbd> from exercise \ref{ex:repeated}.
   
   
   \hfill{\hyperref[ex:smooth-Answer]{Solution}}\\
@@ -872,7 +830,7 @@ function repeated(f, n) {
 
 \begin{Answer}[ref={ex:smooth}]
 
-    
+    <div class='snippet' id='javascript_21_21_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const dx = 0.00001;
@@ -884,12 +842,13 @@ function n_fold_smooth(f, n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAJgDxgXhgBgHRu2gjAbgCgAzAVzGCgEtwYIBbEEKACwApiBKGAb0JgEwATgFMopIWBhJkAPhgc2SALTwE3ANQxiSzdqUwtiTtwD0MAMxEAviXKUaUsAH1iIADZxnDJqw4AaGDBuPkFhMQkpUQAHEQBDKBE4Nh9mFkDgjk4bIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABBEAjApgCgB4EpEDeAUIqYgE7pQjlLaIBUi9T2A3EQL5GiSwIV0AB3QBDKOgAmmYABpEYfMTKDqtBYgC82xAAYSKw4gD8zLQD5mBo2QBcyOAFshcAM5Y5gkeKkz5SAFpEAEZcXA5uCARXKERJek09ADpdVN1gjl5oeCRXRzg4KAALGSVrVRo6C0QZHEQg+PwAakRgHGbWupbG-AB6RABmCJ5wbIEwAH1gOAAbSQm8guK-BTKVSjUkSm8JaUXCov9cUuGiSem5hfyDzBQMeQBWY4AWcKA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
   
 \end{Answer}
 
@@ -898,7 +857,7 @@ function n_fold_smooth(f, n) {
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
 
-    We saw in section~\ref{sec:proc-general-methods}
+    We saw in section \ref{sec:proc-general-methods}
     that attempting to compute square roots by naively finding a
     fixed point of $y\mapsto x/y$ does not converge, and that this can be
     fixed by average damping.  The same method works for finding cube
@@ -921,13 +880,13 @@ function n_fold_smooth(f, n) {
     for computing
     $n$th roots using 
     
-    {\lstinline[mathescape=true]$fixed_point$},
+    <kbd>fixed_point</kbd>,
      
     
-    {\lstinline[mathescape=true]$average_damp$},
-    and the {\lstinline[mathescape=true]$repeated$}
+    <kbd>average_damp</kbd>,
+    and the <kbd>repeated</kbd>
     function
-    of exercise~\ref{ex:repeated}.
+    of exercise \ref{ex:repeated}.
     Assume that any arithmetic operations you need are available as primitives.
     
 
@@ -938,7 +897,7 @@ function n_fold_smooth(f, n) {
 
 \begin{Answer}[ref={ex:nth-roots}]
 
-      
+      <div class='snippet' id='javascript_21_22_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function nth_root(n, x) {
@@ -950,9 +909,10 @@ function nth_root(n, x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABGKALA+gJznKAKMAGkQA8BKRAbwChE7FMBTKETJYGExgE3QAc4MFHiZ9GAQyg884gG6NM4gOaN03cQFs+xWvT36DhgxskZgAGxyY8JtOktKATATKvdRj3rwBPRAF4APlJEAHpEYHEAZyh0RhI+fG9iJABaRABGV0J3T090gDoABjIAbmoAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBFIBsCmAnAhmYSYF4YAYA6fE-ARgG4AoAMwFdMoBLcGGpgDyQBMB9ABxBMwUABQ0ANGyYpovAOZ0kECAEoYAbyowdbBsGatgCEBCS8kYEHXkALURykBPdVt3uYKJFDoowMNAAjCAcYAFoYFxgAHjhEVAwsancAX21dekYWfygUJ14AdyYoe0VlNU10jxhQSFgwJA5YPBpRMpVVZOrPb19-Y1NzS2s7NqUVKQam1SrujwB+GCmoWbndAC44PMLi+2XO2bT3Lx8-LfyikvEZOXa1ajTMg2yAgDcE+XNuNABbfnFXLMTn0YBxcAA+N4fJAOKStDiqA6PfSGfxefhINBQHjiSaA469M7+HAkgiraqLME4SEcckeTagP6DXE9DFYnGSJbhGBkREPWgol40NByRr8MSBPGVAmnfzE0n4OnuRZkJUbGBMCAWd5gURgGZrZUwCAARzoaC84hFUAsHHFoklXIA9DAAEyItXuTaBGAAKjY1tt9sd-givP5T1RSxKvBQIBAYjAUgR0t0wLO7C4fEEwjE6Mx2O4ojQ73Qn143z+Uk9htrMB+WNsvBoJhAKFEDZjJnkrr1iINdcNoicENBMBdwtFdrETkm3N5qgkNbrZGISKoVBETbjCdEAFYpABmd0UIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       
     
 \end{Answer}
@@ -961,7 +921,7 @@ function nth_root(n, x) {
   
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled16}
+\label{ex:unlabeled17}
 
     
     
@@ -975,39 +935,39 @@ function nth_root(n, x) {
     using the improved guess as the new guess.  Write a
     function
     
-    {\lstinline[mathescape=true]$iterative_improve$}
+    <kbd>iterative_improve</kbd>
     that takes two
     functions
     as arguments: a method
     for telling whether a guess is good enough and a method for improving
     a guess.
     
-    The function {\lstinline[mathescape=true]$iterative_improve$}
+    The function <kbd>iterative_improve</kbd>
      should return as its value a
     function
     that takes a guess as argument and keeps improving the guess
-    until it is good enough.  Rewrite the {\lstinline[mathescape=true]$sqrt$}
+    until it is good enough.  Rewrite the <kbd>sqrt</kbd>
     function
     of
-    section~\ref{sec:sqrt} and the 
+    section \ref{sec:sqrt} and the 
     
-    {\lstinline[mathescape=true]$fixed_point$}
+    <kbd>fixed_point</kbd>
     
     function
     of
-    section~\ref{sec:proc-general-methods} in terms of
+    section \ref{sec:proc-general-methods} in terms of
     
-    {\lstinline[mathescape=true]$iterative_improve$}
+    <kbd>iterative_improve</kbd>
     .
 
     
     
-  \hfill{\hyperref[ex:unlabeled16-Answer]{Solution}}\\
+  \hfill{\hyperref[ex:unlabeled17-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled16}]
+\begin{Answer}[ref={ex:unlabeled17}]
 
-      
+      <div class='snippet' id='javascript_21_23_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function iterative_improve(good_enough, improve) {
@@ -1019,14 +979,15 @@ function iterative_improve(good_enough, improve) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDKBTATgQ1gN1QfRgFsAHdOPACgHM44ATfVMOEagCwBplTy8BKRAG8AUInGJQkWAmRosaGiFQBnFYNEStidKigh0SWgyYs27JavVjttiQH5E1ZWpt3bALjkZsqSsTIKP2crfn4AbjdEAF8o3X1DbwVUSOigA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABDKBTATgQ1gN1QfRgFsAHdOPACgHM44ATfVMOEagCwBplTy8BKRAG8AUInGJQkWAmRosaGiFQBnFYNEStidKigh0SWgyYs27JavVjttiQH5E1ZWpt3bALjkZsqSsTIKP2crfn4AbjdEAF8o3X1DbwVUSNiRKWh4JBUAR3QoSgAPDTi9AyQUH1wCAL4-AE9EAF4APic6RmZWDkp67mLuKPdh90bWnkCqPsRi-koARgiRNNz8ygAWAE4IoA}{\usebox\lstbox}!*/
     return iterate;
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-      
+</div></div>
+      <div class='snippet' id='javascript_21_24_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sqrt(x) {
@@ -1038,11 +999,12 @@ sqrt(49);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzF0BTKEdJGKS9AQ1gDdKB9GAWwAd0cDlgCeiALwA+RAHM4cACadKYOCBkALUQBpE+XaXJHjJ0+TFTEvAUMo69ePFgCMeANzEAvsWJpMWABYATncgA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3NElgSIYAWwAOWOADd8AcxA5kyADRsSFajRx0GiDNKwYZs+YpVMA9IjkLkRTjz7R4SPTgNHCSgJ5rK1WvRIhIgA1Ig+iJYATPa84E6CMnBwACYA+jhgcCAyABZ41qaqZH5UAToYAEbIeGiYuAUmtogAtMUAPIgADAB0XV0AjLGOAi7VhL4a5YyIAHwAvN2IAPxsiABcrRzccfzOQlBuGLDSaSLiUrLJ6ZnZeSrnEtKT1CP7MIcGh402LxplWkCVmuGSyOXyhVspX+MJWVia0NhGk2HyO30elx+iiIdmhPCmgJ0qK+OGG8VGKFQWCgExKBO0SGJxxgpwx0jwXkQ81mwNSoLu+S8ZiIKkRSPFsM53KEYie+CFqiIeAGuJ45DQ1LwABYAJx2IA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-      
+      <div class='snippet' id='javascript_21_25_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const tolerance = 0.00001;	  
@@ -1054,42 +1016,43 @@ function fixed_point(f, first_guess) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBFIBsCmAnAhmYSYF4YAYA6fE-ARgG4BIGGAKADMBXTKAS3BgbYA8kATAPoAHEGzBQAFAwA0XNimiCA5kyQQIAShgBvOrVookUJijAw2UVGnYA3JILYBbYShD3J+g95+1V6iFwAPhg0ACMISX8NGABaLii1DU1tAB44RGtMJBkvX3yGTTz8mGkFJWitCjoAXzpGXgERMQlJJxsAC0FQCDkyYk0KIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3NElgSIYAWwAOWOADd8AcxA5kyADRsSFajRx0GiDNKwYZs+YpVMA9IjkLkRTjz7R4SPTgNHCSgJ5rK1WvRIhIgA1Ig+iJYATPa84E6CMnBwACYA+jhgcCAyABZ41qaqZH5UAToYAEbIeGiYuAUmtogAtMUAPIgADAB0XV0AjLGOAi7VhL4a5YyIAHwAvN2IAPxsiABcrRzccfzOQlBuGLDSaSLiUrLJ6ZnZeSrnEtKT1CP7MIcGh402LxplWkCVmuGSyOXyhVspX+MJWVia0NhGk2HyO30elx+iiIdmhPCmgJ0qK+OFiEAQyCgiCgcAANkdIDhEItev1+kMAJBUXYJJDAGAEHDpURwGBgKB4YAqflYSlpSF-TTaJDE44wU4Y6R4RFIqiQ5mzXTjfVtYBY2wkTo0+kGRlKHW64BEB0aSUwWVQeVNXE8XgCoVpEViiXCY65NLk5SIAZ9OxAA}{\usebox\lstbox}!*/
 }
 
 fixed_point(math_cos, 1.0);
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
 \end{Answer}
 
   
   
 <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-10' href='#footnote-link-10'>[10] </a><FOOTNOTE>Observe that this is a combination 
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Observe that this is a combination 
     whose operator is itself
     
     
     
-    a combination.  Exercise~\ref{ex:a-plus-abs-b} already demonstrated
+    a combination.  Exercise \ref{ex:a-plus-abs-b} already demonstrated
     the ability to form such combinations, but that was only a toy
     example.  Here we begin to see the real need for such
     combinations—when applying a
     function
     that is obtained as the value
     returned by a higher-order
-    function.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-10' href='#footnote-link-10'>[10] </a><FOOTNOTE>See exercise~\ref{ex:nth-roots} 
-    for a further generalization.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-10' href='#footnote-link-10'>[10] </a><FOOTNOTE>Elementary 
+    function.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>See exercise \ref{ex:nth-roots} 
+    for a further generalization.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Elementary 
     calculus books usually describe Newton's
     method in terms of the sequence of approximations
     $x_{n+1}=x_n-g(x_n)/Dg(x_n)$.  Having language for talking about
     processes and using the idea of fixed points simplifies the description
-    of the method.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-10' href='#footnote-link-10'>[10] </a><FOOTNOTE>Newton's 
+    of the method.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Newton's 
     method does not always converge to an answer, but
     it can be shown that in favorable cases each iteration doubles the
     number-of-digits accuracy of the approximation to the solution.
@@ -1097,24 +1060,17 @@ fixed_point(math_cos, 1.0);
     
     
     Newton's method will converge much more
-    rapidly than the half-interval method.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-10' href='#footnote-link-10'>[10] </a><FOOTNOTE>Newton's 
-    method does not always converge to an answer, but
-    it can be shown that in favorable cases each iteration doubles the
-    number-of-digits accuracy of the approximation to the solution.
-    In such cases, 
-    
-    
-    Newton's method will converge much more
-    rapidly than the half-interval method.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-10' href='#footnote-link-10'>[10] </a><FOOTNOTE>For finding square roots, 
+    rapidly than the half-interval method.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>For finding square roots, 
     Newton's method converges rapidly to the
-    correct solution from any starting point.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-10' href='#footnote-link-10'>[10] </a><FOOTNOTE>The notion of first-class status of 
+    correct solution from any starting point.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>The notion of first-class status of 
     programming-language 
     elements is due to the British computer scientist Christopher
-    Strachey (1916–1975).</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-10' href='#footnote-link-10'>[10] </a><FOOTNOTE>The major implementation cost of first-class
+    Strachey (1916–1975).</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-7' href='#footnote-link-7'>[7] </a><FOOTNOTE>We'll see
+      examples of this after we introduce data structures in chapter 2.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-8' href='#footnote-link-8'>[8] </a><FOOTNOTE>The major implementation cost of first-class
     functions
     is that allowing
     functions
@@ -1130,7 +1086,14 @@ fixed_point(math_cos, 1.0);
     
       
       In the JavaScript implementation we will
-      study in section~\ref{sec:mc-eval}, these names are stored in the function
+      study in section \ref{sec:mc-eval}, these names are stored in the function
       
       's environment.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section3/subsection3.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/chapter2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+1.3.4  Functions as Returned Values</div>	<div class='next-page'></div></div>

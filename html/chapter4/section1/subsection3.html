@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>4.1.3 
-    Evaluator Data Structures
-  </a>
+		<a name='top' class='permalink'>4.1.3  Evaluator Data Structures</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
   
   <div class='permalink'>
@@ -20,9 +27,10 @@
     the representation of true and false.
   </p></div>
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     Testing of predicates
-  
+  </h2></div>
 
 
   
@@ -34,15 +42,15 @@
       
 	To enter the consequent of a conditional, 
 	we expect the predicate to evaluate to the value
-	{\lstinline[mathescape=true]$true$}, and thus
+	<kbd>true</kbd>, and thus
 	we define the evaluator function
-	{\lstinline[mathescape=true]$is_true$} as follows:
+	<kbd>is_true</kbd> as follows:
       
     </SPLIT>
 
     
     
-    
+    <div class='snippet' id='javascript_75_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_true(x) {
@@ -51,24 +59,26 @@ function is_true(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgJxAUwBQAeAlIgN4BQiVimOUImSBiAvG4lrgNzkC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgJxAUwBQAeAlIgN4BQiVimOUImSBiAvG4lrgNzkC+55VBmz4AjES6IA9FMQoAFnBAAbACY06DJMACGylDkQAjHBB0gDiBMoCeHEchT3cQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
     
     
     With the definition of the function
-    {\lstinline[mathescape=true]$eval_conditional_expression$}
-    of section~\ref{sec:core-of-evaluator}, this means
+    <kbd>eval_conditional_expression</kbd>
+    of section \ref{sec:core-of-evaluator}, this means
     that our evaluator evaluates the alternative statement
     for any predicate value other than
-    {\lstinline[mathescape=true]$true$}.
+    <kbd>true</kbd>.
   </p></div>
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     Representing
     functions
-  
+  </h2></div>
 
   
 
@@ -85,9 +95,9 @@ function is_true(x) {
 	
 	  
 	  
-	    {\lstinline[mathescape=true]$apply_primitive_function($}
+	    <kbd>apply_primitive_function(</kbd>
 	    $\textit{fun}$, $\textit{args}$
-	    {\lstinline[mathescape=true]$)$}
+	    <kbd>)</kbd>
 	  
 	
 	
@@ -102,7 +112,7 @@ function is_true(x) {
       </LI>
       <LI>
 	
-        {\lstinline[mathescape=true]$is_primitive_function($}$\textit{fun}${\lstinline[mathescape=true]$)$}
+        <kbd>is_primitive_function(</kbd>$\textit{fun}$<kbd>)</kbd>
 	
 
 	tests whether 
@@ -118,7 +128,7 @@ function is_true(x) {
 
     These mechanisms for handling primitives
     are further described in
-    section~\ref{sec:running-eval}.
+    section \ref{sec:running-eval}.
   </p></div>
 
   <div class='permalink'>
@@ -129,9 +139,9 @@ function is_true(x) {
     function
     bodies, and environments using the constructor 
     
-    {\lstinline[mathescape=true]$make_compound_function$}:
+    <kbd>make_compound_function</kbd>:
 
-    
+    <div class='snippet' id='javascript_75_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_compound_function(parameters, body, env) {
@@ -143,7 +153,7 @@ function is_compound_function(f) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9CdkAOc4AJtqJLAgBQGoBOqymUm9AzgDSIBGcJAT26YwANwCUiAN4AoRPMT0WIekgA2MdlGoAiPIWJgyFaPDA7OchdZsK6jZqw7c+g4WPEBuGQF8ZJqiRNXHwiUnJwUxpgSVlrJSgVIPZsKFQAc3TMMg0tamBuPVDDY0jAnS9ffzKzRACzbHsmFjZ2fNireQSkxFyobCVgfO4ARkq-eoQ6moRsVwF26U7FZVVezX7B4cQAJnHqylrJsGwRURh6BGYwbRil+NX1DYHMIYLEAGZxoA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgQwObYKYAmaANqlABQpQC2UANIlABZ4Y4CUiA3gFCL+IATnighBSVGgAOmGIMo0onAGTLELTAQW1OAXn2MWbbAG4eAXx6hIsBImqYA1qwhxqUuOCLXo8MORlBTGoRPEEUBgAjOAIATwY8MAA3Tl4BIRExJFIqcgAiV3dPMG9wXwQ8uj50mtrA4NDwqJj4xESUs0sfWwl0Qo8vNG6-cmBU6v5hUXFkdCxcQhIyUYYCtwGSobKevPZOq22-RGGEaUwgkKgwlFHx9KmsxByoNGFgFcQARj2LA5sjk5gNDROK3bgTDLTbJkV54d7ABgAJh+XUOdkBaHacgQITAFDG4PumRmz1h8IYAGYUTweK4wFR7LEtv87LpEBCHM40P1iqUWf4IelnvkAB6VRB5WK7Kq1fjCvIPcRoKiYK64qDiwIoPCixAAakQsRMu3YMtlzFYeHcUCZWMEOMSSjMBFQUmImFi5EkPMGgPI1CZgPYPxdKDdHtGaKB9Uu139gajwedrvdnoxIM9AeZ5TASZ4ofDaajmOS2LA6vj2Z6SaAA}{\usebox\lstbox}!*/
 }
 function function_parameters(f) {
     return list_ref(f, 1);
@@ -156,8 +166,9 @@ function function_environment(f) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 
     
@@ -167,24 +178,25 @@ function function_environment(f) {
 
     
       
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
 	Representing return values
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-	We saw in section~\ref{sec:core-of-evaluator}
+	We saw in section \ref{sec:core-of-evaluator}
 	that the evaluation of sequences terminates with the
 	first return statement encountered, and that the evaluation
 	of function applications needs to return the value
-	{\lstinline[mathescape=true]$undefined$} if the
+	<kbd>undefined</kbd> if the
 	evaluation of the function body does not encounter a
-	{\lstinline[mathescape=true]$return$} statement. In
+	<kbd>return</kbd> statement. In
 	order to identify the evaluation of
-	{\lstinline[mathescape=true]$return$} statements, we
-	introduce       {\lstinline[mathescape=true]$return$}
+	<kbd>return</kbd> statements, we
+	introduce       <kbd>return</kbd>
 	values as evaluator data structures.
-	
+	<div class='snippet' id='javascript_75_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_return_value(content) {
@@ -196,14 +208,15 @@ function is_return_value(value) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ATpqEXMbAN1QBsRMAKCBKTMKASkQG8AoRHxfQ4ogowAzlBoAifkRLkqmCQBpE9Zk1YBuTgF9OoSLASJReAjLKVqNOdTZdefM4JNRUAczeYAJtmFjrlpiKUk6ygRIsWrr60PBI0sQW8tiqjMwB8nbcvAlIABaYqF40rjAUGbaROkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgQwObYKYAmaANqlABQpQC2UANIlABZ4Y4CUiA3gFCL+IATnighBSVGgAOmGIMo0onAGTLELTAQW1OAXn2MWbbAG4eAXx6hIsBImqYA1q2GjxaAG6ZiIPOQgIUHhgStx8Aq5iSKRU5ABEke5ePnhxDAEhwUpmltbQ8BLoiWCe3r7kyb6cvAJCIlHI6Fi4hCRkFWV4dAn1SZ1x7DlW4Pl2xaUpaBlBIR0p1eH8xep4muRYMMRzVYMWPDwZVPYAnmjjlXiIuvZOLr0lF+QALABMuwSoUsSYx+SS551yNRTgD5u9Pt9fqDfFNAlkgSD7hMdiYgA}{\usebox\lstbox}!*/
 function return_value_content(value) {
     return head(tail(value));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	
 
@@ -211,16 +224,17 @@ function return_value_content(value) {
     
   </SPLIT>
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     Operations on Environments
-  
+  </h2></div>
 
   
   
   <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
     The evaluator needs operations for manipulating environments.  As
-    explained in section~\ref{sec:environment-model}, an environment is a
+    explained in section \ref{sec:environment-model}, an environment is a
     sequence of frames, where each frame is a table of bindings that
     associate
     names
@@ -233,10 +247,10 @@ function return_value_content(value) {
 	<UL>
 	  
 	  <LI>
-	    {\lstinline[mathescape=true]$lookup_name_value($}
+	    <kbd>lookup_name_value(</kbd>
 	    $\textit{name}$,
 	    $\textit{env}$
-	    {\lstinline[mathescape=true]$)$}
+	    <kbd>)</kbd>
 	  
 
 	  returns the value that is bound to the symbol
@@ -246,10 +260,10 @@ function return_value_content(value) {
 	  </LI>
 	  <LI>
 	    
-	    {\lstinline[mathescape=true]$extend_environment($}
+	    <kbd>extend_environment(</kbd>
 	    $\textit{names}$, $\textit{values}$,
 	    $\textit{base-env}$
-	    {\lstinline[mathescape=true]$)$}
+	    <kbd>)</kbd>
 	    
 
 	    returns a new environment, consisting of a new frame in which the
@@ -262,10 +276,10 @@ function return_value_content(value) {
 	  </LI>
 	  <LI>
 	    
-	    {\lstinline[mathescape=true]$set_name_value($}
+	    <kbd>set_name_value(</kbd>
 	    $\textit{name}$, $\textit{value}$,
 	    $\textit{env}$
-	    {\lstinline[mathescape=true]$)$}
+	    <kbd>)</kbd>
 	    
 
 	    sets the given $\textit{name}$
@@ -275,10 +289,10 @@ function return_value_content(value) {
 	  </LI>
 	  <LI>
 	    
-	    {\lstinline[mathescape=true]$assign_name_value($}
+	    <kbd>assign_name_value(</kbd>
 	    $\textit{name}$, $\textit{value}$,
 	    $\textit{env}$
-	    {\lstinline[mathescape=true]$)$}
+	    <kbd>)</kbd>
 	    
 
 	    checks if the value associated to the name
@@ -300,11 +314,11 @@ function return_value_content(value) {
     To implement these operations we represent an environment as a list of
     frames.  The enclosing environment of an environment is the
     
-    {\lstinline[mathescape=true]$tail$}
+    <kbd>tail</kbd>
     
     of the list.  The empty environment is simply the empty list.
 
-    
+    <div class='snippet' id='javascript_75_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function enclosing_environment(env) {
@@ -316,7 +330,7 @@ function first_frame(env) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAU0gGzgZxmA5gfVQDcYAnBAW1SgApiBKRAbwChF3FTkoRSkoAhjDR0wRegG4WAXxahIsBImBlMUfMFICqo8czYcuPPogAWyAQBNdkmXPDR4SVBAyZk+AEYBPGpu3IADQoYoxMHIgG7Ea8SAAOQqR+WlTBDFKyEAhqiFDmhBRxUN6EYmSU1IgAvIhgIGhoUvKOSjCYBUUlxOVgVGC0DPoRMSZt+HUNNhlAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAU0gGzgZxmA5gfVQDcYAnBAW1SgApiBKRAbwChF3FTkoRSkoAhjDR0wRegG4WAXxahIsBImBlMUfMFICqo8czYcuPPogAWyAQBNdkmXPDR4SVBAyZk+AEYBPGpu3IADQoYoxMHIgG7Ea8SAAOQqR+WlTBDFKyEAhqiFDmhBRxUN6EYmSU1IgAvIhgIGhoUvKOSjCYBUUlxOVgVGC0DPoRMSZt+HUNNhksLGPIhcWlJOS91DR5HvOdSz19UJJAA}{\usebox\lstbox}!*/
 function enclose_by(frame, env) {    
     return pair(frame, env);
 }
@@ -326,15 +340,17 @@ function is_empty_environment(env) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
   </p></div>
 
   <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
     Each frame of an environment is represented as a pair of lists: a list
-    of the variables bound in that frame and a list of the associated values.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+    of the variables bound in that frame and a list of the associated values.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
+    <div class='snippet' id='javascript_75_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_frame(names, values) {
@@ -352,29 +368,9 @@ function frame_values(frame) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-  
-    
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function make_frame(names, values) {
-    return pair(names, values);
-}
-function frame_names(frame) {    
-    return head(frame);
-}
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9YAnVZTACjEMwGcAaRAN1QBsRKBKRAbwChEfE9MoIPEgAOqGHlLlqdRswosA3JwC+nUJFgJE+ctjJEKxXUTbteibr36DhiABaZUAE2MFTytRujwkJnPRMlG7kZhZWPDZCSFDiDCEeqkA}{\usebox\lstbox}!*/
-function frame_values(frame) {    
-    return tail(frame);
-}
-
-\end{JavaScriptClickable}
-
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
@@ -394,7 +390,7 @@ function frame_values(frame) {
     names
     does not match the number of values.
 
-    
+    <div class='snippet' id='javascript_75_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function extend_environment(names, vals, base_env) {
@@ -406,7 +402,7 @@ function extend_environment(names, vals, base_env) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwB5WWAJgfUwNxgCcEBbTKACjAENyBnAGkXxoBsnEAjG+5PMPgCUiAN4AoRFMQxgiSm0wBzKAAtqdZPREBePYkVgV61hyEiJ0q4iLIoIIkkwQ2cPji4BPSpOt--pDQA1vzARJoaDMy+-rHWgQAOlKiIOgB8iAk0xMnMUEQgyELMptrFMXH+PO4EQgDcFQC+KBzIMnIKymqRWiIAPAZdJuxlYhVWyEQkRJQARAAqcHCIgWCeiDRESiDkYFD0iPQgCQlsMMhYAFyIs4gA1IjjcfT5MEay3rQMIg+zzLcPJ6xF5EN5KD6UUrmBpWZrIVpjWKTaZzRbLYDIADuGy2OwoByOJzOF2uAMelSsILBEK+vXuN3+9KB-ip72A3ih9Sa4kaQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwB5WWAJgfUwNxgCcEBbTKACjAENyBnAGkXxoBsnEAjG+5PMPgCUiAN4AoRFMQxgiSm0wBzKAAtqdZPREBePYkVgV61hyEiJ0q4iLIoIIkkwQ2cPji4BPSpOt--pDQA1vzARJoaDMy+-rHWgQAOlKiIOgB8iAk0xMnMUEQgyELMptrFMXH+PO4EQgDcFQC+KBzIMnIKymqRWiIAPAZdJuxlYhVWyEQkRJQARAAqcHCIgWCeiDRESiDkYFD0iPQgCQlsMMhYAFyIs4gA1IjjcfT5MEay3rQMIg+zzLcPJ6xF5EN5KD6UUrmBpWZrIVpjWKTaZzRbLYDIADuGy2OwoByOJzOF2uAMelSsILBEK+vXuN3+9KB-ip72A3ih9Sa4ka4nEaAw2AEhBIYF2VDOLzmqD+N08stmAC9ZuUKbFJVQAIzMABMzAAzKq1X41PxkKQElBPMLiGQKPUgA}{\usebox\lstbox}!*/
     } else if (length(names) < length(vals)) {
         error("Too many arguments supplied: " + 
               stringify(names) + ", " + 
@@ -419,22 +415,23 @@ function extend_environment(names, vals, base_env) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     
     
       
-	The function {\lstinline[mathescape=true]$extend_environment$}
-	is used by {\lstinline[mathescape=true]$apply$} in
-	section~\ref{sec:core-of-evaluator} to bind
+	The function <kbd>extend_environment</kbd>
+	is used by <kbd>apply</kbd> in
+	section \ref{sec:core-of-evaluator} to bind
 	the parameters of a function to its arguments. In order to
 	allow for assignment to function parameters, as in function
-	{\lstinline[mathescape=true]$make_withdraw_with_balance$}
-	of section~\ref{sec:local-state-variables}, we
+	<kbd>make_withdraw_with_balance</kbd>
+	of section \ref{sec:local-state-variables}, we
 	choose to tag the values in
-	{\lstinline[mathescape=true]$extend_environment$}	as
-	mutable, using {\lstinline[mathescape=true]$map$}.
+	<kbd>extend_environment</kbd>	as
+	mutable, using <kbd>map</kbd>.
       
     
   </p></div>
@@ -465,7 +462,7 @@ function extend_environment(names, vals, base_env) {
       
     error.
 
-    
+    <div class='snippet' id='javascript_75_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 // We use a nullary function as temporary value for names whose
@@ -478,10 +475,11 @@ const no_value_yet = () => null;
 \end{lrbox}
 
 \href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAEHUFNQVwZ2gQ1AOxgG3YgTgT1AGYwoDGALgJYD2KoicoZkAtgA5XY74Bui6M0Ah1SJmkBgHcAFlQQAoEKAAmkElk6UaoKfVRUyoXJAMAjSJFqRe-REyUA6UABUp0VjGzsEoKgUauFMCJSTVoVAgoUClDQCgZ3bEh0fDIqUBJE2yRYKIBHAViVFEoyXABuQP9BYnJqWgkKTFQrSGxQMzpWVnQKSCU6FH7ohkSyD1prAsqACjRMAEpYhgpsRPQrRGL7ORIaOAMUKgB9ScgjowMAXlBpxcuAPlQMdDKgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
     
-    
+    <div class='snippet' id='javascript_75_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function lookup_name_value(name, env) {
@@ -493,7 +491,7 @@ function lookup_name_value(name, env) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGznA1iADgfTAQwFsBTHAN32RGIAoCSAaRYsMgSkQG8AoRPxUJFgJmrHKjhYaLdl178Fg6PCQBnCPjB0ixVUwrJVHHgtP8ATsSghzSGKrwhkybSSPyznhQH5RZcWhSHl4h-CwQqKowYADmODIw5ggkYFDSrGxswaGmAFyI9MSIALyliAAWxPgAJq66WTmhvpU1NC21BkYNjV756po0UPgwLoVGTEMjNJ2ZANzZ-AC+C3wwwIg09vGEWFAAnvGsicksaTKZco3E5knmdUwARACqYABGcODVBTr5D2zzXkWzEMRRMOQgCFUUAE5h0JQEiShOGAsJI6XYAPBkOhBmo8MQ-S0KJ0eB0qhoxJIbAYKx6jUppFxugpqOIc24AEgFJZrLZEEySmUwHByJRqDg9lZaWZfNdbvdEA8AHJwkCqIqvYjAOCWRDVYgRfCw4RgX7dRr5JmYszLBS2ixWGxIGQBSTo-7cRZAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAEHUFNQVwZ2gQ1AOxgG3YgTgT1AGYwoDGALgJYD2KoicoZkAtgA5XY74Bui6M0Ah1SJmkBgHcAFlQQAoEKAAmkElk6UaoKfVRUyoXJAMAjSJFqRe-REyUA6UABUp0VjGzsEoKgUauFMCJSTVoVAgoUClDQCgZ3bEh0fDIqUBJE2yRYKIBHAViVFEoyXABuQP9BYnJqWgkKTFQrSGxQMzpWVnQKSCU6FH7ohkSyD1prAsqACjRMAEpYhgpsRPQrRGL7ORIaOAMUKgB9ScgjowMAXlBpxcuAPlQMdArg2q10KioAaxhWI5QojOp1mQIANKALNxFgBvOSgBGEGoxKFHT5UVjTKGw+GIvFvGJwEibUFiOAQ6xwHF4mmI0bjJYA56k8TzXG0jl4gD8kJQ3DRX0x7M5IsRFjUskiAHMjlCVjQxMUsXz5mzRSKAFwiMSgS567SQRBKFlU4Xq2k81xG6ZW42U1Vm814rVEklkRCNE3zCHuz32+YVTkAX0dCIofmmcVlbFKsr58pQirIyuh1PVrWwHBZEIARABVFAmKjEfqAsRanMB0OgIOQ9DeOHm3YofaETg664RbD7I4EduQFNVpt7AynXUI10oaZ9oEAoFwaf973Vp3qmdiE58AQL9eQVUVACQePp2AmW+geuuh03-DOFxXNJ5GazZcguYAckDYN4zEJEspVHUWw6grNUnS1U5Aw5EM8RguljAZVF0UxbEKhDHYR1AZhcDjbgEyTXVhUgAAPJhBlw-CLGTHp9mmHNiJzXNcEY0AcwAL0rMEHydGjkwARghAAmCEAGZl1XEUyFcaNWFjOVM0TKiqzkdFfn+V8bwEOiGIhbCKIUpMAyAA}{\usebox\lstbox}!*/
                    : name === head(names)
                      ? head(head(vals))
                      : scan(tail(names), tail(vals));
@@ -513,8 +511,9 @@ function lookup_name_value(name, env) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     
     
@@ -527,13 +526,13 @@ function lookup_name_value(name, env) {
       To assign a name
       to a new value in a specified environment, we scan
       for the name, just as in 
-      {\lstinline[mathescape=true]$lookup_name_value$},
+      <kbd>lookup_name_value</kbd>,
       and change the corresponding value when we find it,
       provided it is tagged as mutable.
       
     
 
-    
+    <div class='snippet' id='javascript_75_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function assign_name_value(name, val, env) {
@@ -545,7 +544,7 @@ function assign_name_value(name, val, env) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwM6pgczAfTMgWwFMcA3ZAGxCIAp9iAaRciposUgSkQG8AoRIMShIsBInakcFOHAAONSd35DVw8NHhJUEZGDqEiqJi1TKBaywCciUEFaQxUeEBQoHiZi5Z+IA-BIc0rIK3r7h7BAyGGCYOJIwVgjEYFCKHJycYeFCAFyI9ESIALyliAAWRMgAJh5GWTm+ATSIUMgw7pU1NKaZ2Y2WAai2OF21Yz2UZiaUDQPh+URWSVY0AERgcCjoWGApUIhriADU-fM+a1BbEAiobamoKG5wAO5E1Wvcc+eC+Tp6NDaHTq01a7XcvU4AG4zogAL6IWEwYCIdKkEplKCVeIEORQACe8Q4iWS7Cg5gGSxWdSYawAqmAAEZwcDVAqGRAwJBoDDYfb5T4w3wIogUYa8WGqG5gO7CKwc4rCRJ3HDAeXENHQyVCGx2ByIf76NWGPCGVA0Y3ETgMbXnS0kFjUc32zJCnxwsIe1S6+xISTBeSamFwoA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwM6pgczAfTMgWwFMcA3ZAGxCIAp9iAaRciposUgSkQG8AoRIMShIsBInakcFOHAAONSd35DVw8NHhJUEZGDqEiqJi1TKBaywCciUEFaQxUeEBQoHiZi5Z+IA-BIc0rIK3r7h7BAyGGCYOJIwVgjEYFCKHJycYeFCAFyI9ESIALyliAAWRMgAJh5GWTm+ATSIUMgw7pU1NKaZ2Y2WAai2OF21Yz2UZiaUDQPh+URWSVY0AERgcCjoWGApUIhriADU-fM+a1BbEAiobamoKG5wAO5E1Wvcc+eC+Tp6NDaHTq01a7XcvU4AG4zogAL6IWEwYCIdKkEplKCVeIEORQACe8Q4iWS7Cg5gGSxWdSYawAqmAAEZwcDVAqGRAwJBoDDYfb5T4w3wIogUYa8WGqG5gO7CKwc4rCRJ3HDAeXENHQyVCGx2ByIf76NWGPCGVA0Y3ETgMbXnS0kFjUc32zJCnxwsIe1S6+xISTBeSamEevjS2UEQmMmQQADWJUQcmQVmG6x4iAotkQAA94wBGKHZ+MAJgLcMFfCIjuQUFoEZwUbgsaYWJImBkjMoRNIJL2ZOhQA}{\usebox\lstbox}!*/
                 : name === head(names)
                   ? ( tail(head(vals))
                       ? set_head(head(vals), val)
@@ -565,8 +564,9 @@ function assign_name_value(name, val, env) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     
 
@@ -585,7 +585,7 @@ function assign_name_value(name, val, env) {
 	similar to variable assignment, except that we can
 	insist that the name is found in the innermost frame.
 
-	
+	<div class='snippet' id='javascript_75_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function set_name_value(name, val, env) {
@@ -597,7 +597,7 @@ function set_name_value(name, val, env) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwKZQPpgIYFtUYBu2ANiKgBQ74A0ixJdqYhAlIgN4BQiviokWAhQRsYKnlTI6DZO259FiAE7oQypDGRYQJEhPxyeSkwH5EqZcrjKKAIhhgolnCQtWbALkTVUPuFD8cOAAJnasxiaK3r6IALwJiAAWqNghBlIRUVHmaJgpaRQF6bKsMqRZ2UreyKLiUNgw+r5ydA1NFKWsANyRiAC+iH0QCMiBwMqS8fwwymMYE5IUzGy9iqpQ6ki1YhSL+FiSyHuT+GV9VXz7BAzkx9esPVz9QA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwKZQPpgIYFtUYBu2ANiKgBQ74A0ixJdqYhAlIgN4BQiviokWAhQRsYKnlTI6DZO259FiAE7oQypDGRYQJEhPxyeSkwH5EqZcrjKKAIhhgolnCQtWbALkTVUPuFD8cOAAJnasxiaK3r6IALwJiAAWqNghBlIRUVHmaJgpaRQF6bKsMqRZ2UreyKLiUNgw+r5ydA1NFKWsANyRiAC+iH0QCMiBwMqS8fwwymMYE5IUzGy9iqpQ6ki1YhSL+FiSyHuT+GV9VXz7BAzkx9esPVz9XFwjYGOIuACeGABGJDgEAA1tMAA7YOaUOwcRAkdCIAAe0wAjN0kej+uFeqhbthnBQfv9ASC2ikMABzQF-UgYFazBD4Jw9IA}{\usebox\lstbox}!*/
               : scan(tail(names), tail(vals));
     } 
     const frame = first_frame(env);
@@ -606,8 +606,9 @@ function set_name_value(name, val, env) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     
 	
@@ -622,13 +623,12 @@ function set_name_value(name, val, env) {
     represent environments.  Since we used data abstraction to isolate the
     rest of the evaluator from the detailed choice of representation, we
     could change the environment representation if we wanted to.  (See
-    exercise~\ref{ex:alternate-frame-representation}.)  In a
+    exercise \ref{ex:alternate-frame-representation}.)  In a
     production-quality JavaScript system, the speed of the evaluator's
     environment operations—especially that of variable lookup—has a
     major impact on the performance of the system.  The representation
     described here, although conceptually simple, is not efficient and
-    would not ordinarily be used in a production system.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
-  
+    would not ordinarily be used in a production system.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
     
   </p></div>
 
@@ -655,7 +655,7 @@ function set_name_value(name, val, env) {
         JavaScript allows us to create new bindings for names by means of constant and variable
         declaration, but provides no way to get rid of bindings.  Implement for
         the evaluator a <QUOTE>function</QUOTE>
-        {\lstinline[mathescape=true]$make_unbound$} that removes the
+        <kbd>make_unbound</kbd> that removes the
         binding of a name given as <QUOTE>argument</QUOTE> from the environment in which the
         application of the function is evaluated.
         This problem is not completely specified.  For example,
@@ -669,21 +669,21 @@ function set_name_value(name, val, env) {
     
   </SPLIT>
 <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Frames are not really a data abstraction in the following code:
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Frames are not really a data abstraction in the following code:
     
       
-      {\lstinline[mathescape=true]$assign_name_value$}
+      <kbd>assign_name_value</kbd>
       
     
     and 
     
       
-      {\lstinline[mathescape=true]$define_variable$}
+      <kbd>define_variable</kbd>
       
     
     use 
     
-    {\lstinline[mathescape=true]$set_head$}
+    <kbd>set_head</kbd>
     
     to directly modify the values in a frame.  The purpose of the frame
     
@@ -691,9 +691,9 @@ function set_name_value(name, val, env) {
     is to make the environment-manipulation
     
     functions
-    easy to read.</FOOTNOTE></div><hr><div class='footnote'>
+    easy to read.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>The drawback of this representation (as well as the variant in
-    exercise~\ref{ex:alternate-frame-representation}) is that the evaluator
+    exercise \ref{ex:alternate-frame-representation}) is that the evaluator
     may have to search through many frames in order to find the binding
     for a given variable.
     
@@ -708,4 +708,11 @@ function set_name_value(name, val, env) {
       
     </SPLIT>
   </FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section1/subsection2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section1/subsection4.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+4.1.3  Evaluator Data Structures</div>	<div class='next-page'></div></div>

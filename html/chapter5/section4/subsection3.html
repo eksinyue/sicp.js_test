@@ -1,19 +1,26 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>5.4.3 
-  Conditionals, Assignments, and Definitions
-      </a>
+		<a name='top' class='permalink'>5.4.3  Conditionals, Assignments, and Definitions</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
   
   As with the metacircular evaluator, special forms are handled by
-  selectively evaluating fragments of the expression.  For an {\lstinline[mathescape=true]$if$}
+  selectively evaluating fragments of the expression.  For an <kbd>if</kbd>
   expression, we must evaluate the predicate and decide, based on the
   value of predicate, whether to evaluate the consequent or the
   alternative.
@@ -21,14 +28,13 @@
 
       <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
-  Before evaluating the predicate, we save the {\lstinline[mathescape=true]$if$} expression
+  Before evaluating the predicate, we save the <kbd>if</kbd> expression
   itself so that we can later extract the consequent or alternative.  We
   also save the environment, which we will need later in order to
-  evaluate the consequent or the alternative, and we save {\lstinline[mathescape=true]$continue$}, which we will need later in order to return to the
-  evaluation of the expression that is waiting for the value of the {\lstinline[mathescape=true]$if$}.
+  evaluate the consequent or the alternative, and we save <kbd>continue</kbd>, which we will need later in order to return to the
+  evaluation of the expression that is waiting for the value of the <kbd>if</kbd>.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_111_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 "ev_if",
           save("exp"),                    // save expression for later
           save("env"),
@@ -36,21 +42,19 @@
           assign("continue", label("ev_if_decide")),
           assign("exp", op("if_predicate"), reg("exp")),
           go_to(label("eval_dispatch")),  // evaluate the predicate
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
   When we return from evaluating the predicate, we test whether it was
   true or false and, depending on the result, place either the
-  consequent or the alternative in {\lstinline[mathescape=true]$exp$} before going to {\lstinline[mathescape=true]$eval_dispatch$}.  Notice that restoring {\lstinline[mathescape=true]$env$} and {\lstinline[mathescape=true]$continue$}
-  here sets up {\lstinline[mathescape=true]$eval_dispatch$} to have the correct environment and
-  to continue at the right place to receive the value of the {\lstinline[mathescape=true]$if$}
+  consequent or the alternative in <kbd>exp</kbd> before going to <kbd>eval_dispatch</kbd>.  Notice that restoring <kbd>env</kbd> and <kbd>continue</kbd>
+  here sets up <kbd>eval_dispatch</kbd> to have the correct environment and
+  to continue at the right place to receive the value of the <kbd>if</kbd>
   expression. 
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_111_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 "ev_if_decide",
           restore("continue"),
           restore("env"),
@@ -65,24 +69,23 @@
       "ev_if_consequent",
           assign("exp", op("if_consequent"), reg("exp")),
           go_to(label("eval_dispatch")),
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
   Assignments and definitions
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
   
-  Assignments are handled by {\lstinline[mathescape=true]$ev_assignment$}, which is reached from
-  {\lstinline[mathescape=true]$eval_dispatch$} with the assignment expression in {\lstinline[mathescape=true]$exp$}.  The code at {\lstinline[mathescape=true]$ev_assignment$} first evaluates the value part of the expression and
-  then installs the new value in the environment.  {\lstinline[mathescape=true]$Set_variable_value$} is assumed to be available as a machine
+  Assignments are handled by <kbd>ev_assignment</kbd>, which is reached from
+  <kbd>eval_dispatch</kbd> with the assignment expression in <kbd>exp</kbd>.  The code at <kbd>ev_assignment</kbd> first evaluates the value part of the expression and
+  then installs the new value in the environment.  <kbd>Set_variable_value</kbd> is assumed to be available as a machine
   operation.
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_111_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 "ev_assignment",
           assign("unev", op("assignment_variable"), reg("exp")),
           save("unev"),                   // save variable for later
@@ -99,16 +102,14 @@
           perform(op("set_variable_value"), reg("unev"), reg("val"), reg("env")),
           assign("val", const("ok")),
           go_to(reg("continue")),
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
   
   Definitions are handled in a similar way:
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_111_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 "ev-definition",
           assign("unev", op("definition-variable"), reg("exp")),
           save("unev"),                   // save variable for later
@@ -125,8 +126,7 @@
           perform(op("define-variable"), reg("unev"), reg("val"), reg("env")),
           assign("val", const("ok")),
           go_to(reg("continue")),
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       
@@ -136,12 +136,11 @@
   
   
   
-  Extend the evaluator to handle derived expressions such as {\lstinline[mathescape=true]$cond$},
-  {\lstinline[mathescape=true]$let$}, and so on (section~\ref{sec:representing-expressions}).
+  Extend the evaluator to handle derived expressions such as <kbd>cond</kbd>,
+  <kbd>let</kbd>, and so on (section \ref{sec:representing-expressions}).
   You may <QUOTE>cheat</QUOTE> and assume that the syntax
-  transformers such as {\lstinline[mathescape=true]$cond->if$} are available as machine
-  operations.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-      
+  transformers such as <kbd>cond->if</kbd> are available as machine
+  operations.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
   
       
 \end{Exercise}
@@ -152,10 +151,10 @@
 \begin{Exercise}
 
   
-  Implement {\lstinline[mathescape=true]$cond$} as a new basic special form without
-  reducing it to {\lstinline[mathescape=true]$if$}.  You will have to construct a loop that tests
-  the predicates of successive {\lstinline[mathescape=true]$cond$} clauses until you find one
-  that is true, and then use {\lstinline[mathescape=true]$ev-sequence$} to evaluate the actions
+  Implement <kbd>cond</kbd> as a new basic special form without
+  reducing it to <kbd>if</kbd>.  You will have to construct a loop that tests
+  the predicates of successive <kbd>cond</kbd> clauses until you find one
+  that is true, and then use <kbd>ev-sequence</kbd> to evaluate the actions
   of the clause.
   
       
@@ -169,7 +168,7 @@
   
   
   Modify the evaluator so that it uses normal-order evaluation,
-  based on the lazy evaluator of section~\ref{sec:lazy-evaluation}.
+  based on the lazy evaluator of section \ref{sec:lazy-evaluation}.
       
 \end{Exercise}
 
@@ -178,6 +177,13 @@
 <a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>This isn't really cheating.  In an actual
     implementation built from scratch, we would use our explicit-control
     evaluator to interpret a <SPLIT>JavaScript</SPLIT> program that performs source-level
-    transformations {\lstinline[mathescape=true]$$} in a syntax phase that runs before
+    transformations <kbd></kbd> in a syntax phase that runs before
     execution.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section4/subsection2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section4/subsection4.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+5.4.3  Conditionals, Assignments, and Definitions</div>	<div class='next-page'></div></div>

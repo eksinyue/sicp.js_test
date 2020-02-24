@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>2.1.4 
-        Extended Exercise: Interval Arithmetic
-      </a>
+		<a name='top' class='permalink'>2.1.4  Extended Exercise: Interval Arithmetic</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -44,8 +51,8 @@
         guaranteed by the manufacturer of the resistor.  For example, if you
         buy a resistor labeled <QUOTE>6.8 ohms with 10% tolerance</QUOTE> you can only
         be sure that the resistor has a resistance between $6.8-0.68=6.12$ and
-        $6.8+0.68=7.48$ ohms.  Thus, if you have a 6.8-ohm 10%~resistor in
-        parallel with a 4.7-ohm 5%~resistor, the resistance of the
+        $6.8+0.68=7.48$ ohms.  Thus, if you have a 6.8-ohm 10% resistor in
+        parallel with a 4.7-ohm 5% resistor, the resistance of the
         combination can range from about 2.58 ohms (if the two resistors are
         at the lower bounds) to about 2.97 ohms (if the two resistors are at
         the upper bounds).
@@ -68,7 +75,7 @@
         She also presumes that, given the endpoints of an interval, she can
         construct the interval using the data constructor 
         
-        {\lstinline[mathescape=true]$make_interval$}.
+        <kbd>make_interval</kbd>.
         Alyssa first writes a
         function
         for adding two intervals.  She
@@ -76,7 +83,7 @@
         lower bounds and the maximum value it could be is the sum of the two
         upper bounds:
 
-        
+        <div class='snippet' id='javascript_27_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function add_interval(x, y) {
@@ -86,16 +93,17 @@ function add_interval(x, y) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCaoPozFApgJwDdkAbACgA8AaRATwEpEBvAKEXcX1yhHyQFtkAa1xYcBYuRJwA7gQwAjOOFSVGAakTS5+RcrCqGVNh1Nnz5kAAcr8pSrWJN127vsGyDegG4WAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9GYqYBOAbqgDYAUAHgDSICeAlIgN6IBQiXihmUIhJAAdUMQtTpMA3BwC+7UJFgJEZOAHci2AEZxwAEwoxmbTt179BiABaZUh41PbzF0eEhBChW3QaMmObh4+ASQoUUpHZwVwNxUhQjwoXHwiUkiTMy4LUMQAIgBtfK4AakQAZyhEsABzGGB6CjVNQh09MAdGZjKsoKC8xDoBssrquoaKT29W3w7-buKAXTynF1jlJHt9FIIScgkGTKCcqzQsHbT95p92wyoF65nbiiYaXr6Pz+4pm797xDKPyefiYjFW7HYCSSFz2lC2MPSFDOOCSl0oAEY6AAmRh0d5fAkfZEI-YAZjoAFYumCgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
         Alyssa also works out the product of two intervals by finding the
         minimum and the maximum of the products of the bounds and using them
-        as the bounds of the resulting interval.  ({\lstinline[mathescape=true]$math_min$} and {\lstinline[mathescape=true]$math_max$} are
+        as the bounds of the resulting interval.  (<kbd>math_min</kbd> and <kbd>math_max</kbd> are
         
         
         
@@ -103,7 +111,7 @@ function add_interval(x, y) {
         primitives that find the minimum or maximum of any number of
         arguments.)
 
-        
+        <div class='snippet' id='javascript_27_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function mul_interval(x, y) {
@@ -115,13 +123,14 @@ function mul_interval(x, y) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWxAGwPozFApgJwDcBDNACgA8AaRATwEpEBvAKEXcQgQGcpEAHAIyIAvIjRwA7gQwAjOOAAmlRgCpxUmfKVkGAbjYcuYXgIBMojdPxyFYZRTWIQ-flrvL9h9sdP8AzJYubjba9iqI6hLWtjpeHJw8fPwALEGu7jqOkc4ZoR669AYJ+LhQIPhIyMQA1rhYOAQk5NVQABYYyNhkQjT8Zn3+fSn0VN4JE5NTrR3VFD2CfQMCQwIjRSwAvkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9GYqYBOAbqgDYAUAHgDSICeAlIgN6IBQiXihmUIhJAAdUMQtTpMA3BwC+7UJFgJEZOAHci2AEZxwAEwoxmbTt179BiABaZUh41PbzF0eEhBChW3QaMmObh4+ASQoUUpHZwVwNxUhQjwoXHwiUkiTMy4LUMQAIgBtfK4AakQAZyhEsABzGGB6CjVNQh09MAdGZjKsoKC8xDoBssrquoaKT29W3w7-buKAXTynF1jlJGQQMhSCEnIJBkygiARKxCEARkQAXlUNH3bDKmYAKnuWtr9pXtOwc6EACZbh9Hn4Xoh3lMwXMficzlALgBmEHQmZPahvUHo76MJzw-6IoQAFlRXhhzyxaK+sLxvRyVjQWF2aQOaCg1mwyDwFCudCB-KR-OJjBovT6Esl3HZnLQVF5l35gMFwq6q3Y7ASSRZ+0oWx2SVZeowOENuooisQgNFgSldvtTNNqXNQsQAFYunigA}{\usebox\lstbox}!*/
                          math_max(p1, p2, p3, p4));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
@@ -131,7 +140,7 @@ function mul_interval(x, y) {
         the reciprocal of the upper bound and the reciprocal of the lower bound, in
         that order.
 
-        
+        <div class='snippet' id='javascript_27_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function div_interval(x,y) {
@@ -141,9 +150,10 @@ function div_interval(x,y) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAExgNwPozFApgJzQEMAbACgA8AaATwEpEBvAKETcX1yhHyQFsQJLDgLFy1RHyIBrXMLyFSZAIyIA9IhAAHLQQwAjOOGRl6VVu0tXrN2zdUaScAO57Dx03S8BuZgF8gA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWxAGwPozFApgJwDcBDNACgA8AaRATwEpEBvAKEXcQgQGcpEAHAIyIAvIjRwA7gQwAjOOAAmlRgCpxUmfKVkGAbjYcuYXgIBMojdPxyFYZRTWIQ-flrvL9h9sdP8AzJYubjba9iqI6hLWtjpeHJw8fPwALEGu7jqOkc4ZoR669AYJ+LhQIPhIyMQA1rhYOAQk5NVQABYYyNhkQjT8Zn3+fSn0VN4JE5NTrR3VFD2CfQMCQwIjRSwAviygkLAIKLX12HhEpJQ0DMyI46XllQLEMPgXdEU327vQ8EjRmeEwRhMG4lMoVJBtXDEZSAgyfcDfA7Bf4woEgjh3cGIKBPciwrY7BH7JD8fAnBqnZpkQHMW5gh4AIgA2ogGewANSIXhksAAcxgwFoZD++R0gMYnPGUzZNDZnO52H5grIyNFAPoEtZiAAugy4YS9j9EIoYIQKU1ztQrqxQfcquhzWdyNRDnVHVThAB6XIhWLhBhjKZB4MhqZeqwowoa-UsUnkk4W8gms0Jp1kapu1MemhmUbo0MFjgZ46NNOrACsGqKQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       
@@ -158,15 +168,13 @@ function div_interval(x,y) {
 
         
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_27_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_interval(x, y) {
     return pair(x, y); 
 }
 // lower_bound ...
 // upper_bound ...
-\end{JavaScript}
-
+</pre></div></div>
 
         
 
@@ -176,9 +184,9 @@ function make_interval(x, y) {
 
         Define selectors 
         
-        {\lstinline[mathescape=true]$upper_bound$} and 
+        <kbd>upper_bound</kbd> and 
         
-        {\lstinline[mathescape=true]$lower_bound$} to complete
+        <kbd>lower_bound</kbd> to complete
         the implementation.
         
 
@@ -187,8 +195,7 @@ function make_interval(x, y) {
 
 \begin{Answer}[ref={ex:alyssa-interval-start}]
 
-   
-\begin{JavaScript}
+   <div class='snippet' id='javascript_27_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_interval(x, y) {
     return pair;
 }
@@ -198,8 +205,7 @@ function lower_bound(x) {
 function upper_bound(x) { 
     return tail(x); 
 }
-\end{JavaScript}
-
+</pre></div></div>
  
 \end{Answer}
 
@@ -207,20 +213,20 @@ function upper_bound(x) {
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled18}
+\label{ex:unlabeled20}
  
         Using reasoning analogous to Alyssa's, describe how the difference
         of two intervals may be computed.  Define a corresponding subtraction
         function, called 
         
-        {\lstinline[mathescape=true]$sub_interval$}.
+        <kbd>sub_interval</kbd>.
 
-      \hfill{\hyperref[ex:unlabeled18-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled20-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled18}]
+\begin{Answer}[ref={ex:unlabeled20}]
 
-    
+    <div class='snippet' id='javascript_27_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sub_interval(x, y) {
@@ -230,9 +236,10 @@ function sub_interval(x, y) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxAIwPozFApgJwDcBDAGwAoAPAGkQE8BKRAbwChEPF9coR8kAtsQDWuLDgIkKpOAHcCGNHHAATKkwC0iEAAcdCpavKNq7TuYuXLu-fkXKwaypsQz5dw4+MMGAblYAvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9GYqYBOAbqgDYAUAHgDSICeAlIgN6IBQiXihmUIhJAAdUMQtTpMA3BwC+7UJFgJEZOAHci2AEZxwAEwoxmbTt179BiABaZUh41PbzF0eEhBChW3QaMmObh4+ASQoUUpHZwVwNxUhQjwoXHwiUkiTMy4LUMQAIgBtfK4AakQAZyhEsABzGGB6CjVNQh09MAdGZjKsoKC8xDoBssrquoaKT29W3w7-buKAXTynF1jlJHKQbRSCEnIJBkygnKs0LF20g+afdsMqZgBaRCnbvyYaXr7vn+5Xmbu1Ceqg0bzmTEYq3Y7ASSUu+0oWx2SSulHOOBRCIoAAY6ABGRh0L6-EnfdHw9I4gB0ADZ8VSAKxdSFAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
     
   
 \end{Answer}
@@ -241,7 +248,7 @@ function sub_interval(x, y) {
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled19}
+\label{ex:unlabeled21}
  
         
         The <EM>width</EM> of an interval is half of the difference between its
@@ -257,10 +264,10 @@ function sub_interval(x, y) {
 
 	
         
-      \hfill{\hyperref[ex:unlabeled19-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled21-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled19}]
+\begin{Answer}[ref={ex:unlabeled21}]
 
 	  Let us denote the width of interval $i$
 	  with $W(i)$, and its lower and upper
@@ -310,7 +317,7 @@ function sub_interval(x, y) {
 
 \begin{Answer}[ref={ex:div-interval}]
 
-
+<div class='snippet' id='javascript_27_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function div_interval(x, y) {
@@ -322,9 +329,10 @@ function div_interval(x, y) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAExgNwPozFApgJzQEMAbACgA8AaRATwEpEBvAKEXcX1yhHyRLgB3AhgBGccMjINEAHgC8iAAyIAZKsQgADlpHjJ0xgD5FSthwsB+RAXxx8ZAEQARdDADO8JLfuIy2PEJSRHctIjB3ZXpHenMLdgAuRABbEBIsHAJicmoUogBrXAzA7LIARkQAek0dPQkwKQYqOPjWtvaO9grqgWF8MXrG+mGAbhYAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9GYqYBOAbqgDYAUAHgDSICeAlIgN4BQinihmUIhSAA6oYhANxsAvm1CRYCRGTgB3ItgBGccABNqzFog5cefAYgAWmVLqqMxh6bOjwkIQYLWade1oa7defiQoEUpbeykZcGcFZBAyXHwiUjC6JlYjTggEAGcoREEARkQAXkUVTy0wG2YAKnLVQg0q3SYJf2ywPIKAJlKGyu9bRHq3Dyavaoo2zMRO7sEAZn6xwanh+qVG5u8Zjtz8wQAWFfc1mpHEVYmW6btZkyCUDBw8AhJyCjQoc2xkPAoRTogh6wMWwKOjBos38sLhcO+vzQVEBhWBoIK4IKkPujmi8iEhDeiXeKQoMH0D0CZgARABtRA0zgAakQeSJYAA5jBgPQKFtzuTGMxWTC4Uy6EzWey8NzeRRrjsphSRYzEABdGkSPFyFyIbQwYgk5KfWgMSn+R5mAU3XbMAA8ZQADIgAGSuq5nW1TdIAPmdYs4AH5EERCHBCBQaQARQ0wHJ6sMRxDkpIfMhs4RdRBOxg0xiBxAALhQ8WN6eodDQWHLZOKAHpPeMla0oYX4R3Ox2GwNva3hdq2GxBByoLXPgajW8TZRq6803W6D0oX4u2uES9x5QsQBWYV2IA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 \end{Answer}
 
@@ -334,7 +342,7 @@ function div_interval(x, y) {
 
         
         In passing, Ben also cryptically comments: <QUOTE>By testing the signs of
-          the endpoints of the intervals, it is possible to break {\lstinline[mathescape=true]$mul_interval$} into nine cases, only one of which requires more than
+          the endpoints of the intervals, it is possible to break <kbd>mul_interval</kbd> into nine cases, only one of which requires more than
           two multiplications.</QUOTE>  Rewrite this
         function
         using Ben's
@@ -347,7 +355,7 @@ function div_interval(x, y) {
 
 \begin{Answer}[ref={ex:alyssa-interval-end}]
 
-
+<div class='snippet' id='javascript_27_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function p(n) {
@@ -359,7 +367,7 @@ function n(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwBRgJSIN4ChEGIBOAplCEUkgHwC8iADANy4C+uoksCiY6WeQsTIUkAQhT8W7TtHhIoACxIB9KETggARgBtVAWwCGAaxJFUADx0AaRBZC2AnjcSOQA-IQgIAzlBQAjIj0VogAVK46LELeYH4oAEzBdjrhriDRXr7+yADMyfZpzpkEsfHIACwFIEUZngRGpiowYFBmAG6GOqhGSir6LajIAbbICaO5oxUY1vVC8wu9iv2GFkMjiRNTGBjSHOByPPogOs2tHV2WTgIEc2X+ofQ6cADuZipammAAJpa7d9k7DV6CBkMh3p9wL8LP8YoDnMlnm8iB8vr9HLCsnF-G5kqDwSjIT9UBiSsJyJRJFYsAAyGlU9yIOmSZy0+loNxYRBzBaIAD8iEaqhabSInW6oQizlshSl7h5CwAXFSdGyGWq+KymeySYzubyFgKhWdReLLDUpS5ZekMArecq0NTternZrVa7dVy7QajSZhecxZdrdKUrVbQb7bxLO7mY7GbGSTGdZzbhGfYK-SaLhLUnKZRabd6I8q+E6E-YNYnKyn9Wn08aRdnzUUrbnIuG65HS0moxXnRyexy9UXO76mo3AznavmWx3O13o5W+8y3Wqh1752mx-7TUG224ZfvVSP5yXFx7l-TVx6ayfN9us5Pm3nQ5a55uDWeyzrL1GtQnbw-UdECUVR1E0XQDD9cwrHzJwXE5O8P2VMwNHMAAiJEzEQHRDCIABzbClEMJB8TMdD-lYIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9GYqYBOAbqgDYAUAHgDSICeAlIgN4BQinihmUIhSAA6oYhANxsAvm1CRYCRGTgB3ItgBGccABNqzFog5cefAYgAWmVLqqMxh6bOjwkIQYLWade1oa7defiQoEUpbeykZcGcFQUI8KFx8IlJKGH0jThMgxAAiAG08zgBqRABnKHiwAHMYYHoKJVVCDS0wXXTmUsz-f1zEOn7Siqra+oo3DxavdopOxFL+gF1ciUdo+SEKMAz-bLMkAD4AXkQABjWouRdEMG3d40CzAEJEQXvLp03EKEtsSq06jIODQWEI1DIdCoIDo9EhDBAD04EAQFTeAEZEKcqGREAAqBhkCT+FFgNGCABMWMQOPxCOJXFJ5IAzNToXS4QzkaioG8ACxskAckBclAYHAJFLkChoX7YZB4CiCdF0Smq5mqvmMGg9Xp6riy8zy1BUJUqt4U9Waxh2SJfG7IEBkJIEEjS2gMfScHpM3m005NTxtGy2kk8mlC06TIPecI+8Nw6mB6bBihMUW+hHU6Mp7zpnr7LY45gAMhLb2oiMQZYrcNL5fe9Crfn1XAA-GKsC6pWFcQS4VChf3Ebq9QAuCvF6sNyv125pshzxvN0f6jugiXJN1hIeEwfCxir8eTxfTydVmt3Otnq8r1trzub12pSsc+G04eH+-Hu5TmvvaElwXICm2YFtv16ddxW7bcIWFfdPyPe8J1-U9-1nG9gMw0DvQg1soK7SVYPZft3z7Qkvzwn8ITnX8Lxna90Jw8CqMgx8YJfD8EQQiikLwlCaMwwDsLQhi71Y-D2KIzjyKbKFZMXPiqIEv9yzo2isMvNNxIkySNw491dzkmkFMo3T9RU0Tzw0xixLApTdI7X4cABEAgRBcVwRxQdYXhUCHIkiciEIOBwVyZNFFQQhqiIH5zFQVx3CIXJbWkNg4gSAzKEdZ1pOlfS8soc0KW1FjzP1AqtxfDVEAAVhtOwgA}{\usebox\lstbox}!*/
 function the_trouble_maker(xl, xu, yl, yu) {
     const p1 = xl * yl;
     const p2 = xl * yu;
@@ -395,8 +403,9 @@ function mul_interval(x, y) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 	
 \end{Answer}
 
@@ -412,7 +421,7 @@ function mul_interval(x, y) {
         returns to her desk and fixes this problem by supplying an alternate
         constructor and alternate selectors:
 
-        
+        <div class='snippet' id='javascript_27_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_center_width(c, w) {
@@ -424,14 +433,15 @@ function center(i) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9CmxSYBO2A7jACZQAWAFBADSKkCUiA3gFCI+JGZQQRJGizYYBYgDdUAG3qIAtMyYREAamYsA3JwC+nUJFgJEeSUVow2XXnwFCktWXFLFsAIzjgKVtppAAB0D3Lx8-NgB6RAAmXQMjaHgkcio6aw5uXn5BYURaIJCSMLBfDOUXN2LvUojEaLj9IA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9GYqYBOAbqgDYAUAHgDSICeAlIgN6IBQiXihmUIhJAAdUMQtTpMA3BwC+7UJFgJEZOAHci2AEZxwAEwoxmbTt179BiABaZUh41PbzF0eEhBChW3QaMmObh4+ASQoUUpHZwVwNxU0LGwITHwtdRh9KGsKCDp1EzMuC1CUDBw8AhJyHMQAWkR1OghEAGoGxicXWOUkZNTxY1ZC4MskCjVNQh09MAdmNs9vKd9Z-2YAekQAJk6YpXcGjKz-IaDiqwpFnxm5utUNa79jDe3d9ggEAGcoFHpcftIZEQAF5Sok+pVsOlMtkAIx0AAMADoAKwddjQ47IP4VIiAjpAA}{\usebox\lstbox}!*/
 function width(i) {
     return (upper_bound(i) - lower_bound(i)) / 2;
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
 
@@ -449,10 +459,10 @@ function width(i) {
 
         Define a constructor 
         
-        {\lstinline[mathescape=true]$make_center_percent$} that takes a center and
+        <kbd>make_center_percent</kbd> that takes a center and
         a percentage tolerance and produces the desired interval.  You must
-        also define a selector {\lstinline[mathescape=true]$percent$} that produces the
-        percentage tolerance for a given interval.  The {\lstinline[mathescape=true]$center$} selector
+        also define a selector <kbd>percent</kbd> that produces the
+        percentage tolerance for a given interval.  The <kbd>center</kbd> selector
         is the same as the one shown above.
         
  
@@ -461,7 +471,7 @@ function width(i) {
 
 \begin{Answer}[ref={ex:make-center-percent}]
 
-    
+    <div class='snippet' id='javascript_27_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_center_percent(center, percent) {
@@ -473,12 +483,13 @@ function percent(i) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9CmxSYBO2ADsXgQBSWFEA0i5RtAlIgN4BQiviECAM5REAdxgATKAAtEAXn746iAFSIqzWogD0iAIwAGA6wDcPPkUxQQRJGiy4lxbOKnSaThmMkzTXAL5coJCwCEwUSlQw7Nx8iJbWtuquMlHsurTEaexqhgZm-kA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9CmxSYBO2A7jACZQAWAFBADSKkCUiA3gFCI+JGZQQRJGizYYBYgDdUAG3qIAtMyYREAamYsA3JwC+nUJFgJEeSUVow2XXnwFCktWXFLFsAIzjgKVtppAAB0D3Lx8-NgB6RAAmXQMjaHgkcio6aw5uXn5BYURaIJCSMLBfDOUXN2LvUojEaLj9Q3Ak01EcCUIiGXkADyYATxtELJ4cx0RA1BhLfsQh7RGElpMkStCasuHR+1ykakxULfjm42TEQo3wjPYRu3G8qGn5axPE1ZQMHHMu7CKf+j4LpMf5Amw7CAIADOUGYlBoiAAvGYgcREAAqfKggj1RAARgADASdDsHiIvrhUSRUjRARYmDTqCTlmdTNioH5MvcHHlaIzOdEfsQ6pjCQT4kA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
   
 \end{Answer}
@@ -556,7 +567,7 @@ is (roughly) the sum of the tolerances of its arguments.
         He has written the following two programs, each of which computes the
         parallel-resistors formula differently:
 
-        
+        <div class='snippet' id='javascript_27_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function par1(r1, r2) {
@@ -568,15 +579,16 @@ function par2(r1, r2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwIYCcCMAKLAaRdAJgEpEBvAKERsIFMoR0kATGANwH0Ywo712qADbYAtiCHde-QSPyFSearRWq1q1CxZS+A4bkwFiJEgG5KAX0qhIsBCgxEDR0hWU0ICAM5RECOogAvIiiqADWdDoy+oaImGbu9IzMiGxcPLqy2P5K6nn5mtoZ0SJpUXoiOYTxufl19WplxRXZYHQuJgkWQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwCaoPozFApgJwDdkAbACgA8AaRATwEpEBvAKEXcX1yhHyQFtkAa1xYcBYuRJwA7gQwAjOOFSVGAakTS5+RcrCqGVNh1Nnz5kAAcr8pSrWJN127vsGyDegG4WAXxZQSFgEREERMTwiUkoaBmZEE3YuHj5EK2QYfFi6H0SAoOh4JG07fVUYRiZE0xTeJAALXDQySt8C8CLQlzKHSoSkzm56xChM8jb-QM6QpCt8bChIiRj+1lrhtIAiAG1ELfZNAGcoBbAAcxhgWjJSt3LW+g0aiw4DmgPj0+xL67Ie+59J5OfaIAC6W3a02CxTCIBIy2i5GouWYgwgCBO6QAjIgALxaWS9DwURgAKkJOj0DgYvlMGLAWKsACZ8ZTiapSYgKQDqR5aejMVB0gBmNm89yc8nswH8nyCxnCqwAFnFNg5jh56tlhnlG1SAmEokWK3IgigDQw-GwZCs2JoLIdIodyvoxleHte5stggotvt6WZTpdTyhhVmiFQMEIiMksXi6w4dTS-HhsZiKPCxvESLIuIA9IgJQ8jINPeWK6YCzK+brQ1Nw7CMvhsWQWzR8MyqoNk0gozGTbnUwjB3H25wu+7K560JhRzFx536x0YaFm8y2wGl2j6ULEAhcGys+nyAHsXqk5s+9GT2QD1Pp69Z7f+7f75xzw-H9+OK-5+R3yXZcWBYKMjisEhkBueZFlvZtWwyLIyGVKgADY3XSTJsgAdioAAOJ561AmBwMg6CziWf9bWQTtqKQlD0IdLCyFwgjCO8IA}{\usebox\lstbox}!*/
     return div_interval(one,
                         add_interval(div_interval(one, r1),
                                      div_interval(one, r2)));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
         
 
         Lem complains that Alyssa's program gives different answers for
@@ -593,7 +605,7 @@ function par2(r1, r2) {
         and use them in computing the expressions $A/A$ and $A/B$.  You will
         get the most insight by using intervals whose width is a small
         percentage of the center value. Examine the results of the computation
-        in center-percent form (see exercise~\ref{ex:make-center-percent}).
+        in center-percent form (see exercise \ref{ex:make-center-percent}).
         
 
 	
@@ -617,7 +629,7 @@ function par2(r1, r2) {
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled20}
+\label{ex:unlabeled22}
 
         Eva Lu Ator, another user, has also noticed the different intervals
         computed by different but algebraically equivalent expressions. She
@@ -631,15 +643,15 @@ function par2(r1, r2) {
 	  
 	
 	that represents an uncertain number is repeated.
-        Thus, she says, {\lstinline[mathescape=true]$par2$} is a <QUOTE>better</QUOTE> program for parallel
-        resistances than {\lstinline[mathescape=true]$par1$}.  Is she right?  Why?
+        Thus, she says, <kbd>par2</kbd> is a <QUOTE>better</QUOTE> program for parallel
+        resistances than <kbd>par1</kbd>.  Is she right?  Why?
 
 	
 	
-      \hfill{\hyperref[ex:unlabeled20-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled22-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled20}]
+\begin{Answer}[ref={ex:unlabeled22}]
 
 	  She is right. The so-called <EM>dependency problem</EM> in interval arithmetic
 	  arises when the same input values (or intermediate terms) appear in a 
@@ -653,7 +665,7 @@ function par2(r1, r2) {
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled21}
+\label{ex:unlabeled23}
 
         Explain, in general, why equivalent algebraic expressions may lead to
         different answers.  Can you devise an interval-arithmetic package that
@@ -662,10 +674,10 @@ function par2(r1, r2) {
 
 	
 	
-      \hfill{\hyperref[ex:unlabeled21-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled23-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled21}]
+\begin{Answer}[ref={ex:unlabeled23}]
 
 	  The dependency problem in interval arithmetic is solved using linear
 	  and polynomial appoximations, leading to affine arithmetic and
@@ -676,4 +688,11 @@ function par2(r1, r2) {
       
       
     
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section1/subsection3.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section2/section2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+2.1.4  Extended Exercise: Interval Arithmetic</div>	<div class='next-page'></div></div>

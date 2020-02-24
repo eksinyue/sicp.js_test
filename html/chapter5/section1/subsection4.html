@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>5.1.4 
-  Using a Stack to Implement Recursion
-      </a>
+		<a name='top' class='permalink'>5.1.4  Using a Stack to Implement Recursion</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -35,9 +42,9 @@
   Implementing recursive processes, however, requires an additional
   mechanism.  Consider the following recursive method for computing
   factorials, which we first examined in
-  section~\ref{sec:recursion-and-iteration}:
+  section \ref{sec:recursion-and-iteration}:
 
-  
+  <div class='snippet' id='javascript_98_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function factorial(n) {
@@ -48,9 +55,10 @@ function factorial(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSxDAUyhAySQF5XEBGRCqnqgfg7dePAFyIkAKmRoombPiQBaDoQDcZAL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSxDAUyhAySQF5XEBGRCqnqgfg7dePAFyIkAKmRoombPiQBaDoQDcZAL5A}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
@@ -60,7 +68,7 @@ function factorial(n) {
   $(n-1)!$.  Our GCD machine, modeled on the
   function
 
-  
+  <div class='snippet' id='javascript_98_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function gcd(a, b) {
@@ -69,14 +77,15 @@ function gcd(a, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAcwgEwBQEMA0iBGAlIgN4BQiliATgKZQjVL6IC87iADIgPyJaIAXCnQZ8eAQFIChANxkAvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAcwgEwBQEMA0iBGAlIgN4BQiliATgKZQjVL6IC87iADIgPyJaIAXCnQZ8eAQFIChANxkAvkA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
   similarly had to compute another GCD.  But there is an important
-  difference between the {\lstinline[mathescape=true]$gcd$}
+  difference between the <kbd>gcd</kbd>
   function, which reduces the original
-  computation to a new GCD computation, and {\lstinline[mathescape=true]$factorial$}, which
+  computation to a new GCD computation, and <kbd>factorial</kbd>, which
   requires computing another factorial as a subproblem.  In GCD, the
   answer to the new GCD computation is the answer to the original
   problem.  To compute the next GCD, we simply place the new arguments
@@ -92,9 +101,9 @@ function gcd(a, b) {
   new factorial subproblem is not the answer to the original problem.
   The value obtained for $(n-1)!$ must be multiplied by $n$ to get the
   final answer.  If we try to imitate the GCD design, and solve
-  the factorial subproblem by decrementing the {\lstinline[mathescape=true]$n$} register and
+  the factorial subproblem by decrementing the <kbd>n</kbd> register and
   rerunning the factorial machine, we will no longer have available the
-  old value of {\lstinline[mathescape=true]$n$} by which to multiply the result.  We thus need a
+  old value of <kbd>n</kbd> by which to multiply the result.  We thus need a
   second factorial machine to work on the subproblem.  This second
   factorial computation itself has a factorial subproblem, which
   requires a third factorial machine, and so on.  Since each factorial
@@ -121,14 +130,14 @@ function gcd(a, b) {
       <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
   In the subproblem, the contents of the registers will be different
-  than they were in the main problem. (In this case the {\lstinline[mathescape=true]$n$} register
+  than they were in the main problem. (In this case the <kbd>n</kbd> register
   is decremented.)  In order to be able to continue the suspended
   computation, the machine must save the contents of any registers that
   will be needed after the subproblem is solved so that these can be
   restored to continue the suspended computation.  In the case of
-  factorial, we will save the old value of {\lstinline[mathescape=true]$n$}, to be restored when
-  we are finished computing the factorial of the decremented {\lstinline[mathescape=true]$n$}
-  register.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+  factorial, we will save the old value of <kbd>n</kbd>, to be restored when
+  we are finished computing the factorial of the decremented <kbd>n</kbd>
+  register.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
       </p></div>
 
       <div class='permalink'>
@@ -145,10 +154,10 @@ function gcd(a, b) {
   
   
   
-  on the stack using a {\lstinline[mathescape=true]$save$} instruction and restored from the
-  stack using a {\lstinline[mathescape=true]$restore$} instruction.  After a sequence of values
-  has been {\lstinline[mathescape=true]$save$}d on the stack, a sequence of {\lstinline[mathescape=true]$restore$}s will
-  retrieve these values in reverse order.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+  on the stack using a <kbd>save</kbd> instruction and restored from the
+  stack using a <kbd>restore</kbd> instruction.  After a sequence of values
+  has been <kbd>save</kbd>d on the stack, a sequence of <kbd>restore</kbd>s will
+  retrieve these values in reverse order.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
       </p></div>
 
       <div class='permalink'>
@@ -163,37 +172,37 @@ function gcd(a, b) {
   must suspend its computation of $n!$, solve the $(n-1)!$ subproblem,
   then continue its computation of $n!$.  This view of the factorial
   computation suggests the use of the subroutine mechanism described in
-  section~\ref{sec:subroutines}, which has the controller use a
+  section \ref{sec:subroutines}, which has the controller use a
   
-  {\lstinline[mathescape=true]$continue$} register to transfer to the part of the sequence that
+  <kbd>continue</kbd> register to transfer to the part of the sequence that
   solves a subproblem and then continue where it left off on the main
   problem.  We can thus make a factorial subroutine that returns to the
-  entry point stored in the {\lstinline[mathescape=true]$continue$} register.  Around each subroutine
+  entry point stored in the <kbd>continue</kbd> register.  Around each subroutine
   call, register, since each <QUOTE>level</QUOTE> of the factorial computation will use
-  the same {\lstinline[mathescape=true]$continue$} register.  That is, the factorial subroutine
-  must put a new value in {\lstinline[mathescape=true]$continue$} when it calls itself for a
+  the same <kbd>continue</kbd> register.  That is, the factorial subroutine
+  must put a new value in <kbd>continue</kbd> when it calls itself for a
   subproblem, but it will need the old value in order to return to the
   place that called it to solve a subproblem.
       </p></div>
 
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
-  Figure~\ref{fig:fact-machine} shows the data paths and controller for
-  a machine that implements the recursive {\lstinline[mathescape=true]$factorial$}
+  Figure \ref{fig:fact-machine} shows the data paths and controller for
+  a machine that implements the recursive <kbd>factorial</kbd>
   function.
-  The machine has a stack and three registers, called {\lstinline[mathescape=true]$n$}, {\lstinline[mathescape=true]$val$}, and {\lstinline[mathescape=true]$continue$}.  To simplify the data-path diagram, we have
+  The machine has a stack and three registers, called <kbd>n</kbd>, <kbd>val</kbd>, and <kbd>continue</kbd>.  To simplify the data-path diagram, we have
   not named the register-assignment buttons, only the stack-operation
-  buttons ({\lstinline[mathescape=true]$sc$} and {\lstinline[mathescape=true]$sn$} to save registers, {\lstinline[mathescape=true]$rc$} and {\lstinline[mathescape=true]$rn$} to restore registers).  To operate the machine, we put in register
-  {\lstinline[mathescape=true]$n$} the number whose factorial we wish to compute and start the
-  machine.  When the machine reaches {\lstinline[mathescape=true]$fact-done$}, the computation is
-  finished and the answer will be found in the {\lstinline[mathescape=true]$val$} register.  In
-  the controller sequence, {\lstinline[mathescape=true]$n$} and {\lstinline[mathescape=true]$continue$} are saved before
+  buttons (<kbd>sc</kbd> and <kbd>sn</kbd> to save registers, <kbd>rc</kbd> and <kbd>rn</kbd> to restore registers).  To operate the machine, we put in register
+  <kbd>n</kbd> the number whose factorial we wish to compute and start the
+  machine.  When the machine reaches <kbd>fact-done</kbd>, the computation is
+  finished and the answer will be found in the <kbd>val</kbd> register.  In
+  the controller sequence, <kbd>n</kbd> and <kbd>continue</kbd> are saved before
   each recursive call and restored upon return from the call.  Returning
   from a call is accomplished by branching to the location stored in
-  {\lstinline[mathescape=true]$continue$}.  {\lstinline[mathescape=true]$Continue$} is initialized when the machine starts
-  so that the last return will go to {\lstinline[mathescape=true]$fact-done$}.  The {\lstinline[mathescape=true]$val$}
+  <kbd>continue</kbd>.  <kbd>Continue</kbd> is initialized when the machine starts
+  so that the last return will go to <kbd>fact-done</kbd>.  The <kbd>val</kbd>
   register, which holds the result of the factorial computation, is not
-  saved before the recursive call, because the old contents of {\lstinline[mathescape=true]$val$}
+  saved before the recursive call, because the old contents of <kbd>val</kbd>
   is not useful after the subroutine returns.  Only the new value, which
   is the value produced by the subcomputation, is needed.
   
@@ -202,7 +211,7 @@ function gcd(a, b) {
       <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
   Although in principle the factorial computation requires an infinite
-  machine, the machine in Figure~\ref{fig:fact-machine} is actually
+  machine, the machine in Figure \ref{fig:fact-machine} is actually
   finite except for the stack, which is potentially unbounded.  Any
   particular physical implementation of a stack, however, will be of
   finite size, and this will limit the depth of recursive calls that can
@@ -212,25 +221,26 @@ function gcd(a, b) {
   subproblem is encountered, we save on the stack the registers whose
   current values will be required after the subproblem is solved, solve
   the recursive subproblem, then restore the saved registers and
-  continue execution on the main problem.  The {\lstinline[mathescape=true]$continue$} register
+  continue execution on the main problem.  The <kbd>continue</kbd> register
   must always be saved.  Whether there are other registers that need to
   be saved depends on the particular machine, since not all recursive
   computations need the original values of registers that are modified
-  during solution of the subproblem (see exercise~\ref{ex:design-reg-machines}).
+  during solution of the subproblem (see exercise \ref{ex:design-reg-machines}).
       </p></div>
 
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   A double recursion
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
   
   Let us examine a more complex recursive process, the tree-recursive
   computation of the Fibonacci numbers, which we introduced in
-  section~\ref{sec:tree-recursion}:
-  
+  section \ref{sec:tree-recursion}:
+  <div class='snippet' id='javascript_98_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function fib(n) {
@@ -242,29 +252,30 @@ function fib(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMGAjAFGAlIg3gKESMQCcBTKEEpJAXnsQAZDjXiB+Jlt1gLkToMAjNx6tOIsT34oMSALSIhOANTI0mRIoBMWANz4AvkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABMGAjAFGAlIg3gKESMQCcBTKEEpJAXnsQAZDjXiB+Jlt1gLkToMAjNx6tOIsT34oMSALSIhOANTI0mRIoBMWANz4AvkA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
   Just as with factorial, we can implement the recursive Fibonacci
-  computation as a register machine with registers {\lstinline[mathescape=true]$n$}, {\lstinline[mathescape=true]$val$},
-  and {\lstinline[mathescape=true]$continue$}.  The machine is more complex than the one for
+  computation as a register machine with registers <kbd>n</kbd>, <kbd>val</kbd>,
+  and <kbd>continue</kbd>.  The machine is more complex than the one for
   factorial, because there are two places in the controller sequence
   where we need to perform recursive calls—once to compute Fib$(n-1)$
   and once to compute Fib$(n-2)$.  To set up for each of these calls, we
-  save the registers whose values will be needed later, set the {\lstinline[mathescape=true]$n$}
+  save the registers whose values will be needed later, set the <kbd>n</kbd>
   register to the number whose Fib we need to compute recursively ($n-1$
-  or $n-2$), and assign to {\lstinline[mathescape=true]$continue$} the entry point in the main sequence
-  to which to return ({\lstinline[mathescape=true]$afterfib-n-1$} or {\lstinline[mathescape=true]$afterfib-n-2$},
-  respectively).  We then go to {\lstinline[mathescape=true]$fib-loop$}.  When we return from the
-  recursive call, the answer is in {\lstinline[mathescape=true]$val$}.
-  Figure~\ref{fig:fib-machine} shows the controller sequence for this
+  or $n-2$), and assign to <kbd>continue</kbd> the entry point in the main sequence
+  to which to return (<kbd>afterfib-n-1</kbd> or <kbd>afterfib-n-2</kbd>,
+  respectively).  We then go to <kbd>fib-loop</kbd>.  When we return from the
+  recursive call, the answer is in <kbd>val</kbd>.
+  Figure \ref{fig:fib-machine} shows the controller sequence for this
   machine.
 
   <SPLIT>
@@ -275,7 +286,7 @@ function fib(n) {
 \centering
 
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/Fig5.11b.std}.svg}}
-
+<pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 controller(
@@ -287,7 +298,7 @@ controller(
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgLgTiA2sFMoAoBQACT7YEsDOEyWWGxmAhnnjgOZjIBEokOYArggwDTbkBGCWIwBm5YBAC0AE3CcAlHJ4B6JejwII6NgAd0w1uVjooGtlDDpyUqSaqkyDUeImwQIbd3vEICAslx+7owAvAyKxgg0jGBhPMwE5JDIAIwKil5YfFCJwAAW-vyCjHyUCBLApWHpZJgq6ADKGlq6wiBQ6BC5CBHAZtQAbt0V8Oh8AJ5q5P2sNOgMMZZgUnPMEKwcDAB0GbWqjZo6K+Br7JxqIB255JqdQyAAttpsENc44OgA7jgjq+sIO+g6tc5uRhD4oBInBAGJ8uhZbmo2FkQM9WN0TBAzGA8NsapNBoxfqdYgC8FMENESXjKNQ6JSeAFCEEGBJYhEovM2fFCKkFFwATTaPQmMc-txeAIhAxQeDIWJoXyATQQAB9CAgAqSkTylxuDyKvHSsFIOXiTx42zqkyU6o1S1tCkiljE21kQV0hj9QzixnIZkAKjZJg5MXCwcYXtgVVdxDqnu96DAIA+6FW5FYeETyDAElSAEIlar1chw06Ths+XjAaoMViOhdhogoACGCV1OVKvzqVQhRHvXFwAkkryeDU6m2hqUAFzoSPoYLoZKFtUa0tEivhPF1WvmeupwxNltQ6SyKoAbiAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=MYewdgLgTiA2sFMoAoBQACT7YEsDOEyWWGxmAhnnjgOZjIBEokOYArggwDTbkBGCWIwBm5YBAC0AE3CcAlHJ4B6JejwII6NgAd0w1uVjooGtlDDpyUqSaqkyDUeImwQIbd3vEICAslx+7owAvAyKxgg0jGBhPMwE5JDIAIwKil5YfFCJwAAW-vyCjHyUCBLApWHpZJgq6ADKGlq6wiBQ6BC5CBHAZtQAbt0V8Oh8AJ5q5P2sNOgMMZZgUnPMEKwcDAB0GbWqjZo6K+Br7JxqIB255JqdQyAAttpsENc44OgA7jgjq+sIO+g6tc5uRhD4oBInBAGJ8uhZbmo2FkQM9WN0TBAzGA8NsapNBoxfqdYgC8FMENESXjKNQ6JSeAFCEEGBJYhEovM2fFCKkFFwATTaPQmMc-txeAIhAxQeDIWJoXyATQQAB9CAgAqSkTylxuDyKvHSsFIOXiTx42zqkyU6o1S1tCkiljE21kQV0hj9QzixnIZkAKjZJg5MXCwcYXtgVVdxDqnu96DAIA+6FW5FYeETyDAElSAEIlar1chw06Ths+XjAaoMViOhdhogoACGCV1OVKvzqVQhRHvXFwAkkryeDU6m2hqUAFzoSPoYLoZKFtUa0tEivhPF1WvmeupwxNltQ6SyKoAbiAA}{\usebox\lstbox}!*/
        // Set up for the recursive call by saving "n" and "continue".
        // Set up "continue" so that the computation will continue
        // at "after-fact" when the subroutine returns.
@@ -308,6 +319,7 @@ controller(
        "fact-done"));
 
 \end{JavaScriptClickable}
+</pre>
 
 \caption{A recursive factorial machine.}
 \label{fig:fact-machine}
@@ -319,8 +331,7 @@ controller(
   
 \begin{figure}[H]
 \centering
-
-\begin{JavaScript}
+<pre class='prettyprint no-eval'>
 controller(
     list(      
        assign("continue", label("fib-done")),
@@ -354,8 +365,7 @@ controller(
        assign("val", reg("n")),    // base case: Fib(n) = n
        go_to(reg("continue")),
        "fib-done"));
-\end{JavaScript}
-\caption{Controller for a machine to compute Fibonacci numbers.}
+</pre>\caption{Controller for a machine to compute Fibonacci numbers.}
 \label{fig:fib-machine}
 \end{figure}
 
@@ -373,7 +383,7 @@ controller(
 \item{
       Recursive exponentiation:
 
-      
+      <div class='snippet' id='javascript_98_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function expt(b, n) {
@@ -384,14 +394,15 @@ function expt(b, n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwB4AcoAoBGAaRMASkQG8AoRKxAJ2ShBqSQF43EAGS6ngfkQCM3HlQBciHIgBUKDNnyFEAWkFEA3OQC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAUwB4AcoAoBGAaRMASkQG8AoRKxAJ2ShBqSQF43EAGS6ngfkQCM3HlQBciHIgBUKDNnyFEAWkFEA3OQC+QA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
     }
 \item{
       Iterative exponentiation:
 
-      
+      <div class='snippet' id='javascript_98_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function expt(b, n) {	  
@@ -403,13 +414,14 @@ function expt(b, n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwB4AcoAoBGAaRMASkQG8BIRRAKCqtElgRQygH0YpkAnLCOcF24F03OABMQ0EqVp153ZFBDck-QT0QBeHYgAMc+UcQB+RKIlSoh43QBcLTByF8BYIYgC0iAIwEciABU5mKS0gDcNgC+NorKqo7snDxYYAQ+RJFRQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAUwB4AcoAoBGAaRMASkQG8BIRRAKCqtElgRQygH0YpkAnLCOcF24F03OABMQ0EqVp153ZFBDck-QT0QBeHYgAMc+UcQB+RKIlSoh43QBcLTByF8BYIYgC0iAIwEciABU5mKS0gDcNgC+NorKqo7snDxYYAQ+RJFRQA}{\usebox\lstbox}!*/
     return expt_iter(n, 1);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     }
 \end{enumerate}
 
@@ -435,7 +447,7 @@ function expt(b, n) {
 \begin{Exercise}
 
   Ben Bitdiddle observes that the Fibonacci machine's controller sequence
-  has an extra {\lstinline[mathescape=true]$save$} and an extra {\lstinline[mathescape=true]$restore$}, which can be
+  has an extra <kbd>save</kbd> and an extra <kbd>restore</kbd>, which can be
   removed to make a faster machine.  Where are these instructions?
       
 \end{Exercise}
@@ -445,12 +457,19 @@ function expt(b, n) {
       
 
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>One might argue that we don't need to save the old
-    {\lstinline[mathescape=true]$n$}; after we decrement it and solve the subproblem, we could
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>One might argue that we don't need to save the old
+    <kbd>n</kbd>; after we decrement it and solve the subproblem, we could
     simply increment it to recover the old value.  Although this strategy
     works for factorial, it cannot work in general, since the old value of
-    a register cannot always be computed from the new one.</FOOTNOTE></div><hr><div class='footnote'>
+    a register cannot always be computed from the new one.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>In
-    section~\ref{sec:storage-allocation} we will see how to implement a
+    section \ref{sec:storage-allocation} we will see how to implement a
     stack in terms of more primitive operations.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section1/subsection3.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section1/subsection5.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+5.1.4  Using a Stack to Implement Recursion</div>	<div class='next-page'></div></div>

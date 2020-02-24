@@ -1,27 +1,28 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>1.1.8 
-          
-            
-            
-              Functions
-            
-          
-          as Black-Box Abstractions
-        </a>
+		<a name='top' class='permalink'>1.1.8  Functions as Black-Box Abstractions</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
         <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
-              The function {\lstinline[mathescape=true]$sqrt$} is our first example of a process defined by a set of
+              The function <kbd>sqrt</kbd> is our first example of a process defined by a set of
               mutually 
               
 	      defined functions.
               Notice that the 
-              declaration of {\lstinline[mathescape=true]$sqrt_iter$} is
+              declaration of <kbd>sqrt_iter</kbd> is
               
               <EM>recursive</EM>; that is, the
           
@@ -43,9 +44,9 @@
               <QUOTE>circular</QUOTE> definition could make sense at all, much less specify a
               well-defined process to be carried out by a computer.  This will be
               addressed more carefully in
-              section~\ref{sec:procedures-and-processes}.  But first let's consider
+              section \ref{sec:procedures-and-processes}.  But first let's consider
               some other important points illustrated by the
-              {\lstinline[mathescape=true]$sqrt$} example.
+              <kbd>sqrt</kbd> example.
         </p></div>
 
         <div class='permalink'>
@@ -56,7 +57,7 @@
               enough, how to improve a guess, and so on.  Each of these tasks is
               accomplished by a separate
           function.
-              The entire {\lstinline[mathescape=true]$sqrt$} program
+              The entire <kbd>sqrt</kbd> program
               can be viewed as a cluster of
           
             
@@ -65,7 +66,7 @@
             
           
           (shown in
-          Figure~\ref{fig:sqrt-decomposition}) that mirrors the
+          Figure \ref{fig:sqrt-decomposition}) that mirrors the
           decomposition of the problem into subproblems.
         </p></div>
 
@@ -78,7 +79,7 @@
 
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch1-Z-G-6}.svg}}
 \caption{Functional decomposition of the
-                {\lstinline[mathescape=true]$sqrt$} program.
+                <kbd>sqrt</kbd> program.
               }
 \label{fig:sqrt-decomposition}
 \end{figure}
@@ -109,11 +110,11 @@
           
             
             
-              {\lstinline[mathescape=true]$good_enough$} function
+              <kbd>good_enough</kbd> function
             
           
-          in terms of {\lstinline[mathescape=true]$square$}, we are able to
-          regard the {\lstinline[mathescape=true]$square$}
+          in terms of <kbd>square</kbd>, we are able to
+          regard the <kbd>square</kbd>
           
             
             
@@ -137,11 +138,11 @@
           
             
             
-              {\lstinline[mathescape=true]$good_enough$} function
+              <kbd>good_enough</kbd> function
             
           
           is
-          concerned, {\lstinline[mathescape=true]$square$} is not quite a
+          concerned, <kbd>square</kbd> is not quite a
           
             
             
@@ -183,7 +184,8 @@
           squaring a number should be indistinguishable.
           Each takes a numerical
           argument and produces the square of that number as the
-          value.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+          value.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
+          <div class='snippet' id='javascript_9_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function square(x) {
@@ -192,10 +194,11 @@ function square(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3PLU1x4AjABYi7IA}{\usebox\lstbox}
+</pre>
 
-
-          
+</div></div>
+          <div class='snippet' id='javascript_9_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function square(x) {
@@ -207,37 +210,10 @@ function double(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQFsMoALAfRwIAc8ATOCABGAG3zM27EXADmhIgoDc5AL7lQkWAkQDhY+WUrVa9JAUQBqRAWUqgA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQFsMoALAfRwIAc8ATOCABGAG3zM27EXADmhIgoDc5AL7lQkWAkQDhY+WUrVa9JAUQBqRAWVryaTLjwBGACxFFQA}{\usebox\lstbox}
+</pre>
 
-
-        
-          
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function square(x) {
-    return x * x;
-}
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgXyA}{\usebox\lstbox}
-
-
-          
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function square(x) {
-    return math_exp(double(math_log(x)));
-}
-function double(x) {
-    return x + x;
-}
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQFsMoALAfRwIAc8ATOCABGAG3zM27EXADmhIgoDc5AL7lQkWAkQDhY+WUrVa9JAUQBqRAWUqgA}{\usebox\lstbox}
-
-
+</div></div>
         </p></div>
 
         <div class='permalink'>
@@ -277,9 +253,10 @@ function double(x) {
           
         </p></div>
 
-        \subsubsection{
+        <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
           Local names
-        
+        </h2></div>
         
 
         <div class='permalink'>
@@ -307,7 +284,7 @@ function double(x) {
           
           should
               not be distinguishable:
-              
+              <div class='snippet' id='javascript_9_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function square(x) {
@@ -316,10 +293,11 @@ function square(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3PLU1x4AjABYi7IA}{\usebox\lstbox}
+</pre>
 
-
-              
+</div></div>
+              <div class='snippet' id='javascript_9_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function square(y) {
@@ -328,9 +306,10 @@ function square(y) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKATwEpEBvAKESsVyhCyQMQCpECBucgXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKATwEpEBvAKESsVyhCyQMQCpECBucgX3PLU1x4AjABYi7IA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
           </p></div>
 
         <div class='permalink'>
@@ -362,12 +341,12 @@ function square(y) {
             
           
           For example, we used
-          {\lstinline[mathescape=true]$square$} 
+          <kbd>square</kbd> 
           
             
             
 	      in the declaration of	      
-              {\lstinline[mathescape=true]$good_enough$}
+              <kbd>good_enough</kbd>
             
           
           in our square-root
@@ -378,7 +357,7 @@ function square(y) {
             
           :
 
-          
+          <div class='snippet' id='javascript_9_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function good_enough(guess, x) {
@@ -387,9 +366,10 @@ function good_enough(guess, x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAcznAJgfQKZjiZACwApkRsBnCgGkQA8BKRAbwChEPEAnbKELpAEMARhWIUAjiEE9S5KkwC09JgB5EABgB0GjQEYA3KwC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwEYGcAUAPAlIgbwChFTEAnAUyhHKW0QD4BeRABkQH5EGAuRALTYA3EQC+RUJFgJE6AI4hkVHPmJkK1WvUQAqHqIlTo8JAHM4cACYB9SmDggzAC0xmQldOgA0PNSTIqGjoUDEwFJRV3T3R8AT9EAB52ADo2NgBGQyIiC2s7BydXDJSAFgzfACZcYSA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
         </p></div>
 
         <div class='permalink'>
@@ -398,7 +378,7 @@ function good_enough(guess, x) {
           
             
             
-              {\lstinline[mathescape=true]$good_enough$}
+              <kbd>good_enough</kbd>
             
           
           is to determine if
@@ -407,27 +387,27 @@ function good_enough(guess, x) {
           
             
             
-              {\lstinline[mathescape=true]$good_enough$}
+              <kbd>good_enough</kbd>
             
           
           used
-          the name {\lstinline[mathescape=true]$guess$} to refer to the
-          first argument and {\lstinline[mathescape=true]$x$} to
+          the name <kbd>guess</kbd> to refer to the
+          first argument and <kbd>x</kbd> to
           refer to the second argument.  The argument of
-          {\lstinline[mathescape=true]$square$} is
-          {\lstinline[mathescape=true]$guess$}.  If the author of
-          {\lstinline[mathescape=true]$square$} used
-          {\lstinline[mathescape=true]$x$} (as above)
+          <kbd>square</kbd> is
+          <kbd>guess</kbd>.  If the author of
+          <kbd>square</kbd> used
+          <kbd>x</kbd> (as above)
           to refer to that argument, we see that the
-          {\lstinline[mathescape=true]$x$} in
+          <kbd>x</kbd> in
           
             
             
-              {\lstinline[mathescape=true]$good_enough$}
+              <kbd>good_enough</kbd>
             
           
-          must be a different {\lstinline[mathescape=true]$x$} than the one
-          in  {\lstinline[mathescape=true]$square$}.
+          must be a different <kbd>x</kbd> than the one
+          in  <kbd>square</kbd>.
           Running the
           
             
@@ -435,19 +415,19 @@ function good_enough(guess, x) {
               function
             
           
-    {\lstinline[mathescape=true]$square$} must
+    <kbd>square</kbd> must
           not affect the value
-          of {\lstinline[mathescape=true]$x$} that is used by
-          {\lstinline[mathescape=true]$good_enough$},
+          of <kbd>x</kbd> that is used by
+          <kbd>good_enough</kbd>,
           because that value of
-          {\lstinline[mathescape=true]$x$} may be needed by
+          <kbd>x</kbd> may be needed by
           
             
             
-              {\lstinline[mathescape=true]$good_enough$}
+              <kbd>good_enough</kbd>
             
           
-          after {\lstinline[mathescape=true]$square$} is done
+          after <kbd>square</kbd> is done
           computing.
         </p></div>
 
@@ -455,21 +435,21 @@ function good_enough(guess, x) {
 <a name='p9' class='permalink'></a><p>
               If the parameters were not local to the bodies of their respective
               functions,
-              then the parameter {\lstinline[mathescape=true]$x$} in
-              {\lstinline[mathescape=true]$square$} could be
-              confused with the parameter {\lstinline[mathescape=true]$x$} in
-              {\lstinline[mathescape=true]$good_enough$},
+              then the parameter <kbd>x</kbd> in
+              <kbd>square</kbd> could be
+              confused with the parameter <kbd>x</kbd> in
+              <kbd>good_enough</kbd>,
               and the
               behavior of
               
                 
                 
-                  {\lstinline[mathescape=true]$good_enough$}
+                  <kbd>good_enough</kbd>
                 
               
               would depend upon which version of
-              {\lstinline[mathescape=true]$square$} we used.  Thus,
-              {\lstinline[mathescape=true]$square$} would not be the black box
+              <kbd>square</kbd> we used.  Thus,
+              <kbd>square</kbd> would not be the black box
               we desired.
         </p></div>
 
@@ -523,44 +503,7 @@ function good_enough(guess, x) {
                 
               
               is consistently renamed throughout the
-	      declaration.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>name
-		is not bound, we say that it is
-              
-              <EM>free</EM>.  The
-              set of expressions for which a binding
-	      declares
-	      a name
-	      is called the
-              
-              <EM>scope</EM> of that name.
-              In a
-              
-                
-                
-                  function declaration, the bound names
-                
-              
-              declared as the
-              
-              
-              
-              
-                
-                
-                  parameters of the
-                  function
-                
-              
-              have the body of
-              the
-              
-                
-                
-                  function
-                
-              
-              as their scope.
-        
+	      declaration.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
 		If a name
 		is not bound, we say that it is
               
@@ -605,43 +548,44 @@ function good_enough(guess, x) {
           
             <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
-              In the declaration of {\lstinline[mathescape=true]$good_enough$} above,
-              {\lstinline[mathescape=true]$guess$} and {\lstinline[mathescape=true]$x$} are
-              bound names but {\lstinline[mathescape=true]$abs$}, and
-              {\lstinline[mathescape=true]$square$} are free.
-              The meaning of {\lstinline[mathescape=true]$good_enough$}
+              In the declaration of <kbd>good_enough</kbd> above,
+              <kbd>guess</kbd> and <kbd>x</kbd> are
+              bound names but <kbd>abs</kbd>, and
+              <kbd>square</kbd> are free.
+              The meaning of <kbd>good_enough</kbd>
               should be independent of the names we
-              choose for {\lstinline[mathescape=true]$guess$} and {\lstinline[mathescape=true]$x$}
+              choose for <kbd>guess</kbd> and <kbd>x</kbd>
               so long as they are distinct and
-              different from {\lstinline[mathescape=true]$abs$}, and
-              {\lstinline[mathescape=true]$square$}.  (If we renamed
-              {\lstinline[mathescape=true]$guess$} to
-              {\lstinline[mathescape=true]$abs$} we would have introduced a bug by
+              different from <kbd>abs</kbd>, and
+              <kbd>square</kbd>.  (If we renamed
+              <kbd>guess</kbd> to
+              <kbd>abs</kbd> we would have introduced a bug by
               
               
               
               <EM>capturing</EM>
-              the name {\lstinline[mathescape=true]$abs$}.
+              the name <kbd>abs</kbd>.
               It would have changed from free to bound.)  The
-              meaning of {\lstinline[mathescape=true]$good_enough$} is
+              meaning of <kbd>good_enough</kbd> is
               not independent of the choice of its
               free names, however.  It surely depends upon the fact (external to
-              this declaration) that the symbol {\lstinline[mathescape=true]$abs$} names a
+              this declaration) that the symbol <kbd>abs</kbd> names a
               function for computing the absolute value of a number.
-              The JavaScript function {\lstinline[mathescape=true]$good_enough$} will
+              The JavaScript function <kbd>good_enough</kbd> will
               compute a different mathematical function if we substitute
-              {\lstinline[mathescape=true]$math_cos$} (JavaScript's cosine function)
-              for {\lstinline[mathescape=true]$abs$} in its declaration.
+              <kbd>math_cos</kbd> (JavaScript's cosine function)
+              for <kbd>abs</kbd> in its declaration.
               
             </p></div>
           
         </SPLIT>
 
-        \subsubsection{
+        <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
           Internal
 	  declarations
 	  and block structure
-        
+        </h2></div>
         
 
         <div class='permalink'>
@@ -666,7 +610,7 @@ function good_enough(guess, x) {
                   functions
                 
               :
-              
+              <div class='snippet' id='javascript_9_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sqrt(x) {
@@ -678,7 +622,7 @@ function sqrt_iter(guess, x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzF0BTKEdJNTAfRikvSwEYA6ABgBpE+ANzEAvsVCRYCFBijNW7AOYhKyZAPxFS5KjTqIlcOABNGlMHBBKAFlhVqNgvDvJuyAfkOr1r9+QAuWSYWNiwYAFsAB3Q4ADdKex8nfE08EXFJaHgkI1NzS2s7B3U07Tc9WiQAQwAjZCw0EGqqJMcCAFpnRAAeRB5eHg4MiXBsmUiY+MSSlIISCuoqxGqE9GqlGeTNRAB6b3aMoA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwEYGcAUAPAlIgbwChFTEAnAUyhHKW0QD4BeRABkQH5EGAuRALTYA3EQC+RUJFgJE6AI4hkVHPmJkK1WvUQAqHqIlTo8JMgBulcsgDmlHABoAnmpJkqNOohyIA1IhdEAHpEACZDSXATWQVyKFVCN1IPbTl5OIB9GCgrTABGADo2Bx5cCOMZJFioLJzyTBsQSnR0ErxEjRSvGzg4ABMMyjA4EBsACwamlrbcJI0Nbkbm9Dn50n5q2tyYAFsAB3I4S0nlmZnyqMrEHv7B4dGJpenSjvctLzQsBSUVJ-R8AQvAA87CKbDyF2kpkQuwOR3sfxmr2S7zMlmsdhOzwYIT+ZXERCI1UwAFYykA}{\usebox\lstbox}!*/
            : sqrt_iter(improve(guess, x), x);
 }
 function good_enough(guess, x) {
@@ -689,8 +633,9 @@ function improve(guess, x) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
         </p></div>
 
         <div class='permalink'>
@@ -703,17 +648,17 @@ function improve(guess, x) {
                 
               
               that is
-              important to users of {\lstinline[mathescape=true]$sqrt$} is
-              {\lstinline[mathescape=true]$sqrt$}.  The other
+              important to users of <kbd>sqrt</kbd> is
+              <kbd>sqrt</kbd>.  The other
               
                 
                 
                   functions
                 
               
-              ({\lstinline[mathescape=true]$sqrt_iter$},
-                  {\lstinline[mathescape=true]$good_enough$},
-              and {\lstinline[mathescape=true]$improve$})
+              (<kbd>sqrt_iter</kbd>,
+                  <kbd>good_enough</kbd>,
+              and <kbd>improve</kbd>)
               only clutter up their minds.  They may not 
               
                 
@@ -726,13 +671,13 @@ function improve(guess, x) {
               
                 
                 
-                  {\lstinline[mathescape=true]$good_enough$}
+                  <kbd>good_enough</kbd>
                 
               
               as part of
               another program to work together
               with the square-root program,
-              because {\lstinline[mathescape=true]$sqrt$} needs it.  The
+              because <kbd>sqrt</kbd> needs it.  The
               problem is especially severe in the construction of large systems by
               many separate programmers.  For example, in the construction of a
               large library of numerical
@@ -749,19 +694,19 @@ function improve(guess, x) {
               
                 
                 
-                  {\lstinline[mathescape=true]$good_enough$}
+                  <kbd>good_enough</kbd>
                 
               
               and
-              {\lstinline[mathescape=true]$improve$} as auxiliary
+              <kbd>improve</kbd> as auxiliary
               functions.
               We would like to localize the
               subfunctions,
               hiding them inside
-              {\lstinline[mathescape=true]$sqrt$} so that
-              {\lstinline[mathescape=true]$sqrt$} could coexist with other
+              <kbd>sqrt</kbd> so that
+              <kbd>sqrt</kbd> could coexist with other
               successive approximations, each having its own private
-              {\lstinline[mathescape=true]$good_enough$} function.
+              <kbd>good_enough</kbd> function.
               To make this possible, we allow a
               
                 
@@ -776,7 +721,7 @@ function improve(guess, x) {
               function.
               For example, in the square-root problem we can write
 
-              
+              <div class='snippet' id='javascript_9_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sqrt(x) {
@@ -788,7 +733,7 @@ function sqrt(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzFRJYFEBzOOAEwH0BTMOEWgCy1pFbJkAGkT4ipclPSsoIdEgCGAI2RY0IRTL4ChBALRiCAHkQAGAHRmzARgDcksgF9HFcNHhIYAWwAO6OAA3Vh1BESMJKWlZeSVg9EVaEP4w0RxEAHo6XWQ8BykXKUoPGjRMZhgoVnRQoTSCEijyGTkFOgYWdk4eWvDxVybBsgB+bLCBoaaALhQMKAqqmp9-IOSc+vr88kKyFtjZ8srqrBsrTeInIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwEYGcAUAPAlIgbwChFTEAnAUyhHKW0QD4BeRABkQH5EGAuRALTYA3EQC+RUJFgJE6AI4hkVHPmJkK1WvUQAqHqIlTo8JMgBulcsgDmlHABoAnmpJkqNOohyIA1IhdEAHpEACZDSXATWQVyKFVCN1JjGSQbODgAEwB9SjA4EBsAC0wbEEp0dAceVw0ND20UDEwFJRUyivR8ARrEAB52ADo2NgBGUQ0JDRTTRBgAWwAHcjhLUvLK6rxEuvctLwsrW3sOzZ5gxFOuibIpshmY+TjsmCgrdc6t2t3NTzSMnJ5ArFD5nbZJH6QriXDboCFQ3b8WJQF5vciYBbLVYnWFfL43Uh3X6NZGo96jYb48REIjIzAAVlwwiAA}{\usebox\lstbox}!*/
     }
     function sqrt_iter(guess, x) {
         return good_enough(guess, x) 
@@ -799,8 +744,9 @@ function sqrt(x) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
         </p></div>
 
         <div class='permalink'>
@@ -813,32 +759,32 @@ function sqrt(x) {
               addition to internalizing the 
               
 	      declarations of the auxiliary functions,
-              we can simplify them.  Since {\lstinline[mathescape=true]$x$}
+              we can simplify them.  Since <kbd>x</kbd>
 	      is bound in the
 	      
 	      declaration
 	      of
-              {\lstinline[mathescape=true]$sqrt$}, the
+              <kbd>sqrt</kbd>, the
               
                 
                 
                   functions
                 
               
-              {\lstinline[mathescape=true]$good_enough$},
-              {\lstinline[mathescape=true]$improve$}, and
+              <kbd>good_enough</kbd>,
+              <kbd>improve</kbd>, and
               
 		
-		{\lstinline[mathescape=true]$sqrt_iter$},
+		<kbd>sqrt_iter</kbd>,
 		which are defined internally to
 	      
-              {\lstinline[mathescape=true]$sqrt$}, are in the
-              scope of {\lstinline[mathescape=true]$x$}.
+              <kbd>sqrt</kbd>, are in the
+              scope of <kbd>x</kbd>.
 	      Thus, it is not necessary to pass
-              {\lstinline[mathescape=true]$x$} explicitly to
+              <kbd>x</kbd> explicitly to
               each of these
               functions.
-              Instead, we allow {\lstinline[mathescape=true]$x$} to be a
+              Instead, we allow <kbd>x</kbd> to be a
               
               
               free
@@ -847,7 +793,7 @@ function sqrt(x) {
 	      
 	      declarations,
 	      as shown below.
-	      Then {\lstinline[mathescape=true]$x$}
+	      Then <kbd>x</kbd>
               gets its value from the argument with which the enclosing
               
                 
@@ -855,11 +801,13 @@ function sqrt(x) {
                   function
                 
               
-              {\lstinline[mathescape=true]$sqrt$} is called.  This discipline is called
+              <kbd>sqrt</kbd> is called.  This discipline is called
               
               <EM>lexical
-                scoping</EM>.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+                scoping</EM>.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
+
               
+              <div class='snippet' id='javascript_9_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sqrt(x) {
@@ -871,7 +819,7 @@ function sqrt(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzFRJYFEBzOOAEwH0BTMOEWgCy1pFbJkBEuTGJ0rKCHRIAhgCNkWNCDmS+AoQQC0ifIgA8iAAwA6EyYCMAblLkAvvbKVo8JDAC2AB3RwAbqyagsJEzuKS0rKIcoHocrRB-CEANPqIAPR0WsJ2Yk5irtRIaJjMMFCs6MHaYeLkkTJI9ExsHFy8ydrh9eIA-NkhPb3kAFwoGFDlldVevgFJOXh4eWQFZI3RpVMVVVhWFivEDkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwEYGcAUAPAlIgbwChFTEAnAUyhHKW0QD4BeRABkQH5EGAuRALTYA3EQC+RUJFgJE6AI4hkVHPmJkK1WvUQAqHqIlTo8JMgBulcsgDmlHABoAnmpJkqNOohyIA1IhdEAHpEACZDSXATWQVyKFVCN1JjGSQbODgAEwB9SjA4EBsAC0wbEEp0dFcNDQ9tFAxMBSUVMoqqwR58AB52ADo2NgBGUQ0JDRTTRBgAWwAHcjhLUvLK6prSOq8LK1t7NsqHHmDEA6rRsnGySZj5OOyYKCsV9vWNrbSMnLyC4pe1pIbDbcM6AoEafixKAPJ7kTCzBZLfarKq4C6IK6aTxIKEw55DAZo8REIhQzAAVjRQA}{\usebox\lstbox}!*/
     }
     function sqrt_iter(guess) {
         return good_enough(guess)
@@ -882,53 +830,19 @@ function sqrt(x) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-        
-
-              
-              
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function sqrt(x) {
-    function good_enough(guess) {
-        return abs(square(guess) - x) < 0.001;
-    }
-    function improve(guess) {
-        return average(guess, x / guess);
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzFRJYFEBzOOAEwH0BTMOEWgCy1pFbJkBEuTGJ0rKCHRIAhgCNkWNCDmS+AoQQC0ifIgA8iAAwA6EyYCMAblLkAvvbKVo8JDAC2AB3RwAbqyagsJEzuKS0rKIcoHocrRB-CEANPqIAPR0WsJ2Yk5irtRIaJjMMFCs6MHaYeLkkTJI9ExsHFy8ydrh9eIA-NkhPb3kAFwoGFDlldVevgFJOXh4eWQFZI3RpVMVVVhWFivEDkA}{\usebox\lstbox}!*/
-    }
-    function sqrt_iter(guess) {
-        return good_enough(guess)
-               ? guess
-               : sqrt_iter(improve(guess));
-   }
-   return sqrt_iter(1.0);
-}
-
-\end{JavaScriptClickable}
-
-
+</div></div>
         </p></div>
 
         <div class='permalink'>
 <a name='p15' class='permalink'></a><p>
               We will use block structure extensively to help us break
-              up large programs into tractable pieces.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
-              Algol~60.  It appears in most advanced
-              programming languages and is an important tool for helping to organize
-              the construction of large programs. 
-              
-              
-              
-        
+              up large programs into tractable pieces.<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
               The idea of block structure originated with the
               programming language
               
-              Algol~60.  It appears in most advanced
+              Algol 60.  It appears in most advanced
               programming languages and is an important tool for helping to organize
               the construction of large programs. 
               
@@ -937,7 +851,7 @@ function sqrt(x) {
         </p></div>
 
       <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>It is not even clear which of these
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>It is not even clear which of these
             
               
               
@@ -949,12 +863,12 @@ function sqrt(x) {
             available.  There are machines for which the <QUOTE>obvious</QUOTE>
             implementation is the less efficient one.  Consider a machine that has
             extensive tables of logarithms and antilogarithms stored in a very
-            efficient manner.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>The
+            efficient manner.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>The
                 concept of consistent renaming is actually subtle and difficult to
                 define formally.  Famous logicians have made embarrassing errors
-                here.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Lexical
+                here.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Lexical
                 scoping dictates that free
                 
                 
@@ -981,9 +895,9 @@ function sqrt(x) {
                 
               
               We will see how
-              this works in detail in chapter~3 when we
+              this works in detail in chapter 3 when we
 	      study environments and the
-              detailed behavior of the interpreter.</FOOTNOTE></div><hr><div class='footnote'>
+              detailed behavior of the interpreter.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Embedded 
               
                 
@@ -1000,4 +914,11 @@ function sqrt(x) {
 		declaration
 	      
               and use.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section1/subsection7.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section2/section2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+1.1.8  Functions as Black-Box Abstractions</div>	<div class='next-page'></div></div>

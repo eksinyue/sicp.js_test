@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>1.1.6 
-          Conditional Expressions and Predicates
-        </a>
+		<a name='top' class='permalink'>1.1.6  Conditional Expressions and Predicates</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
         
 
         <SPLIT>
@@ -34,7 +41,7 @@
               
               This construct is a <EM>case analysis</EM> and can be expressed
 	      in JavaScript using a <EM>conditional expression</EM> as follows:
-              
+              <div class='snippet' id='javascript_7_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function abs(x) {
@@ -43,16 +50,17 @@ function abs(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwEYGcAUAPAlIgbwChFTEAnAUyhHKW0QD4BeRABkQH5EGAuRALTYA3EQC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQwEYGcAUAPAlIgbwChFTEAnAUyhHKW0QD4BeRABkQH5EGAuRALTYA3EQC+RImiwCArLmFA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
               
               The general form of a conditional expression is
-              
-\begin{JavaScript}
+              <kbd class='snippet'>
+                
 $\textit{predicate}$ ? $\textit{consequent-expression}$ : $\textit{alternative-expression}$
-\end{JavaScript}
-
+                
+              </kbd>
               Conditional expressions begin with a
               
               $\textit{predicate}$—that is, 
@@ -60,18 +68,10 @@ $\textit{predicate}$ ? $\textit{consequent-expression}$ : $\textit{alternative-e
 	      <EM>true</EM> or
 	      <EM>false</EM>,
 	      two distinguished
-	      <EM>boolean</EM> values in JavaScript.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>{\lstinline[mathescape=true]$true$} and
-	      {\lstinline[mathescape=true]$false$} trivially evaluate
-	      to the boolean values <EM>true</EM> and <EM>false</EM>, respectively.
-	      The $\textit{predicate}$ 
-              is followed by a question mark, the 
-              $\textit{consequent-expression}$, 
-              a colon, and finally the
-              $\textit{alternative-expression}$.
-            
+	      <EM>boolean</EM> values in JavaScript.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
 	      Note that the primitive boolean expressions
-	      {\lstinline[mathescape=true]$true$} and
-	      {\lstinline[mathescape=true]$false$} trivially evaluate
+	      <kbd>true</kbd> and
+	      <kbd>false</kbd> trivially evaluate
 	      to the boolean values <EM>true</EM> and <EM>false</EM>, respectively.
 	      The $\textit{predicate}$ 
               is followed by a question mark, the 
@@ -79,17 +79,7 @@ $\textit{predicate}$ ? $\textit{consequent-expression}$ : $\textit{alternative-e
               a colon, and finally the
               $\textit{alternative-expression}$.
             </p></div>
-          <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>
-                
-                
-                
-                In JavaScript, other values are automatically converted into
-	      <EM>true</EM> and
-	      <EM>false</EM>
-                according to <EM>conversion rules</EM>, but we choose not to make
-		use of these conversion rules in this book.
-              </FOOTNOTE></div>
+          
       </SPLIT>
 
         <SPLIT>
@@ -122,14 +112,14 @@ $\textit{predicate}$ ? $\textit{consequent-expression}$ : $\textit{alternative-e
               The word <EM>predicate</EM> is used for functions that return
 	      <EM>true</EM> or <EM>false</EM>, as well as for expressions that
 	      evaluate to <EM>true</EM> or <EM>false</EM>.
-              The absolute-value function {\lstinline[mathescape=true]$abs$} 
+              The absolute-value function <kbd>abs</kbd> 
               makes use of the 
               
               
               
               
               primitive
-              predicate {\lstinline[mathescape=true]$>=$}.
+              predicate <kbd>>=</kbd>.
 	      This predicate takes two
               numbers as arguments and tests whether the first number is
               greater than or equal to the second number,
@@ -153,11 +143,11 @@ $\textit{predicate}$ ? $\textit{consequent-expression}$ : $\textit{alternative-e
 <a name='p4' class='permalink'></a><p>
               JavaScript
               provides a number of primitive predicates that work similar to
-              {\lstinline[mathescape=true]$>=$}, including
-              {\lstinline[mathescape=true]$>$}, 
-              {\lstinline[mathescape=true]$<$},
-              {\lstinline[mathescape=true]$<=$}, and
-              {\lstinline[mathescape=true]$===$}.
+              <kbd>>=</kbd>, including
+              <kbd>></kbd>, 
+              <kbd><</kbd>,
+              <kbd><=</kbd>, and
+              <kbd>===</kbd>.
               In addition to these primitive
               predicates, there are logical
               composition operations, which enable us to construct compound
@@ -166,7 +156,7 @@ $\textit{predicate}$ ? $\textit{consequent-expression}$ : $\textit{alternative-e
               <UL>
                 
                 
-                    <LI>$ \textit{expression}_1$ {\lstinline[mathescape=true]$&&$}
+                    <LI>$ \textit{expression}_1$ <kbd>&&</kbd>
 		    $\textit{expression}_2$
 
                   The interpreter
@@ -185,7 +175,7 @@ $\textit{predicate}$ ? $\textit{consequent-expression}$ : $\textit{alternative-e
                 <LI>
                   
                   $\textit{expression}_1$ 
-                  {\lstinline[mathescape=true]$||$} 
+                  <kbd>||</kbd> 
                   $\textit{expression}_2$
 
                   The interpreter evaluates 
@@ -200,7 +190,7 @@ $\textit{predicate}$ ? $\textit{consequent-expression}$ : $\textit{alternative-e
                 </LI>
                 
                 <LI>
-                  {\lstinline[mathescape=true]$!$} $\textit{expression}$
+                  <kbd>!</kbd> $\textit{expression}$
 
                   The value of the expression is <EM>true</EM>
                   when $\textit{expression}$
@@ -209,24 +199,24 @@ $\textit{predicate}$ ? $\textit{consequent-expression}$ : $\textit{alternative-e
                 </LI>
               </UL>
               
-              Notice that {\lstinline[mathescape=true]$&&$} and 
-              {\lstinline[mathescape=true]$||$} are not evaluated like
+              Notice that <kbd>&&</kbd> and 
+              <kbd>||</kbd> are not evaluated like
 	      arithmetic operators such as 
-              {\lstinline[mathescape=true]$+$}, because their right-hand
+              <kbd>+</kbd>, because their right-hand
               expression is not always evaluated. The operator
-              {\lstinline[mathescape=true]$!$}, on the other hand, 
+              <kbd>!</kbd>, on the other hand, 
               follows the evaluation rule of section
 	      \ref{sec:evaluating-combinations}. 
               It is a <EM>unary</EM> operator, which means that it takes only
 	      one argument, whereas the
               arithmetic operators encountered so far are <EM>binary</EM>, 
               taking two arguments. The operator
-              {\lstinline[mathescape=true]$!$} precedes its argument;
+              <kbd>!</kbd> precedes its argument;
 	      we call it a <EM>prefix operator</EM>.
 	      Another prefix operator is
 	      the unary <QUOTE>minus</QUOTE> operator, an example of
-	      which is the expression {\lstinline[mathescape=true]$-x$}
-	      of the function {\lstinline[mathescape=true]$abs$}
+	      which is the expression <kbd>-x</kbd>
+	      of the function <kbd>abs</kbd>
 	      in the beginning of this section.
             </p></div>
           
@@ -241,16 +231,14 @@ $\textit{predicate}$ ? $\textit{consequent-expression}$ : $\textit{alternative-e
               number $x$
               be in the range $5 < x < 10$
 	      may be expressed as
-              
-\begin{JavaScript}
+              <div class='snippet' id='javascript_7_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 x > 5 && x < 10
-\end{JavaScript}
-
+</pre></div></div>
               Note that the binary
-              operator {\lstinline[mathescape=true]$&&$}
+              operator <kbd>&&</kbd>
               has lower precedence than the comparison operators
-              {\lstinline[mathescape=true]$>$} and
-              {\lstinline[mathescape=true]$<$}.
+              <kbd>></kbd> and
+              <kbd><</kbd>.
             </p></div>
           
         </SPLIT>
@@ -261,7 +249,7 @@ x > 5 && x < 10
             <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
               
-              
+              <div class='snippet' id='javascript_7_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function not_equal(x, y) {
@@ -270,11 +258,12 @@ function not_equal(x, y) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABGOUD6BTAjiAhgGwAoAPAGkQE8BKRAbwChEnEAnDKEFpYxAPksQAfQYh4AeSgG56AXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABGOUD6BTAjiAhgGwAoAPAGkQE8BKRAbwChEnEAnDKEFpYxAPksQAfQYh4AeSgG56AX3r0U6bHiIB2cgBYqkoA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
               or alternatively as
-              
+              <div class='snippet' id='javascript_7_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function not_equal(x, y) {
@@ -283,16 +272,17 @@ function not_equal(x, y) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABGOUD6BTAjiAhgGwAoAPAGkQE8BKRAbwChEnEAnDKEFpAQhMQD4AvJUQAyUYmKIAPMOoBuegF8gA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABGOUD6BTAjiAhgGwAoAPAGkQE8BKRAbwChEnEAnDKEFpAQhMQD4AvJUQAyUYmKIAPMOoBuegF969FOmx4iAdnIAWKvKA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
               
 
 
-              Note that the operator {\lstinline[mathescape=true]$!==$} when applied 
+              Note that the operator <kbd>!==</kbd> when applied 
               to two numbers, behaves the same as 
-              {\lstinline[mathescape=true]$not_equal$}.
+              <kbd>not_equal</kbd>.
             </p></div>
           
         </SPLIT>
@@ -312,97 +302,106 @@ function not_equal(x, y) {
           
         </SPLIT>
 
-                  
+                  <div class='snippet' id='javascript_7_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 10;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IwBg3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=IwBg3EA}{\usebox\lstbox}
+</pre>
 
-
-                
+</div></div>
+                <div class='snippet' id='javascript_7_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 5 + 3 + 4;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=KwAg1CDM4gLA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=KwAg1CDM4gLA3EA}{\usebox\lstbox}
+</pre>
 
-
-                
+</div></div>
+                <div class='snippet' id='javascript_7_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 9 - 1;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=JwAgtCCMDcQ}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=JwAgtCCMDcQ}{\usebox\lstbox}
+</pre>
 
-
-                
+</div></div>
+                <div class='snippet' id='javascript_7_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 6 / 2;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GwAg9CBMDcQ}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GwAg9CBMDcQ}{\usebox\lstbox}
+</pre>
 
-
-                
+</div></div>
+                <div class='snippet' id='javascript_7_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 2 * 4 + (4 - 6);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EwAgVCAsINQgFNAtCAbASgNxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=EwAgVCAsINQgFNAtCAbASgNxA}{\usebox\lstbox}
+</pre>
 
-
-                
+</div></div>
+                <div class='snippet' id='javascript_7_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const a = 3;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAhjAvDAzAbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBAhjAvDAzAbiA}{\usebox\lstbox}
+</pre>
 
-
-                
+</div></div>
+                <div class='snippet' id='javascript_7_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const b = a + 1;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBARjAvDAhjA1DAjAbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBAhjAvDAzAbgFCkrARk+GAahgEY0g}{\usebox\lstbox}
+</pre>
 
-
-                
+</div></div>
+                <div class='snippet' id='javascript_7_12_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 a + b + a * b;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYAg1CBG4qBUUDcQ}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBARjAvDAhjA1DAjAbgFBqYKZoBU8OQA}{\usebox\lstbox}
+</pre>
 
-
-                
+</div></div>
+                <div class='snippet' id='javascript_7_13_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 a === b;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYAgvBIEYNxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBARjAvDAhjA1DAjAbgFBqJHw5A}{\usebox\lstbox}
+</pre>
 
-
-                
+</div></div>
+                <div class='snippet' id='javascript_7_14_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 b > a && b < a * b 
@@ -410,30 +409,33 @@ b > a && b < a * b
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EYAgfCCGIGQyoA8UQCoEgFAhwfgwFxQDcQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBARjAvDAhjA1DAjAbgFAIB8qMAZKfDADwkBUleMTA-JQFyo5A}{\usebox\lstbox}
+</pre>
 
-
-                
+</div></div>
+                <div class='snippet' id='javascript_7_15_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 a === 4 ? 6 : b === 4 ? 6 + 7 + a : 25;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYAgvBICwg-CA2EAuEAjckbyQahAOwj6ioBMArANxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBARjAvDAhjA1DAjAbgFBqJEwAsMA-DAGwwBc8SxZlNmA7BqnTAEwCsOIA}{\usebox\lstbox}
+</pre>
 
-
-                
+</div></div>
+                <div class='snippet' id='javascript_7_16_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 2 + (b > a ? b : a);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EwAg1CAUBGIHwgIYgPwlgLiQSgNxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBARjAvDAhjA1DAjAbgFABMGMAFAgHyowD88MAXKgJQ5A}{\usebox\lstbox}
+</pre>
 
-
-                
+</div></div>
+                <div class='snippet' id='javascript_7_17_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 (a > b
@@ -445,29 +447,31 @@ a === 4 ? 6 : b === 4 ? 6 + 7 + a : 25;
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQQwBAfGBGBQYH4wngLmWAPDeZE7zHQFoBGASlgCpZQwBqMCgbiA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBARjAvDAhjA1DAjAbgFAAUaAfPHjAPyrkBcqMAPGTC1XOS3QLRYCUeAKkJpMfHEA}{\usebox\lstbox}!*/
 (a + 1);
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
                 <SPLIT>
                   
                 Note that the statement
-                
+                <div class='snippet' id='javascript_7_18_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 a === 4 ? 6 : b === 4 ? 6 + 7 + a : 25;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYAgvBICwg-CA2EAuEAjckbyQahAOwj6ioBMArANxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBARjAvDAhjA1DAjAbgFBqJEwAsMA-DAGwwBc8SxZlNmA7BqnTAEwCsOIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
                 consists of two conditional expressions, where the second
                 one forms the alternative of the first one. If you want
                 to make that clear, you can indent the lines like this:
-                
+                <div class='snippet' id='javascript_7_19_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 a === 4
@@ -478,9 +482,10 @@ a === 4
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYAgvBICwFAPwgGwwFwgEbklEMQgURAGoQB2EkYPENAJgFYBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=MYewdgzgLgBARjAvDAhjA1DAjAbgFBqJEwAseA-DAGx4Bc8SxJMeMMlVGMA7FyqzHoAmAKw4gA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
                   
                 </SPLIT>
         
@@ -490,7 +495,7 @@ a === 4
         
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled0}
+\label{ex:unlabeled7}
 
                 Translate the following expression into 
           
@@ -505,12 +510,12 @@ a === 4
                     \]
           
     
-    \hfill{\hyperref[ex:unlabeled0-Answer]{Solution}}\\
+    \hfill{\hyperref[ex:unlabeled7-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled0}]
+\begin{Answer}[ref={ex:unlabeled7}]
    
-    
+    <div class='snippet' id='javascript_7_20_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 (5 + 4 + (2 - (3 - (6 + 4 / 5)))) 
@@ -519,16 +524,17 @@ a === 4
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQVgBA1GAslsAmMBaeBmF8BsdYHowQBKEosAKD3OAwCptMEz7FMB2EgbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=BQVgBA1GAslsAmMBaeBmF8BsdYHowQBKEosAKD3OAwCptMEz7FMB2EgbiA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   
 \end{Answer}
 
         
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled1}
+\label{ex:unlabeled8}
 
                 
                   
@@ -541,12 +547,12 @@ a === 4
                 the sum of the squares of the two larger numbers.
                 
                 
-        \hfill{\hyperref[ex:unlabeled1-Answer]{Solution}}\\
+        \hfill{\hyperref[ex:unlabeled8-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled1}]
+\begin{Answer}[ref={ex:unlabeled8}]
 
-                
+                <div class='snippet' id='javascript_7_21_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function f(x, y, z) {
@@ -557,9 +563,10 @@ function f(x, y, z) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAFADwDSIJ5YF4CUiA3gFCIUBOAplCJUgM4COIAhjekQNSIvudsPPqw7UUhRAFpyFOfID0CviABGUSm2iIoAC2oiBBuMB36+AWzYAba9UZRZ8+fzHpEAPhyIA-IhTYnoh4vsGIAFw4RJHuXiF+IZFoBAQA3KQAvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3NElgSJghADSIAnmIBeJCtVr0kaTLkIkA1CnTZ84jVpX4ZiALSVqFqgHorKEACMoWDNERQAFjgM7EcYG88UAFsMABtQnGQoc0tqZR1CRAA+CUQAfkQ8cWTEKXTcxAAuCRJixJS8jLzi4iJOHl48ABYxAHYxACY6oA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
               
 \end{Answer}
 
@@ -579,7 +586,7 @@ function f(x, y, z) {
             function expressions are compound expressions.
 	    Use this observation to
             describe the behavior of the following function:
-                
+                <div class='snippet' id='javascript_7_22_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function plus(a, b) { return a + b; }
@@ -590,29 +597,22 @@ function a_plus_abs_b(a, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwDYgM4AoCGAaRAIwEpEBvRAJwFMoRKkdEBqIgbkQF8AoUSWBIgC2MMJlwES5KrXqNEAWnZde4aPEYB9NJk05CGTYQlFSZboksy6DRFkKIAfAF5EABkQB+FOgyIAXMKimMQmJGzcnEA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABABwDYgM4AoCGAaRAIwEpEBvRAJwFMoRKkdEBqIgbkQF8AoUSWBIgC2MMJlwES5KrXqNEAWnZde4aPEYB9NJk05CGTYQlFSZboksy6DRFkKIAfAF5EABkQB+FOgyIAXMKimMQmJGzcPNw42r56BkZYAKwECgAsxGxAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
                 
                 Note that in the conditional expression, we cannot directly use the operators
-                {\lstinline[mathescape=true]$+$} and
-                {\lstinline[mathescape=true]$-$} instead of the
+                <kbd>+</kbd> and
+                <kbd>-</kbd> instead of the
                 names
-                {\lstinline[mathescape=true]$plus$} and
-                {\lstinline[mathescape=true]$minus$} because in infix notation,
+                <kbd>plus</kbd> and
+                <kbd>minus</kbd> because in infix notation,
 		only operator symbols are allowed in the middle,
-		not compound expressions.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+		not compound expressions.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
           
 	  
-        <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>
-                  For an expression of the form
-                  {\lstinline[mathescape=true]$a (b > 0 ? + : -) b$}
-                  the JavaScript interpreter would not know the precedence of
-		  the operator
-                  between {\lstinline[mathescape=true]$a$} and 
-                  {\lstinline[mathescape=true]$b$}, and therefore
-		  such expressions are not allowed.</FOOTNOTE></div></SPLIT>
+        </SPLIT>
               \hfill{\hyperref[ex:a-plus-abs-b-Answer]{Solution}}\\
 \end{Exercise}
 
@@ -633,27 +633,27 @@ function a_plus_abs_b(a, b) {
 \end{enumerate}
 
 	      Thus the evaluation of the application expression 
-	      {\lstinline[mathescape=true]$a_plus_abs_b(5, -4)$}
-	      (1) evaluates {\lstinline[mathescape=true]$a_plus_abs_b$},
+	      <kbd>a_plus_abs_b(5, -4)</kbd>
+	      (1) evaluates <kbd>a_plus_abs_b</kbd>,
 	      resulting in the function given above, and (2) the arguments are
 	      already values. So we need to evaluate (3) the return expression
 	      of the function,
 	      with the parameters replaced by the arguments, thus:
-	      {\lstinline[mathescape=true]$(-4 >= 0 ? plus : minus)(5, -4)$}.
+	      <kbd>(-4 >= 0 ? plus : minus)(5, -4)</kbd>.
 	      With the same rules, we need to (1) evaluate the function expression,
 	      which in this case is the conditional expression
-	      {\lstinline[mathescape=true]$-4 >= 0 ? plus : minus$}. Since
+	      <kbd>-4 >= 0 ? plus : minus</kbd>. Since
 	      the predicate evaluates to <EM>false</EM>, the function expression
-	      evaluates to {\lstinline[mathescape=true]$minus$}.
+	      evaluates to <kbd>minus</kbd>.
 	      The arguments, again (2) are already values.
 	      Thus we
 	      end up evaluating (3) the body of
-	      {\lstinline[mathescape=true]$minus$} with
+	      <kbd>minus</kbd> with
 	      the parameters
-	      {\lstinline[mathescape=true]$a$} and 
-	      {\lstinline[mathescape=true]$b$} 
+	      <kbd>a</kbd> and 
+	      <kbd>b</kbd> 
 	      replaced by 5 and -4, respectively, resulting in
-	      {\lstinline[mathescape=true]$5 - (-4)$}, which
+	      <kbd>5 - (-4)</kbd>, which
 	      will finally evaluate to 9.
 	  
 \end{Answer}
@@ -674,7 +674,7 @@ function a_plus_abs_b(a, b) {
                     declares the following two functions
                   
                 :
-                
+                <div class='snippet' id='javascript_7_23_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function p() {
@@ -687,21 +687,23 @@ function test(x, y) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwBQEpEG8BQj+IBOAplCIUmugNw4C+OOoksCiUxAzlKgB4A0iAJ6ZcBIqXJJeiALzzEABkQB+JYgBcw2nSA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABABwBQEpEG8BQj+IBOAplCIUmugNw4C+OOoksCiUxAzlKgB4A0iAJ6ZcBIqXJJeiALzzEABkQB+JYgBcw2nSA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
                 Then he evaluates the 
                 statement
-                
+                <div class='snippet' id='javascript_7_24_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 test(0, p());
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=C4UwzsAUAMA0AEAHSBKFBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABABwBQEpEG8BQj+IBOAplCIUmugNw4C+OOoksCiUxAzlKgB4A0iAJ6ZcBIqXJJeiALzzEABkQB+JYgBcw2gw7dUiwVRpA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
                 What behavior will Ben observe with an interpreter that uses
                 applicative-order evaluation?  What behavior will he observe with an
                 interpreter that uses normal-order evaluation?  Explain your answer.
@@ -728,43 +730,68 @@ test(0, p());
 		  <SPLIT>
 		    
 		      In applicative-order evaluation of
-		      {\lstinline[mathescape=true]$test(0, p())$},
+		      <kbd>test(0, p())</kbd>,
 		      we need to evaluate the
 		      argument expressions
 		      before we can evaluate the return expression of
-		      the function {\lstinline[mathescape=true]$test$}.
+		      the function <kbd>test</kbd>.
 		      The evaluation of the argument expression
-		      {\lstinline[mathescape=true]$p()$}
+		      <kbd>p()</kbd>
 		      will not terminate, however: It will keep evaluating
 		      application expressions of the form 
-		      {\lstinline[mathescape=true]$p()$}, and thus
+		      <kbd>p()</kbd>, and thus
 		      the evaluation of
-                      {\lstinline[mathescape=true]$test(0, p())$}
+                      <kbd>test(0, p())</kbd>
 		      will not produce a legitimate value.
 		      In normal-order evaluation, on the other hand,
 		      the function application
-		      {\lstinline[mathescape=true]$test(0, p())$}
+		      <kbd>test(0, p())</kbd>
 		      would immediately evaluate the return expression of
-		      the function {\lstinline[mathescape=true]$test$},
-		      {\lstinline[mathescape=true]$x === 0 ? 0 : y$}
+		      the function <kbd>test</kbd>,
+		      <kbd>x === 0 ? 0 : y</kbd>
 		      after replacing the parameter
-		      {\lstinline[mathescape=true]$x$} with
-		      {\lstinline[mathescape=true]$0$} and
-		      {\lstinline[mathescape=true]$y$} with
-		      {\lstinline[mathescape=true]$p()$}.
+		      <kbd>x</kbd> with
+		      <kbd>0</kbd> and
+		      <kbd>y</kbd> with
+		      <kbd>p()</kbd>.
 		      The result of the replacing would be
-		      {\lstinline[mathescape=true]$0 === 0 ? 0 : p()$}.
+		      <kbd>0 === 0 ? 0 : p()</kbd>.
 		      The evaluation of the 
 		      predicate
-		      {\lstinline[mathescape=true]$0 === 0$}
+		      <kbd>0 === 0</kbd>
 		      results in <EM>true</EM> and thus the conditional
 		      expression evaluates to 0, without any need to
 		      evaluate 
-		      {\lstinline[mathescape=true]$p()$}.
+		      <kbd>p()</kbd>.
 		    
 		  </SPLIT>
 		
 \end{Answer}
 
-      
-</SUBSECTION>
+      <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>
+                
+                
+                
+                In JavaScript, other values are automatically converted into
+	      <EM>true</EM> and
+	      <EM>false</EM>
+                according to <EM>conversion rules</EM>, but we choose not to make
+		use of these conversion rules in this book.
+              </FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>
+                  For an expression of the form
+                  <kbd>a (b > 0 ? + : -) b</kbd>
+                  the JavaScript interpreter would not know the precedence of
+		  the operator
+                  between <kbd>a</kbd> and 
+                  <kbd>b</kbd>, and therefore
+		  such expressions are not allowed.</FOOTNOTE></div>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section1/subsection5.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section1/subsection7.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+1.1.6  Conditional Expressions and Predicates</div>	<div class='next-page'></div></div>

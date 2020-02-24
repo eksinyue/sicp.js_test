@@ -1,19 +1,26 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>5.5.1 
-  Structure of the Compiler
-      </a>
+		<a name='top' class='permalink'>5.5.1  Structure of the Compiler</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
       <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
   
-  In section~\ref{sec:separating-analysis} we modified our original
+  In section \ref{sec:separating-analysis} we modified our original
   metacircular interpreter to separate analysis from execution.  We
   analyzed each expression to produce an execution
   function
@@ -29,29 +36,29 @@
 <a name='p2' class='permalink'></a><p>
   The
   function
-  {\lstinline[mathescape=true]$compile$} is the top-level dispatch in the compiler.
-  It corresponds to the {\lstinline[mathescape=true]$eval$}
+  <kbd>compile</kbd> is the top-level dispatch in the compiler.
+  It corresponds to the <kbd>eval</kbd>
   function
   of
-  section~\ref{sec:core-of-evaluator}, the {\lstinline[mathescape=true]$analyze$}
+  section \ref{sec:core-of-evaluator}, the <kbd>analyze</kbd>
   function
   of
-  section~\ref{sec:separating-analysis}, and the {\lstinline[mathescape=true]$eval_dispatch$}
+  section \ref{sec:separating-analysis}, and the <kbd>eval_dispatch</kbd>
   entry point of the explicit-control-evaluator in
-  section~\ref{sec:eceval-core}.
+  section \ref{sec:eceval-core}.
   The compiler, like the interpreters, uses the 
   
   expression-syntax
   functions
-  defined in section~\ref{sec:representing-expressions}.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>{\lstinline[mathescape=true]$Compile$} performs a case
+  defined in section \ref{sec:representing-expressions}.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
+  <kbd>Compile</kbd> performs a case
   analysis on the syntactic type of the expression to be compiled.  For
   each type of expression, it dispatches to a specialized 
   
   <EM>code
     generator</EM>:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_114_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function compile(exp, target, linkage) {
     return is_self-evaluating(exp)
         ? compile_self_evaluating(exp, target, linkage)
@@ -75,53 +82,18 @@ function compile(exp, target, linkage) {
         ? compile_application(exp, target, linkage)
         : error(exp, "Unknown expression type - - COMPILE");
 }
-\end{JavaScript}
-
-      
-  {\lstinline[mathescape=true]$Compile$} performs a case
-  analysis on the syntactic type of the expression to be compiled.  For
-  each type of expression, it dispatches to a specialized 
-  
-  <EM>code
-    generator</EM>:
-
-  
-\begin{JavaScript}
-function compile(exp, target, linkage) {
-    return is_self-evaluating(exp)
-        ? compile_self_evaluating(exp, target, linkage)
-        : is_quoted(exp)
-        ? compile_quoted(exp, target, linkage)
-        : is_variable(exp)
-        ? compile_variable(exp, target, linkage)
-        : is_assignment(exp)
-        ? compile_assignment(exp, target, linkage)
-        : is_definition(exp)
-        ? compile_definition(exp, target, linkage)
-        : is_conditional_expression(exp)
-        ? compile(cond_if(exp), target, linkage)
-        : is_function_expression(exp)
-        ? compile_function_expression(exp, target, linkage)
-        : is_block(exp)
-        ? compile_block(begin_actions(exp), target, linkage)
-        : is_conditional_statement(exp)
-        ? compile_conditional_statement(exp, target, linkage)
-        : is_application(exp)
-        ? compile_application(exp, target, linkage)
-        : error(exp, "Unknown expression type - - COMPILE");
-}
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
   Targets and linkages
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
   
-  {\lstinline[mathescape=true]$Compile$} and the code generators that it calls take two arguments
+  <kbd>Compile</kbd> and the code generators that it calls take two arguments
   in addition to the expression to compile.  There is a 
   
   <EM>target</EM>,
@@ -137,14 +109,14 @@ function compile(exp, target, linkage) {
   <UL>
     <LI>continue at the next instruction in sequence (this is
       
-      specified by the linkage descriptor {\lstinline[mathescape=true]$next$}),
+      specified by the linkage descriptor <kbd>next</kbd>),
 
     </LI>
     <LI>return from the
       function
       being compiled (this is specified
       
-      by the linkage descriptor {\lstinline[mathescape=true]$return$}), or
+      by the linkage descriptor <kbd>return</kbd>), or
 
     </LI>
     <LI>jump to a named entry point (this is specified by using the
@@ -156,28 +128,24 @@ function compile(exp, target, linkage) {
 
       <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
-  For example, compiling the expression {\lstinline[mathescape=true]$5$} (which is
-  self-evaluating) with a target of the {\lstinline[mathescape=true]$val$} register and a
-  linkage of {\lstinline[mathescape=true]$next$} should produce the instruction
+  For example, compiling the expression <kbd>5</kbd> (which is
+  self-evaluating) with a target of the <kbd>val</kbd> register and a
+  linkage of <kbd>next</kbd> should produce the instruction
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_114_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 assign("val", constant(5));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-  Compiling the same expression with a linkage of {\lstinline[mathescape=true]$return$} should
+  Compiling the same expression with a linkage of <kbd>return</kbd> should
   produce the instructions
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_114_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 assign("val", constant(5));
       go_to(reg("continue"));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -186,12 +154,13 @@ assign("val", constant(5));
   in the sequence. In the second case, we will return from a
   function
   call.  In both cases, the value of the expression will be placed into
-  the target {\lstinline[mathescape=true]$val$} register.
+  the target <kbd>val</kbd> register.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Instruction sequences and stack usage
-      
+      </h2></div>
 
       
       <div class='permalink'>
@@ -212,23 +181,25 @@ assign("val", constant(5));
   The simplest method for combining instruction sequences is a
   function
   
-  called {\lstinline[mathescape=true]$append_instruction_sequences$}.  It takes as arguments any
+  called <kbd>append_instruction_sequences</kbd>.  It takes as arguments any
   number of instruction sequences that are to be executed sequentially;
   it appends them and returns the combined sequence.  That is, if
   $seq_1$ and $seq_2$ are sequences of instructions, then
   evaluating
-  
-\begin{JavaScript}
-append_instruction_sequences($seq_1$, $seq_2$);
-\end{JavaScript}
-
+  <kbd class='snippet'>
+    
+    
+      append_instruction_sequences($seq_1$, $seq_2$);
+    
+  </kbd>
   produces the sequence
-  
-\begin{JavaScript}
+  <kbd class='snippet'>
+    
+    
 $\textit{seq}_1$
 $\textit{seq}_2$
-\end{JavaScript}
-
+    
+  </kbd>
       </p></div>
 
       <div class='permalink'>
@@ -236,23 +207,24 @@ $\textit{seq}_2$
   
   Whenever registers might need to be saved, the compiler's code generators use
   
-  {\lstinline[mathescape=true]$preserving$}, which is a more subtle method for combining
-  instruction sequences.  {\lstinline[mathescape=true]$Preserving$} takes three arguments: a set
+  <kbd>preserving</kbd>, which is a more subtle method for combining
+  instruction sequences.  <kbd>Preserving</kbd> takes three arguments: a set
   of registers and two instruction sequences that are to be executed
   sequentially.  It appends the sequences in such a way that the
   contents of each register in the set is preserved over the execution
   of the first sequence, if this is needed for the execution of the
   second sequence.  That is, if the first sequence modifies the register
   and the second sequence actually needs the register's original
-  contents, then {\lstinline[mathescape=true]$preserving$} wraps a {\lstinline[mathescape=true]$save$} and a {\lstinline[mathescape=true]$restore$}
+  contents, then <kbd>preserving</kbd> wraps a <kbd>save</kbd> and a <kbd>restore</kbd>
   of the register around the first sequence before appending the
-  sequences.  Otherwise, {\lstinline[mathescape=true]$preserving$} simply returns the appended
+  sequences.  Otherwise, <kbd>preserving</kbd> simply returns the appended
   instruction sequences.  Thus, for example,
-  
-\begin{JavaScript}
-preserving(list($\textit{reg}_1$, $\textit{reg}_2$), $\textit{seq}_1$, $\textit{seq}_2$);
-\end{JavaScript}
-
+  <kbd class='snippet'>
+    
+    
+      preserving(list($\textit{reg}_1$, $\textit{reg}_2$), $\textit{seq}_1$, $\textit{seq}_2$);
+    
+  </kbd>
   produces one of the following four sequences of instructions, depending on how
   $\textit{seq}_1$ and $\textit{seq}_2$ use $\textit{reg}_1$ and $\textit{reg}_2$:
       </p></div>
@@ -304,27 +276,27 @@ preserving(list($\textit{reg}_1$, $\textit{reg}_2$), $\textit{seq}_1$, $\textit{
 
       <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
-  By using {\lstinline[mathescape=true]$preserving$} to combine instruction sequences the
+  By using <kbd>preserving</kbd> to combine instruction sequences the
   compiler avoids unnecessary stack operations.  This also isolates the
-  details of whether or not to generate {\lstinline[mathescape=true]$save$} and {\lstinline[mathescape=true]$restore$}
-  instructions within the {\lstinline[mathescape=true]$preserving$}
+  details of whether or not to generate <kbd>save</kbd> and <kbd>restore</kbd>
+  instructions within the <kbd>preserving</kbd>
   function, separating them
   from the concerns that arise in writing each of the individual code
   generators.
-  In fact no {\lstinline[mathescape=true]$save$} or {\lstinline[mathescape=true]$restore$} instructions are explicitly
+  In fact no <kbd>save</kbd> or <kbd>restore</kbd> instructions are explicitly
   produced by the code generators.
       </p></div>
 
       <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
   In principle, we could represent an instruction sequence simply as a
-  list of instructions.  {\lstinline[mathescape=true]$Append_instruction_sequences$} could then
-  combine instruction sequences by performing an ordinary list {\lstinline[mathescape=true]$append$}.  However, {\lstinline[mathescape=true]$preserving$} would then be a complex operation,
+  list of instructions.  <kbd>Append_instruction_sequences</kbd> could then
+  combine instruction sequences by performing an ordinary list <kbd>append</kbd>.  However, <kbd>preserving</kbd> would then be a complex operation,
   because it would have to analyze each instruction sequence to
-  determine how the sequence uses its registers.  {\lstinline[mathescape=true]$Preserving$}
+  determine how the sequence uses its registers.  <kbd>Preserving</kbd>
   would be inefficient as well as complex, because it would have to
   analyze each of its instruction sequence arguments, even though these
-  sequences might themselves have been constructed by calls to {\lstinline[mathescape=true]$preserving$}, in which case their parts would have already been
+  sequences might themselves have been constructed by calls to <kbd>preserving</kbd>, in which case their parts would have already been
   analyzed.  To avoid such repetitious analysis we will associate with each
   instruction sequence some information about its register use.
   When we construct a basic instruction sequence we
@@ -358,42 +330,36 @@ preserving(list($\textit{reg}_1$, $\textit{reg}_2$), $\textit{seq}_1$, $\textit{
   We will represent an instruction sequence as a list of its three
   parts.  The constructor for instruction sequences is thus
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_114_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_instruction_sequence(needs, modifies, statements) {
     return list(needs, modifies,statements);
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p14' class='permalink'></a><p>
   For example, the two-instruction sequence that looks up the value of
-  the variable {\lstinline[mathescape=true]$x$} in the current environment, assigns the result
-  to {\lstinline[mathescape=true]$val$}, and then returns, requires registers {\lstinline[mathescape=true]$env$} and {\lstinline[mathescape=true]$continue$} to have been initialized, and modifies register {\lstinline[mathescape=true]$val$}.
+  the variable <kbd>x</kbd> in the current environment, assigns the result
+  to <kbd>val</kbd>, and then returns, requires registers <kbd>env</kbd> and <kbd>continue</kbd> to have been initialized, and modifies register <kbd>val</kbd>.
   This sequence would therefore be constructed as
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_114_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 make_instruction_sequence(list("env", "continue"),
                           list("val"),
                           list(assign("val", op("lookup_variable_value"), constant("x"), reg("env")),
                                go_to(reg("continue"))));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p15' class='permalink'></a><p>
   We sometimes need to construct an instruction sequence with no statements:
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_114_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function empty_instruction_sequence() {
     return make_instruction_sequence(list(), list(), list());
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -401,7 +367,7 @@ function empty_instruction_sequence() {
   The
   functions
   for combining instruction sequences are shown in
-  section~\ref{sec:combining-instruction-sequences}.
+  section \ref{sec:combining-instruction-sequences}.
   
   
       </p></div>
@@ -416,15 +382,15 @@ function empty_instruction_sequence() {
   function
   application, the explicit-control evaluator
   always saves and restores
-  the {\lstinline[mathescape=true]$env$} register around the evaluation of the operator, saves and
-  restores {\lstinline[mathescape=true]$env$} around the evaluation of each operand (except the
-  final one), saves and restores {\lstinline[mathescape=true]$argl$} around the evaluation of each
-  operand, and saves and restores {\lstinline[mathescape=true]$proc$} around the evaluation of the
+  the <kbd>env</kbd> register around the evaluation of the operator, saves and
+  restores <kbd>env</kbd> around the evaluation of each operand (except the
+  final one), saves and restores <kbd>argl</kbd> around the evaluation of each
+  operand, and saves and restores <kbd>proc</kbd> around the evaluation of the
   operand sequence.  For each of the following combinations, say which
-  of these {\lstinline[mathescape=true]$save$} and {\lstinline[mathescape=true]$restore$} operations are superfluous and
-  thus could be eliminated by the compiler's {\lstinline[mathescape=true]$preserving$} mechanism:
+  of these <kbd>save</kbd> and <kbd>restore</kbd> operations are superfluous and
+  thus could be eliminated by the compiler's <kbd>preserving</kbd> mechanism:
 
-  
+  <div class='snippet' id='javascript_114_7_div'><div class='pre-prettyprint'></div></div>
       
 \end{Exercise}
 
@@ -435,11 +401,11 @@ function empty_instruction_sequence() {
 
   
   
-  Using the {\lstinline[mathescape=true]$preserving$} mechanism, the compiler will avoid saving
-  and restoring {\lstinline[mathescape=true]$env$} around the evaluation of the operator of a
+  Using the <kbd>preserving</kbd> mechanism, the compiler will avoid saving
+  and restoring <kbd>env</kbd> around the evaluation of the operator of a
   combination in the case where the operator is a symbol.  We could also
   build such optimizations into the evaluator.  Indeed, the
-  explicit-control evaluator of section~\ref{sec:eceval} already
+  explicit-control evaluator of section \ref{sec:eceval} already
   performs a similar optimization, by treating combinations with no
   operands as a special case.
   
@@ -475,4 +441,11 @@ function empty_instruction_sequence() {
     the register machine in Scheme, we used the actual Scheme
     functions
     in our register machine simulation.)</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section5/section5.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section5/subsection2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+5.5.1  Structure of the Compiler</div>	<div class='next-page'></div></div>

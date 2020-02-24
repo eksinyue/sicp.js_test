@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>3.1.2 
-        The Benefits of Introducing Assignment
-      </a>
+		<a name='top' class='permalink'>3.1.2  The Benefits of Introducing Assignment</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -21,7 +28,7 @@
         powerful technique for maintaining a modular design.  As a simple
         example, consider the design of a
         function
-        {\lstinline[mathescape=true]$rand$} that, whenever
+        <kbd>rand</kbd> that, whenever
         it is called, returns an integer chosen at random.
       </p></div>
 
@@ -29,44 +36,42 @@
 <a name='p2' class='permalink'></a><p>
         
         It is not at all clear what is meant by <QUOTE>chosen at random.</QUOTE>  What we
-        presumably want is for successive calls to {\lstinline[mathescape=true]$rand$} to produce a
+        presumably want is for successive calls to <kbd>rand</kbd> to produce a
         sequence of numbers that has statistical properties of uniform
         distribution.  We will not discuss methods for generating suitable
         sequences here.  Rather, let us assume that we have a
         function
-{\lstinline[mathescape=true]$rand_update$} 
+<kbd>rand_update</kbd> 
 that has the property that if we start with a given
-        number {\lstinline[mathescape=true]$x_1$} and form
+        number <kbd>x_1</kbd> and form
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_49_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 x_2 = rand_update(x_1);
 x_3 = rand_update(x_2);
-\end{JavaScript}
-
-        then the sequence of values {\lstinline[mathescape=true]$x_1$},
-	{\lstinline[mathescape=true]$x_2$},
-	{\lstinline[mathescape=true]$x_3$},
+</pre></div></div>
+        then the sequence of values <kbd>x_1</kbd>,
+	<kbd>x_2</kbd>,
+	<kbd>x_3</kbd>,
 	…, will have the
-        desired statistical properties.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+        desired statistical properties.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
       </p></div>
 
       <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
-        We can implement {\lstinline[mathescape=true]$rand$} as a
+        We can implement <kbd>rand</kbd> as a
         function
         with a local state variable
-        {\lstinline[mathescape=true]$x$} that is initialized to some fixed value 
-{\lstinline[mathescape=true]$random_init$}.
-        Each call to {\lstinline[mathescape=true]$rand$} computes 
-{\lstinline[mathescape=true]$rand_update$} 
+        <kbd>x</kbd> that is initialized to some fixed value 
+<kbd>random_init</kbd>.
+        Each call to <kbd>rand</kbd> computes 
+<kbd>rand_update</kbd> 
 of the current
-        value of {\lstinline[mathescape=true]$x$}, returns this as the random number, and also stores
-        this as the new value of {\lstinline[mathescape=true]$x$}.
+        value of <kbd>x</kbd>, returns this as the random number, and also stores
+        this as the new value of <kbd>x</kbd>.
 
 	
 
-	
+	<div class='snippet' id='javascript_49_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_rand() {
@@ -78,14 +83,15 @@ function make_rand() {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ATqsAEwAoBKRAbwChFaAbTKRAD0QF5F8i5lsYwYUANw1aoSLAScCJctVoKFrDl0LYQAB0KoomYs1IjFi3IxC4kzI7QC+ozmYvSiIuxAQBnJqvYoMOVTIhIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=PTAEEFQNwUwJwJ6gM4EsC2AHANjUcBDAOwBMB9AV0xIIBc8AzCogY1tQHsjQWOsL6yUAVAAoEKCIV0AI3igGcPqAAMoABSpW2CmlgBKULQ6gATAD0AzAEYNMAB4sdemIfFhFykVAI6890BkkdApsdhwELQBzUFRaUAB3OIALYR4uZFpieIIAGjEJAhISaLTeIkzsngA6UAB1PF0YElj45PhGDjhY7GdaQnYud1AubAR84haSEyIOeKcCDGEiJEr2TNQWX1BMJUx4dhhkatFyzNB0UABeC7pkskwOBPVTfJt9AG4xM5zr0GtrCpLABWazA0wAFmBH1OGXmf2spksUJhoiYrEG3EIpEo1DoMHU9kMAG9RKByfgYLQKHBuOoRAAqUABADUPEMAFILjCAL6wirxbHTdBkLRxBFIqEANgA7AAOACcMPRbE43HQBAA1jAyEL1CSyeTcPEAjchXxRUQ4jCKSrMfhJvrQKSKa7mX8hbiaPRCZ9DW7KdTacybeS+RS4FSaVjJrz+echX8NdrdY6-aISsgcAQEOo9fo-Zns7n84XUFnsDm82nPkA}{\usebox\lstbox}!*/
    return rand;
 }
 const rand = make_rand();
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	
 	
@@ -96,12 +102,12 @@ const rand = make_rand();
 <a name='p4' class='permalink'></a><p>
         Of course, we could generate the same sequence of random numbers
         without using assignment by simply calling 
-{\lstinline[mathescape=true]$rand_update$} 
+<kbd>rand_update</kbd> 
 directly.
         However, this would mean that any part of our program that used random
-        numbers would have to explicitly remember the current value of {\lstinline[mathescape=true]$x$}
+        numbers would have to explicitly remember the current value of <kbd>x</kbd>
         to be passed as an argument to 
-{\lstinline[mathescape=true]$rand_update$}.  To realize what an
+<kbd>rand_update</kbd>.  To realize what an
         annoyance this would be, consider using random numbers to implement a
         technique called 
         
@@ -119,13 +125,7 @@ directly.
         $\pi$ using the fact
         that $6/\pi^2$ is the probability that two integers chosen at random
         will have no factors in common; that is, that their greatest common
-        divisor will be 1.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>$\pi$, we perform a large number of experiments.
-        In each experiment we choose two integers at random and perform a test
-        
-        to see if their GCD is 1.  The fraction of times that the test is
-        passed gives us our estimate of $6/\pi^2$, and from this we obtain our
-        approximation to $\pi$.
-       To obtain
+        divisor will be 1.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a> To obtain
         the approximation to $\pi$, we perform a large number of experiments.
         In each experiment we choose two integers at random and perform a test
         
@@ -138,12 +138,12 @@ directly.
 <a name='p6' class='permalink'></a><p>
         The heart of our program is a
         function
-{\lstinline[mathescape=true]$monte_carlo$}, which takes
+<kbd>monte_carlo</kbd>, which takes
         as arguments the number of times to try an experiment, together with
         the experiment, represented as a no-argument
         function
         that will
-        return either true or false each time it is run.  {\lstinline[mathescape=true]$monte_carlo$}
+        return either true or false each time it is run.  <kbd>monte_carlo</kbd>
         runs the experiment for the designated number of trials and returns a
         number telling the fraction of the trials in which the experiment was
         found to be true.
@@ -151,7 +151,7 @@ directly.
 
       <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
-        
+        <div class='snippet' id='javascript_49_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function estimate_pi(trials) {
@@ -165,7 +165,7 @@ function cesaro_test() {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwM6wLYEMrIPoAOMAFFAE4xYA2qAlIgN4BQiriZyUIZS2UAFnlQBHMlGIA2RAHpEGBLjwQsZKnFIVqqADSIIaFXDy50tWgG4mAXyZNQkWAj0GyRk+PrM27TtyQBzCAATYjIsMBDaXTCI4jNEAF4kxABGSxs7cGh4XgV8ZVV1ckoaXWQADwJkCgxkMChPFjZ7bKcYXDINEtQ8DmwYMAH-XWKtQixUVGQgxu9vGGBELrG+rAGhxOSABlm5vY4uHkRRmnHJ6ZljzRpLPdYrFBpkRAWliqqauo9du7YDvxeHWWp1W6zA-kQAFpUtomr94XMTj0CBMpkFEABqVIWOFzB7IJ6MXG-f5HdrVYE9UGDcFQmGIYkI+FIs5onG-GzeTl-XxkoFI3Q7dJAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ATqsAEwAoBKRAbwChFaAbTKRAD0QF5F8i5lsYwYUANw1aoSLAScCJctVoKFrDl0LYQAB0KoomYs1IjFi3IxC4kzI7QC+ozmYvSiIuxAQBnJqvYoMOVTIRcWh4JABzCBJUABpEACM5ewcocyR49jYOAAZEAH5EVEQALkRIkni4ooBSBMMqOxDJJEwvGDRdbA0YYihcGFQ6DySTRyQOgAtsDwBHXChiADZEAHoUBE6IVFw6OF7+wY84iFbtuGxdL1J6uyomsMQTjzOL1oWRhVNUp3LiQNI4v9yFkOABGVxUO7gUJSZAbHBbHZ7PoDIZxTDMDSYfrITBgKAfMTQ5qIQTY-aojx4TBofj8cJxFGHLqoDweTCEQnGGDARAU5mmWkCMDhTI5LnGT5jRBMoYstkc1Yyg5DaySmyITBDTCk3nEDFYnF494SyUpNKk3S4flywWoOkixAAWkQoJiyTNnuMsqpGlZ7MIiAA1K76p6NVr2ZQPWavhaydafdShfTna64jGvV6k36FZy1cY7Ioi1LvkgEzajohsjdIW92jocN1iKDsm3DEA}{\usebox\lstbox}!*/
 function monte_carlo(trials, experiment) {
     function iter(trials_remaining, trials_passed) {
         if (trials_remaining === 0) {
@@ -182,8 +182,9 @@ function monte_carlo(trials, experiment) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
 	
@@ -192,11 +193,11 @@ function monte_carlo(trials, experiment) {
       <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
         Now let us try the same computation using 
-{\lstinline[mathescape=true]$rand_update$} 
+<kbd>rand_update</kbd> 
 directly
-        rather than {\lstinline[mathescape=true]$rand$}, the way we would be forced to proceed if we
+        rather than <kbd>rand</kbd>, the way we would be forced to proceed if we
         did not use assignment to model local state:
-        
+        <div class='snippet' id='javascript_49_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function estimate_pi(trials) {
@@ -209,7 +210,7 @@ function random_gcd_test(trials, initial_x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwM6wLYEMrIPoAOMAFFAE4xYA2qAlIgN4BQiriZyUIZS2UAFnlQBHMlGIA2RAHp2WMABM4GPAHMICvLnSkK1VABo5i5XhhgYUWrQDcTAL5MmoSLATGlK9Zu3jylGiNzSwC8AA96ZjZEF2h4JEtkMl0A1DwObGCwVSN-fUIsVFRkBSMIxhZotggEdEQwgEZEAF4PPBACBRxkYgi7KuraqHqAJha2jq7cXobbSoGYYEQU-IysLNUW5taABkj5gbYOLh5EPJoCopKZM70afsP7FBpkREXl7xmykfpt1tmKocqsduAlcMlzmk1htEABaRANIwHIEotiQy7FBSIADUCO+cyBT2QL0BqPYnFBb3BKwu0Is2TheMQyLJQPRBEKmPxDwGjmifKOFNOiQhd0MiB2QQssGo4Tm9iAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ATqsAEwAoBKRAbwChFaAbTKRAD0QF5F8i5lsYwYUANw1aoSLAScCJctVoKFrDl0LYQAB0KoomYs1IjFi3IxC4kzI7QC+ozmYvSiIuxAQBnJqvYoMOVTIRcWh4JABzCBJUABpEACM5ewcocyR49jYOAAZEAH5EVEQALkRIkni4ooBSBMMqOxDJJEwvGDRdbA0YYihcGFQ6DySTRyQOgAtsDwBHXChiADZEAHpnQh5scuxdL17+wY841U3+QVJ6uyomsPXN7d2FvoGhuLPYQewDSmSbqUFMLh9i8PHhMGgzmBwnFnocuqgPB5MIQ4t95MZaO4wF4WABGXyqdRaHR6AzWDFYnHMABMBJkRO0un0uPqGNoMGAiGBcNMEIEUMyORGbNGqScsKG8MRyNWiAlHnJxhsiEwQ0wiA5XPKzNR1PIWQ4LJ+ItFaQ1uiB8rBfP44UQAFpELi4skTW65QdJRoEUjCIgANRO3WstnK1VI43u0xipAAy2e0G81CQu2O52IV3ukVW73SlEsPWKxR2YvJaNmuPc16IbJvAQfOhfS5UKitWAdHDdYi47K9wxAA}{\usebox\lstbox}!*/
         const x2 = rand_update(x1);
         if (trials_remaining === 0) {
             return trials_passed / trials;
@@ -225,40 +226,41 @@ function random_gcd_test(trials, initial_x) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
         While the program is still simple, it betrays some painful
         breaches of modularity.  In our first version of the program, using
-        {\lstinline[mathescape=true]$rand$}, we can express the Monte Carlo method directly as
+        <kbd>rand</kbd>, we can express the Monte Carlo method directly as
         a general 
-{\lstinline[mathescape=true]$monte_carlo$} 
+<kbd>monte_carlo</kbd> 
         function
         that takes as an argument an
-        arbitrary {\lstinline[mathescape=true]$experiment$}
+        arbitrary <kbd>experiment</kbd>
         function.  In our second version of the
         program, with no local state for the random-number generator, 
-{\lstinline[mathescape=true]$random_gcd_test$} 
-must explicitly manipulate the random numbers {\lstinline[mathescape=true]$x1$} and {\lstinline[mathescape=true]$x2$} and recycle {\lstinline[mathescape=true]$x2$} through the iterative loop as
+<kbd>random_gcd_test</kbd> 
+must explicitly manipulate the random numbers <kbd>x1</kbd> and <kbd>x2</kbd> and recycle <kbd>x2</kbd> through the iterative loop as
         the new input to 
-{\lstinline[mathescape=true]$rand_update$}.
+<kbd>rand_update</kbd>.
 This explicit handling of the
         random numbers intertwines the structure of accumulating test results
         with the fact that our particular experiment uses two random numbers,
         whereas other Monte Carlo experiments might use one random number or
         three.  Even the top-level
         function
-{\lstinline[mathescape=true]$estimate_pi$}
+<kbd>estimate_pi</kbd>
         has to be
         concerned with supplying an initial random number.  The fact that the
         random-number generator's insides are leaking out into other parts of
         the program makes it difficult for us to isolate the Monte Carlo idea
         so that it can be applied to other tasks.  In the first version of the
         program, assignment encapsulates the state of the random-number
-        generator within the {\lstinline[mathescape=true]$rand$}
+        generator within the <kbd>rand</kbd>
         function, so that the details of
         random-number generation remain independent of the rest of the
         program.
@@ -318,19 +320,19 @@ This explicit handling of the
           Implement Monte Carlo integration as a
           function
           
-{\lstinline[mathescape=true]$estimate_integral$}
-that takes as arguments a predicate {\lstinline[mathescape=true]$P$}, upper
-          and lower bounds {\lstinline[mathescape=true]$x1$}, {\lstinline[mathescape=true]$x2$}, {\lstinline[mathescape=true]$y1$}, and {\lstinline[mathescape=true]$y2$} for the
+<kbd>estimate_integral</kbd>
+that takes as arguments a predicate <kbd>P</kbd>, upper
+          and lower bounds <kbd>x1</kbd>, <kbd>x2</kbd>, <kbd>y1</kbd>, and <kbd>y2</kbd> for the
           rectangle, and the number of trials to perform in order to produce the
           estimate.  Your
           function
           should use the same 
-{\lstinline[mathescape=true]$monte_carlo$}
+<kbd>monte_carlo</kbd>
           function
           that was used above to estimate $\pi$.  Use
           your 
-{\lstinline[mathescape=true]$estimate_integral$}
-{\lstinline[mathescape=true]$$} 
+<kbd>estimate_integral</kbd>
+<kbd></kbd> 
 to produce an estimate of $\pi$ by
           measuring the area of a unit circle.
 <div class='permalink'>
@@ -339,11 +341,11 @@ to produce an estimate of $\pi$ by
           function
           that returns a number
           chosen at random from a given range.  The following 
-{\lstinline[mathescape=true]$random_in_range$}
+<kbd>random_in_range</kbd>
           function
-          implements this in terms of the {\lstinline[mathescape=true]$random$}
+          implements this in terms of the <kbd>random</kbd>
           function
-          used in section~\ref{sec:primality}, which returns a nonnegative
+          used in section \ref{sec:primality}, which returns a nonnegative
           number less than its
 	  
 	    
@@ -351,14 +353,12 @@ to produce an estimate of $\pi$ by
 	      input.
 	    
 	  
-          
-\begin{JavaScript}
+          <div class='snippet' id='javascript_49_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function random_in_range(low, high) {
     const range = high - low;
     return low + random(range);
 }
-\end{JavaScript}
-
+</pre></div></div>
       
 \end{Exercise}
 
@@ -371,11 +371,11 @@ function random_in_range(low, high) {
         
         
         It is useful to be able to reset a random-number generator to produce
-        a sequence starting from a given value.  Design a new {\lstinline[mathescape=true]$rand$}
+        a sequence starting from a given value.  Design a new <kbd>rand</kbd>
         function
         that is called with an argument that is either the symbol
-        {\lstinline[mathescape=true]$generate$} or the symbol {\lstinline[mathescape=true]$reset$} and behaves as follows: {\lstinline[mathescape=true]$rand("generate")$} produces a new random number; 
-{\lstinline[mathescape=true]$(rand("reset"))($\textit{new-value}$)$} resets the internal state variable to the designated
+        <kbd>generate</kbd> or the symbol <kbd>reset</kbd> and behaves as follows: <kbd>rand("generate")</kbd> produces a new random number; 
+<kbd>(rand("reset"))($\textit{new-value}$)</kbd> resets the internal state variable to the designated
         $\textit{new-value}$.
 Thus, by resetting the state, one can generate
         repeatable sequences.  These are very handy to have when testing and
@@ -388,7 +388,7 @@ Thus, by resetting the state, one can generate
 
 \begin{Answer}[ref={ex:random-with-reset}]
 
-    
+    <div class='snippet' id='javascript_49_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 let state = 2;
@@ -401,7 +401,7 @@ function rand(symbol) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYUwLgBAzmCGYggXggJgNwChMDMCuAdgMZgCWA9gRAE6wEAmAFFAJ4C2ARucAJQQDemCMIikcEZuy7BkSFACJqIKOHl9BIzTXB5qVAiADuAfRjxESAHwChWu2YTIIBkw5BY7wgL4eRXiCDAKjaeEAD0YdBS3KJQEPIA5iAGtAjytvZwjijMWYgAVBAAjAAMpXwApMWlRb52SmC6VG51EP6YXkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=DYUwLgBAzmCGYggXggJgNwChMDMCuAdgMZgCWA9gRAE6wEAmAFFAJ4C2ARucAJQQDemCMIikcEZuy7BkSFACJqIKOHl9BIzTXB5qVAiADuAfRjxESAHwChWu2YTIIBkw5BY7wgL4eRXiCDAKjaeEAD0YdBS3KJQEPIA5iAGtAjytvZwjijMWYgAVBAAjAAMpXwApMWlRb52SmC6VG51EP6YXtj0pFAADsCwLIy0DIyJySCpIGo8WN19A0MjTOMp5jNzPf2Dw3QrSWtpPLPYERAAKgAWPdCX5HjA9BDz2ywQAJxF7wA0EAAsAHZfkVUADsMsxkoVGA1IxUCdMGcAMp5WLaaEQMDkNAQWAJWCkAhdLaLXajVaTdbHTYLHYQilTDaYF6k+kHSlHBFnABCICIsDwwUJpDIsBkbjRYEuiCgsDYIF+nx+-yBxVBaJZgxATzxBIIQA}{\usebox\lstbox}!*/
     } else {
         // symbol is "generate"
         state = (state * 1010) % 1101;
@@ -410,8 +410,9 @@ function rand(symbol) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     
     
@@ -421,21 +422,22 @@ function rand(symbol) {
       
 
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>One common way to implement
-{\lstinline[mathescape=true]$rand_update$} 
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>One common way to implement
+<kbd>rand_update</kbd> 
 is to use the rule that $x$ is updated to $ax+b$
           modulo $m$, where $a$, $b$, and $m$ are appropriately chosen integers.
-          Chapter~3 of 
+          Chapter 3 of 
           
-          Knuth 1981 
+          <CITATION><div class='permalink'>
+<a name='p14' class='permalink'></a><p>Knuth 1981</p></div>Knuth 1981</CITATION> 
           includes an extensive discussion of techniques
           for generating sequences of random numbers and establishing their
           statistical properties.  Notice that the 
-{\lstinline[mathescape=true]$rand_update$} 
+<kbd>rand_update</kbd> 
           function
           computes a mathematical function: Given the same input twice, it
           produces the same output.  Therefore, the number sequence produced by
-{\lstinline[mathescape=true]$rand_update$} 
+<kbd>rand_update</kbd> 
 certainly is not <QUOTE>random,</QUOTE> if by <QUOTE>random</QUOTE> we
           insist that each number in the sequence is unrelated to the preceding
           number.  The relation between <QUOTE>real randomness</QUOTE> and so-called 
@@ -450,11 +452,18 @@ certainly is not <QUOTE>random,</QUOTE> if by <QUOTE>random</QUOTE> we
           
           Kolmogorov, Solomonoff, and Chaitin have made great
           progress in clarifying these issues; a discussion can be found in
-          Chaitin 1975.</FOOTNOTE></div><hr><div class='footnote'>
+          <CITATION>Chaitin 1975</CITATION>.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>This theorem is due to E. 
           
           Cesàro.  See
           section 4.5.2 of  
           
-          Knuth 1981 for a discussion and a proof.</FOOTNOTE></div>
-</SUBSECTION>
+          <CITATION>Knuth 1981</CITATION> for a discussion and a proof.</FOOTNOTE></div>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section1/subsection1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section1/subsection3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+3.1.2  The Benefits of Introducing Assignment</div>	<div class='next-page'></div></div>

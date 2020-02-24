@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>5.2.4 
-  Monitoring Machine Performance
-      </a>
+		<a name='top' class='permalink'>5.2.4  Monitoring Machine Performance</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -23,8 +30,8 @@
   maximum depth reached by the stack, and add a message to the stack's
   interface that prints the statistics, as shown below.
   We also add an operation to the basic machine model to print the
-  stack statistics, by initializing {\lstinline[mathescape=true]$the_ops$} in {\lstinline[mathescape=true]$make_new_machine$} to
-  
+  stack statistics, by initializing <kbd>the_ops</kbd> in <kbd>make_new_machine</kbd> to
+  <div class='snippet' id='javascript_104_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 list(list("initialize-stack", () => stack("initialize")),
@@ -32,15 +39,16 @@ list(list("initialize-stack", () => stack("initialize")),
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYSwzgLgFKlQRCAdiCICGoBeBTAtJOgMYDW8ANAARQCUlAvAHyWGkLKobY7w03kAoSsOGxo8AA4AnZBAIRiJeejSQQRMBWp0mLBW0kykcwqrQbefANxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=DYSwzgLgFKlQRCAdiCICGoBeBTAtJOgMYDW8ANAARQCUlAvAHyWGkLKobY7w03kAoSsOGxo8AA4AnZBAIRiJeejSQQRMBWp0mLBW0kykcwqrQbefANxA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
-  Here is the new version of {\lstinline[mathescape=true]$make_stack$}:
-  
+  Here is the new version of <kbd>make_stack</kbd>:
+  <div class='snippet' id='javascript_104_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_stack() { 
@@ -53,7 +61,7 @@ function make_stack() {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AzlVCdACgEpEBvRAKETsQBtMpFdEBeRMEBhgblr0mLbsgBGmAE7YADiFwALTG04AGAfUbMUqAB7YAJphlQFHROsF1hiCCEmTMYKIeOnzlq4lCRYCRHKKxLrkFF6aKgGoMJLBADSspBqa9KIS0oFKkWlSsvJZiADUiACMySm29o7OriZmnHYOTi5GdUWl5Slo+q3unGim2N3EjdUtbgoJAwpDekleAL7UXj7Q8EgycDJklOH0MMCIxDC42Ny8xLikoXsVUpJwsQBEAKLIJgCerAREAFyIAAUAPIAp7zW6IBaITAMXCYXYVCoQBD4RBQLbmJSoAyXeaIlKRAgwBi4zr40bNWp9SpNGq9MwAWg6y3xmkcUHsSHRMjJ9CWmiWK3Aa38MDAMFgqAYMAAXpgdmF8dkePwITkMvllB5eXRulT6hYdTSxvrtSzEezOYgngYEJgnp1BZpVn4NpIxS58KhYPgYBBcAqIQYTjIGKgPsRCHZkDxvfLiGIEqhyOwAHzfd1gADmBwjyfaiYhrOL0vwxCeAB0wE8Ek90QQGAzMlrODWuCBxLlm7g4kXi-26JXq7XujAY8gGfTzG29fTrni+ea6C71ohg7gZN6IApiMhlLhUFnMDd8ZbJEg97gD0eOOxW5knn26AB+AL5J+If6X6-wu-3raPgOr6bNspAfl++6Hr+d7WmKEowFKsr2h+r5wZK0pymQ4EoJBN5-taMiZlADJej6sD+oB-bAUReAEGRfoBmBA7-Pcjy7rhmC1gAqmA6BgHAADuSCOAAjiAyhQP8ADKAAqACCADCADSYKOkuiBnkg66blA24CAsQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AzlVCdACgEpEBvRAKETsQBtMpFdEBeRMEBhgblr0mLbsgBGmAE7YADiFwALTG04AGAfUbMUqAB7YAJphlQFHROsF1hiCCEmTMYKIeOnzlq4lCRYCRHKKxLrkFF6aKgGoMJLBADSspBqa9KIS0oFKkWlSsvJZiADUiACMySm29o7OriZmnHYOTi5GdUWl5Slo+q3unGim2N3EjdUtbgoJAwpDekleAL7UXj7Q8EgycDJklOH0MMCIxDC42Ny8xLikoXsVUpJwsQBEAKLIJgCerAREAFyIAAUAPIAp7zW6IBaITAMXCYXYVCoQBD4RBQLbmJSoAyXeaIlKRAgwBi4zr40bNWp9SpNGq9MwAWg6y3xmkcUHsSHRMjJ9CWmiWK3Aa38MDAMFgqAYMAAXpgdmF8dkePwITkMvllB5eXRulT6hYdTSxvrtSzEezOYgngYEJgnp1BZpVn4NpIxS58KhYPgYBBcAqIQYTjIGKgPsRCHZkDxvfLiGIEqhyOwAHzfd1gADmBwjyfaiYhrOL0vwxCeAB0wE8Ek90QQGAzMlrODWuCBxLlm7g4kXi-26JXq7XujAY8gGfTzG29fTrni+ea6C71ohg7gZN6IApiMhlLhUFnMDd8ZbJEg97gD0eOOxW5knn26AB+AL5J+If6X6-wu-3raPgOr6bNspAfl++6Hr+d7WmKEowFKsr2h+r5wZK0pymQ4EoJBN5-taMiZlADJej6sD+oB-bAUReAEGRfoBmBA7-Pcjy7rhmC1gAqmA6BgHAADuSCOAAjiAyhQP8ADKAAqACCADCADSYKOkuiBnkg66blA24CAsQA}{\usebox\lstbox}!*/
         s = pair(x, s);
         number_pushes = number_pushes + 1;
         current_depth = current_depth + 1;
@@ -104,13 +112,14 @@ function make_stack() {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
-  Exercises~\ref{ex:instruction-count} through~\ref{ex:breakpoints}
+  Exercises \ref{ex:instruction-count} through \ref{ex:breakpoints}
   describe other useful monitoring and debugging features that can be
   added to the register-machine simulator.
       </p></div>
@@ -122,7 +131,7 @@ function make_stack() {
   
   Measure the number of pushes and the maximum stack depth required to
   compute $n!$ for various small values of $n$ using the factorial
-  machine shown in Figure~\ref{fig:fact-machine}.  From your data
+  machine shown in Figure \ref{fig:fact-machine}.  From your data
   determine formulas in terms of $n$ for the total number of push
   operations and the maximum stack depth used in computing $n!$ for any
   $n > 1$. Note that each of these is a linear function of $n$ and is
@@ -132,8 +141,8 @@ function make_stack() {
   You may want to also modify the
   machine so that it repeatedly reads a value for $n$, computes the
   factorial, and prints the result (as we did for the GCD machine in
-  figure~\ref{fig:gcd-with-io}), so that you will not have to repeatedly
-  invoke {\lstinline[mathescape=true]$get_register_contents$}, {\lstinline[mathescape=true]$set_register_contents$}, and
+  figure \ref{fig:gcd-with-io}), so that you will not have to repeatedly
+  invoke <kbd>get_register_contents</kbd>, <kbd>set_register_contents</kbd>, and
   start.
   
       
@@ -165,8 +174,8 @@ function make_stack() {
   
   <EM>instruction tracing</EM>.
   That is, before each instruction is executed, the simulator should print
-  the text of the instruction.  Make the machine model accept {\lstinline[mathescape=true]$trace_on$} and
-  {\lstinline[mathescape=true]$trace_off$} messages to turn tracing on and off.
+  the text of the instruction.  Make the machine model accept <kbd>trace_on</kbd> and
+  <kbd>trace_off</kbd> messages to turn tracing on and off.
   
       
 \end{Exercise}
@@ -177,11 +186,11 @@ function make_stack() {
 \begin{Exercise}
 
   Extend the instruction tracing of
-  exercise~\ref{ex:reg-machine-instruction-trace} so that before
+  exercise \ref{ex:reg-machine-instruction-trace} so that before
   printing an instruction, the simulator prints any labels that
   immediately precede that instruction in the controller sequence.  Be
   careful to do this in a way that does not interfere with instruction
-  counting (exercise~\ref{ex:instruction-count}).
+  counting (exercise \ref{ex:instruction-count}).
   You will have to make the simulator retain the necessary label information.
       
 \end{Exercise}
@@ -193,10 +202,10 @@ function make_stack() {
 
   
   
-  Modify the {\lstinline[mathescape=true]$make_register$}
+  Modify the <kbd>make_register</kbd>
   function
   of
-  section~\ref{sec:machine-model} so that registers can be traced.
+  section \ref{sec:machine-model} so that registers can be traced.
   Registers should accept messages that turn tracing on and off.  When a
   register is traced, assigning a value to the register should print the
   name of the register, the old contents of the register, and the new
@@ -219,50 +228,55 @@ function make_stack() {
   examine the state of the machine.  You are to implement a
   function
 
-  
-\begin{JavaScript}
-set_breakpoint($machine$, $label$, $n$);
-\end{JavaScript}
-
+  <kbd class='snippet'>
+    
+    
+      set_breakpoint($machine$, $label$, $n$);
+    
+  </kbd>
   that sets a breakpoint just before the $n$th instruction after the
   given label.  For example,
 
-  
+  <div class='snippet' id='javascript_104_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 set_breakpoint(gcd_machine, "test-b", 4);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4UwLg+gRgTiCGBrADgewJYDswAoDmAxgCYQC28BAFliADQAEARGCMGALRSMMAsAlAG4gA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=M4UwLg+gRgTiCGBrADgewJYDswAoDmAxgCYQC28BAFliADQAEARGCMGALRSMMAsAlAG4gA}{\usebox\lstbox}
+</pre>
 
-
-  installs a breakpoint in {\lstinline[mathescape=true]$gcd_machine$} just before the
+</div></div>
+  installs a breakpoint in <kbd>gcd_machine</kbd> just before the
   assignment to register a.  When the simulator reaches the
   breakpoint it should print the label and the offset of the breakpoint
-  and stop executing instructions.  Alyssa can then use {\lstinline[mathescape=true]$get_register_contents$} and {\lstinline[mathescape=true]$set_register_contents$} to manipulate
+  and stop executing instructions.  Alyssa can then use <kbd>get_register_contents</kbd> and <kbd>set_register_contents</kbd> to manipulate
   the state of the simulated machine.  She should then be able to
   continue execution by saying
 
-  
-\begin{JavaScript}
-proceed_machine($machine$);
-\end{JavaScript}
-
+  <kbd class='snippet'>
+    
+    
+      proceed_machine($machine$);
+    
+  </kbd>
   She should also be able to remove a specific breakpoint by means of
 
-  
-\begin{JavaScript}
-cancel_breakpoint($machine$, $label$, $n$);
-\end{JavaScript}
-
+  <kbd class='snippet'>
+    
+    
+      cancel_breakpoint($machine$, $label$, $n$);
+    
+  </kbd>
   or to remove all breakpoints by means of
 
-  
-\begin{JavaScript}
-cancel_all_breakpoints($machine$);
-\end{JavaScript}
-
+  <kbd class='snippet'>
+    
+    
+      cancel_all_breakpoints($machine$);
+    
+  </kbd>
       
 \end{Exercise}
 
@@ -271,4 +285,11 @@ cancel_all_breakpoints($machine$);
       
 
     
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section2/subsection3.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section3/section3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+5.2.4  Monitoring Machine Performance</div>	<div class='next-page'></div></div>

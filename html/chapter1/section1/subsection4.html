@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>1.1.4 
-          Functions
-        </a>
+		<a name='top' class='permalink'>1.1.4  Functions</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
             <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
@@ -48,7 +55,7 @@
               might say, <QUOTE>To square something, take it times itself.</QUOTE>  This is
               expressed in our language as 
               
-              
+              <div class='snippet' id='javascript_5_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function square(x) {
@@ -57,25 +64,24 @@ function square(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3PLU1x4AjABYi7IA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
               
               We can understand this in the following way:
-              
-\begin{JavaScript}
+              <div class='snippet' id='javascript_5_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function square(    x   ) { return x    *     x; }
 //  ^       ^       ^         ^    ^    ^     ^
 // To    square something,  take   it times itself.
-\end{JavaScript}
-
+</pre></div></div>
               
               
               We have here a <EM>compound function</EM>, which has been given the name
-              {\lstinline[mathescape=true]$square$}.  
+              <kbd>square</kbd>.  
               The function represents the operation of multiplying
               something by itself.  The thing to be multiplied is given a local
-              name, {\lstinline[mathescape=true]$x$}, 
+              name, <kbd>x</kbd>, 
               which plays the same role that a pronoun plays in
               natural language.
               
@@ -83,20 +89,11 @@ function square(    x   ) { return x    *     x; }
               
               Evaluating the declaration creates this
               compound function and associates it with the name 
-                {\lstinline[mathescape=true]$square$}.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-            
+                <kbd>square</kbd>.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
 
               
             </p></div>
-	  <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Observe 
-                that there are two different operations
-                being combined here: we are creating the function, and we are giving
-                it the name {\lstinline[mathescape=true]$square$}.  
-                It is possible, indeed important, to be
-                able to separate these two notions—to create functions without
-                naming them, and to give names to functions that have already been
-                created.  We will see how to do this in section \ref{sec:lambda}.</FOOTNOTE></div>
+	  
         </SPLIT>
 
         <SPLIT>
@@ -105,42 +102,16 @@ function square(    x   ) { return x    *     x; }
             <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
               Our simplest form of a function declaration is
-              
-\begin{JavaScript}
+              <kbd class='snippet'>
+                
 function $\textit{name}$( $\textit{parameters}$ ) { return $\textit{expression}$; }
-\end{JavaScript}
-
+                
+              </kbd>
               
               
               The $\textit{name}$ 
               is a symbol to be associated with the function
-              in the environment.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
-              
-              $\textit{parameters}$ are
-              the names used within the body of the function to refer to the
-              corresponding arguments of the function.  The
-              
-              
-              $\textit{expression}$ 
-              after the keyword {\lstinline[mathescape=true]$return$}
-	      is the <EM>return expression</EM> that will yield the value of
-              the function application when the parameters are replaced by
-              the arguments to which the function is 
-              applied.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>$\textit{parameters}$
-              are grouped within 
-              
-              parentheses and separated by commas, just as they
-              would be in an actual call to the function being declared.
-              
-            
-              The
-	      $\textit{parameters}$
-              are grouped within 
-              
-              parentheses and separated by commas, just as they
-              would be in an actual call to the function being declared.
-              
-            
+              in the environment.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
               The 
               
               
@@ -150,17 +121,11 @@ function $\textit{name}$( $\textit{parameters}$ ) { return $\textit{expression}$
               
               
               $\textit{expression}$ 
-              after the keyword {\lstinline[mathescape=true]$return$}
+              after the keyword <kbd>return</kbd>
 	      is the <EM>return expression</EM> that will yield the value of
               the function application when the parameters are replaced by
               the arguments to which the function is 
-              applied.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>$\textit{parameters}$
-              are grouped within 
-              
-              parentheses and separated by commas, just as they
-              would be in an actual call to the function being declared.
-              
-            
+              applied.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
               The
 	      $\textit{parameters}$
               are grouped within 
@@ -172,70 +137,52 @@ function $\textit{name}$( $\textit{parameters}$ ) { return $\textit{expression}$
 
             <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-              Having declared the {\lstinline[mathescape=true]$square$} function, 
+              Having declared the <kbd>square</kbd> function, 
               we can now use it in a <EM>function application expression</EM>,
 	      which we turn into a statement using a semicolon:
-              
+              <div class='snippet' id='javascript_5_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 square(21);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4RwrghgTgpgFAJgIwEoDcQ}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3LU1zwAmAIxF2QA}{\usebox\lstbox}
+</pre>
 
-
-	      The name {\lstinline[mathescape=true]$square$} is
+</div></div>
+	      The name <kbd>square</kbd> is
 	      the <EM>function expression</EM> of the application,
-	      and {\lstinline[mathescape=true]$21$} is the
+	      and <kbd>21</kbd> is the
 	      <EM>argument expression</EM>. 
-              
+              <div class='snippet' id='javascript_5_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 square(2 + 5);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4RwrghgTgpgFAJgAQGokFYCUBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3LU1zwAmRAGpEAViLsgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	      Here, the argument expression is itself a compound expression,
-	      the operator expression {\lstinline[mathescape=true]$2 + 5$}.
-              
+	      the operator expression <kbd>2 + 5</kbd>.
+              <div class='snippet' id='javascript_5_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 square(square(3));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4RwrghgTgpgFKSs4GYCUaDcQ}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3LU1zx9s+AMxEi7IA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	      Of course application expressions can also serve as argument
 	      expressions.
             </p></div>
-          <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Throughout this book, we will
-                
-                
-                describe the general syntax of programs by using italic symbols—e.g., 
-                $\textit{name}$—to denote the
-                <QUOTE>slots</QUOTE> in the expression to be filled in 
-                when such an expression is actually used.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>We shall see in the next section that
-                
-                the body of the function can be a sequence of statements.
-                In this case, the interpreter evaluates each statement in the
-                sequence in turn until a return statement determines the
-                value of the function application.
-              </FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>We shall see in the next section that
-                
-                the body of the function can be a sequence of statements.
-                In this case, the interpreter evaluates each statement in the
-                sequence in turn until a return statement determines the
-                value of the function application.
-              </FOOTNOTE></div>
+          
         </SPLIT>
 
         <SPLIT>
@@ -243,15 +190,13 @@ square(square(3));
           
             <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
-              We can also use {\lstinline[mathescape=true]$square$} 
+              We can also use <kbd>square</kbd> 
               as a building block in declaring other
               functions.  For example, $x^2 +y^2$ 
               can be expressed as 
-              
-\begin{JavaScript}
+              <div class='snippet' id='javascript_5_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 square(x) + square(y);
-\end{JavaScript}
-
+</pre></div></div>
             </p></div>
           
         </SPLIT>
@@ -262,10 +207,10 @@ square(x) + square(y);
             <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
               We can easily declare a function
-              {\lstinline[mathescape=true]$sum_of_squares$}
+              <kbd>sum_of_squares</kbd>
               that, given any two numbers as arguments, produces the
               sum of their squares:
-              
+              <div class='snippet' id='javascript_5_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sum_of_squares(x,y) {
@@ -274,13 +219,14 @@ function sum_of_squares(x,y) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxAWwPp2B5BHEAQwCcBTZACgA8AaATwEpEBvAKEQ8TKhGKXyJlqTANQoCJUhUYBuVgF8gA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3NElgQoQAWwD6cYKLSZcyQgBoAniQrUaOOgxTps+YogDU2mfmWce5ZCPGTpuuQGZ5AFiLsgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
               
-              Now we can use {\lstinline[mathescape=true]$sum_of_squares$}
+              Now we can use <kbd>sum_of_squares</kbd>
               as a building block in constructing further functions:
-              
+              <div class='snippet' id='javascript_5_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function f(a) {
@@ -289,46 +235,68 @@ function f(a) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAFAQwJSIN4ChEGIBOAplCEUgM4gC2A+nMPVQI4hqlXqIDUiARgA0iNIgBUiAEwYA3LgC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAZxAWwPp2B5BHEAQwCcBTZACgA8AaATwEpEBvAKEQ8TKhGKXyJlqTANQoCJUhUYBuVgF9WoSLATjBUqkzacupHn0RVEAKiNzFy6PCTAKhbe07de-dFhwDJlQojEBGGkRfMwAmBgtWJQoAVgigA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
               
               
               The application of functions such as
-              {\lstinline[mathescape=true]$sum_of_squares(3,4)$}
+              <kbd>sum_of_squares(3,4)</kbd>
               is—after operator combination—the
 	      second kind of combination
               of expressions into larger expressions that we encounter. 
 
 	      In addition to compound functions, JavaScript provides a number of
 	      <EM>primitive functions</EM> that are built into the interpreter.
-	      An example is the function {\lstinline[mathescape=true]$math_log$}
+	      An example is the function <kbd>math_log</kbd>
 	      that computes the natural logarithm of its
-	      argument.<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>{\lstinline[mathescape=true]$math_log(1)$} results in the number 0.
-
-	      Primitive functions are used in exactly the same way as compound functions.
-	      Indeed, one could not tell by looking at the definition
-              of {\lstinline[mathescape=true]$sum_of_squares$} given above whether 
-              {\lstinline[mathescape=true]$square$} was built into
-              the interpreter, like {\lstinline[mathescape=true]$math_log$},
-              or defined as a compound function.
-	    
+	      argument.<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
 	      Evaluating the application expression 
-	      {\lstinline[mathescape=true]$math_log(1)$} results in the number 0.
+	      <kbd>math_log(1)</kbd> results in the number 0.
 
 	      Primitive functions are used in exactly the same way as compound functions.
 	      Indeed, one could not tell by looking at the definition
-              of {\lstinline[mathescape=true]$sum_of_squares$} given above whether 
-              {\lstinline[mathescape=true]$square$} was built into
-              the interpreter, like {\lstinline[mathescape=true]$math_log$},
+              of <kbd>sum_of_squares</kbd> given above whether 
+              <kbd>square</kbd> was built into
+              the interpreter, like <kbd>math_log</kbd>,
               or defined as a compound function.
 	    </p></div>
-          <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>The Source language used in this adaptation introduces
-	      names {\lstinline[mathescape=true]$math_*$} for all functions and
+          
+        </SPLIT>
+      <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Observe 
+                that there are two different operations
+                being combined here: we are creating the function, and we are giving
+                it the name <kbd>square</kbd>.  
+                It is possible, indeed important, to be
+                able to separate these two notions—to create functions without
+                naming them, and to give names to functions that have already been
+                created.  We will see how to do this in section \ref{sec:lambda}.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Throughout this book, we will
+                
+                
+                describe the general syntax of programs by using italic symbols—e.g., 
+                $\textit{name}$—to denote the
+                <QUOTE>slots</QUOTE> in the expression to be filled in 
+                when such an expression is actually used.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>We shall see in the next section that
+                
+                the body of the function can be a sequence of statements.
+                In this case, the interpreter evaluates each statement in the
+                sequence in turn until a return statement determines the
+                value of the function application.
+              </FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>The Source language used in this adaptation introduces
+	      names <kbd>math_*</kbd> for all functions and
 	      constants in JavaScript's
 	      \href{https://www.ecma-international.org/ecma-262/9.0/index.html#sec-math-object}{Math library}.
 	      </FOOTNOTE></div>
-        </SPLIT>
-      
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section1/subsection3.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section1/subsection5.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+1.1.4  Functions</div>	<div class='next-page'></div></div>

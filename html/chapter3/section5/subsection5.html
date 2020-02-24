@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>3.5.5 
-    Modularity of Functional Programs and Modularity of Objects
-  </a>
+		<a name='top' class='permalink'>3.5.5  Modularity of Functional Programs and Modularity of Objects</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>\begin{center}\fbox{\textcolor{red}{Note: this section is a work in progress!}}\end{center}
+		<div class='SUBSECTION'><SUBSECTION>\begin{center}\fbox{\textcolor{red}{Note: this section is a work in progress!}}\end{center}
 
   
   
@@ -14,7 +21,7 @@
 
   <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
-    As we saw in section~\ref{sec:benefits-of-assignment}, one of the
+    As we saw in section \ref{sec:benefits-of-assignment}, one of the
     major benefits of introducing assignment is that we can increase the
     modularity of our systems by encapsulating, or <QUOTE>hiding,</QUOTE> parts of
     the state of a large system within local variables.  Stream models can
@@ -22,7 +29,7 @@
     
     
     illustration, we can reimplement the Monte Carlo estimation of $\pi$,
-    which we examined in section~\ref{sec:benefits-of-assignment}, from a
+    which we examined in section \ref{sec:benefits-of-assignment}, from a
     stream-processing point of view.
   </p></div>
 
@@ -32,12 +39,11 @@
     of a random-number generator from programs that used random numbers.
     We began with a
     
-    function {\lstinline[mathescape=true]$rand_update$},
+    function <kbd>rand_update</kbd>,
     whose successive values furnished our supply of random numbers, and used this to produce a
     random-number generator:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_70_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_rand() {
     let x = random_init;
     function rand() {
@@ -47,8 +53,7 @@ function make_rand() {
     return rand;
 }
 const rand = make_rand();
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
@@ -57,7 +62,7 @@ const rand = make_rand();
     se</EM>, just a stream of random numbers produced by successive calls to
     
       
-      {\lstinline[mathescape=true]$rand_update$}:
+      <kbd>rand_update</kbd>:
       
     
     
@@ -73,7 +78,7 @@ const rand = make_rand();
     
       
       
-	{\lstinline[mathescape=true]$random_numbers$}
+	<kbd>random_numbers</kbd>
       
     
     stream:
@@ -89,19 +94,19 @@ const rand = make_rand();
     The
     
       
-      {\lstinline[mathescape=true]$cesaro_stream$}
+      <kbd>cesaro_stream</kbd>
     
     is now fed to a
     
       
-      {\lstinline[mathescape=true]$monte_carlo$}
+      <kbd>monte_carlo</kbd>
     
     function,
     which produces a stream of estimates of probabilities.  The results
     are then converted into a stream of estimates of $\pi$.
     This version of the program doesn't need a parameter telling how many trials to
     perform.  Better estimates of $\pi$ (from performing more
-    experiments) are obtained by looking farther into the {\lstinline[mathescape=true]$pi$}
+    experiments) are obtained by looking farther into the <kbd>pi</kbd>
     stream:
 
     
@@ -116,7 +121,7 @@ const rand = make_rand();
     There is considerable modularity in this approach, because we still
     can formulate a general 
     
-    {\lstinline[mathescape=true]$monte_carlo$} function
+    <kbd>monte_carlo</kbd> function
     that can deal with
     arbitrary experiments.  Yet there is no assignment or local state.
   </p></div>
@@ -126,13 +131,13 @@ const rand = make_rand();
 \begin{Exercise}
 
     
-    Exercise~\ref{ex:random-with-reset}
+    Exercise \ref{ex:random-with-reset}
     discussed generalizing the random-number generator to
     allow one to reset the random-number sequence so as to produce
     repeatable sequences of <QUOTE>random</QUOTE> numbers.  Produce a stream
     formulation of this same generator that operates on an input stream of
-    requests to {\lstinline[mathescape=true]$generate$} a new random number or to
-    {\lstinline[mathescape=true]$reset$} the
+    requests to <kbd>generate</kbd> a new random number or to
+    <kbd>reset</kbd> the
     sequence to a specified value and that produces the desired stream of
     random numbers.  Don't use assignment in your solution.
   
@@ -146,12 +151,12 @@ const rand = make_rand();
     
     
     
-    Redo exercise~\ref{ex:monte-carlo-integration} on Monte Carlo
+    Redo exercise \ref{ex:monte-carlo-integration} on Monte Carlo
     integration in terms of streams.  The stream version of
     
       
       
-	{\lstinline[mathescape=true]$estimate_integral$}
+	<kbd>estimate_integral</kbd>
       
     
     will not have an argument telling how many trials
@@ -161,9 +166,10 @@ const rand = make_rand();
 \end{Exercise}
 
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     A functional-programming view of time
-  
+  </h2></div>
 
   
   
@@ -189,7 +195,7 @@ const rand = make_rand();
     time history of successive states.  In essence, we represent time
     explicitly, using streams, so that we decouple time in our simulated
     world from the sequence of events that take place during evaluation.
-    Indeed, because of the presence of {\lstinline[mathescape=true]$delay$} there may be little
+    Indeed, because of the presence of <kbd>delay</kbd> there may be little
     relation between simulated time in the model and the order of events
     during the evaluation.
   </p></div>
@@ -200,11 +206,10 @@ const rand = make_rand();
     reconsider the implementation of a <QUOTE>withdrawal processor</QUOTE> that
     
     monitors the balance in a bank account.  In
-    section~\ref{sec:costs-of-assignment} we implemented a simplified
+    section \ref{sec:costs-of-assignment} we implemented a simplified
     version of such a processor:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_70_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_simplified_withdraw(balance) {
     function withdraw(amount) {
         balance = balance - amount;
@@ -212,8 +217,7 @@ function make_simplified_withdraw(balance) {
     }
     return withdraw;
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
@@ -222,12 +226,12 @@ function make_simplified_withdraw(balance) {
     
       
       
-	{\lstinline[mathescape=true]$make_simplified_withdraw$}
+	<kbd>make_simplified_withdraw</kbd>
       
     
     produce computational objects,
-    each with a local state variable {\lstinline[mathescape=true]$balance$} that is decremented by
-    successive calls to the object.  The object takes an {\lstinline[mathescape=true]$amount$} as
+    each with a local state variable <kbd>balance</kbd> that is decremented by
+    successive calls to the object.  The object takes an <kbd>amount</kbd> as
     an argument and returns the new balance.  We can imagine the user of a
     bank account typing a sequence of inputs to such an object and
     observing the sequence of returned values shown on a display screen.
@@ -241,7 +245,7 @@ function make_simplified_withdraw(balance) {
     takes as input a balance and a stream of amounts to withdraw and
     produces the stream of successive balances in the account:
 
-    
+    <div class='snippet' id='javascript_70_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function stream_withdraw(balance, amount_stream) {      
@@ -253,9 +257,10 @@ function stream_withdraw(balance, amount_stream) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9AdxigAsATNLAgCgCMsAbLSDAGkVznCj1U1wCUiAN6Ix4gFDjEmKCDRIADlhho6jZhDZTpuvdSEBeAHwp02fEVIUq1HXoePx9Ji0QBaRCWxlqnbrzmgqz2TmHSfBZ4UCoMfjhcYDyRggICANySAL5AA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9AdxigAsATNLAgCgCMsAbLSDAGkVznCj1U1wCUiAN6Ix4gFDjEmKCDRIADlhho6jZhDZTpuvdSEBeAHwp02fEVIUq1HXoePx9Ji0QBaRCWxlqnbrzmgqz2TmHSfBZ4UCoMfjhcYDyRggICANySAL4SEhAIqIg4AJ54-knIiIaIDDCo0XCB-DjUtajUAKwADOwAjF09iAAsXWnpeQVQRaVYEPkBKThVZs2ExOSUNABMA+wlZQncyBkAkBIYAG6MTRbU+7PzSTe47ADMGUA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
     
   </p></div>
@@ -265,7 +270,7 @@ function stream_withdraw(balance, amount_stream) {
     
       
       
-	The function {\lstinline[mathescape=true]$stream_withdraw$}
+	The function <kbd>stream_withdraw</kbd>
       
     
     implements a well-defined mathematical function whose
@@ -274,7 +279,7 @@ function stream_withdraw(balance, amount_stream) {
     
       
       
-	{\lstinline[mathescape=true]$amount_stream$}
+	<kbd>amount_stream</kbd>
       
     
     is the stream of successive values typed by
@@ -284,12 +289,12 @@ function stream_withdraw(balance, amount_stream) {
     object created by
     
       
-      {\lstinline[mathescape=true]$make_simplified_withdraw$}.
+      <kbd>make_simplified_withdraw</kbd>.
     
     However, with the stream version, there is no assignment, no local state variable,
     and consequently none of the theoretical difficulties that we encountered
     
-    in section~\ref{sec:costs-of-assignment}.  Yet the system has state!
+    in section \ref{sec:costs-of-assignment}.  Yet the system has state!
   </p></div>
 
   <div class='permalink'>
@@ -298,7 +303,7 @@ function stream_withdraw(balance, amount_stream) {
     
       
       
-	{\lstinline[mathescape=true]$stream_withdraw$}
+	<kbd>stream_withdraw</kbd>
       
     
     implements a
@@ -308,7 +313,7 @@ function stream_withdraw(balance, amount_stream) {
     is the user's temporal existence that imposes state on the system.  If
     the user could step back from the interaction and think in terms of
     streams of balances rather than individual transactions, the system
-    would appear stateless.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+    would appear stateless.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
   </p></div>
 
   <div class='permalink'>
@@ -344,7 +349,7 @@ function stream_withdraw(balance, amount_stream) {
     whose behavior does not change.  The functional approach is extremely
     
     
-    attractive for dealing with concurrent systems.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+    attractive for dealing with concurrent systems.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
   </p></div>
 
   <div class='permalink'>
@@ -358,7 +363,7 @@ function stream_withdraw(balance, amount_stream) {
     assignment and objects, we would model the fact that Peter and Paul
     share an account by having both Peter and Paul send their transaction
     requests to the same bank-account object, as we saw in
-    section~\ref{sec:costs-of-assignment}.
+    section \ref{sec:costs-of-assignment}.
     From the stream point of view, where there are no <QUOTE>objects</QUOTE> <EM>per
     se</EM>, we have already indicated that a bank account can be modeled as a
     process that operates on a stream of transaction requests to produce a
@@ -366,7 +371,7 @@ function stream_withdraw(balance, amount_stream) {
     and Paul have a joint bank account by merging Peter's stream of
     transaction requests with Paul's stream of requests and feeding the
     result to the bank-account stream process, as shown in
-    figure~\ref{fig:joint-account-stream}.
+    figure \ref{fig:joint-account-stream}.
 
     
 \begin{figure}[H]
@@ -393,13 +398,13 @@ function stream_withdraw(balance, amount_stream) {
     time</QUOTE> as perceived by Peter and Paul, in the sense that, if Peter and
     Paul meet, they can agree that certain transactions were processed
     before the meeting, and other transactions were processed after the
-    meeting.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+    meeting.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
   </p></div>
 
   <div class='permalink'>
 <a name='p18' class='permalink'></a><p>
     This is precisely the same constraint that we had to deal with in
-    section~\ref{sec:nature-of-time}, where we found the need to introduce
+    section \ref{sec:nature-of-time}, where we found the need to introduce
     explicit synchronization to ensure a <QUOTE>correct</QUOTE> order of events in
     concurrent processing of objects with state.  Thus, in an attempt to
     support the functional style, the need to merge inputs from different
@@ -415,12 +420,7 @@ function stream_withdraw(balance, amount_stream) {
     time-bound, interacting objects with state, or we can model the world
     as a single, timeless, stateless unity.  Each view has powerful
     advantages, but neither view alone is completely satisfactory.  A
-    grand unification has yet to emerge.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
-    
-    
-    
-    
-  
+    grand unification has yet to emerge.<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
     
     
     
@@ -429,13 +429,13 @@ function stream_withdraw(balance, amount_stream) {
   </p></div>
 
 <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Similarly in physics, when we observe a moving particle, we
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Similarly in physics, when we observe a moving particle, we
     say that the position (state) of the particle is changing.  However,
     from the perspective of the particle's 
     
     world line in space-time there
-    is no change involved.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>John Backus, the inventor of Fortran, gave high
+    is no change involved.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>John Backus, the inventor of Fortran, gave high
     
     
     
@@ -443,18 +443,18 @@ function stream_withdraw(balance, amount_stream) {
     
     visibility to functional programming when he was awarded
     the ACM Turing award in 1978.  His acceptance speech 
-    (Backus 1978)
+    (<CITATION>Backus 1978</CITATION>)
     strongly advocated the functional approach.  A good overview of
     functional programming is given in 
-    Henderson 1980 and in 
-    Darlington, Henderson, and Turner 1982.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Observe that, for any two streams, there is in general more than one
+    <CITATION>Henderson 1980</CITATION> and in 
+    <CITATION>Darlington, Henderson, and Turner 1982</CITATION>.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Observe that, for any two streams, there is in general more than one
     
     
     acceptable order of interleaving.  Thus, technically, <QUOTE>merge</QUOTE> is a
     relation rather than a function—the answer is not a deterministic
     function of the inputs.  We already mentioned
-    (footnote~\ref{foot:nondeterministic}) that nondeterminism is
+    (footnote \ref{foot:nondeterministic}) that nondeterminism is
     essential when dealing with concurrency.  The merge relation
     illustrates the same essential nondeterminism, from the functional
     perspective.
@@ -464,7 +464,7 @@ function stream_withdraw(balance, amount_stream) {
         
       
     </SPLIT>
-</FOOTNOTE></div><hr><div class='footnote'>
+</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>The object model approximates the world by
     dividing it into separate pieces.  The functional model does not
     modularize along object boundaries.  The object model is useful when
@@ -478,4 +478,11 @@ function stream_withdraw(balance, amount_stream) {
     paradoxes and confusions.  Unifying the object view with the
     functional view may have little to do with programming, but rather
     with fundamental epistemological issues.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section5/subsection4.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/chapter4.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+3.5.5  Modularity of Functional Programs and Modularity of Objects</div>	<div class='next-page'></div></div>

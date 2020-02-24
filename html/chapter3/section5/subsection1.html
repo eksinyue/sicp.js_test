@@ -1,21 +1,28 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>3.5.1 
-    Streams Are Delayed Lists
-  </a>
+		<a name='top' class='permalink'>3.5.1  Streams Are Delayed Lists</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
   
   
   <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
-    As we saw in section~\ref{sec:sequences-conventional-interfaces},
+    As we saw in section \ref{sec:sequences-conventional-interfaces},
     sequences can serve as standard interfaces for combining program
     modules.  We formulated powerful abstractions for manipulating
-    sequences, such as {\lstinline[mathescape=true]$map$}, {\lstinline[mathescape=true]$filter$}, and {\lstinline[mathescape=true]$accumulate$}, that
+    sequences, such as <kbd>map</kbd>, <kbd>filter</kbd>, and <kbd>accumulate</kbd>, that
     capture a wide variety of operations in a manner that is both succinct
     and elegant.
   </p></div>
@@ -34,8 +41,9 @@
 <a name='p3' class='permalink'></a><p>
     To see why this is true, let us compare two programs for computing the
     sum of all the prime numbers in an interval.  The first program is
-    written in standard iterative style:<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+    written in standard iterative style:<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
     
+    <div class='snippet' id='javascript_66_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sum_primes(a, b) {
@@ -47,7 +55,7 @@ function sum_primes(a, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxAWwPoAcBOM0CmyAFAIYA0iARgJSIDeAUIi4qJLAojFATsRDjgolUhAjo6TVjO7BEAoWCiIAfNSnNZ2nASggcSMRLQBuLdoC+iAgBtkBBhe2sY84jGTY8hRcJqaLkGIuvqG3Lz8gsKIANSIAIyU0cpxiMaS5sGs1nYOTtk6egZIPHx+qfFJ6eKZzkGW9TnOjTKhJRHlFIgADDTmlkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABDAzgfQA4CcYFsCmAFGAJSIDeAUIjYlvlCFkkgLzuIq4CGANr-hRQ0AExgA3VHCzESAbkoBfSqEiwEnHv0HCxklNNkVqteo2aJgMMCNESpMsABpEAJnlKV4aPCRWbdvqGzohQOoEOZFS0NGZMSCgAjiDc9IRhQhEGWGQAfIhgJjHFiAD8BUUltABciHowIoLp4fXZLqSVVbTlGbr22Z1diLX+tq3BLr1Z0ogA1IgAjB7Kqj4a9Y0ohNwuAEZRlXEWu4gApIjciOysiAAMCive6gnJqUQAHgcxR0jviABUiHeDy8al8nBAuEwOAIWx2iH2xhiq2eyDCMggcHAUBc3AgEEhXyqMGAiEImOxiHyiOiQ1iDHiF3xkIUXUUiHwvBQ+CRdOQpMIqGheCIFLAUBIRL5pgZFhg6PJWPFc0WLjFUBVeIJuA80vZnO5vOl9PMSHl+AxSo18wWuOZOtZfOUbMqzplprRFu2Lluy0olBQkOFsMIAHYXAsABzuORAA}{\usebox\lstbox}!*/
                 return iter(count + 1, count + accum);
             } else {
                 return iter(count + 1, accum);
@@ -58,38 +66,9 @@ function sum_primes(a, b) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-
-    
-
-
-    
-    
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function sum_primes(a, b) {
-    function iter(count, accum) {
-        if (count > b) {
-            return accum;
-        } else {
-            if (is_prime(count)) {
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxAWwPoAcBOM0CmyAFAIYA0iARgJSIDeAUIi4qJLAojFATsRDjgolUhAjo6TVjO7BEAoWCiIAfNSnNZ2nASggcSMRLQBuLdoC+iAgBtkBBhe2sY84jGTY8hRcJqaLkGIuvqG3Lz8gsKIANSIAIyU0cpxiMaS5sGs1nYOTtk6egZIPHx+qfFJ6eKZzkGW9TnOjTKhJRHlFIgADDTmlkA}{\usebox\lstbox}!*/
-                return iter(count + 1, count + accum);
-            } else {
-                return iter(count + 1, accum);
-            }
-        }
-    }
-    return iter(a, 0);
-}
-
-\end{JavaScriptClickable}
-
-
+</div></div>
 
     
 
@@ -98,9 +77,9 @@ function sum_primes(a, b) {
   <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
     The second program performs the same computation using the sequence
-    operations of section~\ref{sec:sequences-conventional-interfaces}:
+    operations of section \ref{sec:sequences-conventional-interfaces}:
 
-    
+    <div class='snippet' id='javascript_66_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sum_primes(a, b) {
@@ -112,9 +91,10 @@ function sum_primes(a, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxAWwPoAcBOM0CmyAFAIYA0iARgJSIDeAUIi4jgVCDkqRBOiAA2pKAWLEAHpQCedALwA+RBMQBqRNPLNWO3XtYAGLfpP7gMQaJzEYybHkKVtplyYJh0BHCIIYYYKwA3UkEySloaGgBuRgBfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABDAzgfQA4CcYFsCmAFGAJSIDeAUIjYlvlCFkkgLzuIq4CGANr-hRQ0AExgA3VHCzESAbkoBfSqEiwEnHv0HCxklNNkVqteo2aJgMMCNESpMsABpEAJnlKV4aPCRWbdvqGzohQOoEOZFS0NGZMSCgAjiDc9IRhQhEGWGQAfIhgJjHFiAD8BUUltABciHowIoLp4fXZLqSVVbTlGbr22Z1diLX+tq3BLr1Z0ogA1IgAjB7Kqj4a9Y0ohNwuAEZRlXEWu4gApIjciOysiAAMCive6gnJqUQAHgcxR0jviABUiHeDy8al8iHwYBABCw3DCaGsYSw4j4hF4cAA7i4ABYwADm2K+pgY8UQ6IxiHyuIJg2K5Sh-FpMVqGG4MBk5KcTKGEKhMLh+ARYCRKN4aMxc0WOPxhOWoLWCWhmBwBC2O0Q+2M3xJFm4EAg0JAvAFhEI7xcAE8yKx8n95hauTynXdHc6hlZeEjCKhlXh8C5uW6qpDofhYfDEWHRds9iQ4yDKCgldg-VsAOwuBYADncciAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
@@ -122,11 +102,11 @@ function sum_primes(a, b) {
     In carrying out the computation, the first program needs to store only
     the sum being accumulated.  In contrast, the filter in the second
     program cannot do any testing until 
-    {\lstinline[mathescape=true]$enumerate_interval$}
+    <kbd>enumerate_interval</kbd>
     has
     constructed a complete list of the numbers in the interval.  The
     filter generates another list, which in turn is passed to 
-    {\lstinline[mathescape=true]$accumulate$} before being collapsed to form a sum.  Such large
+    <kbd>accumulate</kbd> before being collapsed to form a sum.  Such large
     intermediate storage is not needed by the first program, which we can
     think of as enumerating the interval incrementally, adding each prime
     to the sum as it is generated.
@@ -138,7 +118,7 @@ function sum_primes(a, b) {
     the sequence paradigm to compute the second prime in the interval from
     10,000 to 1,000,000 by evaluating the expression
 
-    
+    <div class='snippet' id='javascript_66_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 head(tail(filter(is_prime,
@@ -146,9 +126,10 @@ head(tail(filter(is_prime,
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BYUwhgJgFALmCWAbKAzJMQCcrwM4H0AHTeAWxABoAoAAjvocbpADsBXczMDfeFjTADcwyAIwAGSeIo0JUyQEolCgNxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABDAzgfQA4CcYFsCmAFGAJSIDeAUIjYlvlCFkkgLzuIq4CGANr-hRQ0AExgA3VHCzESAbkoBfSqEiwEifGBAEs3KPjQwwBrOL6FecAO4AaRAAsYAcwdkqtOgyZIr1xAB8ji4O1J7hiAD8iNr8YRG0AFyIGNwwMn628Qk5Wjr4egZGJgXmvJY2iADUiACM9k6uJPJKlA743CKEUGnlwDC8poSomDgEWTmTebr6hsamZYS1AAyry-Yra6vNzXJAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
@@ -193,28 +174,28 @@ head(tail(filter(is_prime,
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
 	In their most basic form, streams are similar to lists. The empty stream is
-	{\lstinline[mathescape=true]$null$},
-	a non-empty stream is a pair, and the {\lstinline[mathescape=true]$head$} 
-	of the pair is a data item. However, the {\lstinline[mathescape=true]$tail$} of
+	<kbd>null</kbd>,
+	a non-empty stream is a pair, and the <kbd>head</kbd> 
+	of the pair is a data item. However, the <kbd>tail</kbd> of
 	a pair that represents a 
 	non-empty stream is not a stream, but a <EM>nullary function that returns a stream</EM>.
 	The stream returned by the function, we call <EM>the tail of the stream</EM>.
-	If we have a data item {\lstinline[mathescape=true]$x$}
-	and a stream {\lstinline[mathescape=true]$s$}, we can construct a stream
-	whose head is {\lstinline[mathescape=true]$x$} and whose tail is
-	{\lstinline[mathescape=true]$s$} by evaluating
-	{\lstinline[mathescape=true]$pair(x, () => s)$}.
+	If we have a data item <kbd>x</kbd>
+	and a stream <kbd>s</kbd>, we can construct a stream
+	whose head is <kbd>x</kbd> and whose tail is
+	<kbd>s</kbd> by evaluating
+	<kbd>pair(x, () => s)</kbd>.
       </p></div>
 
       <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
 	In order to access the data item of a non-empty stream, we just use
-	{\lstinline[mathescape=true]$head$} as with lists. In order
+	<kbd>head</kbd> as with lists. In order
 	to access the tail of a stream
-	{\lstinline[mathescape=true]$s$}, we need to <EM>apply</EM> 
-	{\lstinline[mathescape=true]$tail(s)$}, i.e. evaluate
-	{\lstinline[mathescape=true]$(tail(s))()$}. For convenience, we therefore define
-        
+	<kbd>s</kbd>, we need to <EM>apply</EM> 
+	<kbd>tail(s)</kbd>, i.e. evaluate
+	<kbd>(tail(s))()</kbd>. For convenience, we therefore define
+        <div class='snippet' id='javascript_66_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function stream_tail(stream) {
@@ -223,9 +204,10 @@ function stream_tail(stream) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9KLGAGwApVNcBKRAbwChEnFMoQ0lCTz1scrSVANz0AvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9KLGAGwApVNcBKRAbwChEnFMoQ0lCTz1scrSVANz0AvvXoU+BImQAORNKQAsAGkSDEAXgB8iBTCUBWdZt2IwIYsSq2hQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
 	
@@ -236,9 +218,10 @@ function stream_tail(stream) {
         We can make and use streams, in just the same way as we can make
         and use lists, to represent aggregate data arranged in a sequence.  In
         particular, we can build stream analogs of the list operations from
-        chapter~2, such as  {\lstinline[mathescape=true]$list_ref$},
-	{\lstinline[mathescape=true]$map$}, and
-	{\lstinline[mathescape=true]$for_each$}:<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+        chapter 2, such as  <kbd>list_ref</kbd>,
+	<kbd>map</kbd>, and
+	<kbd>for_each</kbd>:<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
+        <div class='snippet' id='javascript_66_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function stream_ref(s, n) {
@@ -250,7 +233,7 @@ function stream_map(f, s) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9TYACmQBpEwBKRAbwChFHFMoQ0kkBebxABgaaCmAfkQALbABMSlAUMEAuFOmz5CJFbjxQsMADYzySALSIAjJQDcdAL51QkWAmWYtOLAAciwcsmr1BFjYkGGQ8MBA9Az85eUZRCKjYuKUPXTRvIgksaT9KUmS4+SJqTgA+F1U8dy8fSq0dfRlKK1t7cGh4JFRXfGA4NDxsCDFvcF9-WJhgRCJQ8MjoltpCxiD2RHQQDGtBG0QMPWQMFaKHLKlm3bj17s0+gaGsEbGwX3vtXSXWvdsgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9KLGAGwApVNcBKRAbwChEnFMoQ0lCTz1scrSVANz0AvvVCRYCFL1x5MwcgBpEYGg2YsMbDmsQBeI4gAMjLRcQB+RAAtsAE3JVzl5gC5ZlfIp7eCRGTIVKpIALSIAIzCYhLg0PBIFHx4OFgADqTAqsF0rtq6SDDIeGAgxEEublo2ZRX5bp7pRGhZpPZYTsEhDdUWgoYAfF4paZnZI-JclVQx4pIJMsnywHBoeNgQtlngORr5MMCIpMWl5TN51azsnGggGCJaoogYxMgYl26S7Y7OMVc6G6TfCrdabbaSHJyfDTP6PZjicT0CAIVCIHAATzwyxwhkQzRgrQALKoBgZhgTWgBWUk0clqc6zEQOYrpYhYDF+FK+THY6GqaIxFFgNG8nF4ABMePFY1IAA8hogFQBqKKqMXQmLi0EbLBbUgs5BsjnqrHiiXCIA}{\usebox\lstbox}!*/
     return is_null(s)
            ? null
            : pair(f(head(s)),
@@ -266,42 +249,9 @@ function stream_for_each(fun, s) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-
-        
-	
-      
-        
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function stream_ref(s, n) {
-    return n === 0
-           ? head(s)
-           : stream_ref(stream_tail(s), n - 1);
-}
-function stream_map(f, s) {
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9TYACmQBpEwBKRAbwChFHFMoQ0kkBebxABgaaCmAfkQALbABMSlAUMEAuFOmz5CJFbjxQsMADYzySALSIAjJQDcdAL51QkWAmWYtOLAAciwcsmr1BFjYkGGQ8MBA9Az85eUZRCKjYuKUPXTRvIgksaT9KUmS4+SJqTgA+F1U8dy8fSq0dfRlKK1t7cGh4JFRXfGA4NDxsCDFvcF9-WJhgRCJQ8MjoltpCxiD2RHQQDGtBG0QMPWQMFaKHLKlm3bj17s0+gaGsEbGwX3vtXSXWvdsgA}{\usebox\lstbox}!*/
-    return is_null(s)
-           ? null
-           : pair(f(head(s)),
-                  () => stream_map(f, stream_tail(s)));
-}
-function stream_for_each(fun, s) {
-    if (is_null(s)) {
-        return true;
-    } else {
-        fun(head(s));
-        return stream_for_each(fun, stream_tail(s));
-    }
-}
-
-\end{JavaScriptClickable}
-
-
+</div></div>
 
         
 	
@@ -310,8 +260,8 @@ function stream_for_each(fun, s) {
       <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
 	The function
-        {\lstinline[mathescape=true]$stream_for_each$} is useful for viewing streams:
-        
+        <kbd>stream_for_each</kbd> is useful for viewing streams:
+        <div class='snippet' id='javascript_66_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function display_stream(s) {
@@ -320,9 +270,10 @@ function display_stream(s) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAExgZwA4BsCGBPAfTSgCcBTHAWwAo0BKRAbwChE3FyoQSljyqCwOCQIUIAC2qpMuPABpE9ANzMAvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9TYACmQBpEwBKRAbwChFHFMoQ0kkBebxABgaaCmAfkQALbABMSlAUMEAuFOmz5CJFbjxQsMADYzySALSIAjJQDcdAL51QkWAmWYtOLAAciwcsmr1BFjYkGGQ8MBA9Az85eUZRCKjYuKUPXTRvIgksaT9KUmS4+SJqTgA+F1U8dy8fSq0dfRlKK1t7cGh4JFRXfGA4NDxsCDFvcF9-WJhgRCJQ8MjoltpCxiD2RHQQDGtBG0QMPWQMFaKHLKlm3bj17s0+gaGsEbGwX3vtXSXWvbaHTucPSqjWi90mgQwrA2II0vUoJWsdn+TiQklCHj0WAAnnggbgZKcmLd6g9BsNRmjkBjsRNEXQ6BAEKhEDgcXicIhOIg0jAMgAWcglTkVHkZACsgtKFUSeha1kp1LZ9yIrNxYMsQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
 	
@@ -331,10 +282,10 @@ function display_stream(s) {
       <div class='permalink'>
 <a name='p13' class='permalink'></a><p>
 	The function that represents the tail of a stream is evaluated when it is accessed,
-	using {\lstinline[mathescape=true]$stream_tail$}.
+	using <kbd>stream_tail</kbd>.
 	This design choice is
         reminiscent of our discussion of rational numbers in
-        section~\ref{sec:abstraction-barriers}, where we saw that we can
+        section \ref{sec:abstraction-barriers}, where we saw that we can
         choose to implement rational numbers so that the reduction of
         numerator and denominator to lowest terms is performed either at
         construction time or at selection time.  The two rational-number
@@ -342,10 +293,10 @@ function display_stream(s) {
         an effect on efficiency.  There is a similar relationship between
         streams and ordinary lists.  As a data abstraction, streams are the
         same as lists.  The difference is the time at which the elements are
-        evaluated.  With ordinary lists, both the {\lstinline[mathescape=true]$head$}
-	{\lstinline[mathescape=true]$tail$}
+        evaluated.  With ordinary lists, both the <kbd>head</kbd>
+	<kbd>tail</kbd>
         are evaluated at construction time.  With streams, the
-	{\lstinline[mathescape=true]$tail$} is
+	<kbd>tail</kbd> is
         evaluated at selection time.
       </p></div>
 
@@ -355,15 +306,16 @@ function display_stream(s) {
 	It is a <EM>delayed expression</EM>, a <QUOTE>promise</QUOTE> 
 	to evaluate an expression 
         exp at some future time. Correspondingly, 
-	{\lstinline[mathescape=true]$stream_tail$} forces the tail to fulfill its promise.  
-	It selects the {\lstinline[mathescape=true]$tail$} of the pair and
+	<kbd>stream_tail</kbd> forces the tail to fulfill its promise.  
+	It selects the <kbd>tail</kbd> of the pair and
 	evaluates the delayed expression found there to obtain the rest of the stream.
         
       </p></div>
 
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
         Streams in action
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p15' class='permalink'></a><p>
@@ -371,7 +323,7 @@ function display_stream(s) {
         <QUOTE>outrageous</QUOTE> prime computation we saw above, reformulated in terms
         of streams:
 
-        
+        <div class='snippet' id='javascript_66_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 head(stream_tail(stream_filter(
@@ -381,9 +333,10 @@ head(stream_tail(stream_filter(
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BYUwhgJgFAzgLgJ3AWwPpzASwDa0S1AMxzhASgCgACG2u++zGVABwU2RABpqG+H4SMGhAA7AK6cEYUqkyjSCAG5hcARgAMWjVyq9+Bw0YabtWgJSXzAbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABDAzgfQA4CcYFsCmAFGAJSIDeAUIjYlvlCFkkgLzuIq4CGANr-hRQ0AExgA3VHCzESAbkoBfSqEiwEnHv0HCxklNNkVqteo2aJgMMCNESpMsABpEAJnlKV4aPCRWbdvqGzohQOoEOZFS0NGZMSCgAjiDc9IRhQhEGWGQAfIhgJjHFiAD8BUUltABciHowIoLp4fXZLqSVVbTlGbr22Z1diLX+tq3BLr1Z0ogA1IgAjB7Kqj4a9Y0ohNwuAEZRlXEWu4gApIjciOysiAAMCive6gnJqUQAHgcxR0jviABUiHeDy8al8nCg9G4uDQ+DAIAIWG4YTQ1jCWHEfEIvDgAHcXAALGAAcwJX1MDHiiBxuMQ+SJpMGxXK8P4TJitQw3BgMhpTnZQ0QhDIrHyQihMLhCPwSJRaJlmN42Lxc0WLgFgs1Wq6DLJ8kQngJ+G4IkI4uNMKg3KV5uhaCsvHRhA1gtQmBwBH52qqtsl8MRyPwqLA6MVhAWt0jt3V3tjccWUajJGT8iAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
@@ -393,13 +346,13 @@ head(stream_tail(stream_filter(
 
       <div class='permalink'>
 <a name='p17' class='permalink'></a><p>
-        We begin by calling {\lstinline[mathescape=true]$stream_enumerate_interval$} with
+        We begin by calling <kbd>stream_enumerate_interval</kbd> with
         the arguments 10,000 and 1,000,000.  The function
-	{\lstinline[mathescape=true]$stream_enumerate_interval$}
-        is the stream analog of {\lstinline[mathescape=true]$enumerate_interval$}
-        (section~\ref{sec:sequences-conventional-interfaces}):
+	<kbd>stream_enumerate_interval</kbd>
+        is the stream analog of <kbd>enumerate_interval</kbd>
+        (section \ref{sec:sequences-conventional-interfaces}):
 
-        
+        <div class='snippet' id='javascript_66_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function stream_enumerate_interval(low, high) {
@@ -411,51 +364,43 @@ function stream_enumerate_interval(low, high) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9DMEHDNLKDPGMCtANywBsAKRuAdwBpEALGAcx4BKRAG8AUIimJMUEGiRt2iAHy8BPSdO3SA-IiKNGWndoBciAA5YYaVh04nTzqcxEBeNaky4CREmQUVDSkDCxKiADUiACM3E4uiUnJLnyCQkIA3IjiAL5AA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABDAzgfQA4CcYFsCmAFGAJSIDeAUIjYlvlCFkkgLzuIq4CGANr-hRQ0AExgA3VHCzESAbkoBfSqEiwEnHv0HCxklNNkVqteo2aJgMMCNESpMsABpEAJnlKV4aPCRWbdvqGzohQOoEOZFS0NGZMSCgAjiDc9IRhQhEGWGQAfIhgJjHFiAD8BUUltABciHowIoLp4fXZLqSVVbTlGbr22Z1diLX+tq3BLr1Z0ogA1IgAjB7Kqj4a9Y0ohNwuAEZRlXEWu4gApIjciOysiAAMCive6gnJqUQAHgcxR0jviABUiHeDy8al8nCg9G4uDQ+DAIAIWG4YTQ1jCWHEfEIvDgAHcXAALGAAcwJX1MDHiiBxuMQ+SJpMGxXK8P4TJitQw3BgMhpTnZQ0QhDIrHyQihMLhCPwSJRaJlmN42Lxc0WLgFgs1Wq6DLJ8kQnkoBPw3BEhHFJphUG5Sot0LQVl46MIGsFqEwOAI-O1VTtkvhiOR+FRYHRisIC1uUdu6p9cfji2j0ZIKfkQA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         and thus the result returned by
-	{\lstinline[mathescape=true]$stream_enumerate_interval$},
-        formed by the {\lstinline[mathescape=true]$pair$}, is<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+	<kbd>stream_enumerate_interval</kbd>,
+        formed by the <kbd>pair</kbd>, is<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
+
+        <div class='snippet' id='javascript_66_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 pair(10000, () => stream_enumerate_interval(10001, 1000000));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4QwlgTgFAjADAuAaABFAlCgvAPhQZwBcIBTEAWwH0SA7AV3JIhEJMrBtYgDcQAbWIhip4iBOnQBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9DMEHDNLKDPGMCtANywBsAKRuAdwBpEALGAcx4BKRAG8AUIimJMUEGiRt2iAHy8BPSdO3SA-IiKNGWndoBciAA5YYaVh04nTzqcxEBeNaky4CREmQUVDSkDCxKiADUiACM3E4uiUnJLnyCQkIA3IjiAL7i1rbMMQAMZSXcboieKOjY+ITEpOSU1LRhxeVxseXlGZlAA}{\usebox\lstbox}
+</pre>
 
-
-      
-
-        
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-pair(10000, () => stream_enumerate_interval(10001, 1000000));
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4QwlgTgFAjADAuAaABFAlCgvAPhQZwBcIBTEAWwH0SA7AV3JIhEJMrBtYgDcQAbWIhip4iBOnQBuIA}{\usebox\lstbox}
-
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p18' class='permalink'></a><p>
-        That is, {\lstinline[mathescape=true]$stream_enumerate_interval$}
+        That is, <kbd>stream_enumerate_interval</kbd>
         returns a stream represented as a pair whose
-	{\lstinline[mathescape=true]$head$}
-        is 10,000 and whose {\lstinline[mathescape=true]$tail$}
+	<kbd>head</kbd>
+        is 10,000 and whose <kbd>tail</kbd>
 	is a promise to enumerate more of the
         interval if so requested.  This stream is now filtered for primes,
-        using the stream analog of the {\lstinline[mathescape=true]$filter$} function
-        (section~\ref{sec:sequences-conventional-interfaces}):
+        using the stream analog of the <kbd>filter</kbd> function
+        (section \ref{sec:sequences-conventional-interfaces}):
 
-        
+        <div class='snippet' id='javascript_66_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function stream_filter(pred, s) {
@@ -467,15 +412,16 @@ function stream_filter(pred, s) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9YGAGygzQAoAHTAEwBoUBKRAbwChFPFMoQ0kYyPGBBEi5ZIw5cZXAPyIRY6bJkAuRNQw1yAC2w7JU1SYWUsMCvqyHGdFScedyzALwA+FOmz5CJMlS0DA5OoWGqqJi4eFAW4kbG4RqRPgTEpBRa9CHh4SnRscQSjIwA3GwAvkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9KLGAGwApVNcBKRAbwChEnFMoQ0lCTz1scrSVANz0AvvVCRYCFL1x5gJKBjSkADpgAmAGhQ0GzFhjYdEMZHjAhiZZFUaHHiAPyIrNh0+YAuRBoyapAAW2IF29l5OrmpEqiFYYVTanpGpgogAvAB8spT4isTKqv46iCmpFZVOFHwERLZUjeWRvjXyBUXqWslVvYZt+FwNwmL09BAIqIg4AJ54A5l+saQArLrp2UswqgBs6zSbMdukAOz7mTnuxI0jE2BTswpKKgHzcjiZKQNPhSqkAB4XRCAgCkiAATJkMhlEAAGXSPAYjTTmNTELBzAakR4dF6aN55YRAA}{\usebox\lstbox}!*/
                                         stream_tail(s)))
              : stream_filter(pred,
                              stream_tail(s));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
 	
@@ -483,46 +429,45 @@ function stream_filter(pred, s) {
 
       <div class='permalink'>
 <a name='p19' class='permalink'></a><p>
-        The function {\lstinline[mathescape=true]$stream_filter$} tests the
-	{\lstinline[mathescape=true]$head$} of the stream (which is 10,000).  Since this is
-	not prime, {\lstinline[mathescape=true]$stream_filter$} examines the tail
+        The function <kbd>stream_filter</kbd> tests the
+	<kbd>head</kbd> of the stream (which is 10,000).  Since this is
+	not prime, <kbd>stream_filter</kbd> examines the tail
 	of its input
-        stream.  The call to {\lstinline[mathescape=true]$stream_tail$} forces evaluation of the delayed
-        {\lstinline[mathescape=true]$stream_enumerate_interval$}, which now returns
+        stream.  The call to <kbd>stream_tail</kbd> forces evaluation of the delayed
+        <kbd>stream_enumerate_interval</kbd>, which now returns
 
-        
+        <div class='snippet' id='javascript_66_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 pair(10001, () => stream_enumerate_interval(10002, 1000000));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4QwlgTgFAjADAmAaABFAlCgvAPhQZwBcIBTEAWwH0SA7AV3JIhEJMrBtYgDcQAbWAjgAmVPCEJ06ANxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9DMEHDNLKDPGMCtANywBsAKRuAdwBpEALGAcx4BKRAG8AUIimJMUEGiRt2iAHy8BPSdO3SA-IiKNGWndoBciAA5YYaVh04nTzqcxEBeNaky4CREmQUVDSkDCxKiADUiACM3E4uiUnJLnyCQkIA3IjiAL7i1rbMMQAMZXGIboieKOjY+ITEpOSU1LRhxWUlAEzcpV1lGZlAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p20' class='permalink'></a><p>
 	The function
-        {\lstinline[mathescape=true]$stream_filter$} 
-	now looks at the {\lstinline[mathescape=true]$head$}
+        <kbd>stream_filter</kbd> 
+	now looks at the <kbd>head</kbd>
 	of this stream,
         10,001, sees that this is not prime either, forces another 
-	{\lstinline[mathescape=true]$stream_tail$}, and so on, until 
-	{\lstinline[mathescape=true]$stream_enumerate_interval$} yields
-        the prime 10,007, whereupon {\lstinline[mathescape=true]$stream_filter$}, according to its
+	<kbd>stream_tail</kbd>, and so on, until 
+	<kbd>stream_enumerate_interval</kbd> yields
+        the prime 10,007, whereupon <kbd>stream_filter</kbd>, according to its
         definition, returns
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_66_12_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 pair(head(stream), stream_filter(pred, stream_tail(stream)));
-\end{JavaScript}
-
+</pre></div></div>
 
         which in this case is
 
-        
+        <div class='snippet' id='javascript_66_13_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 pair(10007,
@@ -534,26 +479,27 @@ pair(10007,
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4QwlgTgFAjADAg7AGgFAAJOagSnQXgD50BnAFwgFMQBbAfQDMwAbMy6MEu4CMGytFiHCsoSLARwAHIJFyRuAsXJVadSgDsArvwgg2dMBrYQAbiGYSEATmToM8x0+cv08SQhw5UASBHehHABuIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABDAzgfQA4CcYFsCmAFGAJSIDeAUIjYlvlCFkkgLzuIq4CGANr-hRQ0AExgA3VHCzESAbkoBfSqEiwEnKPW640+MCAJZuUfGhhhTWcX0K84AdwA0iABYwA5q7JVadBkxI9g6IAHxunq7UfjGIAPyIBvzRsbQAXIgY3DAywU4pqYWEZKzhQtq6+ob4xqbmljU2vHaOiADUiACMLgWFff0Dhe5eJPKISpRZOYSdAAzzAOz5McWIpZoVaMAwvFaEqJg4BMuDNFMyc-MAHCenKyVlWvg6egZGJmYWVk0z87MAnD07sCQalLn9ZqNKABIWIkAryIA}{\usebox\lstbox}!*/
     );
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p21' class='permalink'></a><p>
-        This result is now passed to {\lstinline[mathescape=true]$stream_tail$} in our
+        This result is now passed to <kbd>stream_tail</kbd> in our
         original expression.  This forces the delayed
-	{\lstinline[mathescape=true]$stream_filter$}, 
+	<kbd>stream_filter</kbd>, 
 	which in turn keeps forcing the delayed
-	{\lstinline[mathescape=true]$stream_enumerate_interval$} 
+	<kbd>stream_enumerate_interval</kbd> 
 	until it finds the next prime, which is
-        10,009.  Finally, the result passed to {\lstinline[mathescape=true]$head$} in our
+        10,009.  Finally, the result passed to <kbd>head</kbd> in our
         original expression is
 
-        
+        <div class='snippet' id='javascript_66_14_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 pair(10009,
@@ -565,18 +511,19 @@ pair(10009,
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4QwlgTgFAjADAgnAGgFAAJOagSnQXgD50BnAFwgFMQBbAfQDMwAbMy6MEu4CMGytFiHCsoSLATxBImSNwFi5KrTqUAdgFd+EEGzpg1bCADcQzCXBgxk6DLPsPHT9PARucOO089CcAbiA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABDAzgfQA4CcYFsCmAFGAJSIDeAUIjYlvlCFkkgLzuIq4CGANr-hRQ0AExgA3VHCzESAbkoBfSqEiwEnKPW640+MCAJZuUfGhhhTWcX0K84AdwA0iABYwA5q7JVadBkxI9g6IAHxunq7UfjGIAPyIBvzRsbQAXIgY3DAywU4pqYWEZKzhQtq6+ob4xqbmljU2vHaOiADUiACMLgWFff0Dhe5eJPKISpRZOYSdAAzzAJz5McWIpZoVaMAwvFaEqJg4BMuDNFMyc7NzJ6crJWVa+Dp6BkYmZhZWTTPznd3jt0BQNSl3m81GvT6JAK8iAA}{\usebox\lstbox}!*/
     );
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p22' class='permalink'></a><p>
 	The function
-        {\lstinline[mathescape=true]$head$} returns 10,009,
+        <kbd>head</kbd> returns 10,009,
 	and the computation is complete.  Only as
         many integers were tested for primality as were necessary to find the
         second prime, and the interval was enumerated only as far as was
@@ -598,9 +545,10 @@ pair(10009,
       </p></div>
 
 
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
         An optimization
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p24' class='permalink'></a><p>
@@ -619,19 +567,19 @@ pair(10009,
         include.  In many applications, we end up forcing the same delayed object
         many times.  This can lead to serious inefficiency in recursive
         programs involving streams.  (See
-        exercise~\ref{ex:fib-stream-efficiency}.)  The solution is to build
+        exercise \ref{ex:fib-stream-efficiency}.)  The solution is to build
         delayed objects so that the first time they are forced, they store the
         value that is computed.  Subsequent forcings will simply return the
         stored value without repeating the computation.  In other words, we
         implement the construction of stream pairs as a memoized function
-        similar to the one described in exercise~\ref{ex:memoization}.
+        similar to the one described in exercise \ref{ex:memoization}.
 	One way to accomplish this is to use the following function,
 	which takes as argument a function
         (of no arguments) and returns a memoized version of the function.
 	The first time the memoized function is run, it saves the computed result.
 	On subsequent evaluations, it simply returns the result.
 
-        
+        <div class='snippet' id='javascript_66_15_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function memo(fun) {	    
@@ -643,7 +591,7 @@ function memo(fun) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwKbLgClGAlIgbwEhFTEAoMxAG1SkQENqAnVBgEwE8B9Z8RALyJgTAM6oA3JTK16rUSGr0h4dqmAwwqdlKqsoIZkkz4BAPkLSq1m1RjBEmAIRNWHHnzyXbP34nmKysLgJrp+4WSubFy8-EJQfJJWEX76hkgBSmEpNgC+iKjU4t45qXTp-qgKWcmlpLnkJD65UrlAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwKbLgClGAlIgbwEhFTEAoMxAG1SkQENqAnVBgEwE8B9Z8RALyJgTAM6oA3JTK16rUSGr0h4dqmAwwqdlKqsoIZkkz4BAPkLSq1m1RjBEmAIRNWHHnzyXbP34nmKysLgJrp+4WSubFy8-EJQfJJWEX76hkgBSmEpNgC+iKjU4t45qXTp-qgKWcmlpLnkJD65Ug3kONDwSKIAjiAMrNwALCYlpBAIonJVgYKIQ4gAVPMSTaTJ7DCiAA7UDJyYAETIgTC7MBAMsAiIl8zMMNqIcCBQh7jZlQZGldVQreQJmApih0HBuL1+oMFkI0BhMJCBqhhh9yJsdnsDnDwYjoSYPogAPSExCiAAWcAA7qJEMdTrsAHQMw5ora7faYbEQvpI4b4iREknsOBVRBgOD0clU2knJRnahMw5AA}{\usebox\lstbox}!*/
                          already_run = true;
                          return result;
                      } else {
@@ -653,8 +601,9 @@ function memo(fun) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
 	
@@ -662,9 +611,9 @@ function memo(fun) {
 
       <div class='permalink'>
 <a name='p26' class='permalink'></a><p>
-	We can make use of {\lstinline[mathescape=true]$memo$} whenever
+	We can make use of <kbd>memo</kbd> whenever
 	we construct a stream pair. For example, instead of 
-        
+        <div class='snippet' id='javascript_66_16_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function stream_map(f, s) {
@@ -676,12 +625,15 @@ function stream_map(f, s) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9HLABwApgAaFASkQG8AoRJxTKENJGZPMEAGz4lkVRszHMA-Il4DR4sQC5ERLDDRkSAC2wATIVSrk58k0xI0AvAD4U6bPkKkKtzLjxRVg4QYDc9AL5AA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9HLABwApgAaFASkQG8AoRJxTKENJGZPMEAGz4lkVRszHMA-Il4DR4sQC5ERLDDRkSAC2wATIVSrk58k0xI0AvAD4U6bPkKkKtzLjxRVg4QYDc9AL709KCQsAgu9niYwEKUYDQMYqzsSEgW6YgADMYmUtpYesI58kqorvjRQnZuHjBehtKIALSIAIxUfoH0EAioiDgAnnhl9ogWyqrqACyU5mM2KmokAKyzljYyfL5BPWB9g8PV+ABMY8Yjbo4kAB7zdIg6XER8WAM3HSwYbByI1z6I-koxVM-SGFxwHSC4KiGBiB2hx0o7T80Mq8KOeERbUhAHocYgoNppCAcAAjDBoRDLRBcFCaOAAdyQUAZMAgGHoeMQ5IgWBAyAwBKJyFwgp0GBeAwwOk5+LgpIAVhhoDTkIhgHA0OydATWez6OgQBgfEA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	
-	we can define an optimized function {\lstinline[mathescape=true]$stream_map$}
-	as follows:<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
+	we can define an optimized function <kbd>stream_map</kbd>
+	as follows:<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
+
+	<div class='snippet' id='javascript_66_17_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function stream_map_optimized(f, s) {
@@ -693,35 +645,13 @@ function stream_map_optimized(f, s) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9HLABzziNhxgC8MATACmABoUBKRAbwChFfFMoINEhjI8YEABtJ9ZKx59FfAPyIJ0hUsUAuRESww0jegAtsDOayaatt3jgw449RPXYBeAHwp02fIRIyCmo6ehs7CMjeZh9MXDwoAxlLRFZWAG4uAF8gA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwKbLgClGAlIgbwEhFTEAoMxAG1SkQENqAnVBgEwE8B9Z8RALyJgTAM6oA3JTK16rUSGr0h4dqmAwwqdlKqsoIZkkz4BAPkLSq1m1RjBEmAIRNWHHnzyXbP34nmKysLgJrp+4WSubFy8-EJQfJJWEX76hkgBSmEpNgC+iKjU4t45qXTp-qgKWcmlpLnkJD65Ug040PBIoglsyNzIDAAO3HCDsMgwAF7a2AA0iKL4BMlpRogwotxgitSYi7U2APyI29TUB9YAXIiDDDDM2JgAFtF7uLizF+FoGJiOphZum4+gNhqNxlMZl86r5gPMgb1uFA7rtFvh3q1yOQIAhuigeAiGMhBDc7g8ACzzEyCCy3e6YACsVIBJx2GKxOLAeOQBJ6RO4ACZBMlCSChpgAB40wiIdgbQbUBicSW4CSVAxrCVq3LzaE2HncUWqrGi3jqTAG00C+YARmNptYwAtvOBgttxoA9B7EFAXqzkAAjVDMRAM9aiBZPOAAdyQUGjMAgqHIXsQQYgDBAxV9qAWRNzakVnG0Ke9cADACtUNBw8I4Mwk+wfQmkxzcfRLXy+gBmYVUU2gkZjGATabsSXSgiy+VFlVq1ZILWIHUUUqd4HG8gO83rxHd91SbdO3f8-eIO1SVM5-1BkNhjaRmNIBDUTiIBCt1PpzPZv2ZehwA4wD1hAmgAOalj6fqFkq2jvpW1b0A+PxwJC7DkAkICSEAA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-
-	
-
-      
-
-	
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function stream_map_optimized(f, s) {
-    return is_null(s)
-           ? null
-           : pair(f(head(s)),
-                  memo( () => stream_map_optimized(
-                                 f, stream_tail(s)) ));
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9HLABzziNhxgC8MATACmABoUBKRAbwChFfFMoINEhjI8YEABtJ9ZKx59FfAPyIJ0hUsUAuRESww0jegAtsDOayaatt3jgw449RPXYBeAHwp02fIRIyCmo6ehs7CMjeZh9MXDwoAxlLRFZWAG4uAF8gA}{\usebox\lstbox}!*/
-}
-
-\end{JavaScriptClickable}
-
-
+</div></div>
 
 	
 
@@ -732,18 +662,16 @@ function stream_map_optimized(f, s) {
 \begin{Exercise}
 
 	
-	Define a function {\lstinline[mathescape=true]$stream_combine$}
+	Define a function <kbd>stream_combine</kbd>
 	that takes a binary function and two streams as arguments and returns
 	a stream whose elements are the results of applying the function
 	pairwise to the corresponding elements of the argument streams.
 
-	
-\begin{JavaScript}
+	<div class='snippet' id='javascript_66_18_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function stream_combine(f, s1, s2) {
     ...
 }
-\end{JavaScript}
-
+</pre></div></div>
 
 	
 	
@@ -759,7 +687,7 @@ function stream_combine(f, s1, s2) {
 	In order to take a closer look at delayed evaluation, we will use the
 	following function, which simply returns its argument after printing it:
 
-      
+      <div class='snippet' id='javascript_66_19_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function show(x) {
@@ -769,12 +697,15 @@ function show(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwBZwO4AoAeBKRAbwChEzEATGZABwBsBDAT1zwG5TyAnAUyhC5IcHAL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZwBZwO4AoAeBKRAbwChEzEATGZABwBsBDAT1zwG5TyAnAUyhC5IcHAL5A}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
       What does the interpreter print in response to evaluating each
-      expression in the following sequence?<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
+      expression in the following sequence?<a class='superscript' id='footnote-link-5' href='#footnote-5'>[5]</a>
+
+      <div class='snippet' id='javascript_66_20_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 let x = stream_map(show, stream_enumerate_interval(0, 10));
@@ -783,16 +714,17 @@ stream_ref(x, 7);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYUwLgBAHhC8EGcwCcQEMC2B9DaAOAFAgBYD2A7gDSIrrYgB2ArhiMmmCFgJYOfIA3NMAIAGagEZRASmkBuAFBJUmLKgBmBKNQCs8pbVUat1AOzygA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9DMEHDNLKDPGMCtANywBsAKRuAdwBpEALGAcx4BKRAG8AUIimJMUEGiRt2iAHy8BPSdO3SA-IiKNGWndoBciAA5YYaVh04nTzqcxEBeNaky4CREmQUVDSkDCxKiADUiACM3E4uiUnJLnyCQkIA3IjiAL7ioJCwCCg8HMwAHiIS2gAmMMiWjFgAnpVZTrLySBWZeeKMGFCIFYjuKOjY+DhYlszIZVwTPviExKTklNS0YcwADNwxexl93lN4mMCV3ACsHWe+l9eIAOxZQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
       <SPLIT>
 	
 	  What does the evaluator print if 
-	  {\lstinline[mathescape=true]$stream_map_optimized$}
-	  is used instead of {\lstinline[mathescape=true]$stream_map$}?
-      
+	  <kbd>stream_map_optimized</kbd>
+	  is used instead of <kbd>stream_map</kbd>?
+      <div class='snippet' id='javascript_66_21_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 let x = stream_map_optimized(
@@ -803,46 +735,10 @@ stream_ref(x, 7);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYUwLgBAHhC8EGcwCcQEMC2B9DaAOWA9nmAJYakBeIAJgBQBQEzLrzCAFoQO4A0ETNkKSpMWEADsArhhDI0YEFlITFyAG5pgdAAz8AjDoCURgNwMR6bKgBmdKPwCsZiyitZb9-gHYzQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9HLABzziNhxgC8MATACmABoUBKRAbwChFfFMoINEhjI8YEABtJ9ZKx59FfAPyIJ0hUsUAuRESww0jegAtsDOayaatt3jgw449RPXYBeAHwp02fIRIyCmo6ehs7CMjeZh9MXDwoAxlLRFZWAG4uAF8uUEhYBFi-PAwJBzQsKAw8GDAqtAA3LBlJOAB3FhMYAHMTdm5FASEkVrbEby7e8K1VdUlppV19Q3pR6yjbN0QvIvjSkHLK6tr6ppb2xABqRABGFgWNx6fFSb6MxGzc8Gh4JGQTdr0AAe-RstFEREkWAAnsCMjYhsJEEDMjlJBgoMjtrt-MRSOQYJQaAwHop-u17htUHF8PtDlUanUMI1mvQAAwsG5stKZanFTDAYEsACs8L58QFQsQAHYMkA}{\usebox\lstbox}
+</pre>
 
-
-	
-      </SPLIT>
-      
-      
-
-      
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-let x = stream_map(show, stream_enumerate_interval(0, 10));
-stream_ref(x, 5);
-stream_ref(x, 7);
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYUwLgBAHhC8EGcwCcQEMC2B9DaAOAFAgBYD2A7gDSIrrYgB2ArhiMmmCFgJYOfIA3NMAIAGagEZRASmkBuAFBJUmLKgBmBKNQCs8pbVUat1AOzygA}{\usebox\lstbox}
-
-
-
-      <SPLIT>
-	
-	  What does the evaluator print if 
-	  {\lstinline[mathescape=true]$stream_map_optimized$}
-	  is used instead of {\lstinline[mathescape=true]$stream_map$}?
-      
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-let x = stream_map_optimized(
-            show, 
-            stream_enumerate_interval(0, 10));
-stream_ref(x, 5);
-stream_ref(x, 7);
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYUwLgBAHhC8EGcwCcQEMC2B9DaAOWA9nmAJYakBeIAJgBQBQEzLrzCAFoQO4A0ETNkKSpMWEADsArhhDI0YEFlITFyAG5pgdAAz8AjDoCURgNwMR6bKgBmdKPwCsZiyitZb9-gHYzQA}{\usebox\lstbox}
-
-
+</div></div>
 	
       </SPLIT>
       
@@ -857,7 +753,7 @@ stream_ref(x, 7);
         
         Consider the sequence of expressions
 
-        
+        <div class='snippet' id='javascript_66_22_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 let sum = 0;
@@ -871,7 +767,7 @@ const seq = stream_map(
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYUwLgBAzgrgthAvBADAbgFAYGYwHYDGYAlgPZ4QCGBB8AFAB4CUEA3hhJ9PEhAxAGpucTFwgAncDHEVYIjAF8sBclEhQQAR15rJlOAH04lAA50OYy1eq04AGggWrz6GD2GQeeCHGUwIA2I8f3EAN0pgOgBGBwAmFCYmTBU8NQgATx03EH0DbGJgELpiKAMQUM8HDU0k5VVIAC8s9zyCov5EAD4+CABSCABWJERkFCqtWoxdHMNJbDp0hwB2SYATEpNgSnSDaf06BqSgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAZygJwKYEMC2B9DMEHDNLKDPGMCtANywBsAKRuAdwBpEALGAcx4BKRAG8AUIimJMUEGiRt2iAHy8BPSdO3SA-IiKNGWndoBciAA5YYaVh04nTzqcxEBeNaky4CREmQUVDSkDCxKiADUiACM3E4uiUnJLnyCQkIA3IjiAL7ioJCwCIgwyAR0hMxgIhLasvJISACkiABMiO5diAAMmXkF4NDwSAAmZZaMWACeeN7YOMzItU4NCijoC3jAcGgEWBA8zOPIkzPcy-35jBhQKMSdvf2DRSOIBxDEzAAeK9rID3ciG+UXuOH69VujTBV3E4ggCFQKAwAEdHvNfDgsJZmAlkh9iPEUv9Nr5CMRSORKNRaGFmHF2j0Mv0EWAkdN0aT8MAYIxaMwyhVCBdUVk4aykQAvTk+bm8-kgzzAxCtACsnW6PRFKLF4gx+EwwGY024AHZdSczrN9cxJVkgA}{\usebox\lstbox}!*/
                 accum, 
                 stream_enumerate_interval(1, 20));
 const y = stream_filter(is_even, seq);
@@ -883,16 +779,17 @@ stream_ref(y, 7);
 display_stream(z);
 
 \end{JavaScriptClickable}
+</pre>
 
+</div></div>
 
-
-        What is the value of {\lstinline[mathescape=true]$sum$} after each of
+        What is the value of <kbd>sum</kbd> after each of
 	the above expressions is evaluated?  What is the printed response
 	to evaluating the 
-	{\lstinline[mathescape=true]$stream_ref$} and 
-	{\lstinline[mathescape=true]$display_stream$}
+	<kbd>stream_ref</kbd> and 
+	<kbd>display_stream</kbd>
 	expressions? Would these responses differ if we had applied the
-	function {\lstinline[mathescape=true]$memo$}
+	function <kbd>memo</kbd>
 	on every tail of every constructed stream pair, as suggested
 	in the optimization above? Explain.
         
@@ -900,24 +797,36 @@ display_stream(z);
 \end{Exercise}
 
 
-    <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>This should bother you.
+    
+
+  </SPLIT>
+
+<hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Assume that we have a
+    predicate
+    
+      
+      <kbd>is_prime</kbd>
+    
+    (e.g., as in section \ref{sec:primality}) that
+    tests for primality.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>This should bother you.
 	The fact that we are defining such similar functions
         for streams and lists indicates that we are missing some
         underlying abstraction.  Unfortunately, in order to exploit this
         abstraction, we will need to exert finer control over the process of
         evaluation than we can at present.  We will discuss this point further
-        at the end of section~\ref{sec:streams-and-delayed-evaluation}.
-        In section~\ref{sec:lazy-evaluation}, we'll develop
-	a framework that unifies lists and streams.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>The numbers shown
+        at the end of section \ref{sec:streams-and-delayed-evaluation}.
+        In section \ref{sec:lazy-evaluation}, we'll develop
+	a framework that unifies lists and streams.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>The numbers shown
 	here do not really appear in the delayed expression.  What actually appears is
         the original expression, in an environment in which the variables are
         bound to the appropriate numbers.  For example,
-	{\lstinline[mathescape=true]$low + 1$} with
-        {\lstinline[mathescape=true]$low$} bound to 10,000 actually appears where
-	{\lstinline[mathescape=true]$10001$} is shown.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>There are many
+	<kbd>low + 1</kbd> with
+        <kbd>low</kbd> bound to 10,000 actually appears where
+	<kbd>10001</kbd> is shown.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>There are many
           possible implementations of streams other than the one described in
           this section.  Delayed evaluation, which is the key to making streams
           practical, was inherent in 
@@ -932,7 +841,7 @@ display_stream(z);
           
           
           Friedman and Wise (1976). In their
-          implementation, {\lstinline[mathescape=true]$cons$}
+          implementation, <kbd>cons</kbd>
 	  always delays evaluating its arguments, so
           that lists automatically behave as streams.  The memoizing
           optimization is also known as 
@@ -943,9 +852,9 @@ display_stream(z);
           <EM>call-by-need</EM>.  The Algol community
           would refer to our original delayed objects as <EM>call-by-name
           thunks</EM> and to the optimized versions as <EM>call-by-need thunks</EM>.
-	</FOOTNOTE></div><hr><div class='footnote'>
+	</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>Exercises
-      such as~\ref{ex:delayed1} and~\ref{ex:delayed2}
+      such as \ref{ex:delayed1} and \ref{ex:delayed2}
       are valuable for testing our understanding of how delayed evaluation works.
       On the other hand, intermixing delayed evaluation with printing—and,
       even worse, with assignment—is extremely confusing, and instructors
@@ -958,16 +867,11 @@ display_stream(z);
       our programs.  Unfortunately, this is precisely what we cannot afford
       to do in the presence of assignment, which forces us to be concerned
       with time and change.</FOOTNOTE></div>
-
-  </SPLIT>
-
-<hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>Assume that we have a
-    predicate
-    
-      
-      {\lstinline[mathescape=true]$is_prime$}
-    
-    (e.g., as in section~\ref{sec:primality}) that
-    tests for primality.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section5/section5.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section5/subsection2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+3.5.1  Streams Are Delayed Lists</div>	<div class='next-page'></div></div>

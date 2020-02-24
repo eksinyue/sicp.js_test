@@ -1,6 +1,15 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>4.1 The Metacircular Evaluator</a>
+		<a name='top' class='permalink'>4.1  The Metacircular Evaluator</a>
 	</div>
 </div>
 	<div class='chapter-text'>
@@ -26,9 +35,7 @@
       However, evaluation is a process, so it is appropriate to describe the evaluation process
       using JavaScript, 
       which, after all, is our tool for describing
-      processes.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-      that it evaluates is said to be <EM>metacircular</EM>.
-      
+      processes.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>  
       An evaluator that is written in the same language
       
       that it evaluates is said to be <EM>metacircular</EM>.
@@ -41,7 +48,7 @@
       The metacircular evaluator is essentially a 
       JavaScript formulation of the
       environment model of evaluation described in
-      section~\ref{sec:environment-model}.  Recall that the model has 
+      section \ref{sec:environment-model}.  Recall that the model has 
       three
       basic parts:
     </p></div>
@@ -97,17 +104,13 @@
       on, until we get down to symbols, whose values are looked
       up in the environment, and to 
       operators, 
-      which are applied directly (see Figure~\ref{fig:eval-apply}).<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>functions
-      in the evaluator, {\lstinline[mathescape=true]$eval$} and {\lstinline[mathescape=true]$apply$},
-      which are described in section~\ref{sec:core-of-evaluator}
-      (see Figure~\ref{fig:eval-apply}).
-    
+      which are applied directly (see Figure \ref{fig:eval-apply}).<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
       This evaluation cycle will be embodied by the interplay between the two
       critical
       functions
-      in the evaluator, {\lstinline[mathescape=true]$eval$} and {\lstinline[mathescape=true]$apply$},
-      which are described in section~\ref{sec:core-of-evaluator}
-      (see Figure~\ref{fig:eval-apply}).
+      in the evaluator, <kbd>eval</kbd> and <kbd>apply</kbd>,
+      which are described in section \ref{sec:core-of-evaluator}
+      (see Figure \ref{fig:eval-apply}).
     </p></div>
 
     <div class='permalink'>
@@ -124,42 +127,42 @@
       beginning with the symbol assignment we use an abstract predicate
       
 	
-	{\lstinline[mathescape=true]$is_assignment$}
+	<kbd>is_assignment</kbd>
       
       to test for an assignment, and we use abstract
       selectors
       
 	
-	{\lstinline[mathescape=true]$assignment_name$}
+	<kbd>assignment_name</kbd>
       
       and 
       
 	
-	{\lstinline[mathescape=true]$assignment_right_hand_side$}
+	<kbd>assignment_right_hand_side</kbd>
       
       to
       access the parts of an assignment.  Implementation of expressions will
-      be described in detail in section~\ref{sec:representing-expressions}.
+      be described in detail in section \ref{sec:representing-expressions}.
       There are also operations, described in
-      section~\ref{sec:eval-data-structures}, that specify the
+      section \ref{sec:eval-data-structures}, that specify the
       representation of
       functions
       and environments.  For example,
       
 	
-	{\lstinline[mathescape=true]$make_function_object$}
+	<kbd>make_function_object</kbd>
       
       constructs compound
       functions, 
       
 	
-	{\lstinline[mathescape=true]$lookup_name_value$}
+	<kbd>lookup_name_value</kbd>
       
       accesses the values of variables, 
       and
       
       
-      {\lstinline[mathescape=true]$apply_builtin_function$}
+      <kbd>apply_builtin_function</kbd>
       
       
       applies a primitive
@@ -167,38 +170,17 @@
       to a given list of arguments.
     </p></div>
 
-    
-    &subsection4.1.1;
-
-    
-    &subsection4.1.2;
-
-    
-    &subsection4.1.3;
-
-    
-    &subsection4.1.4;
-    
-    
-    &subsection4.1.5;
-
-    
-    &subsection4.1.6;
-
-    
-    &subsection4.1.7;
-
-  <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Even so, there will remain important aspects of
+    <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Even so, there will remain important aspects of
   the evaluation process that are not elucidated by our evaluator.  The
   most important of these are the detailed mechanisms by which
   functions
   call other
   functions
   and return values to their callers.
-  We will address these issues in chapter~5, where we take a closer look
+  We will address these issues in chapter 5, where we take a closer look
   at the evaluation process by implementing the evaluator as a simple
-  register machine.</FOOTNOTE></div><hr><div class='footnote'>
+  register machine.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>If we grant 
   ourselves the ability to apply primitives,
   
@@ -211,24 +193,24 @@
     <LI>
       The evaluator enables us to deal with nested expressions. For
       example, although simply applying primitives would suffice for evaluating
-      the statement {\lstinline[mathescape=true]$1 + 6;$}, 
+      the statement <kbd>1 + 6;</kbd>, 
       it is not adequate for handling 
-      {\lstinline[mathescape=true]$1 + (2 * 3);$}.  
+      <kbd>1 + (2 * 3);</kbd>.  
       As far as the primitive
       function
-      {\lstinline[mathescape=true]$+$} is concerned,
+      <kbd>+</kbd> is concerned,
       its arguments must be numbers, and it would choke if we passed it the
-      expression {\lstinline[mathescape=true]$2 * 3$} as an argument.
+      expression <kbd>2 * 3</kbd> as an argument.
       One important role of the evaluator is to choreograph
       function
-      composition so that {\lstinline[mathescape=true]$2 * 3$} is reduced to 6 before being passed as an argument to {\lstinline[mathescape=true]$+$}.
+      composition so that <kbd>2 * 3</kbd> is reduced to 6 before being passed as an argument to <kbd>+</kbd>.
     
     </LI>
     <LI>The evaluator allows us to use variables.  For example, the
       primitive
       function
       for addition has no way to deal with expressions such
-      as {\lstinline[mathescape=true]$x + 1$}.  We need an evaluator to keep track of variables and
+      as <kbd>x + 1</kbd>.  We need an evaluator to keep track of variables and
       obtain their values before invoking the primitive
       functions.
       
@@ -251,4 +233,11 @@
 
     </LI>
       </UL></FOOTNOTE></div>
-</SECTION>
+</SECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/chapter4.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section1/subsection1.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+4.1  The Metacircular Evaluator</div>	<div class='next-page'></div></div>

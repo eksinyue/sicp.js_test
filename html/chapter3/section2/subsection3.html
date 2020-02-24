@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>3.2.3 
-        Frames as the Repository of Local State
-      </a>
+		<a name='top' class='permalink'>3.2.3  Frames as the Repository of Local State</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -21,10 +28,10 @@
         and
         assignment can be used to represent objects with local state.  As an
         example, consider the <QUOTE>withdrawal processor</QUOTE> from
-        section~\ref{sec:local-state-variables} created by calling the
+        section \ref{sec:local-state-variables} created by calling the
         function
 
-        
+        <div class='snippet' id='javascript_54_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_withdraw_with_balance(balance) {
@@ -36,49 +43,52 @@ function make_withdraw_with_balance(balance) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9A7jKACwBMAnVXPAw7AI1QBtVJMAKeplgSkQG8AoREMSlMUEKSSpkccFEQBeAHx9Bw9TGCJ2jZhEyIlCxNNlgoPAeuvCOeg8bstEAWhMy5AbjU31o8ZKITvrevogAvoiYDADOBlZhwv4SSABEMGAxIMDAMBAwmOaIoGDEMamhvuE+Ed7hQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9A7jKACwBMAnVXPAw7AI1QBtVJMAKeplgSkQG8AoREMSlMUEKSSpkccFEQBeAHx9Bw9TGCJ2jZhEyIlCxNNlgoPAeuvCOeg8bstEAWhMy5AbjU31o8ZKITvrevogAvoiYDADOBlZhwv4SSABEMGAxIMDAMBAwmOaIoGDEMamhvuE+Ed7hQA}{\usebox\lstbox}!*/
             return "insufficient funds";
         }
     };
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
         Let us describe the evaluation of
 
-        
+        <div class='snippet' id='javascript_54_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const w1 = make_withdraw_with_balance(100);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBA7gRhgXhgWwIYGsCmB9OASygAsATAJwzgOJLwCMMAbDMYHACgQAYeBKANxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9A7jKACwBMAnVXPAw7AI1QBtVJMAKeplgSkQG8AoREMSlMUEKSSpkccFEQBeAHx9Bw9TGCJ2jZhEyIlCxNNlgoPAeuvCOeg8bstEAWhMy5AbjU31o8ZKITvrevogAvoiYDADOBlZhwv4SSABEMGAxIMDAMBAwmOaIoGDEMamhvuE+Ed7VEAgx8rgAjIooGDj4RGQUVER0uiysLQAMo1yeQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         followed by
 
-        
+        <div class='snippet' id='javascript_54_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 w1(50);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=O4RgFArADAlA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=MYewdgzgLgBA7gRhgXhgWwIYGsCmB9OASygAsATAJwzgOJLwCMMAbDMYHACgQAYeBKANwAoAGYBXdlELh02fEVKVqtUoxZsOnJq3Y5+MAN7CYpmBRxRxFMDAxoQk2MgB8Rk2c+FRMbRr0wLqj2jmBQBsaeUWY6mjgoMLEBALR2Dk4i0dEWVjaJ-hyZWQC+MDjMEPGRWZ451rYARISQ4qKihMCEOGEwEmBkEA1F0cUepsUio4icAKwCgkA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
-        Figure~\ref{fig:make-withdraw} shows the result of declaring the {\lstinline[mathescape=true]$make_withdraw_with_balance$}
+        Figure \ref{fig:make-withdraw} shows the result of declaring the <kbd>make_withdraw_with_balance</kbd>
         function
         in the program environment.  This produces a
         function
@@ -97,7 +107,7 @@ w1(50);
 \centering
 
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch3-Z-G-7}.svg}}
-\caption{Result of defining {\lstinline[mathescape=true]$make_withdraw_with_balance$} in the program environment.}
+\caption{Result of defining <kbd>make_withdraw_with_balance</kbd> in the program environment.}
 \label{fig:make-withdraw}
 \end{figure}
 
@@ -110,30 +120,29 @@ w1(50);
         The interesting part of the computation happens when we 
         
 	apply the function
-	
+	<div class='snippet' id='javascript_54_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 make_withdraw_with_balance
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=LYQw1gpg+g7glgFwBYBMBOIa0UqAjEAGxADsBjCIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=LYQw1gpg+g7glgFwBYBMBOIa0UqAjEAGxADsBjCIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 to an argument:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_54_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const w1 = make_withdraw_with_balance(100);
-\end{JavaScript}
- 
+</pre></div></div> 
       </p></div>
 
       <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
         We begin, as usual, by setting up an environment E1 in which the
-        formal parameter {\lstinline[mathescape=true]$balance$} is bound to the argument 100.  Within
-        this environment, we evaluate the body of {\lstinline[mathescape=true]$make_withdraw_with_balance$}, namely
+        formal parameter <kbd>balance</kbd> is bound to the argument 100.  Within
+        this environment, we evaluate the body of <kbd>make_withdraw_with_balance</kbd>, namely
         the function definition expression.  This constructs a new
         function
         object,
@@ -143,9 +152,9 @@ const w1 = make_withdraw_with_balance(100);
         function.  The resulting
         function
         object is the value
-        returned by the call to {\lstinline[mathescape=true]$make_withdraw_with_balance$}.  This is bound to 
-  {\lstinline[mathescape=true]$w1$} in the program environment, since the constant declaration itself is being
-        evaluated in the program environment.  Figure~\ref{fig:w1} shows the
+        returned by the call to <kbd>make_withdraw_with_balance</kbd>.  This is bound to 
+  <kbd>w1</kbd> in the program environment, since the constant declaration itself is being
+        evaluated in the program environment.  Figure \ref{fig:w1} shows the
         resulting environment structure.
 
         <SPLIT>
@@ -156,7 +165,7 @@ const w1 = make_withdraw_with_balance(100);
 \centering
 
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch3-Z-G-8}.svg}}
-\caption{Result of evaluating {\lstinline[mathescape=true]$const w1 = make_withdraw_with_balance(100);$}.}
+\caption{Result of evaluating <kbd>const w1 = make_withdraw_with_balance(100);</kbd>.}
 \label{fig:w1}
 \end{figure}
 
@@ -167,47 +176,43 @@ const w1 = make_withdraw_with_balance(100);
       <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
         Now we can analyze what happens when 
-{\lstinline[mathescape=true]$w1$}
+<kbd>w1</kbd>
 is applied to an
         argument:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_54_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 w1(50);
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
-        We begin by constructing a frame in which {\lstinline[mathescape=true]$amount$}, the formal
-        parameter of {\lstinline[mathescape=true]$w1$}, is bound to the argument 50.  The crucial point
+        We begin by constructing a frame in which <kbd>amount</kbd>, the formal
+        parameter of <kbd>w1</kbd>, is bound to the argument 50.  The crucial point
         to observe is that this frame has as its enclosing environment not the
         program environment, but rather the environment E1, because this is the
-        environment that is specified by the {\lstinline[mathescape=true]$w1$}
+        environment that is specified by the <kbd>w1</kbd>
         function
         object.
         Within this new environment, we evaluate the body of the
         function:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_54_7_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 if (balance >= amount) {
     balance = balance - amount;
     return balance;
 } else {
     return "insufficient funds";
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
         The resulting environment structure is shown in
-        Figure~\ref{fig:apply-w1}.  The expression being evaluated references
-        both {\lstinline[mathescape=true]$amount$} and {\lstinline[mathescape=true]$balance$}.  The variable {\lstinline[mathescape=true]$amount$} will be found in
-        the first frame in the environment, while {\lstinline[mathescape=true]$balance$} will be found
+        Figure \ref{fig:apply-w1}.  The expression being evaluated references
+        both <kbd>amount</kbd> and <kbd>balance</kbd>.  The variable <kbd>amount</kbd> will be found in
+        the first frame in the environment, while <kbd>balance</kbd> will be found
         by following the enclosing-environment pointer to E1.
 
       <SPLIT>
@@ -218,7 +223,7 @@ if (balance >= amount) {
 \centering
 
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch3-Z-G-9}.svg}}
-\caption{Environments created by applying the function object {\lstinline[mathescape=true]$w1$}.}
+\caption{Environments created by applying the function object <kbd>w1</kbd>.}
 \label{fig:apply-w1}
 \end{figure}
 
@@ -228,24 +233,24 @@ if (balance >= amount) {
 
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
-        When the assignment is executed, the binding of {\lstinline[mathescape=true]$balance$} in E1 is changed.  At the completion of the call to {\lstinline[mathescape=true]$w1$},
-        {\lstinline[mathescape=true]$balance$} is 50, and the frame that contains {\lstinline[mathescape=true]$balance$}
+        When the assignment is executed, the binding of <kbd>balance</kbd> in E1 is changed.  At the completion of the call to <kbd>w1</kbd>,
+        <kbd>balance</kbd> is 50, and the frame that contains <kbd>balance</kbd>
         is still pointed to by the
         function
-        object {\lstinline[mathescape=true]$w1$}.  The frame
-        that binds {\lstinline[mathescape=true]$amount$}
-        (in which we executed the code that changed {\lstinline[mathescape=true]$balance$}) is no longer
+        object <kbd>w1</kbd>.  The frame
+        that binds <kbd>amount</kbd>
+        (in which we executed the code that changed <kbd>balance</kbd>) is no longer
         relevant, since the
         function
         call that constructed it has terminated,
         and there are no pointers to that frame from other parts of the
-        environment.  The next time {\lstinline[mathescape=true]$w1$} is called, this will build a new
-        frame that binds {\lstinline[mathescape=true]$amount$} and whose enclosing environment is E1.
+        environment.  The next time <kbd>w1</kbd> is called, this will build a new
+        frame that binds <kbd>amount</kbd> and whose enclosing environment is E1.
         We see that E1 serves as the <QUOTE>place</QUOTE> that holds the local state
         variable for the
         function
-        object {\lstinline[mathescape=true]$w1$}.  Figure~\ref{fig:after-w1}
-        shows the situation after the call to {\lstinline[mathescape=true]$W1$}.
+        object <kbd>w1</kbd>.  Figure \ref{fig:after-w1}
+        shows the situation after the call to <kbd>W1</kbd>.
 
         <SPLIT>
           
@@ -255,7 +260,7 @@ if (balance >= amount) {
 \centering
 
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch3-Z-G-10}.svg}}
-\caption{Environments after the call to {\lstinline[mathescape=true]$w1$}.}
+\caption{Environments after the call to <kbd>w1</kbd>.}
 \label{fig:after-w1}
 \end{figure}
 
@@ -266,33 +271,35 @@ if (balance >= amount) {
       <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
         Observe what happens when we create a second <QUOTE>withdraw</QUOTE> object by
-        making another call to {\lstinline[mathescape=true]$make_withdraw$}:
+        making another call to <kbd>make_withdraw</kbd>:
 
-        
+        <div class='snippet' id='javascript_54_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const w2 = make_withdraw(100);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBA7gJhgXhgWwIYGsCmB9OASygAsATAJwzgAoBGABgYEoBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9A7jKACwBMAnVXPAw7AI1QBtVJMAKeplgSkQG8AoREMSlMUEKSSpkccFEQBeAHx9Bw9TGCJ2jZhEyIlCxNNlgoPAeuvCOeg8bstEAWhMy5AbjU31o8ZKITvrevogAvoiYDADOBlZhwv4SSABEMGAxIMDAMBAwmOaIoGDEMamhvuE+Ed7VEAgx8rgATIooGDj4RGQUrACMAAyDXJ5AA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
-        This produces the environment structure of Figure~\ref{fig:w2}, which shows
-        that {\lstinline[mathescape=true]$w2$} is a
+        This produces the environment structure of Figure \ref{fig:w2}, which shows
+        that <kbd>w2</kbd> is a
         function
         object, that is, a pair with some code
-        and an environment.  The environment E2 for {\lstinline[mathescape=true]$w2$} was created by
-        the call to {\lstinline[mathescape=true]$make_withdraw$}.  It contains a frame with its own
-        local binding for {\lstinline[mathescape=true]$balance$}.  On the other hand, {\lstinline[mathescape=true]$w1$} and {\lstinline[mathescape=true]$w2$} have the same code: the code specified by the function definition expression in the body of {\lstinline[mathescape=true]$make_withdraw$}.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>{\lstinline[mathescape=true]$w1$} and {\lstinline[mathescape=true]$w2$}
-        behave as independent objects.  Calls to {\lstinline[mathescape=true]$w1$} reference the state
-        variable {\lstinline[mathescape=true]$balance$} stored in E1, whereas calls to 
-{\lstinline[mathescape=true]$w2$}
-        reference the {\lstinline[mathescape=true]$balance$} stored in E2. Thus, changes to the local
+        and an environment.  The environment E2 for <kbd>w2</kbd> was created by
+        the call to <kbd>make_withdraw</kbd>.  It contains a frame with its own
+        local binding for <kbd>balance</kbd>.  On the other hand, <kbd>w1</kbd> and <kbd>w2</kbd> have the same code: the code specified by the function definition expression in the body of <kbd>make_withdraw</kbd>.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a> We see here why 
+<kbd>w1</kbd> and <kbd>w2</kbd>
+        behave as independent objects.  Calls to <kbd>w1</kbd> reference the state
+        variable <kbd>balance</kbd> stored in E1, whereas calls to 
+<kbd>w2</kbd>
+        reference the <kbd>balance</kbd> stored in E2. Thus, changes to the local
         state of one object do not affect the other object.
 
         <SPLIT>
@@ -303,29 +310,7 @@ const w2 = make_withdraw(100);
 \centering
 
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch3-Z-G-11}.svg}}
-\caption{Using {\lstinline[mathescape=true]$const w2 = make_withdraw_with_balance(100)$} to create a second object.}
-\label{fig:w2}
-\end{figure}
-
-          
-        </SPLIT>
-       We see here why 
-{\lstinline[mathescape=true]$w1$} and {\lstinline[mathescape=true]$w2$}
-        behave as independent objects.  Calls to {\lstinline[mathescape=true]$w1$} reference the state
-        variable {\lstinline[mathescape=true]$balance$} stored in E1, whereas calls to 
-{\lstinline[mathescape=true]$w2$}
-        reference the {\lstinline[mathescape=true]$balance$} stored in E2. Thus, changes to the local
-        state of one object do not affect the other object.
-
-        <SPLIT>
-          
-          
-            
-\begin{figure}[H]
-\centering
-
-\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch3-Z-G-11}.svg}}
-\caption{Using {\lstinline[mathescape=true]$const w2 = make_withdraw_with_balance(100)$} to create a second object.}
+\caption{Using <kbd>const w2 = make_withdraw_with_balance(100)</kbd> to create a second object.}
 \label{fig:w2}
 \end{figure}
 
@@ -337,14 +322,14 @@ const w2 = make_withdraw(100);
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
 
-        In the {\lstinline[mathescape=true]$make_withdraw$}
-        function, the local variable {\lstinline[mathescape=true]$balance$}
-        is created as a parameter of {\lstinline[mathescape=true]$make_withdraw$}.  We could also
+        In the <kbd>make_withdraw</kbd>
+        function, the local variable <kbd>balance</kbd>
+        is created as a parameter of <kbd>make_withdraw</kbd>.  We could also
         create the local state variable explicitly, using 
-{\lstinline[mathescape=true]$let$}, as
+<kbd>let</kbd>, as
         follows:
             
-        
+        <div class='snippet' id='javascript_54_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_withdraw(initial_amount) {
@@ -356,7 +341,7 @@ function make_withdraw(initial_amount) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9A7jKACwBMAnVXAChjAJlQBttVk5woBKRAbwChEBiBpiiIARo1SRMiALyIadRs1bsA3P0GhIsBInxEyFSizZhOPTYMExgiShIZSIMgHzzT7Ln2u-Bj5xl5AOlEAFpET3MNPz9SERBSJBCXGNiAX0RMBgBnGR9Y63ioRKQAIhockGBgGAgYTHNEbWIcsrS-dKtELqKEpP0CEnJcDXSgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9A7jKACwBMAnVXAChjAJlQBttVk5woBKRAbwChEBiBpiiIARo1SRMiALyIadRs1bsA3P0GhIsBInxEyFSizZhOPTYMExgiShIZSIMgHzzT7Ln2u-Bj5xl5AOlEAFpET3MNPz9SERBSJBCXGNiAX0RMBgBnGR9Y63ioRKQAIhockGBgGAgYTHNEbWIcsrS-dKtELqKEpP0CEnJcDXSgA}{\usebox\lstbox}!*/
         } else {
             return "insufficient funds";
         }
@@ -365,8 +350,9 @@ function make_withdraw(initial_amount) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
         
@@ -374,10 +360,10 @@ function make_withdraw(initial_amount) {
 
 </SPLIT>
         Use the environment model to analyze this alternate
-        version of {\lstinline[mathescape=true]$make_withdraw$}, drawing figures like the ones above to
+        version of <kbd>make_withdraw</kbd>, drawing figures like the ones above to
         illustrate the interactions
 
-        
+        <div class='snippet' id='javascript_54_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const w1 = make_withdraw(100);
@@ -386,11 +372,12 @@ const w2 = make_withdraw(100);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBA7gRhgXhgWwIYGsCmB9OASygAsATAJwzgAoEAGegSgG4AoRGgVmfdElhwATCnTZ8RUpWp1GrIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=3&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9A7jKACwBMAnVXAChjAJlQBttVk5woBKRAbwChEBiBpiiIARo1SRMiALyIadRs1bsA3P0GhIsBInxEyFSizZhOPTYMExgiShIZSIMgHzzT7Ln2u-Bj5xl5AOlEAFpET3MNPz9SERBSJBCXGNiAX0RMBgBnGR9Y63ioRKQAIhockGBgGAgYTHNEbWIcsrS-dKtELqKEpP0CEnJcDS6IBBzRXABGORQMHANh4xmABjWODVnKAFZNjQmwKf0AJnm0LDwhoyp1g6A}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        Show that the two versions of {\lstinline[mathescape=true]$make_withdraw$} create objects with
+        Show that the two versions of <kbd>make_withdraw</kbd> create objects with
         the same behavior.  How do the environment structures differ for the two
         versions?
         
@@ -405,8 +392,15 @@ const w2 = make_withdraw(100);
 
     <hr><div class='footnote'>
 <a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Whether
-          {\lstinline[mathescape=true]$w1$} and {\lstinline[mathescape=true]$w2$} share the same physical code stored in the
+          <kbd>w1</kbd> and <kbd>w2</kbd> share the same physical code stored in the
           computer, or whether they each keep a copy of the code, is a detail of
-          the implementation.  For the interpreter we implement in chapter~4,
+          the implementation.  For the interpreter we implement in chapter 4,
           the code is in fact shared.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section2/subsection2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section2/subsection4.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+3.2.3  Frames as the Repository of Local State</div>	<div class='next-page'></div></div>

@@ -1,10 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>1.2.1 Linear Recursion and Iteration</a>
+		<a name='top' class='permalink'>1.2.1  Linear Recursion and Iteration</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
         
         
@@ -20,7 +29,7 @@
               There are many ways to compute factorials.  One way is to make use of
               the observation that $n!$ is equal to 
               $n$ times $(n-1)!$ for
-              any positive integer~$n$:
+              any positive integer $n$:
               
               \[ n!=n\cdot\left[(n-1)\cdot(n-2)\cdots3\cdot2\cdot1\right]=n\cdot(n-1)! \]
               
@@ -31,7 +40,7 @@
               this observation translates directly into a 
               function:
               
-              
+              <div class='snippet' id='javascript_11_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function factorial(n) {
@@ -42,9 +51,10 @@ function factorial(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSxDAUyhAySQF5XEBGRCqnqgfg7dePAFyIkAKmRoombPiQBaDoQDcZAL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSxDAUyhAySQF5XEBGRCqnqgfg7dePAFyIkAKmRoombPiQBaDoQDcZAL5kyqdFlx4ArGqA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
             </p></div>
@@ -66,9 +76,9 @@ function factorial(n) {
                 <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
 	      We can use the substitution model of
-              section~\ref{sec:substitution-model} to watch the
+              section \ref{sec:substitution-model} to watch the
               function in action
-              computing 6!, as shown in figure~\ref{fig:recursive-factorial}.
+              computing 6!, as shown in figure \ref{fig:recursive-factorial}.
                 </p></div>
             
             </SPLIT>
@@ -103,7 +113,9 @@ function factorial(n) {
               Once again, we can recast our description as a 
               function 
               for computing
-              factorials:<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+              factorials:<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
+
+              <div class='snippet' id='javascript_11_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function factorial(n) {
@@ -115,39 +127,16 @@ function fact_iter(product, counter, max_count) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSxDAUyhAyVWgH0YoaM8BGAGkT6IiAbjIBfMqEiwEyNFDYcuABwxwAJiGj8IccEv4BbFAA8Wu-cXJVqdBkgtgliAHyJjZx1Ao3fiAPyIqhpa3n6+AFxyrOyceF6ciABUQWqa2j7hWX4JGIgA1AK8mdml7qbmek6EomJAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSxDAUyhAyVWgH0YoaM8BGAGkT6IiAbjIBfMqEiwEyNFDYcuABwxwAJiGj8IccEv4BbFAA8Wu-cXJVqdBkgtgliAHyJjZx1Ao3fiAPyIqhpa3n6+AFxyrOyceF6ciABUQWqa2j7hWX4JGIgA1AK8mdml7qbmek6EohKS8pjY+ACsNUA}{\usebox\lstbox}!*/
            : fact_iter(counter * product,
                        counter + 1,
                        max_count);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-                  
-            
-
-              
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function factorial(n) {
-    return fact_iter(1, 1, n);
-}
-function fact_iter(product, counter, max_count) {
-    return counter > max_count
-           ? product
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRSxDAUyhAyVWgH0YoaM8BGAGkT6IiAbjIBfMqEiwEyNFDYcuABwxwAJiGj8IccEv4BbFAA8Wu-cXJVqdBkgtgliAHyJjZx1Ao3fiAPyIqhpa3n6+AFxyrOyceF6ciABUQWqa2j7hWX4JGIgA1AK8mdml7qbmek6EomJAA}{\usebox\lstbox}!*/
-           : fact_iter(counter * product,
-                       counter + 1,
-                       max_count);
-}
-
-\end{JavaScriptClickable}
-
-
+</div></div>
                   
             </p></div>
 
@@ -167,7 +156,7 @@ function fact_iter(product, counter, max_count) {
                 <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
               As before, we can use the substitution model to visualize the process
-              of computing $6!$, as shown in figure~\ref{fig:iterative-factorial}.
+              of computing $6!$, as shown in figure \ref{fig:iterative-factorial}.
                 </p></div>
               
             </SPLIT>
@@ -189,7 +178,7 @@ function fact_iter(product, counter, max_count) {
 <a name='p9' class='permalink'></a><p>
           Consider the first process.  The substitution model reveals a shape of
           expansion followed by contraction, indicated by the arrow in
-          figure~\ref{fig:recursive-factorial}.  The expansion occurs as the
+          figure \ref{fig:recursive-factorial}.  The expansion occurs as the
           process builds up a chain of 
           
           <EM>deferred operations</EM> (in this case,
@@ -218,8 +207,8 @@ function fact_iter(product, counter, max_count) {
           step, all we need to keep track of, for any $n$, are the current
           values of the
 	  names
-	  {\lstinline[mathescape=true]$product$}, {\lstinline[mathescape=true]$counter$}, and 
-          {\lstinline[mathescape=true]$max_count$}.  We call this an 
+	  <kbd>product</kbd>, <kbd>counter</kbd>, and 
+          <kbd>max_count</kbd>.  We call this an 
           
           <EM>iterative process</EM>.  In general, an
           iterative process is one whose state can be summarized by
@@ -283,8 +272,7 @@ function fact_iter(product, counter, max_count) {
 		  which
               indicates <QUOTE>where the process is</QUOTE> in negotiating the chain of
               deferred operations.  The longer the chain, the more information must
-              be maintained.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
-        
+              be maintained.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
               
         </p></div>
 
@@ -306,7 +294,7 @@ function fact_iter(product, counter, max_count) {
               linearly recursive, we are speaking about how the process evolves, not
               about the syntax of how a function is written.  It may seem
               disturbing that we refer to a recursive function such as 
-              {\lstinline[mathescape=true]$fact_iter$}
+              <kbd>fact_iter</kbd>
               as generating an iterative process.  However, the process
               really is iterative: Its state is captured completely by its three
               state names,
@@ -329,10 +317,10 @@ function fact_iter(product, counter, max_count) {
               languages can describe iterative processes only by resorting to
               special-purpose 
               
-              <QUOTE>looping constructs</QUOTE> such as {\lstinline[mathescape=true]$do$}, {\lstinline[mathescape=true]$repeat$},
-              {\lstinline[mathescape=true]$until$}, {\lstinline[mathescape=true]$for$}, and {\lstinline[mathescape=true]$while$}.  The implementation of
+              <QUOTE>looping constructs</QUOTE> such as <kbd>do</kbd>, <kbd>repeat</kbd>,
+              <kbd>until</kbd>, <kbd>for</kbd>, and <kbd>while</kbd>.  The implementation of
 	      JavaScript
-              we shall consider in chapter~5 does not share this defect.  It will
+              we shall consider in chapter 5 does not share this defect.  It will
               execute an iterative process in constant space, even if the iterative
               process is described by a recursive function.  An implementation with
               this property is called 
@@ -344,9 +332,7 @@ function fact_iter(product, counter, max_count) {
               function call mechanism, so that special iteration constructs are
               useful only as 
               
-              syntactic sugar.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
-              
-            
+              syntactic sugar.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
               
               
             </p></div>
@@ -356,8 +342,8 @@ function fact_iter(product, counter, max_count) {
 \begin{Exercise}
 
                 Each of the following two functions defines a method for adding two
-                positive integers in terms of the functions {\lstinline[mathescape=true]$inc$},
-                which increments its argument by 1, and {\lstinline[mathescape=true]$dec$}, which decrements
+                positive integers in terms of the functions <kbd>inc</kbd>,
+                which increments its argument by 1, and <kbd>dec</kbd>, which decrements
                 its argument by 1.
 
         
@@ -365,7 +351,7 @@ function fact_iter(product, counter, max_count) {
         
 
 
-        
+        <div class='snippet' id='javascript_11_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function plus(a, b) {
@@ -374,11 +360,12 @@ function plus(a, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwDYgM4AoCGAaRAIwEpEBvAKEWsQCcBTKEWpHRAXk8QAZEB+IogBciGJCxpMWACb0IuYgRLEA3IgoBfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABDSAKAHgSkQbwFCKGIBOAplCMUuogNSICMA3HgL56iSwKIAmpEDNnxES5StUQBaRi3ado8JAAcANiADOqAIYAaRACNhBImQpVE2xAF5biAAyIA-IcQAuZGjWbU-Qdsx9I0wmRDY8PG8tABZ9AFYQoA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_11_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function plus(a, b) {
@@ -387,13 +374,14 @@ function plus(a, b) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwDYgM4AoCGAaRAIwEpEBvAKEWsQCcBTKEWpHRAXk8QAZEB+IogBcKdNgAm9CLmIEYkLCWIBuCgF8gA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABDSAKAHgSkQbwFCKGIBOAplCMUuogNSICMA3HgL56iSwKIAmpEDNnxES5StUQBaRi3ado8JAAcANiADOqAIYAaRACNhBImQpVE2xAF5biAAyIA-IcQAuRGs2p+g7Zn0UQSNMOTw8Ly0AFn0AVlCgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
                 Using the substitution model, illustrate the process generated by each
                 function in evaluating
-                {\lstinline[mathescape=true]$plus(4, 5);$}.  Are these processes iterative or recursive?
+                <kbd>plus(4, 5);</kbd>.  Are these processes iterative or recursive?
 
 		
         \hfill{\hyperref[ex:addition-procedures-Answer]{Solution}}\\
@@ -404,8 +392,7 @@ function plus(a, b) {
 		  <SPLIT>
 		    
     The process generated by the first procedure is recursive.
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_11_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 plus(4, 5)
 4 === 0 ? 5 : inc(plus(dec(4), 5))
 inc(plus(dec(4), 5))
@@ -423,11 +410,9 @@ inc(inc(inc( 6 )))
 inc(inc( 7 ))
 inc( 8 )
 9
-\end{JavaScript}
-
+</pre></div></div>
     The process generated by the second procedure is iterative.
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_11_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 plus(4, 5)
 4 === 0 ? 5 : plus(dec(4), inc(5))
 plus(dec(4), inc(5))
@@ -441,8 +426,7 @@ plus(1, 8)
 plus(0, 9)
 0 === 0 ? 9 : plus(dec(0), inc(9))
 9
-\end{JavaScript}
-
+</pre></div></div>
 		    
 		  </SPLIT>
 		
@@ -452,13 +436,13 @@ plus(0, 9)
         
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled3}
+\label{ex:unlabeled0}
 
             
                 The following function computes a mathematical function called
                 Ackermann's function.
 
-        
+        <div class='snippet' id='javascript_11_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function A(x,y) {
@@ -470,57 +454,61 @@ function A(x,y) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQQBQA8A0BPAlIgbwChFTEAnAUyhHKW0QF5nEAGEszsgfjY684AuROiYt2AybwBMiAFSJs-SWWENmjRAEZlKnomm69iYWlEBabZhQZrDS1ty4A3EQC+QA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQQBQA8A0BPAlIgbwChFTEAnAUyhHKW0QF5nEAGEszsgfjY684AuROiYt2AybwBMiAFSJs-SWWENmjRAEZlKnomm69iYWlEBabZhQZrDS1ty4A3EQC+RImi3WtrF0A}{\usebox\lstbox}!*/
                ? 2
                : A(x - 1, A(x, y - 1));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         What are the values of the following expressions?
 
-        
+        <div class='snippet' id='javascript_11_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 A(1, 10);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IICgjANABGAMCUBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQQBQA8A0BPAlIgbwChFTEAnAUyhHKW0QF5nEAGEszsgfjY684AuROiYt2AybwBMiAFSJs-SWWENmjRAEZlKnomm69iYWlEBabZhQZrDS1ty4A3EQC+RNFutbWLoA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_11_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 A(2, 4);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IICgTANABALAlAbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQQBQA8A0BPAlIgbwChFTEAnAUyhHKW0QF5nEAGEszsgfjY684AuROiYt2AybwBMiAFSJs-SWWENmjRAEZlKnomm69iYWlEBabZhQZrDS1ty4A3EQC+RNNOsAWF0A}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_11_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 A(3, 3);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IICgzANABGCUDcQ}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQQBQA8A0BPAlIgbwChFTEAnAUyhHKW0QF5nEAGEszsgfjY684AuROiYt2AybwBMiAFSJs-SWWENmjRAEZlKnomm69iYWlEBabZhQZrDS1ty4A3EQC+RNAGZrXl0A}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        Consider the following functions, where {\lstinline[mathescape=true]$A$} is the
+        Consider the following functions, where <kbd>A</kbd> is the
 	
 	function declared
 	  
         above:
 
-        
+        <div class='snippet' id='javascript_11_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function f(n) {
@@ -532,7 +520,7 @@ function g(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAFGAlIg3gKEfxAJwFMoRCkBBFABgBpEMBuHAXx1ElgUQHM1MuAkVLkqKAIwNmbDuGjwkACwHY8BEmQqJqAJmnoW7Tgp4BrVUPyaxiAKyIAVIyeMjQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABAQQBQA8A0BPAlIgbwChFTEAnAUyhHKW0QF5nEAGEszsgfjY684AuROiYt2AybwBMiAFSJs-SWWENmjRAEZlKnomm69iYWlEBabZhQZrDS1ty4A3EQC+RUJFgJEwVGD4xJxUNHQ2rNaBrh5e0PBIAOYBQcqhtEhoWlEu7p7g8b4AFimEadQZNtI5MfneCYgA1qXBpOnhAKzyiEgKYLVEzQAsLkA}{\usebox\lstbox}!*/
 function h(n) {
     return A(2, n);
 }
@@ -541,21 +529,22 @@ function k(n) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
 
         Give concise mathematical definitions for the functions computed by
-        the functions {\lstinline[mathescape=true]$f$}, {\lstinline[mathescape=true]$g$}, and {\lstinline[mathescape=true]$h$} for positive integer
+        the functions <kbd>f</kbd>, <kbd>g</kbd>, and <kbd>h</kbd> for positive integer
         values of $n$.  For example,
 	$k(n)$ computes $5n^2$.
 
 	
-	\hfill{\hyperref[ex:unlabeled3-Answer]{Solution}}\\
+	\hfill{\hyperref[ex:unlabeled0-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled3}]
+\begin{Answer}[ref={ex:unlabeled0}]
 
       The function $f(n)$ computes
       $2 n$,
@@ -570,12 +559,12 @@ function k(n) {
 
 
       <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>In a real program we would probably use the
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>In a real program we would probably use the
                 block structure introduced in the last section to hide the 
                 
-		  declaration of {\lstinline[mathescape=true]$fact_iter$}:
+		  declaration of <kbd>fact_iter</kbd>:
 
-        
+        <div class='snippet' id='javascript_11_12_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function factorial(n) {
@@ -587,43 +576,51 @@ function factorial(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRS5caeJGKAUwzwAcM4ATEaAGkQhxwTDMXJUJiDIyggMSQcOaIAfIiQVJWqgH5E7LjyibtWgFyIGzPIrAjEAKn0dufE6Y+Vb9gNSIAjIQA3CYAvibSsvKWInj+-IEhoUA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG8AoRS5caeJGKAUwzwAcM4ATEaAGkQhxwTDMXJUJiDIyggMSQcOaIAfIiQVJWqgH5E7LjyibtWgFyIGzPIrAjEAKn0dufE6Y+Vb9gNSIAjIQA3CYAvibSsvKWInj+-IEh4WSo6Fi4eACswUA}{\usebox\lstbox}!*/
    }
    return iter(1, 1);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
                 We avoided doing this here so as to minimize the number of things to
-                think about at once.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>When we discuss the implementation of
+                think about at once.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>When we discuss the implementation of
                 functions 
-                on register machines in chapter~5, we will see that any
+                on register machines in chapter 5, we will see that any
                 iterative process can be realized <QUOTE>in hardware</QUOTE> as a machine that
                 has a fixed set of registers and no auxiliary memory.  In contrast,
                 realizing a recursive process requires a machine that uses an
                 
-                auxiliary data structure known as a <EM>stack</EM>.</FOOTNOTE></div><hr><div class='footnote'>
+                auxiliary data structure known as a <EM>stack</EM>.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Tail recursion has long been
                 
                 known as a compiler optimization trick.  A coherent semantic basis for
                 tail recursion was provided by Carl Hewitt (1977), who explained it in
                 
                 terms of the <QUOTE>message-passing</QUOTE> model of computation that we shall
-                discuss in chapter~3. Inspired by this, Gerald Jay Sussman and Guy
-                Lewis Steele Jr.~(see Steele 1975) 
+                discuss in chapter 3. Inspired by this, Gerald Jay Sussman and Guy
+                Lewis Steele Jr. (see <CITATION>Steele 1975</CITATION>) 
                 constructed a tail-recursive
                 interpreter for Scheme.  Steele later showed how tail recursion is a
                 consequence of the natural way to compile 
                 function 
-                calls (Steele 1977).
+                calls (<CITATION>Steele 1977</CITATION>).
 		The IEEE standard for Scheme requires that Scheme implementations
                 
                 be tail-recursive. The ECMA standard for JavaScript eventually followed
-		suit with ECMAScript 2015 (ECMA 2015). Note however,
+		suit with ECMAScript 2015 (<CITATION>ECMA 2015</CITATION>). Note however,
 		that as of this writing (2019), most implementations of JavaScript do
 		not comply with this standard.
 	      </FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section2/section2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section2/subsection2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+1.2.1  Linear Recursion and Iteration</div>	<div class='next-page'></div></div>

@@ -1,16 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>4.1.2 
-    Representing
-    
-      
-      Statements and Expressions
-    
-  </a>
+		<a name='top' class='permalink'>4.1.2  Representing Statements and Expressions</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
   
   
@@ -20,7 +23,7 @@
 <a name='p1' class='permalink'></a><p>
     
     The evaluator is reminiscent of the symbolic differentiation program
-    discussed in section~\ref{sec:symbolic-differentiation}.  Both
+    discussed in section \ref{sec:symbolic-differentiation}.  Both
     programs operate on symbolic expressions.  In both programs, the
     result of operating on a compound expression is determined by
     operating recursively on the pieces of the expression and combining
@@ -52,7 +55,7 @@
 
 	    
 
-	    
+	    <div class='snippet' id='javascript_74_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_self_evaluating(stmt) {
@@ -63,20 +66,21 @@ function is_self_evaluating(stmt) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfRQUwDbDZgNwENsQjYwBzAChSgFsoBKRAbwChEvEAnTKEDySo0YEPQBGmHrQbNEAHwWduq7iLo8YVWYxZLEKtapES4cbJiJhdzANzsAvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfRQUwDbDZgNwENsQjYwBzAChSgFsoBKRAbwChEvEAnTKEDySo0YEPQBGmHrQbNEAHwWduq7iLo8YVWYxZLEKtapES4cbJiJhdzANzsAvu3YQEdRPQCeaAA484Sh4iekQAXkRfIh4sagAiKB4QTDtEAEY7OKYHNzAPbzRE5Iwockx6TDAocMRsVCg0PmBqAv9A4PoAGkQABmz2ABNUX2wiL2oNHDxCEjIKGgKizBKyiqqmbKA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 	    
 	    
           </LI>
           <LI>
-	    The function {\lstinline[mathescape=true]$is_name$} tests
+	    The function <kbd>is_name</kbd> tests
 	    whether the given statement is a name
 	    expression, and the function
-	    {\lstinline[mathescape=true]$name_of_name$} accesses
+	    <kbd>name_of_name</kbd> accesses
 	    the JavaScript string that represents the name.
-	    
+	    <div class='snippet' id='javascript_74_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_name(stmt) {
@@ -88,19 +92,20 @@ function name_of_name(stmt) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfTAQwLYFMAUKU2UAlIgN4BQitiATrlCPUqmlJgOZe4AmaADaoohYlAA0iAERY800gG4qAXyqhIsBIjm40cYBhwEiJctToMmLJAAtcmPvk4xBYs0tVA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgQwObYKYAmaANqlABQpQC2UANIlABZ4Y4CUiA3gFCL+IATnighBSVGgAOmGIMo0onAGTLELTAQW1OAXn2MWbbAG4eAXx6hIsBMnRhM1PNqXc+A4aPH3j+IqRUrgwARI7OIexmltbQ8EjhrHDAaImunLwCQiJiSBpaWDDE6VEWPDwQCFSI1ACeqU6sVJhQeM5gUIi6iDKCKC4hAB4mkWYEqFLEmLXkkml1Dc5oza3tSqXjKJPT5IloyYsuC3srbXgd7FFAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 	    
 
 	    
-	    The function {\lstinline[mathescape=true]$is_name$} 
+	    The function <kbd>is_name</kbd> 
 	    is defined in terms of the function
-	    {\lstinline[mathescape=true]$is_tagged_list$},
+	    <kbd>is_tagged_list</kbd>,
 	    which identifies lists beginning with a designated string that
 	    we call <EM>tag</EM>:
-	    
+	    <div class='snippet' id='javascript_74_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_tagged_list(stmt, the_tag) {
@@ -109,16 +114,17 @@ function is_tagged_list(stmt, the_tag) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgQwObYKYAmaANqlABQpQC2UANIlABZ4Y4CUiA3gFCL+IATnighBSVGgAOmGIMo0onAGTLELTAQW1OAXn2MWbbAG4eAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgQwObYKYAmaANqlABQpQC2UANIlABZ4Y4CUiA3gFCL+IATnighBSVGgAOmGIMo0onAGTLELTAQW1OAXn2MWbbAG4eAXx49JWXIRJlypKuQBEYTNTyuGrgB6u7L4eXoEmQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	    
           </LI>
 
           <LI>
-	    Assignments have the form $\textit{name}$ {\lstinline[mathescape=true]$=$} $\textit{value}$:
+	    Assignments have the form $\textit{name}$ <kbd>=</kbd> $\textit{value}$:
 
-	    
+	    <div class='snippet' id='javascript_74_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_assignment(stmt) {
@@ -130,14 +136,15 @@ function assignment_name(stmt) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQIYpTA5mAWwFMwoAKFKAqASkQG8AoRFgJyKhFaVTSg1y4iAEzQAbVOUrUANIgBEWHPmKl5NANyMAvo1CRYCREryESUNGAzEKVWg2ZsOXJAAsiGYWX4wxZd57eGL621DThmjp64NDwSCYq5mgAbhhiIESh9kwsiOyc3IgBXj5+pVkRWtpAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgQwObYKYAmaANqlABQpQC2UANIlABZ4Y4CUiA3gFCL+IATnighBSVGgAOmGIMo0onAGTLELTAQW1OAXn2MWbbAG4eAXx6hIsBMnSYUKGNjDU8YClR3c+-YaLi9sb4RKRU2vSIAESOzq7untHsZpbW0PBIcS5uHlBoYJjukZy8AgFiSBpaWDDE5NXktfXeSuztqVbgGXbZCXloAG6YxCB4Jb7lIpXqeJpNsvXNJR0WPDwQCFSI1ACeaH25nmhUmFB4iVCIuogygijj0QAe14gAjCbJZgSoUsSYu3Ih0uBSK4z2BycORBp3Ol1WPxQfwBQKh-WOw1G4P2wIGsIueQ6QA}{\usebox\lstbox}!*/
 function assignment_value(stmt) {
    return head(tail(tail(stmt)));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	    
 	    
@@ -145,80 +152,40 @@ function assignment_value(stmt) {
 
           <LI>
 	    Declarations have the form
-	    
-\begin{JavaScript}
+	    <kbd class='snippet'>
+	      
 const $\textit{name}$ = $\textit{value}$;
-\end{JavaScript}
-
+	      
+	    </kbd>
 	    or
-	    
-\begin{JavaScript}
+	    <kbd class='snippet'>
+	      
 let $\textit{name}$ = $\textit{value}$;
-\end{JavaScript}
-
+	      
+	    </kbd>
 	    or
-	    
-\begin{JavaScript}
+	    <kbd class='snippet'>
+	      
 function $\textit{name}$($\textit{parameter}_{1}$, $\ldots$, $\textit{parameter}_{n}$) {
     $\textit{body}$
 }
-\end{JavaScript}
-
+	      
+	    </kbd>
 
 	    
 	    
 	    Here, we treat the latter form (function
-	    declarations) as syntactic sugar<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-\begin{JavaScript}
-const $\textit{name}$ = ($\textit{parameter}_{1}$, $\ldots$, $\textit{parameter}_{n}$) => { $\textit{body}$; };
-\end{JavaScript}
-
-
-	    The corresponding syntax functions are the following:
-
-	    
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function is_constant_declaration(stmt) {
-   return is_tagged_list(stmt, "constant_declaration");
-}
-function constant_declaration_name(stmt) {
-   return head(tail(head(tail(stmt))));
-}
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQglUCGYpoAmAphADY4BOOsCAFNgLZQCUiA3gFCI+XFQhKSVGlwBzMcUJoyqKAyjMANIgBEmMNjwES5KjXhhVLANycAvp1CRaSDVvxFSFarbRgcjYguZsuPRD4BIUQAC2IcQjpcGDI6cMjonFifVhZ0s0traENEe1xHXRcDBDQANxwyEG8mVg5uXn5BJASomLj21PTTCytwHIRkdArKGBwAIzJiJz1XQy76gKDmodEcCSkZOVSVVRGxyemi-VtjTL6bXP2JqZnitw8vBf9G4JaItuS41qSU2u6ell+rZENdDncToZypVqs8GoEmiEfp1Ov8MhYgA}{\usebox\lstbox}!*/
-function constant_declaration_value(stmt) {
-   return head(tail(tail(stmt)));
-}
-function is_variable_declaration(stmt) {
-   return is_tagged_list(stmt, "variable_declaration");
-}
-function variable_declaration_name(stmt) {
-   return head(tail(head(tail(stmt))));
-}
-function variable_declaration_value(stmt) {
-   return head(tail(tail(stmt)));
-}
-
-\end{JavaScriptClickable}
-
-
-
-	    
-	    
-          
+	    declarations) as syntactic sugar<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
 	    for
-	    
-\begin{JavaScript}
+	    <kbd class='snippet'>
+	      
 const $\textit{name}$ = ($\textit{parameter}_{1}$, $\ldots$, $\textit{parameter}_{n}$) => { $\textit{body}$; };
-\end{JavaScript}
-
+	      
+	    </kbd>
 
 	    The corresponding syntax functions are the following:
 
-	    
+	    <div class='snippet' id='javascript_74_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_constant_declaration(stmt) {
@@ -230,7 +197,7 @@ function constant_declaration_name(stmt) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQglUCGYpoAmAphADY4BOOsCAFNgLZQCUiA3gFCI+XFQhKSVGlwBzMcUJoyqKAyjMANIgBEmMNjwES5KjXhhVLANycAvp1CRaSDVvxFSFarbRgcjYguZsuPRD4BIUQAC2IcQjpcGDI6cMjonFifVhZ0s0traENEe1xHXRcDBDQANxwyEG8mVg5uXn5BJASomLj21PTTCytwHIRkdArKGBwAIzJiJz1XQy76gKDmodEcCSkZOVSVVRGxyemi-VtjTL6bXP2JqZnitw8vBf9G4JaItuS41qSU2u6ell+rZENdDncToZypVqs8GoEmiEfp1Ov8MhYgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgQwObYKYAmaANqlABQpQC2UANIlABZ4Y4CUiA3gFCL+IATnighBSVGgAOmGIMo0onAGTLELTAQW1OAXn2MWbbAG4eAXx6hIsBMnQQEVTGChoCeCMUyDMtsNpK3Hz8wqLi9sb4RKRUgQwARI5gzq7unt6+-gnsZpbW0PBIyaluHl4+fkVoYJjUeIGcvAJhYkgaWlgwxOQd5F09VDrsI3lW4IV2JVhp5ZlVCGgAbpjEIA1DQc2hIm3qeJr9sj0DjaMW4zZFkSuCMJgARsSsc5X+jcEtuxGSWLiEJDI8UQCVu9yeLwybyKOTGBX8iDBj2e6QqWWqtXqH22Qm+7QOnWOvQJR26Z3O+QmCKRENR838y1W62xIVx4Xxh1Op02I1yFx400Q1AAnnToYtnFA8PVXIhdIgZIIUA0Es8oIgAB5yxAARhMsJ4BFQUm8wvIkhpKNe6IQ5BFYptYDQkuleFc5yNKBNmDNlshaIWTsxDXt1sDzqwUplSj5nu9vp84KtUMdjLWIdFYYZLujoyAA}{\usebox\lstbox}!*/
 function constant_declaration_value(stmt) {
    return head(tail(tail(stmt)));
 }
@@ -245,8 +212,9 @@ function variable_declaration_value(stmt) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	    
 	    
@@ -254,9 +222,9 @@ function variable_declaration_value(stmt) {
 
           <LI>
 	    Function definitions are objects tagged with the
-	    string {\lstinline[mathescape=true]$function_definition$}:
+	    string <kbd>function_definition</kbd>:
 
-	    
+	    <div class='snippet' id='javascript_74_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_function_definition(stmt) {
@@ -268,24 +236,25 @@ function function_definition_parameters(stmt) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfVJWC0BMCmwMYM2YAFClALZQCUiA3gFCJsBO+UI7SqaUAIYBzYflxoANqiiUaUADSIARJmjwweQsVIbldANzMAvszVlE5jVqIkyaAA6D2g6l3zsUc2gxZtEnNy8iAAW+IK45EIwkt70hiZm4OoIlsn2BLa6OABGcLgAnnG+rBxcPEhhEVGCMTV1VD50CcZAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgQwObYKYAmaANqlABQpQC2UANIlABZ4Y4CUiA3gFCL+IATnighBSVGgAOmGIMo0onAGTLELTAQW1OAXn2MWbbAG4eAXx6hIsBMnTXo8MGgJ5gMMDFthtS7nz8wqLi9sb4RKRUfgwARI4+ru6e3s6x7GaWCc6I2QhJHl6JMoKY1CJ4gih+nLwCwWJIGlpYMMQ1GRZW4E52eS5uhan5AEZwBACeNQH1Io3qeJrkre0rHZ2WPBAIVIjUE2j9BSk+iLqIJSh45LEAHmcAfIi3JulmBKhSxJhTkkeDJ2c5H2hx6iQBRWc7E6HxQXx+5H+yUh+RKZQqVWBByRQx80Pen2+UxxgNG4ymIJJKLA+KAA}{\usebox\lstbox}!*/
 function function_definition_body(stmt) {
    return head(tail(tail(stmt)));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	    
 	    
           </LI>
 
 	  <LI>
-	    {\lstinline[mathescape=true]$return$} statements are objects
+	    <kbd>return</kbd> statements are objects
 	    tagged with the string 
-	    {\lstinline[mathescape=true]$"return_statement"$}:
-	    
+	    <kbd>"return_statement"</kbd>:
+	    <div class='snippet' id='javascript_74_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_return_statement(stmt) {
@@ -297,9 +266,10 @@ function return_statement_expression(stmt) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQE4FMog2NFKAQyiwFsswoAKI8qASkQG8AoRT7XfZdEgOYCsAEzQAbVLXpQANIgBE3PASKkKVKAsYBuNgF82oSLASJl+QiTKVqaLAA8ADthQp4YOlAbN2nczgqiAAWWMQiNCQw4l4+ugZAA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgQwObYKYAmaANqlABQpQC2UANIlABZ4Y4CUiA3gFCL+IATnighBSVGgAOmGIMo0onAGTLELTAQW1OAXn2MWbbAG4eAXx6hIsBMnTDR4tFUxQ81PGApUd3PvyOYhLoWLiEJGTa9IgAREHOru6e3rHsZpbW0PBICWAuWMleUGh4AB5SwigoOdGcvAJ56nia5FgwxHXpFjw8EAhUiNQAnmhZtvkEeBDEmIJuOYi6iDKCKHjkseOLwORl9UIiwYhlJojmaWb9YIMjY+DZCGhTwDBgMBNLiKRUaMK7d22TymMzmCwQDAATN1rrdRnkCm4PMUvj8Sv9yICHhNnnhXu8JlDugRUFJZsNyJIEUlkd5MfCjolCrSlMTSeTyNTmSkSuVKnhqrU7lykTz2OkgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 	    
 	    
@@ -307,10 +277,10 @@ function return_statement_expression(stmt) {
 
           <LI>
 	    Conditional expressions are tagged with 
-	    {\lstinline[mathescape=true]$"conditional_expression"$}
+	    <kbd>"conditional_expression"</kbd>
 	    and have a predicate, a consequent, and an alternative. 
 
-	    
+	    <div class='snippet' id='javascript_74_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_conditional_expression(stmt) {
@@ -322,7 +292,7 @@ function cond_expr_pred(stmt) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQggJjWCCGANmgKYAeADgE4korxgAUKUAtlAJSIDeAUIgJpQQVJKjRR8AcykksaQqijM2UADSJ+A7Tt2IARJjA48YIqUo06DfRwDcvAL69QkU4iPzy1NNTkr2Lj5tIREkRRY0GmAA9UQARnsnF3BoBg9sCx8jFFigrURQ0UQIqCiSGJZ2DQAmJOdXNIQM4yyqNCJlKs4eAqLwpXLK1Q0AZnqgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgQwObYKYAmaANqlABQpQC2UANIlABZ4Y4CUiA3gFCL+IATnighBSVGgAOmGIMo0onAGTLELTAQW1OAXn2MWbbAG4eAXx6hIsBMnQQEBGLbCZiaPAA8pwlCngwbSVuPn5hUXF7Y3wiUipghjCBFNT+ACJHMGdXd08fPwCEdPYzS2toQMQsom9faWEtKh1QgQixJHioNGFgRMQARlKLK3BKuxr8+qyUYM5eNpEOxC6evD7m+kQAJmHysddqpynBNHcKTfnk9qjV3v6AZj2eHhmoRGoATzRJusFEXSIZKIGSCFB4cjpGDARDkKCCEB4eaDEyIcyIPDEcHcHao8wlMzOFBSYiYT7kSQ1FyBPJ-PD+QLkL4-Y5-djDIkksnkX4FBqEJnfXm+dmE1Bc8nC04zQUs7InUU8TmkyWsvnnWVS0VAA}{\usebox\lstbox}!*/
 }
 function cond_expr_cons(stmt) {
    return list_ref(stmt, 2);
@@ -332,8 +302,9 @@ function cond_expr_alt(stmt) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	    
 	    
@@ -342,7 +313,7 @@ function cond_expr_alt(stmt) {
           <LI>
 	    A sequence is a list of statements.
 
-	    
+	    <div class='snippet' id='javascript_74_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_sequence(stmt) {
@@ -354,7 +325,7 @@ function make_sequence(stmts) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfRQUwI4k5TAChSgFsoBKRAbwChEGAnTKERpVNKAQwHNfMAEzQAbVFGJkoAGkQAiLLnwRMcigG5aAX1qhIsBIlLcA1pgw48BSeRRU6DRM1btEYkoQWXlq2SVsa2rrg0PBIilYqGDxQmKT4UCg2lDSO9EwsbEgAFpjcgoQ8MCLJFIE6eqGGnHEADlAAnhZK1v6J9ulOma6cYCAiJW12mhUhBhzoItwk0dyx8WASQx2OzlnI6H0DhdzFyXblwfphiMAwjDMkc3EJ+ysZLjl5BcsjR1VIzJcxN4tJyzROmtXEVBlJhtogA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgQwObYKYAmaANqlABQpQC2UANIlABZ4Y4CUiA3gFCL+IATnighBSVGgAOmGIMo0onAGTLELTAQW1OAXn2MWbbAG4eAXx6hIsBMnQo8ARxB5IebUu59+w0ePtjfCJSKk8GACJHFzcIPAj2M0traHgkakwAa1Zo13dPFE5eAT8xJFCKKOc8uIiGKlpCpKtwVLtc2JysKDxqNygUTyKBHyERMvU8TXIsGGIhxIsWmzTA3qkoAE80DvyGgaLR0oDJMBBief2mpZTbCXRiTCod7t7+gsOS8ZP0M4uZ2SXRSFRbJVp3RDAOTPKiYHp9MAUK6fXzfJAaLTI5q3VbCGGvBEDD7eL7+JCzIGNUE8HgQBBURDUba7OKIXSIGSCRzkCIARhMjEErgFABYAKwmBJmAioKSPTbkSQsjxMnbVTrsRZ0sAM1WYNo6tmIZUvOFvRGDVXKxYylByzAKyTrLZqmL5PUGkHS2XyxUPJ5QU3w94eu5eni2+0KqFcwOw4OI8ihtLhyO+vFxgn9S3bfVhzUmIA}{\usebox\lstbox}!*/
 function sequence_statements(stmt) {   
    return head(tail(stmt));
 }
@@ -372,8 +343,9 @@ function rest_statements(stmts) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	    
 
@@ -382,7 +354,7 @@ function rest_statements(stmts) {
           <LI>
 	    A block contains its body statement.
 
-	    
+	    <div class='snippet' id='javascript_74_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_block(stmt) {
@@ -394,14 +366,15 @@ function make_block(stmt) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQEYBs4QNYAUKUAtlAJSIDeAUIvYgE4CmUIjSqaUAhgOZ9mAEzRZUUIqSgAaRACJsuPHPIBuGgF8aoSLASISPPM0w58kspVoMWbDojHECCs8tnFL6rTujwki-Ew4IQBPCwpqOhtWdiQAC2YeIQJeGCxw8jVNIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgQwObYKYAmaANqlABQpQC2UANIlABZ4Y4CUiA3gFCL+IATnighBSVGgAOmGIMo0onAGTLELTAQW1OAXn2MWbbAG4eAXx6hIsBMnQAjYnAgBrbUu58Bw0ePvG+ESkVB4MAEROLq7h7GaW1tDwSNSYrqxRbh6cvD4iYkghFJHObuEMVDrxVuBJdpmuaA5wBACe2V4CQvn+GlpYMMTZcRY8PBAIVIjUrU2lroi6iDKCKHjk4VyIAIwmjIIgeHsALACse+axZgSoUsSY7ZIN5DNz0ewjNyh3D+QNTS12q8Gh8TEA}{\usebox\lstbox}!*/
 function block_body(stmt) {
     return head(tail(stmt));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	    
 
@@ -411,13 +384,13 @@ function block_body(stmt) {
 	  
           <LI>
 	    A function application is an object tagged with
-	    the string {\lstinline[mathescape=true]$"application"$}.
+	    the string <kbd>"application"</kbd>.
 	    We provide access functions for the 
-	    {\lstinline[mathescape=true]$operator$}, the
-	    {\lstinline[mathescape=true]$operands$}, and three
+	    <kbd>operator</kbd>, the
+	    <kbd>operands</kbd>, and three
 	    functions for iterating  through the operand list:
 
-	    
+	    <div class='snippet' id='javascript_74_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_application(stmt) {
@@ -429,7 +402,7 @@ function operator(stmt) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQIYAcsBsYQawIAUKUAtlAJSIDeAUIswE4CmUILSqaUGAcwFsAJmnzkylKABpEAImx4CReGHnUA3AwC+DUJGJI4WNiyJwWUqrUbNE7Tt0QALNhhEl+MXNZpbdfXBoNUQTMwwwERQ-WyZWDi4kNw8vDB80jPIbagC9AxCERDA4NHDzKJiTFDj7RyTkdDAQXF9qvKDDUOAYFnIy0wrPdvp4h0TnFOGsGu184KNx-vLI6JIRuwSnJG82mbygA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgQwObYKYAmaANqlABQpQC2UANIlABZ4Y4CUiA3gFCL+IATnighBSVGgAOmGIMo0onAGTLELTAQW1OAXn2MWbbAG4eAXx6hIsBMnSYpU0hEy2w2pdz79ho8fbG+ESkVJ4MAESOzjCu7hHsZpbW0PBIcFJ4gm5w8lQ63gJ+YkgaWlgwxJ7siRZW4Kl2GVmYYAQo1YW+IiXqeJrkFVVD1TVJ9TZpiGBwaM3ZbR0ZKJy8RT0BkmAgxFXLtckN7ojAclRzmQta+11CG6X911Ir4ynHwufzre3kN2vd-iQI324x4EAQVEQ1AAnmhoi43FNdIgZIIUHhyBFqG4mNI4AB3cgAZgYABZEgkzARUM5MNDyJJ4bFEQhyDC4U4Ee4xjxqShafSvlBcmzYUy4mkeeCwJD2V9FohkfKfuzxSywLU+QLyDMLi1FqK9VcVpqacQ6eRTmioEbvoblSaqWaLR8bQ77Zdvo6gA}{\usebox\lstbox}!*/
 function operands(stmt) {
    return head(tail(tail(stmt)));
 }
@@ -444,18 +417,13 @@ function rest_operands(ops) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	    
 	  </LI>
-	<hr><div class='footnote'>
-<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>In actual
-	    JavaScript, there is a subtle difference between the two
-	    forms. The interpretation of function declaration statements
-	    involves reordering of sequence statements, a topic which 
-	    we prefer to skip at this point.
-            </FOOTNOTE></div></UL>
+	</UL>
       </p></div>
     
   </SPLIT>
@@ -482,15 +450,15 @@ function rest_operands(ops) {
     
     Rewrite
     
-    {\lstinline[mathescape=true]$evaluate$}
+    <kbd>evaluate</kbd>
     
     so that the dispatch is done in data-directed
     style.  Compare this with the data-directed
     differentiation
     function
     of
-    exercise~\ref{ex:data-directed-differentiation}.
-    (You may use the {\lstinline[mathescape=true]$head$} of a compound expression as the
+    exercise \ref{ex:data-directed-differentiation}.
+    (You may use the <kbd>head</kbd> of a compound expression as the
     type of the expression, as is appropriate for the syntax implemented
     in this section.)
     
@@ -505,37 +473,37 @@ function rest_operands(ops) {
     
     
     Recall the definitions of the special forms
-    {\lstinline[mathescape=true]$&&$}
+    <kbd>&&</kbd>
     and
-    {\lstinline[mathescape=true]$||$}
-    from chapter~1:
+    <kbd>||</kbd>
+    from chapter 1:
     <SPLIT>
       
       
 	<UL>
-	  <LI>$\textit{expression}_1$ {\lstinline[mathescape=true]$&&$} $\textit{expression}_2$: The expression $\textit{expression}_1$ is evaluated first. If it evaluates to 
-	  {\lstinline[mathescape=true]$false$}, {\lstinline[mathescape=true]$false$}
+	  <LI>$\textit{expression}_1$ <kbd>&&</kbd> $\textit{expression}_2$: The expression $\textit{expression}_1$ is evaluated first. If it evaluates to 
+	  <kbd>false</kbd>, <kbd>false</kbd>
 	  is returned; the expression $\textit{expression}_2$
-	  is not evaluated.  If it evaluates to {\lstinline[mathescape=true]$true$}, the value
+	  is not evaluated.  If it evaluates to <kbd>true</kbd>, the value
 	  of $\textit{expression}_2$ is returned.  
 	  </LI>
-	  <LI>$\textit{expression}_1$ {\lstinline[mathescape=true]$||$} $\textit{expression}_2$: The expression $\textit{expression}_1$ is evaluated first. If it evaluates to {\lstinline[mathescape=true]$true$},
-	  {\lstinline[mathescape=true]$true$} is returned;
+	  <LI>$\textit{expression}_1$ <kbd>||</kbd> $\textit{expression}_2$: The expression $\textit{expression}_1$ is evaluated first. If it evaluates to <kbd>true</kbd>,
+	  <kbd>true</kbd> is returned;
 	  the expression $\textit{expression}_2$
 	  is not evaluated.  If it evaluates to
-	  {\lstinline[mathescape=true]$false$}, the value
+	  <kbd>false</kbd>, the value
 	  of $\textit{expression}_2$ is returned.  
 	  </LI>
 	</UL>
 	Include 
-	{\lstinline[mathescape=true]$&&$} and {\lstinline[mathescape=true]$||$}
+	<kbd>&&</kbd> and <kbd>||</kbd>
 	expressions 
 	by defining appropriate syntax
 	functions
 	and evaluation functions
-	{\lstinline[mathescape=true]$eval_and$}
+	<kbd>eval_and</kbd>
 	and 
-	{\lstinline[mathescape=true]$eval_or$}
+	<kbd>eval_or</kbd>
 	
       
     </SPLIT>
@@ -570,5 +538,18 @@ function rest_operands(ops) {
     
   </SPLIT>
 
-
-</SUBSECTION>
+<hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>In actual
+	    JavaScript, there is a subtle difference between the two
+	    forms. The interpretation of function declaration statements
+	    involves reordering of sequence statements, a topic which 
+	    we prefer to skip at this point.
+            </FOOTNOTE></div>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section1/subsection1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section1/subsection3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+4.1.2  Representing Statements and Expressions</div>	<div class='next-page'></div></div>

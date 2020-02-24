@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>2.2.3 
-        Sequences as Conventional Interfaces
-      </a>
+		<a name='top' class='permalink'>2.2.3  Sequences as Conventional Interfaces</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -24,7 +31,7 @@
 
       <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
-        In section~\ref{sec:higher-order-procedures} we saw how program
+        In section \ref{sec:higher-order-procedures} we saw how program
         abstractions, implemented as higher-order
         functions, can capture
         common patterns in programs that deal with numerical data.  Our
@@ -32,15 +39,15 @@
         data depends crucially on the style in which we manipulate our data
         structures.  Consider, for example, the following
         function, analogous
-        to the {\lstinline[mathescape=true]$count_leaves$}
+        to the <kbd>count_leaves</kbd>
         function
-        of section~\ref{sec:trees}, which
+        of section \ref{sec:trees}, which
         takes a tree as argument and computes the sum of the squares of the
         leaves that are odd:
 
         
 
-        
+        <div class='snippet' id='javascript_31_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sum_odd_squares(tree) {
@@ -52,14 +59,15 @@ function sum_odd_squares(tree) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxAWwPpwCbY8gRxAEMAnAU2QAooLyBKRAbwChF3EKoRSkZkMYEABthNOvTYdpHAPyIADFJnSAXIgCEifhgAOxGKXHkGyldPlUdObMYaJ5hEhTuN1CyeZXrUmG-iIySioAC3JiW1oTek8vFQBqMzj2XyxcAOdgqAMxKIZ6AG4WAF8gA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3NElgSIYyAPpwAJuLxgSFajRx0GiJAFJEAJkQBeXYgCMnHn2jwkyEAFsxkkWky5keKLhyzK1WvSTCRYEAA2Ac6uRB7yEQD8iAAM4RHUAFyIAIRCogAOGDBYIThu8QnU0Xi+ElIu+STR9tj4lW6IyTFhRQnJFtblduh1TgAWOBgVoa1tCQDUheMoVjbiPQ44TlDZwQ1EREbk5J3zi314AcJQRyd4GgA0iADMRNfHyKcALNcArJtbQA}{\usebox\lstbox}!*/
                +
                sum_odd_squares(tail(tree));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
       </p></div>
@@ -71,7 +79,7 @@ function sum_odd_squares(tree) {
         is very different from the following
         one, which constructs a list of all the even Fibonacci numbers
         ${\textrm{Fib}}(k)$, where $k$ is less than or equal to a given integer $n$:
-        
+        <div class='snippet' id='javascript_31_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function even_fibs(n) {
@@ -83,7 +91,7 @@ function even_fibs(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG7LAfWDARgZwAowBKRAbwChEbFRJYFExkAPKQgazKtr8RjBEXRAD5mPav2kAnZFBAykYEABtVAbinSAvilX5kFbdNoQE+KHUQBeOni4ktp-nIVKB+TGgyFgJExdTAH5EAAcAQxgZPwAaZjYOTkQAakQARhIAoJyALgT2ETTM51MdE3K+N0VlRMIABidKHSA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQKYDcNgBRgCUiA3gFCKWIBOGUI1SSApIgEyIC83iADANxkAvmVCRYCRMBgAjAsXJUadBky49eFJdsQB+Plp1UAXIiTdOiAIyGjVfTbvbT0uUgC014gGopsgoiebISCImLQ8EjYuGiuKPKktuESTBgAHlB4ANYKtkowwIjZiAB8ZrlOVLT0jGYgADb1gnZCiBj1KBiJlZQQCChQUlx+cjnNPdWqyOjR+MCEeT32iAAOAIYw1HjAADRm6ZlZiL5WhAtLRqZgB8UnIYuUIkpPVSq11xl4vPciZLOxsniAE4QkA}{\usebox\lstbox}!*/
             return is_even(f)
                    ? pair(f, next(k + 1))
                    : next(k + 1);
@@ -93,8 +101,9 @@ function even_fibs(n) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
 
@@ -114,7 +123,7 @@ function even_fibs(n) {
           </LI>
           <LI>squares each of the selected ones; and
           </LI>
-          <LI>accumulates the results using {\lstinline[mathescape=true]$+$}, starting with 0.
+          <LI>accumulates the results using <kbd>+</kbd>, starting with 0.
           </LI>
         </UL>
       </p></div>
@@ -129,7 +138,7 @@ function even_fibs(n) {
           </LI>
           <LI>filters them, selecting the even ones; and
           </LI>
-          <LI>accumulates the results using {\lstinline[mathescape=true]$pair$},  starting with the
+          <LI>accumulates the results using <kbd>pair</kbd>,  starting with the
             empty list.
           </LI>
         </UL>
@@ -142,7 +151,7 @@ function even_fibs(n) {
         A signal-processing engineer would find it natural to conceptualize
         these processes in terms of signals flowing through a cascade of
         stages, each of which implements part of the program plan, as shown in
-        Figure~\ref{fig:signal-flow-plans}.  In {\lstinline[mathescape=true]$sum_odd_squares$}, we
+        Figure \ref{fig:signal-flow-plans}.  In <kbd>sum_odd_squares</kbd>, we
         begin with an 
         
         <EM>enumerator</EM>, which generates a <QUOTE>signal</QUOTE>
@@ -153,14 +162,14 @@ function even_fibs(n) {
         The resulting signal is in turn passed through a 
         
         <EM>map</EM>, which is a
-        <QUOTE>transducer</QUOTE> that applies the {\lstinline[mathescape=true]$square$}
+        <QUOTE>transducer</QUOTE> that applies the <kbd>square</kbd>
         function
         to each
         element.  The output of the map is then fed to an 
         
         <EM>accumulator</EM>,
-        which combines the elements using {\lstinline[mathescape=true]$+$}, starting from an initial 0.
-        The plan for {\lstinline[mathescape=true]$even_fibs$} is analogous.
+        which combines the elements using <kbd>+</kbd>, starting from an initial 0.
+        The plan for <kbd>even_fibs</kbd> is analogous.
 
 	<SPLIT>
 	  
@@ -172,8 +181,8 @@ function even_fibs(n) {
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/ch2-Z-G-17}.svg}}
 \caption{The signal-flow plans for the
         functions
-        {\lstinline[mathescape=true]$sum_odd_squares$} (top) and
-	{\lstinline[mathescape=true]$even_fibs$} (bottom) reveal the
+        <kbd>sum_odd_squares</kbd> (top) and
+	<kbd>even_fibs</kbd> (bottom) reveal the
         commonality between the two programs.
                 }
 \label{fig:signal-flow-plans}
@@ -188,9 +197,9 @@ function even_fibs(n) {
         Unfortunately, the two
         function
         definitions above fail to exhibit this
-        signal-flow structure.  For instance, if we examine the {\lstinline[mathescape=true]$sum_odd_squares$}
+        signal-flow structure.  For instance, if we examine the <kbd>sum_odd_squares</kbd>
         function, we find that the enumeration is
-        implemented partly by the {\lstinline[mathescape=true]$is_null$} and {\lstinline[mathescape=true]$is_pair$} tests and partly
+        implemented partly by the <kbd>is_null</kbd> and <kbd>is_pair</kbd> tests and partly
         by the tree-recursive structure of the
         function.  Similarly, the
         accumulation is found partly in the tests and partly in the addition used
@@ -209,9 +218,10 @@ function even_fibs(n) {
         code.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Sequence Operations
-      
+      </h2></div>
 
       
       
@@ -223,26 +233,27 @@ function even_fibs(n) {
         from one stage in the process to the next.  If we represent these
         signals as lists, then we can use list operations to implement the
         processing at each of the stages.  For instance, we can implement the
-        mapping stages of the signal-flow diagrams using the {\lstinline[mathescape=true]$map$}
+        mapping stages of the signal-flow diagrams using the <kbd>map</kbd>
         function
-        from section~\ref{sec:sequences}:
-        
+        from section \ref{sec:sequences}:
+        <div class='snippet' id='javascript_31_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 map(square, list(1, 2, 3, 4, 5));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=LYQwDgFAzgjgriATgUwDQAIA2BLKAXCARgwCYMBmDAFgwFYBKegbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3NElgSIAthgAOePgBpEMKDiHISFajRx0GM5AH0wIADZ68s+YsorziAPyJdBsxeoAuRKIwwsE8HgAWODABMjOQUiIml7B0iRcSlEKDdDYxDQzh5ovDRMXGk9GGQoPABGaQAmaQBmaQAWaQBWFKA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
         Filtering a sequence to select only those elements that satisfy a
         given predicate is accomplished by
-        
+        <div class='snippet' id='javascript_31_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function filter(predicate, sequence) {
@@ -254,13 +265,14 @@ function filter(predicate, sequence) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMGAbKBTATgCgA5YYAmMEAhpgDSIDOGAjiBpBgJSIDeAUIr4oVBBYkMGgH0wIVKhx1GzCGx58VfAPyJJ05apUAuRAWKkKGHAAsMZIrIZMWrVjt0qNeMjFyXrt+Q+rOLkHIaJi4RiTkVIhQHjJy9oqOTsH6IejY+ISRptSxaL6JbKwA3FwAvkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABMGAbKBTATgCgA5YYAmMEAhpgDSIDOGAjiBpBgJSIDeAUIr4oVBBYkMGgH0wIVKhx1GzCGx58VfAPyJJ05apUAuRAWKkKGHAAsMZIrIZMWrVjt0qNeMjFyXrt+Q+rOLkHIaJi4RiTkVIhQHjJy9oqOTsH6IejY+ISRptSxaL6JbKwA3FwAvlxcoJCwCIiiYnBENmDs3CoCQkhIAKSIAEyIALyjiACMZZUoGbiNzUTUqKJQOOPUA9QAzNQALNQArI4lQA}{\usebox\lstbox}!*/
              : filter(predicate, tail(sequence));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
 
@@ -269,21 +281,22 @@ function filter(predicate, sequence) {
       <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
         For example,
-        
+        <div class='snippet' id='javascript_31_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 filter(is_odd, list(1, 2, 3, 4, 5));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYSwNgLgpgTgFCAzgfQPYBN0BoAEYkRwCMuATLgMy4AsuArAJQMDcQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABMGAbKBTATgCgA5YYAmMEAhpgDSIDOGAjiBpBgJSIDeAUIr4oVBBYkMGgH0wIVKhx1GzCGx58VfAPyJJ05apUAuRAWKkKGHAAsMZIrIZMWrVjt0qNeMjFyXrt+Q+rOLkHIaJi4RiTkVIhQHjJy9oqOTsH6IejY+ISRptSxaL6JbKwA3FwAvlygkLAIiKJicEQ2YOzcKgJCSEgApIgATIgAvCOIAIxllSgZuA1NRNSoolA4Y9T91ADM1AAs1ACsjiVAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 
         Accumulations can be implemented by
         
-        
+        <div class='snippet' id='javascript_31_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function accumulate(op, initial, sequence) {
@@ -295,56 +308,60 @@ function accumulate(op, initial, sequence) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwhEBbEAbZUCmAFHAA4A0iMYMsy2FAzvgI4j6T4CUiA3gFCJBiAE74oIYUhgMA+mBzZCTVuwhcBQzUID8larWwatmgFyJShABb5kAEyUs2HThSPH3qdFlwFi5PTQwdBRQyDCKyk5qnDEA3HwAvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwhEBbEAbZUCmAFHAA4A0iMYMsy2FAzvgI4j6T4CUiA3gFCJBiAE74oIYUhgMA+mBzZCTVuwhcBQzUID8larWwatmgFyJShABb5kAEyUs2HThSPH3qdFlwFi5PTQwdBRQyDCKyk5qnDEA3HwAvkA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
 
-        
+        <div class='snippet' id='javascript_31_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 accumulate(plus, 0, list(1, 2, 3, 4, 5));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYYxFcFtwG2AXApgCgA43AZwDQAIAMeMAlpvMgIx4BMeAzHgCx4CsAlGwNxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwhEBbEAbZUCmAFHAA4A0iMYMsy2FAzvgI4j6T4CUiA3gFCJBiAE74oIYUhgMA+mBzZCTVuwhcBQzUID8larWwatmgFyJShABb5kAEyUs2HThSPH3qdFlwFi5PTQwdBRQyDCKyk5qnDEA3HwAvnygkLAIiCTYIAyEAB4UAJ7c-Jqi4pKIuYgA1IgF8UmemDh4RJnZFAAMFNjSUIQAjBQATBQAzBQALBQArHFAA}{\usebox\lstbox}
+</pre>
 
-
-
-        
-
+</div></div>
 
         
+
+
+        <div class='snippet' id='javascript_31_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 accumulate(times, 1, list(1, 2, 3, 4, 5));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYYxFcFtwG2AXApgCngS0ogzgGgAQCM+MaW8yReATPgMz4As+ArAJSsDcQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwhEBbEAbZUCmAFHAA4A0iMYMsy2FAzvgI4j6T4CUiA3gFCJBiAE74oIYUhgMA+mBzZCTVuwhcBQzUID8larWwatmgFyJShABb5kAEyUs2HThSPH3qdFlwFi5PTQwdBRQyDCKyk5qnDEA3HwAvnygkLAIiLAY+AyEAB4UAJ7c-Jqi4pKIuYgAVIgF8UmemDh4RJnZFACMFNjSUITdiABMFADMFAAsFACscUA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_31_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 accumulate(pair, null, list(1, 2, 3, 4, 5));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYYxFcFtwG2AXApgCgA7AJYCcA0ACAO1hnxgwGd5kBGfAJnwGZ8AWfAVgEpOBuIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwhEBbEAbZUCmAFHAA4A0iMYMsy2FAzvgI4j6T4CUiA3gFCJBiAE74oIYUhgMA+mBzZCTVuwhcBQzUID8larWwatmgFyJShABb5kAEyUs2HThSPH3qdFlwFi5PTQwdBRQyDCKyk5qnDEA3HwAvnyemDh4RCRhwhTy2PSI2NJQhACMFABMFADMFAAsFACscUA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
         All that remains to implement signal-flow diagrams is to enumerate the
-        sequence of elements to be processed.  For {\lstinline[mathescape=true]$even_fibs$}, we need to
+        sequence of elements to be processed.  For <kbd>even_fibs</kbd>, we need to
         generate the sequence of
         integers in a given range, which we can do as follows:
-        
+        <div class='snippet' id='javascript_31_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function enumerate_interval(low, high) {
@@ -356,43 +373,21 @@ function enumerate_interval(low, high) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUzCAtsgTgQysgfRjHywDccAbACkrgHcAaRACxgHMWBKRAbwChEQxFmRQQWJHXqIAfKw4tBwlcID8iNJUrLVKgFyIADjhhZaDRrr02hqDNjyFipCjWmIA1IgCMzNpxcXADc-AC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAUzCAtsgTgQysgfRjHywDccAbACkrgHcAaRACxgHMWBKRAbwChEQxFmRQQWJHXqIAfKw4tBwlcID8iNJUrLVKgFyIADjhhZaDRrr02hqDNjyFipCjWmIA1IgCMzNpxcXADc-AC+-Pz2mLj4RCTYbtQATMwA7CFAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
       </p></div>
 
       <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
-        To enumerate the leaves of a tree, we can use<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-
-        
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function enumerate_tree(tree) {
-    return is_null(tree)
-           ? null
-           : ! is_pair(tree)
-             ? list(tree)
-             : append(enumerate_tree(head(tree)),
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUzCAtsgTgQysgfSi2WQApjSBKRAbwChEnESoQskYBnAtAGz4USyKo2bjmAfkT8+YieIBciAISJuBAA44YWIdXkLx0vtyj6Rho02U5Nm1ABMyqDNjyFK5ABbIczryoqABora3DXTFx8ImEKHUFAoIBuegBfIA}{\usebox\lstbox}!*/
-                      enumerate_tree(tail(tree)));
-}
-
-\end{JavaScriptClickable}
-
-
-
-        
-      
+        To enumerate the leaves of a tree, we can use<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
 
             
 
-        
+        <div class='snippet' id='javascript_31_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function enumerate_tree(tree) {
@@ -404,24 +399,25 @@ function enumerate_tree(tree) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUzCAtsgTgQysgfSi2WQApjSBKRAbwChEnESoQskYBnAtAGz4USyKo2bjmAfkT8+YieIBciAISJuBAA44YWIdXkLx0vtyj6Rho02U5Nm1ABMyqDNjyFK5ABbIczryoqABora3DXTFx8ImEKHUFAoIBuegBfIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAUzCAtsgTgQysgfSi2WQApjSBKRAbwChEnESoQskYBnAtAGz4USyKo2bjmAfkT8+YieIBciAISJuBAA44YWIdXkLx0vtyj6Rho02U5Nm1ABMyqDNjyFK5ABbIczryoqABora3DXTFx8ImEKHUFAoIBuegBfenpI9xivMlMucwBGYMQC8wAmUvKyAGZSgBYg0oBWFKA}{\usebox\lstbox}!*/
                       enumerate_tree(tail(tree)));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
       </p></div>
 
       <div class='permalink'>
 <a name='p13' class='permalink'></a><p>
-        Now we can reformulate {\lstinline[mathescape=true]$sum_odd_squares$} and {\lstinline[mathescape=true]$even_fibs$} as in
-        the signal-flow diagrams.  For {\lstinline[mathescape=true]$sum_odd_squares$}, we enumerate the
+        Now we can reformulate <kbd>sum_odd_squares</kbd> and <kbd>even_fibs</kbd> as in
+        the signal-flow diagrams.  For <kbd>sum_odd_squares</kbd>, we enumerate the
         sequence of leaves of the tree, filter this to keep only the odd
         numbers in the sequence, square each element, and sum the results:
-        
+        <div class='snippet' id='javascript_31_12_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sum_odd_squares(tree) {
@@ -433,21 +429,22 @@ function sum_odd_squares(tree) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZxAWwPpwCbY8gRxAEMAnAU2QAooLyBKRAbwChF3EKoRSliII6EABtiUclQAOwkMgA0iNh2UrVHAAwKlanSrTFJVQiQpbd5tcBjDxpKjGRZcZi693kw6cqTHkMtcgkAhnpQgG4WAF8gA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3NElgSIADgBsQyQgBpEATxIVqNHHQZtEAalmcefaPCQxkAfTgATU3jDzK1WvSRIApIgBMiALyfEARm29weoI4YCAAtjhYGFA4RlC4+HE4ONaKdqqGRiEiIniJyTaKhQD8iFkiBYXUAFyIAISIGUIYMFi58UQVldQlIoZQbUkdXZU1GEJCwRbBYRFRMXl4ABY4GBZ5RESSncM70+GR0bHxuc056xt+ugJIyGEm5kZomLgS62QVaUgYEBBhICJzPCicTSbY7LoABlB4JhiFCYzwT2wOGhsLRwBgImirQyZlMqLRhMUe1mhwW5wu3HI5FuoXupke6GREl6yH6rP6LmkAGZNogOXgACzSACsGyI7CAA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p14' class='permalink'></a><p>
-        For {\lstinline[mathescape=true]$even_fibs$}, we enumerate the integers from 0 to $n$, generate
+        For <kbd>even_fibs</kbd>, we enumerate the integers from 0 to $n$, generate
         the Fibonacci number for each of these integers, filter the resulting
         sequence to keep only the even elements, and accumulate the results
         into a list:
-        
+        <div class='snippet' id='javascript_31_13_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function even_fibs(n) {
@@ -459,12 +456,13 @@ function even_fibs(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwG7LAfWDARgZwAowBKRAbwChEbEAnZKEOpAQwghAFsQAbVqMkIAHVjDoAaRNVqy582mD68pMherk5eguoRj5MaDKo2nTXVsMI5cJs-Y0ZuyOgOSYYYHala9CABilSEhCAbkoAXyA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQKYDcNgBRgCUiA3gFCKWIBOGUI1SSApIgEyIC83iADANxkAvmVCRYCRMBgAjAsXJUadBky49eFJdsQB+Plp1UAXIiTdOiAIyGjVfTbvbT0uUgC014gGopsgoiebISCImLQ8Ei4IAC2GNQAhlAYaDBgydRYCQA2eNlwAO4ANIgAFjAA5qUKtrT0jIj5BYgAfGWVpbZG+mAg2dldOqYADgkw1HmFRYNOVNFxicmp6fFZuU2IvlYl5VWEIcKi4BGS2LhorijypLUqDQkQELF9SRh4o+MlM7Pavf1fPx+0myGTwqEwODAAMBMKoMQSwzwrmhsNRlHm8VeywyazwvBKRH2BxEZDOYAusiuAE4QkA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
@@ -487,11 +485,11 @@ function even_fibs(n) {
         systems by cascading elements selected from standardized families of
         filters and transducers.  Similarly, sequence operations provide a
         library of standard program elements that we can mix and match.  For
-        instance, we can reuse pieces from the {\lstinline[mathescape=true]$sum_odd_squares$} and {\lstinline[mathescape=true]$even-fibs$}
+        instance, we can reuse pieces from the <kbd>sum_odd_squares</kbd> and <kbd>even-fibs</kbd>
         functions
         in a program that constructs a list of the
         squares of the first $n+1$ Fibonacci numbers:
-        
+        <div class='snippet' id='javascript_31_14_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function list_fib_squares(n) {
@@ -503,12 +501,13 @@ function list_fib_squares(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGxgZygfWDARptARxAEMAnAUzQAowBKRAbwChE3FKoQykSIIQAWxDISUCtQAOJGGQA0iVu2UrV7MCOQKla3SsElJ1IqUra9FtQaM5c5yw9UUNgimTEVMMMOLIA3EmRqAAYFejoIgG5mAF8gA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3NElgSJgMAEZ4wJCtRo46DREgC8yxAAZK0zYgD8ajVuoAuBYmWLEARn0Hquqzc3HhYpAFpLJANRDR4xO4AmIk4ePmh4JBwwEABbHCwMKBwAfRgwJKwANwwAGzwcuAB3ABpEAAsYAHMyyWtaeiQCwsQAPnKqsusDXWicnK6tYwAHDBgsfKLigYdqKNj4xJS0jOy8psRvC1KK6qJg7l5wcMEcmGQoZOdktExcZHFa6Xr5DAgIWJAcxbwRsdLpmaaXo5f6AwExDBDPA3bA4UFghEQqHOeEItGIOZxBJJVLpeKrPCqUoSPb7HjkU7nS6ia7oWH3CyqYJAA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
       </p></div>
@@ -517,7 +516,7 @@ function list_fib_squares(n) {
 <a name='p17' class='permalink'></a><p>
         We can rearrange the pieces and use them in computing the product of
         the odd integers in a sequence:
-        
+        <div class='snippet' id='javascript_31_15_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function product_of_squares_of_odd_elements(sequence) {
@@ -529,9 +528,10 @@ function product_of_squares_of_odd_elements(sequence) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwE5wCYmgfTsHAZwEcQBDVAU0LwMwx0oBtKBbSsKQgCkMtI4RKASkQBvAFCJpiKlBCokZCBBCsQTMlErdY7QgBpEUmabPmZARiMmLds6zLJepCpRv3PF4DCbbU3DA09EZ8ApAiwsIA3BIAvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwI4gIYCcCmAKADwEpEBvAKESsVyhCyQMQCpECBucgX3NElgSIYyAPpwAJuLxgSFajRx0GiJAFJEAJkQBeXYgCMnHn2jwksALY5khADSIAnrMrVa9Ri0dHe4U4IAOWBIg0GLAImiYuKJw4RLiIjgANjhWYFA2yDjoOJA4zvJuyhgQECAWIEkYUPiW1vYu8k3NTfoNLR0tFhj+eJHYOO2dw83AMEk1WHjCYpL2WTl5RMve5IHBobER6AMxcZKJKWkZeEnCUHhtmvYAzPYALPYArCtAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
       </p></div>
@@ -541,11 +541,11 @@ function product_of_squares_of_odd_elements(sequence) {
         We can also formulate conventional data-processing applications in
         terms of sequence operations.  Suppose we have a sequence of personnel
         records and we want to find the salary of the highest-paid programmer.
-        Assume that we have a selector {\lstinline[mathescape=true]$salary$} that returns the salary of
-        a record, and a predicate {\lstinline[mathescape=true]$is_programmer$} that tests if a record is
+        Assume that we have a selector <kbd>salary</kbd> that returns the salary of
+        a record, and a predicate <kbd>is_programmer</kbd> that tests if a record is
         for a programmer.  Then we can write
         
-        
+        <div class='snippet' id='javascript_31_16_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function salary_of_highest_paid_programmer(records) {
@@ -557,15 +557,16 @@ function salary_of_highest_paid_programmer(records) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwIYBtUCcCeB9OYPACxgHNiBTZKPAB1RgBN6s4ytUBbLyrACiyUIcLE2QBKRAG8AUIgWIhUEFiSoIEEFxCYolfl1RRieIwA8ANInmK79h4oAM124-f2jdfmky5XHoGOwDDo+gIwyKzsnDx81kIiYpISEgDcsgC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAZwIYBtUCcCeB9OYPACxgHNiBTZKPAB1RgBN6s4ytUBbLyrACiyUIcLE2QBKRAG8AUIgWIhUEFiSoIEEFxCYolfl1RRieIwA8ANInmK79h4oAM124-f2jdfmky5XHoGOwDDo+gIwyKzsnDx81kIiYpISEgDcsgC+srIiYDSIXPiJouKIALyI6JFQ-NU0-ABEADIwYCDIjdaNdGwc3LxYXYgAzE7jThKWbkGB9bWNAEowEMTYTMM9fbGDwwBMAKwTUzOz7vNNAEKh6JtGYKhkfPtHE5PpsqCQsAiIkdH9OICEpiKRyOzKVRIKioJj8KCMdCCYSlVIVcqVLYxAbPDLZL7QeBIXzYHDIpJMMEzSFqRAwuEI0LwxHk1GpPGyEm4AhEUgUai0BjMAE7PiGYoo5LpIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p19' class='permalink'></a><p>
         These examples give just a hint of the vast range of operations that
-        can be expressed as sequence operations.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+        can be expressed as sequence operations.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
       </p></div>
 
       <div class='permalink'>
@@ -577,20 +578,20 @@ function salary_of_highest_paid_programmer(records) {
         programs to a small number of sequence operations.  By changing these, 
         we can experiment with alternative representations of sequences, while
         leaving the overall design of our programs intact.  We will exploit
-        this capability in section~\ref{sec:streams}, when we generalize the
+        this capability in section \ref{sec:streams}, when we generalize the
         sequence-processing paradigm to admit infinite sequences.
       </p></div>
 
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled29}
+\label{ex:unlabeled31}
 
         Fill in the missing expressions to complete the following definitions
         of some basic list-manipulation operations as accumulations:
         
 
-        
+        <div class='snippet' id='javascript_31_17_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function map(f, sequence) {
@@ -603,7 +604,7 @@ function append(seq1, seq2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYAcAUwA0iDOApgI4iGSECUiA3gFCKOIBOhUIzSqEEIyIAG1RRCmTAA88AT2oBeAHyIA-EsR4GTTVu1MwggXiKlyEKgG46AXzp1QkWAkQZ05ACaYjARkMkATNXpNVnZOJx4+QWFRdFQYZjwVBKVKC2tbcGh4JAFyAHMoAAsPEjIKAI1GYI4ucP4hEUxExAAGH2My1KA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYAcAUwA0iDOApgI4iGSECUiA3gFCKOIBOhUIzSqEEIyIAG1RRCmTAA88AT2oBeAHyIA-EsR4GTTVu1MwggXiKlyEKgG46AXzp1QkWAkQZ05ACaYjARkMkATNXpNVnZOJx4+QWFRdFQYZjwVBKVKC2tbcGh4JAFyAHMoAAsPEjIKAI1GYI4ucP4hEUxExAAGH2My1Js0dAB9TDRCnvxiZig8ARh8KExvRF88AGY8ABZKFLoAeg2ndBcwVz6JqZm8ecQFynHJ6eW8AFY8ADY1iy3EHLB8gsPrk7nFlYvIA}{\usebox\lstbox}!*/
 }
 
 function length(sequence) {
@@ -611,15 +612,16 @@ function length(sequence) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 	
-      \hfill{\hyperref[ex:unlabeled29-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled31-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled29}]
+\begin{Answer}[ref={ex:unlabeled31}]
 
-    
+    <div class='snippet' id='javascript_31_18_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function map(f, sequence) {
@@ -632,7 +634,7 @@ function append(seq1, seq2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYAcAUwA0iDOApgI4iGSECUiA3gFCKOIBOhUIzSqEEIyIAG1RRCmTAA88AT2oBeAHyJ0qGM0xZxlaVoZM9+g0zCCBeXYYv6ipchCoBuOgF86dUJFgJEGdOQAmmNYAjHjWAEzU9Hqs7JzePHyCwqLKqqEkYenEQZSOLm7g0PBIAuQA5lAAFoEkZBSR5ixsHFwJ-EIiYpKIMogKPYgA1IghjZaWAAxm4zMEtbYOzkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYAcAUwA0iDOApgI4iGSECUiA3gFCKOIBOhUIzSqEEIyIAG1RRCmTAA88AT2oBeAHyJ0qGM0xZxlaVoZM9+g0zCCBeXYYv6ipchCoBuOgF86dUJFgJEGdOQAmmNYAjHjWAEzU9Hqs7JzePHyCwqLKqqEkYenEQZSOLm7g0PBIAuQA5lAAFoEkZBSR5ixsHFwJ-EIiYpKIMogKPYgA1IghjZaWAAxm4zMEtbYOzq5o6AD6mGhVq-jEzFB4AjD4UJghiJmIAMx4ACyUuXQA9I-e6L5gfuuHx6d4F5daRDfE43PAAVjwADZ7o5nkDyltMMDfuc8NdEHdckA}{\usebox\lstbox}!*/
     return accumulate(pair, seq2, seq1);
 }
 
@@ -643,8 +645,9 @@ function length(sequence) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 \end{Answer}
 
 
@@ -666,39 +669,7 @@ function length(sequence) {
           \[ \left(\cdots (a_{n}  x+a_{n-1})x+\cdots +a_{1}\right) x+a_{0} \]
         
         In other words, we start with $a_{n}$, multiply by $x$, add $a_{n-1}$, 
-        multiply by $x$, and so on, until we reach $a_{0}$.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>function
-        that evaluates a
-        polynomial using Horner's rule.
-        Assume that the coefficients of the
-        polynomial are arranged in a sequence, from $a_{0}$ through $a_{n}$.
-        
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function horner_eval(x, coefficient_sequence) {
-    return accumulate((this_coeff, higher_terms) => ??,
-                      0, 
-                      coefficient_sequence);
-}
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABACzgJzAUzQfUwNwEMAbACgA8AaRCOTYYGCGTMKHAZ0wEcRWJMASkQBvAFCJJiNJiggMiQhAggAtiGKEomUqSjIYHHLXrBqBgObJsObWlUdhAXgB8iAPzvKEqb7-+pAAZqHwCwvxMGJhY2Th4+SCEAbjEAXyA}{\usebox\lstbox}
-
-
-
-        For example, to compute $1+3x+5x^3+x^5$ at $x=2$ you would evaluate
-        
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-horner_eval(2, list(1, 3, 0, 5, 0, 1));
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BYewTgdgpmD6UDcCGAbAFAJgDQAIUEsBnAFzQEZcBmXABlwFZbcyBKFgbiA}{\usebox\lstbox}
-
-
-	
-      
+        multiply by $x$, and so on, until we reach $a_{0}$.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
 
         Fill in the following template to produce a
         function
@@ -706,7 +677,7 @@ horner_eval(2, list(1, 3, 0, 5, 0, 1));
         polynomial using Horner's rule.
         Assume that the coefficients of the
         polynomial are arranged in a sequence, from $a_{0}$ through $a_{n}$.
-        
+        <div class='snippet' id='javascript_31_19_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function horner_eval(x, coefficient_sequence) {
@@ -717,28 +688,30 @@ function horner_eval(x, coefficient_sequence) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABACzgJzAUzQfUwNwEMAbACgA8AaRCOTYYGCGTMKHAZ0wEcRWJMASkQBvAFCJJiNJiggMiQhAggAtiGKEomUqSjIYHHLXrBqBgObJsObWlUdhAXgB8iAPzvKEqb7-+pAAZqHwCwvxMGJhY2Th4+SCEAbjEAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABACzgJzAUzQfUwNwEMAbACgA8AaRCOTYYGCGTMKHAZ0wEcRWJMASkQBvAFCJJiNJiggMiQhAggAtiGKEomUqSjIYHHLXrBqBgObJsObWlUdhAXgB8iAPzvKEqb7-+pAAZqHwCwvxMGJhY2Th4+SCEAbjEAXzExVAwbAhJSACZqYkMoUgBGagBmamDEAFYa6jLBQSSgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         For example, to compute $1+3x+5x^3+x^5$ at $x=2$ you would evaluate
-        
+        <div class='snippet' id='javascript_31_20_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 horner_eval(2, list(1, 3, 0, 5, 0, 1));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BYewTgdgpmD6UDcCGAbAFAJgDQAIUEsBnAFzQEZcBmXABlwFZbcyBKFgbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABACzgJzAUzQfUwNwEMAbACgA8AaRCOTYYGCGTMKHAZ0wEcRWJMASkQBvAFCJJiNJiggMiQhAggAtiGKEomUqSjIYHHLXrBqBgObJsObWlUdhAXgB8iAPzvKEqb7-+pAAZqHwCwvxMGJhY2Th4+SCEAbjEAXzFUDBsCElIAJmpiQyhSAEZqAGZqYMQAVmrqUsFBJKA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	
       \hfill{\hyperref[ex:horner-Answer]{Solution}}\\
 \end{Exercise}
 
 \begin{Answer}[ref={ex:horner}]
 
-    
+    <div class='snippet' id='javascript_31_21_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function horner_eval(x, coefficient_sequence) {
@@ -750,9 +723,10 @@ function horner_eval(x, coefficient_sequence) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABACzgJzAUzQfUwNwEMAbACgA8AaRCOTYYGCGTMKHAZ0wEcRWJMASkQBvAFCJJiNJiggMiQhAggAtiGKEomUqSjIYHHLXrBqBgObJsObWlUdhAXgB8iCVM9fvU8ogBUKDBWNnYOiADUiPqGxnQMlB4+yV4ADNRJKVkmDEwsbJw8fJBCANxiAL5AA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABACzgJzAUzQfUwNwEMAbACgA8AaRCOTYYGCGTMKHAZ0wEcRWJMASkQBvAFCJJiNJiggMiQhAggAtiGKEomUqSjIYHHLXrBqBgObJsObWlUdhAXgB8iCVM9fvU8ogBUKDBWNnYOiADUiPqGxnQMlB4+yV4ADNRJKVkmDEwsbJw8fJBCANxiAL5AA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 \end{Answer}
 
 
@@ -760,9 +734,9 @@ function horner_eval(x, coefficient_sequence) {
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
 
-        Redefine {\lstinline[mathescape=true]$count_leaves$} from section~\ref{sec:trees} as an
+        Redefine <kbd>count_leaves</kbd> from section \ref{sec:trees} as an
         accumulation:
-        
+        <div class='snippet' id='javascript_31_22_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function count_leaves(t) {
@@ -771,16 +745,17 @@ function count_leaves(t) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABBO4oH0A2BTAhgN2wGcAKKASkQG8AoRexAJ2yhEaVwghAFsRNcUbCQD8IgDSIxknrgAOoiVJHlyAbhoBfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABBO4oH0A2BTAhgN2wGcAKKASkQG8AoRexAJ2yhEaVwghAFsRNcUbCQD8IgDSIxknrgAOoiVJHlyAbhoBfGjRRoseQqTm4YjEphhEoJAIySATOUmXrJAMySALKvVA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	
       \hfill{\hyperref[ex:countleaves-as-accumulation-Answer]{Solution}}\\
 \end{Exercise}
 
 \begin{Answer}[ref={ex:countleaves-as-accumulation}]
 
-    
+    <div class='snippet' id='javascript_31_23_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function count_leaves(t) {
@@ -792,13 +767,14 @@ function count_leaves(t) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABBO4oH0A2BTAhgN2wGcAKKASkQG8AoRexAJ2yhEaVwghAFsRNcUbCRI4CxADSIocKLkyUAvAD5EYwkUQBqabPkS6DI8ZMMADFJoBIKyZ64ADiSIgARuijNsiFYhhF0B1wYRmc3Dy9ya1tTYwB+ZFQwDHViMPdPbGwo2Ny8+gAuRABGAxsYinIAbhoAXyA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABBO4oH0A2BTAhgN2wGcAKKASkQG8AoRexAJ2yhEaVwghAFsRNcUbCRI4CxADSIocKLkyUAvAD5EYwkUQBqabPkS6DI8ZMMADFJoBIKyZ64ADiSIgARuijNsiFYhhF0B1wYRmc3Dy9ya1tTYwB+ZFQwDHViMPdPbGwo2Ny8+gAuRABGAxsYinIAbhoAXxoaFDQsPA0SIJDRfygSUsQAJnIpTG6SAGYpABZyGaqgA}{\usebox\lstbox}!*/
 			  t));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 \end{Answer}
 
 
@@ -808,17 +784,17 @@ function count_leaves(t) {
 
         The
         function
-        {\lstinline[mathescape=true]$accumulate_n$} is similar to {\lstinline[mathescape=true]$accumulate$} except
+        <kbd>accumulate_n</kbd> is similar to <kbd>accumulate</kbd> except
         that it takes as its third argument a sequence of sequences, which are all
         assumed to have the same number of elements.  It applies the
         designated accumulation
         function
         to combine all the first elements of
         the sequences, all the second elements of the sequences, and so on, and
-        returns a sequence of the results.  For instance, if {\lstinline[mathescape=true]$s$} is a sequence
+        returns a sequence of the results.  For instance, if <kbd>s</kbd> is a sequence
         containing four sequences
 
-	
+	<div class='snippet' id='javascript_31_24_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 list(list( 1,  2,  3),
@@ -828,12 +804,13 @@ list(list( 1,  2,  3),
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYSwzgLgFKlQBARgDT3gJlfAzASmQFBrGzTwAsWArFgGz5HHykIDsWAHFgJwNPPhoiAAypEKJOly4gA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=DYSwzgLgFKlQBARgDT3gJlfAzASmQFBrGzTwAsWArFgGz5HHykIDsWAHFgJwNPPhoiAAypEKJOly4gA}{\usebox\lstbox}
+</pre>
 
-
-	then the value of {\lstinline[mathescape=true]$accumulate_n(plus, 0, s)$} should be the sequence {\lstinline[mathescape=true]$[22, [26, [30, null]]]$}.  Fill in the missing expressions
-        in the following definition of {\lstinline[mathescape=true]$accumulate_n$}:
-        
+</div></div>
+	then the value of <kbd>accumulate_n(plus, 0, s)</kbd> should be the sequence <kbd>[22, [26, [30, null]]]</kbd>.  Fill in the missing expressions
+        in the following definition of <kbd>accumulate_n</kbd>:
+        <div class='snippet' id='javascript_31_25_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function accumulate_n(op, init, seqs) {
@@ -845,9 +822,10 @@ function accumulate_n(op, init, seqs) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwhEBbEAbZUCmA+mABRwAOANIjGDFNQM74COjAlIgN4BQi-iAE74oIQUhiNiObCQAW+ZABMSzNu3Z8B2gQH5EYGVp3aAXInLIYgkqnRZcBMlRp0GiXbvbVjJv-ztMHDwiUgpqWnpqTw0Abh4AXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwhEBbEAbZUCmA+mABRwAOANIjGDFNQM74COjAlIgN4BQi-iAE74oIQUhiNiObCQAW+ZABMSzNu3Z8B2gQH5EYGVp3aAXInLIYgkqnRZcBMlRp0GiXbvbVjJv-ztMHDwiUgpqWnpqTw0Abh4AXx4eCARGKEQ1QjVEAF5EbEkoEkL0kgBGagAmagBmbwKikgAWagBWagA2Bt9-PtLigHZqAA5qAE4GgYqABmpyysRyqrieQIcQ4lslJWo5zNZs1nZYoA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 	
     
     \hfill{\hyperref[ex:accumulate-n-Answer]{Solution}}\\
@@ -855,7 +833,7 @@ function accumulate_n(op, init, seqs) {
 
 \begin{Answer}[ref={ex:accumulate-n}]
 
-    
+    <div class='snippet' id='javascript_31_26_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function accumulate_n(op, init, seqs) {
@@ -867,9 +845,10 @@ function accumulate_n(op, init, seqs) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwhEBbEAbZUCmA+mABRwAOANIjGDFNQM74COjAlIgN4BQi-iAE74oIQUhiNiObCQAW+ZABMSzNu3Z8B2gQH5EYGVp3aAXInLIYgkqnRZcBMlRp0GiDMnIkAHogC8AHyICsq+7EysHBHGJnH8dpg4eESkFNS09NSe3n5BiFBWsj4RiGrR7ADcPAC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwhEBbEAbZUCmA+mABRwAOANIjGDFNQM74COjAlIgN4BQi-iAE74oIQUhiNiObCQAW+ZABMSzNu3Z8B2gQH5EYGVp3aAXInLIYgkqnRZcBMlRp0GiDMnIkAHogC8AHyICsq+7EysHBHGJnH8dpg4eESkFNS09NSe3n5BiFBWsj4RiGrR7ADcPAC+PDwQCIxQZayEagGI2JJQJN3NJACM1ABM1ADMpf29ACzUAKzUAGylsfHr0yQA7NQAHNQAnFM9QwAM1IPDiIMjGtWJDinEtkpK1OetLO2sVUA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 \end{Answer}
 
 
@@ -896,13 +875,11 @@ function accumulate_n(op, init, seqs) {
 	  
 	  
 	    is represented as the following sequence:
-	    
-\begin{JavaScript}
+	    <div class='snippet' id='javascript_31_27_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 [[1, [2, [3, [4, null]]]], 
  [[4, [5, [6, [6, null]]]], 
   [[6, [7, [8, [9, null]]]], null]]]
-\end{JavaScript}
-
+</pre></div></div>
 	  
 	</SPLIT>
         With this representation, we can use sequence operations to concisely
@@ -912,20 +889,21 @@ function accumulate_n(op, init, seqs) {
 
         <UL>
           <LI>
-          {\lstinline[mathescape=true]$dot_product($}$v${\lstinline[mathescape=true]$, $}$w${\lstinline[mathescape=true]$)$} returns the sum $\sum_{i}v_{i}
+          <kbd>dot_product(</kbd>$v$<kbd>, </kbd>$w$<kbd>)</kbd> returns the sum $\sum_{i}v_{i}
             w_{i}$.
           </LI>
           <LI>
-            {\lstinline[mathescape=true]$matrix_times_vector($}$m${\lstinline[mathescape=true]$, $}$v${\lstinline[mathescape=true]$)$} returns the vector $t$, where $t_{i} =\sum_{j}m_{ij}v_{j}$.
+            <kbd>matrix_times_vector(</kbd>$m$<kbd>, </kbd>$v$<kbd>)</kbd> returns the vector $t$, where $t_{i} =\sum_{j}m_{ij}v_{j}$.
           </LI>
           <LI>
-            {\lstinline[mathescape=true]$matrix_times_matrix($}$m${\lstinline[mathescape=true]$, $}$n${\lstinline[mathescape=true]$)$} returns the matrix $p$, where $p_{ij}=\sum_{k} m_{ik}n_{kj}$.
+            <kbd>matrix_times_matrix(</kbd>$m$<kbd>, </kbd>$n$<kbd>)</kbd> returns the matrix $p$, where $p_{ij}=\sum_{k} m_{ik}n_{kj}$.
           </LI>
           <LI>
-            {\lstinline[mathescape=true]$transpose($}$m${\lstinline[mathescape=true]$)$} returns the matrix $n$, where $n_{ij}=m_{ji}$.
+            <kbd>transpose(</kbd>$m$<kbd>)</kbd> returns the matrix $n$, where $n_{ij}=m_{ji}$.
           </LI>
         </UL>
-        We can define the dot product as<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
+        We can define the dot product as<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
+          <div class='snippet' id='javascript_31_28_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function dot_product(v, w) {
@@ -935,9 +913,10 @@ function dot_product(v, w) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAEzlA+gBwE52SaACgDcAaRAdwEpEBvAKEScWwFMoRskBDCCEALYgANtyitCmYSADO5AAzlGzFarXNe-IaPHowhWANZzEARnLCYMqCXLUqVANz0AvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABABwDYgM4AoAeAaRATwEpEBvAKEWsQCcBTKEWpHRAaiIG4KBfC0JFgJEsALb1s+IqUo06jZq0QAqbnwHho8JAEMIEEGJCpdUegH0wWOMgIwwMKAQz0AjhllUaDJi0QwGFYmqFgAFvS6ACZYrh7ExN7yyQD8iGAhSck0AFwoujC0WPqGxqbmNnYBjs6IYrrIuIgAvAB8iBHRuMQu7p49WdlDiCVGJmaW1rb2NQT1jWxtogWhOD2Icf3EPPyC2iJRcFAWyLRwUSDQWABuBADuXvK+SiMGY+X0WGiYBAAMBINhkDRmUJlYsOJJAQAIwEVCBKA3e4JbYaCiHY6nc6XRHwjCI2GIABM6zxiIAzAQACwJLhAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
         
 
         Fill in the missing expressions in the following
@@ -945,9 +924,9 @@ function dot_product(v, w) {
         for
         computing the other matrix operations.  (The
         function
-        {\lstinline[mathescape=true]$accumulate_n$} is
-        defined in exercise~\ref{ex:accumulate-n}.)
-        
+        <kbd>accumulate_n</kbd> is
+        defined in exercise \ref{ex:accumulate-n}.)
+        <div class='snippet' id='javascript_31_29_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function matrix_times_vector(m, v) {
@@ -961,63 +940,16 @@ function transpose(mat) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIZQE4wB4H1bICmAzrgG6HRwYAUyANImQJSIDeAUIt4hoVCAxI0ABxoB+cY2TMA3BwC+HDqEiwEiTKjDERcYoTrpWnHr36CkqCBBDIQAG3SFcYCVMSTpx+UpXhoeGF0LDwCElw0TBwaMGkTLh4IBGIoRGSHYkQAXk0MbV19QzA5RO4+ASEUVDEvFFKFIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIZQE4wB4H1bICmAzrgG6HRwYAUyANImQJSIDeAUIt4hoVCAxI0ABxoB+cY2TMA3BwC+HDqEiwEiTKjDERcYoTrpWnHr36CkqCBBDIQAG3SFcYCVMSTpx+UpXhoeGF0LDwCElw0TBwaMGkTLh4IBGIoRGSHYkQAXk0MbV19QzA5RO4+ASEUVDEvFFKFIA}{\usebox\lstbox}!*/
 function matrix_times_matrix(n, m) {
     const cols = transpose(n);
     return map(??, m);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-  
-    
-      
-          
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function dot_product(v, w) {
-    return accumulate(plus, 0, 
-                      accumulate_n(times, 1, list(v, w)));
-}
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAEzlA+gBwE52SaACgDcAaRAdwEpEBvAKEScWwFMoRskBDCCEALYgANtyitCmYSADO5AAzlGzFarXNe-IaPHowhWANZzEARnLCYMqCXLUqVANz0AvkA}{\usebox\lstbox}
-
-
-        
-
-        Fill in the missing expressions in the following
-        functions
-        for
-        computing the other matrix operations.  (The
-        function
-        {\lstinline[mathescape=true]$accumulate_n$} is
-        defined in exercise~\ref{ex:accumulate-n}.)
-        
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function matrix_times_vector(m, v) {
-    return map(??, m);
-}
-
-function transpose(mat) {
-    return accumulate_n(??, ??, mat);
-}
-
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIZQE4wB4H1bICmAzrgG6HRwYAUyANImQJSIDeAUIt4hoVCAxI0ABxoB+cY2TMA3BwC+HDqEiwEiTKjDERcYoTrpWnHr36CkqCBBDIQAG3SFcYCVMSTpx+UpXhoeGF0LDwCElw0TBwaMGkTLh4IBGIoRGSHYkQAXk0MbV19QzA5RO4+ASEUVDEvFFKFIA}{\usebox\lstbox}!*/
-function matrix_times_matrix(n, m) {
-    const cols = transpose(n);
-    return map(??, m);
-}
-
-\end{JavaScriptClickable}
-
-
+</div></div>
   
     
       \hfill{\hyperref[ex:matrix-ops-Answer]{Solution}}\\
@@ -1025,7 +957,7 @@ function matrix_times_matrix(n, m) {
 
 \begin{Answer}[ref={ex:matrix-ops}]
 
-    
+    <div class='snippet' id='javascript_31_30_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function matrix_times_vector(m, v) {
@@ -1039,15 +971,16 @@ function transpose(mat) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIZQE4wB4H1bICmAzrgG6HRwYAUyANImQJSIDeAUIt4hoVCAxI0ABxoY4Ad0QBeAHyIAJnCi4RExSGjipjFo2TMA3BwC+HDqEiwEiTKjDERcYoTrpWnHr36CkqCAgQZBAAG3RCXDAaEVQYDEYwMNCDDxNzS3BoeGF0LDwCElw0TBwaMANPLh4IBGIoRFrQ4lk7DAcnFzdDE28+ASEUVDFsWQVRGgBPMaUVNQ0tKBpsRknmRibidcQwYzMgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwhEBbEAbZUCmA+mABRwAOANIjGDFNQM74COjAlIgN4BQi-iAE74oIQUhiNiObCQAW+ZABMSzNu3Z8B2gQH5EYGVp3aAXInLIYgkqnRZcBMlRp0GiDMnIkAHogC8AHyICsq+7EysHBHGJnH8dpg4eESkFNS09NSe3n5BiFBWsj4RiGrR7ADcPAC+PKCQsAiISnBQhOSCcEog0CQAbtQA7py82sKi4ihoSY74JOTYIIzUAAzUsfFb0-bJBMQksBj4K4gAjNTYklADwxpVtfXg0PBInlCCMD6ERyeE-fhoHAbBhqP1RrEJmI3l4SF0hgFgq12p1ur0bvCwaUMA86k9Gq8CoJkGBGOQ4MwSO8IeMRNCdrMUgdLNZqIZsNhsnhcTx8S9mu9Pt9flJBV8SGBsjSBBAEIwoIhZdhGAEiSSyRT5jjqrTJjDcoiPLCAJ6G5EdLo9Po+ajG0pKjhsnk8WWkhX9VVXeUkM7rRAAJj9AGZVg9XfKPGdPdcSF6bhcA9Qg6U4yQg9QAKzUM4pmMJ-MaarhhUYf3R72phP+pO570AFkz1AAbLWbgB2agADmoAE5C7yxcKYMcpACgSCE+DqgB6adq0nkykYHMzueDn7Dv6DqkJ0tVIA}{\usebox\lstbox}!*/
 function matrix_times_matrix(n, m) {
     const cols = transpose(m);
     return map(x => map(y => dot_product(x, y), cols), n);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 \end{Answer}
 
 
@@ -1057,14 +990,14 @@ function matrix_times_matrix(n, m) {
 
         
         
-        The {\lstinline[mathescape=true]$accumulate$}
+        The <kbd>accumulate</kbd>
         function
-        is also known as {\lstinline[mathescape=true]$fold_right$}, 
+        is also known as <kbd>fold_right</kbd>, 
         because it combines the first element of the sequence with the result
-        of combining all the elements to the right.  There is also a {\lstinline[mathescape=true]$fold_left$}, which is 
-        similar to {\lstinline[mathescape=true]$fold_right$}, except
+        of combining all the elements to the right.  There is also a <kbd>fold_left</kbd>, which is 
+        similar to <kbd>fold_right</kbd>, except
         that it combines elements working in the opposite direction:
-        
+        <div class='snippet' id='javascript_31_31_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function fold_left(op, initial, sequence) {
@@ -1076,61 +1009,66 @@ function fold_left(op, initial, sequence) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMOAbAJgfVQU2FACjgAcAaRGMGWAQ1XIGccBHEHSHASkQG8AoRIOTho8JNRwAnApJwMQqKOVkMo3fkM2JZUEJPENMYBahly1ArVaEB+bXIVRL1qwC4KUKUWJn5i8gAWODTovmqc5M4u0YJQNDCmKuEA3FEAvlE6euKe0pTUMHSMLGwcnKlpQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABMOAbAJgfVQU2FACjgAcAaRGMGWAQ1XIGccBHEHSHASkQG8AoRIOTho8JNRwAnApJwMQqKOVkMo3fkM2JZUEJPENMYBahly1ArVaEB+bXIVRL1qwC4KUKUWJn5i8gAWODTovmqc5M4u0YJQNDCmKuEA3FEAvlE6euKe0pTUMHSMLGwcnKkZfCgY2HiEqDCq5Mao9IgNqgQAjOQATOQAzJzlQA}{\usebox\lstbox}!*/
     }
     return iter(initial, sequence);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
 
         What are the values of
         
-        
+        <div class='snippet' id='javascript_31_32_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 fold_right(divide, 1, list(1, 2, 3));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYewNgJg+gTglgcwBYBcAUE4Dc4QKYA0ABAIzFhwDO6ZRATMQMwCUzA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=PTAEGcEMFsFNUuBBjZBXaaA2kAusAoZAewDtxdQAzYrAEwH0AnASwHMALSgXhXUxz4A3ASppSyXCzKg6LAG4s6sABQAPADSgAngEpQAbwKgToJrFxompUGtBhtIgL6jajVp1wq5i5VoCMWlgsFCqBoABMWgDMurpCQA}{\usebox\lstbox}
+</pre>
 
-
-        
+</div></div>
+        <div class='snippet' id='javascript_31_33_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 fold_left(divide, 1, list(1, 2, 3));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYewNgJg+mCmwBcAUECWA3VFYBoAEAjPmKgM7JF4BM+AzAJT0DcQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABMOAbAJgfVQU2FACjgAcAaRGMGWAQ1XIGccBHEHSHASkQG8AoRIOTho8JNRwAnApJwMQqKOVkMo3fkM2JZUEJPENMYBahly1ArVaEB+bXIVRL1qwC4KUKUWJn5i8gAWODTovmqc5M4u0YJQNDCmKuEA3FEAvlE6euKe0pTUMHSMLGwcnKkZoJCwCIjoMABuMOg4BAAe5ACe6pk4uvqIbYgA9IidFXwoGNh4hPVNLeQAjOSoMKoEK4gATOQAzJzlQA}{\usebox\lstbox}
+</pre>
 
-
-        
+</div></div>
+        <div class='snippet' id='javascript_31_34_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 fold_right(list, null, list(1, 2, 3));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYewNgJg+gTglgcwBYBcAUY4GcUBoAEAdgK5hgGY5oCMBATAQMwCUzA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=PTAEGcEMFsFNUuBBjZBXaaA2kAusAoZAewDtxdQAzYrAEwH0AnASwHMALSgXhXUxz4A3ARr1m7LgAosLCgBpQpbFkWyKUgIyKATIoDMASkNCgA}{\usebox\lstbox}
+</pre>
 
-
-        
+</div></div>
+        <div class='snippet' id='javascript_31_35_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 fold_left(list, null, list(1, 2, 3));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYewNgJg+mCmwBcAUYCWBnBAaABAOwFcwxc1MkBGXAJlwGYBKBgbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABMOAbAJgfVQU2FACjgAcAaRGMGWAQ1XIGccBHEHSHASkQG8AoRIOTho8JNRwAnApJwMQqKOVkMo3fkM2JZUEJPENMYBahly1ArVaEB+bXIVRL1qwC4KUKUWJn5i8gAWODTovmqc5M4u0YJQNDCmKuEA3FEAvlE6euKe0pTUMHSMLGwcnKkZKBjYeISoMKrkxqj0iPWqBACM5ABM5ADMnOVAA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        Give a property that {\lstinline[mathescape=true]$op$} should satisfy to guarantee that {\lstinline[mathescape=true]$fold_right$} and {\lstinline[mathescape=true]$fold_left$} will produce the same values for any
+        Give a property that <kbd>op</kbd> should satisfy to guarantee that <kbd>fold_right</kbd> and <kbd>fold_left</kbd> will produce the same values for any
         sequence.
         
    
@@ -1139,30 +1077,32 @@ fold_left(list, null, list(1, 2, 3));
 
 \begin{Answer}[ref={ex:fold-right-left}]
 
-     We can guarantee that {\lstinline[mathescape=true]$fold_right$} and
-     {\lstinline[mathescape=true]$fold_left$} produce
+     We can guarantee that <kbd>fold_right</kbd> and
+     <kbd>fold_left</kbd> produce
      the same values for any sequence, if we require that
-     {\lstinline[mathescape=true]$op$} is commutative and associative.
- 
+     <kbd>op</kbd> is commutative and associative.
+ <div class='snippet' id='javascript_31_36_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 fold_right(plus, 0, list(1, 2, 3));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYewNgJg+gTglgcwBYBcAUAHMBXAzgGgAIAGIsOXdARiICYiBmASiYG4g}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABABwDYgM4AoAeAaRATwEpEBvAKEWsQCcBTKEWpHRAaiIG4KBfCgPQDEGAIYBbeolEZpECCHEhUoqPQoQEGKImBxUAEwD6tGAHMAFjoC8chUpVqeewyfNWsaTAQAMBVDDaWACMBABMBADMxMRcQA}{\usebox\lstbox}
+</pre>
 
-
-
+</div></div>
+<div class='snippet' id='javascript_31_37_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 fold_left(plus, 0, list(1, 2, 3));
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYewNgJg+mCmwBcAUAHMBXAzgGgAQAY8wBLTZARjwCY8BmASnoG4g}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABABwDYgM4AoAeAaRATwEpEBvAKEWsQCcBTKEWpHRAaiIG4KBfC0JFgJEwOKgAmAfVT1gULHGQEYYGLACGqAhnoBHEPUj1SlGqPDR4SdfVpYGGEKigFHUU1XM0GTFohgMKTBnVAd6DA8vbxjqAH46COcoaNjvAC4AqDtFZHCnFwIAC3oNCXyPYgJUtNrEKA0YMPdiYh5zfnNfZhts+1V1GC0dfUNjNr4BcWlZeSw0TAIABgJUQIUARgIAJgIAZlauIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
    
 \end{Answer}
 
@@ -1170,13 +1110,13 @@ fold_left(plus, 0, list(1, 2, 3));
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled30}
+\label{ex:unlabeled32}
 
-        Complete the following definitions of {\lstinline[mathescape=true]$reverse$}
+        Complete the following definitions of <kbd>reverse</kbd>
         
-        (exercise~\ref{ex:reverse}) in terms of {\lstinline[mathescape=true]$fold_right$} and {\lstinline[mathescape=true]$fold_left$} from exercise~\ref{ex:fold-right-left}:
+        (exercise \ref{ex:reverse}) in terms of <kbd>fold_right</kbd> and <kbd>fold_left</kbd> from exercise \ref{ex:fold-right-left}:
 
-        
+        <div class='snippet' id='javascript_31_38_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function reverse(sequence) {
@@ -1185,11 +1125,12 @@ function reverse(sequence) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAJwKYDdXIM6oBS4COIqkqAlIgN4BQi9KqUIySwcANgCYD6yMAcwAWUPHgAeAGkQBPSgF4AfIgD8K6WBAcO0oiTLkA3DQC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAJwKYDdXIM6oBS4COIqkqAlIgN4BQi9KqUIySwcANgCYD6yMAcwAWUPHgAeAGkQBPSgF4AfIgD8K6WBAcO0oiTLkA3DQC+NGmkw58HGNlEBGaQBZpATmkOAbNIBMAVnIjGgB6EMZsLSgALkQAbQDpOO8kj3jXeKdETW0AXXz8oA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_31_39_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function reverse(sequence) {
@@ -1198,18 +1139,19 @@ function reverse(sequence) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAJwKYDdXIM6oBS4COIqkqAlIgN4BQi9KqUIySwcANgCYD6HqwKHjwAPADSIAnpQC8APkQB+RRLAgOHCURJlyAbhoBfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAJwKYDdXIM6oBS4COIqkqAlIgN4BQi9KqUIySwcANgCYD6HqwKHjwAPADSIAnpQC8APkQB+RRLAgOHCURJlyAbhoBfGjTSYc+DjGxCAjBIAsEgJwTbANgkAmAKzl9NAD0gYzY6lAAXIgA2r4S0R7xrjFOMfaIahoAujk5QA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 	
 	
-      \hfill{\hyperref[ex:unlabeled30-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled32-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled30}]
+\begin{Answer}[ref={ex:unlabeled32}]
 
-  
+  <div class='snippet' id='javascript_31_40_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function reverse(sequence) {
@@ -1219,11 +1161,12 @@ function reverse(sequence) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAJwKYDdXIM6oBS4COIqkqAlIgN4BQi9KqUIySwcANgCYD6yMAcwAWUPHgAeAGkQBPSgF4AfIgCGABzWkueGdI4xso8eXLS6DC5asMwIDh2lESZcgG4aAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=PTAEGcEMFsFNUuBBjZBXaaA2kAusAoZAewDtxdQAzYrAEwH0AnASwHMALSgXhXUxz4A3ASppSyXCzKgmsAG6wm4WAAoVARzSwJsAJSgA3gVCnZsXGialqtRq065VqgB4AaUAE8D3AHwIABwCdOlVPDywWClc9PQ8TM0Sk5LNSbCwPTW1dPREAXwICOUVlNUjogEYPABYPAE4PCoA2DwAmAFZYkRBzcGxcAC5QAG0Oj2Hm8YaR2pGq0DSsLABdVdWgA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-
+<div class='snippet' id='javascript_31_41_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function reverse(sequence) {
@@ -1232,17 +1175,19 @@ function reverse(sequence) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAJwKYDdXIM6oBS4COIqkqAlIgN4BQi9KqUIySwcANgCYD6HqwKHjwAPADSIAnpQC8APkQAHAIYxkeSRJHkJYEBw4SiJMuQDcNAL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABMOAbAJgfVQU2FACjgAcAaRGMGWAQ1XIGccBHEHSHASkQG8AoRIOTho8JNRwAnApJwMQqKOVkMo3fkM2JZUEJPENMYBahly1ArVaEB+bXIVRL1qwC4KUKUWJn5i8gAWODTovmqc5M4u0YJQNDCmKuEA3FEAvlE6euKe0pTUMHSMLGwcnKkZoJCwCPYAblJMBEys7BBcvJk4uvrIaFi4+AQEAB7kAJ7cALwAfIjE8dLj5CMRiMao9Igtpe3lfBl8sg2STagwqgQAjOQALOQAnORXAGzkAEwArJz7APS-9j8UHcAG0vuQQa8IU9ECD7rCbusTABdVGooA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 \end{Answer}
 
       
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Nested Mappings
-      
+      </h2></div>
 
       
       
@@ -1251,7 +1196,7 @@ function reverse(sequence) {
 <a name='p21' class='permalink'></a><p>
         We can extend the sequence paradigm to include many
         computations that are commonly expressed using nested 
-        loops.<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
+        loops.<a class='superscript' id='footnote-link-5' href='#footnote-5'>[5]</a>
       </p></div>
 
       <div class='permalink'>
@@ -1287,12 +1232,14 @@ function reverse(sequence) {
         Here is a way to generate the sequence of pairs: For each integer
         $i\leq n$, enumerate the integers $j<i$, and for each such $i$ and $j$
         generate the pair $(i, j)$.  In terms of sequence operations, we map
-        along the sequence {\lstinline[mathescape=true]$enumerate_interval(1, n)$}.  For each $i$ in
-        this sequence, we map along the sequence {\lstinline[mathescape=true]$enumerate_interval(1, i-1)$}.  For each $j$ in this latter sequence, we generate the pair
-        {\lstinline[mathescape=true]$list(i, j)$}.  This gives us a sequence of pairs for each $i$.
-        Combining all the sequences for all the $i$ (by accumulating with {\lstinline[mathescape=true]$append$}) produces the required sequence of pairs:<a class='superscript' id='footnote-6' href='#footnote-6'>[6]</a>
+        along the sequence <kbd>enumerate_interval(1, n)</kbd>.  For each $i$ in
+        this sequence, we map along the sequence <kbd>enumerate_interval(1, i-1)</kbd>.  For each $j$ in this latter sequence, we generate the pair
+        <kbd>list(i, j)</kbd>.  This gives us a sequence of pairs for each $i$.
+        Combining all the sequences for all the $i$ (by accumulating with <kbd>append</kbd>) produces the required sequence of pairs:<a class='superscript' id='footnote-link-6' href='#footnote-6'>[6]</a>
 
         
+
+        <div class='snippet' id='javascript_31_42_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 accumulate(append, 
@@ -1303,36 +1250,19 @@ accumulate(append,
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYYxFcFtwG2AXApgCmABzYgdgEwDQAEAUAaWeQVrDISRRZOsgJYEC8AfAY2sgFbsuMZgGd4LQnwCUeOvXkKC2KIgBOCRAH1mWJKoBuwGMgCMhZgFoTUmXMVllkNRu261h42co2pAbiA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAUzCAtsgTgQysgfRjHywDccAbACkrgHcAaRACxgHMWBKRAbwChEQxFmRQQWJHXqIAfKw4tBwlcID8iNJUrLVKgFyIADjhhZaDRrr02hqDNjyFipCjWmIA1IgCMzNpxcXADc-AC+-BAIAM5QmogAvIgAbKE4EBAYIJRO1DhGRqgAJszWNlqUpbbC6PnUMInytUbUAFaNiJQwsfXMrVxW1UOq9pi4+EQk2G7UfogwALQ+QYPDwqOOEy7TVLPMYEEhQA}{\usebox\lstbox}
+</pre>
 
-
-      
-
-        
-
-        
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-accumulate(append, 
-           null, 
-           map(i => map(j => list(i, j),
-                        enumerate_interval(1, i-1)),
-               enumerate_interval(1, n)));
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYYxFcFtwG2AXApgCmABzYgdgEwDQAEAUAaWeQVrDISRRZOsgJYEC8AfAY2sgFbsuMZgGd4LQnwCUeOvXkKC2KIgBOCRAH1mWJKoBuwGMgCMhZgFoTUmXMVllkNRu261h42co2pAbiA}{\usebox\lstbox}
-
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p25' class='permalink'></a><p>
-        The combination of mapping and accumulating with {\lstinline[mathescape=true]$append$} is so common in this
+        The combination of mapping and accumulating with <kbd>append</kbd> is so common in this
         sort of program that we will isolate it as a separate
         function:
         
-        
+        <div class='snippet' id='javascript_31_43_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function flatmap(f, seq) {
@@ -1341,9 +1271,10 @@ function flatmap(f, seq) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMANgQygWzQBwBTAA0iAzgKYCOAlIgN4BQiTiATmVCC0mhBCJiHRQyeXDjJgAJsTCCUxbPiKlKVKgG56AXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABMANgQygWzQBwBTAA0iAzgKYCOAlIgN4BQiTiATmVCC0mhBCJiHRQyeXDjJgAJsTCCUxbPiKlKVKgG56AX3r1UGRXgAeiALwA+RChgkox4karFrtvAEZiAJmIBmYgBY1dSA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
       </p></div>
@@ -1354,7 +1285,7 @@ function flatmap(f, seq) {
         filter predicate is called for each element of the sequence; its
         argument is a pair and it must extract the integers from the pair.
         Thus, the predicate to apply to each element in the sequence is
-        
+        <div class='snippet' id='javascript_31_44_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_prime_sum(pair) {
@@ -1363,9 +1294,10 @@ function is_prime_sum(pair) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQA4CcYFsCmaKIuAFBgIYxYCUiA3gFCIuJb5QhZKqY4GkAFvgoATclVqIA1ImFjSUKgBsJ1GhoDcjAL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQA4CcYFsCmAFGAJSIDeAUIjYlvlCFkkgLzuIq4CGANr-hRQ0AExgA3VHCzESAbkoBfSqEiwEnHv0HCxklNNkVqteo2aJgMMCNESpMsABpEAJnlKV4aPCRWbdvqGzohQOoEOZFS0NGZMSCgAjiDc9IRhQhEGWGQAfIhgJjHFiAD8BUUltABciHowIoLp4fXZLqSVVbTlGbr22Z1diLX+tq3BLr1Z0ogA1IgAjB7Kqj4a9Y0ohNwuAEZRlXEWu4gApIjciOysiAAMCive6gnJqUQAHgcxR0jviABUiHeDy8al8yHQ2Dw+DQKBAuEIGG4MByxm+DHiEMwOAIhAAFvhuCJEcjUfMCUT0sjeCSUSR6SDKKhsdDYfDCLxUFBCAAOFwATgZQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
         
       </p></div>
 
@@ -1375,7 +1307,7 @@ function is_prime_sum(pair) {
         pairs using the following
         function, which constructs a triple
         consisting of the two elements of the pair along with their sum:
-        
+        <div class='snippet' id='javascript_31_45_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_pair_sum(pair) {
@@ -1385,9 +1317,10 @@ function make_pair_sum(pair) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADqmAJ2wGcRkAKfIgSkQG8AoRFxQzKEQpAGxhKgUAFplQATKgUI0ANIhHiKUAj0m1ZiZq207WCidWmIA1PNETlMVYZq2A3IwC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADqmAJ2wGcRkAKfIgSkQG8AoRFxQzKEQpAGxhKgUAFplQATKgUI0ANIhHiKUAj0m1ZiZq207WCidWmIA1PNETlMVYZq2A3IwC+jRmix4ppchT4CKADjkATnsgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
         
       </p></div>
 
@@ -1395,7 +1328,7 @@ function make_pair_sum(pair) {
 <a name='p28' class='permalink'></a><p>
         Combining all these steps yields the complete
         function:
-        
+        <div class='snippet' id='javascript_31_46_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function prime_sum_pairs(n) {
@@ -1407,12 +1340,13 @@ function prime_sum_pairs(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwE4wLYFMD6BnEDHZAQxlTwAowBKRAbwChEXFUsoRUkMTlLeAa1yly+QgBpEzVrLnAYAGyhZUlGHmLps4jFJlzDLYIpJRe-GIgC8APkQXKAKxv3FGqOqlOa+o-4D-LDBCVTNcGDAVVAA3EkVKAEYpKwBaRESaXwNAwODQ1HCcSOi4hOTEWiyaAG5GAF8gA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADqmAJ2wGcRkAKfIgSkQG8AoRFxQzKEQpAGxhKgUAFplQATKgUI0ANIhHiKUAj0m1ZiZq207WCidWmIA1PNETlMVYZq2A3IwC+jUJFgJE-PIRjIcZShsGLRZ2Tm5PEm9fTGFzNSNTfSUVBNsaB2dXaHgkYB5UKDRcCmA5EkwARzombTCuJFQICHIQAqhY1FxcTDAxOTA2njli0vKq+ycXcByPXvJMQkKcGDAOwgA3VFUeOAB3OSEYAHMhGpC2DgbEXb3EAD55E6EL3UQAfkRBnh5X3QAuRCGCi3GR-N46eZ+JYdbCrdZbHb7EyIACMh2ekyyM3cSFwPj8pHIeCkJAoYHOdSuEVGaCwJKIROQcnBumAVnWFC8+JiTJZELe+UKoxgiAAvI9RgArcWPPgCLlyKUaVkCtWQwbQ5ZwtaLREUdGeRAAWjRtjB6stUMW2vheu2BoG6QyU0YPMJAQZhDJADYMkA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
 
@@ -1428,58 +1362,14 @@ function prime_sum_pairs(n) {
         of a set $S$; that is, all the ways of ordering the items in
         the set.  For instance, the permutations of $\{1, 2, 3\}$ are
         $\{1, 2, 3\}$, $\{ 1, 3, 2\}$, $\{2, 1, 3\}$, $\{ 2, 3, 1\}$, $\{ 3, 1, 2\}$, and
-        $\{ 3, 2, 1\}$.  Here is a plan for generating the permutations of~$S$:
+        $\{ 3, 2, 1\}$.  Here is a plan for generating the permutations of $S$:
         For each item $x$ in $S$, recursively generate the sequence of
-        permutations of $S-x$, <a class='superscript' id='footnote-7' href='#footnote-7'>[7]</a>$x$ to the front of each one.  This yields, for each $x$ in $S$, the sequence
-        of permutations of $S$ that begin with~$x$.  Combining these
-        sequences for all $x$ gives all the permutations of~$S$:<a class='superscript' id='footnote-8' href='#footnote-8'>[8]</a>
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function permutations(s) {
-    return is_null(s)
-           ? list(null)
-           : flatmap(x => map(p => pair(x, p),
-                              permutations(remove(x, s))),
-                     s);
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwKYCcC2IoENYIDOAFIQJSIDeAUInYuqlCOkjIQPpggA2PpZWvWH0A-Ih7soxbn0EiFALkTAe+TLmTEAHogC8APkQatyfUeS4Y6HQBoUZW0IUvXLtFhz54YEo0xwAG6odojkZI7Obm7kANzUAL5AA}{\usebox\lstbox}!*/
-}
-
-\end{JavaScriptClickable}
-
-
-
-        
-
-      
-
-        
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function permutations(s) {
-    return is_null(s)
-           ? list(null)
-           : flatmap(x => map(p => pair(x, p),
-                              permutations(remove(x, s))),
-                     s);
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwKYCcC2IoENYIDOAFIQJSIDeAUInYuqlCOkjIQPpggA2PpZWvWH0A-Ih7soxbn0EiFALkTAe+TLmTEAHogC8APkQatyfUeS4Y6HQBoUZW0IUvXLtFhz54YEo0xwAG6odojkZI7Obm7kANzUAL5AA}{\usebox\lstbox}!*/
-}
-
-\end{JavaScriptClickable}
-
-
-
-        
-
-       and adjoin
+        permutations of $S-x$, <a class='superscript' id='footnote-link-7' href='#footnote-7'>[7]</a> and adjoin
         $x$ to the front of each one.  This yields, for each $x$ in $S$, the sequence
-        of permutations of $S$ that begin with~$x$.  Combining these
-        sequences for all $x$ gives all the permutations of~$S$:<a class='superscript' id='footnote-9' href='#footnote-9'>[9]</a>
+        of permutations of $S$ that begin with $x$.  Combining these
+        sequences for all $x$ gives all the permutations of $S$:<a class='superscript' id='footnote-link-8' href='#footnote-8'>[8]</a>
+
+        <div class='snippet' id='javascript_31_47_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function permutations(s) {
@@ -1491,35 +1381,13 @@ function permutations(s) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwKYCcC2IoENYIDOAFIQJSIDeAUInYuqlCOkjIQPpggA2PpZWvWH0A-Ih7soxbn0EiFALkTAe+TLmTEAHogC8APkQatyfUeS4Y6HQBoUZW0IUvXLtFhz54YEo0xwAG6odojkZI7Obm7kANzUAL5AA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABMANgQygWzQBwBTAA0iAzgKYCOAlIgN4BQiTiATmVCC0mhBCJiHRQyeXDjJgAJsTCCUxbPiKlKVKgG56AX3qhIsBInEsBUDPDAk8JGg2at2nJDBIB9WShTWqje38QA-IgoLlB4Hig+-n4AXMhCingAHogAvAB8iIk4aZk4aDAsycQ4VIS+0ZVV9sam5ghWbJhwAG4iScQ2auXVvTaaOvS1IGYGlnghJGEAjMQATMQAzGrqQA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-
-        
-
-      
-
-        
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function permutations(s) {
-    return is_null(s)
-           ? list(null)
-           : flatmap(x => map(p => pair(x, p),
-                              permutations(remove(x, s))),
-                     s);
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwKYCcC2IoENYIDOAFIQJSIDeAUInYuqlCOkjIQPpggA2PpZWvWH0A-Ih7soxbn0EiFALkTAe+TLmTEAHogC8APkQatyfUeS4Y6HQBoUZW0IUvXLtFhz54YEo0xwAG6odojkZI7Obm7kANzUAL5AA}{\usebox\lstbox}!*/
-}
-
-\end{JavaScriptClickable}
-
-
+</div></div>
 
         
 
@@ -1531,12 +1399,12 @@ function permutations(s) {
         permutations of $S$ to the problem of generating the permutations of
         sets with fewer elements than $S$.  In the terminal case, we work our
         way down to the empty list, which represents a set of no elements.
-        For this, we generate {\lstinline[mathescape=true]$list(null)$}, which is a sequence with one
-        item, namely the set with no elements.  The {\lstinline[mathescape=true]$remove$}
+        For this, we generate <kbd>list(null)</kbd>, which is a sequence with one
+        item, namely the set with no elements.  The <kbd>remove</kbd>
         function
-        used in {\lstinline[mathescape=true]$permutations$} returns all the items in a given sequence
+        used in <kbd>permutations</kbd> returns all the items in a given sequence
         except for a given item.  This can be expressed as a simple filter:
-        
+        <div class='snippet' id='javascript_31_48_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function remove(item, sequence) {
@@ -1546,31 +1414,32 @@ function remove(item, sequence) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAJwKYFs4DdUAoZQYA0iAzqgI4iqSoCUiA3gFCJsqpQjJLAwA2hZLgAeiALwA+RAEJRE8eMQEMdIq3aatW8lRoR6AbmYBfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAJwKYFs4DdUAoZQYA0iAzqgI4iqSoCUiA3gFCJsqpQjJLAwA2hZLgAeiALwA+RAEJRE8eMQEMdIq3aatW8lRoR6AbmYBfZszSYcuAMwl+MUlFwBGEgCYSdxABYSAVjo6QyA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
         
       </p></div>
 
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled31}
+\label{ex:unlabeled33}
 
         Define a
         function
 
         
-        {\lstinline[mathescape=true]$unique_pairs$} that, given an integer $n$, 
-        generates the sequence of pairs $(i, j)$ with $1\leq j< i\leq n$.  Use {\lstinline[mathescape=true]$unique_pairs$} to simplify the definition of {\lstinline[mathescape=true]$prime_sum_pairs$}
+        <kbd>unique_pairs</kbd> that, given an integer $n$, 
+        generates the sequence of pairs $(i, j)$ with $1\leq j< i\leq n$.  Use <kbd>unique_pairs</kbd> to simplify the definition of <kbd>prime_sum_pairs</kbd>
         given above.
    
-      \hfill{\hyperref[ex:unlabeled31-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled33-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled31}]
+\begin{Answer}[ref={ex:unlabeled33}]
 
-    
+    <div class='snippet' id='javascript_31_49_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function unique_pairs(n) {
@@ -1582,15 +1451,16 @@ function prime_sum_pairs(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABOGBHEBTA+gBwIYwBOAzgBRgCUiA3gFCIOKEZQiFLAA2eUAtnjlIxEAXgB8ifoIBWoiZxjEoQgDSJpFNfUY7de-QwxgQvDIR7YYYKGYBueTqQCMamAFonFTYm0G-RkzMLLCsbQntHF0RKCgBuWgBfWlBIWAREHEIYUyxiE1wCEnIqOh1mVnZJAVJ+AGtsfCJcky0-PWAYTjChYlwsnLzeVraRlHQGwrIYuMSgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAUzCAtsgTgQysgfRjHywDccAbACkrgHcAaRACxgHMWBKRAbwChEQxFmRQQWJHXqIAfKw4tBwlcID8iNJUrLVKgFyIADjhhZaDRrr02hqDNjyFipCjWmIA1IgCMzNpxcXADc-AC+-KCQsAiI6DgA1oQmZgQAzhjUKVg8Aiqi4pKIlDBpUNQsyDgAJlmmOf5VtVCmNNlBzNa2KpU1dWY83r3Nrf05QaERUdDwSKUERlgwmOmZ7XzWBRJzaQtLmBVNY4OsRy0wbfVBIeGR4DOxwJR48UbUwMxpyACOuZti20QOAgEAwIGe+GoOCMRlQ1WYWkozFe70+Pwmt2mMSQ4Bg3xAyXqaWoYD++QBRSeL2h1BgiAAvPIUQArBnyEplWnMZlcTrdfndeyYXD4IgkbBuah+RAwAC0Pg6iC6AuEQscopcEqoUoRGKm92xxn2hAy6AWRJJZOEWyKKPiSXNqVNfJVQmAF1ItN2i2WJowLtdNlx+MJZmJpL1-H4PpWpsdWGJADYQkA}{\usebox\lstbox}!*/
     return map(make_pair_sum, 
                filter(is_prime_sum, 
                       unique_pairs(n)));
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
     
 \end{Answer}
@@ -1599,20 +1469,20 @@ function prime_sum_pairs(n) {
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled32}
+\label{ex:unlabeled34}
 
         Write a
         function
         to find all ordered
-        triples of distinct positive integers $i$, $j$, and~$k$ less than or
+        triples of distinct positive integers $i$, $j$, and $k$ less than or
         equal to a given integer $n$ that sum to a given integer $s$.
     
-      \hfill{\hyperref[ex:unlabeled32-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled34-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled32}]
+\begin{Answer}[ref={ex:unlabeled34}]
 
-      
+      <div class='snippet' id='javascript_31_50_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function unique_triples(n) {
@@ -1624,7 +1494,7 @@ function unique_triples(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABOGBHEBTA+lATjABwBsMBnACjAEpEBvAKEScVwyhFyWCIEMoBbHgXIxEAXgB8ibn0HCAVuKlzyAayWIiMUlBEAaRPIOqqexswuWr1m9YxgQ-DLj7YYYKM4BuPIuQCMBvIAtP5Upua2UdH2js6uWO6euD5+gYgwoeFm0TaxTi6eiR7evgEG1FQA3PQAvvSgkLAIiMQgFAAeBgCeNAwWrOyciB2IANSI3TX1jdDwSHiEJKQ4ABZ8WKSOOHDkpBV9kSxsHFwwRMkinvykGjwQEI4gvJ7kbfuIAAwGMNekNGJAYh9kdckwUOhsItiGRKOFpkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAUzCAtsgTgQysgfRjHywDccAbACkrgHcAaRACxgHMWBKRAbwChEQxFmRQQWJHXqIAfKw4tBwlcID8iNJUrLVKgFyIADjhhZaDRrr02hqDNjyFipCjWmIA1IgCMzNpxcXADc-AC+-KCQsAiIwJR46DhG1MDMAM7IAI48Aiqi4pKIOBAQGCAJ+NTJRqgAJsxalMxJKWmImTkh4ZHg0PBI4DBZIIRQWDBGlMjp1GC51gUSSPGJydQwiAC88qtQrdQAVtvyBwDWJ4iUMOlQG8yHzGdcVrZv7x-C9pi4+EQk2Dc1D8iEOAFofEFXp8YXpvo4-i5AVRgcwYBCodZYSg0D8nP9XCiQfNuhEov1YlMQLMAB7MACeC3yYmWiBpXkQ9NCZL6MSQ40m03SBCgLDwBHSGBFcGo6UaTOESyKwBglFIG3w6HSlxKZXQFSc1CpcsQAAY0Zr0jwtjaOtDsYghiMxhMpjM5kFufx+AK3cLReLJehpcDzYgAGwhIA}{\usebox\lstbox}!*/
 function plus(x, y) {
     return x + y;
 }
@@ -1634,8 +1504,9 @@ function triples_that_sum_to(s, n) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
     
 \end{Answer}
@@ -1663,7 +1534,7 @@ function triples_that_sum_to(s, n) {
         <QUOTE>eight-queens puzzle</QUOTE> asks how to place eight queens on a
         chessboard so that no queen is in check from any other (i.e., no two
         queens are in the same row, column, or diagonal).  One possible
-        solution is shown in Figure~\ref{fig:8queens}.  One way to solve the
+        solution is shown in Figure \ref{fig:8queens}.  One way to solve the
         puzzle is to work across the board, placing a queen in each column.
         Once we have placed $k-1$ queens, we must place the $k$th queen in a
         position where it does not check any of the queens already on the
@@ -1680,16 +1551,16 @@ function triples_that_sum_to(s, n) {
 
         We implement this solution as a
         function
-        {\lstinline[mathescape=true]$queens$}, which returns
+        <kbd>queens</kbd>, which returns
         a sequence of all solutions to the problem of placing $n$ queens on an
-        $n\times n$ chessboard.  The function {\lstinline[mathescape=true]$queens$} has an internal
+        $n\times n$ chessboard.  The function <kbd>queens</kbd> has an internal
         function
-        {\lstinline[mathescape=true]$queens_cols$} that returns the sequence of all ways to place queens in
+        <kbd>queens_cols</kbd> that returns the sequence of all ways to place queens in
         the first $k$ columns of the board.
 
         
 	
-        
+        <div class='snippet' id='javascript_31_51_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function queens(board_size) {
@@ -1701,7 +1572,7 @@ function queens(board_size) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABARxAUzWAzgCgEZwCGATgCYD6WMAXmgJSIDeAUIm4qJLAiupuRDgAbXAGsGLdlMTE0UEMSSjEAXjWIADK2k72AfkRCYWKDjQBbAA5QAnuQIlSdbbp0AuDjCFQ0xHC9dAxEs4Km5sVQA+RGNKQmA0HFEAGmDQmHCsOlSAoN1gIUIoc0JLHFkTcjhgclQMCJVo5gBIVukSsrA0AHdyYjhuqMRCUgArOBgwchCw+DB-PMWlwK7e-u7UlNzlnbyKqCqauswsnN3zzBBzXyK0ckmfYgA3QiEcAEYz8+-EBzJKGj0bItNpSY5TQQiJKIAC0iHedERAG4XABfFyyeSKXj1ATCXB-ChUWh0FGooA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABMANgQygWzQBwBTAA0iAzgKYCOAlIgN4BQiTiATmVCC0mhBCJiHRQyeXDjJgAJsTCCUxbPiKlKVKgG56AX3qhIsBIgn8yLDGQD6MMMJYA3NCjwo4Ad2IALGAHMPNBsys7JxILq6IAHyIXr6MgfGIAPyIsigocQnMAFyIOGgwLM5uhBmZZcaYpuZWNqYOTmGIANSIAIyePn4a2rrg0PBIFCBkEiR4AEZwaCySFiQwAF5k-qV6-YZDI2AWEHAoYwDWK2VsHFyIB4gAvDeIAAylZczJKDAkUHhkmDhQAJ4Wk2mkiojyeiBywBgKFseFBYPiODg8wMYBI1yibzmaGAIgOxERyIGJCoxDh8OYqAwijwbHeFjgwAsm1G6MQ9AAkJz4tSwGRXBYWG5WWhJAArODWCwEmAo2Hk+UKhK8-mC9wXEqKzUK2lQemM5moklsrWaipVYQ1Wz1PDtY0mk2AmZzRbLEkcrmBA07PaHRAAWjaam6zB0zFOIUQXt2+wmUyd8yW3R09ANYwAHBogA}{\usebox\lstbox}!*/
                      flatmap(rest_of_queens => 
 			     map(new_row => adjoin_position(
                                              new_row, k,
@@ -1714,22 +1585,23 @@ function queens(board_size) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         In this
         function
-        {\lstinline[mathescape=true]$rest_of_queens$} is a way to place $k-1$ queens
-        in the first $k-1$ columns, and {\lstinline[mathescape=true]$new_row$} is a proposed row in
+        <kbd>rest_of_queens</kbd> is a way to place $k-1$ queens
+        in the first $k-1$ columns, and <kbd>new_row</kbd> is a proposed row in
         which to place the queen for the $k$th column.  Complete the program
         by implementing the representation for sets of board positions, 
         including the
         function
-        {\lstinline[mathescape=true]$adjoin_position$}, which adjoins a new row-column
-        position to a set of positions, and {\lstinline[mathescape=true]$empty_board$}, which
+        <kbd>adjoin_position</kbd>, which adjoins a new row-column
+        position to a set of positions, and <kbd>empty_board</kbd>, which
         represents an empty set of positions.  You must also write the
         function
-        {\lstinline[mathescape=true]$is_safe$}, which determines for a set of positions, 
+        <kbd>is_safe</kbd>, which determines for a set of positions, 
         whether the queen in the $k$th column is safe with respect to the
         others.  (Note that we need only check whether the new queen is
         safe—the other queens are already guaranteed safe with respect to
@@ -1744,7 +1616,7 @@ function queens(board_size) {
 
 
 
-        
+        <div class='snippet' id='javascript_31_52_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function adjoin_position(row, col, rest) {
@@ -1753,22 +1625,24 @@ function adjoin_position(row, col, rest) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCYCs4zAfQA5wDOMsCAFAE5wDuANIhHADb0UCmhUAlIgN4BQiIYnZQQFJHmQwKZKTMo16jJl1YduAbn4BfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwCYCs4zAfQA5wDOMsCAFAE5wDuANIhHADb0UCmhUAlIgN4BQiIYnZQQFJHmQwKZKTMo16jJl1YduAbn4BfIA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_31_53_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const empty_board = null;
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBApgWwA5QJ4H0BGICGAnAExgF4YwBXAG0oG4g}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBApgWwA5QJ4H0BGICGAnAExgF4YwBXAG0oG4g}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        
+        <div class='snippet' id='javascript_31_54_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_safe(k, positions) {
@@ -1780,7 +1654,7 @@ function is_safe(k, positions) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfRQQ2AUwBQDWANIgA5woywIoCUiA3gFCKuIQ1SLAwBOKUNLzgB3RAF5EACxyYAJnhny85StTB1aAbhZsOGrj36COAGwmIomGKcWyFqqvA21tu1rxxQQvJJggQIAC2IKaYUPgqFCQocGjAmLz04gB8jO5smVnZmfoCiMJikkoOFG45FZXsnNXmklY2UXQ6Va2Znt6+iLHxiYgAZP0ZbSNsRgJCoogAtNx8E2aIAITi4sOjI4UztQNDG-tzxpNiANSHC3DmK2sHG1tni4PrtxXjglvXBaItL6wAvkRnhsoLwQDgSEDRg1bI51JodH8gA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfRQQ2AUwBQDWANIgA5woywIoCUiA3gFCKuIQ1SLAwBOKUNLzgB3RAF5EACxyYAJnhny85StTB1aAbhZsOGrj36COAGwmIomGKcWyFqqvA21tu1rxxQQvJJggQIAC2IKaYUPgqFCQocGjAmLz04gB8jO5smVnZmfoCiMJikkoOFG45FZXsnNXmklY2UXQ6Va2Znt6+iLHxiYgAZP0ZbSNsRgJCoogAtNx8E2aIAITi4sOjI4UztQNDG-tzxpNiANSHC3DmK2sHG1tni4PrtxXjglvXBaItL6wAvkRnhsoLwQDgSEDRg1bI51JodH8gA}{\usebox\lstbox}!*/
                          return so_far &&
                                 first_row - first_col !==
                                 row - col &&
@@ -1793,21 +1667,23 @@ function is_safe(k, positions) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	Putting it all together:
 
-        
+        <div class='snippet' id='javascript_31_55_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 // click here to see the solution
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PTAEGMBsEtwa1ACwKYCdmgC4HtQGdkNMV9tIBXTabAOyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwCYCs4zAfQA5wDOMsCAFAE5wDuANIhHADb0UCmhUAlIgN4BQiIYnZQQFJHmQwKZKTMo16jJl1YduAbn4BffozCdEbALZ4oATxwAjOMgqpEAXkRgQTJttCRSSGIRxCZGA2MgBregJiX0IeAWEGBCNgGU4cKmpnRAALNjQyXPyoknhDLi5tBINk1KgcFSyoaSYCvNQ5IhKk8srhUXEkZAgIEBN3ZChQjsJ6QjgcYHseJwA+PkEEza3toWqoERoswvaoio2di629xKZG5umzy6eE-olEOYX7RAAyb-PngEJFIUNIZRAAWkQwLSDQAhE4nP9AYCwZCGr8kcjntC6mCANRQ2r1ZiIeGIrFY-E3H5-CnInHpQ5kg7UXp0oQ6WiYrFQCggNj0bnIpowFrFGI9XT8bzQUqIACO-LYhjItnsqECMAAXmw4v8Zb4FUrcCpCOE9TtXkgws4EYgAAxC7YAfkQTH8UDIpnMVjVDi4Tq2AC5CUxJrJA09xaVCM41v5AsFQhFENHuoL2UJgEwJiZkHhKBocHBgDhFWxlbHVoh+ABIeubPMFsBsaiMzLVtCYbD4Tq+MiRzOAlttjL0CKDofPdhpEtl42xDNTy7K0ZsCgTNg4bDhgBuyBaAEYl8vnn6NcQdeUufXa5ty8riUwzTbIYfyo8OecrUaKybmGa56ale2h6AacrZrm+ZkMAsxsPKFp9GwYhvEMIxjDmkxkPmeDKqg9BuB49BNjBcEIWcYHgLKCDGG4Jjrpu25gHuB5kEwSg5DAADm2SIUIP7sZkazZNx2SRq6hFMJGIbyLIglcnSq70RukxMSxLSCYgBLHpxPGSnoD4qgAHGcAD0pkMO6EA2rk7CIFAcDvBW9m5O8zAgL4QA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 
 \end{Answer}
@@ -1817,46 +1693,44 @@ function is_safe(k, positions) {
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled33}
+\label{ex:unlabeled35}
 
-        Louis Reasoner is having a terrible time doing exercise~\ref{ex:8queens}.  His
-        {\lstinline[mathescape=true]$queens$}
+        Louis Reasoner is having a terrible time doing exercise \ref{ex:8queens}.  His
+        <kbd>queens</kbd>
         function
         seems to work, but it runs extremely slowly.
         (Louis never does manage to wait long enough for it to solve even the
         $6\times 6$ case.)  When Louis asks Eva Lu Ator for help, she points
         out that he has interchanged the order of the nested mappings in the
-        {\lstinline[mathescape=true]$flatmap$}, writing it as
-        
-\begin{JavaScript}
+        <kbd>flatmap</kbd>, writing it as
+        <div class='snippet' id='javascript_31_56_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 flatmap(new_row =>
         map(rest_of_queens => adjoin_position(
                                new_row, k, 
                                rest_of_queens), 
 	    queen_cols(k - 1)), 
         enumerate_interval(1, board_size));
-\end{JavaScript}
-
+</pre></div></div>
 
         Explain why this interchange makes the program run slowly.  Estimate
         how long it will take Louis's program to solve the eight-queens
-        puzzle, assuming that the program in exercise~\ref{ex:8queens} solves
+        puzzle, assuming that the program in exercise \ref{ex:8queens} solves
         the puzzle in time $T$.
 
 	
 
-      \hfill{\hyperref[ex:unlabeled33-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled35-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled33}]
+\begin{Answer}[ref={ex:unlabeled35}]
 
-	  Louis's program re-evaluates the application {\lstinline[mathescape=true]$queen_cols(k - 1))$}
-	  in each iteration of {\lstinline[mathescape=true]$flatmap$},
+	  Louis's program re-evaluates the application <kbd>queen_cols(k - 1))</kbd>
+	  in each iteration of <kbd>flatmap</kbd>,
 	  which happens $n$
 	  times for each $k$. That
 	  means overall Louis's program will solve the puzzle in a time of about
 	  $n^n T$ if the program in
-	  exercise~\ref{ex:8queens} solves the  puzzle in time 
+	  exercise \ref{ex:8queens} solves the  puzzle in time 
 	  $T$.
 	
 \end{Answer}
@@ -1866,16 +1740,16 @@ flatmap(new_row =>
       
       
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>This 
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>This 
           is, in fact, precisely the 
           
-          {\lstinline[mathescape=true]$fringe$}
+          <kbd>fringe</kbd>
           function
           from
-          exercise~\ref{ex:fringe}.  Here we've renamed it to emphasize that
+          exercise \ref{ex:fringe}.  Here we've renamed it to emphasize that
           it is part of a family of general sequence-manipulation
-          functions.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>
+          functions.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>
           
           Richard Waters (1979)
           developed a program that automatically analyzes traditional 
@@ -1892,8 +1766,8 @@ flatmap(new_row =>
           APL owes much of its power and appeal to a
           similar choice. In APL all data are represented as arrays, and there is a
           universal and convenient set of generic operators for all sorts of
-          array operations.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>According to 
+          array operations.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>According to 
           
           Knuth (1981), this rule was formulated by
           
@@ -1917,19 +1791,20 @@ flatmap(new_row =>
           V. Y. Pan in 1966.  The book by 
           
           
-          Borodin and Munro (1975) 
+          <CITATION><div class='permalink'>
+<a name='p31' class='permalink'></a><p>Borodin and Munro (1975)</p></div>Borodin and Munro 1975</CITATION> 
           provides an overview of these and other results about
-          optimal algorithms.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>This definition uses
+          optimal algorithms.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>This definition uses
 	
 	  
 	  
-	    the function {\lstinline[mathescape=true]$accumulate_n$}
-	    from exercise~\ref{ex:accumulate-n}.
+	    the function <kbd>accumulate_n</kbd>
+	    from exercise \ref{ex:accumulate-n}.
 	  
 	
-      </FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>This approach to nested mappings was shown
+      </FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>This approach to nested mappings was shown
           to us by 
           
           David Turner, whose languages 
@@ -1938,30 +1813,28 @@ flatmap(new_row =>
           
           Miranda provide elegant
           formalisms for dealing with these constructs.  The examples in this
-          section (see also exercise~\ref{ex:8queens}) are adapted from Turner
-          1981.  In section~\ref{sec:exploiting-streams}, we'll see how this
-          approach generalizes to infinite sequences.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>We're
+          section (see also exercise \ref{ex:8queens}) are adapted from Turner
+          1981.  In section \ref{sec:exploiting-streams}, we'll see how this
+          approach generalizes to infinite sequences.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>We're
           representing a pair here as a list of two elements rather than as
-          an ordinary pair.  Thus, the <QUOTE>pair</QUOTE> $(i, j)$ is represented as {\lstinline[mathescape=true]$list(i, j)$}, not {\lstinline[mathescape=true]$pair(i, j)$}.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>The set $S-x$ is the set of all elements
-          of $S$, excluding $x$.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>
+          an ordinary pair.  Thus, the <QUOTE>pair</QUOTE> $(i, j)$ is represented as <kbd>list(i, j)</kbd>, not <kbd>pair(i, j)</kbd>.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-7' href='#footnote-link-7'>[7] </a><FOOTNOTE>The set $S-x$ is the set of all elements
+          of $S$, excluding $x$.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-8' href='#footnote-link-8'>[8] </a><FOOTNOTE>
           
           
           
-          The character sequence {\lstinline[mathescape=true]$//$} in JavaScript code is used to
-          introduce <EM>comments</EM>.  Everything from {\lstinline[mathescape=true]$//$} to the end of
-          the line is ignored by the interpreter.  In this book we don't use
-          many comments; we try to make our programs self-documenting by using
-          descriptive names.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>
-          
-          
-          
-          The character sequence {\lstinline[mathescape=true]$//$} in JavaScript code is used to
-          introduce <EM>comments</EM>.  Everything from {\lstinline[mathescape=true]$//$} to the end of
+          The character sequence <kbd>//</kbd> in JavaScript code is used to
+          introduce <EM>comments</EM>.  Everything from <kbd>//</kbd> to the end of
           the line is ignored by the interpreter.  In this book we don't use
           many comments; we try to make our programs self-documenting by using
           descriptive names.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section2/subsection2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section2/subsection4.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+2.2.3  Sequences as Conventional Interfaces</div>	<div class='next-page'></div></div>

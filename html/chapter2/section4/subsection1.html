@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>2.4.1 
-        Representations for Complex Numbers
-      </a>
+		<a name='top' class='permalink'>2.4.1  Representations for Complex Numbers</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
 
@@ -18,10 +25,7 @@
       uses generic operations.  We begin by discussing two plausible
       representations for complex numbers as ordered pairs: rectangular form
       (real part and imaginary part) and polar form (magnitude and
-      angle).<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>~\ref{sec:manifest-types}
-      will show how both representations can be made to coexist in a single
-      system through the use of type tags and generic operations.
-        Section~\ref{sec:manifest-types}
+      angle).<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>  Section \ref{sec:manifest-types}
       will show how both representations can be made to coexist in a single
       system through the use of type tags and generic operations.
       </p></div>
@@ -30,7 +34,7 @@
       Like rational numbers, complex numbers are naturally represented as
       ordered pairs.  The set of complex numbers can be thought of as a
       two-dimensional space with two orthogonal axes, the <QUOTE>real</QUOTE> axis and
-      the <QUOTE>imaginary</QUOTE> axis. (See figure~\ref{fig:complex-plane}.)  From
+      the <QUOTE>imaginary</QUOTE> axis. (See figure \ref{fig:complex-plane}.)  From
       this point of view, the complex number $z=x+iy$
       (where $i^{2} =-1$)
       can be thought of as the point in the plane whose real coordinate is
@@ -49,7 +53,7 @@
 <a name='p3' class='permalink'></a><p>
       When multiplying complex numbers, it is more natural to think in terms
       of representing a complex number in polar form, as a magnitude and an
-      angle ($r$ and $A$ in figure~\ref{fig:complex-plane}).
+      angle ($r$ and $A$ in figure \ref{fig:complex-plane}).
       The product of two complex numbers is the vector obtained by
       stretching one complex number by the length of the other and then
       rotating it through the angle of the other:
@@ -91,42 +95,37 @@
       
       data-abstraction
       strategy we followed in designing the rational-number package in
-      section~\ref{sec:rationals}.  Assume that the operations on complex numbers are
-      implemented in terms of four selectors: {\lstinline[mathescape=true]$real_part$},
-      {\lstinline[mathescape=true]$imag_part$}, {\lstinline[mathescape=true]$magnitude$}, and {\lstinline[mathescape=true]$angle$}.  Also assume that
+      section \ref{sec:rationals}.  Assume that the operations on complex numbers are
+      implemented in terms of four selectors: <kbd>real_part</kbd>,
+      <kbd>imag_part</kbd>, <kbd>magnitude</kbd>, and <kbd>angle</kbd>.  Also assume that
       we have two
       functions
-      for constructing complex numbers: {\lstinline[mathescape=true]$make_from_real_imag$} returns a complex number with specified real and
-      imaginary parts, and {\lstinline[mathescape=true]$make_from_mag_ang$} returns a complex number with
+      for constructing complex numbers: <kbd>make_from_real_imag</kbd> returns a complex number with specified real and
+      imaginary parts, and <kbd>make_from_mag_ang</kbd> returns a complex number with
       specified magnitude and angle.  These
       functions
       have the property that,
-      for any complex number {\lstinline[mathescape=true]$z$}, both
-      
-\begin{JavaScript}
+      for any complex number <kbd>z</kbd>, both
+      <div class='snippet' id='javascript_39_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 make_from_real_imag(real_part(z),imag_part(z));
-\end{JavaScript}
-
+</pre></div></div>
       and
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_39_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 make_from_mag_ang(magnitude(z), angle(z));
-\end{JavaScript}
-
-      produce complex numbers that are equal to {\lstinline[mathescape=true]$z$}.
+</pre></div></div>
+      produce complex numbers that are equal to <kbd>z</kbd>.
       </p></div>
       <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
       Using these constructors and selectors, we can implement
       arithmetic on complex numbers using the <QUOTE>abstract data</QUOTE> specified by
       the constructors and selectors, just as we did for rational numbers in
-      section~\ref{sec:rationals}.  As shown in the formulas above, we can add and
+      section \ref{sec:rationals}.  As shown in the formulas above, we can add and
       subtract complex numbers in terms of real and imaginary parts while
       multiplying and dividing complex numbers in terms of magnitudes and
       angles:
 
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_39_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function add_complex(z1, z2) {
     return make_from_real_imag(
                real_part(z1) + real_part(z2),
@@ -147,8 +146,7 @@ function div_complex(z1, z2) {
                magnitude(z1) / magnitude(z2),
                angle(z1) - angle(z2));
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
       <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
@@ -181,10 +179,10 @@ function div_complex(z1, z2) {
     
 
       which relate the real and imaginary parts ($x$, $y$) to the magnitude
-      and the angle $(r, A)$.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>'s representation is
+      and the angle $(r, A)$.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a> Ben's representation is
       therefore given by the following selectors and constructors:
 
-      
+      <div class='snippet' id='javascript_39_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function real_part(z) {
@@ -196,7 +194,7 @@ function imag_part(z) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAJwKYEMA2B9ADu5KACgC8BKRAbwChE6VUoRkkALDAE1LIG5qBfaqEiwEiGAFt0AczwFi5KrXpomLRFHQxM3PoOHR4SKdLAwmHVNyX0Ga4+iitsAZwCOhIsts-b7kARWaFhynuQUANSI3r6+-oFEkjKhCmRpekLghmLoYNKYVoo0tqrMDk7YjrkATIkmKdwANME4+GHpApkiRohSANao2MDIcBLYLdhJ0kQAHo2IAJ4UxSqMZYj4MMiz80sZBqIOA0MjY-W508jz6Msxpeqb28iIAFS9js4QcC5EN-PPbykFRcMDAvw6-CAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwCaoPoTgWwA4A2ApgB4AUAXgIwA0iFATAJSIDeAUIl4gE5FQgeSHMgDWRDMB64MfZAQwwRAczKduGzVzkK8yHlEpUWAal5F5GPQcrMa6rY6XJlV-YeqnEz19Y-MmAG52AF92UEhYBEQAZxAAIyxcQlIjOkYWDg0+ASFEEXFJaRxZCwUfNUcqnTcbT0QAWnNLP1smeyqnFVqPY0bvbtaMoNDw8Gh4YRAFbHxicmp05jYHc1zhMQkpGW7kMFVVzq4VMBgBVCIjFgAqfJdT88uMjqONPeViK8Qzd8-h4LCEQm0VQMAAbkk5qlFvRllluDlBBtCtsSrt9pVXtwTmcQBcvgB6O7KB54p52Q5HX5PPpNaltEaA8ZRJAxACOIH0lxImVWiLyJEQtxIALGkUmzV07kovOy-CRiAAFhZUDLRUCWQMXD0ZSs5etEFBkDACGrRhqJTjHrr4dp5XkRFBFRh2TZKZ12Zy+GQakMmF53VVPVyyD4dRR-YyxcCkPSI3qEfaNk6MMgjWAGKHBtKIzRfTn-ermZbNkUZDUKiQ6ABPWWJg16GA8MhVxC1ovi6IFLbFDDo1Q8OjIOt2hvG5s8IV3FPYGJkYd0Se3R3OmIwMDzwujdjYMAxKD5atJDBgEAlKiIAC8dxRvYrKjIDAAdABWOgNAAMr5Gu-3h+Pp4lAwV43j25ZlIoD7Pm+jRfi+Iw7ggf58HEBAHteaCYLMKTkDgR7YCeZ4YLQiCBq8ODTJCOFkHhAFEQwdBkVixz4XAhFAVu7Bhq0KHTFAQRAA}{\usebox\lstbox}!*/
 function magnitude(z) {
     return math_sqrt(
                square(real_part(z)) + 
@@ -213,45 +211,9 @@ function make_from_mag_ang(r, a) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-
-      
-      
-       Ben's representation is
-      therefore given by the following selectors and constructors:
-
-      
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function real_part(z) {
-    return head(z);
-}
-function imag_part(z) {
-    return tail(z);
-}
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAJwKYEMA2B9ADu5KACgC8BKRAbwChE6VUoRkkALDAE1LIG5qBfaqEiwEiGAFt0AczwFi5KrXpomLRFHQxM3PoOHR4SKdLAwmHVNyX0Ga4+iitsAZwCOhIsts-b7kARWaFhynuQUANSI3r6+-oFEkjKhCmRpekLghmLoYNKYVoo0tqrMDk7YjrkATIkmKdwANME4+GHpApkiRohSANao2MDIcBLYLdhJ0kQAHo2IAJ4UxSqMZYj4MMiz80sZBqIOA0MjY-W508jz6Msxpeqb28iIAFS9js4QcC5EN-PPbykFRcMDAvw6-CAA}{\usebox\lstbox}!*/
-function magnitude(z) {
-    return math_sqrt(
-               square(real_part(z)) + 
-               square(imag_part(z)));
-}
-function angle(z) {
-    return math_atan2(imag_part(z),real_part(z));
-}
-function make_from_real_imag(x, y) {
-    return pair(x, y);
-}
-function make_from_mag_ang(r, a) {
-    return pair(r * math_cos(a), r * math_sin(a));
-}
-
-\end{JavaScriptClickable}
-
-
+</div></div>
 
       
       
@@ -266,7 +228,7 @@ function make_from_mag_ang(r, a) {
       trigonometric relations to obtain the real and
       imaginary parts.  Alyssa's representation is:
 
-      
+      <div class='snippet' id='javascript_39_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function real_part(z) {
@@ -278,7 +240,7 @@ function imag_part(z) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAJwKYEMA2B9ADu5KACgC8BKRAbwChE6VUoRkkBbdAczBiYBNVSFAFSJ2UABbYIcAM5F0YDpgHkyAbmoBfaqEiwEiGOw54CxclVr00TFqM7c+K4fYnYZMMPMXLB6rTrg0PBsDjwg-IKW9Ay2SOIYvIIa2rrBBgpKztHWjMxIUOgwmMkBafqhANao2MDIcKzYaFjYRpxEAB4ANIgAnhQ0MTb5iPgwyERikjIAjoREsyAEAh0UANSIi8tE-WRdVjGHh1PY6IVgAEw7Pav+qUEV9tW19Y3Gp4pEyD3oAwexIzGE2+iF+KSAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwCaoPoTgWwA4A2ApgB4AUAXgIwA0iFATAJSIDeAUIl4gE5FQgeSHMgDWRDMB64MfZAQwwRAczKduGzVzkK8yHlEpUWAal5F5GPQcrMa6rY6XJlV-YeqnEz19Y-MmAG52AF92UEhYBEQAZxAAIyxcQlIjOkYWDg0+ASFEEXFJaRxZCwUfNUcqnTcbT0QAWnNLP1smeyqnFVqPY0bvbtaMoNDw8Gh4YRAFbHxicmp05jYHc1zhMQkpGW7kMFVVzq4VMBgBVCIjFgAqfJdT88uMjqONPeViK8Qzd8-h4LCEQm0VQMAAbkk5qlFvRllluDlBBtCtsSrt9pVXtwTmcQBcvgB6O7KB54p52Q5HX5PPpNaltEaA8ZRJAxACOIH0lxImVWiLyJEQtxIALGkUmzV07kovOy-CRxNJ+IoNzuUAAFkkYmR6SrGWLgUgfD0ZSs5etFbjlaqRBqMDEYGAdfs-kx9UCWZbHqb4dp5Xl1RZUDLRR6JbrZQj-UgoMgYAQQ6Mw9ECltiqVLBUSHQAJ6Rv0WvQwHhkW2a9k2dmcvhkHnfWIcrlkPPtSlHMsYZCxsAMZt0Hnu5kS1NFHYuTsYnh0ZD5tYKoslqcofXsbBgGJQfI5pIYMAgEpURAAXjuKPTNQqDAAdABWOgNAAMt5Ga43W53e5KDGPp7TMgvKhkNed6NE+N4jKuCBvnwcQEJuJ5oJgswpOQODbtgu77hgtCIG2WI4NMkIoaW6FwJhX50HhWLYqR5EYAEwTsMarQwdMUBBEAA}{\usebox\lstbox}!*/
 function magnitude(z) {
     return head(z);
 }
@@ -294,15 +256,16 @@ function make_from_mag_ang(r, a) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
       The discipline of data abstraction ensures that the same implementation of
-      {\lstinline[mathescape=true]$add_complex$}, {\lstinline[mathescape=true]$sub_complex$}, {\lstinline[mathescape=true]$mul_complex$}, and {\lstinline[mathescape=true]$div_complex$} will work with either Ben's representation or Alyssa's
+      <kbd>add_complex</kbd>, <kbd>sub_complex</kbd>, <kbd>mul_complex</kbd>, and <kbd>div_complex</kbd> will work with either Ben's representation or Alyssa's
       representation. 
       </p></div>
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>In actual computational systems, rectangular form is
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>In actual computational systems, rectangular form is
         preferable to polar form most of the time because of 
         
         roundoff errors
@@ -310,7 +273,7 @@ function make_from_mag_ang(r, a) {
         complex-number example is unrealistic.  Nevertheless, it provides a
         clear illustration of the design of a system using generic operations
         and a good introduction to the more substantial systems to be
-        developed later in this chapter.</FOOTNOTE></div><hr><div class='footnote'>
+        developed later in this chapter.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>The arctangent function referred to
         
         
@@ -319,10 +282,17 @@ function make_from_mag_ang(r, a) {
 	    
 	      
 	      
-		computed by JavaScript's {\lstinline[mathescape=true]$math_atan2$} function,
+		computed by JavaScript's <kbd>math_atan2</kbd> function,
 	      
 	    
-        is defined so as to take two arguments $y$~and $x$ and to return
+        is defined so as to take two arguments $y$ and $x$ and to return
         the angle whose tangent is $y/x$.  The signs of the arguments
         determine the quadrant of the angle.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section4/section4.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section4/subsection2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+2.4.1  Representations for Complex Numbers</div>	<div class='next-page'></div></div>

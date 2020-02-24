@@ -1,31 +1,36 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>5.2.3 
-  Generating Execution
-  Functions
-  for Instructions
-      </a>
+		<a name='top' class='permalink'>5.2.3  Generating Execution Functions for Instructions</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
 
       <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
-  The assembler calls {\lstinline[mathescape=true]$make_execution_function$} to
+  The assembler calls <kbd>make_execution_function</kbd> to
   generate the execution
   function
   for an instruction.
   Like the analyze
   function
   in the evaluator of
-  section~\ref{sec:separating-analysis}, this dispatches on the type of
+  section \ref{sec:separating-analysis}, this dispatches on the type of
   instruction to generate the appropriate execution
   function.
-  
+  <div class='snippet' id='javascript_103_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_execution_function(inst, labels, machine, pc, flag, stack, ops) {
@@ -38,7 +43,7 @@ function make_execution_function(inst, labels, machine, pc, flag, stack, ops) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9TAPTCEWBbUSEsAChjAGcoAaRAG1QCNMW7m0IALWpmYAHCM2BsA5swaoI6ZnBF0AlIgDeAKES7EEBA0R5EAXkT9MqACY16UVQG4tOvQCdMUEG6QnT-xAAiVDo6GCkwQNc9PQB+FAwcELCIuwZeeUEwYVYOLh5EZQKxVWiYxAAuYzMAwKhMBijyuISsbHqGNKYEgSFmNk5uJRUJaVEIUubdKr9a9jdUSH4mqfi0NvnFgS6M3uz+vKHESVQZRBKymJma80CpOHa4Fea1xOx7qDgdnqycgfzxpMptd-Lc6KgAG6YZ7lV5tcFQ758X6yKDyRTnCaXPQg2oeBhwDwwmJwnD4z4eJGZPqIOQKQHY6bVUFBESYNzAQnIYktdY4NkcrlUvZ-Q4FIoMqaVRDstyE76BACqYHQYDgAHckLQGG4QNB4EgoABPNlVACCAGULQBRACyACEADLWwJOLQAXyAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9TAPTCEWBbUSEsAChjAGcoAaRAG1QCNMW7m0IALWpmYAHCM2BsA5swaoI6ZnBF0AlIgDeAKES7EEBA0R5EAXkT9MqACY16UVQG4tOvQCdMUEG6QnT-xAAiVDo6GCkwQNc9PQB+FAwcELCIuwZeeUEwYVYOLh5EZQKxVWiYxAAuYzMAwKhMBijyuISsbHqGNKYEgSFmNk5uJRUJaVEIUubdKr9a9jdUSH4mqfi0NvnFgS6M3uz+vKHESVQZRBKymJma80CpOHa4Fea1xOx7qDgdnqycgfzxpMptd-Lc6KgAG6YZ7lV5tcFQ758X6yKDyRTnCaXPQg2oeBhwDwwmJwnD4z4eJGZPqIOQKQHY6bVUFBESYNzAQnIYktdY4NkcrlUvZ-Q4FIoMqaVRDstyE76BACqYHQYDgAHckLQGG4QNB4EgoABPNlVACCAGULQBRACyACEADLWwJOLQAXyAA}{\usebox\lstbox}!*/
         : x === "branch"
         ? make_branch(inst, machine, labels, flag, pc)
         : x === "go_to"
@@ -53,8 +58,9 @@ function make_execution_function(inst, labels, machine, pc, flag, stack, ops) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
@@ -68,23 +74,24 @@ function make_execution_function(inst, labels, machine, pc, flag, stack, ops) {
   the individual instructions in the register-machine language.
   We use data abstraction to isolate the detailed syntax of
   register-machine expressions from the general execution mechanism, as
-  we did for evaluators in section~\ref{sec:representing-expressions},
+  we did for evaluators in section \ref{sec:representing-expressions},
   by using syntax
   functions
   to extract and classify the parts of an instruction.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Assign instructions
-      
+      </h2></div>
 
       
       <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
-  The {\lstinline[mathescape=true]$make_assign$}
+  The <kbd>make_assign</kbd>
   function
   handles assign instructions:
-  
+  <div class='snippet' id='javascript_103_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_assign(inst, machine, labels, operations, pc) {
@@ -97,7 +104,7 @@ function make_assign(inst, machine, labels, operations, pc) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9VBnPGAczAAoYw8oAaFVCACws1oBtUAjTVvWuAB0wAnVLAS9E-CAEpEAbwBQiZYgjioiKKiFFMGgLyJdUbEMxEYVYaTSNmtfIRKnz2MKmSZylKNOkBuJRU1H0QAN1RWEBxMAA9+RENHYjBsCKiY+O8qAKDlEKpwyOjsUCRDS2wBYVF4VLj+UnSShuk8lQ6AfjosKsERMXqs5sz+WlsmMBZEdi4ePn7a8TaO1cQALh6cfiEYZBhYMNHSBkxUABMm4tHpcfpJ6dnuPFz2sug6yWFgOCFkbDQvWSJFIskUa2UeD02BCUEwYCgeFIWh0eloI1K4FBuQhiAuEUg2wgpCkAUQ7QAvgp2mYoCAhEh+j8-gCMDhgWBAhSgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9VBnPGAczAAoYw8oAaFVCACws1oBtUAjTVvWuAB0wAnVLAS9E-CAEpEAbwBQiZYgjioiKKiFFMGgLyJdUbEMxEYVYaTSNmtfIRKnz2MKmSZylKNOkBuJRU1H0QAN1RWEBxMAA9+RENHYjBsCKiY+O8qAKDlEKpwyOjsUCRDS2wBYVF4VLj+UnSShuk8lQ6AfjosKsERMXqs5sz+WlsmMBZEdi4ePn7a8TaO1cQALh6cfiEYZBhYMNHSBkxUABMm4tHpcfpJ6dnuPFz2sug6yWFgOCFkbDQvWSJFIskUa2UeD02BCUEwYCgeFIWh0eloI1K4FBuQhiAuEUg2wgpCkAUQ7QAvgp2mYoCAhEh+j8-gCMDhgWBAhSgA}{\usebox\lstbox}!*/
     function perform_make_assign() {
         set_contents(target, value_fun());
         advance_pc(pc); 
@@ -107,13 +114,14 @@ function make_assign(inst, machine, labels, operations, pc) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-  {\lstinline[mathescape=true]$Make_assign$} extracts the target register name (the
+</div></div>
+  <kbd>Make_assign</kbd> extracts the target register name (the
   second element of the instruction) and the value expression
   (the rest of the list that forms the instruction)
   from the assign instruction using the selectors
-  
+  <div class='snippet' id='javascript_103_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function assign_reg_name(assign_instruction) {
@@ -126,16 +134,17 @@ function assign_value_exp(assign_instruction) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwM6pgczAfQE4CmmOYyAtgQBRobY4xipR4jTxgCUiA3gFCIDEhKCDxIAFgWQATSlGQwANtXRZcDJizYIOHANy8Avr16hIsBClV0AbskUgCOAgA8ADitrrGzVhc48iPyCwqJI8kpyCso0avQ+Wv66BoZAA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAQwM6pgczAfQE4CmmOYyAtgQBRobY4xipR4jTxgCUiA3gFCIDEhKCDxIAFgWQATSlGQwANtXRZcDJizYIOHANy8Avr16hIsBClV0AbskUgCOAgA8ADitrrGzVhc48iPyCwqJI8kpyCso0avQ+Wv66BoZAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
-  The register name is looked up with {\lstinline[mathescape=true]$get_register$} to produce the
-  target register object.  The value expression is passed to {\lstinline[mathescape=true]$make_operation_exp$} if the value is the result of an operation, and to
-  {\lstinline[mathescape=true]$make_primitive_exp$} otherwise.  These
+  The register name is looked up with <kbd>get_register</kbd> to produce the
+  target register object.  The value expression is passed to <kbd>make_operation_exp</kbd> if the value is the result of an operation, and to
+  <kbd>make_primitive_exp</kbd> otherwise.  These
   functions
   (shown below)
   parse the value expression and produce an execution
@@ -145,7 +154,7 @@ function assign_value_exp(assign_instruction) {
   function
   of no arguments, called 
   
-  {\lstinline[mathescape=true]$value_fun$},
+  <kbd>value_fun</kbd>,
   which will be evaluated during the simulation to produce the actual
   value to be assigned to the register.  Notice that the work of looking
   up the register name and parsing the value expression is performed
@@ -154,12 +163,12 @@ function assign_value_exp(assign_instruction) {
   
   functions, and corresponds directly to the saving in work we obtained
   by separating program analysis from execution in the evaluator of
-  section~\ref{sec:separating-analysis}.
+  section \ref{sec:separating-analysis}.
       </p></div>
 
       <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-  The result returned by {\lstinline[mathescape=true]$make_assign$} is the execution
+  The result returned by <kbd>make_assign</kbd> is the execution
   function
   for the assign instruction.  When this
   function
@@ -167,10 +176,10 @@ function assign_value_exp(assign_instruction) {
   called (by the machine model's execute
   function),
   it sets the contents of the target register to the result
-  obtained by executing {\lstinline[mathescape=true]$value_fun$}.  Then it advances
+  obtained by executing <kbd>value_fun</kbd>.  Then it advances
   the pc to the next instruction by running the
   function
-  
+  <div class='snippet' id='javascript_103_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function advance_pc(pc) {
@@ -180,21 +189,23 @@ function advance_pc(pc) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCYDdmQKYH0AOEAFIQJSIDeAUIrYgM7ZS4QJTZhT0kQA0iUZDAA2RAOZMWbDlx6l5AbkQ06VAL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAQwCYDdmQKYH0AOEAFIQJSIDeAUIrYgM7ZS4QJTZhT0kQA0iUZDAA2RAOZMWbDlx6l5AbkQ06VAL5A}{\usebox\lstbox}
+</pre>
 
-
-  {\lstinline[mathescape=true]$Advance_pc$} is the normal termination for all instructions except
-  branch and {\lstinline[mathescape=true]$go_to$}.
+</div></div>
+  <kbd>Advance_pc</kbd> is the normal termination for all instructions except
+  branch and <kbd>go_to</kbd>.
       </p></div>
 
-      \subsubsection{
-  Test, branch, and {\lstinline[mathescape=true]$go_to$} instructions
-      
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
+  Test, branch, and <kbd>go_to</kbd> instructions
+      </h2></div>
 
       <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
   
-  {\lstinline[mathescape=true]$Make_test$} handles test instructions in a similar way.  It
+  <kbd>Make_test</kbd> handles test instructions in a similar way.  It
   extracts the expression that specifies the condition to be tested and
   generates an execution
   function
@@ -202,7 +213,7 @@ function advance_pc(pc) {
   function
   for the condition is called, the result is assigned to the
   flag register, and the pc is advanced:
-  
+  <div class='snippet' id='javascript_103_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_test(inst, machine, labels, operations, flag, pc) {
@@ -216,7 +227,7 @@ function make_test(inst, machine, labels, operations, flag, pc) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9KmDOUAFDGIQDQqoQAWpmlANqgEaaP6VwAOmATqlgJOiYMwDmlbhACUiAN4AoRCsQRhUNQgAmMIUgC8iPIWzqwu-STJQZAbkXLVMYIhL5sPfoPhhsmAA9uInNLXxk5JVVorRtYsIRsUEMqLE9eAX1-IJCdPV9KNFp6JlZ2ES9M33x7RxjVZOhfRAzgOD5kbDQ0k2JIp3ro-EwoMwQ8MCh8IjFUSXj8xOSiCIdBmNRtADdUSBxpIml7RAGYgF86wb4RkD4kVvbO7pxeuxPos8RyzAVT6P4+O1rBREAAiABCm0QABUAKIAZWhiFIhD4ICaCAAXIgAILw+GwgCy4IAMrDQbUPooLopGvpjARRqFFmAiL1sCioGiMWB+tFrlBbkgoKgYIw2YyOTZufpamcgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9KmDOUAFDGIQDQqoQAWpmlANqgEaaP6VwAOmATqlgJOiYMwDmlbhACUiAN4AoRCsQRhUNQgAmMIUgC8iPIWzqwu-STJQZAbkXLVMYIhL5sPfoPhhsmAA9uInNLXxk5JVVorRtYsIRsUEMqLE9eAX1-IJCdPV9KNFp6JlZ2ES9M33x7RxjVZOhfRAzgOD5kbDQ0k2JIp3ro-EwoMwQ8MCh8IjFUSXj8xOSiCIdBmNRtADdUSBxpIml7RAGYgF86wb4RkD4kVvbO7pxeuxPos8RyzAVT6P4+O1rBREAAiABCm0QABUAKIAZWhiFIhD4ICaCAAXIgAILw+GwgCy4IAMrDQbUPooLopGvpjARRqFFmAiL1sCioGiMWB+tFrlBbkgoKgYIw2YyOTZufpamcgA}{\usebox\lstbox}!*/
             advance_pc(pc); 
         }
 
@@ -231,8 +242,9 @@ function test_condition(test_instruction) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
@@ -251,7 +263,7 @@ function test_condition(test_instruction) {
   also that the label is looked up at assembly time, not each time the
   branch instruction is simulated.
 
-  
+  <div class='snippet' id='javascript_103_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_branch(inst, machine, labels, flag, pc) {
@@ -264,7 +276,7 @@ function make_branch(inst, machine, labels, flag, pc) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ARgJ1UgAsAKGMAZygBoVUJiLM6AbVXTVyu4dgczoAHCAEpEAbwBQiWYggJqiACaYlAXkQEijbKurkqUUQG4Zc87JjBE5StnadW2TAA8hpfcfHS5f+YpQiBTUlIiarHBw6CBCDhxcpI5cPIjJzm5x6Z5q3maW-qCQsAiIQpj4wHD4yNhoWHiEJKQ+Bf5y1rb8mFDYCmBQmAOUpHyo-KKt7dNylD19CIPDpCJ0IVCUplJt0wC+iCmYkjszsqjKAG46OCIrYmancrsniM8v+D0g+EjlldW19Rw2hI+T8+0OxxmFXw1UM1DoACIAELnRBIgBKAEEAHIAYQAEsEjPgQNB4GAAFyITEAZRpAFEALJIgAy9IRWzBUjeRTJpWBui8pAFxGw6xJfLAUzkHygXyQxEw51IUFQMFYwqaunFpJKUq2uyAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ARgJ1UgAsAKGMAZygBoVUJiLM6AbVXTVyu4dgczoAHCAEpEAbwBQiWYggJqiACaYlAXkQEijbKurkqUUQG4Zc87JjBE5StnadW2TAA8hpfcfHS5f+YpQiBTUlIiarHBw6CBCDhxcpI5cPIjJzm5x6Z5q3maW-qCQsAiIQpj4wHD4yNhoWHiEJKQ+Bf5y1rb8mFDYCmBQmAOUpHyo-KKt7dNylD19CIPDpCJ0IVCUplJt0wC+iCmYkjszsqjKAG46OCIrYmancrsniM8v+D0g+EjlldW19Rw2hI+T8+0OxxmFXw1UM1DoACIAELnRBIgBKAEEAHIAYQAEsEjPgQNB4GAAFyITEAZRpAFEALJIgAy9IRWzBUjeRTJpWBui8pAFxGw6xJfLAUzkHygXyQxEw51IUFQMFYwqaunFpJKUq2uyAA}{\usebox\lstbox}!*/
             if (get_contents(flag)) {
                 set_contents(pc, insts);
 
@@ -285,18 +297,19 @@ function branch_dest(branch_instruction) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
   
-  A {\lstinline[mathescape=true]$go_to$} instruction is similar to a branch, except that the
+  A <kbd>go_to</kbd> instruction is similar to a branch, except that the
   destination may be specified either as a label or as a register, and
   there is no condition to check—the pc is always set to the
   new destination.
-  
+  <div class='snippet' id='javascript_103_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_goto(inst, machine, labels, pc) {
@@ -310,7 +323,7 @@ function make_goto(inst, machine, labels, pc) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9A5nKOAChjAGcoAaFVCAC1M2oBtUAjTZs6gBwgEpEAbwBQicYggIKiACaYZAXkT5C2eRRLko-ANwixEmMEQky2Vh2bZMADx5ENOwaIlvJ0qIlIUyiZcxwcOggPBbsnESWnNyI0dZ2YfGOCs767hIATphQIJlIRIKKAHyIZDnYUmBQmNVkRHzUPlBkegZuAL6IMZjeJmbY2bgwFJiZNvYpFPwuhhlVMkP+KhVDIzWZRGj0jNRro+OJg5i4U2lz7tm5+aZFpeVQlQg1dQ0Q1LgVVS8tREMz+guXR6wgubjGmTgm2a1AARAAhVCyRAAcQA8gAVNHebSZEDQeBgABciAAggBlckAUQAsvCADJU2FtToiDoGUCQWAIFQEODqVJEVT85p4gkIWZuK55JB0TBIohQVAwZhCvnYUX47lgAFsoA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9A5nKOAChjAGcoAaFVCAC1M2oBtUAjTZs6gBwgEpEAbwBQicYggIKiACaYZAXkT5C2eRRLko-ANwixEmMEQky2Vh2bZMADx5ENOwaIlvJ0qIlIUyiZcxwcOggPBbsnESWnNyI0dZ2YfGOCs767hIATphQIJlIRIKKAHyIZDnYUmBQmNVkRHzUPlBkegZuAL6IMZjeJmbY2bgwFJiZNvYpFPwuhhlVMkP+KhVDIzWZRGj0jNRro+OJg5i4U2lz7tm5+aZFpeVQlQg1dQ0Q1LgVVS8tREMz+guXR6wgubjGmTgm2a1AARAAhVCyRAAcQA8gAVNHebSZEDQeBgABciAAggBlckAUQAsvCADJU2FtToiDoGUCQWAIFQEODqVJEVT85p4gkIWZuK55JB0TBIohQVAwZhCvnYUX47lgAFsoA}{\usebox\lstbox}!*/
         const reg = get_register(machine, register_exp_reg(dest));
         return () => set_contents(pc, get_contents(reg));
 
@@ -324,19 +337,21 @@ function goto_dest(goto_instruction) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Other instructions
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
   The stack instructions save and restore simply use the
   stack with the designated register and advance the pc:
-  
+  <div class='snippet' id='javascript_103_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_save(inst, machine, stack, pc) {
@@ -350,7 +365,7 @@ function make_save(inst, machine, stack, pc) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AzqgN0wAoYxcoAaFVCACzM2otvWoAcIBKRAbwChEQxBAQVEAJ0wBzRAF5E0zFGxTpMCpgnE09RsyitsZCqpnYwqZCRNQuXANz9Bw0JFgJE7LcDgTk2GhYeIQkPALCkV4guHTELBBsisrYomBQmOm4xGr2TlHCqAAmBKiQOJzEnI4uQgC+zpFSUCASSN4Svv6BGDj4RE4N-G7Q8EhBOFIUfjbkVDR6YEyICUnVfLUiYlCSMvLJKmoaGdq6DEsGRrZm0hZWsxR5ja7go54dXQETZtNSxOGbSK4FJpDJZHIyDhwdjxQyJJ4FITFUrlbCVaoORCbIZNZStdo+PxfXo-KAzQbOEYeJCrYxzG53aywq5zCQgN5gAG4lptRB0TDFYiGGAAG2ZiTpFDZHKedSAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AzqgN0wAoYxcoAaFVCACzM2otvWoAcIBKRAbwChEQxBAQVEAJ0wBzRAF5E0zFGxTpMCpgnE09RsyitsZCqpnYwqZCRNQuXANz9Bw0JFgJE7LcDgTk2GhYeIQkPALCkV4guHTELBBsisrYomBQmOm4xGr2TlHCqAAmBKiQOJzEnI4uQgC+zpFSUCASSN4Svv6BGDj4RE4N-G7Q8EhBOFIUfjbkVDR6YEyICUnVfLUiYlCSMvLJKmoaGdq6DEsGRrZm0hZWsxR5ja7go54dXQETZtNSxOGbSK4FJpDJZHIyDhwdjxQyJJ4FITFUrlbCVaoORCbIZNZStdo+PxfXo-KAzQbOEYeJCrYxzG53aywq5zCQgN5gAG4lptRB0TDFYiGGAAG2ZiTpFDZHKedSAA}{\usebox\lstbox}!*/
     return perform_make_save;
 }
 
@@ -370,21 +385,22 @@ function stack_inst_reg_name(stack_instruction) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
   
-  The final instruction type, handled by {\lstinline[mathescape=true]$make_perform$}, generates
+  The final instruction type, handled by <kbd>make_perform</kbd>, generates
   an execution
   function
   for the action to be performed.  At simulation
   time, the action
   function
   is executed and the pc advanced.
-  
+  <div class='snippet' id='javascript_103_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_perform(inst, machine, labels, operations, pc) {
@@ -398,7 +414,7 @@ function make_perform(inst, machine, labels, operations, pc) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADpgJ2DgOQAoYwBnKAGhVQgAtLN6AbVAI03avrj4CqWAn6JcEAJSIA3gChESxBDFREjUUgC8EwsVLZN8MBWpQpAbnmLlMYIgpVsgwiJPZMAD1xljCKRkFZRCVNQ1oD1AdBiwXIXcETx8-SIR6NGZWDm5ecVdhLSorW1DEAkwoEAIkMhltAD45CK1saLrLDQATADdUSBxJMkkrRABfGxCxxDzMOVLQwgISMxp6ACIAIVQuxAAFAFEAJQAxAHkjgFlEShoCEDSwAC5EAEEAZXeDy82AGQP1iUpvIJvJoo89EQSMgjI9VhZ5iEKlUaogoKgYOx4aMQUA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADpgJ2DgOQAoYwBnKAGhVQgAtLN6AbVAI03avrj4CqWAn6JcEAJSIA3gChESxBDFREjUUgC8EwsVLZN8MBWpQpAbnmLlMYIgpVsgwiJPZMAD1xljCKRkFZRCVNQ1oD1AdBiwXIXcETx8-SIR6NGZWDm5ecVdhLSorW1DEAkwoEAIkMhltAD45CK1saLrLDQATADdUSBxJMkkrRABfGxCxxDzMOVLQwgISMxp6ACIAIVQuxAAFAFEAJQAxAHkjgFlEShoCEDSwAC5EAEEAZXeDy82AGQP1iUpvIJvJoo89EQSMgjI9VhZ5iEKlUaogoKgYOx4aMQUA}{\usebox\lstbox}!*/
         error(inst, "Bad PERFORM instruction: ASSEMBLE");
     }
 }
@@ -408,15 +424,17 @@ function perform_action(inst) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Execution
     functions
     for subexpressions
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
@@ -424,14 +442,14 @@ function perform_action(inst) {
   
   
   The value of a reg, label, or constant expression
-  may be needed for assignment to a register ({\lstinline[mathescape=true]$make_assign$}) or for input to
-  an operation ({\lstinline[mathescape=true]$make_operation_exp$}, below).  The following
+  may be needed for assignment to a register (<kbd>make_assign</kbd>) or for input to
+  an operation (<kbd>make_operation_exp</kbd>, below).  The following
   function
   generates execution
   functions
   to produce values for these expressions
   during the simulation:
-  
+  <div class='snippet' id='javascript_103_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_primitive_exp(exp, machine, labels) {
@@ -443,7 +461,7 @@ function make_primitive_exp(exp, machine, labels) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADgJxmRlgDcdMAPXACitwBoVUIALGMTJgG1QCNM3AM4BKRAG8AUIhmIYwRDRhDsEBEKiowUbPTrURYqbJOI1YDWcQBeM+s3bd1bKVTcQmfbhEBuaaZl8TCgQfCQaMWsAPjM-AJl-GQBfREEhTDkFJRVeAW4nWnpDCUTTc0sODSEbRG44OHQQXGxcwRpW4R5+QQKW7u4vQzj4oJCwxUiYyqghP1KUtIz5RWVsIIBzZShMfALBo1KTcqhEfBr14LXMTY0dmjQ2Di5T662d3o394YDR0PDJxAXHTmbbaIQ0fC+RCSeapYQZYzxHb4OD4LxMABEAFUwOgwHAAO5IehBIRCeBIKAAT1wmAAXIgAIIAZWZAFEALIAIQAMmyMb55pIkkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADgJxmRlgDcdMAPXACitwBoVUIALGMTJgG1QCNM3AM4BKRAG8AUIhmIYwRDRhDsEBEKiowUbPTrURYqbJOI1YDWcQBeM+s3bd1bKVTcQmfbhEBuaaZl8TCgQfCQaMWsAPjM-AJl-GQBfREEhTDkFJRVeAW4nWnpDCUTTc0sODSEbRG44OHQQXGxcwRpW4R5+QQKW7u4vQzj4oJCwxUiYyqghP1KUtIz5RWVsIIBzZShMfALBo1KTcqhEfBr14LXMTY0dmjQ2Di5T662d3o394YDR0PDJxAXHTmbbaIQ0fC+RCSeapYQZYzxHb4OD4LxMABEAFUwOgwHAAO5IehBIRCeBIKAAT1wmAAXIgAIIAZWZAFEALIAIQAMmyMb55pIkkA}{\usebox\lstbox}!*/
         const insts = lookup_label(labels, label_exp_label(exp));
         return () => insts;
 
@@ -457,15 +475,16 @@ function make_primitive_exp(exp, machine, labels) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
   The syntax of reg, label, and constant expressions
   is determined by
-  
+  <div class='snippet' id='javascript_103_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_register_exp(exp) {
@@ -479,7 +498,7 @@ function register_exp_reg(exp) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQE4FMDmqpYZpYAeADgBSlkCUiA3gFCIuLZQgZKppQCGOHFgAmaADb4q5ADSIARNhxyaAbkYBfRo1CRYCNrnyFi5TLim0GzVu05IAFlj7CK-GGIs1VGrTujxudAgEFH4wKBNKajomVgMOLmR0fkERcUlqWTlgsFC+cOU1TW1wf30cvPDItAA3PjEQLE8rONtEx2dXPndPb2K-PUDxPgAjLDFI5tibLAShlKFRCVCLLLFR8cKfEt0AxHWxiephw6nrFjaHJxc3D2i+oA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABDAzgfQE4FMDmqpYZpYAeADgBSlkCUiA3gFCIuLZQgZKppQCGOHFgAmaADb4q5ADSIARNhxyaAbkYBfRo1CRYCNrnyFi5TLim0GzVu05IAFlj7CK-GGIs1VGrTujxudAgEFH4wKBNKajomVgMOLmR0fkERcUlqWTlgsFC+cOU1TW1wf30cvPDItAA3PjEQLE8rONtEx2dXPndPb2K-PUDxPgAjLDFI5tibLAShlKFRCVCLLLFR8cKfEt0AxHWxiephw6nrFjaHJxc3D2i+oA}{\usebox\lstbox}!*/
 function is_constant_exp(exp) {
     return is_tagged_list(exp, "constant");
 }
@@ -497,8 +516,9 @@ function label_exp_label(exp) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
@@ -514,7 +534,7 @@ function label_exp_label(exp) {
   function
   for an <QUOTE>operation expression</QUOTE>—a list containing the operation and
   operand expressions from the instruction:
-  
+  <div class='snippet' id='javascript_103_12_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_operation_exp(exp, machine, labels, operations) {
@@ -527,21 +547,22 @@ function make_operation_exp(exp, machine, labels, operations) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9OAHTAJ1VgW0wA88AKSvAGhVQgAsYxNGAbVAI0y4BnRviIl4YQQEpEAbwBQiJYggJBURPkQBeRFzhx0IPNjyEYyaqOKkw5Krhp0pIgjYnSA3IuWrJG1DM4CEEdJicdAD4mLFNzZBhYADccOlpGNFZ2Tj0+AWl6H2ViktLla3EyOkcxMAATQVoqKSlvIsRQSFtEN2A4QmRsNFiK23saGQUyxEJMKBBCJHxqNBo8KJ7qF0RAwmDpVvaAX3b22fnFnqI+gaGMHFGJce8joA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9OAHTAJ1VgW0wA88AKSvAGhVQgAsYxNGAbVAI0y4BnRviIl4YQQEpEAbwBQiJYggJBURPkQBeRFzhx0IPNjyEYyaqOKkw5Krhp0pIgjYnSA3IuWrJG1DM4CEEdJicdAD4mLFNzZBhYADccOlpGNFZ2Tj0+AWl6H2ViktLla3EyOkcxMAATQVoqKSlvIsRQSFtEN2A4QmRsNFiK23saGQUyxEJMKBBCJHxqNBo8KJ7qF0RAwmDpVvaAX3b22fnFnqI+gaGMHFGJce8joA}{\usebox\lstbox}!*/
     }
     
     return perform_make_operation_exp;
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p14' class='permalink'></a><p>
   The syntax of operation expressions is determined by
-  
+  <div class='snippet' id='javascript_103_13_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_operation_exp(exp) {
@@ -555,14 +576,15 @@ function operation_exp_op(operation_exp) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfTgBwKYCcCGsCa2AHpgBRmYCUiA3gFCIuK7ZQi5Kpqb4xcVcnQBko5Oij4A5jOwATNABtUUCgAts+BcNoAaRACIsRmgG5GAX0aNQkIkix5C8MCXIZKzgo4+0GZlZ2Tm5ELR0KaRhlTW1dH1diahpUyxs7cGg3RES-ai8XMAUUCjy3fzomVjYOLiRo2PLkkXSgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABDAzgfTgBwKYCcCGsCa2AHpgBRmYCUiA3gFCIuK7ZQi5Kpqb4xcVcnQBko5Oij4A5jOwATNABtUUCgAts+BcNoAaRACIsRmgG5GAX0aNQkIkix5C8MCXIZKzgo4+0GZlZ2Tm5ELR0KaRhlTW1dH1diahpUyxs7cGg3RES-ai8XMAUUCjy3fzomVjYOLiRo2PLkkXSgA}{\usebox\lstbox}!*/
 function operation_exp_operands(operation_exp) {
     return tail(operation_exp);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
@@ -570,10 +592,10 @@ function operation_exp_operands(operation_exp) {
   Observe that the treatment of operation expressions is very much like
   the treatment of
   function
-  applications by the {\lstinline[mathescape=true]$analyze_application$}
+  applications by the <kbd>analyze_application</kbd>
   function
   in the evaluator of
-  section~\ref{sec:separating-analysis} in that we generate an execution
+  section \ref{sec:separating-analysis} in that we generate an execution
   function
   for each operand.  At simulation time, we call the
   operand
@@ -586,7 +608,7 @@ function operation_exp_operands(operation_exp) {
   function
   is found by looking up the operation name in
   the operation table for the machine:
-  
+  <div class='snippet' id='javascript_103_14_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function lookup_prim(symbol, operations) {
@@ -599,9 +621,10 @@ function lookup_prim(symbol, operations) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGznA1iADgfSwJxgFsAKAZwE8iAjOZAGkTiwFN8BDWBMgSkQG8AUIhGII3KIgBu7ZIgC8idmTJwI5KrQZNWHLmF4BuQcNH4WUEPiQy58+4nAATFsBhgWT06NEB+RGz4cPgaNHSMAEQAqmDoYHAA7kjMbJzwYABciACCAMq5AKIAsgBCADIFETzePohZABYs7E4kUOwwyCS2PDzGAL5AA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAGznA1iADgfSwJxgFsAKAZwE8iAjOZAGkTiwFN8BDWBMgSkQG8AUIhGII3KIgBu7ZIgC8idmTJwI5KrQZNWHLmF4BuQcNH4WUEPiQy58+4nAATFsBhgWT06NEB+RGz4cPgaNHSMAEQAqmDoYHAA7kjMbJzwYABciACCAMq5AKIAsgBCADIFETzePohZABYs7E4kUOwwyCS2PDzGAL5AA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       
@@ -640,11 +663,11 @@ function lookup_prim(symbol, operations) {
   
   
   When we introduced save and restore in
-  section~\ref{sec:stack-recursion}, we didn't specify what would happen
+  section \ref{sec:stack-recursion}, we didn't specify what would happen
   if you tried to restore a register that was not the last one saved, as
   in the sequence
 
-  
+  <div class='snippet' id='javascript_103_15_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 save(y);
@@ -653,9 +676,10 @@ restore(y);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=M4QwbgpgFAnglAbgFCklAHopAnCwAuA9rrIkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=M4QwbgpgFAnglAbgFCklAHopAnCwAuA9rrIkA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   There are several reasonable possibilities for the meaning of restore:
   
 \begin{enumerate}[a.]
@@ -664,7 +688,7 @@ restore(y);
       stack, regardless of what register that value came from.  This is the
       way our simulator behaves.  Show how to take advantage of this
       behavior to eliminate one instruction from the Fibonacci machine of
-      section~\ref{sec:stack-recursion} (figure~\ref{fig:fib-machine}).
+      section \ref{sec:stack-recursion} (figure \ref{fig:fib-machine}).
     }
 \item{
       restore(y) puts into y the last value saved on the
@@ -677,7 +701,7 @@ restore(y);
       restore(y) puts into y the last value saved from y regardless of what other registers were saved after y and not
       restored.  Modify the simulator to behave this way.  You will have to
       associate a separate stack with each register.  You should make the
-      {\lstinline[mathescape=true]$initialize_stack$} operation initialize all the register stacks.
+      <kbd>initialize_stack</kbd> operation initialize all the register stacks.
     }
 \end{enumerate}
 
@@ -695,11 +719,11 @@ restore(y);
   the assembler to store the following information in the machine model:
   <UL>
     <LI>a list of all instructions, with duplicates removed, sorted by
-      instruction type (assign, {\lstinline[mathescape=true]$go_to$}, and so on);
+      instruction type (assign, <kbd>go_to</kbd>, and so on);
 
     </LI>
     <LI>a list (without duplicates) of the registers used to hold entry
-      points (these are the registers referenced by {\lstinline[mathescape=true]$go_to$}
+      points (these are the registers referenced by <kbd>go_to</kbd>
       instructions);
 
     </LI>
@@ -709,8 +733,8 @@ restore(y);
     </LI>
     <LI>for each register, a list (without duplicates) of the sources from
       which it is assigned (for example, the sources for register val
-      in the factorial machine of Figure~\ref{fig:fact-machine} are
-      constant(1) and {\lstinline[mathescape=true]$op("*", reg("n"), reg("val"))$}).
+      in the factorial machine of Figure \ref{fig:fact-machine} are
+      constant(1) and <kbd>op("*", reg("n"), reg("val"))</kbd>).
     </LI>
 
   </UL>
@@ -718,7 +742,7 @@ restore(y);
   Extend the
   message-passing interface to the machine to provide access to this new
   information.  To test your analyzer, define the Fibonacci machine from
-  figure~\ref{fig:fib-machine} and examine the lists you constructed.
+  figure \ref{fig:fib-machine} and examine the lists you constructed.
   
       
 \end{Exercise}
@@ -730,8 +754,8 @@ restore(y);
 
   Modify the simulator so that it uses the controller sequence to
   determine what registers the machine has rather than requiring a list
-  of registers as an argument to  {\lstinline[mathescape=true]$make_machine$}.  Instead of
-  pre-allocating the registers in {\lstinline[mathescape=true]$make_machine$}, you can allocate
+  of registers as an argument to  <kbd>make_machine</kbd>.  Instead of
+  pre-allocating the registers in <kbd>make_machine</kbd>, you can allocate
   them one at a time when they are first seen during assembly of the
   instructions.
       
@@ -740,4 +764,11 @@ restore(y);
       
 
     
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section2/subsection2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section2/subsection4.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+5.2.3  Generating Execution Functions for Instructions</div>	<div class='next-page'></div></div>

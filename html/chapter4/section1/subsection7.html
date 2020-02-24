@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>4.1.7 
-    Separating Syntactic Analysis from Execution
-  </a>
+		<a name='top' class='permalink'>4.1.7  Separating Syntactic Analysis from Execution</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>\begin{center}\fbox{\textcolor{red}{Note: this section is a work in progress!}}\end{center}
+		<div class='SUBSECTION'><SUBSECTION>\begin{center}\fbox{\textcolor{red}{Note: this section is a work in progress!}}\end{center}
 
   
   
@@ -22,11 +29,11 @@
     with their execution.  Thus if a program is executed many times, its
     syntax is analyzed many times.  Consider, for example, evaluating
     
-    {\lstinline[mathescape=true]$factorial(4)$}
+    <kbd>factorial(4)</kbd>
      using the following definition of
-    {\lstinline[mathescape=true]$factorial$}:
+    <kbd>factorial</kbd>:
 
-    
+    <div class='snippet' id='javascript_79_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function factorial(n) {      
@@ -38,13 +45,14 @@ function factorial(n) {
 \end{lrbox}
 
 \href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAhtOAnGKA2AKMASkQG9FyKAoCxDAUyhAySQF53EBGam3xAfh58KqdFlwFEAWi7EAVIjABuSgF8gA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
-    Each time {\lstinline[mathescape=true]$factorial$} is called, the evaluator
+    Each time <kbd>factorial</kbd> is called, the evaluator
     must determine that the body is
     
       
@@ -55,23 +63,23 @@ function factorial(n) {
     predicate and dispatch on its value.  Each time it evaluates the expression
     
       
-      {\lstinline[mathescape=true]$factorial(n - 1) * n$},
+      <kbd>factorial(n - 1) * n</kbd>,
       
     
     or the subexpressions
     
       
-      {\lstinline[mathescape=true]$factorial(n - 1)$}
+      <kbd>factorial(n - 1)</kbd>
       
     
     and 
     
-    {\lstinline[mathescape=true]$n - 1$},
+    <kbd>n - 1</kbd>,
     
     the evaluator must perform the case analysis in
     
       
-      {\lstinline[mathescape=true]$evaluate$}
+      <kbd>evaluate</kbd>
     
     to determine that the expression is an application, and must extract
     its operator and operands.  This analysis is expensive.
@@ -82,15 +90,16 @@ function factorial(n) {
 <a name='p3' class='permalink'></a><p>
     We can transform the evaluator to be significantly more efficient by
     arranging things so that syntactic analysis is performed only
-    once.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+    once.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a> We split
+    
       
-      {\lstinline[mathescape=true]$evaluate$},
+      <kbd>evaluate</kbd>,
     
     which takes an
     expression and an environment, into two parts.  The
     
     function
-    {\lstinline[mathescape=true]$analyze$} takes only the expression.
+    <kbd>analyze</kbd> takes only the expression.
     It performs the syntactic
     analysis and returns a new
     
@@ -105,36 +114,7 @@ function factorial(n) {
     function
     takes an environment as its
     argument and completes the evaluation.  This saves work because
-    {\lstinline[mathescape=true]$analyze$} will be called only once on
-    an expression, while the execution
-    
-    function
-    may be called many times.
-   We split
-    
-      
-      {\lstinline[mathescape=true]$evaluate$},
-    
-    which takes an
-    expression and an environment, into two parts.  The
-    
-    function
-    {\lstinline[mathescape=true]$analyze$} takes only the expression.
-    It performs the syntactic
-    analysis and returns a new
-    
-    function, the 
-    
-    <EM>execution
-    
-    function</EM>, that
-    encapsulates the work to be done in executing the analyzed
-    expression.  The execution
-    
-    function
-    takes an environment as its
-    argument and completes the evaluation.  This saves work because
-    {\lstinline[mathescape=true]$analyze$} will be called only once on
+    <kbd>analyze</kbd> will be called only once on
     an expression, while the execution
     
     function
@@ -146,38 +126,35 @@ function factorial(n) {
     With the separation into analysis and execution,
     
       
-      {\lstinline[mathescape=true]$evaluate$}
+      <kbd>evaluate</kbd>
     
     now becomes
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_79_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function evaluate(exp, env) {      
     return (analyze(exp))(env);
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-    The result of calling {\lstinline[mathescape=true]$analyze$} is the execution
+    The result of calling <kbd>analyze</kbd> is the execution
     
     function
     to be applied to the environment.  The
-    {\lstinline[mathescape=true]$analyze$}
+    <kbd>analyze</kbd>
     
     function
     is the same case analysis as performed by the original
-    {\lstinline[mathescape=true]$eval$} of
-    section~\ref{sec:core-of-evaluator},
+    <kbd>eval</kbd> of
+    section \ref{sec:core-of-evaluator},
     except that the
     
     functions
     to which we dispatch perform only analysis, not full evaluation:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_79_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze(stmt) {
     return is_self_evaluating(stmt)
            ? analyze_self_evaluating(stmt)
@@ -203,8 +180,7 @@ function analyze(stmt) {
            ? analyze_application(stmt)
          : error(stmt, "Unknown statement type in analyze");
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
@@ -219,13 +195,11 @@ function analyze(stmt) {
     ignores its environment argument and just returns the expression:
 
     
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_79_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze_self_evaluating(stmt) {      
     return env => stmt;
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <SPLIT>
@@ -242,24 +216,14 @@ function analyze_self_evaluating(stmt) {
       
     
     must still be done in the execution phase,
-    since this depends upon knowing the environment.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
-\begin{JavaScript}
+    since this depends upon knowing the environment.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
+
+    <div class='snippet' id='javascript_79_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze_name(stmt) {      
     return env => lookup_name_value(
                       name_of_name(stmt, env));
 }
-\end{JavaScript}
-
-  
-
-    
-\begin{JavaScript}
-function analyze_name(stmt) {      
-    return env => lookup_name_value(
-                      name_of_name(stmt, env));
-}
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
@@ -267,7 +231,7 @@ function analyze_name(stmt) {
     
       
       The function
-      {\lstinline[mathescape=true]$analyze_assignment$}
+      <kbd>analyze_assignment</kbd>
       
     
     also must defer actually setting the variable
@@ -276,7 +240,7 @@ function analyze_name(stmt) {
     
       
       The function
-      {\lstinline[mathescape=true]$assignment_value$}
+      <kbd>assignment_value</kbd>
       
     
     expression can be analyzed (recursively) during analysis is a
@@ -284,7 +248,7 @@ function analyze_name(stmt) {
     
       
       The function
-      {\lstinline[mathescape=true]$assignment_value$}
+      <kbd>assignment_value</kbd>
       
     
     expression will now be analyzed
@@ -293,8 +257,7 @@ function analyze_name(stmt) {
       
       constant and variable declarations.
     
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_79_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze_assignment(stmt) {
     const variable = assignment_variable(stmt);
     const vfun = analyze(assignment_value(stmt));
@@ -328,8 +291,7 @@ function analyze_constant_declaration(stmt) {
 	       return "ok";
            };
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
@@ -344,8 +306,7 @@ function analyze_constant_declaration(stmt) {
     we extract and analyze the predicate,
     consequent, and alternative at analysis time.
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_79_7_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze_conditional_expression(stmt) {	
     const pfun = analyze(cond_expr_pred(stmt));
     const cfun = analyze(cond_expr_cons(stmt));
@@ -354,8 +315,7 @@ function analyze_conditional_expression(stmt) {
                   ? cfun(env) 
 		  : afun(env);
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
@@ -388,8 +348,7 @@ function analyze_conditional_expression(stmt) {
     
     may be applied many times.
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_79_8_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze_function_definition(stmt) {
     const vars = 
         function_definition_parameters(stmt);
@@ -398,8 +357,7 @@ function analyze_function_definition(stmt) {
     return env =>
 	make_function(vars, bfun, env);
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
@@ -412,51 +370,7 @@ function analyze_function_definition(stmt) {
       
     
     is more 
-    involved.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
-      
-      
-	statement
-      
-    
-    in the sequence is analyzed, yielding an execution
-    
-    function.
-    These execution
-    
-    functions
-    are combined to produce an execution
-    
-    function
-    that takes an environment as argument and sequentially
-    calls each individual execution
-    
-    function
-    with the environment as argument.
-
-    
-\begin{JavaScript}
-function analyze_sequence(stmts) {
-    function sequentially(fun1, fun2) {
-        return env => {
-                   fun1(env);
-                   fun2(env);
-               };
-    }
-    function loop(first_fun, rest_funs) {
-        return is_null(rest_funs)
-               ? first_fun
-               : loop(sequentially(first_fun,
-                          head(rest_funs)),
-                      tail(rest_funs));
-    }
-    const funs = map(analyze, stmts);
-    return is_null(funs) 
-           ? env => undefined
-           : loop(head(funs), tail(funs));
-}
-\end{JavaScript}
-
-  
+    involved.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
     Each
     
       
@@ -479,8 +393,7 @@ function analyze_sequence(stmts) {
     function
     with the environment as argument.
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_79_9_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze_sequence(stmts) {
     function sequentially(fun1, fun2) {
         return env => {
@@ -500,8 +413,7 @@ function analyze_sequence(stmts) {
            ? env => undefined
            : loop(head(funs), tail(funs));
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
@@ -523,21 +435,21 @@ function analyze_sequence(stmts) {
     
       
       
-	{\lstinline[mathescape=true]$execute_application$},
+	<kbd>execute_application</kbd>,
       
     
     which is the analog of
-    {\lstinline[mathescape=true]$apply$} in
-    section~\ref{sec:core-of-evaluator}.
+    <kbd>apply</kbd> in
+    section \ref{sec:core-of-evaluator}.
     
       
       
 	The function
-	{\lstinline[mathescape=true]$execute_application$}
+	<kbd>execute_application</kbd>
       
     
     differs from
-    {\lstinline[mathescape=true]$apply$}
+    <kbd>apply</kbd>
     in that the
     
     function
@@ -549,8 +461,7 @@ function analyze_sequence(stmts) {
     
     function
     for the body on the extended environment.
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_79_10_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze_application(stmt) {	
     const ffun = analyze(operator(stmt));
     const afuns = map(analyze, operands(stmt));
@@ -570,8 +481,7 @@ function execute_application(fun, args) {
              : error(fun, "unknown function type in " +
                           "execute_application");
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
@@ -583,9 +493,9 @@ function execute_application(fun, args) {
     
     functions
     as in
-    sections~\ref{sec:representing-expressions},
-    ~\ref{sec:eval-data-structures},
-    and~\ref{sec:running-eval}.
+    sections \ref{sec:representing-expressions},
+     \ref{sec:eval-data-structures},
+    and \ref{sec:running-eval}.
   </p></div>
 
   <SPLIT>
@@ -613,7 +523,7 @@ function execute_application(fun, args) {
     
       
       
-	{\lstinline[mathescape=true]$analyze_sequence$}
+	<kbd>analyze_sequence</kbd>
       
     
     needs to be
@@ -623,21 +533,20 @@ function execute_application(fun, args) {
     are straightforward transformations of the corresponding evaluation
     
     functions
-    (or {\lstinline[mathescape=true]$eval$} clauses) in
-    section~\ref{sec:core-of-evaluator}.
+    (or <kbd>eval</kbd> clauses) in
+    section \ref{sec:core-of-evaluator}.
     She expected
     
       
       
-	{\lstinline[mathescape=true]$analyze_sequence$}
+	<kbd>analyze_sequence</kbd>
       
     
     to look like this:
 
     
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_79_11_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function analyze_sequence(stmts) {	
     function execute_sequence(funs, env) {
         if (is_null(tail(funs))) {
@@ -654,8 +563,7 @@ function analyze_sequence(stmts) {
            : env => execute_sequence(funs, 
                                      env);
 }
-\end{JavaScript}
-
+</pre></div></div>
 
     Eva Lu Ator explains to Alyssa that the version in the text does more
     of the work of evaluating a sequence at analysis time.
@@ -663,7 +571,7 @@ function analyze_sequence(stmts) {
     
       
       
-	{\lstinline[mathescape=true]$sequence_execution$} function,
+	<kbd>sequence_execution</kbd> function,
       
     
     rather than having the calls to the individual execution
@@ -679,7 +587,7 @@ function analyze_sequence(stmts) {
     
       
       
-	{\lstinline[mathescape=true]$sequence_execution$}.
+	<kbd>sequence_execution</kbd>.
       
     
     For example,
@@ -718,18 +626,18 @@ function analyze_sequence(stmts) {
   
 
 <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>This technique is an integral part of the compilation
-    process, which we shall discuss in chapter~5.  Jonathan Rees wrote
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>This technique is an integral part of the compilation
+    process, which we shall discuss in chapter 5.  Jonathan Rees wrote
     a Scheme
     
     
     interpreter like this in about 1982 for the T project 
-    (Rees and Adams 1982).  
-    Marc Feeley 1986 
-    (see also Feeley and Lapalme 1987)
+    (<CITATION>Rees and Adams 1982</CITATION>).  
+    <CITATION>Marc Feeley 1986</CITATION> 
+    (see also <CITATION>Feeley and Lapalme 1987</CITATION>)
     independently invented this technique
-    in his master's thesis.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>There is,
+    in his master's thesis.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>There is,
     however, an important part of the variable search that <EM>can</EM> be
     done as part of the syntactic analysis.
     <SPLIT>
@@ -738,8 +646,15 @@ function analyze_sequence(stmts) {
         
       
     </SPLIT>
-</FOOTNOTE></div><hr><div class='footnote'>
+</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>See
-    exercise~\ref{ex:analyze-sequence} for some insight
+    exercise \ref{ex:analyze-sequence} for some insight
     into the processing of sequences.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section1/subsection6.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section2/section2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+4.1.7  Separating Syntactic Analysis from Execution</div>	<div class='next-page'></div></div>

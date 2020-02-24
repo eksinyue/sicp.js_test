@@ -1,19 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>1.1.5 
-          The Substitution Model for 
-          
-            
-            
-              Function
-            
-        
-          Application
-        </a>
+		<a name='top' class='permalink'>1.1.5  The Substitution Model for Function Application</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
         <SPLIT>
           
@@ -46,11 +46,11 @@
               <UL>
                 <LI>
               To evaluate an application combination of the form
-              
-\begin{JavaScript}
+              <kbd class='snippet'>
+                
 $\textit{function-expression}$ ( $\textit{argument-expressions}$ )
-\end{JavaScript}
-
+		
+	      </kbd>
               do the following:
               
 \begin{enumerate}
@@ -75,38 +75,35 @@ $\textit{function-expression}$ ( $\textit{argument-expressions}$ )
               </UL>
               To illustrate this process, 
               let's evaluate the application combination
-              
+              <div class='snippet' id='javascript_6_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 f(5);
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYCgrAlA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=1&prgrm=GYVwdgxgLglg9mABMAFAQwJSIN4ChEGIBOAplCEUgM4gC2A+nMPVQI4hqlXqIDUiARgA0iNIgBUiAEwYA3LgC+uVAFY5QA}{\usebox\lstbox}
+</pre>
 
-
-              Evaluating the name {\lstinline[mathescape=true]$f$}
+</div></div>
+              Evaluating the name <kbd>f</kbd>
 	      results in the function declared in
               section \ref{sec:compound-procedures}.
 	      Evaluating the argument expression
-	      {\lstinline[mathescape=true]$5$} yields the
+	      <kbd>5</kbd> yields the
 	      argument value 5.
               Now, we retrieve the return
               expression of
-              {\lstinline[mathescape=true]$f$}:
-              
-\begin{JavaScript}
+              <kbd>f</kbd>:
+              <div class='snippet' id='javascript_6_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 sum_of_squares(a + 1, a * 2)
-\end{JavaScript}
-
+</pre></div></div>
               in which we replace the parameter
-	      {\lstinline[mathescape=true]$a$}
+	      <kbd>a</kbd>
               by the argument 5:
-              
-\begin{JavaScript}
+              <div class='snippet' id='javascript_6_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 sum_of_squares(5 + 1, 5 * 2)
-\end{JavaScript}
-
+</pre></div></div>
             </p></div>
           
         </SPLIT>
@@ -119,60 +116,48 @@ sum_of_squares(5 + 1, 5 * 2)
               Thus the problem reduces to the evaluation of an application
 	      combination with two arguments
               and a function expression
-	      {\lstinline[mathescape=true]$sum_of_squares$}.
+	      <kbd>sum_of_squares</kbd>.
               Evaluating this combination involves three subproblems.
 	      We must evaluate the
               function expression to get the function to be applied,
 	      and we must evaluate the argument expressions to get the arguments.  
-              Now {\lstinline[mathescape=true]$5 + 1$} produces 6 and
-              {\lstinline[mathescape=true]$5 * 2$} produces 10, 
+              Now <kbd>5 + 1</kbd> produces 6 and
+              <kbd>5 * 2</kbd> produces 10, 
               so we must apply the
-              {\lstinline[mathescape=true]$sum_of_squares$} function 
+              <kbd>sum_of_squares</kbd> function 
               to 6 and 10.  
               These values are substituted
-              for the parameters {\lstinline[mathescape=true]$x$} and 
-              {\lstinline[mathescape=true]$y$} in the return
+              for the parameters <kbd>x</kbd> and 
+              <kbd>y</kbd> in the return
 	      expression of 
-              {\lstinline[mathescape=true]$sum_of_squares$},
+              <kbd>sum_of_squares</kbd>,
               reducing the expression to
-              
-\begin{JavaScript}
+              <div class='snippet' id='javascript_6_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 square(6) + square(10)
-\end{JavaScript}
-
+</pre></div></div>
               If we use the declaration of
-	      {\lstinline[mathescape=true]$square$} once, 
+	      <kbd>square</kbd> once, 
               this reduces to
-              
-\begin{JavaScript}
+              <div class='snippet' id='javascript_6_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 (6 * 6) + square(10)
-\end{JavaScript}
-
+</pre></div></div>
               which reduces by multiplication to
-              
-\begin{JavaScript}
+              <div class='snippet' id='javascript_6_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 36 + square(10)
-\end{JavaScript}
-
+</pre></div></div>
               A second application of
-	      {\lstinline[mathescape=true]$square$} yields
-              
-\begin{JavaScript}
+	      <kbd>square</kbd> yields
+              <div class='snippet' id='javascript_6_7_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 36 + (10 * 10)
-\end{JavaScript}
-
+</pre></div></div>
 	      which reduces by multiplication to
-              
-\begin{JavaScript}
+              <div class='snippet' id='javascript_6_8_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 36 + 100
-\end{JavaScript}
-
+</pre></div></div>
 	      and finally by addition to
-              
-\begin{JavaScript}
+              <div class='snippet' id='javascript_6_9_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 136
-\end{JavaScript}
-
+</pre></div></div>
             </p></div>
           
         </SPLIT>
@@ -226,7 +211,7 @@ square(6) + square(10)
                   increasingly elaborate models of how interpreters work,
 		  culminating
                   with a complete implementation of an interpreter and compiler in
-                  chapter~5.  The substitution model is only the first of
+                  chapter 5.  The substitution model is only the first of
 		  these models—a way to get started thinking formally
 		  about the evaluation process.  In general, when 
                   
@@ -235,7 +220,7 @@ square(6) + square(10)
                   examine things in greater detail, these simple models become
                   inadequate and must be replaced by more refined models.  The
                   substitution model is no exception.  In particular, when we
-		  address in chapter~3 the use of 
+		  address in chapter 3 the use of 
                   functions
                    
                   with <QUOTE>mutable data,</QUOTE> we will see that
@@ -243,33 +228,15 @@ square(6) + square(10)
 		  a more complicated model of 
                   function
                    
-                  application.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+                  application.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
                 </LI>
-              <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Despite the
-                  simplicity of the substitution idea, it turns out to be
-		  surprisingly complicated to give a rigorous mathematical
-		  definition of the substitution process.  The problem arises
-		  from the possibility of confusion between the names used for the 
-                  
-		  parameters of a function
-                   
-                  and the (possibly identical) names used in the expressions
-                  to which the 
-                  function
-                   
-                  may be applied.  Indeed, there is a long
-                  history of erroneous definitions of <EM>substitution</EM> in the
-                  literature of logic and programming semantics.  
-                  
-                  See Stoy 1977 for a
-                  careful discussion of substitution.
-                </FOOTNOTE></div></UL>
+              </UL>
             </p></div>
 
-        \subsubsection{ 
+        <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
           Applicative order versus normal order
-        
+        </h2></div>
 
         <SPLIT>
           
@@ -287,23 +254,21 @@ square(6) + square(10)
               it obtained an expression involving only operators, and
               would then perform the evaluation.  If we used this method, the
               evaluation of
-              
-\begin{JavaScript}
+              <div class='snippet' id='javascript_6_10_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 f(5)
-\end{JavaScript}
-
+</pre></div></div>
               would proceed according to the sequence of expansions
-              
-\begin{JavaScript}
+              <kbd class='snippet'>
+                
 sum_of_squares(5 + 1, 5 * 2)
 square(5 + 1)  +  square(5 * 2)
 (5 + 1) * (5 + 1) + square(5 * 2)
 (5 + 1) * (5 + 1) + (5 * 2) * (5 * 2)
-\end{JavaScript}
-
+                
+              </kbd>
               followed by the reductions
-              
-\begin{JavaScript}
+              <kbd class='snippet'>
+                
 6 * (5 + 1) + (5 * 2) * (5 * 2)
 6 * 6 + (5 * 2) * (5 * 2)
 36 + (5 * 2) * (5 * 2)
@@ -311,22 +276,20 @@ square(5 + 1)  +  square(5 * 2)
 36 + 10 * 10
 36 + 100
 136
-\end{JavaScript}
-
+                
+              </kbd>
               This gives the same answer as our previous evaluation model, but the
               process is different.  In particular, the evaluations
-              of {\lstinline[mathescape=true]$5 + 1$} and 
-              {\lstinline[mathescape=true]$5 * 2$} are each performed
+              of <kbd>5 + 1</kbd> and 
+              <kbd>5 * 2</kbd> are each performed
 	      twice here,
               corresponding to the reduction of the expression
-              
-\begin{JavaScript}
+              <div class='snippet' id='javascript_6_11_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 x * x
-\end{JavaScript}
-
-              with {\lstinline[mathescape=true]$x$} replaced respectively 
-              by {\lstinline[mathescape=true]$5 + 1$} 
-              and {\lstinline[mathescape=true]$5 * 2$}.
+</pre></div></div>
+              with <kbd>x</kbd> replaced respectively 
+              by <kbd>5 + 1</kbd> 
+              and <kbd>5 * 2</kbd>.
             </p></div>
           
         </SPLIT>
@@ -352,7 +315,7 @@ x * x
               in the first two chapters
               of this book) and that yield legitimate values, normal-order and
               applicative-order evaluation produce the same value.  (See
-              exercise~\ref{ex:normal-order-vs-appl-order-test}
+              exercise \ref{ex:normal-order-vs-appl-order-test}
 	      for an instance of
               an <QUOTE>illegitimate</QUOTE> value where normal-order and
 	      applicative-order evaluation do not give the same result.)
@@ -380,11 +343,29 @@ x * x
             becomes much more complicated to deal with when we leave the realm of
             procedures that can be modeled by substitution.  On the other hand,
             normal-order evaluation can be an extremely valuable tool, and we will
-            investigate some of its implications in chapters 3 and 4.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
-	
+            investigate some of its implications in chapters 3 and 4.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
             
 	</p></div>
       <hr><div class='footnote'>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Despite the
+                  simplicity of the substitution idea, it turns out to be
+		  surprisingly complicated to give a rigorous mathematical
+		  definition of the substitution process.  The problem arises
+		  from the possibility of confusion between the names used for the 
+                  
+		  parameters of a function
+                   
+                  and the (possibly identical) names used in the expressions
+                  to which the 
+                  function
+                   
+                  may be applied.  Indeed, there is a long
+                  history of erroneous definitions of <EM>substitution</EM> in the
+                  literature of logic and programming semantics.  
+                  
+                  See <CITATION>Stoy 1977</CITATION> for a
+                  careful discussion of substitution.
+                </FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>In
             chapter 3 we will introduce <EM>stream processing</EM>, which is a
 	    way of handling apparently <QUOTE>infinite</QUOTE> data structures
@@ -398,4 +379,11 @@ x * x
 	    JavaScript.
 	    
 	  </FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section1/subsection4.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter1/section1/subsection6.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+1.1.5  The Substitution Model for Function Application</div>	<div class='next-page'></div></div>

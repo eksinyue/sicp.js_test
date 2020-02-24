@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>4.4.1 
-  Deductive Information Retrieval
-      </a>
+		<a name='top' class='permalink'>4.4.1  Deductive Information Retrieval</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -30,9 +37,10 @@
   order to make logical deductions.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   A sample data base
-      
+      </h2></div>
 
       
 
@@ -44,13 +52,11 @@
   contains <EM>assertions</EM> about company personnel.  Here is the
   information about Ben Bitdiddle, the resident computer wizard:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 address(list("Bitdiddle", "Ben"), list("Slumerville", "Ridge Road", 10));
 job(list("Bitdiddle", "Ben"), list("computer", "wizard"));
 salary(list("Bitdiddle", "Ben"), 60000);
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -70,8 +76,7 @@ salary(list("Bitdiddle", "Ben"), 60000);
   division, and he supervises two programmers and one technician.  Here
   is the information about them:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 address(list("Hacker", "Alyssa", "P"), list("Cambridge", "Mass Ave", 78));
 job(list("Hacker", "Alyssa", "P"), list("computer", "programmer"));
 salary(list("Hacker", "Alyssa", "P"), 40000);
@@ -86,40 +91,35 @@ address(list("Tweakit", "Lem", "E"), list("Boston", "Bay State Road", 22));
 job(list("Tweakit", "Lem", "E"), list("computer", "technician"));
 salary(list("Tweakit", "Lem", "E"), 25000);
 supervisor(list("Tweakit", "Lem", "E"), list("Bitdiddle", "Ben"));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
   There is also a programmer trainee, who is supervised by Alyssa:
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 address(list("Reasoner", "Louis"), list("Slumerville", "Pine Tree Road", 80));
 job(list("Reasoner", "Louis"), list("computer", "programmer trainee"));
 salary(list("Reasoner", "Louis"), 30000);
 supervisor(list("Reasoner", "Louis"), list("Hacker", "Alyssa", "P"));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
   All of these people are in the computer division, as indicated by the
-  word {\lstinline[mathescape=true]$computer$} as the first item in their job descriptions.
+  word <kbd>computer</kbd> as the first item in their job descriptions.
 
   Ben is a high-level employee.  His supervisor is the company's big
   wheel himself:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 supervisor(list("Bitdiddle", "Ben"), list("Warbucks", "Oliver"));
 
 address(list("Warbucks", "Oliver"), list("Swellesley", "Top Heap Road"));
 job(list("Warbucks", "Oliver"), list("administration", "big", "wheel"));
 salary(list("Warbucks", "Oliver"), 150000);
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -128,8 +128,7 @@ salary(list("Warbucks", "Oliver"), 150000);
   accounting division, consisting of a chief accountant and his
   assistant:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 address(list("Scrooge", "Eben"), list("Weston", "Shady Lane", 10));
 job(list("Scrooge", "Eben"), list("accounting", list("chief", "accountant"));
 salary(list("Scrooge", "Eben"), 75000);
@@ -139,22 +138,19 @@ address(list("Cratchet", "Robert"), list("Allston", "N Harvard Street", 16));
 job(list("Cratchet", "Robert"), list("accounting", "scrivener"));
 salary(list("Cratchet", "Robert"), 18000);
 supervisor(list("Cratchet", "Robert"), list("Scrooge", "Eben"));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
   There is also a secretary for the big wheel:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 address(list("Aull", "DeWitt"), list("Slumerville", "Onion Square", 5));
 job(list("Aull", "DeWitt"), list("administration", "secretary"));
 salary(list("Aull", "DeWitt"), 25000);
 supervisor(list("Aull", "DeWitt"), list("Warbucks", "Oliver"));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -164,43 +160,38 @@ supervisor(list("Aull", "DeWitt"), list("Warbucks", "Oliver"));
   computer wizard can do the jobs of both a computer programmer and a
   computer technician:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_7_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 can_do_job(list("computer", "wizard"), list("computer", "programmer"));
 can_do_job(list("computer", "wizard"), list("computer", "technician"));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
   A computer programmer could fill in for a trainee:
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_8_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 can_do_job(list("computer", "programmer"),
            list("computer", "programmer", "trainee"));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
   
   Also, as is well known,
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_9_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 can_do_job(list("administration", "secretary"),
            list("administration", "big", "wheel"));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       
       
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Simple queries
-      
+      </h2></div>
 
       
       <div class='permalink'>
@@ -209,25 +200,21 @@ can_do_job(list("administration", "secretary"),
   base by posing queries in response to the system's prompt.  For
   example, to find all computer programmers one can say
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_10_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 // Query input:
 job(x, list("computer", "programmer"));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p14' class='permalink'></a><p>
   The system will respond with the following items:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_11_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 // Query results:
 job(list("Hacker", "Alyssa", "P"), list("computer", "programmer"))
 job(list("Fect", "Cy", "D"), list("computer", "programmer"))
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -236,8 +223,8 @@ job(list("Fect", "Cy", "D"), list("computer", "programmer"))
   The input query specifies that we are looking for entries in the data
   base that match a certain <EM>pattern</EM>.  In this example, the pattern
   specifies entries consisting of three items, of which the first is the
-  literal symbol {\lstinline[mathescape=true]$job$}, the second can be anything, and the third is
-  the literal list {\lstinline[mathescape=true]$list("computer", "programmer")$}.  The <QUOTE>anything</QUOTE> that
+  literal symbol <kbd>job</kbd>, the second can be anything, and the third is
+  the literal list <kbd>list("computer", "programmer")</kbd>.  The <QUOTE>anything</QUOTE> that
   can be the second item in the matching list is specified by a 
   
   <EM>
@@ -245,7 +232,7 @@ job(list("Fect", "Cy", "D"), list("computer", "programmer"))
     
       
       
-	{\lstinline[mathescape=true]$x$}.
+	<kbd>x</kbd>.
       
     
 
@@ -259,11 +246,9 @@ job(list("Fect", "Cy", "D"), list("computer", "programmer"))
       <div class='permalink'>
 <a name='p16' class='permalink'></a><p>
   A pattern can have more than one variable.  For example, the query
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_12_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 address(x, y)
-\end{JavaScript}
-
+</pre></div></div>
   will list all the employees' addresses.
       </p></div>
 
@@ -280,11 +265,9 @@ address(x, y)
   specifying that the same <QUOTE>anything</QUOTE> must appear in each position.
   This is why variables have names.  For example,
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_13_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 supervisor(x, x)
-\end{JavaScript}
-
+</pre></div></div>
 
   finds all people who supervise themselves (though there are no such
   assertions in our sample data base).
@@ -293,79 +276,65 @@ supervisor(x, x)
       <div class='permalink'>
 <a name='p19' class='permalink'></a><p>
   The query
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_14_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 job(x, list("computer",  type));
-\end{JavaScript}
-
+</pre></div></div>
 
   matches all job entries whose third item is a two-element list whose
   first item is
   
     
     
-      {\lstinline[mathescape=true]$"computer"$}:
+      <kbd>"computer"</kbd>:
     
   
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_15_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 job(list("Bitdiddle", "Ben"), list("computer", "wizard"));
 job(list("Hacker", "Alyssa", "P"), list("computer", "programmer"));
 job(list("Fect", "Cy", "D"), list("computer", "programmer"));
 job(list("Tweakit", "Lem", "E"), list("computer", "technician"));
-\end{JavaScript}
-
+</pre></div></div>
 
       </p></div>
       <div class='permalink'>
 <a name='p20' class='permalink'></a><p>
   This same pattern does <EM>not</EM> match
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_16_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 job(list("Reasoner", "Louis"), list("computer", "programmer", "trainee"));
-\end{JavaScript}
-
+</pre></div></div>
   because the third item in the entry is a list of three elements, and
   the pattern's third item specifies that there should be two elements.
   If we wanted to change the pattern so that the third item could be any
   
-  list beginning with {\lstinline[mathescape=true]$computer$}, we could 
+  list beginning with <kbd>computer</kbd>, we could 
   specify
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_17_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 job(x, pair("computer", type))
-\end{JavaScript}
-
+</pre></div></div>
   For example,
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_18_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 pair("computer", type)
-\end{JavaScript}
-
+</pre></div></div>
 
   matches the data
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_19_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 list("computer", "programmer", "trainee")
-\end{JavaScript}
-
+</pre></div></div>
 
   with
   
     
     
-      {\lstinline[mathescape=true]$type$}
+      <kbd>type</kbd>
     
   
-  as the list {\lstinline[mathescape=true]$list("programmer", "trainee")$}.  
+  as the list <kbd>list("programmer", "trainee")</kbd>.  
   It also matches the data
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_20_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 list("computer", "programmer")
-\end{JavaScript}
-
+</pre></div></div>
 
   with
   
@@ -375,13 +344,11 @@ type
     
   
   as the list
-  {\lstinline[mathescape=true]$list("programmer")$}, and matches the data
+  <kbd>list("programmer")</kbd>, and matches the data
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_21_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 list("computer")
-\end{JavaScript}
-
+</pre></div></div>
 
   with
     
@@ -390,7 +357,7 @@ list("computer")
 type      
     
   
-  as the empty list {\lstinline[mathescape=true]$null$}.
+  as the empty list <kbd>null</kbd>.
   
       </p></div>
 
@@ -451,9 +418,10 @@ type
 
       
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Compound queries
-      
+      </h2></div>
 
       
 
@@ -463,7 +431,7 @@ type
   In order to form compound operations, the query language provides
   means of combination.  One thing that makes the query language a logic
   programming language is that the means of combination mirror the means
-  of combination used in forming logical expressions: {\lstinline[mathescape=true]$and$}, {\lstinline[mathescape=true]$or$}, and {\lstinline[mathescape=true]$not$}.  (Here {\lstinline[mathescape=true]$and$}, {\lstinline[mathescape=true]$or$}, and {\lstinline[mathescape=true]$not$} are not
+  of combination used in forming logical expressions: <kbd>and</kbd>, <kbd>or</kbd>, and <kbd>not</kbd>.  (Here <kbd>and</kbd>, <kbd>or</kbd>, and <kbd>not</kbd> are not
   the JavaScript primitives,
   but rather operations built into the query language.)
       </p></div>
@@ -471,45 +439,37 @@ type
       <div class='permalink'>
 <a name='p24' class='permalink'></a><p>
   
-  We can use {\lstinline[mathescape=true]$and$} as follows to find the addresses of all the
+  We can use <kbd>and</kbd> as follows to find the addresses of all the
   computer programmers:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_22_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 and(job(person, list("computer", "programmer"),
     address(person, where));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p25' class='permalink'></a><p>
   The resulting output is
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_23_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 and(job(list("Hacker", "Alyssa", "P"), list("computer", "programmer")),
     address(list("Hacker", "Alyssa", "P"), list("Cambridge", "Mass Ave", 78)))
 
 and(job(list("Fect", "Cy", "D"), list("computer", "programmer")),
     address(list("Fect", "Cy", "D"), list("Cambridge", "Ames Street", 3)))
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p26' class='permalink'></a><p>
   
   In general,
-  
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
+  <kbd class='snippet'>
+    
+    
 and($\textit{query}_{1}$, $\textit{query}_{2}$, $\ldots$, $\textit{query}_{n})$;
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=IYOwJgFAJAOgLgUwB5wJZwN4EcCuCBOAngL4D6GAjMVADQAEsiK62eRZGATNfbADZgA9nADOtBvGRpMuAiXIhiASigBuIA}{\usebox\lstbox}
-
-
+    
+  </kbd>
 
   is satisfied by all sets of values for the pattern variables that
   simultaneously satisfy
@@ -526,21 +486,18 @@ and($\textit{query}_{1}$, $\textit{query}_{2}$, $\ldots$, $\textit{query}_{n})$;
       <div class='permalink'>
 <a name='p28' class='permalink'></a><p>
   
-  Another means of constructing compound queries is through {\lstinline[mathescape=true]$or$}.
+  Another means of constructing compound queries is through <kbd>or</kbd>.
   For example,
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_24_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 or(supervisor(x, list("Bitdiddle", "Ben")),
    supervisor(x, list("Hacker", "Alyssa", "P")));
-\end{JavaScript}
-
+</pre></div></div>
   
   will find all employees supervised by Ben Bitdiddle or Alyssa P.
   Hacker:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_25_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 or(supervisor(list("Hacker", "Alyssa", "P"), list("Bitdiddle", "Ben")),
 supervisor(list("Hacker", "Alyssa", "P"), list("Hacker", "Alyssa", "P")))
 
@@ -552,23 +509,18 @@ or(supervisor(list("Tweakit", "Lem", "E"), list("Bitdiddle", "Ben")),
 
 or(supervisor(list("Reasoner", "Louis"), list("Bitdiddle", "Ben")),
    supervisor(list("Reasoner", "Louis"), list("Hacker", "Alyssa", "P")))
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p29' class='permalink'></a><p>
   In general,
-  
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
+  <kbd class='snippet'>
+    
+    
 or($\textit{query}_{1}$, $\textit{query}_{2}$, $\ldots$, $\textit{query}_{n}$^);
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=PYJwFAJAOgLgpgDxgSxgbwI4Fc4gJ4C+A+mgIwEQA0ABNPEqpjvsWgEwU3QA2AJsDADOVWrEQp02XIRIA7CgD0AlAG4gA}{\usebox\lstbox}
-
-
+    
+  </kbd>
 
   is satisfied by all sets of values for the pattern variables that
   satisfy at least one of
@@ -587,28 +539,27 @@ or($\textit{query}_{1}$, $\textit{query}_{2}$, $\ldots$, $\textit{query}_{n}$^);
   
     
     
-      {\lstinline[mathescape=true]$not$}.
+      <kbd>not</kbd>.
     
   
   For example,
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_26_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 and(supervisor(x, list("Bitdiddle", "Ben")),
     not(job(x, list("computer", "programmer"))));
-\end{JavaScript}
-
+</pre></div></div>
 
   finds all people supervised by Ben Bitdiddle who are not computer
   programmers.  In general,
 
-  
-\begin{JavaScript}
+  <kbd class='snippet'>
+    
+    
 not($\textit{query}_{1}$);
-\end{JavaScript}
-
+    
+  </kbd>
 
   is satisfied by all assignments to the pattern variables that do not
-  satisfy $\textit{query}_{1}$.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+  satisfy $\textit{query}_{1}$.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
       </p></div>
 
       <div class='permalink'>
@@ -618,45 +569,37 @@ not($\textit{query}_{1}$);
   
     
     
-      {\lstinline[mathescape=true]$javascript_value$}.
+      <kbd>javascript_value</kbd>.
     
   
   When
   
     
     
-      {\lstinline[mathescape=true]$javascript_value$}
+      <kbd>javascript_value</kbd>
     
   
   is the first element of a pattern, it specifies that the
   next element is a JavaScript predicate to be applied to the rest of the
   (instantiated) elements as arguments.  In general,
 
-  
-\begin{JavaScript}
+  <kbd class='snippet'>
+    
+    
 javascript_value($\textit{predicate}$, $\textit{arg}_{1}$, $\ldots$, $\textit{arg}_{n}$)
-\end{JavaScript}
-
+    
+  </kbd>
 
   will be satisfied by assignments to the pattern variables for which the
   $\textit{predicate}$ applied to the instantiated
   $\textit{arg}_{1}, \ldots, \textit{arg}_{n}$
   is true.  For example, to find all people whose salary is greater than
-  \$30,000 we could write<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
-\begin{JavaScript}
+  \$30,000 we could write<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
+
+  <div class='snippet' id='javascript_89_27_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 and(salary(person, amount),
     javascript_value(greater_than, amount, 30000));
-\end{JavaScript}
-
-  
-      
-
-  
-\begin{JavaScript}
-and(salary(person, amount),
-    javascript_value(greater_than, amount, 30000));
-\end{JavaScript}
-
+</pre></div></div>
   
       </p></div>
 
@@ -686,9 +629,10 @@ and(salary(person, amount),
 
       
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Rules
-      
+      </h2></div>
 
       
       <div class='permalink'>
@@ -698,30 +642,21 @@ and(salary(person, amount),
   language provides means for abstracting queries.  These are given by
   <EM>rules</EM>.  The rule
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_28_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 rule(lives_near(person_1, person_2),
      and(address(person_1, pair(town, rest_1)),
          address(person_2, pair(town, rest_2)),
          not(same(person_1, person_2))));
-\end{JavaScript}
-
+</pre></div></div>
 
   specifies that two people live near each other if they live in the
-  same town.  The final {\lstinline[mathescape=true]$not$} clause prevents the rule from saying
-  that all people live near themselves.  The {\lstinline[mathescape=true]$same$} relation is
-  defined by a very simple rule:<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
-\begin{JavaScript}
+  same town.  The final <kbd>not</kbd> clause prevents the rule from saying
+  that all people live near themselves.  The <kbd>same</kbd> relation is
+  defined by a very simple rule:<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
+
+  <div class='snippet' id='javascript_89_29_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 rule(same(x, x));
-\end{JavaScript}
-
-      
-
-  
-\begin{JavaScript}
-rule(same(x, x));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -729,47 +664,25 @@ rule(same(x, x));
   The following rule declares that a person is a <QUOTE>wheel</QUOTE> in an
   organization if he supervises someone who is in turn a supervisor:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_30_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 rule(wheel(person),
      and(supervisor(middle_manager, person),
          supervisor(x, middle_manager)));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p34' class='permalink'></a><p>
   The general form of a rule is
-  
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
+  <kbd class='snippet'>
+    
+    
 rule($\textit{conclusion}$, $\textit{body}$);
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=E4VwNgpgFAJAOgFwgDwQSwQbwMYHsB22YIAzmgQL4wA0ABPEqhpgEa4AmAnlQJQDcQA}{\usebox\lstbox}
-
-
+    
+  </kbd>
 
   where $\textit{conclusion}$ is a pattern and $\textit{body}$ is any
-  query.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>'t be explicitly in the data base as an assertion.  It
-  
-  can be an implicit assertion implied by a rule.  For example, the
-  query
-  
-\begin{JavaScript}
-lives_near(x, list("Bitdiddle", "Ben"))
-\end{JavaScript}
-
-  results in
-  
-\begin{JavaScript}
-lives_near(list("Reasoner", "Louis"), list("Bitdiddle", "Ben"))            
-lives_near(list("Aull", "DeWitt"), list("Bitdiddle", "Ben"))
-\end{JavaScript}
-
-       We can think
+  query.<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a> We can think
   of a rule as representing a large (even infinite) set of assertions,
   namely all instantiations of the rule conclusion with variable
   assignments that satisfy the rule body.  When we described simple
@@ -779,30 +692,24 @@ lives_near(list("Aull", "DeWitt"), list("Bitdiddle", "Ben"))
   
   can be an implicit assertion implied by a rule.  For example, the
   query
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_31_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 lives_near(x, list("Bitdiddle", "Ben"))
-\end{JavaScript}
-
+</pre></div></div>
   results in
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_32_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 lives_near(list("Reasoner", "Louis"), list("Bitdiddle", "Ben"))            
 lives_near(list("Aull", "DeWitt"), list("Bitdiddle", "Ben"))
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p35' class='permalink'></a><p>
   To find all computer programmers who live near Ben Bitdiddle, we can
   ask
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_33_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 and(job(x, list("computer", "programmer")),
     lives_near(x, list("Bitdiddle", "Ben")));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -810,16 +717,14 @@ and(job(x, list("computer", "programmer")),
   
   As in the case of compound
   functions, rules can be used as parts of
-  other rules (as we saw with the {\lstinline[mathescape=true]$lives-near$} rule above)
+  other rules (as we saw with the <kbd>lives-near</kbd> rule above)
   or even be defined recursively.  For instance, the rule
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_34_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 rule(outranked_by(staff_person, boss),
      or(supervisor(staff_person, boss),
         and(supervisor(staff_person, middle_manager),
             outranked_by(middle_manager, boss))));
-\end{JavaScript}
-
+</pre></div></div>
   says that a staff person is outranked by a boss in the organization if
   the boss is the person's supervisor or (recursively) if the person's
   supervisor is outranked by the boss.
@@ -831,7 +736,7 @@ rule(outranked_by(staff_person, boss),
 
   Define a rule that says that person 1 can replace person 2 if either
   person 1 does the same job as person 2 or someone who does person 1's
-  job can also do person~2's job, and if person 1 and person 2 are not
+  job can also do person 2's job, and if person 1 and person 2 are not
   the same person. Using your rule, give queries that find the
   following:
   
@@ -870,23 +775,19 @@ rule(outranked_by(staff_person, boss),
   job, Ben decides to do something about it.  He adds all the weekly
   meetings of the firm to the Microshaft data base by
   asserting the following:
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_35_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 meeting("accounting", list("Monday", "9am"))
 meeting("administration", list("Monday", "10am"))
 meeting("computer", list("Wednesday", "3pm"))
 meeting("administration", list("Friday", "1pm"))
-\end{JavaScript}
-
+</pre></div></div>
 
   Each of the above assertions is for a meeting of an entire division.
   Ben also adds an entry for the company-wide meeting that spans all the
   divisions.  All of the company's employees attend this meeting.
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_36_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 meeting("whole-company", list("Wednesday", "4pm"))
-\end{JavaScript}
-
+</pre></div></div>
 
   
 \begin{enumerate}[a.]
@@ -901,17 +802,18 @@ meeting("whole-company", list("Wednesday", "4pm"))
       
 	
 	
-	  {\lstinline[mathescape=true]$whole-company$}
+	  <kbd>whole-company</kbd>
 	
       
       meetings plus all meetings of that person's division.
       Fill in the body of Alyssa's rule.
-      
-\begin{JavaScript}
+      <kbd class='snippet'>
+        
+	
 rule(meeting_time(person, day_and_time),
      $\textit{rule-body}$);
-\end{JavaScript}
-
+	
+      </kbd>
     }
 \item{
       Alyssa arrives at work on Wednesday morning and wonders what meetings she 
@@ -930,26 +832,22 @@ rule(meeting_time(person, day_and_time),
 
   
   By giving the query
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_37_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 lives_near(person, list("Hacker", "Alyssa", "P"));
-\end{JavaScript}
-
+</pre></div></div>
 
   Alyssa P. Hacker is able to find people who live near her, with whom
   she can ride to work.  On the other hand, when she tries to find all
   pairs of people who live near each other by querying
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_38_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 lives_near(person_1, person_2)
-\end{JavaScript}
-
+</pre></div></div>
 
   she notices that each pair of people who live near each other is
   listed twice; for example,
 
-  
+  <div class='snippet' id='javascript_89_39_div'><div class='pre-prettyprint'></div></div>
 
   Why does this happen?
   Is there a way to find a list of people who live near each other, in
@@ -960,9 +858,10 @@ lives_near(person_1, person_2)
 
 
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Logic as programs
-      
+      </h2></div>
 
       
       <div class='permalink'>
@@ -971,17 +870,17 @@ lives_near(person_1, person_2)
   assignment of values to pattern variables satisfies the body, <EM>
     then</EM> it satisfies the conclusion.  Consequently, we can regard the
   query language as having the ability to perform <EM>logical
-    deductions</EM> based upon the rules.  As an example, consider the {\lstinline[mathescape=true]$append$} operation described at the beginning of
-  section~\ref{sec:logic-programming}.  As we said, {\lstinline[mathescape=true]$append$} can be
+    deductions</EM> based upon the rules.  As an example, consider the <kbd>append</kbd> operation described at the beginning of
+  section \ref{sec:logic-programming}.  As we said, <kbd>append</kbd> can be
   characterized by the following two rules:
 
   <UL>
-    <LI>For any list {\lstinline[mathescape=true]$y$}, the empty list and {\lstinline[mathescape=true]$y$} {\lstinline[mathescape=true]$append$} to form {\lstinline[mathescape=true]$y$}.
+    <LI>For any list <kbd>y</kbd>, the empty list and <kbd>y</kbd> <kbd>append</kbd> to form <kbd>y</kbd>.
 
     </LI>
-    <LI>For any {\lstinline[mathescape=true]$u$},$\,$ {\lstinline[mathescape=true]$v$},$\,$ {\lstinline[mathescape=true]$y$}, and {\lstinline[mathescape=true]$z$},
-      $\,${\lstinline[mathescape=true]$pair(u, v)$} and {\lstinline[mathescape=true]$y$} {\lstinline[mathescape=true]$append$} to form {\lstinline[mathescape=true]$pair(u, z)$}
-      if {\lstinline[mathescape=true]$v$} and {\lstinline[mathescape=true]$y$} {\lstinline[mathescape=true]$append$} to form {\lstinline[mathescape=true]$z$}.
+    <LI>For any <kbd>u</kbd>,$\,$ <kbd>v</kbd>,$\,$ <kbd>y</kbd>, and <kbd>z</kbd>,
+      $\,$<kbd>pair(u, v)</kbd> and <kbd>y</kbd> <kbd>append</kbd> to form <kbd>pair(u, z)</kbd>
+      if <kbd>v</kbd> and <kbd>y</kbd> <kbd>append</kbd> to form <kbd>z</kbd>.
     </LI>
 
   </UL>
@@ -991,66 +890,57 @@ lives_near(person_1, person_2)
 <a name='p38' class='permalink'></a><p>
   To express this in our query language, we define two rules for a
   relation
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_40_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 append-to-form("x", "y", "z")
-\end{JavaScript}
+</pre></div></div>
 
+  which we can interpret to mean <QUOTE><kbd>x</kbd> and <kbd>y</kbd> <kbd>append</kbd> to
+    form <kbd>z</kbd></QUOTE>:
 
-  which we can interpret to mean <QUOTE>{\lstinline[mathescape=true]$x$} and {\lstinline[mathescape=true]$y$} {\lstinline[mathescape=true]$append$} to
-    form {\lstinline[mathescape=true]$z$}</QUOTE>:
-
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_41_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 rule(append_to_form(null, y, y));
 rule(append_to_form(pair(u, v), y, pair(u, z)),
      append-to-form(v, y, z));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p39' class='permalink'></a><p>
 	
   The first rule has no body, which means that the conclusion holds for
-  any value of~{\lstinline[mathescape=true]$y$}.  Note how the second rule makes use of
+  any value of <kbd>y</kbd>.  Note how the second rule makes use of
   
-  dotted-tail notation to name the {\lstinline[mathescape=true]$head$} and {\lstinline[mathescape=true]$tail$} of a list.
+  dotted-tail notation to name the <kbd>head</kbd> and <kbd>tail</kbd> of a list.
       </p></div>
 
       <div class='permalink'>
 <a name='p40' class='permalink'></a><p>
-  Given these two rules, we can formulate queries that compute the {\lstinline[mathescape=true]$append$} of two lists:
-  
-\begin{JavaScript}
+  Given these two rules, we can formulate queries that compute the <kbd>append</kbd> of two lists:
+  <div class='snippet' id='javascript_89_42_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 // Query input:
 append-to-form(list("a", "b"), list("c", "d"), z);
 // Query results:
 append-to-form(list("a", "b"), list("c", "d"), list("a", "b", "c", "d"))
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p41' class='permalink'></a><p>
   What is more striking, we can use the same rules to ask the question
-  <QUOTE>Which list, when {\lstinline[mathescape=true]$append$}ed to {\lstinline[mathescape=true]$list("a", "b")$}, yields {\lstinline[mathescape=true]$list("a", "b", "c", "d")$}?</QUOTE>
+  <QUOTE>Which list, when <kbd>append</kbd>ed to <kbd>list("a", "b")</kbd>, yields <kbd>list("a", "b", "c", "d")</kbd>?</QUOTE>
   This is done as follows:
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_43_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 // Query input:
 append-to-form(list("a", "b"), y, list("a", "b", "c", "d"));
 // Query results:
 append-to-form(list("a", "b"), list("c", "d"), list("a", "b", "c", "d"))
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p42' class='permalink'></a><p>
-  We can also ask for all pairs of lists that {\lstinline[mathescape=true]$append$} to form {\lstinline[mathescape=true]$list("a", "b", "c", "d")$}:
-  
-\begin{JavaScript}
+  We can also ask for all pairs of lists that <kbd>append</kbd> to form <kbd>list("a", "b", "c", "d")</kbd>:
+  <div class='snippet' id='javascript_89_44_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 // Query input:
 append-to-form(x, y, list("a", "b", "c", "d"));
 // Query results:
@@ -1059,8 +949,7 @@ append-to-form(list("a"), list("b", "c", "d"), list("a", "b", "c", "d"))
 append-to-form(list("a", "b"), list("c", "d"), list("a", "b", "c", "d"))
 append-to-form(list("a", "b", "c"), list("d"), list("a", "b", "c", "d"))
 append-to-form(list("a", "b", "c", "d"), null, list("a", "b", "c", "d"))
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -1069,9 +958,9 @@ append-to-form(list("a", "b", "c", "d"), null, list("a", "b", "c", "d"))
   using the rules to deduce the answers to the queries above.  Actually,
   as we will see in the next section, the system is following a
   well-determined algorithm in unraveling the rules.  Unfortunately,
-  although the system works impressively in the {\lstinline[mathescape=true]$append$} case, the
+  although the system works impressively in the <kbd>append</kbd> case, the
   general methods may break down in more complex cases, as we will see
-  in section~\ref{sec:math-logic}.
+  in section \ref{sec:math-logic}.
       </p></div>
 
       
@@ -1079,24 +968,20 @@ append-to-form(list("a", "b", "c", "d"), null, list("a", "b", "c", "d"))
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
 
-  The following rules implement a {\lstinline[mathescape=true]$next-to$} relation that finds
+  The following rules implement a <kbd>next-to</kbd> relation that finds
   adjacent elements of a list:
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_45_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 rule(next_to_in(x, y, pair(x, pair(y, u))),
      and(next_to_in(x, y, pair(v, z)),
          next_to_in(x, y, z));
-\end{JavaScript}
-
+</pre></div></div>
 
   What will the response be to the following queries?
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_46_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 next_to_in(x, y, list(1, list(2, 3), 4));
 
 next_to_in(x, 1, list(2, 1, 3, 1));
-\end{JavaScript}
-
+</pre></div></div>
       
 \end{Exercise}
 
@@ -1110,14 +995,14 @@ next_to_in(x, 1, list(2, 1, 3, 1));
   
     
     
-      {\lstinline[mathescape=true]$last_pair$}
+      <kbd>last_pair</kbd>
     
   
     operation of
-  exercise~\ref{ex:last}, which returns a list containing the last
+  exercise \ref{ex:last}, which returns a list containing the last
   element of a nonempty list.  Check your rules on queries such as
-  {\lstinline[mathescape=true]$last_pair(list(3), x)$}, {\lstinline[mathescape=true]$last_pair(list(1, 2, 3), x)$}, and {\lstinline[mathescape=true]$last_pair(list(2, x, list(3))$}.
-  Do your rules work correctly on queries such as {\lstinline[mathescape=true]$last_pair(x, list(3))$}$\,$?
+  <kbd>last_pair(list(3), x)</kbd>, <kbd>last_pair(list(1, 2, 3), x)</kbd>, and <kbd>last_pair(list(2, x, list(3))</kbd>.
+  Do your rules work correctly on queries such as <kbd>last_pair(x, list(3))</kbd>$\,$?
   
       
 \end{Exercise}
@@ -1131,8 +1016,7 @@ next_to_in(x, 1, list(2, 1, 3, 1));
   The following data base (see Genesis 4) traces the genealogy of the
   descendants of Ada back to Adam, by way of Cain:
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_89_47_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 son("Adam", "Cain");     
 son("Cain", "Enoch");
 son("Enoch", "Irad");      
@@ -1140,8 +1024,7 @@ son("Methushael", "Lamech");
 wife("Lamech", "Ada");
 son("Ada", "Jabal");
 son("Ada", "Jubal");
-\end{JavaScript}
-
+</pre></div></div>
 
   Formulate rules such as <QUOTE>If <EM>S</EM> is the son of <EM>F</EM>, and <EM>
       F</EM> is the son of <EM>G</EM>, then <EM>S</EM> is the grandson of <EM>G</EM></QUOTE>
@@ -1150,7 +1033,7 @@ son("Ada", "Jubal");
   more true in biblical times than today) that will enable the query
   system to find the grandson of Cain; the sons of Lamech; the grandsons
   of Methushael.
-  (See exercise~\ref{ex:great-grandson} for some rules to
+  (See exercise \ref{ex:great-grandson} for some rules to
   deduce more complicated relationships.)
   
       
@@ -1161,11 +1044,11 @@ son("Ada", "Jubal");
       
 
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Actually, this description of
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Actually, this description of
   
     
     
-      {\lstinline[mathescape=true]$not$}.
+      <kbd>not</kbd>.
     
   
   is valid only for simple cases.
@@ -1173,20 +1056,20 @@ son("Ada", "Jubal");
   
     
     
-      {\lstinline[mathescape=true]$not$}
+      <kbd>not</kbd>
     
   
   is more complex.  We will examine
-  {\lstinline[mathescape=true]$not$}'s  peculiarities
-  in sections~\ref{sec:how-query-works} and~\ref{sec:math-logic}.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Such {\lstinline[mathescape=true]$javascript_value$} expressions should be used only to perform an operation not
+  <kbd>not</kbd>'s  peculiarities
+  in sections \ref{sec:how-query-works} and \ref{sec:math-logic}.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Such <kbd>javascript_value</kbd> expressions should be used only to perform an operation not
     
     provided in the query language.  In particular, it should not
     be used to test equality (since that is what the matching in the
     query language is designed to do) or inequality (since that can
-    be done with the {\lstinline[mathescape=true]$same$} rule shown below).</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Notice 
-    that we do not need {\lstinline[mathescape=true]$same$} in order to make two things be
+    be done with the <kbd>same</kbd> rule shown below).</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Notice 
+    that we do not need <kbd>same</kbd> in order to make two things be
     the same: We just use the same pattern variable for each—in effect,
     we have one thing instead of two things in the first place.  For
     example, see
@@ -1205,12 +1088,12 @@ son("Ada", "Jubal");
       
     
     in the
-    {\lstinline[mathescape=true]$wheel$}
+    <kbd>wheel</kbd>
     rule below.
     
       
       
-	The {\lstinline[mathescape=true]$same$} relation
+	The <kbd>same</kbd> relation
       
     
     is useful when we want to force two things to be
@@ -1233,9 +1116,16 @@ son("Ada", "Jubal");
     parts of a query forces the same value to appear in both places, using
     different pattern variables does not force different values to appear.
     (The values assigned to different pattern variables may be the same or
-    different.)</FOOTNOTE></div><hr><div class='footnote'>
+    different.)</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>We will also allow rules without bodies, as in
   
-  {\lstinline[mathescape=true]$same$}, and we will interpret such a rule to mean that the rule
+  <kbd>same</kbd>, and we will interpret such a rule to mean that the rule
     conclusion is satisfied by any values of the variables.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section4/section4.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section4/subsection2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+4.4.1  Deductive Information Retrieval</div>	<div class='next-page'></div></div>

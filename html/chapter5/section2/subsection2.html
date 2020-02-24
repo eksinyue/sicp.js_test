@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>5.2.2 
-  The Assembler
-      </a>
+		<a name='top' class='permalink'>5.2.2  The Assembler</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -17,7 +24,7 @@
   machine into a corresponding list of machine instructions, each with
   its execution
   function.  Overall, the assembler is much like the
-  evaluators we studied in chapter~4—there is an input language (in
+  evaluators we studied in chapter 4—there is an input language (in
   this case, the register-machine language) and we must perform an
   appropriate action for each type of expression in the language.
       </p></div>
@@ -28,9 +35,9 @@
   The technique of producing an execution
   function
   for each instruction
-  is just what we used in section~\ref{sec:separating-analysis} to speed
+  is just what we used in section \ref{sec:separating-analysis} to speed
   up the evaluator by separating analysis from runtime execution.  As we
-  saw in chapter~4, much useful analysis of Scheme expressions could be
+  saw in chapter 4, much useful analysis of Scheme expressions could be
   performed without knowing the actual values of variables.  Here,
   analogously, much useful analysis of register-machine-language
   expressions can be performed without knowing the actual contents of
@@ -62,18 +69,18 @@
   It takes the controller text and the machine model as arguments and
   returns the instruction sequence to be stored in the model.
   Assemble calls
-  {\lstinline[mathescape=true]$extract_labels$} to build the initial instruction list
+  <kbd>extract_labels</kbd> to build the initial instruction list
   and label table from the supplied controller text.  The second argument
-  to {\lstinline[mathescape=true]$extract_labels$} is a
+  to <kbd>extract_labels</kbd> is a
   function
   to be called to process these results:
   This
   function
-  uses {\lstinline[mathescape=true]$update_insts$} to generate the instruction execution
+  uses <kbd>update_insts</kbd> to generate the instruction execution
   functions
   and insert them into the instruction list,
   and returns the modified list.
-  
+  <div class='snippet' id='javascript_102_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function assemble(controller_text, machine) {
@@ -85,18 +92,19 @@ function assemble(controller_text, machine) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwM6oKYFsBGAbDACggSgCc48CyB9KDADygBpEtkIALGMDASkQBvAFCIxiUJFgJEZDBAwwAbkR6ooqVnmQ4MeVAJHjjiEAAcAJsno01Gwnc2Jtu-a3Zce-ANyiTYuSgQMiRHX2MAXz8xaNkMIJDERnIOKBoXPVRiUgoqDFp6JlY5BWUfYQigA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAQwM6oKYFsBGAbDACggSgCc48CyB9KDADygBpEtkIALGMDASkQBvAFCIxiUJFgJEZDBAwwAbkR6ooqVnmQ4MeVAJHjjiEAAcAJsno01Gwnc2Jtu-a3Zce-ANyiTYuSgQMiRHX2MAXz8xaNkMIJDERnIOKBoXPVRiUgoqDFp6JlY5BWUfYQigA}{\usebox\lstbox}!*/
     return extract_labels(controller_text, receive);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-  {\lstinline[mathescape=true]$Extract_labels$}
+  <kbd>Extract_labels</kbd>
   takes as arguments a list text (the sequence of controller
   instruction expressions) and a receive
   function.  Receive
@@ -106,7 +114,7 @@ function assemble(controller_text, machine) {
   text
   with the position in the list insts that the label designates.
 
-  
+  <div class='snippet' id='javascript_102_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function extract_labels(text, receive) {
@@ -119,7 +127,7 @@ function extract_labels(text, receive) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwB5QE4ENoH0A2WARsvgM4AUUaUANIhshMjAG7ICUiA3gFCIDEoSLASIAFqQAOyDBRhgyUMvUIlyXbon6DdEBEsRgauBYYC8E5FgAmVGhwDcvHboGMoIDEhhlcSjAUAcwpjdFNFKA5XN10AfgYmFnZ5SJVEKSwYOQBbLABrZAJiUlxkMEwAT1CTMzpEOrIOVRKNaNjYgC5E5jZkCkzsijzCiICQaHgwGvC65oa0+bVSJuddAF8XXQ8vJGp0RHMjxHAbZGAFZBtEAB8bhr8wEHx8e3R2joTGXpSnl-o-vgPl0UOhsHhluQqFlXvsovRJPgZBgnLx1kA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAUwB5QE4ENoH0A2WARsvgM4AUUaUANIhshMjAG7ICUiA3gFCIDEoSLASIAFqQAOyDBRhgyUMvUIlyXbon6DdEBEsRgauBYYC8E5FgAmVGhwDcvHboGMoIDEhhlcSjAUAcwpjdFNFKA5XN10AfgYmFnZ5SJVEKSwYOQBbLABrZAJiUlxkMEwAT1CTMzpEOrIOVRKNaNjYgC5E5jZkCkzsijzCiICQaHgwGvC65oa0+bVSJuddAF8XXQ8vJGp0RHMjxHAbZGAFZBtEAB8bhr8wEHx8e3R2joTGXpSnl-o-vgPl0UOhsHhluQqFlXvsovRJPgZBgnLx1kA}{\usebox\lstbox}!*/
     }
 
     return text === undefined || is_null(text)
@@ -128,28 +136,29 @@ function extract_labels(text, receive) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
-  {\lstinline[mathescape=true]$Extract_labels$} works by sequentially scanning the elements of
+  <kbd>Extract_labels</kbd> works by sequentially scanning the elements of
   the text and accumulating the
   insts and the labels.
   If an element is a symbol (and thus a label) an appropriate entry is
   added to the labels table.  Otherwise the element is accumulated
-  onto the insts list.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+  onto the insts list.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
       </p></div>
 
       <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
-  {\lstinline[mathescape=true]$Update_insts$} modifies the instruction list, which initially
+  <kbd>Update_insts</kbd> modifies the instruction list, which initially
   contains only the text of the instructions, to include the
   corresponding execution
   functions:
 
-  
+  <div class='snippet' id='javascript_102_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function update_insts(insts, labels, machine) {
@@ -162,7 +171,7 @@ function update_insts(insts, labels, machine) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABCADgEwIZQKYH0ZgDOUhAFAcYQDSIA2GARtrdYgLYYQAWB2AlIgDeAKERjEEBMUQoIiALyIA5tii4ATtiUxi2daQ7deNAESyTfANyjxkolETB6ShctUatOnPsM8w2UycMJQtrcQkpB2JOAGtXX15SE2iIGNCbMTtpOBRCeM4-bCScvSx4InSMiPtEQncYbBRXOrUKKHUQaHLcbAAPbAgQWARcFHU4CDDbSPYMGLxG-Pme-sHhsFxQSHWpsU0oEHUkDhRyBQA+WvrG8ioq8IfHp7EOZZu2jq6RnF6ocj47s8gcCgfQmCxASCoVCEv5IdCEU9ZPDEaixEElCi0YiUjEsdjoTlCHwAfdgW1idYAL5AA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABCADgEwIZQKYH0ZgDOUhAFAcYQDSIA2GARtrdYgLYYQAWB2AlIgDeAKERjEEBMUQoIiALyIA5tii4ATtiUxi2daQ7deNAESyTfANyjxkolETB6ShctUatOnPsM8w2UycMJQtrcQkpB2JOAGtXX15SE2iIGNCbMTtpOBRCeM4-bCScvSx4InSMiPtEQncYbBRXOrUKKHUQaHLcbAAPbAgQWARcFHU4CDDbSPYMGLxG-Pme-sHhsFxQSHWpsU0oEHUkDhRyBQA+WvrG8ioq8IfHp7EOZZu2jq6RnF6ocj47s8gcCgfQmCxASCoVCEv5IdCEU9ZPDEaixEElCi0YiUjEsdjoTlCHwAfdgW1idYAL5AA}{\usebox\lstbox}!*/
     const make_ep = make_execution_function;
     return map(i => set_iep(i,
                             make_ep(instruction_text(i),
@@ -176,8 +185,9 @@ function update_insts(insts, labels, machine) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
@@ -187,9 +197,9 @@ function update_insts(insts, labels, machine) {
   function.
   The execution
   function
-  is not yet available when {\lstinline[mathescape=true]$extract_labels$}
-  constructs the instruction, and is inserted later by {\lstinline[mathescape=true]$update_insts$}.
-  
+  is not yet available when <kbd>extract_labels</kbd>
+  constructs the instruction, and is inserted later by <kbd>update_insts</kbd>.
+  <div class='snippet' id='javascript_102_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_instruction(text) {
@@ -203,7 +213,7 @@ function instruction_text(inst) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9GYDOUATiNPGABRSYAeUAlIgN4BQi7iRmUIRSADqhhEqtKABpEYEABsZ9ANwsAvixahIsBIjyESZBNmp0KuhszYcuPPogAWmVABNTBBktXrwBpGf1awbFpMCBAA7H4iOAhXQkZWDk5uXiQoIRlY9xU1DR9EfG5cN39yIJoQsNLI6MzJaoh4y3YCqCN02sR6xUQVIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9GYDOUATiNPGABRSYAeUAlIgN4BQi7iRmUIRSADqhhEqtKABpEYEABsZ9ANwsAvixahIsBIjyESZBNmp0KuhszYcuPPogAWmVABNTBBktXrwBpGf1awbFpMCBAA7H4iOAhXQkZWDk5uXiQoIRlY9xU1DR9EfG5cN39yIJoQsNLI6MzJaoh4y3YCqCN02sR6xUQVIA}{\usebox\lstbox}!*/
 function instruction_execution_proc(inst) {
     return tail(inst);
 }
@@ -213,20 +223,21 @@ function set_instruction_execution_proc(inst, proc) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
   The instruction text is not used by our simulator, but it is handy to keep
-  around for debugging (see exercise~\ref{ex:reg-machine-instruction-trace}).
+  around for debugging (see exercise \ref{ex:reg-machine-instruction-trace}).
       </p></div>
 
       <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
   Elements of the label table are pairs:
-  
+  <div class='snippet' id='javascript_102_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_label_entry(label_name, insts) {
@@ -235,11 +246,12 @@ function make_label_entry(label_name, insts) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ANqgI0120zCgCcBPACnyJLFWUwBpEYwBnKLgSkQBvAFCIxiCpiggKSAA6oYFOoWLYmLdpx78A3MIC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ANqgI0120zCgCcBPACnyJLFWUwBpEYwBnKLgSkQBvAFCIxiCpiggKSAA6oYFOoWLYmLdpx78A3MIC+QA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
   Entries will be looked up in the table with
-  
+  <div class='snippet' id='javascript_102_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function lookup_label(labels, label_name) {
@@ -252,9 +264,10 @@ function lookup_label(labels, label_name) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAGznA1iADgfWQQwCMBTZACgJOQGcAaFI0nMfAW2IEpEBvAKEQGIICalEQA3fMkQBeRPmrU4ECo2TM2xepVLUOAbl79BAJ2JQQJpJOky7icABNiwGGGKPjgwQH5ExExM4E1UqDXZ6ACIAVTBnV3dHBioALkQAQQBlTIBRAFkAIQAZHMiOL29ENKh8GHIbA14AXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAGznA1iADgfWQQwCMBTZACgJOQGcAaFI0nMfAW2IEpEBvAKEQGIICalEQA3fMkQBeRPmrU4ECo2TM2xepVLUOAbl79BAJ2JQQJpJOky7icABNiwGGGKPjgwQH5ExExM4E1UqDXZ6ACIAVTBnV3dHBioALkQAQQBlTIBRAFkAIQAZHMiOL29ENKh8GHIbA14AXyA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       
@@ -263,7 +276,7 @@ function lookup_label(labels, label_name) {
 
   The following register-machine code is ambiguous, because the label
   here is defined more than once:
-  
+  <div class='snippet' id='javascript_102_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 "start"
@@ -275,17 +288,18 @@ function lookup_label(labels, label_name) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EQZwLghgTmwFAAIkIOYHsD6Y0AoA2EARgKZ44AWxUxAlDQDSLLCXXCPIIQggCWKAOxzAI7BHl7gcAYzQCpAZjoMmSdFlwESZMK1orOLKsXaquPfkJFiJU2fLA4ALMo7J12fEVI5dxum5IwH5s9EA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=EQZwLghgTmwFAAIkIOYHsD6Y0AoA2EARgKZ44AWxUxAlDQDSLLCXXCPIIQggCWKAOxzAI7BHl7gcAYzQCpAZjoMmSdFlwESZMK1orOLKsXaquPfkJFiJU2fLA4ALMo7J12fEVI5dxum5IwH5s9EA}{\usebox\lstbox}!*/
     assign("a", list(const(4))),
     go_to(label(there)),
     "there",
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
   With the simulator as written, what will the contents of register a
-  be when control reaches there?  Modify the {\lstinline[mathescape=true]$extract_labels$}
+  be when control reaches there?  Modify the <kbd>extract_labels</kbd>
   function
   so that the assembler will signal an error if the same label
   name is used to indicate two different locations.
@@ -299,11 +313,11 @@ function lookup_label(labels, label_name) {
     
     Using the receive
     function
-    here is a way to get {\lstinline[mathescape=true]$extract_labels$} to effectively return two values—labels and
+    here is a way to get <kbd>extract_labels</kbd> to effectively return two values—labels and
     insts—without explicitly making a compound data structure to
     hold them.  An alternative implementation, which returns an explicit
     pair of values, is
-    
+    <div class='snippet' id='javascript_102_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function extract_labels(text, receive) { 
@@ -316,7 +330,7 @@ function extract_labels(text, receive) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAUwB5QE4ENoH0A2WARsvgM4AUUaUANIhshMjAG7ICUiA3ogFCJBiGMEQUYZXGBD58VGhy7cBQ1YyggMSAA5YYGCtNn0j+DgG4+KwQF8U5ZD2urEEBGSgNkZGZ4C8KOjYeIQk5FR6ctToipYuQm5gHsJJUGSIAQAWyFgAJhSMPvhQFs6qicmhpOkBUJEF3r6l8YIVnmA0uDCpGYjZefIxlmVC6ppIErgeGN0A5oad3R4cI-EA-Ii6+uKpZPRbBgC2WADWyATEpLjIYJgAngvoXan0S2kc9FXkiqsuAFybPQGA4UY5nZ7TEDQeBgR5QCElV67D6IL5kZpCGx8GxAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAUwB5QE4ENoH0A2WARsvgM4AUUaUANIhshMjAG7ICUiA3ogFCJBiGMEQUYZXGBD58VGhy7cBQ1YyggMSAA5YYGCtNn0j+DgG4+KwQF8U5ZD2urEEBGSgNkZGZ4C8KOjYeIQk5FR6ctToipYuQm5gHsJJUGSIAQAWyFgAJhSMPvhQFs6qicmhpOkBUJEF3r6l8YIVnmA0uDCpGYjZefIxlmVC6ppIErgeGN0A5oad3R4cI-EA-Ii6+uKpZPRbBgC2WADWyATEpLjIYJgAngvoXan0S2kc9FXkiqsuAFybPQGA4UY5nZ7TEDQeBgR5QCElV67D6IL5kZpCGx8GxAA}{\usebox\lstbox}!*/
         const labels = tail(result);
         const next_inst = head(text);
 
@@ -327,10 +341,11 @@ function extract_labels(text, receive) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     which would be called by assemble as follows:
-    
+    <div class='snippet' id='javascript_102_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function assemble_alternative(controller_text, machine) {
@@ -344,12 +359,13 @@ function assemble_alternative(controller_text, machine) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwM6oKYFsBGAbDAfWTygwCcxlYA3DACggSnLjwPMLIA8oAaRFmQQAFjDAYAlIgDeAKESLETMKiiJyGVCFKIAvIgy9ywqITzIcGPKkbNW7ClyNRJAbgVKVaxOLWp9RBEMZAATek1tUndPRW91CysbQKhkGDwIrR1XD1jEEAAHUOoiPyhbMtQBROsqwWExCRi8zSgQSl9Vco8AXyA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAQwM6oKYFsBGAbDAfWTygwCcxlYA3DACggSnLjwPMLIA8oAaRFmQQAFjDAYAlIgDeAKESLETMKiiJyGVCFKIAvIgy9ywqITzIcGPKkbNW7ClyNRJAbgVKVaxOLWp9RBEMZAATek1tUndPRW91CysbQKhkGDwIrR1XD1jEEAAHUOoiPyhbMtQBROsqwWExCRi8zSgQSl9Vco8AXyA}{\usebox\lstbox}!*/
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     
     
@@ -360,5 +376,12 @@ function assemble_alternative(controller_text, machine) {
     function
     to be invoked is called a <QUOTE>continuation.</QUOTE>  Recall that we
     also used continuations to implement the backtracking control
-    structure in the amb evaluator in section~\ref{sec:amb-implementation}.</FOOTNOTE></div>
-</SUBSECTION>
+    structure in the amb evaluator in section \ref{sec:amb-implementation}.</FOOTNOTE></div>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section2/subsection1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section2/subsection3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+5.2.2  The Assembler</div>	<div class='next-page'></div></div>

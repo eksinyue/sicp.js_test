@@ -1,19 +1,26 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>5.1.2 
-  Abstraction in Machine Design
-      </a>
+		<a name='top' class='permalink'>5.1.2  Abstraction in Machine Design</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
 
       <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
   We will often define a machine to include <QUOTE>primitive</QUOTE> operations that are
-  actually very complex.  For example, in sections~\ref{sec:eceval} and
+  actually very complex.  For example, in sections \ref{sec:eceval} and
   \ref{sec:compilation} we will treat JavaScript's environment
   manipulations as primitive.  Such abstraction is valuable because it
   allows us to ignore the details of parts of a machine so that we can
@@ -26,15 +33,15 @@
       <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
   Consider the GCD machine. The machine has an instruction that computes
-  the remainder of the contents of registers {\lstinline[mathescape=true]$a$} and {\lstinline[mathescape=true]$b$} and
-  assigns the result to register {\lstinline[mathescape=true]$t$}.  If we want to construct the
+  the remainder of the contents of registers <kbd>a</kbd> and <kbd>b</kbd> and
+  assigns the result to register <kbd>t</kbd>.  If we want to construct the
   GCD machine without using a primitive remainder operation,
   we must specify how to compute remainders in terms of simpler
   operations, such as subtraction.  Indeed, we can write a 
   JavaScript function
   that finds remainders in this way:
 
-  
+  <div class='snippet' id='javascript_96_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function remainder(n, d) {
@@ -45,16 +52,17 @@ function remainder(n, d) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAJwKYFsCGMwBNXIAUYANIrgJSIDeAUIgyqlCMkkgDzn2O8D8iMD14MAXEyw58RJAFpyZSgG5aAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAJwKYFsCGMwBNXIAUYANIrgJSIDeAUIgyqlCMkkgDzn2O8D8iMD14MAXEyw58RJAFpyZSgG5aAXyA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
   We can thus replace the remainder operation in the GCD machine's
   data paths with a subtraction operation and a comparison test.
-  Figure~\ref{fig:gcd-machine-rem} shows the data paths and controller
+  Figure \ref{fig:gcd-machine-rem} shows the data paths and controller
   for the elaborated machine.
   The instruction
 
@@ -68,21 +76,18 @@ function remainder(n, d) {
 \end{figure}
 
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_96_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 assign("t", list(op("rem"), reg("a"), reg("b")))
-\end{JavaScript}
-
+</pre></div></div>
 
   in the GCD controller definition is replaced by a sequence of
   instructions that contains a loop, as shown in
-  figure~\ref{fig:gcd-machine-rem-controller}.
+  figure \ref{fig:gcd-machine-rem-controller}.
 
   
 \begin{figure}[H]
 \centering
-
-\begin{JavaScript}
+<pre class='prettyprint no-eval'>
 controller(
     "test-b",
     list(test(list(op("="), reg("b"), constant(0))),
@@ -98,9 +103,8 @@ controller(
          assign("b", reg("t")),
          go_to(label("test-b"))),
     "gcd-done");
-\end{JavaScript}
-\caption{Controller instruction sequence for the GCD machine in
-  figure~\ref{fig:gcd-machine-rem}.}
+</pre>\caption{Controller instruction sequence for the GCD machine in
+  figure \ref{fig:gcd-machine-rem}.}
 \label{fig:gcd-machine-rem-controller}
 \end{figure}
 
@@ -112,9 +116,9 @@ controller(
 
   
   Design a machine to compute square roots using Newton's method, as
-  described in section~\ref{sec:sqrt}:
+  described in section \ref{sec:sqrt}:
 
-  
+  <div class='snippet' id='javascript_96_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function sqrt(x) {
@@ -126,7 +130,7 @@ function sqrt(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzFRJYFEBzOOAEwH0BTMOEWgCy1pFbJkAGkT4ipclPSsoIdEgCGAI2RY0IRTL4ChBALRiCAHkQAGAHRmzARgDcksgF9HFcNHhIYAWwAO6OAA3Vh1BESMJKWlZeSVg9EVaEP4w0RxEAHo6XWQ8BykXKUoPGjRMZhgoVnRQoTSCEijyGTkFOgYWdk4eWvD8VyayAH5ssIHBgC4UDCgKqpqffyDknPr6-PJC5pi26fLK6qwbKzziJyA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=5&prgrm=GYVwdgxgLglg9mABAZwI4CcoAoAeBKRAbwChEzFRJYFEBzOOAEwH0BTMOEWgCy1pFbJkAGkT4ipclPSsoIdEgCGAI2RY0IRTL4ChBALRiCAHkQAGAHRmzARgDcksgF9HFcNHhIYAWwAO6OAA3Vh1BESMJKWlZeSVg9EVaEP4w0RxEAHo6XWQ8BykXKUoPGjRMZhgoVnRQoTSCEijyGTkFOgYWdk4eWvD8VyayAH5ssIHBgC4UDCgKqpqffyDknPr6-PJC5pi26fLK6qwbKzziJyA}{\usebox\lstbox}!*/
     }
     function sqrt_iter(guess, x) {
         return good_enough(guess, x)
@@ -137,12 +141,13 @@ function sqrt(x) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
+</div></div>
 
-
-  Begin by assuming that {\lstinline[mathescape=true]$good_enough$} and {\lstinline[mathescape=true]$improve$} operations
+  Begin by assuming that <kbd>good_enough</kbd> and <kbd>improve</kbd> operations
   are available as primitives.  Then show how to expand these in terms
-  of arithmetic operations.  Describe each version of the {\lstinline[mathescape=true]$sqrt$}
+  of arithmetic operations.  Describe each version of the <kbd>sqrt</kbd>
   machine design by drawing a data-path diagram and writing a controller
   definition in the register-machine language.
   
@@ -152,4 +157,11 @@ function sqrt(x) {
       
 
     
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section1/subsection1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section1/subsection3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+5.1.2  Abstraction in Machine Design</div>	<div class='next-page'></div></div>

@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>3.4.2 
-    Mechanisms for Controlling Concurrency
-  </a>
+		<a name='top' class='permalink'>3.4.2  Mechanisms for Controlling Concurrency</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
   
 
@@ -45,9 +52,10 @@
     serializer</EM>.
   </p></div>
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     Serializing access to shared state
-  
+  </h2></div>
 
   
 
@@ -101,9 +109,10 @@
   <SPLIT>
     
     
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Serializers in JavaScript
-      
+      </h2></div>
     
   </SPLIT>
 
@@ -121,15 +130,16 @@
     
       
       
-        {\lstinline[mathescape=true]$parallel_execute$}:
+        <kbd>parallel_execute</kbd>:
       
     
 
-    
-\begin{JavaScript}
+    <kbd class='snippet'>
+      
+      
 parallel_execute( f$_{1}$, f$_{2}$, $\ldots$, f$_{k}$ )
-\end{JavaScript}
-
+      
+    </kbd>
   </p></div>
 
   <div class='permalink'>
@@ -138,68 +148,66 @@ parallel_execute( f$_{1}$, f$_{2}$, $\ldots$, f$_{k}$ )
       
       
         Each f must be a function of no arguments.  
-        The function {\lstinline[mathescape=true]$parallel_execute$}
+        The function <kbd>parallel_execute</kbd>
         creates a separate process for each
         f, which applies
         f (to no arguments).
       
     
     These processes all
-    run concurrently.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+    run concurrently.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
   </p></div>
 
   <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
     As an example of how this is used, consider
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_64_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 let x = 10;
 
 parallel_execute( () => { x = x * x; },
                   () => { x = x + 1; } );
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
     This creates two concurrent
     processes—$P_1$, which
-    sets {\lstinline[mathescape=true]$x$} to
-    {\lstinline[mathescape=true]$x$} times {\lstinline[mathescape=true]$x$},
+    sets <kbd>x</kbd> to
+    <kbd>x</kbd> times <kbd>x</kbd>,
     and $P_2$, which increments
-    {\lstinline[mathescape=true]$x$}.  After execution is complete,
-    {\lstinline[mathescape=true]$x$} will be left with one of five possible
+    <kbd>x</kbd>.  After execution is complete,
+    <kbd>x</kbd> will be left with one of five possible
     values, depending on the interleaving of the events of
     $P_1$ and $P_2$:
     <UL>
       <LI>
       101: $P_1$
-      sets {\lstinline[mathescape=true]$x$} to 100 and then
+      sets <kbd>x</kbd> to 100 and then
       $P_2$ increments
-      {\lstinline[mathescape=true]$x$} to 101.
+      <kbd>x</kbd> to 101.
       </LI>
       <LI>
-      121: $P_2$ increments {\lstinline[mathescape=true]$x$} to 11 and then
-      $P_1$ sets {\lstinline[mathescape=true]$x$} to
-      {\lstinline[mathescape=true]$x$} times {\lstinline[mathescape=true]$x$}.
+      121: $P_2$ increments <kbd>x</kbd> to 11 and then
+      $P_1$ sets <kbd>x</kbd> to
+      <kbd>x</kbd> times <kbd>x</kbd>.
       </LI>
       <LI>
       110: $P_2$ changes
-      {\lstinline[mathescape=true]$x$} from 10 to 11 between the two
+      <kbd>x</kbd> from 10 to 11 between the two
       times that $P_1$ accesses the value of
-      {\lstinline[mathescape=true]$x$} during the evaluation of
-      {\lstinline[mathescape=true]$x * x$}.
+      <kbd>x</kbd> during the evaluation of
+      <kbd>x * x</kbd>.
       </LI>
       <LI>
-      11:  $P_2$ accesses {\lstinline[mathescape=true]$x$}, then
-      $P_1$ sets {\lstinline[mathescape=true]$x$} to 100,
-      then $P_2$ sets {\lstinline[mathescape=true]$x$}.
+      11:  $P_2$ accesses <kbd>x</kbd>, then
+      $P_1$ sets <kbd>x</kbd> to 100,
+      then $P_2$ sets <kbd>x</kbd>.
       </LI>
       <LI>
-      100: $P_1$ accesses {\lstinline[mathescape=true]$x$} (twice),
-      then $P_2$ sets {\lstinline[mathescape=true]$x$} to 11,
-      then $P_1$ sets {\lstinline[mathescape=true]$x$}.
+      100: $P_1$ accesses <kbd>x</kbd> (twice),
+      then $P_2$ sets <kbd>x</kbd> to 11,
+      then $P_1$ sets <kbd>x</kbd>.
       </LI>
     </UL>
   </p></div>
@@ -212,7 +220,7 @@ parallel_execute( () => { x = x * x; },
     which are created by <EM>serializers</EM>. Serializers are constructed by
     
       
-      {\lstinline[mathescape=true]$make_serializer$},
+      <kbd>make_serializer</kbd>,
       
     
     whose implementation is given below.  A serializer takes a
@@ -233,18 +241,16 @@ parallel_execute( () => { x = x * x; },
   <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
     Thus, in contrast to the example above, executing
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_64_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 let x = 10;
 
 const s = make_serializer();
 
 parallel_execute(s( () => { x = x * x; }),
                  s( () => { x = x + 1; } ));
-\end{JavaScript}
-
+</pre></div></div>
     can produce only two possible values for
-    {\lstinline[mathescape=true]$x$}, 101 or 121.
+    <kbd>x</kbd>, 101 or 121.
     The other possibilities are eliminated, because the execution of
     $P_1$ and
     $P_2$ cannot be interleaved.
@@ -254,15 +260,14 @@ parallel_execute(s( () => { x = x * x; }),
 <a name='p11' class='permalink'></a><p>
     Here is a version of the
     
-    {\lstinline[mathescape=true]$make_account$}
+    <kbd>make_account</kbd>
     
     
     
     function
-    from section~\ref{sec:local-state-variables},
+    from section \ref{sec:local-state-variables},
     where the deposits and withdrawals have been serialized:
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_64_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_account(balance) {
     function withdraw(amount) {
         if (balance > amount) {
@@ -289,15 +294,14 @@ function make_account(balance) {
     }
     return dispatch;
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
     With this implementation, two processes cannot be withdrawing from or
     depositing into a single account concurrently.  This eliminates the source
-    of the error illustrated in figure~\ref{fig:bank-access},
+    of the error illustrated in figure \ref{fig:bank-access},
     where Peter changes the account balance between the times when Paul accesses
     the balance to compute the new value and when Paul actually performs the
     assignment.  On the other hand, each account has its own serializer,
@@ -312,16 +316,14 @@ function make_account(balance) {
     Which of the five possibilities in the parallel execution shown above
     remain if we instead serialize execution as follows:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_64_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 let x = 10;
 
 const s = make_serializer();
 
 parallel_execute( () => { x = s( () => x * x ); }, 
                   s( () => { x = x + 1; } ) );
-\end{JavaScript}
-
+</pre></div></div>
   
 \end{Exercise}
 
@@ -330,32 +332,28 @@ parallel_execute( () => { x = s( () => x * x ); },
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
 
-    Give all possible values of {\lstinline[mathescape=true]$x$}
+    Give all possible values of <kbd>x</kbd>
     that can result from executing
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_64_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 let x = 10;
 
 parallel_execute( () => { x = x * x; }, 
                   () => { x = x * x * x; } );
-\end{JavaScript}
-
+</pre></div></div>
 
     Which of these possibilities remain if we instead use serialized
     
     functions:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_64_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 let x = 10;
 
 const s = make_serializer();
 
 parallel_execute( s( () => x = x * x ) , 
                   s( () => x = x * x * x ) )
-\end{JavaScript}
-
+</pre></div></div>
   
 \end{Exercise}
 
@@ -367,8 +365,7 @@ parallel_execute( s( () => x = x * x ) ,
   Ben Bitdiddle worries that it would be better to implement the bank
   account as follows (where the commented line has been changed):
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_64_7_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_account(balance) {
     function withdraw(amount) {
         if (balance > amount) {
@@ -396,8 +393,7 @@ function make_account(balance) {
                 }
                 return dispatch;
             }
-\end{JavaScript}
-
+</pre></div></div>
   because allowing unserialized access to the bank balance can
   result in anomalous behavior.  Do you agree?  Is there any
   scenario that demonstrates Ben's concern?
@@ -413,18 +409,18 @@ function make_account(balance) {
     create a new serialized
     
     function
-    in response to every {\lstinline[mathescape=true]$withdraw$} and
-    {\lstinline[mathescape=true]$deposit$} message.  He says that
+    in response to every <kbd>withdraw</kbd> and
+    <kbd>deposit</kbd> message.  He says that
     
-    {\lstinline[mathescape=true]$make_account$}
+    <kbd>make_account</kbd>
     could be changed so that the calls to
     
       
       
-        {\lstinline[mathescape=true]$protected_$}
+        <kbd>protected_</kbd>
       
     
-    are done outside the {\lstinline[mathescape=true]$dispatch$}
+    are done outside the <kbd>dispatch</kbd>
     
     function.
     That is, an account would return the same serialized
@@ -434,8 +430,7 @@ function make_account(balance) {
     it is asked for a withdrawal
     
     function.
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_64_8_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_account(balance) {
     function withdraw(amount) {
         if (balance > amount) {
@@ -464,23 +459,23 @@ function make_account(balance) {
     }
     return dispatch;
 }
-\end{JavaScript}
-
+</pre></div></div>
 
     Is this a safe change to make?  In particular, is there any
     difference in what concurrency is allowed by these two versions
     of
     
-    {\lstinline[mathescape=true]$make_account$}
+    <kbd>make_account</kbd>
     ? 
   
 \end{Exercise}
 
   
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     Complexity of using multiple shared resources
-  
+  </h2></div>
 
   
   
@@ -501,26 +496,15 @@ function make_account(balance) {
     balance, compute the difference between the balances, withdraw this
     difference from one account, and deposit it in the other account.  We
     could implement this as
-    follows:<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
-\begin{JavaScript}
+    follows:<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
+
+    <div class='snippet' id='javascript_64_9_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function exchange(account1, account2) {
     const difference = account1("balance") - account2("balance");
     account1("withdraw")(difference);
     account2("deposit")(difference);
 }
-\end{JavaScript}
-
-  
-
-    
-\begin{JavaScript}
-function exchange(account1, account2) {
-    const difference = account1("balance") - account2("balance");
-    account1("withdraw")(difference);
-    account2("deposit")(difference);
-}
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
@@ -537,22 +521,18 @@ function exchange(account1, account2) {
     Even with account deposits and withdrawals
     serialized for individual accounts (as in the
     
-    {\lstinline[mathescape=true]$make_account$}
+    <kbd>make_account</kbd>
     
     
     function
     shown above in this section),
-    {\lstinline[mathescape=true]$exchange$} can still
+    <kbd>exchange</kbd> can still
     produce incorrect results.  For example, Peter might compute the
     difference in the balances for
     $a_1$ and $a_2$, but then Paul
     might change the balance in $a_1$ before Peter is able
-    to complete the exchange.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>{\lstinline[mathescape=true]$exchange$}
-    function
-    to lock out any other concurrent accesses to the accounts during the
-    entire time of the exchange.
-  
-    For correct behavior, we must arrange for the {\lstinline[mathescape=true]$exchange$}
+    to complete the exchange.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
+    For correct behavior, we must arrange for the <kbd>exchange</kbd>
     function
     to lock out any other concurrent accesses to the accounts during the
     entire time of the exchange.
@@ -561,7 +541,7 @@ function exchange(account1, account2) {
   <div class='permalink'>
 <a name='p16' class='permalink'></a><p>
     One way we can accomplish this is by using both accounts' serializers
-    to serialize the entire {\lstinline[mathescape=true]$exchange$}
+    to serialize the entire <kbd>exchange</kbd>
     
     function.
     To do this, we will arrange for access to an account's serializer.
@@ -569,15 +549,14 @@ function exchange(account1, account2) {
     breaking the modularity of the bank-account object by exposing the
     serializer.  The following version of
     
-    {\lstinline[mathescape=true]$make_account$}
+    <kbd>make_account</kbd>
     
     is identical to the original version given in
-    Section~\ref{sec:local-state-variables}, except that a serializer is
+    Section \ref{sec:local-state-variables}, except that a serializer is
     provided to protect the balance variable, and the serializer is
     exported via message passing:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_64_10_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_account_and_serializer(balance) {
     function withdraw(amount) {
         if (balance > amount) {
@@ -606,8 +585,7 @@ function make_account_and_serializer(balance) {
     }
     return dispatch;
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
@@ -616,26 +594,15 @@ function make_account_and_serializer(balance) {
     unlike our earlier serialized account, it is now the responsibility of
     each user of bank-account objects to explicitly manage the
     serialization, for example as
-    follows:<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
-\begin{JavaScript}
+    follows:<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
+
+    <div class='snippet' id='javascript_64_11_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function deposit(account, amount) {
     const s = account("serializer");
     const d = account("deposit");
     s(d(amount));
 }
-\end{JavaScript}
-
-  
-
-    
-\begin{JavaScript}
-function deposit(account, amount) {
-    const s = account("serializer");
-    const d = account("deposit");
-    s(d(amount));
-}
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
@@ -643,20 +610,18 @@ function deposit(account, amount) {
     Exporting the serializer in this way gives us enough flexibility to
     implement a serialized exchange program.  We simply
     serialize the original
-    {\lstinline[mathescape=true]$exchange$}
+    <kbd>exchange</kbd>
     
     function
     with the serializers for both accounts:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_64_12_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function serialized_exchange(account1, account2) {
     const serializer1 = account1("serializer");
     const serializer2 = account2("serializer");
     serializer1(serializer2(exchange))(account1, account2);
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   
@@ -668,11 +633,11 @@ function serialized_exchange(account1, account2) {
     the accounts.  Argue that if the processes are run sequentially,
     after any number of concurrent exchanges, the account balances should be 
     \$10, \$20, and \$30 in some order.
-    Draw a timing diagram like the one in Figure~\ref{fig:bank-access} to
+    Draw a timing diagram like the one in Figure \ref{fig:bank-access} to
     show how this condition can be violated if the exchanges are
     implemented using the first version of the account-exchange program in
     this section.  On the other hand, argue that even with this
-    {\lstinline[mathescape=true]$exchange$} program, the sum of the balances
+    <kbd>exchange</kbd> program, the sum of the balances
     in the accounts will be preserved.  Draw a timing diagram to show how
     even this condition would be violated if we did not serialize the
     transactions on individual accounts.
@@ -697,19 +662,17 @@ function serialized_exchange(account1, account2) {
     example, the version of
     
     
-      {\lstinline[mathescape=true]$make_account$}
+      <kbd>make_account</kbd>
     
     
     in the text above.
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_64_13_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function transfer(from_account, to_account, amount) {
     from_account("withdraw")(amount);
     to_account("deposit")(amount);
 }
-\end{JavaScript}
-
+</pre></div></div>
 
     Louis Reasoner claims that there is a problem here, and that we need
     to use a more sophisticated method, such as the one required for
@@ -718,9 +681,9 @@ function transfer(from_account, to_account, amount) {
     problem?  (You should assume that the balance in
     
       
-      {\lstinline[mathescape=true]$from_account$}
+      <kbd>from_account</kbd>
     
-    is at least {\lstinline[mathescape=true]$amount$}.)
+    is at least <kbd>amount</kbd>.)
   
 \end{Exercise}
 
@@ -735,7 +698,7 @@ function transfer(from_account, to_account, amount) {
     
       
       
-        {\lstinline[mathescape=true]$make_account_and_serializer$}
+        <kbd>make_account_and_serializer</kbd>
       
     
     should have exported the serializer 
@@ -743,17 +706,16 @@ function transfer(from_account, to_account, amount) {
       
       
         (for use by such functions as
-        {\lstinline[mathescape=true]$serialized_exchange$})        
+        <kbd>serialized_exchange</kbd>)        
       
     
     in addition to (rather than instead of) using it to serialize accounts and
     deposits as
     
-    {\lstinline[mathescape=true]$make_account$}
+    <kbd>make_account</kbd>
     
     did. He proposes to redefine accounts as follows:
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_64_14_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_account_and_serializer(balance) {
     function withdraw(amount) {
         if (balance > amount) {
@@ -781,24 +743,21 @@ function make_account_and_serializer(balance) {
     }
     return dispatch;
 }
-\end{JavaScript}
-
+</pre></div></div>
 
     Then deposits are handled as with the original
     
-    {\lstinline[mathescape=true]$make_account$}:
+    <kbd>make_account</kbd>:
     
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_64_15_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function deposit(account, amount) {
     account("deposit")(amount);
 }
-\end{JavaScript}
-
+</pre></div></div>
     Explain what is wrong with Louis's reasoning.  In particular,
     consider what happens when
     
-    {\lstinline[mathescape=true]$serialized_exchange$}
+    <kbd>serialized_exchange</kbd>
     
     is called.
     
@@ -808,9 +767,10 @@ function deposit(account, amount) {
   
   
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     Implementing serializers
-  
+  </h2></div>
 
   
 
@@ -826,50 +786,21 @@ function deposit(account, amount) {
     
     <EM>released</EM>.  Once a mutex has been acquired, no other acquire
     operations on that mutex may proceed until the mutex is
-    released.<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
-    function
-    {\lstinline[mathescape=true]$p$}, the serializer returns a
-    
-    function
-    that acquires the mutex, runs {\lstinline[mathescape=true]$p$},
-    and then releases the mutex.  This ensures that only one of the
-    
-    functions
-    produced by the serializer can be running at once, which is
-    precisely the serialization property that we need to guarantee.
-
-    
-\begin{JavaScript}
-function make_serializer() {
-    const mutex = make_mutex();
-    return p => {
-        function serialized_p(args) {
-            mutex("acquire");
-            const val = p(args);
-            mutex("release");
-            return val;
-        }
-        return serialized_p;   
-    };
-}
-\end{JavaScript}
-
-  
+    released.<a class='superscript' id='footnote-link-5' href='#footnote-5'>[5]</a>
     In our implementation, each serializer has an associated mutex.  Given a
     
     function
-    {\lstinline[mathescape=true]$p$}, the serializer returns a
+    <kbd>p</kbd>, the serializer returns a
     
     function
-    that acquires the mutex, runs {\lstinline[mathescape=true]$p$},
+    that acquires the mutex, runs <kbd>p</kbd>,
     and then releases the mutex.  This ensures that only one of the
     
     functions
     produced by the serializer can be running at once, which is
     precisely the serialization property that we need to guarantee.
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_64_16_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_serializer() {
     const mutex = make_mutex();
     return p => {
@@ -882,8 +813,7 @@ function make_serializer() {
         return serialized_p;   
     };
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
@@ -901,39 +831,17 @@ function make_serializer() {
 <a name='p21' class='permalink'></a><p>
     Our mutex constructor
     
-    {\lstinline[mathescape=true]$make_mutex$}
+    <kbd>make_mutex</kbd>
     
     begins by initializing the cell
     contents to false.  To acquire the mutex, we test the cell.  If the
     mutex is available, we set the cell contents to true and proceed.
     Otherwise, we wait in a loop, attempting to acquire over and over
     again, until we find that the mutex is
-    available.<a class='superscript' id='footnote-6' href='#footnote-6'>[6]</a>
-\begin{JavaScript}
-function make_mutex() {
-    const cell = list(false);
-    function the_mutex(m) {
-        return m === "aquire"
-               ? ( test_and_set(cell)
-                   ? the_mutex("aquire") // retry
-                   : true )
-               : m === "release"
-                 ? clear(cell)
-                 : error("Unknown request in mutex",
-                         m);
-    }
-    return the_mutex;
-}
-function clear(cell) {
-    set_head(cell, false);
-}
-\end{JavaScript}
-
-  
+    available.<a class='superscript' id='footnote-link-6' href='#footnote-6'>[6]</a>
     To release the mutex, we set the cell contents to false.
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_64_17_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_mutex() {
     const cell = list(false);
     function the_mutex(m) {
@@ -951,29 +859,27 @@ function make_mutex() {
 function clear(cell) {
     set_head(cell, false);
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p22' class='permalink'></a><p>
     
       
-      The function {\lstinline[mathescape=true]$test_and_set$}
+      The function <kbd>test_and_set</kbd>
       
     
     tests the cell and returns the result of the
     test.  In addition, if the test was false,
     
-    {\lstinline[mathescape=true]$test_and_set$}
+    <kbd>test_and_set</kbd>
     
     sets the cell contents to true before returning false.  We can express this
     behavior as the following
     
     function:
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_64_18_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function test_and_set(cell) {
     if (head(cell)) {
         return true;
@@ -982,19 +888,18 @@ function test_and_set(cell) {
         return false;
     }
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p23' class='permalink'></a><p>
     However, this implementation of
     
-    {\lstinline[mathescape=true]$test_and_set$}
+    <kbd>test_and_set</kbd>
     does not suffice as it stands.  There is a crucial subtlety here, which is the
     essential place where concurrency control enters the system: The
     
-    {\lstinline[mathescape=true]$test_and_set$}
+    <kbd>test_and_set</kbd>
     
     operation must be performed 
     
@@ -1002,15 +907,15 @@ function test_and_set(cell) {
     the cell and found it to be false, the cell contents will actually be set to true
     before any other process can test the cell.  If we do not make this
     guarantee, then the mutex can fail in a way similar to the
-    bank-account failure in Figure~\ref{fig:bank-access}.  (See
-    exercise~\ref{ex:atomic-test-and-set}.)
+    bank-account failure in Figure \ref{fig:bank-access}.  (See
+    exercise \ref{ex:atomic-test-and-set}.)
   </p></div>
 
   <div class='permalink'>
 <a name='p24' class='permalink'></a><p>
     The actual implementation of
     
-    {\lstinline[mathescape=true]$test_and_set$}
+    <kbd>test_and_set</kbd>
     
     depends on the details of how our system runs concurrent processes.
     For example, we might be executing concurrent processes on a sequential
@@ -1022,7 +927,7 @@ function test_and_set(cell) {
     
       
       
-        {\lstinline[mathescape=true]$test_and_set$}
+        <kbd>test_and_set</kbd>
       
     
     can work by disabling time slicing during the testing and
@@ -1032,7 +937,7 @@ function test_and_set(cell) {
     
   Alternatively, multiprocessing computers provide instructions that
   support atomic operations directly in
-  hardware.<a class='superscript' id='footnote-7' href='#footnote-7'>[7]</a>
+  hardware.<a class='superscript' id='footnote-link-7' href='#footnote-7'>[7]</a>
   </p></div>
 
   
@@ -1042,14 +947,14 @@ function test_and_set(cell) {
     Suppose that we implement
     
       
-      {\lstinline[mathescape=true]$test_and_set$}
+      <kbd>test_and_set</kbd>
     
     using an ordinary
     
     function
     as shown in the text, without attempting to make the operation
     atomic.  Draw a timing diagram like the one in
-    figure~\ref{fig:bank-access} to demonstrate how the mutex
+    figure \ref{fig:bank-access} to demonstrate how the mutex
     implementation can fail by allowing two processes to acquire the mutex
     at the same time.
     
@@ -1077,7 +982,7 @@ function test_and_set(cell) {
         in terms of atomic
         
           
-          {\lstinline[mathescape=true]$test_and_set$}
+          <kbd>test_and_set</kbd>
         
         operations.
       }
@@ -1088,9 +993,10 @@ function test_and_set(cell) {
 
   
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     Deadlock
-  
+  </h2></div>
 
   
   
@@ -1102,7 +1008,7 @@ function test_and_set(cell) {
     that account exchanging still has a problem, even with the
     
       
-      {\lstinline[mathescape=true]$serialized_exchange$}
+      <kbd>serialized_exchange</kbd>
       
     
     
@@ -1146,7 +1052,7 @@ function test_and_set(cell) {
     account a unique identification number and rewrite
     
       
-      {\lstinline[mathescape=true]$serialized_exchange$}
+      <kbd>serialized_exchange</kbd>
     
     so that a process will always attempt to enter a
     
@@ -1155,8 +1061,8 @@ function test_and_set(cell) {
     lowest-numbered account first.  Although this method works well for
     the exchange problem, there are other situations that require more
     sophisticated deadlock-avoidance techniques, or where deadlock cannot
-    be avoided at all.  (See exercises~\ref{ex:deadlock-avoid}
-    and~\ref{ex:deadlock-cannot-avoid}.)<a class='superscript' id='footnote-8' href='#footnote-8'>[8]</a>
+    be avoided at all.  (See exercises \ref{ex:deadlock-avoid}
+    and \ref{ex:deadlock-cannot-avoid}.)<a class='superscript' id='footnote-link-8' href='#footnote-8'>[8]</a>
   </p></div>
 
   
@@ -1170,13 +1076,13 @@ function test_and_set(cell) {
     problem.  Rewrite
     
       
-      {\lstinline[mathescape=true]$serialized_exchange$}
+      <kbd>serialized_exchange</kbd>
       
     
     to incorporate this idea. (You will also need to modify
     
       
-      {\lstinline[mathescape=true]$make_account$}
+      <kbd>make_account</kbd>
       
     
     so that each account is created with a number, which can be accessed by
@@ -1203,9 +1109,10 @@ function test_and_set(cell) {
   
 
 
-  \subsubsection{
+  <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
     Concurrency, time, and communication
-  
+  </h2></div>
 
   <div class='permalink'>
 <a name='p27' class='permalink'></a><p>
@@ -1222,7 +1129,7 @@ function test_and_set(cell) {
     Mechanisms such as
     
       
-      {\lstinline[mathescape=true]$test_and_set$}
+      <kbd>test_and_set</kbd>
       
     
     require processes to examine a
@@ -1233,7 +1140,7 @@ function test_and_set(cell) {
     may not be in a consistent state at every instant.  In contemporary
     multiprocessing systems, therefore, the serializer paradigm is being
     supplanted by new approaches to concurrency
-    control.<a class='superscript' id='footnote-9' href='#footnote-9'>[9]</a>
+    control.<a class='superscript' id='footnote-link-9' href='#footnote-9'>[9]</a>
   </p></div>
 
   <div class='permalink'>
@@ -1258,7 +1165,7 @@ function test_and_set(cell) {
     and the <QUOTE>state</QUOTE> of the account immediately after synchronization.
     Questions about the
     <QUOTE>real</QUOTE> account balance or the order of events between
-    synchronizations may be irrelevant or meaningless.<a class='superscript' id='footnote-10' href='#footnote-10'>[10]</a>
+    synchronizations may be irrelevant or meaningless.<a class='superscript' id='footnote-link-10' href='#footnote-10'>[10]</a>
   </p></div>
 
   <div class='permalink'>
@@ -1268,16 +1175,7 @@ function test_and_set(cell) {
     establishing shared state, or imposing an order on events requires
     communication among the processes.  In essence, any notion of time in
     concurrency control must be intimately tied to
-    communication.<a class='superscript' id='footnote-11' href='#footnote-11'>[11]</a>
-    Theory of Relativity, where the speed of light (the
-    fastest signal that can be used to synchronize events) is a
-    fundamental constant relating time and space.  The
-    complexities we encounter in dealing with time and state in our
-    computational models may in fact mirror a fundamental complexity of
-    the physical universe.
-    
-    
-  
+    communication.<a class='superscript' id='footnote-link-11' href='#footnote-11'>[11]</a>
     It is intriguing that a similar connection between time and
     communication also arises in the 
     
@@ -1292,45 +1190,45 @@ function test_and_set(cell) {
   </p></div>
 
 <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>
     <SPLIT>
       
       
-        The function {\lstinline[mathescape=true]$parallel_execute$} is not
+        The function <kbd>parallel_execute</kbd> is not
         part of the JavaScript standard, but it can be implemented using the
-        {\lstinline[mathescape=true]$SharedArrayBuffer$} feature mentioned            
-        in section~\ref{sec:nature-of-time}.
+        <kbd>SharedArrayBuffer</kbd> feature mentioned            
+        in section \ref{sec:nature-of-time}.
       
     </SPLIT>
-  </FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>We have simplified {\lstinline[mathescape=true]$exchange$}
-    by exploiting the fact that our {\lstinline[mathescape=true]$deposit$}
+  </FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>We have simplified <kbd>exchange</kbd>
+    by exploiting the fact that our <kbd>deposit</kbd>
     message accepts negative amounts.  (This is a serious bug in our banking
-    system!)</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>If the account balances start out as \$10,
+    system!)</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>If the account balances start out as \$10,
     \$20, and \$30, then after any number of concurrent exchanges, the
     balances should still be \$10, \$20, and
     \$30 in some order.  Serializing the deposits to individual accounts is not
     sufficient to guarantee this.
-    See exercise~\ref{ex:exchange-bug}.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>Exercise~\ref{ex:export-serializer}
+    See exercise \ref{ex:exchange-bug}.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Exercise \ref{ex:export-serializer}
     investigates why
     deposits and withdrawals are no longer automatically serialized
-    by the account.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>The term <QUOTE>mutex</QUOTE> is an abbreviation for 
+    by the account.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>The term <QUOTE>mutex</QUOTE> is an abbreviation for 
     
     <EM>mutual
     exclusion</EM>.  The general problem of arranging a mechanism that permits
     concurrent processes to safely share resources is called the mutual
     exclusion problem.  Our mutex is a simple variant of the 
     
-    <EM>semaphore</EM> mechanism (see exercise~\ref{ex:semaphore}),
+    <EM>semaphore</EM> mechanism (see exercise \ref{ex:semaphore}),
     which was introduced in the 
     
     <QUOTE>THE</QUOTE> Multiprogramming System developed at the
     
     Technological University of Eindhoven and named for the university's
-    initials in Dutch (Dijkstra 1968a).  The acquire and
+    initials in Dutch (<CITATION>Dijkstra 1968a</CITATION>).  The acquire and
     release operations were originally called 
     
     
@@ -1340,16 +1238,16 @@ function test_and_set(cell) {
     reference to the semaphores used on railroad systems.  Dijkstra's
     classic exposition (1968b) was one of the first to clearly present the
     issues of concurrency control, and showed how to use semaphores to
-    handle a variety of concurrency problems.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>In most time-shared operating systems,
+    handle a variety of concurrency problems.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>In most time-shared operating systems,
     processes that are 
     
     blocked by a mutex do
     
     not waste time <QUOTE>busy-waiting</QUOTE> as above.  Instead, the system
     schedules another process to run while the first is waiting, and the blocked
-    process is awakened when the mutex becomes available.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>There are many variants of such
+    process is awakened when the mutex becomes available.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-7' href='#footnote-link-7'>[7] </a><FOOTNOTE>There are many variants of such
   
   instructions—including test-and-set, test-and-clear, swap,
   compare-and-exchange, load-reserve, and store-conditional—whose
@@ -1374,8 +1272,8 @@ function test_and_set(cell) {
   rational
   
   dog placed between two equally attractive sources of food will starve
-  to death, because it is incapable of deciding which to go to first.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>The general
+  to death, because it is incapable of deciding which to go to first.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-8' href='#footnote-link-8'>[8] </a><FOOTNOTE>The general
     technique for avoiding deadlock by numbering the
     
     shared resources and acquiring them in order is due to 
@@ -1389,8 +1287,8 @@ function test_and_set(cell) {
     Deadlock-recovery mechanisms are widely used in database management
     systems, a topic that
     is treated in detail in
-    Gray and Reuter 1993.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>One such alternative to serialization is called 
+    <CITATION>Gray and Reuter 1993</CITATION>.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>One such alternative to serialization is called 
     
     <EM>barrier synchronization</EM>.  The programmer permits concurrent processes
     to execute as they please, but establishes certain synchronization points
@@ -1404,19 +1302,26 @@ function test_and_set(cell) {
     
     SYNC and 
     
-    EIEIO (Enforced In-order Execution of Input/Output).</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>This may seem
+    EIEIO (Enforced In-order Execution of Input/Output).</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-10' href='#footnote-link-10'>[10] </a><FOOTNOTE>This may seem
     like a strange point of view, but there are
     
     systems that work this way.  International charges to credit-card
     accounts, for example, are normally cleared on a per-country basis,
     and the charges made in different countries are periodically
     reconciled.  Thus the account balance may be different in
-    different countries.</FOOTNOTE></div><hr><div class='footnote'>
+    different countries.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>For distributed
     systems, this perspective was pursued by 
     
     Lamport (1978), who showed how
     to use communication to establish <QUOTE>global clocks</QUOTE> that can be
     used to establish orderings on events in distributed systems.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section4/subsection1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section5/section5.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+3.4.2  Mechanisms for Controlling Concurrency</div>	<div class='next-page'></div></div>

@@ -1,6 +1,15 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>5.4 The Explicit-Control Evaluator</a>
+		<a name='top' class='permalink'>5.4  The Explicit-Control Evaluator</a>
 	</div>
 </div>
 	<div class='chapter-text'>
@@ -12,7 +21,7 @@
     
     <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
-      In section~\ref{sec:designing-register-machines} we saw how to
+      In section \ref{sec:designing-register-machines} we saw how to
       transform simple Source programs into descriptions of register
       machines.  We will now perform this transformation on a more complex
       program, the metacircular evaluator of
@@ -20,7 +29,7 @@
       which shows how
       the behavior of a Source interpreter can be described in terms of the
       functions
-      {\lstinline[mathescape=true]$eval$} and {\lstinline[mathescape=true]$apply$}.
+      <kbd>eval</kbd> and <kbd>apply</kbd>.
       The <EM>explicit-control
   evaluator</EM> that we develop in this section shows how the underlying
       function-calling and argument-passing mechanisms used in the
@@ -29,24 +38,25 @@
       serve as an implementation of a Source interpreter, written in a
       language that is very similar to the native machine language of
       conventional computers.  The evaluator can be executed by the
-      register-machine simulator of section~\ref{sec:simulator}.
+      register-machine simulator of section \ref{sec:simulator}.
       Alternatively, it can be used as a starting point for building a
       machine-language implementation of a Source evaluator, or even a
       
       
       
       special-purpose machine for evaluating Source expressions.
-      Figure~\ref{fig:Scheme-chip} shows such a hardware implementation: a
+      Figure \ref{fig:Scheme-chip} shows such a hardware implementation: a
       silicon chip that acts as an evaluator for Scheme, the language for which this book was originally written..  The chip designers
       started with the data-path and controller specifications for a
       register machine similar to the evaluator described in this section
       and used design automation programs to construct the
-      integrated-circuit layout.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+      integrated-circuit layout.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
     </p></div>
     
-    \subsubsection{
+    <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
       Registers and operations
-    
+    </h2></div>
 
     
     
@@ -56,7 +66,7 @@
       operations to be used in our register machine.  We described the
       metacircular evaluator in terms of abstract syntax, using
       functions
-      such as {\lstinline[mathescape=true]$quoted?$} and {\lstinline[mathescape=true]$make-procedure$}.  In implementing the
+      such as <kbd>quoted?</kbd> and <kbd>make-procedure</kbd>.  In implementing the
       register machine, we could expand these
       functions
       into sequences of
@@ -67,16 +77,16 @@
       operations of the register machine the syntax
       functions
       given in
-      section~\ref{sec:representing-expressions} and the
+      section \ref{sec:representing-expressions} and the
       functions
       for
       representing environments and other run-time data given in
-      sections~\ref{sec:eval-data-structures} and~\ref{sec:running-eval}.
+      sections \ref{sec:eval-data-structures} and \ref{sec:running-eval}.
       In order to completely specify an evaluator that could be programmed
       in a low-level machine language or implemented in hardware, we would
       replace these operations by more elementary operations, using the
       list-structure implementation we described in
-      section~\ref{sec:storage-allocation}.
+      section \ref{sec:storage-allocation}.
     </p></div>
 
     
@@ -100,16 +110,16 @@
       
       
       Our Source evaluator register machine includes a stack and seven
-      registers: {\lstinline[mathescape=true]$exp$}, {\lstinline[mathescape=true]$env$}, {\lstinline[mathescape=true]$val$}, {\lstinline[mathescape=true]$continue$}, {\lstinline[mathescape=true]$proc$},
-      {\lstinline[mathescape=true]$argl$}, and {\lstinline[mathescape=true]$unev$}.  {\lstinline[mathescape=true]$Exp$} is used to hold the expression
-      to be evaluated, and {\lstinline[mathescape=true]$env$} contains the environment in which the
-      evaluation is to be performed.  At the end of an evaluation, {\lstinline[mathescape=true]$val$}
+      registers: <kbd>exp</kbd>, <kbd>env</kbd>, <kbd>val</kbd>, <kbd>continue</kbd>, <kbd>proc</kbd>,
+      <kbd>argl</kbd>, and <kbd>unev</kbd>.  <kbd>Exp</kbd> is used to hold the expression
+      to be evaluated, and <kbd>env</kbd> contains the environment in which the
+      evaluation is to be performed.  At the end of an evaluation, <kbd>val</kbd>
       contains the value obtained by evaluating the expression in the
-      designated environment.  The {\lstinline[mathescape=true]$continue$} register is used to
+      designated environment.  The <kbd>continue</kbd> register is used to
       implement recursion, as explained in
-      section~\ref{sec:stack-recursion}.  (The evaluator needs to call
+      section \ref{sec:stack-recursion}.  (The evaluator needs to call
       itself recursively, since evaluating an expression requires evaluating
-      its subexpressions.)  The registers {\lstinline[mathescape=true]$proc$}, {\lstinline[mathescape=true]$argl$}, and {\lstinline[mathescape=true]$unev$} are used in evaluating combinations.
+      its subexpressions.)  The registers <kbd>proc</kbd>, <kbd>argl</kbd>, and <kbd>unev</kbd> are used in evaluating combinations.
     </p></div>
 
     <div class='permalink'>
@@ -121,21 +131,16 @@
       
     </p></div>
 
-    
-    &subsection5.4.1;
-    
-    
-    &subsection5.4.2;
-
-    
-    &subsection5.4.3;
-
-    
-    &subsection5.4.4;
-
-  <hr><div class='footnote'>
+    <hr><div class='footnote'>
 <a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>See 
-  Batali et al.~1982 for more
+  <CITATION>Batali et al. 1982</CITATION> for more
   
   information on the chip and the method by which it was designed.</FOOTNOTE></div>
-</SECTION>
+</SECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section3/subsection2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section4/subsection1.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+5.4  The Explicit-Control Evaluator</div>	<div class='next-page'></div></div>

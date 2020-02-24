@@ -1,19 +1,26 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>4.4.2 
-  How the Query System Works
-      </a>
+		<a name='top' class='permalink'>4.4.2  How the Query System Works</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
 
       <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
-  In section~\ref{sec:implementing-the-query-system} we will present an
+  In section \ref{sec:implementing-the-query-system} we will present an
   implementation of the query interpreter as a collection of
   functions.
   In this section we give an overview that explains the general
@@ -29,9 +36,9 @@
   It should be apparent that the query evaluator must perform some kind
   of search in order to match queries against facts and rules in the
   data base.  One way to do this would be to implement the query system
-  as a nondeterministic program, using the {\lstinline[mathescape=true]$amb$} evaluator of
-  section~\ref{sec:nondeterministic-evaluation} (see
-  exercise~\ref{ex:query-lang-amb}).  Another possibility is to manage
+  as a nondeterministic program, using the <kbd>amb</kbd> evaluator of
+  section \ref{sec:nondeterministic-evaluation} (see
+  exercise \ref{ex:query-lang-amb}).  Another possibility is to manage
   the search with the aid of streams.  Our implementation follows this
   second approach.
       </p></div>
@@ -52,29 +59,30 @@
   
     
     
-      {\lstinline[mathescape=true]$evaluate$}
+      <kbd>evaluate</kbd>
     
   
   classifies expressions for the
-  interpreter described in section~\ref{sec:mc-eval}.
+  interpreter described in section \ref{sec:mc-eval}.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Pattern matching
-      
+      </h2></div>
 
       
       
       <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
   A <EM>pattern matcher</EM> is a program that tests whether some datum
-  fits a specified pattern.  For example, the data list {\lstinline[mathescape=true]$list(list("a", "b"), "c", list("a", "b"))$} matches the pattern {\lstinline[mathescape=true]$list(x, "c", x)$} with the pattern variable
-  {\lstinline[mathescape=true]$x$} bound to {\lstinline[mathescape=true]$list("a", "b")$}.  The same data list matches the pattern
-  {\lstinline[mathescape=true]$list(x, y, z)$} with {\lstinline[mathescape=true]$x$} and {\lstinline[mathescape=true]$z$} both bound to {\lstinline[mathescape=true]$list("a", "b")$}
-  and {\lstinline[mathescape=true]$y$} bound to {\lstinline[mathescape=true]$"c"$}.  It also matches the pattern {\lstinline[mathescape=true]$list(list(x, y), "c", list(x, y))$} with {\lstinline[mathescape=true]$x$} bound to {\lstinline[mathescape=true]$"a"$}  and {\lstinline[mathescape=true]$y$} bound
-  to {\lstinline[mathescape=true]$"b"$}.  However, it does not match the pattern {\lstinline[mathescape=true]$list(x, "a", y)$},
+  fits a specified pattern.  For example, the data list <kbd>list(list("a", "b"), "c", list("a", "b"))</kbd> matches the pattern <kbd>list(x, "c", x)</kbd> with the pattern variable
+  <kbd>x</kbd> bound to <kbd>list("a", "b")</kbd>.  The same data list matches the pattern
+  <kbd>list(x, y, z)</kbd> with <kbd>x</kbd> and <kbd>z</kbd> both bound to <kbd>list("a", "b")</kbd>
+  and <kbd>y</kbd> bound to <kbd>"c"</kbd>.  It also matches the pattern <kbd>list(list(x, y), "c", list(x, y))</kbd> with <kbd>x</kbd> bound to <kbd>"a"</kbd>  and <kbd>y</kbd> bound
+  to <kbd>"b"</kbd>.  However, it does not match the pattern <kbd>list(x, "a", y)</kbd>,
   since that pattern specifies a list whose second element is
-  the string {\lstinline[mathescape=true]$"a"$}.
+  the string <kbd>"a"</kbd>.
       </p></div>
 
       <div class='permalink'>
@@ -92,14 +100,14 @@
 
       <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
-  For example, using the pattern {\lstinline[mathescape=true]$list(x, y, z)$} to match {\lstinline[mathescape=true]$list("a", "b", "c")$}
-  given an empty frame will return a frame specifying that {\lstinline[mathescape=true]$x$} is
-  bound to {\lstinline[mathescape=true]$"a"$} and {\lstinline[mathescape=true]$y$} is bound to {\lstinline[mathescape=true]$"b"$}. Trying the match
+  For example, using the pattern <kbd>list(x, y, z)</kbd> to match <kbd>list("a", "b", "c")</kbd>
+  given an empty frame will return a frame specifying that <kbd>x</kbd> is
+  bound to <kbd>"a"</kbd> and <kbd>y</kbd> is bound to <kbd>"b"</kbd>. Trying the match
   with the same pattern, the same datum, and a frame specifying that
-  {\lstinline[mathescape=true]$y$}  is bound to {\lstinline[mathescape=true]$"a"$} will fail.  Trying the match with the
-  same pattern, the same datum, and a frame in which {\lstinline[mathescape=true]$y$} is bound
-  to {\lstinline[mathescape=true]$b$} and {\lstinline[mathescape=true]$x$} is unbound will return the given frame
-  augmented by a binding of {\lstinline[mathescape=true]$x$} to {\lstinline[mathescape=true]$"a"$}.
+  <kbd>y</kbd>  is bound to <kbd>"a"</kbd> will fail.  Trying the match with the
+  same pattern, the same datum, and a frame in which <kbd>y</kbd> is bound
+  to <kbd>b</kbd> and <kbd>x</kbd> is unbound will return the given frame
+  augmented by a binding of <kbd>x</kbd> to <kbd>"a"</kbd>.
       </p></div>
 
       <div class='permalink'>
@@ -109,23 +117,22 @@
   simple queries that don't involve rules.  For instance, to process the
   query
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_90_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 job(x, list("computer", "programmer"));
-\end{JavaScript}
-
+</pre></div></div>
 
   we scan through all assertions in the data base and select those that
   match the pattern with respect to an initially empty frame.  For each
   match we find, we use the frame returned by the match to instantiate
-  the pattern with a value for {\lstinline[mathescape=true]$x$}.
+  the pattern with a value for <kbd>x</kbd>.
   
   
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Streams of frames
-      
+      </h2></div>
 
       
       
@@ -139,14 +146,14 @@ job(x, list("computer", "programmer"));
   entries are collected into a stream, which is passed through a filter
   to weed out the failures.  The result is a stream of all the frames
   that extend the given frame via a match to some assertion in the data
-  base.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+  base.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
       </p></div>
 
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
   In our system, a query takes an input stream of frames and performs
   the above matching operation for every frame in the stream, as
-  indicated in Figure~\ref{fig:query-stream}.  That is, for each frame in
+  indicated in Figure \ref{fig:query-stream}.  That is, for each frame in
   the input stream, the query generates a new stream consisting of all
   extensions to that frame by matches to assertions in the data base.
   All these streams are then combined to form one huge stream, which
@@ -182,9 +189,10 @@ job(x, list("computer", "programmer"));
   is finally printed.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Compound queries
-      
+      </h2></div>
 
       
       <div class='permalink'>
@@ -193,43 +201,37 @@ job(x, list("computer", "programmer"));
   when we deal with compound queries.  The processing of compound
   queries makes use of the ability of our matcher to demand that a match
   
-  be consistent with a specified frame.  For example, to handle the {\lstinline[mathescape=true]$and$} of two queries, such as
+  be consistent with a specified frame.  For example, to handle the <kbd>and</kbd> of two queries, such as
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_90_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 and(can_do_job(x, list("computer", "programmer", "trainee")),
     job(person, x))
-\end{JavaScript}
-
+</pre></div></div>
 
   (informally, <QUOTE>Find all people who can do the job of a computer
     programmer trainee</QUOTE>), we first find all entries that match the
   pattern
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_90_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 can_do_job(x, list("computer", "programmer", "trainee"))
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
   This produces a stream of frames, each of which contains a binding for
-{\lstinline[mathescape=true]$x$}.  Then for each frame in the stream we find all entries that
+<kbd>x</kbd>.  Then for each frame in the stream we find all entries that
   match
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_90_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 job(person, x)
-\end{JavaScript}
+</pre></div></div>
 
-
-  in a way that is consistent with the given binding for {\lstinline[mathescape=true]$x$}.  Each
-  such match will produce a frame containing bindings for {\lstinline[mathescape=true]$x$} and
-  {\lstinline[mathescape=true]$person$}.  The {\lstinline[mathescape=true]$and$} of two queries can be viewed as a series
+  in a way that is consistent with the given binding for <kbd>x</kbd>.  Each
+  such match will produce a frame containing bindings for <kbd>x</kbd> and
+  <kbd>person</kbd>.  The <kbd>and</kbd> of two queries can be viewed as a series
   combination of the two component queries, as shown in
-  figure~\ref{fig:query-and}.  The frames that pass through the first
+  figure \ref{fig:query-and}.  The frames that pass through the first
   query filter are filtered and further extended by the second query.
 
   <SPLIT>
@@ -240,7 +242,7 @@ job(person, x)
 \centering
 
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/Fig4.5a.std}.svg}}
-\caption{The {\lstinline[mathescape=true]$and$} combination of two queries is
+\caption{The <kbd>and</kbd> combination of two queries is
         produced by operating on the stream of frames in series.}
 \label{fig:query-and}
 \end{figure}
@@ -253,8 +255,8 @@ job(person, x)
       <div class='permalink'>
 <a name='p13' class='permalink'></a><p>
   
-  Figure~\ref{fig:query-or} shows the analogous method for computing the
-  {\lstinline[mathescape=true]$or$} of two queries as a parallel combination of the two component
+  Figure \ref{fig:query-or} shows the analogous method for computing the
+  <kbd>or</kbd> of two queries as a parallel combination of the two component
   queries.  The input stream of frames is extended separately by each
   query.  The two resulting streams are then merged to produce the final
   output stream.
@@ -267,7 +269,7 @@ job(person, x)
 \centering
 
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/Fig4.6a.std}.svg}}
-\caption{The {\lstinline[mathescape=true]$or$} combination of two queries is produced by 
+\caption{The <kbd>or</kbd> combination of two queries is produced by 
         operating on the stream of frames in parallel and merging the
         results.}
 \label{fig:query-or}
@@ -284,63 +286,59 @@ job(person, x)
   Even from this high-level description, it is apparent that the
   processing of compound queries can be slow.
   For example, since a query may produce more than one output frame for
-  each input frame, and each query in an {\lstinline[mathescape=true]$and$} gets its input frames
-  from the previous query, an {\lstinline[mathescape=true]$and$} query could, in the worst case,
+  each input frame, and each query in an <kbd>and</kbd> gets its input frames
+  from the previous query, an <kbd>and</kbd> query could, in the worst case,
   have to perform a number of matches that is exponential in the number
   of queries (see 
-  exercise~\ref{ex:q-exponential-and}).<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a><a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
-      
+  exercise \ref{ex:q-exponential-and}).<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
   Though systems for handling only simple queries are quite practical,
   dealing with complex queries is extremely 
-  difficult.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
+  difficult.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
       </p></div>
 
       <div class='permalink'>
 <a name='p15' class='permalink'></a><p>
   
-  From the stream-of-frames viewpoint, the {\lstinline[mathescape=true]$not$} of some query acts
+  From the stream-of-frames viewpoint, the <kbd>not</kbd> of some query acts
   as a filter that removes all frames for which the query can be
   satisfied.  For instance, given the pattern
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_90_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 not(job(x, list("computer", "programmer")))
-\end{JavaScript}
-
+</pre></div></div>
 
   we attempt, for each frame in the input stream, to produce extension
-  frames that satisfy {\lstinline[mathescape=true]$job(x, list("computer", "programmer"))$}.  We remove
+  frames that satisfy <kbd>job(x, list("computer", "programmer"))</kbd>.  We remove
   from the input stream all frames for which such extensions exist.  The
   result is a stream consisting of only those frames in which the
-  binding for {\lstinline[mathescape=true]$x$} does not satisfy {\lstinline[mathescape=true]$job(x, list("computer", "programmer"))$}.  For example, in processing the query
+  binding for <kbd>x</kbd> does not satisfy <kbd>job(x, list("computer", "programmer"))</kbd>.  For example, in processing the query
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_90_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 and(supervisor(x, y),
     not(job(x, list("computer", "programmer"))));
-\end{JavaScript}
+</pre></div></div>
 
-
-  the first clause will generate frames with bindings for {\lstinline[mathescape=true]$x$} and
-  {\lstinline[mathescape=true]$y$}.  The {\lstinline[mathescape=true]$not$} clause will then filter
-  these by removing all frames in which the binding for {\lstinline[mathescape=true]$x$}
-  satisfies the restriction that {\lstinline[mathescape=true]$x$} is a computer
-  programmer.<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
+  the first clause will generate frames with bindings for <kbd>x</kbd> and
+  <kbd>y</kbd>.  The <kbd>not</kbd> clause will then filter
+  these by removing all frames in which the binding for <kbd>x</kbd>
+  satisfies the restriction that <kbd>x</kbd> is a computer
+  programmer.<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
       </p></div>
 
       <div class='permalink'>
 <a name='p16' class='permalink'></a><p>
   
-  The {\lstinline[mathescape=true]$javascript-value$} expression is implemented as a similar filter
+  The <kbd>javascript-value</kbd> expression is implemented as a similar filter
   on frame streams.  We use each frame in the stream to instantiate any
   variables in the pattern, then apply the JavaScript predicate.  We remove
   from the input stream all frames for which the predicate fails.
   
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Unification
-      
+      </h2></div>
 
       
       
@@ -359,11 +357,11 @@ and(supervisor(x, y),
   A unifier takes two patterns, each containing constants and variables,
   and determines whether it is possible to assign values to the
   variables that will make the two patterns equal.  If so, it returns a
-  frame containing these bindings.  For example, unifying {\lstinline[mathescape=true]$list(x, "a", y)$} and {\lstinline[mathescape=true]$list(y, z, "a")$} will specify a frame in which {\lstinline[mathescape=true]$x$}, {\lstinline[mathescape=true]$y$}, and {\lstinline[mathescape=true]$z$} must all be bound to {\lstinline[mathescape=true]$"a"$}.  On the other
-  hand, unifying {\lstinline[mathescape=true]$list(x, y, "a")$} and {\lstinline[mathescape=true]$list(x, "b", y)$} will fail, because
-  there is no value for {\lstinline[mathescape=true]$y$} that can make the two patterns equal.
-  (For the second elements of the patterns to be equal, {\lstinline[mathescape=true]$y$} would
-  have to be {\lstinline[mathescape=true]$"b"$}; however, for the third elements to be equal, {\lstinline[mathescape=true]$y$} would have to be {\lstinline[mathescape=true]$"a"$}.)  The unifier used in the query system,
+  frame containing these bindings.  For example, unifying <kbd>list(x, "a", y)</kbd> and <kbd>list(y, z, "a")</kbd> will specify a frame in which <kbd>x</kbd>, <kbd>y</kbd>, and <kbd>z</kbd> must all be bound to <kbd>"a"</kbd>.  On the other
+  hand, unifying <kbd>list(x, y, "a")</kbd> and <kbd>list(x, "b", y)</kbd> will fail, because
+  there is no value for <kbd>y</kbd> that can make the two patterns equal.
+  (For the second elements of the patterns to be equal, <kbd>y</kbd> would
+  have to be <kbd>"b"</kbd>; however, for the third elements to be equal, <kbd>y</kbd> would have to be <kbd>"a"</kbd>.)  The unifier used in the query system,
   like the pattern matcher, takes a frame as input and performs
   unifications that are consistent with this frame.
       </p></div>
@@ -372,81 +370,51 @@ and(supervisor(x, y),
 <a name='p19' class='permalink'></a><p>
   The unification algorithm is the most technically difficult part of
   the query system.  With complex patterns, performing unification may
-  seem to require deduction.  To unify {\lstinline[mathescape=true]$list(x, x)$} and {\lstinline[mathescape=true]$list(list("a", y, "c"), list("a", "b", z))$}, for example, the algorithm must infer that {\lstinline[mathescape=true]$x$} should
-  be {\lstinline[mathescape=true]$list("a", "b", "c")$}, {\lstinline[mathescape=true]$y$} should be {\lstinline[mathescape=true]$"b"$}, and {\lstinline[mathescape=true]$z$} should
-  be {\lstinline[mathescape=true]$"c"$}.  We may think of this process as solving a set of
+  seem to require deduction.  To unify <kbd>list(x, x)</kbd> and <kbd>list(list("a", y, "c"), list("a", "b", z))</kbd>, for example, the algorithm must infer that <kbd>x</kbd> should
+  be <kbd>list("a", "b", "c")</kbd>, <kbd>y</kbd> should be <kbd>"b"</kbd>, and <kbd>z</kbd> should
+  be <kbd>"c"</kbd>.  We may think of this process as solving a set of
   equations among the pattern components.  In general, these are
   simultaneous equations, which may require substantial manipulation to
-  solve.<a class='superscript' id='footnote-6' href='#footnote-6'>[6]</a>{\lstinline[mathescape=true]$list(x, x)$} and {\lstinline[mathescape=true]$list(list("a", y, "c"), list("a", "b", z))$} may be thought of as specifying the
+  solve.<a class='superscript' id='footnote-link-5' href='#footnote-5'>[5]</a>  For example, unifying <kbd>list(x, x)</kbd> and <kbd>list(list("a", y, "c"), list("a", "b", z))</kbd> may be thought of as specifying the
   simultaneous equations
 
-  
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
+  <kbd class='snippet'>
+    
+    
 x $=$ list("a", y, "c")
 x $=$ list("a", "b", z)
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=B4AgJAvGIDYJYGcAuAKARAQzQGhAT1zQGM0BKAKFEmnmXS0ICMcQAvUoA}{\usebox\lstbox}
-
-
-        For example, unifying {\lstinline[mathescape=true]$list(x, x)$} and {\lstinline[mathescape=true]$list(list("a", y, "c"), list("a", "b", z))$} may be thought of as specifying the
-  simultaneous equations
-
-  
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-x $=$ list("a", y, "c")
-x $=$ list("a", "b", z)
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=B4AgJAvGIDYJYGcAuAKARAQzQGhAT1zQGM0BKAKFEmnmXS0ICMcQAvUoA}{\usebox\lstbox}
-
-
+    
+  </kbd>
       </p></div>
 
       <div class='permalink'>
 <a name='p20' class='permalink'></a><p>
   These equations imply that
 
-  
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-list("a", y, "c") $=$ list("a", "b", z)
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=DYSwzgLgFARAhjANAAgJ4pgYxgSmQEgF59lRJYEMAjJZALxyA}{\usebox\lstbox}
-
-
+  <kbd class='snippet'>
+    
+    
+list("a", y, "c") $=$ list("a", "b", z)      
+    
+  </kbd>
 
   which in turn implies that
 
-  
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-"a" $=$ "a", y $=$ "b", "c" $=$ z,
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=EQQ2AIBIF5PVgBpwE8q3gIyfAxhGOAL0SA}{\usebox\lstbox}
-
-
+  <kbd class='snippet'>
+    
+    
+"a" $=$ "a", y $=$ "b", "c" $=$ z,      
+    
+  </kbd>
 
   and hence that
 
-  
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-x $=$ list("a", "b", "c")
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=B4AgJAvGIDYJYGcAuAKARAQzQGhGgRjngMZoCUQA}{\usebox\lstbox}
-
-
+  <kbd class='snippet'>
+    
+    
+x $=$ list("a", "b", "c")      
+    
+  </kbd>
       </p></div>
 
       <div class='permalink'>
@@ -463,27 +431,26 @@ x $=$ list("a", "b", "c")
 
       <div class='permalink'>
 <a name='p22' class='permalink'></a><p>
-  Consider the unification of {\lstinline[mathescape=true]$list(x, "a")$} and {\lstinline[mathescape=true]$list(list("b", y), z)$}.  We
-  can deduce that {\lstinline[mathescape=true]$x$} $=$ {\lstinline[mathescape=true]$list("b", y)$} and {\lstinline[mathescape=true]$"a"$} $=$ {\lstinline[mathescape=true]$z$}, but we cannot
-  further solve for {\lstinline[mathescape=true]$x$} or~{\lstinline[mathescape=true]$y$}.  The unification doesn't fail,
+  Consider the unification of <kbd>list(x, "a")</kbd> and <kbd>list(list("b", y), z)</kbd>.  We
+  can deduce that <kbd>x</kbd> $=$ <kbd>list("b", y)</kbd> and <kbd>"a"</kbd> $=$ <kbd>z</kbd>, but we cannot
+  further solve for <kbd>x</kbd> or <kbd>y</kbd>.  The unification doesn't fail,
   since it is certainly possible to make the two patterns equal by
-  assigning values to {\lstinline[mathescape=true]$x$} and {\lstinline[mathescape=true]$y$}.  Since this match in no way
-  restricts the values {\lstinline[mathescape=true]$y$} can take on, no binding for {\lstinline[mathescape=true]$y$} is
+  assigning values to <kbd>x</kbd> and <kbd>y</kbd>.  Since this match in no way
+  restricts the values <kbd>y</kbd> can take on, no binding for <kbd>y</kbd> is
   put into the result frame.  The match does, however, restrict the
-  value of~{\lstinline[mathescape=true]$x$}.  Whatever value {\lstinline[mathescape=true]$y$} has, {\lstinline[mathescape=true]$x$} must be {\lstinline[mathescape=true]$list("b", y)$}.  A binding of {\lstinline[mathescape=true]$x$} to the pattern {\lstinline[mathescape=true]$list("b", y)$} is thus
-  put into the frame.  If a value for {\lstinline[mathescape=true]$y$} is later determined and
+  value of <kbd>x</kbd>.  Whatever value <kbd>y</kbd> has, <kbd>x</kbd> must be <kbd>list("b", y)</kbd>.  A binding of <kbd>x</kbd> to the pattern <kbd>list("b", y)</kbd> is thus
+  put into the frame.  If a value for <kbd>y</kbd> is later determined and
   added to the frame (by a pattern match or unification that is required
-  to be consistent with this frame), the previously bound {\lstinline[mathescape=true]$x$} will
-  refer to this value.<a class='superscript' id='footnote-7' href='#footnote-7'>[7]</a>
-  
-      
+  to be consistent with this frame), the previously bound <kbd>x</kbd> will
+  refer to this value.<a class='superscript' id='footnote-link-6' href='#footnote-6'>[6]</a>
   
   
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Applying rules
-      
+      </h2></div>
 
       
       <div class='permalink'>
@@ -492,11 +459,9 @@ x $=$ list("a", "b", "c")
   inferences from rules. To see how this is accomplished, consider
   processing a query that involves applying a rule, such as
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_90_7_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 lives_near(x, list("Hacker", "Alyssa", "P"));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -510,20 +475,18 @@ lives_near(x, list("Hacker", "Alyssa", "P"));
   pattern with the conclusion of each rule.  We find that the pattern
   unifies with the conclusion of the rule
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_90_8_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 rule(lives_near(person_1, person_2),
      and(address(person_1, pair(town, rest_1)),
          address(person_2, list(town, rest_2)),
          not(same(person_1, person_2))));
-\end{JavaScript}
+</pre></div></div>
 
-
-  resulting in a frame specifying that {\lstinline[mathescape=true]$person_2$} is bound
-  to {\lstinline[mathescape=true]$list("Hacker", "Alyssa", "P")$} and that {\lstinline[mathescape=true]$x$} should be bound to (have
-  the same value as) {\lstinline[mathescape=true]$person_1$}.  Now, relative to this frame, we
+  resulting in a frame specifying that <kbd>person_2</kbd> is bound
+  to <kbd>list("Hacker", "Alyssa", "P")</kbd> and that <kbd>x</kbd> should be bound to (have
+  the same value as) <kbd>person_1</kbd>.  Now, relative to this frame, we
   evaluate the compound query given by the body of the rule.  Successful
-  matches will extend this frame by providing a binding for {\lstinline[mathescape=true]$person_1$}, and consequently a value for {\lstinline[mathescape=true]$x$}, which we can use to
+  matches will extend this frame by providing a binding for <kbd>person_1</kbd>, and consequently a value for <kbd>x</kbd>, which we can use to
   instantiate the original query pattern.
       </p></div>
 
@@ -551,7 +514,7 @@ rule(lives_near(person_1, person_2),
   Notice how similar this is to the method for applying a
   function
   in
-  the {\lstinline[mathescape=true]$evaluate$}/{\lstinline[mathescape=true]$apply$} evaluator for JavaScript:
+  the <kbd>evaluate</kbd>/<kbd>apply</kbd> evaluator for JavaScript:
   <UL>
 
     <LI>Bind the
@@ -583,9 +546,10 @@ rule(lives_near(person_1, person_2),
   
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Simple queries
-      
+      </h2></div>
 
       
       <div class='permalink'>
@@ -608,17 +572,10 @@ rule(lives_near(person_1, person_2),
 
     </LI>
     <LI>a stream of extended frames obtained by applying all
-      possible rules (using the unifier).<a class='superscript' id='footnote-8' href='#footnote-8'>[8]</a>
+      possible rules (using the unifier).<a class='superscript' id='footnote-link-7' href='#footnote-7'>[7]</a>
     </LI>
 
-  <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-8' href='#footnote-link-8'>[8] </a><FOOTNOTE>Since unification is a
-        
-        
-        generalization of matching, we could simplify the system by using the
-        unifier to produce both streams.  Treating the easy case with the
-        simple matcher, however, illustrates how matching (as opposed to
-        full-blown unification) can be useful in its own right.</FOOTNOTE></div></UL>
+  </UL>
       </p></div>
 
       <div class='permalink'>
@@ -632,9 +589,10 @@ rule(lives_near(person_1, person_2),
   
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   The query evaluator and the driver loop
-      
+      </h2></div>
 
       
       <div class='permalink'>
@@ -645,24 +603,24 @@ rule(lives_near(person_1, person_2),
   that coordinates the matching operations is called 
   
   
-  {\lstinline[mathescape=true]$qeval$}, and it plays a role analogous to that of the {\lstinline[mathescape=true]$evaluate$}
+  <kbd>qeval</kbd>, and it plays a role analogous to that of the <kbd>evaluate</kbd>
   function
-  for JavaScript.  The function {\lstinline[mathescape=true]$qeval$} takes as inputs a query and a stream
+  for JavaScript.  The function <kbd>qeval</kbd> takes as inputs a query and a stream
   of frames.  Its output is a stream of frames, corresponding to
   successful matches to the query pattern, that extend some frame in the
-  input stream, as indicated in Figure~\ref{fig:query-stream}.  Like
-  {\lstinline[mathescape=true]$evaluate$}, {\lstinline[mathescape=true]$qeval$} classifies the different types of expressions
+  input stream, as indicated in Figure \ref{fig:query-stream}.  Like
+  <kbd>evaluate</kbd>, <kbd>qeval</kbd> classifies the different types of expressions
   (queries) and dispatches to an appropriate
   function
   for each.  There
   is a
   function
-  for each special form ({\lstinline[mathescape=true]$and$}, {\lstinline[mathescape=true]$or$}, {\lstinline[mathescape=true]$not$},
+  for each special form (<kbd>and</kbd>, <kbd>or</kbd>, <kbd>not</kbd>,
   and
     
     
     
-      {\lstinline[mathescape=true]$javascript_value$})
+      <kbd>javascript_value</kbd>)
     
   
   and one for simple queries.
@@ -675,41 +633,39 @@ rule(lives_near(person_1, person_2),
   The driver loop, which is analogous to the
   
   
-    {\lstinline[mathescape=true]$driver_loop$}
+    <kbd>driver_loop</kbd>
   
   function
   for the other evaluators in this chapter, reads queries from the
-  terminal.  For each query, it calls {\lstinline[mathescape=true]$qeval$} with the query and a
+  terminal.  For each query, it calls <kbd>qeval</kbd> with the query and a
   stream that consists of a single empty frame.  This will produce the
   stream of all possible matches (all possible extensions to the empty
   frame).  For each frame in the resulting stream, it instantiates the
   original query using the values of the variables found in the frame.
   This stream of instantiated queries is then 
-  printed.<a class='superscript' id='footnote-9' href='#footnote-9'>[9]</a>
+  printed.<a class='superscript' id='footnote-link-8' href='#footnote-8'>[8]</a>
       </p></div>
 
       <div class='permalink'>
 <a name='p33' class='permalink'></a><p>
   
   
-  The driver also checks for the special command {\lstinline[mathescape=true]$assert$}, which
+  The driver also checks for the special command <kbd>assert</kbd>, which
   signals that the input is not a query but rather an assertion or rule
   to be added to the data base.  For instance,
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_90_9_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 assert(job(list("Bitdiddle", "Ben"), list("computer", "wizard")));
 
 assert(rule(wheel(person),
             and(supervisor(middle-manager, person),
                 supervisor(x, middle-manager))));
-\end{JavaScript}
-
+</pre></div></div>
   
       </p></div>
 
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>Because matching is generally very expensive, we would
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Because matching is generally very expensive, we would
     
     like to avoid applying the full matcher to every element of the data
     base.  This is usually arranged by breaking up the process into a
@@ -721,29 +677,33 @@ assert(rule(wheel(person),
     then when we want to select the candidates.  This is called <EM>
       indexing</EM> the data base.  There is a vast technology built around
     data-base-indexing schemes.  Our implementation, described in
-    section~\ref{sec:implementing-the-query-system}, contains a
-    simple-minded form of such an optimization.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>But this kind of exponential explosion is not common in {\lstinline[mathescape=true]$and$}
+    section \ref{sec:implementing-the-query-system}, contains a
+    simple-minded form of such an optimization.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>But this kind of exponential explosion is not common in <kbd>and</kbd>
     queries because the added conditions tend to reduce rather than expand
-    the number of frames produced.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>There is a large literature on data-base-management
+    the number of frames produced.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>There is a large literature on data-base-management
     systems that is concerned with how to handle complex queries
-    efficiently.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>There is a large literature on data-base-management
-    systems that is concerned with how to handle complex queries
-    efficiently.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>There is a subtle difference between this filter
-    implementation of {\lstinline[mathescape=true]$not$} and the usual meaning of {\lstinline[mathescape=true]$not$} in
-    mathematical logic.  See section~\ref{sec:math-logic}.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>In one-sided pattern matching, all the equations that
+    efficiently.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>There is a subtle difference between this filter
+    implementation of <kbd>not</kbd> and the usual meaning of <kbd>not</kbd> in
+    mathematical logic.  See section \ref{sec:math-logic}.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>In one-sided pattern matching, all the equations that
     contain pattern variables are explicit and already solved for the
-    unknown (the pattern variable).</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>Another way to think of unification is that it generates the most
+    unknown (the pattern variable).</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>Another way to think of unification is that it generates the most
     general pattern that is a specialization of the two input patterns.
-    That is, the unification of {\lstinline[mathescape=true]$list(x, "a")$} and {\lstinline[mathescape=true]$list(list("b", y), z)$} is {\lstinline[mathescape=true]$list(list("b", y), "a")$}, and the unification of {\lstinline[mathescape=true]$list(x, "a", y)$} and {\lstinline[mathescape=true]$list(y, z, "a")$}, discussed above, is {\lstinline[mathescape=true]$list("a", "a", "a")$}.
+    That is, the unification of <kbd>list(x, "a")</kbd> and <kbd>list(list("b", y), z)</kbd> is <kbd>list(list("b", y), "a")</kbd>, and the unification of <kbd>list(x, "a", y)</kbd> and <kbd>list(y, z, "a")</kbd>, discussed above, is <kbd>list("a", "a", "a")</kbd>.
     For our implementation, it is more convenient to think of the result
-    of unification as a frame rather than a pattern.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-9' href='#footnote-link-9'>[9] </a><FOOTNOTE>The reason we use streams (rather than lists) of frames is that the
+    of unification as a frame rather than a pattern.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-7' href='#footnote-link-7'>[7] </a><FOOTNOTE>Since unification is a
+        
+        
+        generalization of matching, we could simplify the system by using the
+        unifier to produce both streams.  Treating the easy case with the
+        simple matcher, however, illustrates how matching (as opposed to
+        full-blown unification) can be useful in its own right.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-8' href='#footnote-link-8'>[8] </a><FOOTNOTE>The reason we use streams (rather than lists) of frames is that the
     
     
     recursive application of rules can generate
@@ -751,4 +711,11 @@ assert(rule(wheel(person),
     evaluation embodied in streams is crucial here: The system will print
     responses one by one as they are generated, regardless of whether
     there are a finite or infinite number of responses.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section4/subsection1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section4/subsection3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+4.4.2  How the Query System Works</div>	<div class='next-page'></div></div>

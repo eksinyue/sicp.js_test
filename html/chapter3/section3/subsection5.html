@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>3.3.5 
-        Propagation of Constraints
-      </a>
+		<a name='top' class='permalink'>3.3.5  Propagation of Constraints</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -34,7 +41,7 @@
         function
         for computing the area $A$ could not be used to
         compute the deflection $d$, even though the computations of $A$ and
-        $d$ arise from the same equation.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+        $d$ arise from the same equation.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
       </p></div>
 
       <div class='permalink'>
@@ -46,10 +53,10 @@
         
         
         <EM>primitive constraints</EM>, which state that certain
-        relations hold between quantities.  For example, {\lstinline[mathescape=true]$adder(a, b, c)$}
+        relations hold between quantities.  For example, <kbd>adder(a, b, c)</kbd>
         specifies that the quantities $a$, $b$, and $c$ must be related by the
-        equation $a+b=c$, {\lstinline[mathescape=true]$multiplier(x, y, z)$} expresses the constraint
-        $xy = z$, and {\lstinline[mathescape=true]$constant(3.14, x)$} says that the value of $x$ must
+        equation $a+b=c$, <kbd>multiplier(x, y, z)</kbd> expresses the constraint
+        $xy = z$, and <kbd>constant(3.14, x)</kbd> says that the value of $x$ must
         be 3.14.
       </p></div>
 
@@ -76,7 +83,7 @@
 <a name='p4' class='permalink'></a><p>
         Such a constraint can be thought of as a network consisting of
         primitive adder, multiplier, and constant constraints
-        (figure~\ref{fig:constraint}).  In the figure, we see on the left a
+        (figure \ref{fig:constraint}).  In the figure, we see on the left a
         multiplier box with three terminals, labeled $m1$, $m2$, and $p$.
         These connect the multiplier to the rest of the network as follows:
         The $m1$ terminal is linked to a connector $C$, which will hold the
@@ -120,24 +127,23 @@
         the adder, which sets $F$ to 77.
       </p></div>
 
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
         Using the constraint system
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
         To use the constraint system to carry out the temperature computation
-        outlined above, we first create two connectors, {\lstinline[mathescape=true]$C$} and {\lstinline[mathescape=true]$F$},
-        by calling the constructor {\lstinline[mathescape=true]$make_connector$}, and link {\lstinline[mathescape=true]$C$} and
-        {\lstinline[mathescape=true]$F$} in an appropriate network:
+        outlined above, we first create two connectors, <kbd>C</kbd> and <kbd>F</kbd>,
+        by calling the constructor <kbd>make_connector</kbd>, and link <kbd>C</kbd> and
+        <kbd>F</kbd> in an appropriate network:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const C = make_connector();
 const F = make_connector();
 celsius_fahrenheit_converter(C, F);
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -146,8 +152,7 @@ celsius_fahrenheit_converter(C, F);
         function
         that creates the network is defined as follows:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function celsius_fahrenheit_converter(c, f) {
     const u = make_connector();
     const v = make_connector();
@@ -162,19 +167,18 @@ function celsius_fahrenheit_converter(c, f) {
     constant(32, y);
     return "ok";
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
         This
         function
-        creates the internal connectors {\lstinline[mathescape=true]$u$}, {\lstinline[mathescape=true]$v$}, {\lstinline[mathescape=true]$w$}, {\lstinline[mathescape=true]$x$}, and {\lstinline[mathescape=true]$y$}, and links them as shown in
-        Figure~\ref{fig:constraint} using the primitive constraint
-        constructors {\lstinline[mathescape=true]$adder$}, {\lstinline[mathescape=true]$multiplier$}, and {\lstinline[mathescape=true]$constant$}.  Just
+        creates the internal connectors <kbd>u</kbd>, <kbd>v</kbd>, <kbd>w</kbd>, <kbd>x</kbd>, and <kbd>y</kbd>, and links them as shown in
+        Figure \ref{fig:constraint} using the primitive constraint
+        constructors <kbd>adder</kbd>, <kbd>multiplier</kbd>, and <kbd>constant</kbd>.  Just
         as with the digital-circuit simulator of
-        section~\ref{sec:circuit-simulator}, expressing these combinations of
+        section \ref{sec:circuit-simulator}, expressing these combinations of
         primitive elements in terms of
         functions
         automatically provides our
@@ -184,125 +188,116 @@ function celsius_fahrenheit_converter(c, f) {
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
         To watch the network in action, we can place probes on the connectors
-        {\lstinline[mathescape=true]$C$} and {\lstinline[mathescape=true]$F$}, using a {\lstinline[mathescape=true]$probe$}
+        <kbd>C</kbd> and <kbd>F</kbd>, using a <kbd>probe</kbd>
         function
         similar to the one
-        we used to monitor wires in section~\ref{sec:circuit-simulator}.
+        we used to monitor wires in section \ref{sec:circuit-simulator}.
         Placing a probe on a connector will cause a message to be printed
         whenever the connector is given a value:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 probe("Celsius Temp", C);
 probe("Fahrenheit Temp", F);
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
-        Next we set the value of {\lstinline[mathescape=true]$C$} to 25.  (The third argument to {\lstinline[mathescape=true]$set_value$} tells {\lstinline[mathescape=true]$C$} that this directive comes from the {\lstinline[mathescape=true]$user$}.)
+        Next we set the value of <kbd>C</kbd> to 25.  (The third argument to <kbd>set_value</kbd> tells <kbd>C</kbd> that this directive comes from the <kbd>user</kbd>.)
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 set_value(C, 25, "user");
 // Probe: Celsius Temp = 25
 // Probe: Fahrenheit Temp = 77
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
-        The probe on {\lstinline[mathescape=true]$C$} awakens and reports the value.  {\lstinline[mathescape=true]$C$} also
+        The probe on <kbd>C</kbd> awakens and reports the value.  <kbd>C</kbd> also
         propagates its value through the network as described above.  This
-        sets {\lstinline[mathescape=true]$F$} to 77, which is reported by the probe on {\lstinline[mathescape=true]$F$}.
+        sets <kbd>F</kbd> to 77, which is reported by the probe on <kbd>F</kbd>.
       </p></div>
 
       <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
-        Now we can try to set {\lstinline[mathescape=true]$F$} to a new value, say 212:
+        Now we can try to set <kbd>F</kbd> to a new value, say 212:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 set_value(F, 212, "user");
 // Error! Contradiction (77 212)
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p13' class='permalink'></a><p>
         The connector complains that it has sensed a contradiction: Its value
         is 77, and someone is trying to set it to 212.  If we really want to
-        reuse the network with new values, we can tell {\lstinline[mathescape=true]$C$} to forget its
+        reuse the network with new values, we can tell <kbd>C</kbd> to forget its
         old value:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 forget_value(C, "user");
 // Probe: Celsius Temp = ?
 // Probe: Fahrenheit Temp = ?
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p14' class='permalink'></a><p>
-        {\lstinline[mathescape=true]$C$} finds that the
+        <kbd>C</kbd> finds that the
 	
 	  
 	  
-	    {\lstinline[mathescape=true]$"user"$},
+	    <kbd>"user"</kbd>,
 	  
 	
 	who set its value originally, is
-        now retracting that value, so {\lstinline[mathescape=true]$C$}
+        now retracting that value, so <kbd>C</kbd>
 	agrees to lose its value, as shown by the probe, and informs the
 	rest of the network of this fact. This information eventually
-	propagates to {\lstinline[mathescape=true]$F$}, which now finds
+	propagates to <kbd>F</kbd>, which now finds
         that it has no reason for continuing to believe that its own
-	value is~77.  Thus, {\lstinline[mathescape=true]$F$} also
+	value is 77.  Thus, <kbd>F</kbd> also
 	gives up its value, as shown by the probe.
       </p></div>
 
       <div class='permalink'>
 <a name='p15' class='permalink'></a><p>
-        Now that {\lstinline[mathescape=true]$F$} has no value, we are free to set it to 212:
+        Now that <kbd>F</kbd> has no value, we are free to set it to 212:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_7_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 set_value(F, 212, "user");
 // Probe: Fahrenheit Temp = 212
 // Probe: Celsius Temp = 100
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p16' class='permalink'></a><p>
         This new value, when propagated through the network, forces
-	{\lstinline[mathescape=true]$C$} to
+	<kbd>C</kbd> to
         have a value of 100, and this is registered by the probe on
-	{\lstinline[mathescape=true]$C$}.
+	<kbd>C</kbd>.
         Notice that the very same network is being used to compute
-	{\lstinline[mathescape=true]$C$}
-        given {\lstinline[mathescape=true]$F$} and to compute
-	{\lstinline[mathescape=true]$F$}
-	given~{\lstinline[mathescape=true]$C$}.  This
+	<kbd>C</kbd>
+        given <kbd>F</kbd> and to compute
+	<kbd>F</kbd>
+	given <kbd>C</kbd>.  This
         nondirectionality of computation is the distinguishing feature of
         constraint-based systems.
       </p></div>
 
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
         Implementing the constraint system
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p17' class='permalink'></a><p>
         The constraint system is implemented via procedural objects with local
         state, in a manner very similar to the digital-circuit simulator of
-        section~\ref{sec:circuit-simulator}.  Although the primitive objects
+        section \ref{sec:circuit-simulator}.  Although the primitive objects
         of the constraint system are somewhat more complex, the overall system
         is simpler, since there is no concern about agendas and logic delays.
       </p></div>
@@ -314,29 +309,29 @@ set_value(F, 212, "user");
         <UL>
           <LI>
             
-            {\lstinline[mathescape=true]$has_value(connector)$}:
+            <kbd>has_value(connector)</kbd>:
             tells whether the connector has a value.
 
           </LI>
           <LI>
             
-            {\lstinline[mathescape=true]$get_value(connector)$}:
+            <kbd>get_value(connector)</kbd>:
             returns the connector's current value.
           </LI>
           <LI>
             
-            {\lstinline[mathescape=true]$set_value(connector, new_value, informant)$}:
+            <kbd>set_value(connector, new_value, informant)</kbd>:
             indicates that the informant is requesting the connector to set its
             value to the new value.
           </LI>
           <LI>
             
-            {\lstinline[mathescape=true]$forget_value(connector, retractor)$}:
+            <kbd>forget_value(connector, retractor)</kbd>:
             tells the connector that the retractor is requesting it to forget its value.
           </LI>
           <LI>
             
-            {\lstinline[mathescape=true]$connect(connector, new_constraint)$}:
+            <kbd>connect(connector, new_constraint)</kbd>:
             tells the connector to participate in the new constraint.
           </LI>
         </UL>
@@ -351,13 +346,13 @@ set_value(F, 212, "user");
 	
         
 	  
-	  {\lstinline[mathescape=true]$inform_about_value$},
+	  <kbd>inform_about_value</kbd>,
 	  
 	
 	which tells the given constraint that the connector has a value, and
 	
 	  
-	  {\lstinline[mathescape=true]$forget_value$},
+	  <kbd>forget_value</kbd>,
 	  
 	
 	which tells the constraint that the connector has lost its value.
@@ -365,17 +360,16 @@ set_value(F, 212, "user");
 
       <div class='permalink'>
 <a name='p20' class='permalink'></a><p>
-        {\lstinline[mathescape=true]$Adder$} constructs an adder constraint among summand connectors
-        {\lstinline[mathescape=true]$a1$} and {\lstinline[mathescape=true]$a2$} and a {\lstinline[mathescape=true]$sum$} connector.  An adder is
+        <kbd>Adder</kbd> constructs an adder constraint among summand connectors
+        <kbd>a1</kbd> and <kbd>a2</kbd> and a <kbd>sum</kbd> connector.  An adder is
         implemented as a
         function
         with local state (the
         function
-        {\lstinline[mathescape=true]$me$}
+        <kbd>me</kbd>
         below):
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_8_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function adder(a1, a2, sum) {
     function process_new_value() {
         if (has_value(a1) && has_value(a2)) {
@@ -407,24 +401,22 @@ function adder(a1, a2, sum) {
     connect(sum, me);
     return me;
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p21' class='permalink'></a><p>
-        {\lstinline[mathescape=true]$Adder$} connects the new adder to the designated connectors and
+        <kbd>Adder</kbd> connects the new adder to the designated connectors and
         returns it as its value.  The
         function
-        {\lstinline[mathescape=true]$me$}, which represents the
+        <kbd>me</kbd>, which represents the
         adder, acts as a dispatch to the local
         functions.  The following
-        <QUOTE>syntax interfaces</QUOTE> (see footnote~\ref{foot:object-syntax} in
-        section~\ref{sec:circuit-simulator}) are used in conjunction with the
+        <QUOTE>syntax interfaces</QUOTE> (see footnote \ref{foot:object-syntax} in
+        section \ref{sec:circuit-simulator}) are used in conjunction with the
         dispatch:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_9_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function inform_about_value(constraint) {
     return constraint("I-have-a-value");
 }
@@ -432,27 +424,26 @@ function inform_about_value(constraint) {
 function inform_about_no_value(constraint) {
     return constraint("I-lost-my-value");
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p22' class='permalink'></a><p>
         The adder's local
         function
-        {\lstinline[mathescape=true]$process_new_value$} is called when the
+        <kbd>process_new_value</kbd> is called when the
         adder is informed that one of its connectors has a value. The adder
-        first checks to see if both {\lstinline[mathescape=true]$a1$} and {\lstinline[mathescape=true]$a2$} have values. If so,
-        it tells {\lstinline[mathescape=true]$sum$} to set its value to the sum of the two addends.
-        The {\lstinline[mathescape=true]$informant$} argument to {\lstinline[mathescape=true]$set_value$} is {\lstinline[mathescape=true]$me$}, which is
-        the adder object itself.  If {\lstinline[mathescape=true]$a1$} and {\lstinline[mathescape=true]$a2$} do not both have
-        values, then the adder checks to see if perhaps {\lstinline[mathescape=true]$a1$} and {\lstinline[mathescape=true]$sum$}
-        have values.  If so, it sets {\lstinline[mathescape=true]$a2$} to the difference of these two.
-        Finally, if {\lstinline[mathescape=true]$a2$} and {\lstinline[mathescape=true]$sum$} have values, this gives the adder
-        enough information to set {\lstinline[mathescape=true]$a1$}.  If the adder is told that one of
+        first checks to see if both <kbd>a1</kbd> and <kbd>a2</kbd> have values. If so,
+        it tells <kbd>sum</kbd> to set its value to the sum of the two addends.
+        The <kbd>informant</kbd> argument to <kbd>set_value</kbd> is <kbd>me</kbd>, which is
+        the adder object itself.  If <kbd>a1</kbd> and <kbd>a2</kbd> do not both have
+        values, then the adder checks to see if perhaps <kbd>a1</kbd> and <kbd>sum</kbd>
+        have values.  If so, it sets <kbd>a2</kbd> to the difference of these two.
+        Finally, if <kbd>a2</kbd> and <kbd>sum</kbd> have values, this gives the adder
+        enough information to set <kbd>a1</kbd>.  If the adder is told that one of
         its connectors has lost a value, it requests that all of its
         connectors now lose their values.  (Only those values that were set by
-        this adder are actually lost.)  Then it runs {\lstinline[mathescape=true]$process_new_value$}.
+        this adder are actually lost.)  Then it runs <kbd>process_new_value</kbd>.
         The reason for this last step is that one or more connectors may still
         have a value (that is, a connector may have had a value that was not
         originally set by the adder), and these values may need to be
@@ -461,11 +452,10 @@ function inform_about_no_value(constraint) {
 
       <div class='permalink'>
 <a name='p23' class='permalink'></a><p>
-        A multiplier is very similar to an adder. It will set its {\lstinline[mathescape=true]$product$} to 0 if either of the factors is 0, even if the other factor
+        A multiplier is very similar to an adder. It will set its <kbd>product</kbd> to 0 if either of the factors is 0, even if the other factor
         is not known.
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_10_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function multiplier(m1, m2, product) {
     function process_new_value() {
         if ((has_value(m1) && get_value(m1) === 0)
@@ -506,31 +496,29 @@ function multiplier(m1, m2, product) {
     connect(product, me);
     return me;
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p24' class='permalink'></a><p>
-        A {\lstinline[mathescape=true]$constant$} constructor simply sets the value of the designated
+        A <kbd>constant</kbd> constructor simply sets the value of the designated
         connector.  Any
 	
 	  
 	  
-	    {\lstinline[mathescape=true]$"I-have-a-value"$}
+	    <kbd>"I-have-a-value"</kbd>
 	  
 	
 	or
 	
 	  
 	  
-	    {\lstinline[mathescape=true]$"I-lost-my-value"$}
+	    <kbd>"I-lost-my-value"</kbd>
 	  
 	
 	message sent to the constant box will produce an error.
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_11_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function constant(value, connector) {
     function me(request) {
         Error("Unknown request in constant", request);
@@ -539,8 +527,7 @@ function constant(value, connector) {
     set_value(connector, value, me);
     return me;
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -548,8 +535,7 @@ function constant(value, connector) {
         Finally, a probe prints a message about the setting or unsetting of
         the designated connector:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_12_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function probe(name, connector) {
     function print_probe(value) {
         display("Probe: " + name + " = " + value);
@@ -571,24 +557,23 @@ function probe(name, connector) {
     connect(connector, me);
     return me;
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
         Representing connectors
-      
+      </h2></div>
 
       
 
       <div class='permalink'>
 <a name='p26' class='permalink'></a><p>
         A connector is represented as a procedural object with local state
-        variables {\lstinline[mathescape=true]$value$}, the current value of the connector; {\lstinline[mathescape=true]$informant$}, the object that set the connector's value; and {\lstinline[mathescape=true]$constraints$}, a list of the constraints in which the connector
+        variables <kbd>value</kbd>, the current value of the connector; <kbd>informant</kbd>, the object that set the connector's value; and <kbd>constraints</kbd>, a list of the constraints in which the connector
         participates.
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_13_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_connector() {
     let value = false;
     let informant = false;
@@ -648,39 +633,18 @@ function make_connector() {
     }
     return me;
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p27' class='permalink'></a><p>
         The connector's local
         function
-        {\lstinline[mathescape=true]$set_my_value$} is called when
+        <kbd>set_my_value</kbd> is called when
         there is a request to set the connector's value.  If the connector
         does not currently have a value, it will set its value and remember as
-        {\lstinline[mathescape=true]$informant$} the constraint that requested the value to be
-        set.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>function
-        to all items in a list except a given one:
-
-        
-\begin{JavaScript}
-function for_each_except(exception, fun, list) {
-    function loop(items) {
-        if (is_null(items)) {
-            return "done";
-        } else if (head(items) === exception) {
-            return loop(tail(items));
-        } else {
-            fun(head(items));
-            return loop(tail(items));
-        }
-    }
-    return loop(list);
-}
-\end{JavaScript}
-
-      
+        <kbd>informant</kbd> the constraint that requested the value to be
+        set.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
         Then the connector will notify all of its participating
         constraints except the constraint that requested the value to be set.
         This is accomplished using the following iterator, which applies a
@@ -688,8 +652,7 @@ function for_each_except(exception, fun, list) {
         function
         to all items in a list except a given one:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_14_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function for_each_except(exception, fun, list) {
     function loop(items) {
         if (is_null(items)) {
@@ -703,15 +666,14 @@ function for_each_except(exception, fun, list) {
     }
     return loop(list);
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p28' class='permalink'></a><p>
         If a connector is asked to forget its value, it runs the local
         function
-        {\lstinline[mathescape=true]$forget_my_value$}, which first checks to make sure that
+        <kbd>forget_my_value</kbd>, which first checks to make sure that
         the request is coming from the same object that set the value
         originally.  If so, the connector informs its associated constraints
         about the loss of the value.
@@ -721,7 +683,7 @@ function for_each_except(exception, fun, list) {
 <a name='p29' class='permalink'></a><p>
         The local
         function
-        {\lstinline[mathescape=true]$connect$} adds the designated new constraint
+        <kbd>connect</kbd> adds the designated new constraint
         to the list of constraints if it is not already in that list.  Then,
         if the connector has a value, it informs the new constraint of this
         fact.
@@ -731,7 +693,7 @@ function for_each_except(exception, fun, list) {
 <a name='p30' class='permalink'></a><p>
         The connector's
         function
-        {\lstinline[mathescape=true]$me$} serves as a dispatch to the other
+        <kbd>me</kbd> serves as a dispatch to the other
         internal
         functions
         and also represents the connector as an object.
@@ -739,8 +701,7 @@ function for_each_except(exception, fun, list) {
         functions
         provide a syntax interface for the dispatch:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_15_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function has_value(connector) {
     return connector("has_value");
 }
@@ -760,8 +721,7 @@ function forget_value(connector, retractor) {
 function connect(connector, new_constraint) {
     return (connector("connect"))(new_constraint);
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       
@@ -775,12 +735,12 @@ function connect(connector, new_constraint) {
 	
 
         
-        {\lstinline[mathescape=true]$averager$} that takes three connectors
-	{\lstinline[mathescape=true]$a$}, {\lstinline[mathescape=true]$b$},
-        and {\lstinline[mathescape=true]$c$} as inputs and establishes the
+        <kbd>averager</kbd> that takes three connectors
+	<kbd>a</kbd>, <kbd>b</kbd>,
+        and <kbd>c</kbd> as inputs and establishes the
 	constraint that the value of
-        {\lstinline[mathescape=true]$c$} is the average of the values of
-	{\lstinline[mathescape=true]$a$} and {\lstinline[mathescape=true]$b$}.
+        <kbd>c</kbd> is the average of the values of
+	<kbd>a</kbd> and <kbd>b</kbd>.
       
 \end{Exercise}
 
@@ -792,19 +752,17 @@ function connect(connector, new_constraint) {
         
         Louis Reasoner wants to build a squarer, a constraint device with two
         terminals such that the value of connector
-	{\lstinline[mathescape=true]$b$} on the second
+	<kbd>b</kbd> on the second
         terminal will always be the square of the value
-	{\lstinline[mathescape=true]$a$} on the first
+	<kbd>a</kbd> on the first
         terminal.  He proposes the following simple device made from a
         multiplier:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_16_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function squarer(a, b) {
     return multiplier(a, a, b);
 }
-\end{JavaScript}
-
+</pre></div></div>
 
         There is a serious flaw in this idea.  Explain.
         
@@ -818,7 +776,7 @@ function squarer(a, b) {
 
         
         Ben Bitdiddle tells Louis that one way to avoid the trouble in
-        exercise~\ref{ex:squarer-constraint} is to define a
+        exercise \ref{ex:squarer-constraint} is to define a
 	squarer as a new primitive constraint.  Fill in the missing
 	portions in Ben's outline for a
         
@@ -827,8 +785,7 @@ function squarer(a, b) {
 	
         to implement such a constraint:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_17_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function squarer(a, b) {
     function process_new_value() {
         if (has_value(b)) {
@@ -851,8 +808,7 @@ function squarer(a, b) {
     // rest of definition
     return me;
 }
-\end{JavaScript}
-
+</pre></div></div>
       
 \end{Exercise}
 
@@ -864,18 +820,16 @@ function squarer(a, b) {
         Suppose we evaluate the following sequence of expressions in the
         program environment:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_18_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const a = make_connector();
 const b = make_connector();
 set_value(a, 10, "user");
-\end{JavaScript}
-
+</pre></div></div>
 
         At some time during evaluation of the
 	
 	  
-	{\lstinline[mathescape=true]$set_value$},
+	<kbd>set_value</kbd>,
 	
 	the following expression from the connector's local
         
@@ -884,11 +838,9 @@ set_value(a, 10, "user");
 	
         is evaluated:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_19_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 for_each_except(setter, inform_about_value, constraints);
-\end{JavaScript}
-
+</pre></div></div>
 
         Draw an environment diagram showing the environment in which the above
         expression is evaluated.
@@ -903,7 +855,7 @@ for_each_except(setter, inform_about_value, constraints);
         The
 	
 	  
-	  {\lstinline[mathescape=true]$celsius_fahrenheit_converter$}
+	  <kbd>celsius_fahrenheit_converter</kbd>
 	
         
 	  
@@ -912,40 +864,36 @@ for_each_except(setter, inform_about_value, constraints);
         is cumbersome when
         compared with a more expression-oriented style of definition, such as
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_20_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function celsius_fahrenheit_converter(x) {
     return cplus(cmul(cdiv(cv(9), cv(5)), x), cv(32));
 }
-\end{JavaScript}
-
+</pre></div></div>
 
         Here
 	
 	  
-	  {\lstinline[mathescape=true]$cplus$}
+	  <kbd>cplus</kbd>
         ,
         
 	  
-	  {\lstinline[mathescape=true]$cmul$}
+	  <kbd>cmul</kbd>
         , etc. are the <QUOTE>constraint</QUOTE>
         versions of the  arithmetic operations.  For example,
 	
 	  
-	  {\lstinline[mathescape=true]$cplus$}
+	  <kbd>cplus</kbd>
 	
 	takes two connectors as arguments and returns a connector that is
 	related to these by an adder constraint:
         
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_61_21_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function cplus(x, y) {
     const z = make_connector();
     adder(x, y, z);
     return z;
 }
-\end{JavaScript}
-
+</pre></div></div>
 
         Define analogous
         
@@ -954,19 +902,19 @@ function cplus(x, y) {
 	
         
 	  
-	  {\lstinline[mathescape=true]$cminus$}
+	  <kbd>cminus</kbd>
 	,
 	
 	  
-	  {\lstinline[mathescape=true]$cmul$}
+	  <kbd>cmul</kbd>
 	  ,
 	
 	  
-	  {\lstinline[mathescape=true]$cdiv$}
+	  <kbd>cdiv</kbd>
 	  , and
-	{\lstinline[mathescape=true]$cv$}
+	<kbd>cv</kbd>
         (constant value) that enable us to define compound constraints as in
-        the converter example above.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
+        the converter example above.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
       
 \end{Exercise}
 
@@ -974,7 +922,7 @@ function cplus(x, y) {
       
 
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>Constraint propagation
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Constraint propagation
           first appeared in the incredibly forward-looking 
           
           SKETCHPAD system of
@@ -995,12 +943,12 @@ function cplus(x, y) {
           
           
           applied constraint propagation to electrical circuit analysis 
-          (Sussman and Stallman 1975; 
-          Sussman and Steele 1980). 
-          TK!Solver (Konopasek and Jayaraman 1984) 
-          is an extensive modeling environment based on constraints.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>The {\lstinline[mathescape=true]$setter$} might not be a constraint.  In our
-          temperature example, we used {\lstinline[mathescape=true]$user$} as the {\lstinline[mathescape=true]$setter$}.</FOOTNOTE></div><hr><div class='footnote'>
+          (<CITATION>Sussman and Stallman 1975</CITATION>; 
+          <CITATION>Sussman and Steele 1980</CITATION>). 
+          TK!Solver (<CITATION>Konopasek and Jayaraman 1984</CITATION>) 
+          is an extensive modeling environment based on constraints.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>The <kbd>setter</kbd> might not be a constraint.  In our
+          temperature example, we used <kbd>user</kbd> as the <kbd>setter</kbd>.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>The expression-oriented format
           is convenient because it avoids the need to name the intermediate
           expressions in a computation.  Our original formulation of the
@@ -1022,26 +970,22 @@ function cplus(x, y) {
 	  
           that set the values of designated vector arguments
           but do not themselves return vectors as values:
-          
-\begin{JavaScript}
+          <div class='snippet' id='javascript_61_22_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 v_sum('a', 'b', temp1);
 v_sum('c', 'd', temp2);
 v_prod(temp1, temp2, answer);
-\end{JavaScript}
-
+</pre></div></div>
           Alternatively, we could deal with expressions, using
           
 	    
 	    functions
 	  
           that return vectors as values, and thus avoid
-          explicitly mentioning {\lstinline[mathescape=true]$temp1$} and
-	  {\lstinline[mathescape=true]$temp2$}:
-          
-\begin{JavaScript}
+          explicitly mentioning <kbd>temp1</kbd> and
+	  <kbd>temp2</kbd>:
+          <div class='snippet' id='javascript_61_23_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const answer = v_prod(v_sum('a', 'b'), v_sum('c', 'd'));
-\end{JavaScript}
-
+</pre></div></div>
           Since
 	  
 	    
@@ -1062,7 +1006,7 @@ const answer = v_prod(v_sum('a', 'b'), v_sum('c', 'd'));
           have implemented the system in imperative style, as we did in this
           section.  One reason is that the non-expression-oriented constraint
           language provides a handle on constraint objects (e.g., the value of
-          the {\lstinline[mathescape=true]$adder$}
+          the <kbd>adder</kbd>
           
 	    
 	    function)
@@ -1073,4 +1017,11 @@ const answer = v_prod(v_sum('a', 'b'), v_sum('c', 'd'));
           operations on connectors.  Although it is easy to implement the
           expression-oriented style in terms of the imperative implementation,
           it is very difficult to do the converse.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section3/subsection4.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section4/section4.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+3.3.5  Propagation of Constraints</div>	<div class='next-page'></div></div>

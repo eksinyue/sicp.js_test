@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>5.1.5 
-  Instruction Summary
-      </a>
+		<a name='top' class='permalink'>5.1.5  Instruction Summary</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -17,14 +24,14 @@
   
   A controller instruction in our register-machine language
   has one of the following forms, where each
-  $\textit{input}_i$ is either {\lstinline[mathescape=true]$reg($}$\textit{register-name}${\lstinline[mathescape=true]$)$}
-  or {\lstinline[mathescape=true]$constant($}$\textit{constant-value}${\lstinline[mathescape=true]$)$}.
+  $\textit{input}_i$ is either <kbd>reg(</kbd>$\textit{register-name}$<kbd>)</kbd>
+  or <kbd>constant(</kbd>$\textit{constant-value}$<kbd>)</kbd>.
       </p></div>
 
       <div class='permalink'>
 <a name='p2' class='permalink'></a><p>
   These instructions were introduced in
-  section~\ref{sec:register-machine-language}:
+  section \ref{sec:register-machine-language}:
   
   
   
@@ -32,8 +39,9 @@
   
   
   
-  
-\begin{JavaScript}
+  <kbd class='snippet'>
+    
+    
 assign($\textit{register-name}$, reg($\textit{register-name}$))
 
 assign($\textit{register-name}$, constant($\textit{constant-value}$))
@@ -47,36 +55,38 @@ test(list(op($\textit{operation-name}$), $\textit{input}_{1}$, $\ldots$, $\texti
 branch(label($\textit{label-name}$))
 
 go_to(label($\textit{label-name}$))
-\end{JavaScript}
-
+    
+  </kbd>
       </p></div>
 
       <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
   The use of registers to hold labels was introduced in
-  section~\ref{sec:subroutines}:
-  
-\begin{JavaScript}
+  section \ref{sec:subroutines}:
+  <kbd class='snippet'>
+    
+    
 assign($\textit{register-name}$, label($\textit{label-name}$))
 
 go_to(reg($\textit{register-name}$))
-\end{JavaScript}
-
+    
+  </kbd>
       </p></div>
 
       <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
   Instructions to use the stack were introduced in
-  section~\ref{sec:stack-recursion}:
+  section \ref{sec:stack-recursion}:
   
   
-  
-\begin{JavaScript}
+  <kbd class='snippet'>
+    
+    
 save($\textit{register-name}$)
 
 restore($\textit{register-name}$)
-\end{JavaScript}
-
+    
+  </kbd>
       </p></div>
 
       <div class='permalink'>
@@ -87,12 +97,19 @@ restore($\textit{register-name}$)
   The only kind of constant-value we have seen so far is a number,
   but later we will use strings, symbols, and lists.
   For example,
-  {\lstinline[mathescape=true]$constant("abc")$} is the string {\lstinline[mathescape=true]$"abc"$},
+  <kbd>constant("abc")</kbd> is the string <kbd>"abc"</kbd>,
   
-  {\lstinline[mathescape=true]$constant(list(a, b, c))$} is the list {\lstinline[mathescape=true]$list(a, b, c)$},
-  and {\lstinline[mathescape=true]$constant(null)$} is the empty list.
+  <kbd>constant(list(a, b, c))</kbd> is the list <kbd>list(a, b, c)</kbd>,
+  and <kbd>constant(null)</kbd> is the empty list.
   
       </p></div>
 
     
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section1/subsection4.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section2/section2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+5.1.5  Instruction Summary</div>	<div class='next-page'></div></div>

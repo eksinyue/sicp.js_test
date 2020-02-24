@@ -1,22 +1,29 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>2.1.3 
-        What Is Meant by Data?
-      </a>
+		<a name='top' class='permalink'>2.1.3  What Is Meant by Data?</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
       <div class='permalink'>
 <a name='p1' class='permalink'></a><p>
         We began the rational-number implementation in
-        section~\ref{sec:rationals} by implementing the rational-number
-        operations {\lstinline[mathescape=true]$add_rat$}, {\lstinline[mathescape=true]$sub_rat$}, and so on in terms of three
+        section \ref{sec:rationals} by implementing the rational-number
+        operations <kbd>add_rat</kbd>, <kbd>sub_rat</kbd>, and so on in terms of three
         unspecified
-        functions: {\lstinline[mathescape=true]$make_rat$}, {\lstinline[mathescape=true]$numer$}, and {\lstinline[mathescape=true]$denom$}.
+        functions: <kbd>make_rat</kbd>, <kbd>numer</kbd>, and <kbd>denom</kbd>.
         At that point, we could think of the operations as being defined in
         terms of data objects—numerators, denominators, and rational
         numbers—whose behavior was specified by the latter three
@@ -35,14 +42,14 @@
         
         
         
-        if we construct a rational number {\lstinline[mathescape=true]$x$} from a pair
-        of integers {\lstinline[mathescape=true]$n$} and {\lstinline[mathescape=true]$d$}, then extracting the {\lstinline[mathescape=true]$numer$} and the
-        {\lstinline[mathescape=true]$denom$} of {\lstinline[mathescape=true]$x$} and dividing them should yield the same result
-        as dividing {\lstinline[mathescape=true]$n$} by {\lstinline[mathescape=true]$d$}. 
-        In other words, {\lstinline[mathescape=true]$make_rat$},
-        {\lstinline[mathescape=true]$numer$}, and {\lstinline[mathescape=true]$denom$} must satisfy the condition that, for any
-        integer {\lstinline[mathescape=true]$n$} and any non-zero integer {\lstinline[mathescape=true]$d$}, if {\lstinline[mathescape=true]$x$} is
-        {\lstinline[mathescape=true]$make_rat(n,d)$}, then
+        if we construct a rational number <kbd>x</kbd> from a pair
+        of integers <kbd>n</kbd> and <kbd>d</kbd>, then extracting the <kbd>numer</kbd> and the
+        <kbd>denom</kbd> of <kbd>x</kbd> and dividing them should yield the same result
+        as dividing <kbd>n</kbd> by <kbd>d</kbd>. 
+        In other words, <kbd>make_rat</kbd>,
+        <kbd>numer</kbd>, and <kbd>denom</kbd> must satisfy the condition that, for any
+        integer <kbd>n</kbd> and any non-zero integer <kbd>d</kbd>, if <kbd>x</kbd> is
+        <kbd>make_rat(n,d)</kbd>, then
   <SPLIT>
     
         
@@ -59,14 +66,14 @@
 
       <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
-        In fact, this is the only condition {\lstinline[mathescape=true]$make_rat$}, {\lstinline[mathescape=true]$numer$}, and
-        {\lstinline[mathescape=true]$denom$} must fulfill in order to form a suitable basis for a
+        In fact, this is the only condition <kbd>make_rat</kbd>, <kbd>numer</kbd>, and
+        <kbd>denom</kbd> must fulfill in order to form a suitable basis for a
         rational-number representation.  In general, we can think of data as
         defined by some collection of selectors and constructors, together
         with specified conditions that these
         functions
         must fulfill in order
-        to be a valid representation.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+        to be a valid representation.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
       </p></div>
 
       <div class='permalink'>
@@ -90,7 +97,7 @@
         rational numbers.  We never actually said what a pair was, only that
         the language supplied
         functions
-        {\lstinline[mathescape=true]$pair$}, {\lstinline[mathescape=true]$head$}, and {\lstinline[mathescape=true]$tail$}
+        <kbd>pair</kbd>, <kbd>head</kbd>, and <kbd>tail</kbd>
         for operating on pairs.  But the only thing we need to know about
         these three operations 
         
@@ -98,10 +105,10 @@
         
         
         is that if we glue two objects together using
-        {\lstinline[mathescape=true]$pair$} we can retrieve the objects using {\lstinline[mathescape=true]$head$} and {\lstinline[mathescape=true]$tail$}.
+        <kbd>pair</kbd> we can retrieve the objects using <kbd>head</kbd> and <kbd>tail</kbd>.
         That is, the operations satisfy the condition that, for any objects
-        {\lstinline[mathescape=true]$x$} and {\lstinline[mathescape=true]$y$}, if {\lstinline[mathescape=true]$z$} is {\lstinline[mathescape=true]$pair(x, y)$} then {\lstinline[mathescape=true]$head(z)$}
-        is {\lstinline[mathescape=true]$x$} and {\lstinline[mathescape=true]$tail(x)$} is {\lstinline[mathescape=true]$y$}.  Indeed, we mentioned that
+        <kbd>x</kbd> and <kbd>y</kbd>, if <kbd>z</kbd> is <kbd>pair(x, y)</kbd> then <kbd>head(z)</kbd>
+        is <kbd>x</kbd> and <kbd>tail(x)</kbd> is <kbd>y</kbd>.  Indeed, we mentioned that
         these three
         functions
         are included as primitives in our language.
@@ -109,12 +116,12 @@
         functions
         that satisfies the above condition
         can be used as the basis for implementing pairs.  This point is
-        illustrated strikingly by the fact that we could implement {\lstinline[mathescape=true]$pair$},
-        {\lstinline[mathescape=true]$head$}, and {\lstinline[mathescape=true]$tail$} without using any data structures at all but
+        illustrated strikingly by the fact that we could implement <kbd>pair</kbd>,
+        <kbd>head</kbd>, and <kbd>tail</kbd> without using any data structures at all but
         only using
         functions.  Here are the definitions: 
 	
-        
+        <div class='snippet' id='javascript_26_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function pair(x, y) {
@@ -126,7 +133,7 @@ function pair(x, y) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwIYwE4AoAeAaRATwEpEBvAKEWsQwFMoQMkBbRAXgD4qbea32gxAAZEPPrwD8iHOIm8AXIgFCAjGICQ86YTnzFiOhgxxsLAgCIAghgDmIFnTBREYOC9GnE6mEjSYLYgBuCgBfClBIWAREAAs6VAATLAAvUkpeekZmRBSsYWCwiPBoeCQodAAbVPS5LKYkPNVC0KA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABABwIYwE4AoAeAaRATwEpEBvAKEWsQwFMoQMkBbRAXgD4qbea32gxAAZEPPrwD8iHOIm8AXIgFCAjGICQ86YTnzFiOhgxxsLAgCIAghgDmIFnTBREYOC9GnE6mEjSYLYgBuCgBfClBIWAREAAs6VAATLAAvUkpeekZmRBSsYWCwiPBoeCQodAAbVPS5LKYkPNVC8IoIBABnFxwOFHRsVTwAJkL4pNxgoA}{\usebox\lstbox}!*/
                : error(m, "Argument not 0 or 1 in pair");
 }
 function head(z) {
@@ -137,8 +144,9 @@ function tail(z) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
         
       </p></div>
@@ -157,16 +165,16 @@ function tail(z) {
 
       <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
-        The subtle point to notice is that the value returned by {\lstinline[mathescape=true]$pair(x, y)$} is a
+        The subtle point to notice is that the value returned by <kbd>pair(x, y)</kbd> is a
         function—namely the internally defined
         function
-        {\lstinline[mathescape=true]$dispatch$}, which takes one argument and returns either {\lstinline[mathescape=true]$x$} or {\lstinline[mathescape=true]$y$} depending on whether the argument is 0 or 1.  Correspondingly, {\lstinline[mathescape=true]$head(z)$} is defined to apply {\lstinline[mathescape=true]$z$} to 0.  Hence, if {\lstinline[mathescape=true]$z$} is the
+        <kbd>dispatch</kbd>, which takes one argument and returns either <kbd>x</kbd> or <kbd>y</kbd> depending on whether the argument is 0 or 1.  Correspondingly, <kbd>head(z)</kbd> is defined to apply <kbd>z</kbd> to 0.  Hence, if <kbd>z</kbd> is the
         function
-        formed by {\lstinline[mathescape=true]$pair(x, y)$}, then {\lstinline[mathescape=true]$z$} applied to 0 will
-        yield {\lstinline[mathescape=true]$x$}. Thus, we have shown that {\lstinline[mathescape=true]$head(pair(x, y))$} yields
-        {\lstinline[mathescape=true]$x$}, as desired.  Similarly, {\lstinline[mathescape=true]$tail(pair(x, y))$} applies the
+        formed by <kbd>pair(x, y)</kbd>, then <kbd>z</kbd> applied to 0 will
+        yield <kbd>x</kbd>. Thus, we have shown that <kbd>head(pair(x, y))</kbd> yields
+        <kbd>x</kbd>, as desired.  Similarly, <kbd>tail(pair(x, y))</kbd> applies the
         function
-        returned by {\lstinline[mathescape=true]$pair(x, y)$} to 1, which returns {\lstinline[mathescape=true]$y$}.
+        returned by <kbd>pair(x, y)</kbd> to 1, which returns <kbd>y</kbd>.
         Therefore, this 
         
           
@@ -175,7 +183,7 @@ function tail(z) {
           
         
         implementation of pairs is a valid
-        implementation, and if we access pairs using only {\lstinline[mathescape=true]$pair$}, {\lstinline[mathescape=true]$head$}, and {\lstinline[mathescape=true]$tail$} we cannot distinguish this implementation from one
+        implementation, and if we access pairs using only <kbd>pair</kbd>, <kbd>head</kbd>, and <kbd>tail</kbd> we cannot distinguish this implementation from one
         that uses <QUOTE>real</QUOTE> data structures.
       </p></div>
 
@@ -222,7 +230,7 @@ function tail(z) {
         is often called 
         
         <EM>message passing</EM>, and we will be using it as a
-        basic tool in chapter~3 when we address the issues of modeling and
+        basic tool in chapter 3 when we address the issues of modeling and
         simulation.
       </p></div>
 
@@ -238,10 +246,10 @@ function tail(z) {
           
         
         representation of pairs.  For this
-        representation, verify that {\lstinline[mathescape=true]$head(pair(x, y))$} yields {\lstinline[mathescape=true]$x$} for
-        any objects {\lstinline[mathescape=true]$x$} and {\lstinline[mathescape=true]$y$}.
+        representation, verify that <kbd>head(pair(x, y))</kbd> yields <kbd>x</kbd> for
+        any objects <kbd>x</kbd> and <kbd>y</kbd>.
 
-        
+        <div class='snippet' id='javascript_26_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function pair(x, y) {
@@ -253,9 +261,10 @@ function head(z) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwIYwE4AoAeAaRATwEpEBvAKEWsQwFMoQMkBbRAXgD5EXcCSA3BQC+FUJFgJEACzqoAJlgBepSjVoMmSJVizICAR1JcUxIcKA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABABwIYwE4AoAeAaRATwEpEBvAKEWsQwFMoQMkBbRAXgD5EXcCSA3BQC+FUJFgJEACzqoAJlgBepSjVoMmSJVizICAR1JcUxIaIoQEAZyiIcHFOmwBGPACYzFWQtxmgA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
           
@@ -264,9 +273,9 @@ function head(z) {
           
         
 
-        What is the corresponding definition of {\lstinline[mathescape=true]$tail$}? (Hint: To verify
+        What is the corresponding definition of <kbd>tail</kbd>? (Hint: To verify
         that this works, make use of the substitution model of
-        section~\ref{sec:substitution-model}.)
+        section \ref{sec:substitution-model}.)
         
 
       \hfill{\hyperref[ex:lambda-cons-Answer]{Solution}}\\
@@ -274,7 +283,7 @@ function head(z) {
 
 \begin{Answer}[ref={ex:lambda-cons}]
 
-    
+    <div class='snippet' id='javascript_26_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function tail(z) {
@@ -283,9 +292,10 @@ function tail(z) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABFAhjANgCgF4EpEDeAUIqYgE4CmUI5S2mmADgDQCO+AvAHyIcDcRAL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABABwIYwE4AoAeAaRATwEpEBvAKEWsQwFMoQMkBbRAXgD5EXcCSA3BQC+FUJFgJEACzqoAJlgBepSjVoMmSJVizICAR1JcUxIaPHR4SKOgA2y1VRr1GzRDr14jHbkfMUFBAIAM5QiDgcKOjYAIx4AExmFLYwDjhmQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         
 
@@ -296,22 +306,22 @@ function tail(z) {
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled17}
+\label{ex:unlabeled19}
  
         Show that we can represent pairs of nonnegative integers using only
         numbers and arithmetic operations if we represent the pair $a$ and $b$
         as the integer that is the product $2^a 3^b$.  Give the corresponding
         definitions of the
         functions
-        {\lstinline[mathescape=true]$pair$}, {\lstinline[mathescape=true]$head$}, and {\lstinline[mathescape=true]$tail$}.
+        <kbd>pair</kbd>, <kbd>head</kbd>, and <kbd>tail</kbd>.
 
 
-\hfill{\hyperref[ex:unlabeled17-Answer]{Solution}}\\
+\hfill{\hyperref[ex:unlabeled19-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled17}]
+\begin{Answer}[ref={ex:unlabeled19}]
 
-
+<div class='snippet' id='javascript_26_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function pair(a, b) {
@@ -323,7 +333,7 @@ function head(p) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABABwIYwE4ApUBpEBGAlIgN4BQiViGAplCBksKgM5QD6tAHslFgCZ8qEgCpELdl178AzPmIBucgF9yoSLASIAFrVQATLMhIVqNeoyTJEAUkQDEAXheIADJXNfEAfl36jGwB6BxIAakQARk9vagAud2U1DWh4JCh0ABtjUxiLBiYUO0RZZ1c3RDzYvwyYbOQg2XCoqu8EtySgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABMAhgZygfQKYA8AOUAFAEYA0iYAlIgN4BQiTiATtlCC0kgLx+IAGRsxHMA-IgCMw0SIBciGGhwA3bGCLUZskRLQBHECjZFUGHAWLlKiAPSIATFSradTBSUQAqZOix5CUgokAFopKgBuegBfelBIWAREfBQYFiIUChIaBhE2Di5fcwDiBwoUGh8zf0siAGYsyJi48Gh4JAALbBQAEyJ8HO18ziR8RABSR0Q+HkFXWQku3v67RxoAail50QUBKNj4tqSoVIAbfsG89hHkicQ66f4BRG3dRBOYc-xbOo2tt2Yu329HoHy+qXSDUQABZnBEgA}{\usebox\lstbox}!*/
            : 0;
 }
 function tail(p) {
@@ -333,8 +343,9 @@ function tail(p) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 \end{Answer}
 
@@ -357,7 +368,7 @@ function tail(p) {
         get by without numbers (at least insofar as nonnegative integers are
         concerned) by implementing 0 and the operation of adding 1 as
 
-        
+        <div class='snippet' id='javascript_26_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const zero = f => x => x;
@@ -367,9 +378,10 @@ function add_1(n) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAXgUwE4hgXhgM3QPhgD1wIG4AoTAVzGCgEtwYBDAE2YH0BGACjAEoYA3qRgiYSBFApIwWIoTR5MPLpl5d8vXmQC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBAXgUwE4hgXhgM3QPhgD1wIG4AoTAVzGCgEtwYBDAE2YH0BGACjAEoYA3qRgiYSBFApIwWIoTR5MPLpl5d8vXmQC+QA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         This representation is known as 
         
@@ -379,13 +391,13 @@ function add_1(n) {
         Alonzo Church, the logician who invented the $\lambda$
         calculus.
 
-        Define {\lstinline[mathescape=true]$one$} and {\lstinline[mathescape=true]$two$} directly (not in terms of {\lstinline[mathescape=true]$zero$}
-        and {\lstinline[mathescape=true]$add_1$}).  (Hint: Use substitution to evaluate {\lstinline[mathescape=true]$add_1(zero)$}).
+        Define <kbd>one</kbd> and <kbd>two</kbd> directly (not in terms of <kbd>zero</kbd>
+        and <kbd>add_1</kbd>).  (Hint: Use substitution to evaluate <kbd>add_1(zero)</kbd>).
         Give a direct definition of the addition
         
-	function {\lstinline[mathescape=true]$plus$}
+	function <kbd>plus</kbd>
         (not in
-        terms of repeated application of {\lstinline[mathescape=true]$add_1$}).
+        terms of repeated application of <kbd>add_1</kbd>).
         
 
 
@@ -394,7 +406,7 @@ function add_1(n) {
 
 \begin{Answer}[ref={ex:church-numerals}]
 
-    
+    <div class='snippet' id='javascript_26_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const one = f => x => f(x);
@@ -409,7 +421,7 @@ function plus(n, m) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBOCmMC8MBmyB8MAem0ApsBKAbgChRJYoB3EZNPXJLVfN40ss1AVzGBQAluBgAHADa8I+MABoYAWyIwA3mRiaYAJ3hRe2sIxY48YdkXyKLhIlwC+3APROYUeNCFgA5t0rQ3AAtdRBRJaXwEBVoQLh5+QREjYECDFIB9KBB0sF5FACN4bXxgFXUtHT0DZNkzGABqGABGSwAGBwpU7QysnLzC4qhg+HhSIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=MYewdgzgLgBOCmMC8MBmyB8MAem0ApsBKAbgChRJYoB3EZNPXJLVfN40ss1AVzGBQAluBgAHADa8I+MABoYAWyIwA3mRiaYAJ3hRe2sIxY48YdkXyKLhIlwC+3APROYUeNCFgA5t0rQ3AAtdRBRJaXwEBVoQLh5+QREjYECDFIB9KBB0sF5FACN4bXxgFXUtHT0DZNkzGABqGABGSwAGBwpU7QysnLzC4qhg+HhSIA}{\usebox\lstbox}!*/
 const three = plus(one, two);
 
 function church_to_number(c) {
@@ -418,8 +430,9 @@ function church_to_number(c) {
 church_to_number(three);
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
   
 \end{Answer}
 
@@ -462,9 +475,9 @@ church_to_number(three);
           
           Wagner, and 
           
-          Wright at IBM (see Thatcher, Wagner, and Wright 1978), and by 
+          Wright at IBM (see <CITATION>Thatcher, Wagner, and Wright 1978</CITATION>), and by 
           
-          Guttag at Toronto (see Guttag 1977),
+          Guttag at Toronto (see <CITATION>Guttag 1977</CITATION>),
           is called 
           
           
@@ -476,4 +489,11 @@ church_to_number(three);
           
           Liskov and Zilles
           (1975).</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section1/subsection2.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section1/subsection4.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+2.1.3  What Is Meant by Data?</div>	<div class='next-page'></div></div>

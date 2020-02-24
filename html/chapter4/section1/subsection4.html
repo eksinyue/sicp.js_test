@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>4.1.4 
-    Running the Evaluator as a Program
-  </a>
+		<a name='top' class='permalink'>4.1.4  Running the Evaluator as a Program</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
   
   
@@ -53,9 +60,9 @@
     There must be a binding for each primitive
     function
     name, so that when
-    {\lstinline[mathescape=true]$evaluate$}
+    <kbd>evaluate</kbd>
     evaluates the operator of an application of a primitive,
-    it will find an object to pass to {\lstinline[mathescape=true]$apply$}.  We thus set up a 
+    it will find an object to pass to <kbd>apply</kbd>.  We thus set up a 
     
     
     global
@@ -67,9 +74,9 @@
       
 	The global environment also includes bindings for the symbols
 	
-	{\lstinline[mathescape=true]$undefined$},
-	{\lstinline[mathescape=true]$NaN$} and
-	{\lstinline[mathescape=true]$Infinity$},
+	<kbd>undefined</kbd>,
+	<kbd>NaN</kbd> and
+	<kbd>Infinity</kbd>,
 	so that they can be used as constants
 	in expressions to be evaluated.
       
@@ -77,7 +84,7 @@
 
     
     
-    
+    <div class='snippet' id='javascript_76_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function setup_environment() {
@@ -89,7 +96,7 @@ function setup_environment() {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwKZRABwPqrANxgCcEBbPKACgEpEBvAKEWcQgWSkUyJlJlnypsoSLATYwAQ3LJEAXiYslpSZkrB5APkQALVJIAm66gBouPPgKEjo8MMmoBuRczb3O3XvxiDh4W+L4kgA2IKiyCkrKqupaiCoA1kKelj7W-mJglHqGlFCSMMHG1KYuUUop3r42mQ7OSm4c5l5W2I35YFAS0uHyZdFqGnLaOUbAps2pvu2SnXVl7ZNVQjOd2EGhvZHl8TFDI-pG+YXFJv07la2rUPNKROggREioAB5QeAa4BMRkFJTnO2YqkwH0olzSflEdm6MjMAMBFwsyza7A6XSkMlKCPKwNB4OqGWhGzCyDh2PJSyuqNmXWJ4SxFOYUD0uFImCgAE8voQSGByJ0nAwAL5AA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZwKZRABwPqrANxgCcEBbPKACgEpEBvAKEWcQgWSkUyJlJlnypsoSLATYwAQ3LJEAXiYslpSZkrB5APkQALVJIAm66gBouPPgKEjo8MMmoBuRczb3O3XvxiDh4W+L4kgA2IKiyCkrKqupaiCoA1kKelj7W-mJglHqGlFCSMMHG1KYuUUop3r42mQ7OSm4c5l5W2I35YFAS0uHyZdFqGnLaOUbAps2pvu2SnXVl7ZNVQjOd2EGhvZHl8TFDI-pG+YXFJv07la2rUPNKROggREioAB5QeAa4BMRkFJTnO2YqkwH0olzSflEdm6MjMAMBFwsyza7A6XSkMlKCPKwNB4OqGWhGzCyDh2PJSyuqNmXWJ4SxFOYUD0uFImCgAE8voQSGByJ0nAwAL4MBiLZlCADmwTgACMQtyfnyKPIUA8cHgeb9OjRnABIBgS7DSuUKzVK-lQRxAA}{\usebox\lstbox}!*/
     const primitive_constant_names =
         map(f => head(f), primitive_constants);
     const primitive_constant_values =
@@ -104,8 +111,9 @@ function setup_environment() {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     
     
@@ -119,16 +127,16 @@ function setup_environment() {
       <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
 	It does not matter how we represent primitive functions,
-	so long as {\lstinline[mathescape=true]$apply$} can identify and
+	so long as <kbd>apply</kbd> can identify and
 	apply them using the functions
-	{\lstinline[mathescape=true]$is_primitive_function$} and 
-	{\lstinline[mathescape=true]$apply_primitive_function$}.  We have chosen to
+	<kbd>is_primitive_function</kbd> and 
+	<kbd>apply_primitive_function</kbd>.  We have chosen to
 	represent a primitive function
-	as a list beginning with the string {\lstinline[mathescape=true]$"primitive"$} and
+	as a list beginning with the string <kbd>"primitive"</kbd> and
 	containing a function
 	in the underlying JavaScript that implements that primitive.
 
-	
+	<div class='snippet' id='javascript_76_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_primitive_function(impl) {
@@ -140,14 +148,15 @@ function is_primitive_function(fun) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADgJxmRlgDcdRJYEAKI3AGwEpEBvAKES8X0yhHxIGMAM5QaAIgJESMchIA0ieswDc7AL7tK0eElF5CxMhXC7alFh269+g5SOxRUAcxeYAJtmFialJVJGsvJM6lo61EjSxnI4KpjImGDOkX7gVpxctgJColDYvMBpYEoAjKGaQA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfSgQwObYKYAmaANqlABQpQC2UANIlABZ4Y4CUiA3gFCL+IATnighBSVGgAOmGIMo0onAGTLELTAQW1OAXn2MWbbAG4eAXx6hIsBImqYA1qymCY1GLABura9Hhg5O5SxJy8AkIiYkikVOQARK7unjA+8QzBoWaWfrYS6Eke3r7g-gjk1mF8-MKi4sjoWLiEJGQV4AyJbkWpePHs2ValeYiFKT5omXjUeGBYee1gVQK10YixUGjCwIsMAIwDFjw8EAhU9gCe0t3jLsQgKIi61fwOztfJxWi5AeSI5AAPBgXPQAPkQAMQAGpEBdEAMAJARHgEVAhTAXIIFG5fH7lahXMZfEIPdiHVEodGYom9SbUELTWbzX4Ej49CYklBkkxAA}{\usebox\lstbox}!*/
 function primitive_implementation(fun) {
    return list_ref(fun, 1);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
 	
       </p></div>
@@ -158,7 +167,7 @@ function primitive_implementation(fun) {
 <a name='p5' class='permalink'></a><p>
     
       
-      The function {\lstinline[mathescape=true]$setup_environment$}
+      The function <kbd>setup_environment</kbd>
       
     
     will get the primitive 
@@ -166,7 +175,9 @@ function primitive_implementation(fun) {
       
       names and implementation functions
     
-    from a list:<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+    from a list:<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
+
+    <div class='snippet' id='javascript_76_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const primitive_functions = list(
@@ -178,7 +189,7 @@ const primitive_functions = list(
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBADgJwJYFslSQNwKYH0BmArmMBuBDALwwA2S0AFAFAytu31QMBEAJvXBoBDAJ7cANOzb8Ig0VKkBKcSwV1G3bAgQgEEhWy06EBpSoPqu3ANT7T7BgA9JIxVQB8MRzGswRrZVUpSx4AWjt7VicXN0pPb1C-APM1Th4AKgjI6L9Y+Jh0pJhAizTuAHos+xzXDy8YcqKS1I0AUirTGrz61qaU4LLKIY6pLrrvIepXfvYQ7gBCYcls51zxmEWp5oGNAB4RhTG4+t22aaDZst3KA4dV2uPva9Zz0o13W7uY9c8X7cv3jdlitvo8YO5qLkZmw5vNPuxvOxjqx5mxHIoLmxFABuIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBADgJwJYFslSQNwKYH0BmArmMBuBDALwwA2S0AFAFAytu31QMBEAJvXBoBDAJ7cANOzb8Ig0VKkBKcSwV1G3bAgQgEEhWy06EBpSoPqu3ANT7T7BgA9JIxVQB8MRzGswRrZVUpSx4AWjt7VicXN0pPb1C-APM1Th4AKgjI6L9Y+Jh0pJhAizTuAHos+xzXDy8YcqKS1I0AUirTGrz61qaU4LLKIY6pLrrvIepXfvYQ7gBCYcls51zxmEWp5oGNAB4RhTG4+t22aaDZst3KA4dV2uPva9Zz0o13W7uY9c8X7cv3jdlitvo8YO5qLkZmw5vNPuxvOxjqx5mxHIoLmxFABuJhMRCodBYPBEEhkSDYoA}{\usebox\lstbox}!*/
        list("/",             (x, y) => x / y  ),
        list("%",             (x, y) => x % y  ),
        list("===",           (x, y) => x === y),
@@ -191,38 +202,9 @@ const primitive_functions = list(
        );
 
 \end{JavaScriptClickable}
+</pre>
 
-
-    
-  
-
-    
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-const primitive_functions = list(
-       list("display",       display          ),
-       list("error",         error            ),
-       list("+",             (x, y) => x + y  ),
-       list("-",             (x, y) => x - y  ),
-       list("*",             (x, y) => x * y  ),
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBADgJwJYFslSQNwKYH0BmArmMBuBDALwwA2S0AFAFAytu31QMBEAJvXBoBDAJ7cANOzb8Ig0VKkBKcSwV1G3bAgQgEEhWy06EBpSoPqu3ANT7T7BgA9JIxVQB8MRzGswRrZVUpSx4AWjt7VicXN0pPb1C-APM1Th4AKgjI6L9Y+Jh0pJhAizTuAHos+xzXDy8YcqKS1I0AUirTGrz61qaU4LLKIY6pLrrvIepXfvYQ7gBCYcls51zxmEWp5oGNAB4RhTG4+t22aaDZst3KA4dV2uPva9Zz0o13W7uY9c8X7cv3jdlitvo8YO5qLkZmw5vNPuxvOxjqx5mxHIoLmxFABuIA}{\usebox\lstbox}!*/
-       list("/",             (x, y) => x / y  ),
-       list("%",             (x, y) => x % y  ),
-       list("===",           (x, y) => x === y),
-       list("!==",           (x, y) => x !== y),
-       list("<",             (x, y) => x <   y),
-       list("<=",            (x, y) => x <=  y),
-       list(">",             (x, y) => x >   y),
-       list(">=",            (x, y) => x >=  y),
-       list("!",              x     =>   !   x)
-       );
-
-\end{JavaScriptClickable}
-
-
+</div></div>
     
   </p></div>
 
@@ -232,8 +214,8 @@ const primitive_functions = list(
 <a name='p6' class='permalink'></a><p>
 	Similar to primitive functions, we define primitive values
 	that are installed in the global environment by
-	the function {\lstinline[mathescape=true]$setup_environment$}.
-	
+	the function <kbd>setup_environment</kbd>.
+	<div class='snippet' id='javascript_76_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const primitive_constants = list(list("undefined", undefined),
@@ -244,9 +226,10 @@ const primitive_constants = list(list("undefined", undefined),
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBADgJwJYFslSQNwKYH1SRQCGYUEMAvDADZLQAUtDARAK5gAm2AZkmNh2YAaGOy69+HAJRCAUDAWKlylauVMo9ZgDki24at3aZ8tWfPq6m5gEkwE9AE8DMOw6iOTF7+Y1aURFAAFrgACjYuMAHBYTZSpj6JilIA3EA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBADgJwJYFslSQNwKYH1SRQCGYUEMAvDADZLQAUtDARAK5gAm2AZkmNh2YAaGOy69+HAJRCAUDAWKlylauVMo9ZgDki24at3aZ8tWfPq6m5gEkwE9AE8DMOw6iOTF7+Y1aURFAAFrgACjYuMAHBYTZSpj6JilIA3LKyiKjoWHgE0CRkKUA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
     
 	
@@ -268,37 +251,11 @@ const primitive_constants = list(list("undefined", undefined),
     system:<SPLIT>
     
     
-      <a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+      <a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
     
-  <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>
-        JavaScript's {\lstinline[mathescape=true]$apply$} 
-        method of function objects expects arguments in an array. Thus, the 
-        {\lstinline[mathescape=true]$argument_list$} is transformed into 
-        an array using a {\lstinline[mathescape=true]$while$} loop:
-	
-\begin{JavaScript}
-function apply_in_underlying_javascript(prim, argument_list) {
-   const argument_array = [];
-   let i = 0;
-   while (!is_null(argument_list)) {
-      argument_array[i] = head(argument_list);
-      i = i + 1;
-      argument_list = tail(argument_list);
-   }
-   return prim.apply(prim, argument_array);
-}
-\end{JavaScript}
+  </SPLIT>
 
-	We have made use of
-	{\lstinline[mathescape=true]$apply_in_underlying_javascript$}
-	to define the function
-	{\lstinline[mathescape=true]$apply$} in
-	section~\ref{sec:data-directed}.
-
-      </FOOTNOTE></div></SPLIT>
-
-  
+  <div class='snippet' id='javascript_76_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function apply_primitive_function(fun, argument_list) {
@@ -309,9 +266,10 @@ function apply_primitive_function(fun, argument_list) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwA6oDYE8D6qBOMAtjLAG4CmOoksCAFDQDQr4DmIRFYUOGMAZygBKRAG8AUImmJ8FKCHxI0mXDDA5wAEwr5s6tjgBWyMsgERCqKPSkz7DmQWKkYlHMUwUuPZHTCM4MJMdo5hrBw+vPxCwgDcDhIAvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwA6oDYE8D6qBOMAtjLAG4CmOoksCAFDQDQr4DmIRFYUOGMAZygBKRAG8AUImmJ8FKCHxI0mXDDA5wAEwr5s6tjgBWyMsgERCqKPSkz7DmQWKkYlHMUwUuPZHTCM4MJMdo5hrBw+vPxCwgDcDhIAvhISKth4hCTkVDTQ8AFEuM7ZblSYIAIsMTYAjCwATMLxQA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 	
 
@@ -337,7 +295,7 @@ function apply_primitive_function(fun, argument_list) {
     result by an <EM>output prompt</EM> so as to distinguish the value of
     the expression from the output that may be printed.
 
-    
+    <div class='snippet' id='javascript_76_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const input_prompt = "M-Eval input: ";
@@ -350,7 +308,7 @@ function driver_loop(env, history) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAlmADgVygfUQJxAW0bAXhgCIBZAWgFEA3AQwBt4lUAuEgbgChRJYRUU6LLnwwiZKnUb8ogtsS6cAZsjDAoccDAAmmONQCmmNPRAhEACgNhqAGhgALONBCYAngEoYAb04x-MDzQTIJiMMJ4UBZOLu4wANQhqBjYkR5cAfBKMBYIoQQFMGDI9PRevpmZ2s6I9LRuFsQQBhAQmmCOtBAw1toG2sTpfgEAvj30zT7DlYHgwcIA5pi0OGGItJjNucxQQzP+QbCmwAzdRMcMaGArLRaLyzjpAJCZ05WHMFAGeGhSyC1hHC0SwADzEAD4iiBfgx-mg3AYoLY3vtUWjMhcJnt9h8wAYAO5oazUMIGEFfMDaIk2ODYMA4axRTEQexfH5-Fr2YnYmYfTAAogGP60L53bBLFb2PGE7mKVG6fRGExmSzS6l2RzOKCuNwJEgAHX1YGIepR6PNATyyQiokSVtgiWIhuNCTNFvNMkEKREDpg0D0YAWcCUDWQzWMWAQUX5EA8cYyo04IyAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=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-m2llbQVZWRpAnOI5LfK2ybX3AUEI-gNQAZ2lhXhTK7Lot-ZdUJ-SDq7JWfae6IzFxmqe6EJqj2WTePtHZyVw7NviQKfV9x1XCp5IoDW49mBtHPVAt9hrHiytZPKq2BjGayCAw8IVoHIH5ArLbMuPdEK6GfTUgUUrWgfvg7GAFfgDBUsHdhmYIHjXgd5ChqDfsJLSvI8KGaR7kOqlQ8AKp0MsCQFwAQYg5ANJ0EYMwf63AABMGGhA-KOtYYqnJnAEhdafcIpMg3UE+QAH3U81H5es5MafU3svS4QKKoAOC0SFEdrXKeyJ87trqpiOEcNdMwsNYSDjKODK1-1i7w0o3ERT4YEkJo5hmxS-yn193CA5pzuFXN0nGTkBzBGtaBafCQemCmABkmWguJoUzRArFTEskEcBFuh7pL0dv889ZaUWSsxZc7qoclXWiecs-9Fr-6bMKZq9g4tMhQtFuCwN9LYXG4jS8-Ezrh7eTU2Wv1wbg3-kLvKw0OjOHa0ircHN+z9XnNxc7YOUjuHnhtYk+wY7m2wPddm710+C3RtDcTUt8bK3rWXYY4xJjt3AjzeG4tx7y2ytWc2LcA1sGNVbYI7V3We3YtNcOzBk7iwzt9yR1ds9N3qu-b6-9x7D3M3Lbe-9dHn3WTfex9o3Hz3HsvbiBN9r8TwgV1XvHWzOOlOw8c-thH36y0s6rij4n8SBft0YqpXo6l67s6p-dvHhPG7A-+qL+prJO49Y54Fgn6bAfjaV0z8wo7fQkIDD92XqWucNYO3zwcRviX+lR+Vu3-9x1UknVDnbcuacK-p-rhpfLURK1NqrL9227sW7MNFnn8hYRqLLYrckys3d4nQI7976BjEBxxNdGXPLT7830JAWEHBhc1P9mbUiueUsAQL+yWEonS9CHL9gQOpvKd58C7XovdIADMjedbwr+WbjvAE6vc-hzHocoKlRp-+jSwf+Db6e877qwc0-KCDiE6S-vTA6VKnbaynrmVzcAW1wqv3kmp6Zxnuvhey-R-mH9bfC-A-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-boFfZ4JQQAFT312iP3P0KIOQ-0f3vW8yUEgD-0XCAMv0OQQCX0QOr4ACk0DtQsDwD4AyDYDX9uglByRaDXgGDjyr9YNz9SDDxAAhAVoQ54MQ2feANQ3ROQxPavu2bQ0Q8WU-XA+AJ2boCw7UJQe2TRBw7oPQ6Q8I-w7g9nTCIOI5KI2I1w0AyQw5M5FIxQ7I45CI-PQ-Uozw1o+o6w1Qwo7oA5F4CQ7oJQ54PEQiPBEPdsKBGXenOtlsmPbqpQRdKKK9YwJ41dO0NI15XvavnFTFWgyEwE4E9-avgAJKwCC5z26CxPxMRORMyMyDlrSBEBmAAAK0Th9tk4yOT0TltIc8EXiPBcKw9FdfdL5b5OGsMGpQEnIZgF02AOYbFAAViQGIERdsBQIxXpMPW3Sbp3YRP7boNOVeg01uEEJwTOKtJkGpY1MlvYy+CnSPXKqErRKqHIveCQ-1h0YwFU-4fWas44+XYsaFNsxcLswoknQ4+szkWfh0ZWdbMc2Hac8FMPcdlJIVDc3ZHs85Ac9zN8y44FJul8w83na7M0Dhlc387ULc-s-LopC81WaCw9f-veuze6UYlDdiQM3aImEYrkVC04xs9diIjmYExi7C11hGeM8S1FO80eILNS15bS1MHC8lJLGojybCvi9CE2tyYUmYI4MkDWcrF6YKXRH+ihUs0CGU+VglS3s+ECKgLsB07HQ4ZzptK0ZUXLE4Zq9qwiL4EdphBUe0M1RBSuUGNBY4GeSMbXAUUa1q0gERLa3aPa464sZ3Bq2624KBUGIOO2Qq4gPIwiKEP67HYPcFJyMUm0DiJhHcoOAALI30ACieQK4CbG4O4pk2EiACb5sybfEabmb2bhbubZaO4gB7Q2w74LenNkojARAEqZYQD48pk8b0AdySb1+Ra7b2A1Ea5PbibPGFA9Z3ysACbYNqKmlngi93QuYa+7uQgiScInQ7Qnml52NTV9jqAjgkufEEuzAj4M7vb9ZEL2U5iY9lKHySbR7UQ4iTpeNZEliPLsidkBZiiyiqS4z3U5iV7ngVyT5GJfEhi1UYbMg5iJZ5kbLx6z8wUuIEHNGpLh7kujAa8k4dZtbFw9bTjTbuFRcYHLbCSQ7I7ZaAAOlR7ADa0Dak7oGOyW9fvuWO-uYODR3R1dYx14FW72yxxQPud60BTICq+bIrbNClEzYpfuJclIqK+KxqxSNK9CCCgs4K8szuAR42-VTyUp5K5p60J9ODEAA}{\usebox\lstbox}!*/
     } else {
         const program = parse(input);
         const locals = local_names(program);	    
@@ -366,17 +324,18 @@ function driver_loop(env, history) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
-    We transform the input string that is read by {\lstinline[mathescape=true]$prompt$}
+</div></div>
+    We transform the input string that is read by <kbd>prompt</kbd>
     into a tagged-list representation of the statement according to the description in
     section 4.1.2, a process called parsing and accomplished by the primitive function
-    {\lstinline[mathescape=true]$parse$}. Similar to the evaluation of
+    <kbd>parse</kbd>. Similar to the evaluation of
     blocks in \ref{sec:core-of-evaluator}, we create a new environment by
     extending the given environment by a binding of the local names in the program
-    to the special value {\lstinline[mathescape=true]$no_value_yet$}, and
+    to the special value <kbd>no_value_yet</kbd>, and
     evaluate the program with respect to the new environment. Passing the new
-    environment in the recursive call of {\lstinline[mathescape=true]$driver_loop$}
+    environment in the recursive call of <kbd>driver_loop</kbd>
     ensures that subsequent programs can refer to previously declared names.
       </p></div>
     
@@ -387,13 +346,12 @@ function driver_loop(env, history) {
 <a name='p9' class='permalink'></a><p>
   We use a special printing
   
-  function {\lstinline[mathescape=true]$user_print$}, 
+  function <kbd>user_print</kbd>, 
   to avoid printing the environment part of a compound
   function, which may be a very long list
   (or may even contain cycles).
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_76_7_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function user_print(object) {
    return is_compound_function(object)
        ? "compound function" +
@@ -402,8 +360,7 @@ function user_print(object) {
          "<environment>"
        : object;
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -411,7 +368,7 @@ function user_print(object) {
   Now all we need to do to run the evaluator is to initialize the
   global environment and start the driver loop.  Here is a sample
   interaction:
-  
+  <div class='snippet' id='javascript_76_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 const the_global_environment = setup_environment();
@@ -419,12 +376,12 @@ driver_loop(the_global_environment, "");
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBFAWBTA+gcwDYgEYEN3MTADcBLAJ3AFtDYBeGCRKAVwAcDjyqaAKASgDcAKAAmZEkURlkmEKx4IUGbHg6kKYamCgAaGACJ9goA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=MYewdgzgLgBAlmADgVygfUQJxAW0bAXhgCIBZAWgFEA3AQwBt4lUAuEgbgChRJYRUU6LLnwwiZKnUb8ogtsS6cAZsjDAoccDAAmmONQCmmNPRAhEACgNhqAGhgALONBCYAngEoYAb04x-MDzQTIJiMMJ4UBZOLu4wANQhqBjYkR5cAfBKMBYIoQQFMGDI9PRevpmZ2s6I9LRuFsQQBhAQmmCOtBAw1toG2sTpfgEAvj30zT7DlYHgwcIA5pi0OGGItJjNucxQQzP+QbCmwAzdRMcMaGArLRaLyzjpAJCZ05WHMFAGeGhSyC1hHC0SwADzEAD4iiBfgx-mg3AYoLY3vtUWjMhcJnt9h8wAYAO5oazUMIGEFfMDaIk2ODYMA4axRTEQexfH5-Fr2YnYmYfTAAogGP60L53bBLFb2PGE7mKVG6fRGExmSzS6l2RzOKCuNwJEgAHX1YGIepR6PNATyyQiokSVtgiWIhuNCTNFvNMkEKREDpg0D0YAWcCUDWQzWMWAQUX5EA8cYyo04I04nAA9KmYCo1Bo5pnUoEHMCvpgYAAWezNdTtGAARgAdDXlKoq1ohbCRQYLNAcEiejZytN+VBkJgOs40M16EoicKNIGu1Aex43QEAPz+btQFdscfXBkLpcr-zr0wgADWyEQVxuMPo-wse4MaBA08fB92XP72-gEDQh1oYDoH0wB1MsOZgO+y7ouubb0H+cxQABQEGCBGwiu076ftQUH7Duv50HotAAEb0E+wGgeh4CQUeMAwVIMKESRZEoRR4GYX22HfuOXRtAs9KMtR0E9PRPFwHxDKAex3Jcb+PDVOBlxklgLRtFRm44aidGXHJcAKXBSkxqpEGblhGmVHhaBZi2YBoH0SgILpGHqTRWlwVZ4G2QY9lgI5amLr20mohZzQAI7-GonbOUJsETgYYXWMAkVxeFiUTohbKMhAkGmTJaAkSAwBnoJaKuXlxxFSZHFmZkFlDiONnQB2ElRFFJXCZcdWjmlTUCZVgW4T+aDArUcAnGxrWaTAw30A0sHIB2FjmEYIquNlVXIu6lT0Fqz7ThyWVLcslJZeppnVQEbBGNgmDscQACqYBnmAID4h0jUZYBnxuIgBhMO1d4dvIQzJu51bTQ0Wb2BsCyxlMlrZLkv6RjgjmGJZzZsVmcZw5UnUdODKRwCjGho6DVGQ1NmAwzyYwGBMv3Bjk46gHg-CUuj2YYVjA68ghMBESA2i6kQZM2QLQsWFjCaZB8zJhJi14Mll4ueNLAS4jcZxMOG6AMPQksY+0GBoQyxZZVjG2bVbMDMjy6t82yV77YCwIWGCBCQs9t5wgiSI0dbGIFacdsHHzztEMNvQWNDLL+wHjvey0zxPC8-hmnyLQlIQR5zQtKuW9bZIUlSxK0uAzUWHH6KPrHAeVPtBd15mhvgOqZf8ZJ3Mh1kTO-njicWDGWfYxUqJ4zA-ccvBgECUP9C7Gr-i0-TONj4i9UwKodkIP0i8wMmozjJMo+ZFdq0U-dj3Pa9zec1oUDfQz+OILUbiDNLyYgy3HTbdAu2J1lJSLIqqrx7g+aEh0ALaEASCRAsYeb7HHsUUoatl7HxXOPdYtIrCzk7PZTY6BIGUisLA2MplG7W1-oQvasJbgxkIT9I60CSFwI8GdD+SYmx3w6DFHSekiSwMMk5fyplQHj3HFATA95c6ijkgIrAKR+jZSrlbbk51KiuXmrI8AJdBHTxOv5NhMAVGon6miS6uCLByIMkNeea0TH7FlJw0W-0ObWU8t5XyxkRHcjEevUcMAgRnifCzRAbMqSi0rptIEqobwvkVgYCh7pRYeIch5dYDxERGAMUuNhKiUnbx8h5FWyjNpOK-tw1xoUUqRX8sA3xJ8wHjm+PgNwsV4oRXfPA0BmRx5by8jvbQqCj4MwRuOOof93rfF6nUkecdx4yLwbSSZ6VpmSU3GQpxmQ0G-UaTLPm+CVk9kTmEOOizJbLPQFMiuGy2FbP2IzRGaBJ60IuQQtKxyORzItOPQ5Vz-KJz3kvEZPTEH+J4fRapCVOwOPod1D6UAcmIruf2IF+83ify4dZVx+VCpSX7KAj4Kswi4rPHlQWDR1Jq1lkHCY8taUJOVhS54rx9m8E+C0gBLtQQQihIneEiIklNwCLbNWCzLH5wcUXXobc6QV2ZKyTlDcqrAzTBmAA6r9MMv1aBFBKKBXULiugctZssOIHJMyuCKJrGA+IHAgGaGqnQLE0LgU6N0Z6sBfb8wMNYf6Wj+h1hgAAFQcL9FAmAwmTBfJ8MNTqXGFK8T+cII46a6m1IEfkHYpqbx8vFeAfRAK6TcFwdMsbfouPxHAUoRQhRGB9VNF+21+hTUpPARFE9wUwAtU6h8+qvDOHgJgfkpE6CATrNwPmXsp7eqIBYLwHs9UoKxW6hWNdIKgMeeOKFnT1IIN5uyjZYQd2pWuZlSCaLxG-haQ-dpNSunqI0Uu+gccdyQCMLrUoUSA5rs1m8lZPV1mzLyXXX9SsLBBKfCemFKcrZwrPYBJF8D4wYpBXs-wV79GIUAp5VCYFhGHnNCeLUViEJIVw6xI2b493+wsgROAxFSIUddQR3YVdiPQAsPRxjzE8OURstRwxj7zLPtQc47+2sP22P1iCYBbhYaNMw8gmTsYVzrnk7lZTEHvhESMNEAwtBtBuzITAeTcYXLhFoNgsNhnjNGIQDraTFhELVrs-YMzwmYCXWHatGzRnZNGOIDgLOcBai-XIix3ML4gZcAqdimK-cEMtRESAxTXbIPPPBQPEx5zEurOavIoRfklxCoDmo2LK7qwxVEuJGZPZRGNI+BawUliasd3QByNa9z-BtYSQPNrBXBMle7bQ0yYqu0cgqy4mK3GmLMfw8VgKBLGnNHQI+Aes2mMRYWwJm4pTHGWM27xyjrdOunXWiucpARKutnov+HD23+P4uwqA1bfXOv3eQnxjyQ2PyXcsZ9+b-GB7ne5KV8pKYy2i26EofMwBCz4HreWP0KE3X1gAEw3bHL+Sc04ZEIAWButLw4Am7mQDgXTN11IwAAD40-9tuyRBON10+MeaccAsQCkQAhe8TlTdx7ep8TjeEjaALAWP0EwJHKrEEfO-Pn2L1vxN+-uztJOOh+ec1Z-We6psSdF+LyXVD2JQDDWgRCCxVeYawVTwxMAABk9vHAGaM9TgoRBTdPgt3r-nv4Bt1d2KvTDFuJdUmNzL-3gF5dxbdZHtbgu7cn3Hprlz+sU-a8gnGVVRrWhiXayDxPg4u3p9c6nzP2f9eyTIw9l1O2idF-V4NEPRvpcpeIIDx74Fo9Y9mLwcjneqMJ6XEH4vLuteuZLzroTKGY-Vg77X4HZ3C8BGT2PsvZe90V99wxBjc2B+Lf3cHsXoepecZl0doHXet-Yov-v3b+4hcN43pP-TtmN-T+v262-C+PJL+H0n0fN-DPd-XJT-asccApAZIpVjQ-LtA3E-cPNvSAzxK-H3bFZAtJI2DJG4M2evFfQAozEA3YMArQDA6A1uEpR-fAxvF-IgrPNAt1ccPLQDZLf-J-UnX8ZvMPVverEgZghFbvFxfgtZdAAyFSGAkfGgtfDPXXBXRgqvSkLxRSQRcQg-SQkXTg4-FvM-FLBxdvHRJQ-SFQ3PcAQQiTaxPRZSV3ZfDDLtKhTLJQdiGsEgjoCwhRIIPA2wxvew-kRwyqdHFw3vXRBRBgVgwPAA7wnaXw9iAAZkCO3WSmhU8LVw0PNy0O4J0N4KaESIijMMqQy2gwfXUICWN2yI6USmIArFmQYOrGg3hREKRXKGu2oOf2kNc1kNny0GaUiDaUKNuWKOxyuH1QfRqK6N-AmX+RYKKIiNSK0yIPgVGI6D+XqJuVmQGOd1s1uUWM7QAwRSQ1gMb3mPiN-FJWSJSI4LSMNwyLCPsGIFJTyOxQy1OKoK8I3lKPuKqKXG2NJXJQlheNeICRfw6J724ibVGie3+KPyuNPxuJIGmnBNQLkOrEgW1FtzYJaMBLaKn1yW2KIWYUhIIPH31joJnx7y9jxIOlYXWLJy-XMFjG2OWLxMWipJmMxNszpMCLhQpOZIU3YI6DLw5Iq3jW-hhzhwR2LDLArFR2rHrBiJBM4KkU7BBCty7XdkKEkX+G2Iy1CXCTcTYmwNNmyXsHzlSzeHHlKJ1K3j1PaEqIcQNKyU2GNIpTGyRLGPglZitMiSUBVMb3gO0KiCUFuMtPZlFgeLdRSXtNwO9L8UiL-miMDNrECJSRKWjOFxKKiK8klnsACIZO-llXLgElTLNLsIzMcITLiK1NoGCUy3VwHh4ApHCOLNjKiGIBeTvAMEqN7wbOOJrPqg21oR9NSK4JhK41G1bKyw5DDOrDbLhHrIEi+RjNaKANcy+UCISlMDaEDHzPaysGWybI3jLwhxcWWNhz2waX3LZKMyPIk3XIdSfCIghkyQa1ZQxI6Bt0lifKqgqw+E9yJB6O3OajCGUy4BcW6NaQAoEnPN6TgN-C02vPyKrKfFPP3BrnsH2kHICXfNQpG3bPpNdKWMyUZQ-JuCaOaNfI2KM2QoMCTMIv2mIoZFIrTmgsOIzyorXPJBlVLjlQEmwqkGASIi6CfCgvhhyFIkDFNwfE1gXUKDEoWAkr4u+TBUb1vOaDygaAcQCAyyoskqVnsA0sqBiTdl5XfJBFZEVKMQUpAzrgEtUu633hBUeVkokpri8AAB4bZrA5KHBRysRVdT4fMbpiBg0zBAkAJdRoZydMo-RLwRp+h5BTRNp-QCdgwGgXK9ROyTREgVEkrAwUqfKFjUM6Z0FTEArGhgqQBMwCRKYFhIrENoqwS4qSAEr3QcqgwQwdKk50rbjmqLRWq8rLKxNOif4zALwrx1tOtHwGs3hpsbBlRzBdyXt0N-AXEIATgIJeLg5QUZglNhiXL9LaIOI5rLB9rT41ANyCcILJI1F9q2BHwxBChNc9rhUDrNdNdLKTqvM-Q1qiSOqTMy8BqVwD4Hkxlr1-yuKCyrr+w-LHFSrJqSAHoBYt5rUGQYtAa0M44PgqKwgTzMkFru4D1ghmsNxvqqKiK2LStnqAhSa6K2KhhU4ASOhmtChp1aEBUtxNoYJYabhbiAA5G4TeSYXTJQVwcLH-doIGFRNgSbQGjFC8nhWa08SweC7FXrca15OGqQKazIGa6gI6vGra2+bFVannDarEA25i2Y3aqShxGCBWlUb9OuFSi68Gnc6662W6-m93Ci36zzSaCwT4DPN64OX2ojFHdAV6sfBStChgEO9Ebza6RoZ6KaXPWrT6TKj6yoYgDNT7boPWF6foQYGAWOkTY2iCMvFy1kDPAG1EMYFcR5Yke6j3M3G9NpF25qaGmYM+G6OGy+RGttO6hAZO3idrVGmu9Gi0TGzJbGy5SyXGuyteRvUu+ip8ddcmjO5a2i2hc2TJFDGu2Wi2gJYkPW5Wt1N7NW9sjq6O+gLWqmiTJe023khey2r9J60OruxoKMIwa4RgLuj2hkKEWAYWreQYV9ZG36L2x662jmsOtACO2zKOnC4utgJe8uqSyulc4O4ZN4Sez2zMGe7Suy8eJe0m1eneim-Yamre5e0k4U7hUU3AAsIsJHKU7FesUsHvDLZGVGJC7+XIPAMoRc9MzjYgLhkmDs+wImWoHs0RxUa08mVQA4oc9Ikci+GRwwKcrQNRp8SR0iZqJ7LGdYnwzMimZw78vmLRuRyAeWEjN0Uo6oCAWoeoTsmYexxx3UNEKyraEjYgLu5xmG66C0TxjEbx+IPx9EN2dzBdSEMERIdxoJkVbx8gMJtECJ0zKJmAMEcgUzfweJ-wUogAKmSdRFSc8F5TBHyeyaLqFVKNTCKf2BKfSbBAzDieqe8YAFI6mZgGmymYA2nKncmbZvH3dOmAhunF01SiBPBWnhGABCAoEZ-wMZ6JmAOZyZgZ0o1yhZ0Z0ytJnp9y-wKZ2x7x1yggLZnIHZ0p8ZmAE5g59Z7x8EM585yJnpyEW56Zls8EU5+wc0JZjJmAT5t5o52Zx5v5zIRdfwGZgIZUt0IYD4CxnO6xzjUo-pbyAu+wFFwZAZym4J4RvmnmupvFrF7FvJ7xgASTABQLfm+fJcpaJeJdKKBFNzQAAAVSW-HGWHAWXSXi664hgjUm02kLGvTVAoYqZar0AqEMLn5X40AEA0B+lMAZoLqAArWgOgVavQfAB290CxnRkQ-RhR8hmYCKgrSV9gSofCsOy8S6qIVXOFvQYmWRlJGuMQFcQy7IRdTXb0+wIVkUu2e1ombhyxrlAgN112D1yEThh1oNyJF-b0uMI18IaNsRyxvCtleYZN2RwHF10N1Ed13lL1oxeF6vZFalcxzNtGQHcOMNywCN72sveNxN4tvvRDO2BZDi9mNugSExSOYhX17hRlPSym5txqHDCuntl+KOft9xZVDOkd7DDrLeulyoX8lum11VH8s3BYUwAS-SGkbiz6IgVba1rtySPliTbVCMAMKIEAIiZV1HRRi44MiJXh29+99QdRdcfQj0ttUM10NEPq9qiMk2B0g6O9h9rweII8QDiGPMkpN9iD-91EYgVy09qAB5t0NgBD9QMx9lX87d29xSfdiGwgK1q8ND+dLgBUQwYwRW5zLdndoj6gduZqW49+IAA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_76_9_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 M-Eval input:
 function append(xs,ys) { 
     if (is_null(xs)) {
@@ -439,8 +396,7 @@ M-Eval input:
 append(list('a', 'b', 'c'), list('d', 'e', 'f'));
 
 M-Eval value: ['a', ['b', ['c', ['d', ['e', ['f', null]]]]]]
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       
@@ -448,11 +404,11 @@ M-Eval value: ['a', ['b', ['c', ['d', ['e', ['f', null]]]]]]
 \begin{Exercise}
 
   Eva Lu Ator and Louis Reasoner are each experimenting with the
-  metacircular evaluator.  Eva types in the definition of {\lstinline[mathescape=true]$map$}, and
+  metacircular evaluator.  Eva types in the definition of <kbd>map</kbd>, and
   runs some test programs that use it.  They work fine.  Louis, in contrast,
-  has installed the system version of {\lstinline[mathescape=true]$map$} as a primitive for the
+  has installed the system version of <kbd>map</kbd> as a primitive for the
   metacircular evaluator.  When he tries it, things go terribly
-  wrong.  Explain why Louis's {\lstinline[mathescape=true]$map$} fails even though Eva's works.
+  wrong.  Explain why Louis's <kbd>map</kbd> fails even though Eva's works.
   
       
 \end{Exercise}
@@ -460,7 +416,7 @@ M-Eval value: ['a', ['b', ['c', ['d', ['e', ['f', null]]]]]]
       
 
 <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>Any
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Any
     function
     defined in the underlying
     JavaScript
@@ -472,9 +428,40 @@ M-Eval value: ['a', ['b', ['c', ['d', ['e', ['f', null]]]]]]
     JavaScript    
     itself.
     Thus, for example, we could put 
-    {\lstinline[mathescape=true]$list("first", head)$} 
+    <kbd>list("first", head)</kbd> 
     or 
-    {\lstinline[mathescape=true]$list("square", x => x * x)$}
+    <kbd>list("square", x => x * x)</kbd>
     in the list of 
-    {\lstinline[mathescape=true]$primitive_functions$}.</FOOTNOTE></div>
-</SUBSECTION>
+    <kbd>primitive_functions</kbd>.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>
+        JavaScript's <kbd>apply</kbd> 
+        method of function objects expects arguments in an array. Thus, the 
+        <kbd>argument_list</kbd> is transformed into 
+        an array using a <kbd>while</kbd> loop:
+	<div class='snippet' id='javascript_76_10_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
+function apply_in_underlying_javascript(prim, argument_list) {
+   const argument_array = [];
+   let i = 0;
+   while (!is_null(argument_list)) {
+      argument_array[i] = head(argument_list);
+      i = i + 1;
+      argument_list = tail(argument_list);
+   }
+   return prim.apply(prim, argument_array);
+}
+</pre></div></div>
+	We have made use of
+	<kbd>apply_in_underlying_javascript</kbd>
+	to define the function
+	<kbd>apply</kbd> in
+	section \ref{sec:data-directed}.
+
+      </FOOTNOTE></div>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section1/subsection3.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section1/subsection5.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+4.1.4  Running the Evaluator as a Program</div>	<div class='next-page'></div></div>

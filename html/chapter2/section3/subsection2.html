@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>2.3.2 
-        Example: Symbolic Differentiation
-      </a>
+		<a name='top' class='permalink'>2.3.2  Example: Symbolic Differentiation</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -40,16 +47,17 @@
 <a name='p2' class='permalink'></a><p>
       In developing the symbolic-differentiation program, we will follow the
       same strategy of data abstraction that we followed in developing the
-      rational-number system of section~\ref{sec:rationals}.  That is, we will first
+      rational-number system of section \ref{sec:rationals}.  That is, we will first
       define a differentiation algorithm that operates on abstract
       objects such as <QUOTE>sums,</QUOTE> <QUOTE>products,</QUOTE> and <QUOTE>variables</QUOTE> without
       worrying about how these are to be represented.  Only afterward will
       we address the representation problem.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         The differentiation program with abstract data
-      
+      </h2></div>
 
       
       <div class='permalink'>
@@ -104,54 +112,54 @@
 
 \noindent\begin{tabular}{ | l | l | } \hline
 
-            {\lstinline[mathescape=true]$is_variable(e)$}
+            <kbd>is_variable(e)</kbd>
            & 
-            Is {\lstinline[mathescape=true]$e$} a variable?
+            Is <kbd>e</kbd> a variable?
            \\ \hline
 
-          {\lstinline[mathescape=true]$is_same_variable(v1, v2)$}
+          <kbd>is_same_variable(v1, v2)</kbd>
            & 
-            Are {\lstinline[mathescape=true]$v1$} and {\lstinline[mathescape=true]$v2$} the same variable?
+            Are <kbd>v1</kbd> and <kbd>v2</kbd> the same variable?
            \\ \hline
 
-            {\lstinline[mathescape=true]$is_sum(e)$}
+            <kbd>is_sum(e)</kbd>
            & 
-            Is {\lstinline[mathescape=true]$e$} a sum?
+            Is <kbd>e</kbd> a sum?
            \\ \hline
 
-            {\lstinline[mathescape=true]$addend(e)$}
+            <kbd>addend(e)</kbd>
            & 
-            Addend of the sum {\lstinline[mathescape=true]$e$}.
+            Addend of the sum <kbd>e</kbd>.
            \\ \hline
 
-            {\lstinline[mathescape=true]$augend(e)$} 
+            <kbd>augend(e)</kbd> 
            & 
-            Augend of the sum {\lstinline[mathescape=true]$e$}.
+            Augend of the sum <kbd>e</kbd>.
            \\ \hline
 
-            {\lstinline[mathescape=true]$make_sum(a1, a2)$}
+            <kbd>make_sum(a1, a2)</kbd>
            & 
-            Construct the sum of {\lstinline[mathescape=true]$a1$} and {\lstinline[mathescape=true]$a2$}.
+            Construct the sum of <kbd>a1</kbd> and <kbd>a2</kbd>.
            \\ \hline
 
-            {\lstinline[mathescape=true]$is_product(e)$}
+            <kbd>is_product(e)</kbd>
            & 
-            Is {\lstinline[mathescape=true]$e$} a product?
+            Is <kbd>e</kbd> a product?
            \\ \hline
 
-            {\lstinline[mathescape=true]$multiplier(e)$}
+            <kbd>multiplier(e)</kbd>
            & 
-            Multiplier of the product {\lstinline[mathescape=true]$e$}.
+            Multiplier of the product <kbd>e</kbd>.
            \\ \hline
 
-            {\lstinline[mathescape=true]$multiplicand(e)$}
+            <kbd>multiplicand(e)</kbd>
            & 
-            Multiplicand of the product {\lstinline[mathescape=true]$e$}.
+            Multiplicand of the product <kbd>e</kbd>.
            \\ \hline
 
-            {\lstinline[mathescape=true]$make_product(m1, m2)$}
+            <kbd>make_product(m1, m2)</kbd>
            & 
-            Construct the product of {\lstinline[mathescape=true]$m1$} and {\lstinline[mathescape=true]$m2$}.
+            Construct the product of <kbd>m1</kbd> and <kbd>m2</kbd>.
            \\ \hline
 \end{tabular}
 
@@ -160,13 +168,13 @@
 
       <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-        Using these, and the primitive predicate {\lstinline[mathescape=true]$is_number$},
+        Using these, and the primitive predicate <kbd>is_number</kbd>,
       
       
       which identifies numbers,        we can express the differentiation rules as the        following
       function:
 
-      
+      <div class='snippet' id='javascript_35_1_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function deriv(exp, variable) {
@@ -178,7 +186,7 @@ function deriv(exp, variable) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAEwKYCcYDcAUqAeADgDSJYCGm5ARgDaoCUiA3gFCIeLqpQjpIwAzgH0wIALbUMeIg3acFnAPyIADPMUKAXIiHCKVOqhmE5m8ypx7B5can2UYNeidIGnRhkxUBGRDvVzTR1rCRMzIM0VcXIAa3tBMLRMXHJkNDBkcLdHZ0ZSDUiihWTsHHIQAHNUTOyyXM8I4o4QkUJ0OGQQaHDC5sRouISwmPjhds7uqBxxEFpYQloYaQJTAv6NxVLcWfmYRZgIclrVhnXNi813PK9iPsvEUfsJrp7tmbmFpZXZc4f-zjXTx-AEKXZfQ7HLKnLz3Yo6ACi6A66BwACJwLEwHAAO5IVbcQSCeBIKAAT0IqF0SG2aLuoIUpwA3KwAL5AA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQG4EMBOMsBGANgKYAUAHgJSIDeAUIk4jiVCDkqmilHmAHNKVANz0AvvVCRYCZOhRYAtiUy58xchgCMAGkQYATDQbMWbDl3TY8hUmR00AZE8SMzH+WtuaHxxC4G2ogAvGEGhmKS0tDwVjwgSsJ07kys7JxeAA5YMDjJgQAWJFgAJslhIYgARADU1VFS4LFySlgA1qooiWRYeohY-qbM6ZaIRKhQZHXV+n1zxo0xskhtnWhZOHClINBkSv1KQ6nmGUgTvNMAVLOIB-pHohJNMnEDpaUkYOUoJiejmWKZTIUFyRDIvye0WaKwGIAEXx+fzMAKQQPKoJg4Mx4MhUJeLXim22uym1BSKIsmW4OTyBVc6Iq4WqNyWMLeShARFgWQmJHyvwpIypaJKGLBEKo+OWHK5PImECw30lQrSIsQjJxIIleLZrzknzwGDIJAoWX0Ng0pGRwrOXjAiQI-JNZqoJ08iAA-IgAAzuzwALi8lrs5FNWTdHs83rI3EUKm8VrDZot6lDUq9iGCQb9UY8QbjPXDkbzHm9ay6PUNMGNZU+yuLqZ81v0-tLpertfhiJdEabSalbajBfQxJ2e2LQ7z5Y6laSFY2W3HU053JgvJgzsbbnbu7znf2cvXCqV5W3U73l6YIc0Ut0F73C7HpLIB9X8s3+XPV5-7ZvLZ3X883fY8YEVBtXUHX8gwAURwLZ8mqcB2jAOAAHckHDVgUBQN4oAATyyEhkCQTtZgfS9i0aegDwuKYWVuOjrluaoKBY-DqiofQmJmfRWNuABmO8ajYp4AHoxMQABtGp6nvCTmCkqSGP0JSVOk-jVOqDj9AdIgiAAXSM1sFNLNS5Ok-opJ9XSuUM4zED0+yDPkyTFOUm5XM8czyNM7yPNuZS2NUmzHLsoyXLcPz-PUqSrO024nIi2z9OS+hoo8HytOC6SBJS5z8oMxAipc9K3OYJziqMoA}{\usebox\lstbox}!*/
                ? make_sum(deriv(addend(exp), variable), 
                           deriv(augend(exp), variable))
                : is_product(exp)
@@ -193,12 +201,13 @@ function deriv(exp, variable) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
       <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
-      This {\lstinline[mathescape=true]$deriv$}
+      This <kbd>deriv</kbd>
       function
       incorporates the complete differentiation algorithm.
       Since it is expressed in terms of abstract data, it will work no
@@ -207,9 +216,10 @@ function deriv(exp, variable) {
       we must address next.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Representing algebraic expressions
-      
+      </h2></div>
 
       
       <div class='permalink'>
@@ -218,12 +228,12 @@ function deriv(exp, variable) {
       expressions.  For example, we could use lists of symbols that mirror
       the usual algebraic notation, representing 
       $ax+b$ as 
-      {\lstinline[mathescape=true]$list( "a", "*", "x", "+", "b")$}.  
+      <kbd>list( "a", "*", "x", "+", "b")</kbd>.  
       
         
         
           However, it will be more convenient, if we reflect the mathematical structure of the expression in the JavaScript
-          value representing it; that is, to represent $ax+b$ as {\lstinline[mathescape=true]$list("+", list("*", "a", "x"), "b")$}.
+          value representing it; that is, to represent $ax+b$ as <kbd>list("+", list("*", "a", "x"), "b")</kbd>.
         
       
       Then our data representation for the differentiation problem is as
@@ -234,9 +244,9 @@ function deriv(exp, variable) {
           They are identified by the primitive predicate
           
           
-          {\lstinline[mathescape=true]$is_string$}:
+          <kbd>is_string</kbd>:
           
-          
+          <div class='snippet' id='javascript_35_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_variable(x) {
@@ -245,9 +255,10 @@ function is_variable(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQG4EMBOMsBGANgKYAUAHgJSIDeAUIk4jiVCDkqmilHmAHNKVANz0AvkA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQG4EMBOMsBGANgKYAUAHgJSIDeAUIk4jiVCDkqmilHmAHNKVANz0AvvXrdseQqTIAiCgE8AXotFA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
         </LI>
         <LI>Two variables are the same if the 
           
@@ -256,7 +267,7 @@ function is_variable(x) {
             
           
           
-          
+          <div class='snippet' id='javascript_35_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_same_variable(v1, v2) {
@@ -266,13 +277,14 @@ function is_same_variable(v1, v2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfRQQwLYFM0BumATjJgEYA2uAFAQIwA0iBATAJSIDeAUIv4mK4oIYklSESZKrQacAZPMR8BqgRKKkK1Oh0SKW9RAF5TLVgG4eAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQG4EMBOMsBGANgKYAUAHgJSIDeAUIk4jiVCDkqmilHmAHNKVANz0AvvVCRYCZOhRYAtiUy58xchgCMAGkQYATDQbMWbDl3TY8hUmR00AZE8SMzH+WtuaHxxC4G2ogAvGEGhmKS9NyKKt4a9gBEFACeAF5J+ikZSaJAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
           </LI>
         <LI>Sums and products are constructed as lists:
           
-          
+          <div class='snippet' id='javascript_35_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_sum(a1, a2) {
@@ -281,10 +293,11 @@ function make_sum(a1, a2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AziZAClQEYAaRVAJgEpEBvAKERcQCdMoQ2kAbGXFEIAiANTCKpSbQDcjAL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AziZAClQEYAaRVAJgEpEBvAKERcQCdMoQ2kAbGXFEIAiANTCKpSbQDcjAL6NGaLHgKEVOAA5s4AExDQRADwmIAzDQqbsO-YaHCAnmeEAvYTRoygA}{\usebox\lstbox}
+</pre>
 
-
-          
+</div></div>
+          <div class='snippet' id='javascript_35_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_product(m1, m2) {
@@ -293,19 +306,20 @@ function make_product(m1, m2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADgJzgBMRoAKZARgBoUAmASkQG8AoRDxfTKEfJADYwAzlDIAiAFTjaVWYwDcrAL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AziZAClQEYAaRVAJgEpEBvAKERcQCdMoQ2kAbGXFEIAiANTCKpSbQDcjAL6NQkWAhQYcABzZwAJiGiFk5FLQbNWHLj0T9BIgFQSUJ5LIWNGaLHgJGN2Np6BkLCAB7OAMw0FN5aOvqGwgCezsIAXsI0NDJAA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
         </LI>
         <LI>A sum is a list whose first element is the 
           
             
-            string {\lstinline[mathescape=true]$"+"$}:
+            string <kbd>"+"</kbd>:
           
 
           
 
-          
+          <div class='snippet' id='javascript_35_6_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_sum(x) {
@@ -314,16 +328,17 @@ function is_sum(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfRSAtgCgB4CUiA3gFCIWIBOAplCFUqmgA4CGMV+RAZD4gAsabACbdEAXimIARAGoZAblIBfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfRSAtgCgB4CUiA3gFCIWIBOAplCFUqmgA4CGMV+RAZD4gAsabACbdEAXimIARAGoZAblIBfUqWaZcWNgGsaGbDhl4ZAGkQBmAgUVA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 
         </LI>
         <LI>The addend is the second item of the sum list:
 
           
-          
+          <div class='snippet' id='javascript_35_7_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function addend(s) {
@@ -332,16 +347,17 @@ function addend(s) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQwCaoKZlQCgM4CUiA3gFCIWIBOGUIVSAFhmjlMjADb4EEDcpAL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQwCaoKZlQCgM4CUiA3gFCIWIBOGUIVSAFhmjlMjADb4EEDcpAL6lSaTNhwBbZAGsMAfTwhJOAEQAPVQBpEAZl58gA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 
         </LI>
         <LI>The augend is the third item of the sum list:
 
           
-          
+          <div class='snippet' id='javascript_35_8_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function augend(s) {
@@ -350,19 +366,20 @@ function augend(s) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAQxAcwKZgCYAoDOAlIgN4BQiliAThlCNUgBYbJ5TIwA2uH3BhQQG4yAXyA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAQxAcwKZgCYAoDOAlIgN4BQiliAThlCNUgBYbJ5TIwA2uH3BhQQG4yAXzJlUmHLgC2yANYYA+vhCzcAIgAemgDSIAzMKA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
         </LI>
         <LI>A product is a list whose first element is the 
           
             
-            string {\lstinline[mathescape=true]$"*"$}:
+            string <kbd>"*"</kbd>:
           
 
           
 
-          
+          <div class='snippet' id='javascript_35_9_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function is_product(x) {
@@ -371,15 +388,16 @@ function is_product(x) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDAzgfQA4Cc4BMTQAUAHgJSIDeAUIrYlgKZQhZKqYCGMWJ5AZH0QALBh1y9EAXmmIARACpZAbioBfIA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQA4Cc4BMTQAUAHgJSIDeAUIrYlgKZQhZKqYCGMWJ5AZH0QALBh1y9EAXmmIARACpZAbioBfKlXbY8BKIQC2HANYNMOfEVnFZAGkQBmUqSVA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
         </LI>
         <LI>The multiplier is the second item of the product list:
 
           
 
-          
+          <div class='snippet' id='javascript_35_10_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function multiplier(s) {
@@ -388,16 +406,17 @@ function multiplier(s) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWxAG1gBzTApgJwAoBnASkQG8AoRWxfXKEfJAC1wEMATQqDmNCVKkA3FQC+QA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWxAG1gBzTApgJwAoBnASkQG8AoRWxfXKEfJAC1wEMATQqDmNCVKkA3FQC+VKqgwxseIsg4BrXAH1M+OFxDRCAIgAe+gDSIAzMJFA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         </LI>
         <LI>The multiplicand is the third item of the product list:
 
           
 
-          
+          <div class='snippet' id='javascript_35_11_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function multiplicand(s) {
@@ -406,9 +425,10 @@ function multiplicand(s) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWxAG1gBzTCBDMAEwAoBnASkQG8AoRexAJwFMoRGkALZvEqPGGmL9BZcuIDcNAL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAWxAG1gBzTCBDMAEwAoBnASkQG8AoRexAJwFMoRGkALZvEqPGGmL9BZcuIDcNAL40aqDDGy4CJZHgDWzAPqZGcQiGjEARAA8TAGkQBmSUA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
         </LI>
 
       </UL>
@@ -417,10 +437,10 @@ function multiplicand(s) {
       <div class='permalink'>
 <a name='p8' class='permalink'></a><p>
       Thus, we need only combine these with the algorithm as embodied by
-      {\lstinline[mathescape=true]$deriv$} in order to have a working symbolic-differentiation
+      <kbd>deriv</kbd> in order to have a working symbolic-differentiation
       program.  Let us look at some examples of its behavior:
 
-      
+      <div class='snippet' id='javascript_35_12_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 deriv(list("+", "x", 3), "x");
@@ -428,11 +448,12 @@ deriv(list("+", "x", 3), "x");
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwTglgbgFANhAzgFxgIgNRoDQAI0AeOuAzAJR6FpkDcAUAPQO4DamxLAjHiwAx4A7AK5w4AXQlA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAEwKYCcYDcAUqAeADgDSJYCGm5ARgDaoCUiA3gFCIeLqpQjpIwAzgH0wIALbUMeIg3acFnAPyIADPMUKAXIiHCKVOqhmE5m8ypx7B5can2UYNeidIGnRhkxUBGRDvVzTR1rCRMzIM0VcXIAa3tBMLRMXHJkNDBkcLdHZ0ZSDUiihWTsHHIQAHNUTOyyXM8I4o4QkUJ0OGQQaHDC5sRouISwmPjhds7uqBxxEFpYQloYaQJTAv6NxVLcWfmYRZgIclrVhnXNi813PK9iPsvEUfsJrp7tmbmFpZXZc4f-zjXTx-AEKXZfQ7HLKnLz3Yo6ACi6A66BwACJwLEwHAAO5IVbcQSCeBIKAAT0IqF0SG2aLuoIUpwA3KwAL6sd5LQTTNEAajpiDR+AFAGYzoLhQwWQB6aWIADafIF8p8pHlqlIYlotAAunqgA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-      
+      <div class='snippet' id='javascript_35_13_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 deriv(list("*", "x", "y"), "x");
@@ -441,11 +462,12 @@ deriv(list("*", "x", "y"), "x");
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwTglgbgFANhAzgFxgIgFRoDQAI0AeO+AnmgJR6EUDcAUAPQO4DaaA1MS21nm0XwAMeAHYBXOHAC6MvI2a5FS1jy4BGPmjKiJ02bnGSZUoA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAEwKYCcYDcAUqAeADgDSJYCGm5ARgDaoCUiA3gFCIeLqpQjpIwAzgH0wIALbUMeIg3acFnAPyIADPMUKAXIiHCKVOqhmE5m8ypx7B5can2UYNeidIGnRhkxUBGRDvVzTR1rCRMzIM0VcXIAa3tBMLRMXHJkNDBkcLdHZ0ZSDUiihWTsHHIQAHNUTOyyXM8I4o4QkUJ0OGQQaHDC5sRouISwmPjhds7uqBxxEFpYQloYaQJTAv6NxVLcWfmYRZgIclrVhnXNi813PK9iPsvEUfsJrp7tmbmFpZXZc4f-zjXTx-AEKXZfQ7HLKnLz3Yo6ACi6A66BwACJwLEwHAAO5IVbcQSCeBIKAAT0IqF0SG2aLuoIUpwA3KwAL6sUCQWAIXQiIEufBMNgKbi8fi84SCKCYMCVHCClnsznQEkSmx2ByGFxYHxuABMQsKor4Aj5DW1PiYADIrYg4Qo9PzjFgDYgbWQ-ABeb1kPWKjngFU80LieWGkU8E0SwjkGCowVu20AC1QaTDiG9nsQaIA1Gj-cruUgnpKwuRdYhyK7hZxjeKllL0XnSOWWwaC4Gi48huMOq9puIK+Jq0bI-WhNM0QAqOmPIfttkBrmqtIZLKCcO1sdIFNpqCx2g4DcMDvLnkVaq1DcsUdineprL7mCHp+H48nxeF1V6F5TdM1jg61NcZY3ja1kwfdNM2zGdTyDYtPn2b5UWvACuG3RBd0fA8jy8OCu3BJDISvTdAIwrCcFfSicPff13gbScZ1INF8FnNEyTRM5s1Yj8AHpeMQABtXNZ0E4SmKEljRNUUgxFoWgAF0lIKfigjE6dRIrYSONkuZFOUxA5P0hSgA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-      
+      <div class='snippet' id='javascript_35_14_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 deriv(list("*", list("*", "x", "y"), list("+", "x", 3)), "x");
@@ -457,15 +479,16 @@ deriv(list("*", list("*", "x", "y"), list("+", "x", 3)), "x");
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwTglgbgFANhAzgFxgIgFRoDQAIErpZ5oAeOuaAnmgJR4GpoDUFZFAzLfZebQNwAoAPTDcAbUqtsIsbgnjMFcYuIT2eRTTwA7AK5w4AXRN5Z8i5fkqWygIyaADLoPHTufYZNGZoyzeJzKxtpIKsFJU0NCWcPV28zP3DrVXso7Tivd083HzDwkOVo8Q4XLJ9M41wjat85CxzqkyA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAEwKYCcYDcAUqAeADgDSJYCGm5ARgDaoCUiA3gFCIeLqpQjpIwAzgH0wIALbUMeIg3acFnAPyIADPMUKAXIiHCKVOqhmE5m8ypx7B5can2UYNeidIGnRhkxUBGRDvVzTR1rCRMzIM0VcXIAa3tBMLRMXHJkNDBkcLdHZ0ZSDUiihWTsHHIQAHNUTOyyXM8I4o4QkUJ0OGQQaHDC5sRouISwmPjhds7uqBxxEFpYQloYaQJTAv6NxVLcWfmYRZgIclrVhnXNi813PK9iPsvEUfsJrp7tmbmFpZXZc4f-zjXTx-AEKXZfQ7HLKnLz3Yo6ACi6A66BwACJwLEwHAAO5IVbcQSCeBIKAAT0IqF0SG2aLuoIUpwA3KwAL6sUCQWAIXQiIEufBMNgKbi8fi84SCKCYMCVHCClnsznQEkSmx2ByGFxYHxuABMQsKor4Aj5DW1PiYADIrYg4Qo9PzjFgDYgbWQ-ABeb1kPWKjngFU80LieWGkU8E0SwjkGCowVu20AC1QaTDiG9nsQaIA1Gj-cruUgnpKwuRdYhyK7hZxjeKllL0XnSOWWwaC4Gi48huMOq9puIK+Jq0bI-WhNM0QAqOmPIfttkBrmqtIZLKCcO1sdIFNpqCx2g4DcMDvLnkVaq1DcsUdineprL7mCHp+H48nxeF1V6F5TdM1jg61NcZY3ja1kwfdNM2zGdTyDYtPn2b5UWvACuG3RBd0fA8jy8OCu3BJDISvTdAIwrCcFfSicPff13gbScZ1IBj0SY7N8FnNEyTRM5EBY3NOI40gAGZbnYniWQAekkxAAG1s2bVhpM4WTZOnWdVPU0g1KEuSuNnMRaFoABdUyCmUopNObOSK1k1RSEMkyzMQRzTOMu4LI4TSmKUmTFCsulfKCbyNLRXS7IcuYnPcu1PM0ELtNs-TIqMtyUuijy-PMALtLCjThPStKXKi4zEFK9ygoURyytMoA}{\usebox\lstbox}!*/
 //        [["*", ["x", [0, null]]], 
 //         [["*", [1, ["y", null]]], null]]],
 //         [["+", ["x", [3, null]]], null] ] ],
 //     null ]]]
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
       </p></div>
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
@@ -476,7 +499,7 @@ deriv(list("*", list("*", "x", "y"), list("+", "x", 3)), "x");
       
       but we would like the program to know that $x\cdot 0 = 0$, $1\cdot y =
         y$, and $0+y = y$.  The answer for the second example should have been
-      simply~{\lstinline[mathescape=true]$y$}.  As the third example shows, this becomes a serious
+      simply <kbd>y</kbd>.  As the third example shows, this becomes a serious
       issue when the expressions are complex.
       </p></div>
       <div class='permalink'>
@@ -487,15 +510,15 @@ deriv(list("*", list("*", "x", "y"), list("+", "x", 3)), "x");
       rational-number implementation: we haven't reduced answers to simplest
       form.  To accomplish the rational-number reduction, we needed to
       change only the constructors and the selectors of the implementation.
-      We can adopt a similar strategy here.  We won't change {\lstinline[mathescape=true]$deriv$} at
-      all.  Instead, we will change {\lstinline[mathescape=true]$make_sum$} so that if both summands
-      are numbers, {\lstinline[mathescape=true]$make_sum$} will add them and return their sum.  Also,
-      if one of the summands is 0, then {\lstinline[mathescape=true]$make_sum$} will return the other
+      We can adopt a similar strategy here.  We won't change <kbd>deriv</kbd> at
+      all.  Instead, we will change <kbd>make_sum</kbd> so that if both summands
+      are numbers, <kbd>make_sum</kbd> will add them and return their sum.  Also,
+      if one of the summands is 0, then <kbd>make_sum</kbd> will return the other
       summand.
 
           
 
-      
+      <div class='snippet' id='javascript_35_15_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_sum(a1, a2) {
@@ -507,23 +530,24 @@ function make_sum(a1, a2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AziZAClQEYAaRVAJgEpEBvAKERcQCdMoQ2kwCAjTG2yYAjiFQAbYuUQAGGs1bLWAfkpUlK5QC5EfZIOFiJ06hQVbty9aUYBIFXpi5sBozLoAyL4hduBIWJaK2sbShJEAGoNULCWPUkXKEIAIijUilIs2gBuRgBfIA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABGEBbARgUwE4H1MCOIAhgDYAUmAHgA4A0yaAlIgN4BQiXi2mUI2JDADOuFBhyVaLAGQzE1GogC8qxqgDc7AL7tQkWAkSpiAa0y5hacsQCMDYgCYWHbjz4Ck4rHkIkKdgwADEycbuGIAPyITmER3ABc6j74RGQ2jsGh8RHRduwAkOFJImJoPja2svKl3pJO2Tm5MbaIANQxjnFNiYikIlDkAERtQw72nUxauuwm5pbWmYgAzFNAA}{\usebox\lstbox}!*/
                ? a1 + a2
                : list("+", a1, a2);
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
       This uses the
       function
-      {\lstinline[mathescape=true]$number_equal$}, which checks whether an
+      <kbd>number_equal</kbd>, which checks whether an
       expression is equal to a given number:
 
           
 
-      
+      <div class='snippet' id='javascript_35_16_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function number_equal(exp, num) {
@@ -532,17 +556,18 @@ function number_equal(exp, num) {
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABGEBbARgUwE4H1MCOIAhgDYAUmAHgA4A0yaAlIgN4BQiXi2mUI2JDADOuFBhyVaLAGQzE1GogC8qxqgDc7AL5A}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABGEBbARgUwE4H1MCOIAhgDYAUmAHgA4A0yaAlIgN4BQiXi2mUI2JDADOuFBhyVaLAGQzE1GogC8qxqgDc7AL7t24rHkIkKAZgammGoA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-        Similarly, we will change {\lstinline[mathescape=true]$make_product$} to build in the rules that 0
+        Similarly, we will change <kbd>make_product</kbd> to build in the rules that 0
       times anything is 0 and 1 times anything is the thing itself:
 
 
           
 
-      
+      <div class='snippet' id='javascript_35_17_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_product(m1, m2) {
@@ -554,7 +579,7 @@ function make_product(m1, m2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9ADgJzgBMRoAKZARgBoUAmASkQG8AoRDxfTKEfJMCGQAjTPmyYAjiFQAbCjUQAGJgB9ViQSLETpcinVor2nU5wD8yk2dMAuTUNHipM+VVqUG1m6cvI63j4c9lpOuq4GHl5BZn6UgUH2MADO2KFiCkwAZFmIKWmOGf7RMbEolIgAVPQJMfayKVBkAESVzbTu9AwA3KwAvkA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABGEBbARgUwE4H1MCOIAhgDYAUmAHgA4A0yaAlIgN4BQiXi2mUI2JDADOuFBhyVaLAGQzE1GogC8qxqgDc7AL7tQkWAkSpiAa0y4a2OABMQ0cqgCMDVACYWHbjz4Ck4rDxCEgpnBgAGFgAfKPVA-CIyRzcIpk5vDMQAfkRw9MzuAC44nASQxxdEJzSCzJz3fNquYoDS4KT3BmrGpvqnHtrikTE0QIrZeWHW7GSapoy+xAAqYzcBpuLSEShyACIl3ddK9yYtXXYTc0trOwcUxABmU6A}{\usebox\lstbox}!*/
              ? m1
              : is_number(m1) && is_number(m2)
                ? m1 * m2
@@ -562,15 +587,16 @@ function make_product(m1, m2) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
       
 
 
       Here is how this version works on our three examples:
 
-      
+      <div class='snippet' id='javascript_35_18_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 deriv(list("+", "x", 3), "x");
@@ -578,11 +604,12 @@ deriv(list("+", "x", 3), "x");
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwTglgbgFANhAzgFxgIgNRoDQAI0AeOuAzAJR6FpkDcAUAPQO4CMQA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAEwKYCcYDcAUqAeADgDSJYCGm5ARgDaoCUiA3gFCIeLqpQjpIwAzgH0wIALbUMeIg3acFnAPyIADPMUKAXIiHCKVOqhmE5m8ypx7B5can2UYNeidIGnRhkxUBGRDvVzTR1rCRMzIM0VcXIAa3tBMLRMXHJkNDBkcLdHZ0ZSDUiihWTsHHIQAHNUTOyyXM8I4o4QkUJ0OGQQaHDC5sRouISwmPjhds7uqBxxEFpYQloYaQJTAv6NxVLcWfmYRZgIclrVhnXNi813PK9zy8jR+wmunu2ZuYWlldk7+7+Fa6eX7-S67T6HY5ZU5ePrNHQAUXQHXQOAAROBYmA4AB3JCrbiCQTwJBQACehFQuiQ21RwP+pwA3KwAL6sN5LQTTVEAalpiFR+D5AGYzvzBQwmQB6SWIHxAA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-      
+      <div class='snippet' id='javascript_35_19_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 deriv(list("*", "x", "y"), "x");
@@ -590,11 +617,12 @@ deriv(list("*", "x", "y"), "x");
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwTglgbgFANhAzgFxgIgFRoDQAI0AeO+AnmgJR6EUDcAUAPQOlpA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAEwKYCcYDcAUqAeADgDSJYCGm5ARgDaoCUiA3gFCIeLqpQjpIwAzgH0wIALbUMeIg3acFnAPyIADPMUKAXIiHCKVOqhmE5m8ypx7B5can2UYNeidIGnRhkxUBGRDvVzTR1rCRMzIM0VcXIAa3tBMLRMXHJkNDBkcLdHZ0ZSDUiihWTsHHIQAHNUTOyyXM8I4o4QkUJ0OGQQaHDC5sRouISwmPjhds7uqBxxEFpYQloYaQJTAv6NxVLcWfmYRZgIclrVhnXNi813PK9zy8jR+wmunu2ZuYWlldk7+7+Fa6eX7-S67T6HY5ZU5ePrNHQAUXQHXQOAAROBYmA4AB3JCrbiCQTwJBQACehFQuiQ21RwP+pwA3KwAL6sN5LQTTVEAKlpiFR+D5qNJqLO-MFDCZAHopfyRUA}{\usebox\lstbox}
+</pre>
 
+</div></div>
 
-
-      
+      <div class='snippet' id='javascript_35_20_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 deriv(list("*", list("*", "x", "y"), list("+", "x", 3)), "x");
@@ -604,9 +632,10 @@ deriv(list("*", list("*", "x", "y"), list("+", "x", 3)), "x");
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwTglgbgFANhAzgFxgIgFRoDQAIErpZ5oAeOuaAnmgJR4GpoDUFZFAzLfZebQNwAoAPTDcAbUqtsIsbgnjMFReTyKaeAHYBXOHAC6hvLPnzxi4hOrLF0q6okctug0dw69h-c8-7c+oA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABAEwKYCcYDcAUqAeADgDSJYCGm5ARgDaoCUiA3gFCIeLqpQjpIwAzgH0wIALbUMeIg3acFnAPyIADPMUKAXIiHCKVOqhmE5m8ypx7B5can2UYNeidIGnRhkxUBGRDvVzTR1rCRMzIM0VcXIAa3tBMLRMXHJkNDBkcLdHZ0ZSDUiihWTsHHIQAHNUTOyyXM8I4o4QkUJ0OGQQaHDC5sRouISwmPjhds7uqBxxEFpYQloYaQJTAv6NxVLcWfmYRZgIclrVhnXNi813PK9zy8jR+wmunu2ZuYWlldk7+7+Fa6eX7-S67T6HY5ZU5ePrNHQAUXQHXQOAAROBYmA4AB3JCrbiCQTwJBQACehFQuiQ21RwP+pwA3KwAL6sN5LQTTVEAKlpiA5XN5pFR+D5qNJqLO-KEXIA1GLRaQAMy3RAiyVMgD0msQAG01fLiKxtZxdbqeXzzYq9eK+WJaLQALrOgom03moU2iWkM2ow02626pWke1Ol2IUPOx0huZhxCOoA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
       Although this is quite an improvement, the third example shows that
       there is still a long way to go before we get a program that puts
@@ -632,13 +661,13 @@ deriv(list("*", list("*", "x", "y"), list("+", "x", 3)), "x");
 
         by adding a new clause to the
 	
-	{\lstinline[mathescape=true]$deriv$}
+	<kbd>deriv</kbd>
 	
 	program and defining appropriate
         
 	functions
-        {\lstinline[mathescape=true]$is_exp$}, {\lstinline[mathescape=true]$base$}, {\lstinline[mathescape=true]$exponent$},
-        and {\lstinline[mathescape=true]$make_exp$}.  (You may use the string {\lstinline[mathescape=true]$"**"$} to denote
+        <kbd>is_exp</kbd>, <kbd>base</kbd>, <kbd>exponent</kbd>,
+        and <kbd>make_exp</kbd>.  (You may use the string <kbd>"**"</kbd> to denote
         exponentiation.)
         Build in the rules that anything raised to the power 0 is 1 and
         anything raised to the power 1 is the thing itself.
@@ -650,7 +679,7 @@ deriv(list("*", list("*", "x", "y"), list("+", "x", 3)), "x");
 
 \begin{Answer}[ref={ex:deriv-exponentiation}]
 
-     
+     <div class='snippet' id='javascript_35_21_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function base(e) {
@@ -662,7 +691,7 @@ function exponent(e) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAIwIYGcCmAKTBKRAbwChEzEAnTKECpAC01QBNspUYAbXPPAbmIBfYqEiwEiTAA8ADgkxgoPIqXJUadRIxZsO3dlx68Bw0dHhIAtqgDWmAPrSZ2NFgA0k2QRLlK1WkhgIJbImBSOAI4gqNxOHgAMeKq+KQD8iACMySnkAFyIQSFhkdGxsh4ZSTnV6a6Y2dVk+Zww6EoARABUne0edR5O-EIi4OYSrY6y2FLe2eoBiBMyHBTTBABk61pMrDOIALyHXT0mI2IWiMxhMABuuOWIN6gUMKjInPgqvvOaE4Whq0GDRy6XiwJS+QmTxebw+9xkVUavnS2Am6FQlgc0Ne7xwcUezxxHwI6QyiHyiXBOUh6Hs6GC8MRSORiGsdjpDKuLzuLCuYFYgw82Nh+A8VOZjS5t2wqBAAHMFAKvELCSLeOLqYtaTIKHBmCBoIyNTVWbYHPTLNg2Q4dXqDUpLCBOLAZC0woyxRKvUipXdHc6YK6YBBUPyPYhjd6o8LcbxPVHvdb7Lb9YbfVanS63YDlRGE-n8zHifGC4nM4GWiGw4N1QWaZNnEDS4h0kmU-arWbk7rU0onPJFOHI83qkmnNhhyOkXUPZOp9V+2AFH2vIgALSZOPEACQu+Z6ZngoJMNjTPz+QAohRdat2uAbGA4AB3JBOKjodAXKAATxkmEWSC+r0EZ7sygwmEAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQG4EMBOMsBGANgKYAUAHgJSIDeAUIk4jiVCDkqmilHmAHNKVANz0AvvVCRYCZOhRYAtiUy58xchgCMAGkQYATDQbMWbDl3TY8hUmR00AZE8SMzH+WtuaHxxC4G2ogAvGEGhmKS0tDwVjwgSsJ07kys7JxeAA5YMDjJgQAWJFgAJslhIYgARADU1VFS4LFySlgA1qooiWRYeohY-qbM6ZaIRKhQZHXV+n1zxo0xskhlpSRg5SgmqeYZSMVlZFC5RGTbohJNMnEDIAIbWztmo5mH5ScwZ59nF5fRzRW2RwcFKIGgyWGaQsmW4OTyBVc7wq4WqACoGldlrc2p00FkQWCIUp+kohrtXkgJrxphj9CT6YssYCcSAiLAshMSPltikXjCDiUPqdzlR-tcWkglGyORMIFhNqK+SMBYhkT9jiK-ksWXIwIkCNy0CQAI4gLBnEgULL6fVKZ4q-ZeO2G-JWrLOVzu0LhO06m5yAhYFDkEgO6FO9UisPi7Fyd0IDZTMPKiNjKNfTWZmOx3VSjqqd1kIMh-Tu8N7MYuo2m82W636AAMVF2nkQAH5ENpW54AFyIas4Y1mi1kd36bQttueTslkg9tv96lTdF0xBzsvW3MB+JF6ipyuw9Dw-L7opClEhVeYgE7xDrPAYMcNgzqOwpqGH+KD58ehdmTtG3-Zh+24GwNHsctgIAxAyG4RQVG8CDQxfcD3xoTtgn7ZtoJArxuiSKDpzbTtcS6HoHxgJ81keX8qH0NDNHotxiNYttKOo+5aPLBi3yYqc2LwuFCXBZMt1wmdEDIhIkmkglQVEshpXZGBORgbk6P0CTBOnDilJlVS5QVcoeJYnTzNYxjSDFLSLJ0uSRIhPTlNldS3S3Wy7K8nSrLDTzvMElzDJgeVFXLMVtLMUD0CLIjvNIgt8UcqYHIUiEEzAJNNLMgKvOkotIty6c500wqis8DKsvLRAAFouxs+gAEhmtYvSStM3yIoC-sAFEcBBfJqnAdowDgAB3JB3VYFAUFuKAAE8shIZAkA42Y3Ba1jy0aeg9OXWk12qCh1oAFmYo7qlEIA}{\usebox\lstbox}!*/
 function make_exp(base, exp) {
     return number_equal(exp, 0)
            ? 1
@@ -699,45 +728,47 @@ function deriv(exp, variable) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 \end{Answer}
 
 
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled34}
+\label{ex:unlabeled37}
 
         Extend the differentiation program to handle sums and products of
         arbitrary numbers of (two or more) terms.
         Then the last example above could be expressed as
       
 
-      
+      <div class='snippet' id='javascript_35_22_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 deriv(list("*", "x", "y", list("+", "x", 3)), "x");
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwTglgbgFANhAzgFxgIgFRoDQAI0AeO+AnsQiugNTGHEDMAlI3nYwNxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=PTAEGMAsEMDsHMCmoAulkCdEAcsGdFYVoUBLAe1lHIDNVEMBbPAKBFACMBPUAE0RqlYQ+KGgBXJLF5jpoRuIA2ZbItLg4vFixrjY4MpT4NSANwAUiAB7YANKFPQMpaB0WIAlKADeLUP9AsFHEMKlI8AH1YcUYOBksbDz8AlICAflAABmTUlIAuUHCIx2dXdwTsJNzqjPMivGhGRGKnFzdECvsStvcvDIBGUALMqurUgvqYitGx1IzGaABrZrwp-mcLaF5+aWmu1rLPexzZ05T1s3MJKV49hwP2jxmzocLI3HJecQNpk5fQeZLFZTBbLCIfL4-BTKUiqUjxayVY7-FGpC4WaEqNQaXaIjzI1GE3LdQ5PAlE2ag5oQ74ocx-CmzdHmTGwtQIxLkxmEkmPLncsasuE4254p4Ms4FACiGAw5Aw5gARHpFrByAB3KiI-B4ChUFBcbDIITGDaK-ncvEAbhYAF8dHoDHq3i1Su1zFYvL4UkEQmFIngUM4EB6PDb7bp9IZ-REGk1XT0OqZ+l0AExek6+0Iu3nlZNeABkBdAEpSRVzSfToCLDkGAF4Gw5U+GHVHnZNGKGfJnEMFs0VsNBSArPdXi+gtl2G3XQIqANSKluRp1GKmxqbQFNiKvegJZqhqQNKhf2Ten9NLx3R+RA8FyyF0xhbxg7nt9g-hOmKgBU5vkz4vO1WxXKgth2W48AzH1ez9UAJ1uYhSEUcxILDIDl2vAd71pLtd38fcXUHYcuxreCp0bH9F3Qq9nSFdkFUg7toPfODEEnRDkNQltmUPL9f3sRUrD-RUuD-Xjj2EoT7AAZjJWchLDIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
         Try to do this by changing only the
-          representation for sums and products, without changing the {\lstinline[mathescape=true]$deriv$}
+          representation for sums and products, without changing the <kbd>deriv</kbd>
         function
-        at all.  For example, the {\lstinline[mathescape=true]$addend$} of a sum would
-        be the first term, and the {\lstinline[mathescape=true]$augend$} would be the sum of the rest
+        at all.  For example, the <kbd>addend</kbd> of a sum would
+        be the first term, and the <kbd>augend</kbd> would be the sum of the rest
         of the terms.
 
 	
 	  
-      \hfill{\hyperref[ex:unlabeled34-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled37-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled34}]
+\begin{Answer}[ref={ex:unlabeled37}]
 
 
 
@@ -745,16 +776,17 @@ deriv(list("*", "x", "y", list("+", "x", 3)), "x");
       
       
 
-      
+      <div class='snippet' id='javascript_35_23_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 deriv(list("*", "x", "y", list("+", "x", 3)), "x");
 \end{JavaScriptClickable}
 \end{lrbox}
 
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=CYUwTglgbgFANhAzgFxgIgFRoDQAI0AeO+AnsQiugNTGHEDMAlI3nYwNxA}{\usebox\lstbox}
+\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=PTAEGMAsEMDsHMCmoAulkCdEAcsGdFYVoUBLAe1lHIDNVEMBbPAKBFACMBPUAE0RqlYQ+KGgBXJLF5jpoRuIA2ZbItLg4vFixrjY4MpT4NSANwAUiAB7YANKFPQMpaB0WIAlKADeLUP9AsFHEMKlI8AH1YcUYOBksbDz8AlICAflAABmTUlIAuUHCIx2dXdwTsJNzqjPMivGhGRGKnFzdECvsStvcvDIBGUALMqurUgvqYitGx1IzGaABrZrwp-mcLaF5+aWmu1rLPexzZ05T1s3MJKV49hwP2jxmzocLI3HJecQNpk5fQeZLFZTBbLCIfL4-BTKUiqUjxayVY7-FGpC4WaEqNQaXaIjzI1GE3LdQ5PAlE2ag5oQ74oczo8yY2FqBGJWx-Cmc1Ikx7srn8plwnG3PFPDlnAoAUQwGHIGHMACI9ItYOQAO5URH4PAUKgoLjYZBCYwbBV8-kBPEAbhYAF8dHoDLq3i1Su1zFYvL4UkEQmFIngUM4EB6PDb7bp9IZ-REGk1XT0OqZ+l0AExek6+0IunnlZNeABkBdA4pSRVzSfToCLDkGAF4Gw5U+GHVHnZNGKGfJnEMFs0VsNBSPLPdXi+gtl2G3XQAqANQKluRp1GKmxqbQFNiKvegJZqhqQOKhf2Ten9NLx3R+RA8GyyF0xhbxg7nt9g-hOkKgBUZvkz4vO1WxXKgth2W48AzH1ez9UAJ1uYhSEUcxILDIDl2vAd71pLtd38fcXUHYcuxreCp0bH9F3Qq9nUFFl5Ug7toPfODEEnRDkNQlsGUPL9f3sBUrD-BUuD-Xjj2EoT7AAZjJWchLDIA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
 	
 \end{Answer}
@@ -763,12 +795,12 @@ deriv(list("*", "x", "y", list("+", "x", 3)), "x");
       
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
-\label{ex:unlabeled35}
+\label{ex:unlabeled38}
 
         
         
         Suppose we want to modify the differentiation program so that it works
-        with ordinary mathematical notation, in which {\lstinline[mathescape=true]$"+"$} and {\lstinline[mathescape=true]$"*"$} are
+        with ordinary mathematical notation, in which <kbd>"+"</kbd> and <kbd>"*"</kbd> are
         infix rather than prefix operators.  Since the differentiation program
         is defined in terms of abstract data, we can modify it to work with
         different representations of expressions solely by changing the
@@ -782,17 +814,15 @@ deriv(list("*", "x", "y", list("+", "x", 3)), "x");
             expressions presented in infix form, 
 	    
 	    as in this example:
-	    
-\begin{JavaScript}
+	    <div class='snippet' id='javascript_35_24_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 list("x", "+", 
      list(3, "*", 
           list("x", "+", 
                list("y", "+", 2))))
-\end{JavaScript}
-
+</pre></div></div>
 	    
 	    
-            To simplify the task, assume that {\lstinline[mathescape=true]$"+"$} and {\lstinline[mathescape=true]$"*"$} always
+            To simplify the task, assume that <kbd>"+"</kbd> and <kbd>"*"</kbd> always
             take two arguments and that expressions are fully parenthesized.
           }
 \item{
@@ -802,11 +832,9 @@ list("x", "+",
               
               
 		provide for avoiding unnecessary lists by assuming that multiplication is done before addition, as in this example:
-		
-\begin{JavaScript}
+		<div class='snippet' id='javascript_35_25_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 list("x", "+", "3", "*", list("x", "+", "y", "+", 2))
-\end{JavaScript}
-
+</pre></div></div>
 	      
 	    
             Can you design appropriate predicates, selectors, and
@@ -816,15 +844,15 @@ list("x", "+", "3", "*", list("x", "+", "y", "+", 2))
 \end{enumerate}
 
 	
-      \hfill{\hyperref[ex:unlabeled35-Answer]{Solution}}\\
+      \hfill{\hyperref[ex:unlabeled38-Answer]{Solution}}\\
 \end{Exercise}
 
-\begin{Answer}[ref={ex:unlabeled35}]
+\begin{Answer}[ref={ex:unlabeled38}]
 
 	  
 \begin{enumerate}[a.]
 \item{
-    
+    <div class='snippet' id='javascript_35_26_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function make_sum(a1, a2) {
@@ -836,7 +864,7 @@ function make_sum(a1, a2) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAWwIYGsCmB9AziZAClQEYAaRVAJgEpEBvAKERcQCdMoQ2kwCAjTG2yYAjiFQAbYuUQAGGs1bLWAfkpUlK5QC5EfZIOFiJ06hQVbty9ZRJXrLPTFzYDRmXQBkXxC7cCQsS0Do4s6qSIANQaoWF6ki5QMhQARFGpFNQ0ANyMAL6MoJCwCH6u+EQAHnRMyhxcPOXYAA6oMGyENYg+iAAWmKgAJoRQ7dI1dAC8M4jpqXmFxdDwSMNDmGAjuLVWDdxIA8OEO4tF4CtlqCAA5pvbu-WcB-2DI2Mw0h-SOzS5BecSqsUBgcC02HAhiBoIRkLJkLQGHtnk13EIROIpLDZApEAAfPH6QLGTHSBEWRRhcIsORxXREwzokxYuEUEiUqnUhF0lR6NEk0ywqhsjmc6koexi1jOVz87HeXz+OUI0VSxDqOGIABUKE0auliESuGSrLmWsyuv+SwupSQ-nBkOhyW6dVY+ya9vanW6vSO73GXT+iBmUzNCwBy1tKBAklgLUSQR2SKejUObxOVsBlyQyBjccSEFQWwzybdKLTx2+owDv0zkeBGzYMAAboRMFUWhRm6gm6h+JJMI8y6nmnL2y1VTZ5HSZdhu73+5g2x3Jyp1IR-LhUMgcPOYH2B8vO4g9wfB+rECREHpLFTZ5Uj6vtBrQXgCIRGy3iEMNsXxzQux7fdFwAxAeTVT9W2uO4-xXQCFwHP5wKcZoHShGF-2QtQQSwN8iDQXC0KdWE8xgeMYCCf8KCw-UWEgkjYzIgsixGKiwNojiWFPEDQJosUCLBCF0OSejc0Y8igj4zjpMQNipJksJuMQ6iFI4sT8xgQtYInJC1T0ABRNgIU6VJwHQMA4AAdyQccOFwXBgSgABPFpMD8JBIMyeTtH-RYgA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQG4EMBOMsBGANgKYAUAHgJSIDeAUIk4jiVCDkqmilHmAHNKVANz0AvvVCRYCZOhRYAtiUy58xchgCMAGkQYATDQbMWbDl3TY8hUmR00AZE8SMzH+WtuaHxxC4G2ogAvGEGhmKS0tDwSGAgSgQkOGgkAI4gWERkJBQADvoJSibuTKzsnF7FyTi5Bc6uefmh4cVRUuCxckpYANaqKIlkWHqIWP6mzBWWiDUpaZnZI2MADFRlnkwA-OOGm1sAXHOJtYtZORP66wdbiLvj2rdH1acpK42vSe8TG3dbu1GiAA1HtnndjkRUFAVvoAETAuH6X4dGKyKw8YbUOibGZVbj5LAwOrYwIACxIWAAJmQoESctQaGEQogEXDUV10eMqVSSGAaShSmY8UgKdSyIKOTI4uMQAI+QKhdMLFUxTS6TAchqcoKqKIJJ1pT1+qp8jg4FSQNAyEoxkpJriVfE3qkMhcbWsaAAfL0nb6upY5e3XP7-e5MVbg5jHeYB922-TaUNh8P2qNmGMu87LYOIJPpjwPW0FjNfWoez7cWM24wlwuIW2IABUDf2Kc8kOhHvhTaRrf10U5MoJ5st1uxU3KTq8hOJwgCrjVtPpwiZ4Thval3SQShARFg+Sh70FOOF06XkoNaJlu-3MEPMAgWH5EqVU8qosp6pX2tfeq3XK8ngGD1IUBjqHYJBvuYH5lu8zTJvWkYQl4NgaPYCHprsZDcIoKjeOh5DNPoaGQTQuzBMcNxhscuHDJh7a7L0AyYkoZBATAIHUryL4ISREGaFQ+h1mGHFcXKCqgUJ4E+KQeolrR6BmhaVowgx7apiarE2lpyljjCt4HkedR8W4GnmUwYk2nuRmPs+NKmSJFmeKRgnSU5YbMaao6qexKScdZd4Pu8HnOWFzCOeFUVbK5cnCdF4WGfeUJPrxDTyeZxwAKI4OadRwuAfRgHAADuSDNKwKAoDKUAAJ75CQyBIGJSKhR4CEdPQVlQrwZBwhQfYbn2AAs0n9XCohAA}{\usebox\lstbox}!*/
                ? a1 + a2
                : list(a1, "+", a2);
 }
@@ -890,14 +918,15 @@ function deriv(exp, variable) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     
     
 	    }
 \item{
-    
+    <div class='snippet' id='javascript_35_27_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function items_before_first(op, s) {
@@ -909,7 +938,7 @@ function items_before_first(op, s) {
 \end{JavaScriptClickable}
 \end{lrbox}
 \begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABDKBTAtgZwPoCNXBwBOq2wMRmUAFHAA4A0imAlIgN4BQiPiJUIIkgAWqAIYATaq0QBeeYnrdeK3gH5EYEABtty1SoBciOmIrVRk6Syb6D9nigw58hEmQpVajRFDPbrFhYAbk4AX05QSFgEZDQsbDFgNCIPShp6JhkuFX5BEXEpGXlZRTo7ew0-GADWCoNjJwSklLSvTN9-a1CIqOh4JHQxAGtSTBB0ajEARiYxACY2HN48oU0J-FTUAEcQMQCZpgAGFnrVDQWzo3X0TewdvYP549OHc54Zq9VGnC1b1CIU2mbAAZCDkL8NgCposvgYLtNEABqRCXN4NRDaGBeQ6IABESLxc0WPU4AHoyajmA9UJBUIpgL4AVhUWAJGUAWIoMRMBCqeN0OTKTBGWI2YowNoAJ7IUVQTHiKgS+ko+ic7lERQQCCCTCRcD9WLY7AC6gADyWdlWSGNpnMFsQYMQcMQAEJENRjVpdNR0BhNtQCUTEBaQuF9dEBqiJBJaUVLblUAI1k0XARiKRyOlA4SsmHegaYkgxCAAOZx6wcK1J-JxZyJZIAto0IN50l9IuIIajbB0IhwCQgaC+2ZdxZVxPJpB-O4PfYjl6IAA+S5us928-Qz0QJxdGh3LuMM6bc4C6FHwJdPA0W6viCPUK2G7P28v6PeXemd54P2wx8B56guCXqPr6sLvvCn6IAAVGO368MYWJeOeTB4tBwZbvmQr8jSdIMkyRAsmK7JqkQXI8nyYgmP2g7QNhIqsiRkoygxYBwMiHJkRqWo6pQEaGjaOB9gOQ40A6yw8NaEK9mYgIOk6IE+n6-yAq2IYhM6BaRrE6A6LAdBYtC2TVlOdYJK4GbNoG6FtuGHZRrp2j6ViEDEZWEl8DWKbxDgLRNlmXhocGrDtoWUaxkQMAAG7UKgZo+FFYiRWIuDaKgCYrF5gl-qBcV0K8lQHg4v6JclqWoLF8UFQ4GiejgmBiH62ClTAKVpZVCVJa15VsBoiLGLu6K-qaeXVW8N4jGMEzUBF0VTDGFajUwLVteltgQe+s0xSW5Zsh1NiICtPVjcV0nCbRNCjd+E09qa3akOdom+npMAGTA0JLc6G3fTwW3PU5r0uW5n3wT9qhHWlQTrWDDj3b2NFPX9jnOe9gIgzDGNvBDa1fZjbzI4DMCuXto1BN+xgAKJEP2qngMMbEAO5IHlJCYJgUZQFKdD0jASBbUSoMGKNPRAA}{\usebox\lstbox}!*/
+/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=2&prgrm=GYVwdgxgLglg9mABDAzgfQG4EMBOMsBGANgKYAUAHgJSIDeAUIk4jiVCDkqmilHmAHNKVANz0AvvVCRYCZOhRYAtiUy58xchgCMAGkQYATDQbMWbDl3TY8hUmR00AZE8SMzH+WtuaHxxC4G2ogAvGEGhmKS0tDwSGAgSgQkOGgkAI4gWERkJBQADvoJSibuTKzsnF7FyTi5Bc6uefmh4cVRUuCxcjBQJEroycBwrGjAMDi8ZHCFiCilZhWWiAAWJFgAJmTzrSGIM2WeTAD8iAlERIdHAFyI+VgTZGub21T6V0eevf2DJMOj40mUGmsygDxy8yoogknRkcWQfQGaCwwD6qUBUxm+h2pmYSyqzy2OzCewOn2YpzBMAhVA+Hlu3yRKLRYwmmNB4NeHRisiQSiwAGtVChEmQsHpEFh-LjyhYqjUUmlMtkxRKAAy08knSWGOlmW4K1IZLI5KX6DV6jynSXaS366qJWqqxoOpIpMXGO1Wm2IADUOq99qIqGB4v0ACJfeH9FLoZIAPTxyVzY0kSAkfbARBogaSsAbfb5FJYKAjFDyZMipT0RPILNYfP7MBEACedclUEQpCwvCbGf9M2LpZw+wgEA4KFh3SsPFF1Doh3xM-uj3ngS9AEJEGRuOccio3XVI9HENQ41PeZKNhs00SFni5VxEb9-qoMcDj9jzzz4VgQAJb1eBdFkfBEfmRVFFXfMhPzmb8ukvfkhTQfIcDgDYQGgMglAlJRpUXUDDSVE1sPVGgAB9yLOR1FWNFU8PNTUtWtNUvQNGijWVfcJW0JitUQU48MDRB2MPYj6MMfReOE7VEBwmSRNdJ0cJdXcOOwz1+M8QTggAKjk3UtPpLsQ1IiNdJPPDz1rLAU0yNMIAzOAsxzcsGwLQccBLMsK1s1D0MwqAayTGB60bBBW3bMA4D9QshxGUdx0mC94W4fyMKw+cZXMSplweOo11cNSLmw-onVg6gRDcaIEPhJQQCIWB8mDd0cQI3KwKRIYRjfNkPwsr9uVquR6samBmpgCB3KA7Kl069BmSgvqYIGuChrhOQbzwDB6lmGwNFIe9ZQ6tTD12vjvVYz4GWsdQ7HIZoLu07duEUFRvAOh6Cn0fb7poU5gluC0tRu2clHOwNBMFYVRS2mAds2G983On67s0N43CMrU4YR-9AMe1GfEOp6bi8dLAohrGoeQqtsOhlC0Iy4FRqalq6gJzGsaxnHsIa1nJumjmFK5jxfvRjHhfJJDVHJrCeZZ8a2ZRzmRdV8kxcO941f4hWJqm5HHqhGTbgAURwNCj3AAVooAdyQZpWBQFB4SgFsi2QJAcejSWPEejp6B54MpnDCgT3DVaABYMZD8NRCAA}{\usebox\lstbox}!*/
 function items_after_first(op, s) {
     return head(s) === op
            ? tail(s)
@@ -978,8 +1007,9 @@ function deriv(exp, variable) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     
     
@@ -996,4 +1026,11 @@ function deriv(exp, variable) {
       
 
     
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section3/subsection1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section3/subsection3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+2.3.2  Example: Symbolic Differentiation</div>	<div class='next-page'></div></div>

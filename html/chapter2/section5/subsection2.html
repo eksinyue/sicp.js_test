@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>2.5.2 
-        Combining Data of Different Types
-      </a>
+		<a name='top' class='permalink'>2.5.2  Combining Data of Different Types</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
 
@@ -39,8 +46,8 @@
       package so that it provides a
       function
       for adding complex numbers to
-      ordinary numbers and installs this in the table using the tag {\lstinline[mathescape=true]$list("complex","javascript_number")$}:<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-\begin{JavaScript}
+      ordinary numbers and installs this in the table using the tag <kbd>list("complex","javascript_number")</kbd>:<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
+      <div class='snippet' id='javascript_44_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 // to be included in the complex package
 function add_complex_to_javascript_num(z, x) {
    return make_from_real_imag(real_part(z) + x,
@@ -48,20 +55,7 @@ function add_complex_to_javascript_num(z, x) {
 }
 put("add", list("complex", "javascript_number"),
     (z, x) => tag(add_complex_to_javascript_num(z, x)));
-\end{JavaScript}
-
-      
-      
-\begin{JavaScript}
-// to be included in the complex package
-function add_complex_to_javascript_num(z, x) {
-   return make_from_real_imag(real_part(z) + x,
-                              imag_part(z));
-}
-put("add", list("complex", "javascript_number"),
-    (z, x) => tag(add_complex_to_javascript_num(z, x)));
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
       <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
@@ -89,9 +83,10 @@ put("add", list("complex", "javascript_number"),
       operations.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Coercion
-      
+      </h2></div>
 
       
       <div class='permalink'>
@@ -121,13 +116,11 @@ put("add", list("complex", "javascript_number"),
       transforms a given ordinary number to a complex number with that real
       part and zero imaginary part:
 
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_44_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function javascript_number_to_complex(n) {
    return make_complex_from_real_imag(contents(n), 0);
 }
-\end{JavaScript}
-
+</pre></div></div>
 
       
       
@@ -136,74 +129,36 @@ function javascript_number_to_complex(n) {
       in a special coercion table,
       indexed under the names of the two types:
 
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_44_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 put_coercion("javascipt_number", 
              "complex", 
              javascript_number_to_complex);
-\end{JavaScript}
+</pre></div></div>
 
-
-        (We assume that there are {\lstinline[mathescape=true]$put_coercion$} and {\lstinline[mathescape=true]$get_coercion$}
+        (We assume that there are <kbd>put_coercion</kbd> and <kbd>get_coercion</kbd>
       functions
       available for manipulating this table.)  Generally some of
       the slots in the table will be empty, because it is not generally
       possible to coerce an arbitrary data object of each type into all
       other types.  For example, there is no way to coerce an arbitrary
-      complex number to an ordinary number, so there will be no general {\lstinline[mathescape=true]$complex_to_javascript_number$}
+      complex number to an ordinary number, so there will be no general <kbd>complex_to_javascript_number</kbd>
       function
       included in the table.
       </p></div>
       <div class='permalink'>
 <a name='p6' class='permalink'></a><p>
       Once the coercion table has been set up, we can handle coercion in a
-      uniform manner by modifying the {\lstinline[mathescape=true]$apply_generic$}
+      uniform manner by modifying the <kbd>apply_generic</kbd>
       function
       of
-      section~\ref{sec:data-directed}.  When asked to apply an operation, we
+      section \ref{sec:data-directed}.  When asked to apply an operation, we
       first check whether the operation is defined for the arguments' types,
       just as before.  If so, we dispatch to the
       function
       found in the
       operation-and-type table.
       Otherwise, we try coercion.  For simplicity, we consider only the case
-      where there are two arguments.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>function:
-
-      
-      
-\begin{JavaScript}
-function apply_generic(op, args) {
-    const type_tags = map(type_tag, args);
-    const fun = get(op, type_tags);
-    if (fun !== false) {
-        return fun(map(contents, args));
-    } else {
-        if (length(args) === 2) {
-            const type1 = head(type_tags);
-            const type2 = head(tail(type_tags));
-            const a1 = head(args);
-            const a2 = head(tail(args));
-            const t1_to_t2 = get_coercion(type1, type2);
-            const t2_to_t1 = get_coercion(type2, type1);
-            if (t1_to_t2 !== false) {
-                return apply_generic(op,list(t1_to_t2(a1),
-                                             a2));
-            } else if (t2_to_t1 !== false) {
-                return apply_generic(op, list(a1,
-                                              t2_to_t1(a2)));
-		} else {
-                return Error("No method for these types",
-                             list(op, type_tags));
-            }
-        } else {
-            return Error("No method for these types",
-                         list(op, type_tags));
-        }
-    }
-}
-\end{JavaScript}
-
-        We
+      where there are two arguments.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>  We
       check the coercion table to see if objects of the first type can
       be coerced to the second type.  If so, we coerce the first argument and try the
       operation again.  If objects of the first type cannot in general be coerced to
@@ -215,8 +170,7 @@ function apply_generic(op, args) {
       function:
 
       
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_44_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function apply_generic(op, args) {
     const type_tags = map(type_tag, args);
     const fun = get(op, type_tags);
@@ -246,8 +200,7 @@ function apply_generic(op, args) {
         }
     }
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
       <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
@@ -262,7 +215,7 @@ function apply_generic(op, args) {
       for each pair of types rather than a different
       function
       for
-      each collection of types and each generic operation.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>  What we are counting on here is the fact that the
+      each collection of types and each generic operation.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>  What we are counting on here is the fact that the
       appropriate transformation between types depends only on the types
       themselves, not on the operation to be applied.
       </p></div>
@@ -278,9 +231,10 @@ function apply_generic(op, args) {
       types, as we discuss next.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Hierarchies of types
-      
+      </h2></div>
 
       
       
@@ -307,7 +261,7 @@ function apply_generic(op, args) {
       <EM>supertype</EM> of integers.  The particular
       hierarchy we have here is of a very simple kind, in which each type
       has at most one supertype and at most one subtype.  Such a structure,
-      called a <EM>tower</EM>, is illustrated in Figure~\ref{fig:tower}.
+      called a <EM>tower</EM>, is illustrated in Figure \ref{fig:tower}.
 
       
 \begin{figure}[H]
@@ -330,7 +284,7 @@ function apply_generic(op, args) {
       integer to a complex number, we need not explicitly define a special
       coercion
       function
-      {\lstinline[mathescape=true]$integer_to_complex$}.  Instead, we define how an
+      <kbd>integer_to_complex</kbd>.  Instead, we define how an
       integer can be transformed into a rational number, how a rational
       number is transformed into a real number, and how a real number is
       transformed into a complex number.  We then allow the system to
@@ -341,16 +295,16 @@ function apply_generic(op, args) {
 <a name='p11' class='permalink'></a><p>
       
       
-      We can redesign our {\lstinline[mathescape=true]$apply_generic$}
+      We can redesign our <kbd>apply_generic</kbd>
       function
       in the following
-      way: For each type, we need to supply a {\lstinline[mathescape=true]$raise$}
+      way: For each type, we need to supply a <kbd>raise</kbd>
       function, which
       <QUOTE>raises</QUOTE> objects of that type one level in the tower.  Then when the
       system is required to operate on objects of different types it can
       successively raise the lower types until all the objects are at
-      the same level in the tower.  (Exercises~\ref{ex:raise}
-      and ~\ref{ex:apply-with-raise}
+      the same level in the tower.  (Exercises \ref{ex:raise}
+      and  \ref{ex:apply-with-raise}
       concern the details of implementing such a strategy.)
       </p></div>
       <div class='permalink'>
@@ -361,9 +315,9 @@ function apply_generic(op, args) {
       function
       for
       finding the real part of an integer, we should nevertheless expect
-      that {\lstinline[mathescape=true]$real_part$} will be defined for integers by virtue of the
+      that <kbd>real_part</kbd> will be defined for integers by virtue of the
       fact that integers are a subtype of complex numbers.  In a tower, we
-      can arrange for this to happen in a uniform way by modifying {\lstinline[mathescape=true]$apply_generic$}.  If the required operation is not directly defined for
+      can arrange for this to happen in a uniform way by modifying <kbd>apply_generic</kbd>.  If the required operation is not directly defined for
       the type of the object given, we raise the object to its supertype and
       try again.  We thus crawl up the tower, transforming our argument as we
       go, until we either find a level at which the desired operation can be
@@ -376,7 +330,7 @@ function apply_generic(op, args) {
       it gives us a simple way to <QUOTE>lower</QUOTE> a data object to the simplest
       representation.  For example, if we add $2+3i$ to $4-3i$, it would be
       nice to obtain the answer as the integer 6 rather than as the complex
-      number $6+0i$.  Exercise~\ref{ex:simplify} discusses a way to implement
+      number $6+0i$.  Exercise \ref{ex:simplify} discusses a way to implement
       such a lowering operation.  (The trick is that we need a general way
       to distinguish those objects that can be lowered, such as $6+0i$, from
       those that cannot, such as $6+2i$.)
@@ -393,9 +347,10 @@ function apply_generic(op, args) {
 
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
         Inadequacies of hierarchies
-      
+      </h2></div>
 
       
       <div class='permalink'>
@@ -403,7 +358,7 @@ function apply_generic(op, args) {
       If the data types in our system can be naturally arranged in a tower,
       this greatly simplifies the problems of dealing with generic operations
       on different types, as we have seen.  Unfortunately, this is usually
-      not the case.  Figure~\ref{fig:relations-among-figures} illustrates a
+      not the case.  Figure \ref{fig:relations-among-figures} illustrates a
       more complex arrangement of mixed types, this one showing relations
       among different types of geometric figures.  We see that, in general,
       
@@ -419,11 +374,11 @@ function apply_generic(op, args) {
       operation to an object may involve considerable searching through the
       entire type network on the part of a
       function
-      such as {\lstinline[mathescape=true]$apply_generic$}.  Since there generally are multiple subtypes for a
+      such as <kbd>apply_generic</kbd>.  Since there generally are multiple subtypes for a
       type, there is a similar problem in coercing a value <QUOTE>down</QUOTE> the type
       hierarchy.  Dealing with large numbers of interrelated types while
       still preserving modularity in the design of large systems is very
-      difficult, and is an area of much current research.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
+      difficult, and is an area of much current research.<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
       </p></div>
 
       
@@ -431,16 +386,15 @@ function apply_generic(op, args) {
 \begin{Exercise}
 
         
-        Louis Reasoner has noticed that {\lstinline[mathescape=true]$apply_generic$} may try to
+        Louis Reasoner has noticed that <kbd>apply_generic</kbd> may try to
         coerce the arguments to each other's type even if they already have
         the same type.  Therefore, he reasons, we need to put
         functions
         in the coercion table to <QUOTE>coerce</QUOTE> arguments of each type to their
-        own type.  For example, in addition to the {\lstinline[mathescape=true]$javascript_number_to_complex$}
+        own type.  For example, in addition to the <kbd>javascript_number_to_complex</kbd>
         coercion shown above, he would do:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_44_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function javascript_number_to_javascript_number(n) { 
     return n;
 }
@@ -451,27 +405,24 @@ put_coercion("javascript_number", "javascript_number",
              javascript_number_to_javascript_number);
 put_coercion("complex_number", "complex_number",
              complex_number_to_complex_number);
-\end{JavaScript}
-
+</pre></div></div>
 
         
 \begin{enumerate}[a.]
 \item{
             With Louis's coercion
             functions
-            installed, what happens if {\lstinline[mathescape=true]$apply_generic$}
-            is called with two arguments of type {\lstinline[mathescape=true]$"javascript_number"$} or two arguments of
-            type {\lstinline[mathescape=true]$"complex"$} for an operation that is not found in the table for those
+            installed, what happens if <kbd>apply_generic</kbd>
+            is called with two arguments of type <kbd>"javascript_number"</kbd> or two arguments of
+            type <kbd>"complex"</kbd> for an operation that is not found in the table for those
             types?  For example, assume that we've defined a generic exponentiation
             operation:
 
-            
-\begin{JavaScript}
+            <div class='snippet' id='javascript_44_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function exp(x, y) { 
     return apply_generic("exp", list(x, y)); 
 }
-\end{JavaScript}
-
+</pre></div></div>
 
             and have put a
             function
@@ -479,23 +430,21 @@ function exp(x, y) {
 JavaScript-number
             package but not in any other package:
 
-            
-\begin{JavaScript}
+            <div class='snippet' id='javascript_44_7_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 // following added to JavaScript-number package
 put("exp", list("javascript_number", "javascript_number"),
     (x, y) => tag(math_exp(x, y))); // primitive math_exp
-\end{JavaScript}
+</pre></div></div>
 
-
-            What happens if we call {\lstinline[mathescape=true]$exp$} with two complex numbers as arguments?
+            What happens if we call <kbd>exp</kbd> with two complex numbers as arguments?
           }
 \item{
             Is Louis correct that something had to be done about
-            coercion with arguments of the same type, or does {\lstinline[mathescape=true]$apply_generic$}
+            coercion with arguments of the same type, or does <kbd>apply_generic</kbd>
             work correctly as is?
           }
 \item{
-            Modify {\lstinline[mathescape=true]$apply_generic$} so that it doesn't try coercion if
+            Modify <kbd>apply_generic</kbd> so that it doesn't try coercion if
             the two arguments have the same type.
           }
 \end{enumerate}
@@ -510,7 +459,7 @@ put("exp", list("javascript_number", "javascript_number"),
 \begin{Exercise}
 
         
-        Show how to generalize {\lstinline[mathescape=true]$apply_generic$} to handle
+        Show how to generalize <kbd>apply_generic</kbd> to handle
         coercion in the general case of multiple arguments.  One strategy is
         to attempt to coerce all the arguments to the type of the first argument, then
         to the type of the second argument, and so on.  Give an example of a situation
@@ -531,12 +480,12 @@ put("exp", list("javascript_number", "javascript_number"),
  
         
         Suppose you are designing a generic arithmetic system for dealing with
-        the tower of types shown in Figure~\ref{fig:tower}:
+        the tower of types shown in Figure \ref{fig:tower}:
         integer, rational, real, complex.  For
         each type (except complex), design a
         function
         that raises objects of
-        that type one level in the tower.  Show how to install a generic {\lstinline[mathescape=true]$raise$} operation that will work for each type (except complex).
+        that type one level in the tower.  Show how to install a generic <kbd>raise</kbd> operation that will work for each type (except complex).
         
       
 \end{Exercise}
@@ -548,7 +497,7 @@ put("exp", list("javascript_number", "javascript_number"),
 \begin{Exercise}
 
         
-        Using the {\lstinline[mathescape=true]$raise$} operation of exercise~\ref{ex:raise}, modify the {\lstinline[mathescape=true]$apply_generic$}
+        Using the <kbd>raise</kbd> operation of exercise \ref{ex:raise}, modify the <kbd>apply_generic</kbd>
         function
         so that it coerces its arguments to have the
         same type by the method of successive raising, as discussed in this
@@ -572,32 +521,26 @@ put("exp", list("javascript_number", "javascript_number"),
         by lowering it in the tower of types as far as possible.  Design
         a
         function
-        {\lstinline[mathescape=true]$drop$} that accomplishes this for the tower described
-        in exercise~\ref{ex:raise}.  The key is to decide, in some general way, whether
+        <kbd>drop</kbd> that accomplishes this for the tower described
+        in exercise \ref{ex:raise}.  The key is to decide, in some general way, whether
         an object can be lowered.  For example, the complex number $1.5+0i$
-        can be lowered as far as {\lstinline[mathescape=true]$"real"$}, the complex number $1+0i$ can be
-        lowered as far as {\lstinline[mathescape=true]$"integer"$}, and the complex number $2+3i$ cannot
+        can be lowered as far as <kbd>"real"</kbd>, the complex number $1+0i$ can be
+        lowered as far as <kbd>"integer"</kbd>, and the complex number $2+3i$ cannot
         be lowered at all.  Here is a plan for determining whether an object
-        can be lowered: Begin by defining a generic operation {\lstinline[mathescape=true]$project$}
+        can be lowered: Begin by defining a generic operation <kbd>project</kbd>
         that <QUOTE>pushes</QUOTE> an object down in the tower.  For example, projecting
         a complex number would involve throwing away the imaginary part.  Then
-        a number can be dropped if, when we {\lstinline[mathescape=true]$project$} it and {\lstinline[mathescape=true]$raise$}
+        a number can be dropped if, when we <kbd>project</kbd> it and <kbd>raise</kbd>
         the result back to the type we started with, we end up with something
         equal to what we started with.  Show how to implement this idea in
-        detail, by writing a {\lstinline[mathescape=true]$drop$}
+        detail, by writing a <kbd>drop</kbd>
         function
         that drops an object as far
         as possible.  You will need to design the various projection
-        operations<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>{\lstinline[mathescape=true]$project$} as a generic operation in
+        operations<a class='superscript' id='footnote-link-5' href='#footnote-5'>[5]</a> and install <kbd>project</kbd> as a generic operation in
         the system.  You will also need to make use of a generic equality
-        predicate, such as described in exercise~\ref{ex:equ?}.  Finally, use {\lstinline[mathescape=true]$drop$}
-        to rewrite {\lstinline[mathescape=true]$apply_generic$} from exercise~\ref{ex:apply-with-raise} so that it
-        <QUOTE>simplifies</QUOTE> its answers.
-        
-       and install {\lstinline[mathescape=true]$project$} as a generic operation in
-        the system.  You will also need to make use of a generic equality
-        predicate, such as described in exercise~\ref{ex:equ?}.  Finally, use {\lstinline[mathescape=true]$drop$}
-        to rewrite {\lstinline[mathescape=true]$apply_generic$} from exercise~\ref{ex:apply-with-raise} so that it
+        predicate, such as described in exercise \ref{ex:equ?}.  Finally, use <kbd>drop</kbd>
+        to rewrite <kbd>apply_generic</kbd> from exercise \ref{ex:apply-with-raise} so that it
         <QUOTE>simplifies</QUOTE> its answers.
         
       
@@ -613,7 +556,7 @@ put("exp", list("javascript_number", "javascript_number"),
         parts, imaginary parts, magnitudes, and angles can be either ordinary
         numbers, rational numbers, or other numbers we might wish to add to
         the system.  Describe and implement the changes to the system needed
-        to accommodate this.  You will have to define operations such as {\lstinline[mathescape=true]$sine$} and {\lstinline[mathescape=true]$cosine$} that are generic over ordinary numbers and
+        to accommodate this.  You will have to define operations such as <kbd>sine</kbd> and <kbd>cosine</kbd> that are generic over ordinary numbers and
         rational numbers.
       
 \end{Exercise}
@@ -624,12 +567,12 @@ put("exp", list("javascript_number", "javascript_number"),
       
 
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>We also have to supply an almost identical
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>We also have to supply an almost identical
         function
-        to handle the types {\lstinline[mathescape=true]$list("javascript_number","complex")$}.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>See
-        exercise~\ref{ex:multi-coercion} for generalizations.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>If we are
+        to handle the types <kbd>list("javascript_number","complex")</kbd>.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>See
+        exercise \ref{ex:multi-coercion} for generalizations.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>If we are
         clever, we can usually get by with fewer than $n^2$ coercion
         functions.  For instance, if we know how to convert from type 1 to
         type 2 and from type 2 to type 3, then we can use this knowledge to
@@ -642,8 +585,8 @@ put("exp", list("javascript_number", "javascript_number"),
         relations among types and automatically generate those coercion
         functions
         that can be inferred from the ones that are supplied
-        explicitly.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>This statement, which also appears in the first edition of this book,
+        explicitly.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>This statement, which also appears in the first edition of this book,
         is just as true now as it was when we wrote it twelve years ago.
         Developing a useful, general framework for expressing the relations
         among different types of entities (what philosophers call
@@ -659,17 +602,24 @@ put("exp", list("javascript_number", "javascript_number"),
         confusing differences among contemporary object-oriented
         languages—centers on the treatment of generic operations on
         interrelated types.  Our own discussion of computational objects in
-        chapter~3 avoids these issues entirely.  Readers familiar with
+        chapter 3 avoids these issues entirely.  Readers familiar with
         object-oriented programming will notice that we have much to say in
-        chapter~3 about local state, but we do not even mention <QUOTE>classes</QUOTE> or
+        chapter 3 about local state, but we do not even mention <QUOTE>classes</QUOTE> or
         <QUOTE>inheritance.</QUOTE>  In fact, we suspect that these problems cannot be
         adequately addressed in terms of computer-language design alone,
         without also drawing on work in knowledge representation and automated
-        reasoning.</FOOTNOTE></div><hr><div class='footnote'>
+        reasoning.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>A real number can be projected to an integer
           using the 
           
           
-          {\lstinline[mathescape=true]$round$} primitive, which returns the closest integer
+          <kbd>round</kbd> primitive, which returns the closest integer
           to its argument.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section5/subsection1.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter2/section5/subsection3.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+2.5.2  Combining Data of Different Types</div>	<div class='next-page'></div></div>

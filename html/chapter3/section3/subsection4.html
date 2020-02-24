@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>3.3.4 
-        A Simulator for Digital Circuits
-      </a>
+		<a name='top' class='permalink'>3.3.4  A Simulator for Digital Circuits</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       
@@ -55,15 +62,15 @@
         later the inverter will change its output signal to 1.  If the input
         signal to an inverter changes to 1, then one <EM>inverter-delay</EM> later the
         inverter will change its output signal to 0.  We draw an inverter
-        symbolically as in Figure~\ref{fig:logic-gates}.  An 
+        symbolically as in Figure \ref{fig:logic-gates}.  An 
         
         <EM>and-gate</EM>,
-        also shown in Figure~\ref{fig:logic-gates}, is a primitive function
+        also shown in Figure \ref{fig:logic-gates}, is a primitive function
         box with two inputs and one output.  It drives its output signal to a
         value that is the 
         
         <EM>logical and</EM> of the inputs.  That is, if both
-        of its input signals become~1, then one <EM>and-gate-delay</EM> time later the
+        of its input signals become 1, then one <EM>and-gate-delay</EM> time later the
         and-gate will force its output signal to be 1; otherwise the output
         will be 0.  An 
         
@@ -94,10 +101,10 @@
         the 
         
         
-        <EM>half-adder</EM> circuit shown in Figure~\ref{fig:half-adder} consists of an
+        <EM>half-adder</EM> circuit shown in Figure \ref{fig:half-adder} consists of an
         or-gate, two and-gates, and an inverter.  It takes two input signals,
         A and B, and has two output signals, S and C.  S will become 1
-        whenever precisely one of A and B is~1, and C will become 1 whenever A
+        whenever precisely one of A and B is 1, and C will become 1 whenever A
         and B are both 1.  We can see from the figure that, because of the
         delays involved, the outputs may be generated at different times.
         Many of the difficulties in the design of digital circuits arise from
@@ -131,19 +138,17 @@
         
         One basic element of our simulation will be a
         function
-        {\lstinline[mathescape=true]$make_wire$}, which constructs wires.  For example, we can construct six
+        <kbd>make_wire</kbd>, which constructs wires.  For example, we can construct six
         wires as follows:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const a = make_wire();
 const b = make_wire();
 const c = make_wire();
 const d = make_wire();
 const e = make_wire();
 const s = make_wire();
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -155,31 +160,23 @@ const s = make_wire();
         function
         are the wires to be attached to the box.  For example, given
         that we can construct and-gates, or-gates, and inverters, we can wire
-        together the half-adder shown in Figure~\ref{fig:half-adder}:
+        together the half-adder shown in Figure \ref{fig:half-adder}:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 or_gate(a, b, d);
-\end{JavaScript}
+</pre></div></div>
 
-
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 and_gate(a, b, c);
-\end{JavaScript}
-
+</pre></div></div>
         
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_4_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 inverter(c, e);
-\end{JavaScript}
-
+</pre></div></div>
         
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_5_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 and_gate(d, e, s);
-\end{JavaScript}
-
+</pre></div></div>
         
       </p></div>
 
@@ -188,12 +185,11 @@ and_gate(d, e, s);
         Better yet, we can explicitly name this operation by defining a
         function 
             
-            {\lstinline[mathescape=true]$half_adder$}
+            <kbd>half_adder</kbd>
          that constructs this circuit, given the four
         external wires to be attached to the half-adder:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function half_adder(a, b, s, c) {
     const d = make_wire();
     const e = make_wire();
@@ -203,8 +199,7 @@ function half_adder(a, b, s, c) {
     and_gate(d, e, s);
     return "ok";
 }
-\end{JavaScript}
-
+</pre></div></div>
         
       </p></div>
 
@@ -212,30 +207,16 @@ function half_adder(a, b, s, c) {
 <a name='p8' class='permalink'></a><p>
         The advantage of making this definition is that we can use 
             
-            {\lstinline[mathescape=true]$half_adder$}
+            <kbd>half_adder</kbd>
          itself as a building block in creating more complex
-        circuits.  Figure~\ref{fig:full-adder}, for example, shows a
+        circuits.  Figure \ref{fig:full-adder}, for example, shows a
         
         
         <EM>
-          full-adder</EM> composed of two half-adders and an or-gate.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
-\begin{JavaScript}
-function full_adder(a, b, c_in, sum, c_out) {
-    const s = make_wire();
-    const c1 = make_wire();
-    const c2 = make_wire();
-    half_adder(b, c_in, s, c1);
-    half_adder(a, s, sum, c2);
-    or_gate(c1, c2, c_out);
-    return "ok";
-}
-\end{JavaScript}
-
-       We can construct a full-adder
+          full-adder</EM> composed of two half-adders and an or-gate.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a> We can construct a full-adder
         as follows:
         
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_7_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function full_adder(a, b, c_in, sum, c_out) {
     const s = make_wire();
     const c1 = make_wire();
@@ -245,19 +226,18 @@ function full_adder(a, b, c_in, sum, c_out) {
     or_gate(c1, c2, c_out);
     return "ok";
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p9' class='permalink'></a><p>
           Having defined 
               
-              {\lstinline[mathescape=true]$full_adder$}
+              <kbd>full_adder</kbd>
            as a
         function, we can now use it as a
         building block for creating still more complex circuits.  (For
-        example, see exercise~\ref{ex:ripple-carry}.)
+        example, see exercise \ref{ex:ripple-carry}.)
 
         
 \begin{figure}[H]
@@ -276,7 +256,7 @@ function full_adder(a, b, c_in, sum, c_out) {
         In essence, our simulator provides us with the tools to construct a
         language of circuits.  If we adopt the general perspective on
         languages with which we approached the study of JavaScript in
-        section~\ref{sec:elements-of-programming},
+        section \ref{sec:elements-of-programming},
         we can say that the primitive function boxes form the primitive
         elements of the language, that wiring boxes together provides a means
         of combination, and that specifying wiring patterns as
@@ -284,9 +264,10 @@ function full_adder(a, b, c_in, sum, c_out) {
         serves as a means of abstraction.
       </p></div>
 
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
         Primitive function boxes
-      
+      </h2></div>
 
       
 
@@ -298,19 +279,19 @@ function full_adder(a, b, c_in, sum, c_out) {
         wires:
 
         <UL>
-          <LI>{\lstinline[mathescape=true]$get_signal(wire)$}:
+          <LI><kbd>get_signal(wire)</kbd>:
             
             returns the current value of the signal on the wire.
 
           </LI>
           <LI>
-            {\lstinline[mathescape=true]$set_signal(wire, new_value)$}:
+            <kbd>set_signal(wire, new_value)</kbd>:
             
             changes the value of the signal on the wire to the new value.
 
           </LI>
           <LI>
-            {\lstinline[mathescape=true]$add_action(wire, nullary_function)$}:
+            <kbd>add_action(wire, nullary_function)</kbd>:
             
             asserts that the designated
             function
@@ -332,7 +313,7 @@ function full_adder(a, b, c_in, sum, c_out) {
         
 	  
 	  
-	    {\lstinline[mathescape=true]$after_delay$}
+	    <kbd>after_delay</kbd>
 	  
 	
 	that takes a time delay and a
@@ -351,7 +332,7 @@ function full_adder(a, b, c_in, sum, c_out) {
         use
 	
           
-          {\lstinline[mathescape=true]$add_action$}
+          <kbd>add_action</kbd>
 	  
          to associate with the input wire a
         
@@ -367,18 +348,17 @@ function full_adder(a, b, c_in, sum, c_out) {
         computes the
 	
           
-          {\lstinline[mathescape=true]$logical_not$}
+          <kbd>logical_not</kbd>
 	  
         
 	of the input signal, and then, after one
 	
           
-          {\lstinline[mathescape=true]$inverter_delay$},
+          <kbd>inverter_delay</kbd>,
 	  
         
 	sets the output signal to be this new value:
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_8_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function inverter(input, output) {
     function invert_input() {
         const new_value = logical_not(get_signal(input));
@@ -396,8 +376,7 @@ function logical_not(s) {
              ? 0
              : Error("Invalid signal for logical_not", s);
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -412,21 +391,20 @@ function logical_not(s) {
 	
           
           
-	    {\lstinline[mathescape=true]$logical_and$}
+	    <kbd>logical_and</kbd>
 	    (using a function analogous to
-	    {\lstinline[mathescape=true]$logical_not$})
+	    <kbd>logical_not</kbd>)
 	  
 	
 	of the values of the signals on the input wires and sets up a change
 	to the new value to occur on the output wire after one
 	
           
-          {\lstinline[mathescape=true]$and_gate_delay$}.
+          <kbd>and_gate_delay</kbd>.
 	  
         
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_9_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function and_gate(a1, a2, output) {
     function and_action_function() {
         const new_value = logical_and(get_signal(a1),
@@ -438,8 +416,7 @@ function and_gate(a1, a2, output) {
     add_action(a2, and_action_function);
     return "ok";
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       
@@ -450,13 +427,13 @@ function and_gate(a1, a2, output) {
           Define an or-gate as a primitive function box.  Your
 	  
             
-            {\lstinline[mathescape=true]$or_gate$}
+            <kbd>or_gate</kbd>
 	    
           
 	  constructor should be similar to
 	  
             
-            {\lstinline[mathescape=true]$and_gate$}.
+            <kbd>and_gate</kbd>.
 	    
           
       
@@ -473,19 +450,19 @@ function and_gate(a1, a2, output) {
         function
         
           
-          {\lstinline[mathescape=true]$or_gate$}
+          <kbd>or_gate</kbd>
         
 	that accomplishes this.  What is the delay time of the
         or-gate in terms of
 	
           
-          {\lstinline[mathescape=true]$and_gate_delay$}
+          <kbd>and_gate_delay</kbd>
 	  
         
 	and
 	
           
-          {\lstinline[mathescape=true]$inverter_delay$}?
+          <kbd>inverter_delay</kbd>?
 	  
         
       
@@ -496,7 +473,7 @@ function and_gate(a1, a2, output) {
 \stepcounter{ExerciseDisplayNumber}
 \begin{Exercise}
 
-        Figure~\ref{fig:ripple-carry} shows a 
+        Figure \ref{fig:ripple-carry} shows a 
         
         
         <EM>ripple-carry adder</EM> formed by stringing
@@ -529,7 +506,7 @@ function and_gate(a1, a2, output) {
 	
 	
           
-          {\lstinline[mathescape=true]$ripple_carry_adder$}
+          <kbd>ripple_carry_adder</kbd>
 	  
         
 	that generates this circuit.  The
@@ -565,9 +542,10 @@ function and_gate(a1, a2, output) {
 
       
 
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
         Representing wires
-      
+      </h2></div>
 
       
 
@@ -577,11 +555,11 @@ function and_gate(a1, a2, output) {
         state variables: a
 	
 	  
-	  {\lstinline[mathescape=true]$signal_value$}
+	  <kbd>signal_value</kbd>
 	
 	(initially taken to be 0) and a collection of
 	
-	  {\lstinline[mathescape=true]$action_function$}
+	  <kbd>action_function</kbd>
 	
 	to be run when the signal changes value.  We implement the wire,
 	using message-passing style, as
@@ -591,16 +569,15 @@ function and_gate(a1, a2, output) {
 	  
 	  functions
 	
-        together with a {\lstinline[mathescape=true]$dispatch$}
+        together with a <kbd>dispatch</kbd>
         
 	  function
 	
         that selects the appropriate local operation, just as we did
         with the simple bank-account object in section
-        ~\ref{sec:local-state-variables}:
+         \ref{sec:local-state-variables}:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_10_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_wire() {
     let signal_value = 0;
     let action_functions = null;
@@ -625,8 +602,7 @@ function make_wire() {
     }
     return dispatch;
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -638,19 +614,18 @@ function make_wire() {
 	
 	
           
-          {\lstinline[mathescape=true]$set_my_signal$}
+          <kbd>set_my_signal</kbd>
 	  
         
 	tests whether the new signal value changes the signal on the wire.
 	If so, it runs each of the action
         functions, using the following
         function
-        {\lstinline[mathescape=true]$call_each$},
+        <kbd>call_each</kbd>,
         which calls each of the items in a list of no-argument
         functions:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_11_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function call_each(functions) {
     if (is_null(functions)) {
         return "done";
@@ -659,8 +634,7 @@ function call_each(functions) {
         call_each(tail(functions));
     }
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -669,19 +643,19 @@ function call_each(functions) {
         function
         
             
-            {\lstinline[mathescape=true]$accept_action_function$}
+            <kbd>accept_action_function</kbd>
          adds the given
         function
         to the list of
         functions
         to be run, and then runs the new
         function
-        once.  (See exercise~\ref{ex:accept-action}.)
+        once.  (See exercise \ref{ex:accept-action}.)
       </p></div>
 
       <div class='permalink'>
 <a name='p18' class='permalink'></a><p>
-        With the local {\lstinline[mathescape=true]$dispatch$}
+        With the local <kbd>dispatch</kbd>
         
 	  
 	  function
@@ -693,8 +667,9 @@ function call_each(functions) {
 	  functions
 	
         to access the local operations on
-        wires:<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
-\begin{JavaScript}
+        wires:<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
+
+        <div class='snippet' id='javascript_60_12_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function get_signal(wire) {
     return wire("get_signal");
 }
@@ -706,25 +681,7 @@ function set_signal(wire, new_value) {
 function add_action(wire, action_function) {
     return (wire("add_action"))(action_function);
 }
-\end{JavaScript}
-
-      
-
-        
-\begin{JavaScript}
-function get_signal(wire) {
-    return wire("get_signal");
-}
-
-function set_signal(wire, new_value) {
-    return (wire("set_signal"))(new_value);
-}
-
-function add_action(wire, action_function) {
-    return (wire("add_action"))(action_function);
-}
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -738,13 +695,13 @@ function add_action(wire, action_function) {
         is allocated (by the
 	
           
-          {\lstinline[mathescape=true]$let$}
+          <kbd>let</kbd>
          expression in
 	
           
-          {\lstinline[mathescape=true]$make_wire$})
+          <kbd>make_wire</kbd>)
         
-	and a new {\lstinline[mathescape=true]$dispatch$}
+	and a new <kbd>dispatch</kbd>
         
 	  
 	  function
@@ -767,15 +724,16 @@ function add_action(wire, action_function) {
         
       </p></div>
 
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
         The agenda
-      
+      </h2></div>
 
       
 
       <div class='permalink'>
 <a name='p21' class='permalink'></a><p>
-        The only thing needed to complete the simulator is {\lstinline[mathescape=true]$after_delay$}.
+        The only thing needed to complete the simulator is <kbd>after_delay</kbd>.
         The idea here is that we maintain a data structure, called an <EM>
           agenda</EM>, that contains a schedule of things to do.  The following
         operations are defined for agendas:
@@ -783,25 +741,25 @@ function add_action(wire, action_function) {
         <UL>
           <LI>
             
-            {\lstinline[mathescape=true]$make_agenda()$}: returns a new empty agenda.
+            <kbd>make_agenda()</kbd>: returns a new empty agenda.
 
           </LI>
           <LI>
             
-            {\lstinline[mathescape=true]$is_empty_agenda(agenda)$}: is true if the specified agenda is empty.
+            <kbd>is_empty_agenda(agenda)</kbd>: is true if the specified agenda is empty.
           </LI>
           <LI>
             
-            {\lstinline[mathescape=true]$first_agenda_item(agenda)$}: returns the first item on the agenda.
+            <kbd>first_agenda_item(agenda)</kbd>: returns the first item on the agenda.
           </LI>
           <LI>
             
-            {\lstinline[mathescape=true]$remove_first_agenda_item(agenda)$}:
+            <kbd>remove_first_agenda_item(agenda)</kbd>:
             modifies the agenda by removing the first item.
           </LI>
           <LI>
             
-            {\lstinline[mathescape=true]$add_to_agenda(time, action, agenda)$}:
+            <kbd>add_to_agenda(time, action, agenda)</kbd>:
             modifies the agenda by adding the given action
             function
             to be run at
@@ -809,7 +767,7 @@ function add_action(wire, action_function) {
           </LI>
           <LI>
             
-            {\lstinline[mathescape=true]$current_time(agenda):$}:
+            <kbd>current_time(agenda):</kbd>:
             returns the current simulation time.
           </LI>
         </UL>
@@ -820,45 +778,42 @@ function add_action(wire, action_function) {
         The particular agenda that we use is denoted by
         
             
-            {\lstinline[mathescape=true]$the_agenda$}
+            <kbd>the_agenda</kbd>
         . The
         function
         
             
-            {\lstinline[mathescape=true]$after_delay$}
+            <kbd>after_delay</kbd>
          adds new
         elements to 
             
-            {\lstinline[mathescape=true]$the_agenda$}
+            <kbd>the_agenda</kbd>
          :
         
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_13_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function after_delay(delay, action) {
     add_to_agenda(delay + current_time(the_agenda),
                   action, the_agenda);
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p23' class='permalink'></a><p>
         The simulation is driven by the
         function
-        {\lstinline[mathescape=true]$propagate$}, which
+        <kbd>propagate</kbd>, which
         operates on 
             
-            {\lstinline[mathescape=true]$the_agenda$}
+            <kbd>the_agenda</kbd>
         , executing each
         function
         on the agenda
         in sequence.  In general, as the simulation runs, new items will be
-        added to the agenda, and {\lstinline[mathescape=true]$propagate$} will continue the simulation
+        added to the agenda, and <kbd>propagate</kbd> will continue the simulation
         as long as there are items on the agenda:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_14_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function propagate() {
     if (is_empty_agenda(the_agenda)) {
         return "done";
@@ -869,14 +824,14 @@ function propagate() {
         return propagate();
     }
 }
-\end{JavaScript}
-
+</pre></div></div>
         
       </p></div>
 
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
         A sample simulation
-      
+      </h2></div>
 
       
       
@@ -889,8 +844,7 @@ function propagate() {
         signal changes value, it should print the new signal value, together
         with the current time and a name that identifies the wire:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_15_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function probe(name, wire) {
     add_action(wire, 
                () => display(name + " " +
@@ -898,8 +852,7 @@ function probe(name, wire) {
                              ", New value = " + 
                              get_signal(wire));
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -907,22 +860,19 @@ function probe(name, wire) {
         We begin by initializing the agenda and specifying delays for the
         primitive function boxes:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_16_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const the_agenda = make_agenda();
 const inverter_delay = 2;
 const and_gate_delay = 3;
 const or_gate_delay = 5;
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p26' class='permalink'></a><p>
         Now we define four wires, placing probes on two of them:
 
-
-\begin{JavaScript}
+<div class='snippet' id='javascript_60_17_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const input_1 = make_wire();
 const input_2 = make_wire();
 const sum = make_wire();
@@ -930,73 +880,60 @@ const carry = make_wire();
 
 probe("Sum", sum);
 // Sum 0, New value = 0
-\end{JavaScript}
+</pre></div></div>
 
-
-
-\begin{JavaScript}
+<div class='snippet' id='javascript_60_18_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 probe("Carry", carry);
 // Carry 0, New value = 0
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p27' class='permalink'></a><p>
         Next we connect the wires in a half-adder circuit (as in
-        Figure~\ref{fig:half-adder}), set the signal on
+        Figure \ref{fig:half-adder}), set the signal on
 	
           
-          {\lstinline[mathescape=true]$input_1$}
+          <kbd>input_1</kbd>
         
 	to 1, and run the simulation:
 
-
-\begin{JavaScript}
+<div class='snippet' id='javascript_60_19_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 half_adder(input_1, input_2, sum, carry);
-\end{JavaScript}
+</pre></div></div>
 
-
-
-\begin{JavaScript}
+<div class='snippet' id='javascript_60_20_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 set_signal(input_1, 1);
-\end{JavaScript}
+</pre></div></div>
 
-
-
-\begin{JavaScript}
+<div class='snippet' id='javascript_60_21_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 propagate();
 // Sum 8, New Value = 1
-\end{JavaScript}
+</pre></div></div>
 
-
-    The {\lstinline[mathescape=true]$sum$} signal changes to 1 at time 8.
+    The <kbd>sum</kbd> signal changes to 1 at time 8.
     We are now eight time units from the beginning of the simulation.
     At this point, we can set the signal on
     
       
-      {\lstinline[mathescape=true]$input_2$}
+      <kbd>input_2</kbd>
     
     to 1 and allow the values to propagate:
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_22_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 set_signal(input_2, 1);
-\end{JavaScript}
-
+</pre></div></div>
         
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_23_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 propagate();
 // Carry 11, New value = 1
 // Sum 16, New value = 0
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p28' class='permalink'></a><p>
-        The {\lstinline[mathescape=true]$carry$} changes to 1 at time 11 and the {\lstinline[mathescape=true]$sum$} changes to 0
+        The <kbd>carry</kbd> changes to 1 at time 11 and the <kbd>sum</kbd> changes to 0
         at time 16.
         
         
@@ -1014,13 +951,13 @@ propagate();
 	
         
           
-          {\lstinline[mathescape=true]$accept_action_function$}
+          <kbd>accept_action_function</kbd>
 	  
         
 	defined in
 	
           
-          {\lstinline[mathescape=true]$make_wire$}
+          <kbd>make_wire</kbd>
 	  
         
 	specifies that when a new action
@@ -1040,24 +977,23 @@ propagate();
         we had defined
 	
           
-          {\lstinline[mathescape=true]$accept_action_function$}
+          <kbd>accept_action_function</kbd>
 	  
         
 	as
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_24_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function accept_action_function(fun) {
     action_functions = pair(fun, action_functions);
 }
-\end{JavaScript}
-
+</pre></div></div>
       
 \end{Exercise}
 
       
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
         Implementing the agenda
-      
+      </h2></div>
 
       
 
@@ -1079,13 +1015,12 @@ function accept_action_function(fun) {
         pair consisting of a number (the time) and a 
         
         queue (see
-        exercise~\ref{ex:agenda-list}) that holds the
+        exercise \ref{ex:agenda-list}) that holds the
         functions
         that are
         scheduled to be run during that time segment.
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_25_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_time_segment(time, queue) {
     return pair(time, queue);
 }
@@ -1097,28 +1032,28 @@ function segment_time(s) {
 function segment_queue(s) {
     return tail(s);
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p31' class='permalink'></a><p>
         We will operate on the time-segment queues using the queue operations
-        described in section~\ref{sec:queues}.
+        described in section \ref{sec:queues}.
       </p></div>
 
       <div class='permalink'>
 <a name='p32' class='permalink'></a><p>
         
         The agenda itself is a one-dimensional table of time segments.  It
-        differs from the tables described in section~\ref{sec:tables} in that
+        differs from the tables described in section \ref{sec:tables} in that
         the segments will be sorted in order of increasing time.  In addition,
         we store the 
         
         <EM>current time</EM> (i.e., the time of the last action
         that was processed) at the head of the agenda.  A newly constructed
-        agenda has no time segments and has a current time of 0:<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
-\begin{JavaScript}
+        agenda has no time segments and has a current time of 0:<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
+
+        <div class='snippet' id='javascript_60_26_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function make_agenda() {
     return list(0);
 }
@@ -1146,53 +1081,17 @@ function first_segment(agenda) {
 function rest_segments(agenda) {
     return tail(segments(agenda));
 }
-\end{JavaScript}
-
-      
-
-        
-\begin{JavaScript}
-function make_agenda() {
-    return list(0);
-}
-
-function current_time(agenda) {
-    return head(agenda);
-}
-
-function set_current_time(agenda, time) {
-    set_head(agenda, time);
-}
-
-function segments(agenda) {
-    return tail(agenda);
-}
-
-function set_segments(agenda, segs) {
-    set_tail(agenda, segs);
-}
-
-function first_segment(agenda) {
-    return head(segments(agenda));
-}
-
-function rest_segments(agenda) {
-    return tail(segments(agenda));
-}
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p33' class='permalink'></a><p>
         An agenda is empty if it has no time segments:
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_27_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function is_empty_agenda(agenda) {
     return is_null(segments(agenda));
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -1206,8 +1105,7 @@ function is_empty_agenda(agenda) {
         agenda just before it.  If we reach the end of the agenda, we must
         create a new time segment at the end.
 
-        
-\begin{JavaScript}
+        <div class='snippet' id='javascript_60_28_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function add_to_agenda(time, action, agenda) {
     function belongs_before(segs) {
         return is_null(segs) ||
@@ -1241,8 +1139,7 @@ function add_to_agenda(time, action, agenda) {
         add_to_segments(segs);
     }
 }
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
@@ -1252,8 +1149,9 @@ function add_to_agenda(time, action, agenda) {
         that removes the first item from the agenda deletes the
         item at the front of the queue in the first time segment.  If this
         deletion makes the time segment empty, we remove it from the list of
-        segments:<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
-\begin{JavaScript}
+        segments:<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
+
+        <div class='snippet' id='javascript_60_29_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function remove_first_agenda_item(agenda) {
     const q = segment_queue(first_segment(agenda));
     delete_queue(q);
@@ -1261,29 +1159,16 @@ function remove_first_agenda_item(agenda) {
         set_segments(agenda, rest_segments(agenda));
     } else {}
 }
-\end{JavaScript}
-
-      
-
-        
-\begin{JavaScript}
-function remove_first_agenda_item(agenda) {
-    const q = segment_queue(first_segment(agenda));
-    delete_queue(q);
-    if (is_empty_queue(q)) {
-        set_segments(agenda, rest_segments(agenda));
-    } else {}
-}
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       <div class='permalink'>
 <a name='p36' class='permalink'></a><p>
         The first agenda item is found at the head of the queue in the first
         time segment.  Whenever we extract an item, we also update the current
-        time:<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>
-\begin{JavaScript}
+        time:<a class='superscript' id='footnote-link-5' href='#footnote-5'>[5]</a>
+
+        <div class='snippet' id='javascript_60_30_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function first_agenda_item(agenda) {
     if (is_empty_agenda(agenda)) {
         error("Agenda is empty: first_agenda_item");
@@ -1293,23 +1178,7 @@ function first_agenda_item(agenda) {
         return front_queue(segment_queue(first_seg));
     }
 }
-\end{JavaScript}
-
-      
-
-        
-\begin{JavaScript}
-function first_agenda_item(agenda) {
-    if (is_empty_agenda(agenda)) {
-        error("Agenda is empty: first_agenda_item");
-    } else {
-        const first_seg = first_segment(agenda);
-        set_current_time(agenda, segment_time(first_seg));
-        return front_queue(segment_queue(first_seg));
-    }
-}
-\end{JavaScript}
-
+</pre></div></div>
       </p></div>
 
       
@@ -1339,14 +1208,14 @@ function first_agenda_item(agenda) {
       
       
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>A
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>A
           full-adder is a basic circuit element used in adding two binary
           numbers.  Here A and B are the bits at corresponding positions in the
           two numbers to be added, and C$_{in}$ is the carry bit from the
           addition one place to the right.  The circuit generates SUM, which is
           the sum bit in the corresponding position, and C$_{out}$, which is the
-          carry bit to be propagated to the left.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>These
+          carry bit to be propagated to the left.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>These
         
 	  
 	  functions
@@ -1378,10 +1247,10 @@ function first_agenda_item(agenda) {
           write
 	  
 	    
-	    {\lstinline[mathescape=true]$wire('get_signal')$}
+	    <kbd>wire('get_signal')</kbd>
 	    
 	  
-	  we think of {\lstinline[mathescape=true]$wire$} as a
+	  we think of <kbd>wire</kbd> as a
           
 	    
 	    function
@@ -1389,17 +1258,17 @@ function first_agenda_item(agenda) {
           that is called with the message
 	  
 	    
-	    {\lstinline[mathescape=true]$"get_signal"$}
+	    <kbd>"get_signal"</kbd>
 	    
 	  
 	  as input.
           Alternatively, writing
 	  
 	    
-	    {\lstinline[mathescape=true]$get_signal(wire)$}
+	    <kbd>get_signal(wire)</kbd>
 	    
 	   encourages us to think
-          of {\lstinline[mathescape=true]$wire$} as a data object that is
+          of <kbd>wire</kbd> as a data object that is
 	  the input to a
           
 	    
@@ -1407,7 +1276,7 @@ function first_agenda_item(agenda) {
 	  
           
             
-            {\lstinline[mathescape=true]$get_signal$}.
+            <kbd>get_signal</kbd>.
 	    
           
 	  The truth of the matter is that, in a language in which
@@ -1425,27 +1294,34 @@ function first_agenda_item(agenda) {
 	  </QUOTE>
 	  and <QUOTE>data,</QUOTE> and we can choose our
           syntactic sugar to allow us to program in whatever style we choose.
-          </FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>The
+          </FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>The
           agenda is a 
           
           
-          headed list, like the tables in section~\ref{sec:tables},
+          headed list, like the tables in section \ref{sec:tables},
           but since the list is headed by the time, we do not need an additional
-          dummy header (such as the {\lstinline[mathescape=true]$*table*$} symbol used with tables).</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>Observe that the {\lstinline[mathescape=true]$if$} expression in
+          dummy header (such as the <kbd>*table*</kbd> symbol used with tables).</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Observe that the <kbd>if</kbd> expression in
           this
           function
           has no
-          alternative expression.  Such a <QUOTE>one-armed {\lstinline[mathescape=true]$if$} statement</QUOTE>
+          alternative expression.  Such a <QUOTE>one-armed <kbd>if</kbd> statement</QUOTE>
           
           
           is used to decide whether to do something, rather than to select
-          between two expressions.  An {\lstinline[mathescape=true]$if$} expression returns an
+          between two expressions.  An <kbd>if</kbd> expression returns an
           unspecified value if the predicate is false and there is no
-          alternative.</FOOTNOTE></div><hr><div class='footnote'>
+          alternative.</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>In this way, the current time will always be the time
           of the action most recently processed.  Storing this time at the head
           of the agenda ensures that it will still be available even if the
           associated time segment has been deleted.</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section3/subsection3.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter3/section3/subsection5.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+3.3.4  A Simulator for Digital Circuits</div>	<div class='next-page'></div></div>

@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>5.3.1 
-  Memory as Vectors
-      </a>
+		<a name='top' class='permalink'>5.3.1  Memory as Vectors</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
       
       <div class='permalink'>
@@ -37,27 +44,10 @@
   To model computer memory, we use a new kind of data
   structure called a 
   
-  <EM>vector</EM> {\lstinline[mathescape=true]$(in JavaScript, a vector is essentially just a wrapper around an array)$}.  Abstractly, a vector is a compound
+  <EM>vector</EM> <kbd>(in JavaScript, a vector is essentially just a wrapper around an array)</kbd>.  Abstractly, a vector is a compound
   data object whose individual elements can be accessed by means of an
   integer index in an amount of time that is independent of the
-  index.<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>JavaScript functions
-  for manipulating vectors:
-
-  <UL>
-    
-    
-    <LI>{\lstinline[mathescape=true]$vector_ref($}$\textit{vector}, \textit{n}${\lstinline[mathescape=true]$)$} returns the $n$th
-      element of the vector.
-
-      
-      
-    </LI>
-    <LI>{\lstinline[mathescape=true]$vector_set($}, , {\lstinline[mathescape=true]$)$} sets
-      the $n$th element of the vector to the designated value.
-    </LI>
-
-  </UL>
-       In order to describe memory operations, we use two
+  index.<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a> In order to describe memory operations, we use two
   primitive 
   JavaScript functions
   for manipulating vectors:
@@ -65,13 +55,13 @@
   <UL>
     
     
-    <LI>{\lstinline[mathescape=true]$vector_ref($}$\textit{vector}, \textit{n}${\lstinline[mathescape=true]$)$} returns the $n$th
+    <LI><kbd>vector_ref(</kbd>$\textit{vector}, \textit{n}$<kbd>)</kbd> returns the $n$th
       element of the vector.
 
       
       
     </LI>
-    <LI>{\lstinline[mathescape=true]$vector_set($}, , {\lstinline[mathescape=true]$)$} sets
+    <LI><kbd>vector_set(</kbd>, , <kbd>)</kbd> sets
       the $n$th element of the vector to the designated value.
     </LI>
 
@@ -80,21 +70,19 @@
 
       <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
-  For example, if {\lstinline[mathescape=true]$v$} is a vector, then {\lstinline[mathescape=true]$vector_ref(v, 5)$} gets
-  the fifth entry in the vector {\lstinline[mathescape=true]$v$} and {\lstinline[mathescape=true]$vector_set(v, 5, 7)$}
-  changes the value of the fifth entry of the vector {\lstinline[mathescape=true]$v$} to 7.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a><EM>base address</EM>
-  that specifies the beginning location of a vector in memory with an
-  <EM>index</EM> that specifies the offset of a particular element of the vector.
-      
+  For example, if <kbd>v</kbd> is a vector, then <kbd>vector_ref(v, 5)</kbd> gets
+  the fifth entry in the vector <kbd>v</kbd> and <kbd>vector_set(v, 5, 7)</kbd>
+  changes the value of the fifth entry of the vector <kbd>v</kbd> to 7.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
   For computer memory, this access can be implemented
   through the use of address arithmetic to combine a <EM>base address</EM>
   that specifies the beginning location of a vector in memory with an
   <EM>index</EM> that specifies the offset of a particular element of the vector.
       </p></div>
 
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
   Representing JavaScript data
-      
+      </h2></div>
 
       
       
@@ -104,14 +92,14 @@
   a list-structured memory.  Let us imagine that computer memory is
   divided into two vectors: 
   
-  {\lstinline[mathescape=true]$the_heads$} and 
+  <kbd>the_heads</kbd> and 
   
-  {\lstinline[mathescape=true]$the_tails$}.  We will
+  <kbd>the_tails</kbd>.  We will
   represent list structure as follows: A pointer to a pair is an index
   into the two vectors.  The 
-  head of the pair is the entry in {\lstinline[mathescape=true]$the_heads$} with the designated index, and the 
+  head of the pair is the entry in <kbd>the_heads</kbd> with the designated index, and the 
   tail of the pair is
-  the entry in {\lstinline[mathescape=true]$the_tails$} with the designated index.  We also need a
+  the entry in <kbd>the_tails</kbd> with the designated index.  We also need a
   representation for objects other than pairs (such as numbers and
   strings) and a way to distinguish one kind of data from another.
   There are many methods of accomplishing this, but they all reduce to
@@ -119,75 +107,21 @@
   
   
   <EM>typed pointers</EM>, that is, to extending the notion of
-  <QUOTE>pointer</QUOTE> to include information on data type.<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a><QUOTE>pair</QUOTE> data
-  type and an index into the memory vectors) from pointers to other
-  kinds of data (which consist of some other data type and whatever is
-  being used to represent data of that type).  Two data objects are
-  
-  considered to be the same ({\lstinline[mathescape=true]$===$}) if their pointers are
-  identical.<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>~\ref{fig:box-and-pointer-memory}
-  illustrates the use of this method to represent the list {\lstinline[mathescape=true]$list(list(1, 2), 3, 4)$}, whose box-and-pointer diagram is also shown.  We use letter
-  prefixes to denote the data-type information.  Thus, a pointer to the
-  pair with index 5 is denoted {\lstinline[mathescape=true]$p5$}, the empty list is denoted by
-  the pointer {\lstinline[mathescape=true]$e0$}, and a pointer to the number 4 is denoted {\lstinline[mathescape=true]$n4$}.  In the box-and-pointer diagram, we have indicated at the lower
-  left of each pair the vector index that specifies where the {\lstinline[mathescape=true]$head$}
-  and {\lstinline[mathescape=true]$tail$} of the pair are stored.  The blank locations in {\lstinline[mathescape=true]$the_heads$} and {\lstinline[mathescape=true]$the_tails$} may contain parts of other list
-  structures (not of interest here).
-
-  <SPLIT>
-    
-    
-      
-\begin{figure}[H]
-\centering
-
-\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/Fig5.14b.std}.svg}}
-\caption{Box-and-pointer and memory-vector representations 
-        of the list {\lstinline[mathescape=true]$list(list(1, 2), 3, 4)$}.}
-\label{fig:box-and-pointer-memory}
-\end{figure}
-
-    
-  </SPLIT>
-       
-  Figure~\ref{fig:box-and-pointer-memory}
-  illustrates the use of this method to represent the list {\lstinline[mathescape=true]$list(list(1, 2), 3, 4)$}, whose box-and-pointer diagram is also shown.  We use letter
-  prefixes to denote the data-type information.  Thus, a pointer to the
-  pair with index 5 is denoted {\lstinline[mathescape=true]$p5$}, the empty list is denoted by
-  the pointer {\lstinline[mathescape=true]$e0$}, and a pointer to the number 4 is denoted {\lstinline[mathescape=true]$n4$}.  In the box-and-pointer diagram, we have indicated at the lower
-  left of each pair the vector index that specifies where the {\lstinline[mathescape=true]$head$}
-  and {\lstinline[mathescape=true]$tail$} of the pair are stored.  The blank locations in {\lstinline[mathescape=true]$the_heads$} and {\lstinline[mathescape=true]$the_tails$} may contain parts of other list
-  structures (not of interest here).
-
-  <SPLIT>
-    
-    
-      
-\begin{figure}[H]
-\centering
-
-\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/Fig5.14b.std}.svg}}
-\caption{Box-and-pointer and memory-vector representations 
-        of the list {\lstinline[mathescape=true]$list(list(1, 2), 3, 4)$}.}
-\label{fig:box-and-pointer-memory}
-\end{figure}
-
-    
-  </SPLIT>
-       The data type enables the system to
+  <QUOTE>pointer</QUOTE> to include information on data type.<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a> The data type enables the system to
   distinguish a pointer to a pair (which consists of the <QUOTE>pair</QUOTE> data
   type and an index into the memory vectors) from pointers to other
   kinds of data (which consist of some other data type and whatever is
   being used to represent data of that type).  Two data objects are
   
-  considered to be the same ({\lstinline[mathescape=true]$===$}) if their pointers are
-  identical.<a class='superscript' id='footnote-5' href='#footnote-5'>[5]</a>~\ref{fig:box-and-pointer-memory}
-  illustrates the use of this method to represent the list {\lstinline[mathescape=true]$list(list(1, 2), 3, 4)$}, whose box-and-pointer diagram is also shown.  We use letter
+  considered to be the same (<kbd>===</kbd>) if their pointers are
+  identical.<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a> 
+  Figure \ref{fig:box-and-pointer-memory}
+  illustrates the use of this method to represent the list <kbd>list(list(1, 2), 3, 4)</kbd>, whose box-and-pointer diagram is also shown.  We use letter
   prefixes to denote the data-type information.  Thus, a pointer to the
-  pair with index 5 is denoted {\lstinline[mathescape=true]$p5$}, the empty list is denoted by
-  the pointer {\lstinline[mathescape=true]$e0$}, and a pointer to the number 4 is denoted {\lstinline[mathescape=true]$n4$}.  In the box-and-pointer diagram, we have indicated at the lower
-  left of each pair the vector index that specifies where the {\lstinline[mathescape=true]$head$}
-  and {\lstinline[mathescape=true]$tail$} of the pair are stored.  The blank locations in {\lstinline[mathescape=true]$the_heads$} and {\lstinline[mathescape=true]$the_tails$} may contain parts of other list
+  pair with index 5 is denoted <kbd>p5</kbd>, the empty list is denoted by
+  the pointer <kbd>e0</kbd>, and a pointer to the number 4 is denoted <kbd>n4</kbd>.  In the box-and-pointer diagram, we have indicated at the lower
+  left of each pair the vector index that specifies where the <kbd>head</kbd>
+  and <kbd>tail</kbd> of the pair are stored.  The blank locations in <kbd>the_heads</kbd> and <kbd>the_tails</kbd> may contain parts of other list
   structures (not of interest here).
 
   <SPLIT>
@@ -199,32 +133,7 @@
 
 \maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/Fig5.14b.std}.svg}}
 \caption{Box-and-pointer and memory-vector representations 
-        of the list {\lstinline[mathescape=true]$list(list(1, 2), 3, 4)$}.}
-\label{fig:box-and-pointer-memory}
-\end{figure}
-
-    
-  </SPLIT>
-       
-  Figure~\ref{fig:box-and-pointer-memory}
-  illustrates the use of this method to represent the list {\lstinline[mathescape=true]$list(list(1, 2), 3, 4)$}, whose box-and-pointer diagram is also shown.  We use letter
-  prefixes to denote the data-type information.  Thus, a pointer to the
-  pair with index 5 is denoted {\lstinline[mathescape=true]$p5$}, the empty list is denoted by
-  the pointer {\lstinline[mathescape=true]$e0$}, and a pointer to the number 4 is denoted {\lstinline[mathescape=true]$n4$}.  In the box-and-pointer diagram, we have indicated at the lower
-  left of each pair the vector index that specifies where the {\lstinline[mathescape=true]$head$}
-  and {\lstinline[mathescape=true]$tail$} of the pair are stored.  The blank locations in {\lstinline[mathescape=true]$the_heads$} and {\lstinline[mathescape=true]$the_tails$} may contain parts of other list
-  structures (not of interest here).
-
-  <SPLIT>
-    
-    
-      
-\begin{figure}[H]
-\centering
-
-\maxsizebox{\linewidth}{0.8\paperheight}{\includegraphics[scale=0.8]{{img\string_javascript/Fig5.14b.std}.svg}}
-\caption{Box-and-pointer and memory-vector representations 
-        of the list {\lstinline[mathescape=true]$list(list(1, 2), 3, 4)$}.}
+        of the list <kbd>list(list(1, 2), 3, 4)</kbd>.}
 \label{fig:box-and-pointer-memory}
 \end{figure}
 
@@ -234,20 +143,16 @@
 
       <div class='permalink'>
 <a name='p5' class='permalink'></a><p>
-  A pointer to a number, such as {\lstinline[mathescape=true]$n4$},
+  A pointer to a number, such as <kbd>n4</kbd>,
   might consist of a type indicating numeric data together with the
-  actual representation of the number 4.<a class='superscript' id='footnote-6' href='#footnote-6'>[6]</a>
-  <EM>bignum</EM> data type, for which the
-  pointer designates a list in which the parts of the number are
-  stored.<a class='superscript' id='footnote-7' href='#footnote-7'>[7]</a>
-      
+  actual representation of the number 4.<a class='superscript' id='footnote-link-5' href='#footnote-5'>[5]</a>
   To deal with numbers that are too large to
   be represented in the fixed amount of space allocated for a single
   pointer, we could use a distinct 
   
   <EM>bignum</EM> data type, for which the
   pointer designates a list in which the parts of the number are
-  stored.<a class='superscript' id='footnote-8' href='#footnote-8'>[8]</a>
+  stored.<a class='superscript' id='footnote-link-6' href='#footnote-6'>[6]</a>
       </p></div>
 
       <div class='permalink'>
@@ -263,9 +168,9 @@
   string
   to be recognized as the <QUOTE>same</QUOTE>
   string
-  by {\lstinline[mathescape=true]$===$} and we
+  by <kbd>===</kbd> and we
   
-  want {\lstinline[mathescape=true]$===$} to be a simple test for equality of pointers, we must
+  want <kbd>===</kbd> to be a simple test for equality of pointers, we must
   ensure that if the reader sees the same character string twice, it
   will use the same pointer (to the same sequence of characters) to
   represent both occurrences.  To accomplish this, the reader maintains
@@ -285,10 +190,11 @@
   <EM>interning</EM> symbols.
       </p></div>
 
-      \subsubsection{ 
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2> 
       
   Implementing the primitive list operations
-      
+      </h2></div>
 
       <div class='permalink'>
 <a name='p7' class='permalink'></a><p>
@@ -296,9 +202,9 @@
   
   Given the above representation scheme, we can replace each
   <QUOTE>primitive</QUOTE> list operation of a register machine with one or more
-  primitive vector operations.  We will use two registers, {\lstinline[mathescape=true]$the_heads$} and
-  {\lstinline[mathescape=true]$the_tails$}, to identify the memory vectors, and will
-  assume that {\lstinline[mathescape=true]$vector_ref$} and {\lstinline[mathescape=true]$vector_set$} are available as
+  primitive vector operations.  We will use two registers, <kbd>the_heads</kbd> and
+  <kbd>the_tails</kbd>, to identify the memory vectors, and will
+  assume that <kbd>vector_ref</kbd> and <kbd>vector_set</kbd> are available as
   primitive operations.  We also assume that numeric operations on
   pointers (such as incrementing a pointer, using a pair pointer to
   index a vector, or adding two numbers) use only the index portion of
@@ -311,21 +217,23 @@
 
   
   
-  
-\begin{JavaScript}
-assign(reg,list(op("head"), reg))
-assign(reg,list(op("tail"), reg))
-\end{JavaScript}
-
+  <kbd class='snippet'>
+    
+    
+assign(reg$_{1}$,list(op("head"), reg$_{2}$))
+assign(reg$_{1}$,list(op("tail"), reg$_{2}$))
+    
+  </kbd>
 
   if we implement these, respectively, as
 
-  
-\begin{JavaScript}
-assign(reg,list(op("vector_ref"), reg("the_heads"), reg))
-assign(reg,list(op("vector_ref"), reg("the_tails"), reg))
-\end{JavaScript}
-
+  <kbd class='snippet'>
+    
+    
+assign(reg$_{1}$,list(op("vector_ref"), reg("the_heads"), reg$_{2}$))
+assign(reg$_{1}$,list(op("vector_ref"), reg("the_tails"), reg$_{2}$))
+    
+  </kbd>
       </p></div>
 
       <div class='permalink'>
@@ -333,137 +241,109 @@ assign(reg,list(op("vector_ref"), reg("the_tails"), reg))
   The instructions
   
   
-  
-\begin{JavaScript}
-perform(list(op("set_head"), reg(), reg()))
-perform(list(op("set_tail"), reg(), reg()))
-\end{JavaScript}
-
+  <kbd class='snippet'>
+    
+    
+perform(list(op("set_head"), reg($\textit{reg}_{1}$), reg($\textit{reg}_{2}$)))
+perform(list(op("set_tail"), reg($\textit{reg}_{1}$), reg($\textit{reg}_{2}$)))
+    
+  </kbd>
   are implemented as
-  
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-perform(op("vector_set"), list(reg("the_heads"), reg(), reg()))
-perform(op("vector_set"), list((reg("the_tails"), reg(), reg()))
-\end{JavaScriptClickable}
-\end{lrbox}
-
-\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=A4UwTgZg9mC2AUVjwEQDcQGMAuMD6AziNigJQA0ABADYCWB28YIA5qtgBYh5cCGAJgTJVmbCpVHxS0gFChIMBElQYc+IiXF0G8Jq3Zc82XrWpDxki-umkgA}{\usebox\lstbox}
-
-
+  <kbd class='snippet'>
+    
+    
+perform(op("vector_set"), list(reg("the_heads"), reg($\textit{reg}_{1}$), reg($\textit{reg}_{2}$)))
+perform(op("vector_set"), list((reg("the_tails"), reg($\textit{reg}_{1}$), reg($\textit{reg}_{2}$)))
+    
+  </kbd>
       </p></div>
 
       <div class='permalink'>
 <a name='p10' class='permalink'></a><p>
   
-  The operation {\lstinline[mathescape=true]$pair$} is performed by allocating an unused index and storing the
-  arguments to {\lstinline[mathescape=true]$pair$} in {\lstinline[mathescape=true]$the_heads$} and {\lstinline[mathescape=true]$the_tails$} at that
+  The operation <kbd>pair</kbd> is performed by allocating an unused index and storing the
+  arguments to <kbd>pair</kbd> in <kbd>the_heads</kbd> and <kbd>the_tails</kbd> at that
   indexed vector position.  We presume that there is a special register,
   
-  {\lstinline[mathescape=true]$free$}, that always holds a pair pointer containing the next
+  <kbd>free</kbd>, that always holds a pair pointer containing the next
   available index, and that we can increment the index part of that
-  pointer to find the next free location.<a class='superscript' id='footnote-9' href='#footnote-9'>[9]</a>
-\begin{JavaScript}
-assign(, list(op("pair"), reg(), reg())
-\end{JavaScript}
-
-  is implemented as the following sequence of vector
-  operations:<a class='superscript' id='footnote-10' href='#footnote-10'>[10]</a>
-\begin{JavaScript}
-perform(op("vector_set"), list(reg("the_heads"), reg("free"), reg())),
-perform(op("vector_set"), list(reg("the_tails"), reg("free"), reg())),
-assign(, reg("free")),
-assign("free", list(op("+"), reg("free"), cons(1)))
-\end{JavaScript}
-
-      
-
-  
-\begin{JavaScript}
-perform(op("vector_set"), list(reg("the_heads"), reg("free"), reg())),
-perform(op("vector_set"), list(reg("the_tails"), reg("free"), reg())),
-assign(, reg("free")),
-assign("free", list(op("+"), reg("free"), cons(1)))
-\end{JavaScript}
-
-      
+  pointer to find the next free location.<a class='superscript' id='footnote-link-7' href='#footnote-7'>[7]</a>
   For example, the instruction
 
-  
-\begin{JavaScript}
-assign(, list(op("pair"), reg(), reg())
-\end{JavaScript}
-
+  <kbd class='snippet'>
+    
+    
+assign($\textit{reg}_{1}$, list(op("pair"), reg($\textit{reg}_{2}$), reg($\textit{reg}_{3}$))
+    
+  </kbd>
   is implemented as the following sequence of vector
-  operations:<a class='superscript' id='footnote-11' href='#footnote-11'>[11]</a>
-\begin{JavaScript}
-perform(op("vector_set"), list(reg("the_heads"), reg("free"), reg())),
-perform(op("vector_set"), list(reg("the_tails"), reg("free"), reg())),
-assign(, reg("free")),
+  operations:<a class='superscript' id='footnote-link-8' href='#footnote-8'>[8]</a>
+
+  <kbd class='snippet'>
+    
+    
+perform(op("vector_set"), list(reg("the_heads"), reg("free"), reg($\textit{reg}_{2}$))),
+perform(op("vector_set"), list(reg("the_tails"), reg("free"), reg($\textit{reg}_{3}$))),
+assign($\textit{reg}_{1}$, reg("free")),
 assign("free", list(op("+"), reg("free"), cons(1)))
-\end{JavaScript}
-
-      
-
-  
-\begin{JavaScript}
-perform(op("vector_set"), list(reg("the_heads"), reg("free"), reg())),
-perform(op("vector_set"), list(reg("the_tails"), reg("free"), reg())),
-assign(, reg("free")),
-assign("free", list(op("+"), reg("free"), cons(1)))
-\end{JavaScript}
-
+    
+  </kbd>
       </p></div>
 
       <div class='permalink'>
 <a name='p11' class='permalink'></a><p>
-  The {\lstinline[mathescape=true]$===$} operation
+  The <kbd>===</kbd> operation
 
-  
-\begin{JavaScript}
-list(op("==="), reg(), reg())
-\end{JavaScript}
-
+  <kbd class='snippet'>
+    
+    
+list(op("==="), reg($\textit{reg}_{1}$), reg($\textit{reg}_{2}$))
+    
+  </kbd>
   simply tests the equality of all fields in the registers, and
   
   
   
   
-  predicates such as {\lstinline[mathescape=true]$is_pair$}, {\lstinline[mathescape=true]$is_null$}, {\lstinline[mathescape=true]$is_string$}, and {\lstinline[mathescape=true]$is_number$} need only check the type field.
+  predicates such as <kbd>is_pair</kbd>, <kbd>is_null</kbd>, <kbd>is_string</kbd>, and <kbd>is_number</kbd> need only check the type field.
       </p></div>
 
-      \subsubsection{
+      <div class='permalink'>
+<a name='h1' class='permalink'></a><h2>
   Implementing stacks
-      
+      </h2></div>
 
       
       <div class='permalink'>
 <a name='p12' class='permalink'></a><p>
   Although our register machines use stacks, we need do nothing special
   here, since stacks can be modeled in terms of lists.  The stack can be
-  a list of the saved values, pointed to by a special register {\lstinline[mathescape=true]$the_stack$}.  Thus, {\lstinline[mathescape=true]$save($}$\textit{reg}${\lstinline[mathescape=true]$)$} can be implemented as
+  a list of the saved values, pointed to by a special register <kbd>the_stack</kbd>.  Thus, <kbd>save(</kbd>$\textit{reg}$<kbd>)</kbd> can be implemented as
 
   
-  
-\begin{JavaScript}
+  <kbd class='snippet'>
+    
+    
 assign("the_stack", list(op("pair"), reg($\textit{reg}$), reg("the-stack")))
-\end{JavaScript}
-
+    
+  </kbd>
   
-  Similarly, {\lstinline[mathescape=true]$restore($}$\textit{reg}${\lstinline[mathescape=true]$)$} can be implemented as
-  
-\begin{JavaScript}
+  Similarly, <kbd>restore(</kbd>$\textit{reg}$<kbd>)</kbd> can be implemented as
+  <kbd class='snippet'>
+    
+    
 assign($\textit{reg}$, list(op("head"), reg("the_stack")))
 assign("the_stack", list(op("tail"), reg("the_stack")))
-\end{JavaScript}
+    
+  </kbd>
 
-
-  and {\lstinline[mathescape=true]$perform(op("initialize_stack"))$} can be implemented as
-  
-\begin{JavaScript}
+  and <kbd>perform(op("initialize_stack"))</kbd> can be implemented as
+  <kbd class='snippet'>
+    
+    
 assign("the_stack", cons(null))
-\end{JavaScript}
-
+    
+  </kbd>
       </p></div>
 
       <div class='permalink'>
@@ -481,17 +361,15 @@ assign("the_stack", cons(null))
 \begin{Exercise}
 
   Draw the box-and-pointer representation and the memory-vector
-  representation (as in Figure~\ref{fig:box-and-pointer-memory}) of the
+  representation (as in Figure \ref{fig:box-and-pointer-memory}) of the
   list structure produced by
 
-  
-\begin{JavaScript}
+  <div class='snippet' id='javascript_106_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 const x = pair(1, 2);
 const y = list(x, x);
-\end{JavaScript}
-
-  with the {\lstinline[mathescape=true]$free$} pointer initially {\lstinline[mathescape=true]$p1$}.  What is the final
-  value of {\lstinline[mathescape=true]$free$}$\,$?  What pointers represent the values of {\lstinline[mathescape=true]$x$} and {\lstinline[mathescape=true]$y$}$\,$?
+</pre></div></div>
+  with the <kbd>free</kbd> pointer initially <kbd>p1</kbd>.  What is the final
+  value of <kbd>free</kbd>$\,$?  What pointers represent the values of <kbd>x</kbd> and <kbd>y</kbd>$\,$?
       
 \end{Exercise}
 
@@ -508,10 +386,9 @@ const y = list(x, x);
   
 \begin{enumerate}[a.]
 \item{
-      Recursive {\lstinline[mathescape=true]$count_leaves$}:
+      Recursive <kbd>count_leaves</kbd>:
 
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_106_2_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function count_leaves(tree) {
     return is_null(tree)
         ? 0
@@ -520,14 +397,12 @@ function count_leaves(tree) {
           : count_leaves(head(tree)) + 
             count_leaves(tail(tree));
 }
-\end{JavaScript}
-
+</pre></div></div>
     }
 \item{
-      Recursive {\lstinline[mathescape=true]$count_leaves$} with explicit counter:
+      Recursive <kbd>count_leaves</kbd> with explicit counter:
 
-      
-\begin{JavaScript}
+      <div class='snippet' id='javascript_106_3_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function count_leaves(tree) {
     function count_iter(tree, n) {
         return is_null(tree)
@@ -539,8 +414,7 @@ function count_leaves(tree) {
     }
     count_iter(tree, 0);
 }
-\end{JavaScript}
-
+</pre></div></div>
     }
 \end{enumerate}
 
@@ -554,15 +428,15 @@ function count_leaves(tree) {
 
   
   
-  Exercise~\ref{ex:append} of section~\ref{sec:mutable-list-structure}
-  presented an {\lstinline[mathescape=true]$append$}
+  Exercise \ref{ex:append} of section \ref{sec:mutable-list-structure}
+  presented an <kbd>append</kbd>
   function
   that appends two lists to form a
   new list and an
   
     
     
-      {\lstinline[mathescape=true]$append_mutator$}      
+      <kbd>append_mutator</kbd>      
       function
     
   
@@ -577,23 +451,23 @@ function count_leaves(tree) {
       
 
     <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>We could represent memory as lists of items.
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>We could represent memory as lists of items.
     However, the access time would then not be independent of the index,
-    since accessing the $n$th element of a list requires $n-1$ {\lstinline[mathescape=true]$tail$}
-    operations.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>For completeness, we should specify a {\lstinline[mathescape=true]$make_vector$}
+    since accessing the $n$th element of a list requires $n-1$ <kbd>tail</kbd>
+    operations.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>For completeness, we should specify a <kbd>make_vector</kbd>
     operation that constructs vectors.  However, in the present
     application we will use vectors only to model fixed divisions of the
-    computer memory.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>This is
+    computer memory.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>This is
     precisely the same 
     
     
-    <QUOTE>tagged data</QUOTE> idea we introduced in chapter~2 for
+    <QUOTE>tagged data</QUOTE> idea we introduced in chapter 2 for
     dealing with generic operations.  Here, however, the data types are
     included at the primitive machine level rather than constructed
-    through the use of lists.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>Type information may be encoded in a variety of
+    through the use of lists.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Type information may be encoded in a variety of
     ways, depending on the details of the machine on which the JavaScript
     system is to be implemented.  The execution efficiency of JavaScript
     programs will be strongly dependent on how cleverly this choice is
@@ -609,51 +483,36 @@ function count_leaves(tree) {
     manipulate the type fields of pointers?  Machines that include special
     hardware for the efficient handling of type fields are said to have
     
-    <EM>tagged architectures</EM>.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>Type information may be encoded in a variety of
-    ways, depending on the details of the machine on which the JavaScript
-    system is to be implemented.  The execution efficiency of JavaScript
-    programs will be strongly dependent on how cleverly this choice is
-    made, but it is difficult to formulate general design rules for good
-    choices.  The most straightforward way to implement typed pointers is
-    to allocate a fixed set of bits in each pointer to be a 
-    
-    <EM>type
-      field</EM> that encodes the data type.  Important questions to be
-    addressed in designing such a representation include the following:
-    How many type bits are required?  How large must the vector indices
-    be?  How efficiently can the primitive machine instructions be used to
-    manipulate the type fields of pointers?  Machines that include special
-    hardware for the efficient handling of type fields are said to have
-    
-    <EM>tagged architectures</EM>.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>This decision on the
+    <EM>tagged architectures</EM>.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-5' href='#footnote-link-5'>[5] </a><FOOTNOTE>This decision on the
     
     
     
-    representation of numbers determines whether {\lstinline[mathescape=true]$===$}, which tests
+    representation of numbers determines whether <kbd>===</kbd>, which tests
     equality of pointers, can be used to test for equality of numbers.  If
     the pointer contains the number itself, then equal numbers will have
     the same pointer.  But if the pointer contains the index of a location
     where the number is stored, equal numbers will be guaranteed to have
     equal pointers only if we are careful never to store the same number
-    in more than one location.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>This is just like writing a number as a sequence of
+    in more than one location.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-6' href='#footnote-link-6'>[6] </a><FOOTNOTE>This is just like writing a number as a sequence of
     digits, except that each <QUOTE>digit</QUOTE> is a number between 0 and the
-    largest number that can be stored in a single pointer.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>This is just like writing a number as a sequence of
-    digits, except that each <QUOTE>digit</QUOTE> is a number between 0 and the
-    largest number that can be stored in a single pointer.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>There are other ways
+    largest number that can be stored in a single pointer.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-7' href='#footnote-link-7'>[7] </a><FOOTNOTE>There are other ways
     of finding free storage.  For example, we could link together all the
     unused pairs into a 
     
     <EM>free list</EM>.  Our free locations are
     consecutive (and hence can be accessed by incrementing a pointer)
     because we are using a compacting garbage collector, as we will see in
-    section~\ref{sec:gc}.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>This is essentially the implementation of {\lstinline[mathescape=true]$pair$} in terms of {\lstinline[mathescape=true]$set_head$} and {\lstinline[mathescape=true]$set_tail$}, as described in
-    section~\ref{sec:mutable-list-structure}.  The operation {\lstinline[mathescape=true]$get_new_pair$} used in that implementation is realized here by the {\lstinline[mathescape=true]$free$} pointer.</FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-11' href='#footnote-link-11'>[11] </a><FOOTNOTE>This is essentially the implementation of {\lstinline[mathescape=true]$pair$} in terms of {\lstinline[mathescape=true]$set_head$} and {\lstinline[mathescape=true]$set_tail$}, as described in
-    section~\ref{sec:mutable-list-structure}.  The operation {\lstinline[mathescape=true]$get_new_pair$} used in that implementation is realized here by the {\lstinline[mathescape=true]$free$} pointer.</FOOTNOTE></div>
-</SUBSECTION>
+    section \ref{sec:gc}.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-8' href='#footnote-link-8'>[8] </a><FOOTNOTE>This is essentially the implementation of <kbd>pair</kbd> in terms of <kbd>set_head</kbd> and <kbd>set_tail</kbd>, as described in
+    section \ref{sec:mutable-list-structure}.  The operation <kbd>get_new_pair</kbd> used in that implementation is realized here by the <kbd>free</kbd> pointer.</FOOTNOTE></div>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section3/section3.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter5/section3/subsection2.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+5.3.1  Memory as Vectors</div>	<div class='next-page'></div></div>

@@ -1,12 +1,19 @@
+<div id='permalink-msg'>
+<div class='screen'>
+	<div class='alert alert-success'>
+		<strong>Permalink copied!</strong>
+	</div>
+</div>
+</div>
+
+<div class='chapter-content'>
 <div class='chapter-title'>
 	<div class='permalink'>
-		<a name='top' class='permalink'>4.1.6 
-    Internal Declarations
-  </a>
+		<a name='top' class='permalink'>4.1.6  Internal Declarations</a>
 	</div>
 </div>
 	<div class='chapter-text'>
-		<div class='SECTION'><SUBSECTION>
+		<div class='SUBSECTION'><SUBSECTION>
 
   
   <SPLIT>
@@ -42,7 +49,7 @@
     
     declarations
     used to implement block structure (introduced in
-    section~\ref{sec:black-box}), we will find that
+    section \ref{sec:black-box}), we will find that
     name-by-name extension
     of the environment may not be the best way to
     
@@ -59,8 +66,7 @@
     declarations,
     such as
 
-    
-\begin{JavaScript}
+    <div class='snippet' id='javascript_78_1_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function f(x) {
     function is_even(n) {
         return n === 0
@@ -74,65 +80,64 @@ function f(x) {
     }
     // rest of body of f
 }
-\end{JavaScript}
-
+</pre></div></div>
   </p></div>
 
   <div class='permalink'>
 <a name='p3' class='permalink'></a><p>
     Our intention here is that the name
     
-    {\lstinline[mathescape=true]$is_odd$}
+    <kbd>is_odd</kbd>
     
     in the body of the
     
     function
     
-    {\lstinline[mathescape=true]$is_even$}
+    <kbd>is_even</kbd>
     
     should refer to the
     
     function
     
-    {\lstinline[mathescape=true]$is_odd$}
+    <kbd>is_odd</kbd>
     
     that is 
     
       
-      declared after {\lstinline[mathescape=true]$is_even$}.
+      declared after <kbd>is_even</kbd>.
       
     
     The scope of the name
     
-    {\lstinline[mathescape=true]$is_odd$}
+    <kbd>is_odd</kbd>
     
-    is the entire body of {\lstinline[mathescape=true]$f$},
-    not just the portion of the body of {\lstinline[mathescape=true]$f$}
+    is the entire body of <kbd>f</kbd>,
+    not just the portion of the body of <kbd>f</kbd>
     starting at the point where the
     
       
       declaration of
     
     
-    {\lstinline[mathescape=true]$is_odd$}
+    <kbd>is_odd</kbd>
      occurs.
     Indeed, when we consider that
     
-    {\lstinline[mathescape=true]$is_odd$}
+    <kbd>is_odd</kbd>
     
     is itself defined in terms of
     
       
-      {\lstinline[mathescape=true]$is_even$}—so
+      <kbd>is_even</kbd>—so
       
     
     that
     
-    {\lstinline[mathescape=true]$is_even$}
+    <kbd>is_even</kbd>
     
     and
     
-    {\lstinline[mathescape=true]$is_odd$}
+    <kbd>is_odd</kbd>
     
     are mutually recursive
     
@@ -143,11 +148,11 @@ function f(x) {
     declarations
     is to regard them as if the names
     
-    {\lstinline[mathescape=true]$is_even$}
+    <kbd>is_even</kbd>
     
     and
     
-    {\lstinline[mathescape=true]$is_odd$}
+    <kbd>is_odd</kbd>
     
     were being added to the environment simultaneously.
     More generally, in block structure, the scope of a local name is the
@@ -163,7 +168,7 @@ function f(x) {
   <div class='permalink'>
 <a name='p4' class='permalink'></a><p>
     As it happens, our interpreter will evaluate calls to
-    {\lstinline[mathescape=true]$f$}
+    <kbd>f</kbd>
     correctly, but for an <QUOTE>accidental</QUOTE> reason:
     Since the
     
@@ -179,14 +184,14 @@ function f(x) {
     declared.
     Hence,
     
-    {\lstinline[mathescape=true]$is_odd$}
+    <kbd>is_odd</kbd>
     
     will have been
     
     declared
     by the time
     
-    {\lstinline[mathescape=true]$is_even$}
+    <kbd>is_even</kbd>
     
     is executed.  In fact, our sequential evaluation mechanism will give the
     same result as a mechanism that directly implements simultaneous
@@ -219,7 +224,7 @@ function f(x) {
     simultaneous
     
     declaration,
-    see exercise~\ref{ex:simultaneous-def}.)<a class='superscript' id='footnote-1' href='#footnote-1'>[1]</a>
+    see exercise \ref{ex:simultaneous-def}.)<a class='superscript' id='footnote-link-1' href='#footnote-1'>[1]</a>
   </p></div>
 
   <div class='permalink'>
@@ -240,14 +245,9 @@ function f(x) {
     One way to do this is by a
     syntax transformation on
     
-    function definition expressions.<a class='superscript' id='footnote-2' href='#footnote-2'>[2]</a>
+    function definition expressions.<a class='superscript' id='footnote-link-2' href='#footnote-2'>[2]</a>
   
-    <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>We can view function
-    declaration statements as a combination of
-    constant declaration statements and function definition expressions,
-    as explained in section~\ref{sec:lambda}, and thus the
-    same technique applies to function declaration statements.</FOOTNOTE></div>
+    
     Before evaluating the body of a
     
     function definition expression,
@@ -267,28 +267,30 @@ function f(x) {
     values by assignment.
     In the following, we shall focus on
     variable declarations using
-    {\lstinline[mathescape=true]$let$}; constant declarations
-    using {\lstinline[mathescape=true]$const$} and
-    {\lstinline[mathescape=true]$function$} can be handled
+    <kbd>let</kbd>; constant declarations
+    using <kbd>const</kbd> and
+    <kbd>function</kbd> can be handled
     similarly.
     For example, the
     
     function definition
 
-    
-\begin{JavaScript}
+    <kbd class='snippet'>
+      
+      
 ($\textit{vars}$) => {
     let u = $e_1$;
     let v = $e_2$;
     $\textit{statement}$
 }
-\end{JavaScript}
-
+      
+    </kbd>
 
     would be transformed into
 
-    
-\begin{JavaScript}
+    <kbd class='snippet'>
+      
+      
 ( $\textit{vars}$ ) => {
     return ( (u, v) => {
                u = $e_1$;
@@ -296,11 +298,11 @@ function f(x) {
                $\textit{statement}$
            })("*unassigned*", "*unassigned*");
 }
-\end{JavaScript}
-
+      
+    </kbd>
     where
     
-    {\lstinline[mathescape=true]$"*unassigned*"$}
+    <kbd>"*unassigned*"</kbd>
     is a special symbol
     
     that causes looking up a
@@ -320,7 +322,7 @@ function f(x) {
     
     declarations
     
-    is shown in exercise~\ref{ex:alternative-scanout}.
+    is shown in exercise \ref{ex:alternative-scanout}.
     Unlike the transformation
     shown above, this enforces the restriction that the
     
@@ -348,14 +350,14 @@ function f(x) {
 	Change
 	
 	
-	  {\lstinline[mathescape=true]$lookup_name_value$}
+	  <kbd>lookup_name_value</kbd>
 	
-	(section~\ref{sec:operations-on-environments})
+	(section \ref{sec:operations-on-environments})
 	to signal an error if
 	the value it finds is the
 	
 	  
-	  string {\lstinline[mathescape=true]$"*unassigned*"$}.
+	  string <kbd>"*unassigned*"</kbd>.
 	  
 	
       }
@@ -365,7 +367,7 @@ function f(x) {
 	
 	function
 	
-	{\lstinline[mathescape=true]$scan_out_let$}
+	<kbd>scan_out_let</kbd>
 	
 	that takes a
 	
@@ -377,19 +379,19 @@ function f(x) {
 	Install
 	
 	  
-	  {\lstinline[mathescape=true]$scan_out_let$}
+	  <kbd>scan_out_let</kbd>
 	  
 	
 	in the interpreter, either in 
 	
-	{\lstinline[mathescape=true]$make_function$}
+	<kbd>make_function</kbd>
 	
-	{\lstinline[mathescape=true]$$}
+	<kbd></kbd>
 	or in
 	
-	{\lstinline[mathescape=true]$function_body$}
+	<kbd>function_body</kbd>
 	
-	(see section~\ref{sec:eval-data-structures}).
+	(see section \ref{sec:eval-data-structures}).
 	Which place is better?
 	Why?
       }
@@ -444,8 +446,9 @@ function f(x) {
     declarations
     
     that translates the example in the text to
-    
-\begin{JavaScript}
+    <kbd class='snippet'>
+      
+      
 ( $\textit{vars}$ ) => {
     return ( (u, v) => {
                return ( (a, b) => {
@@ -455,18 +458,18 @@ function f(x) {
 		      })($e_1$, $e_2$);
            })("*unassigned*", "*unassigned*");
 }
-\end{JavaScript}
+      
+    </kbd>
 
-
-    Here {\lstinline[mathescape=true]$a$} and {\lstinline[mathescape=true]$b$}
+    Here <kbd>a</kbd> and <kbd>b</kbd>
     are meant to represent new variable names, created by the interpreter,
     that do not appear in the user's program. Consider the
-    {\lstinline[mathescape=true]$solve$}
+    <kbd>solve</kbd>
     
     function
-    from section~\ref{sec:streams-and-delayed-evaluation}:
+    from section \ref{sec:streams-and-delayed-evaluation}:
 
-    
+    <div class='snippet' id='javascript_78_2_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function solve(f, y0, dt) {
@@ -478,8 +481,9 @@ function solve(f, y0, dt) {
 \end{lrbox}
 
 \href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABAZzgGwG4FMAUwA0iAngAyEAmUAlIgN4BQiTiECyUxiAvIjGFFgDmAJwCGaHIhw0uAPkTkihUhWoBuRs1Zh2CotxRRhWUQFsA+qdEAHPMqobmiY1BDCkRDQF8gA}{\usebox\lstbox}
+</pre>
 
-
+</div></div>
 
     Will this
     function
@@ -497,7 +501,7 @@ function solve(f, y0, dt) {
 
     Ben Bitdiddle, Alyssa P. Hacker, and Eva Lu Ator are arguing about
     the desired result of evaluating the expression
-    
+    <div class='snippet' id='javascript_78_3_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 let a = 1;
@@ -513,18 +517,19 @@ function f(x) {
 f(10);
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 
     Ben asserts that the result should be obtained using the sequential
     rule for
     
-    {\lstinline[mathescape=true]$let$}:
-    {\lstinline[mathescape=true]$b$} is
+    <kbd>let</kbd>:
+    <kbd>b</kbd> is
     
     declared
     to be 11, then
-    {\lstinline[mathescape=true]$a$} is
+    <kbd>a</kbd> is
     
     declared
     to be 5, so the result is 16.  Alyssa objects that mutual
@@ -536,9 +541,9 @@ f(10);
     function
     names
     differently from other names.  Thus, she argues for the mechanism
-    implemented in exercise~\ref{ex:internal-defs}.
+    implemented in exercise \ref{ex:internal-defs}.
     This would lead to
-    {\lstinline[mathescape=true]$a$} being unassigned at the time that the value for {\lstinline[mathescape=true]$b$} is to
+    <kbd>a</kbd> being unassigned at the time that the value for <kbd>b</kbd> is to
     be computed.  Hence, in Alyssa's view the
     
     function
@@ -547,19 +552,18 @@ f(10);
     
     declarations
     of
-    {\lstinline[mathescape=true]$a$} and {\lstinline[mathescape=true]$b$}
+    <kbd>a</kbd> and <kbd>b</kbd>
     are truly meant to be simultaneous, then the value 5 for
-    {\lstinline[mathescape=true]$a$} should be used in evaluating
-    {\lstinline[mathescape=true]$b$}.  Hence, in Eva's
-    view {\lstinline[mathescape=true]$a$} should be 5,
-    {\lstinline[mathescape=true]$b$} should be 15, and the result should
+    <kbd>a</kbd> should be used in evaluating
+    <kbd>b</kbd>.  Hence, in Eva's
+    view <kbd>a</kbd> should be 5,
+    <kbd>b</kbd> should be 15, and the result should
     be 20.  Which (if any) of these viewpoints do you support?  Can you
     devise a way to implement internal
     
     declarations
     so that they behave as
-    Eva prefers?<a class='superscript' id='footnote-3' href='#footnote-3'>[3]</a>
-  
+    Eva prefers?<a class='superscript' id='footnote-link-3' href='#footnote-3'>[3]</a>
     
   
 \end{Exercise}
@@ -581,20 +585,20 @@ f(10);
 	scope of a constant declaration is the surrounding block.
 	An occurrence of the function name in its body can refer
 	to the function, because it lies in the scope of the
-	{\lstinline[mathescape=true]$const$} 
+	<kbd>const</kbd> 
 	that declares the name.
 	Louis Reasoner thinks that there ought to be a way to
 	specify recursive functions without using 
-	{\lstinline[mathescape=true]$const$},
-	{\lstinline[mathescape=true]$let$} or
-	{\lstinline[mathescape=true]$function$}. 
+	<kbd>const</kbd>,
+	<kbd>let</kbd> or
+	<kbd>function</kbd>. 
 	Amazingly, Louis's intuition 
 	is correct.
 	It is indeed possible to specify recursive
 	functions without using
-	{\lstinline[mathescape=true]$const$} or
-	{\lstinline[mathescape=true]$let$},
-	{\lstinline[mathescape=true]$function$},
+	<kbd>const</kbd> or
+	<kbd>let</kbd>,
+	<kbd>function</kbd>,
 	although the method for accomplishing this is much more subtle
 	than Louis imagined.
       
@@ -603,7 +607,8 @@ f(10);
     applying a recursive
     
     factorial
-    function:<a class='superscript' id='footnote-4' href='#footnote-4'>[4]</a>
+    function:<a class='superscript' id='footnote-link-4' href='#footnote-4'>[4]</a>
+    <div class='snippet' id='javascript_78_4_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 (n => (fact => fact(fact, n))
@@ -619,8 +624,9 @@ f(10);
 (10);
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
     
 \begin{enumerate}[a.]
 \item{
@@ -633,7 +639,7 @@ f(10);
 	
 	function,
 	which includes mutually recursive internal definitions:
-	
+	<div class='snippet' id='javascript_78_5_div'><div class='pre-prettyprint'><pre class='prettyprint' title='Evaluate Javascript expression'
 \begin{lrbox}{\lstbox}
 \begin{JavaScriptClickable}
 function f(x) {
@@ -655,23 +661,23 @@ function f(x) {
 }
 
 \end{JavaScriptClickable}
+</pre>
 
-
+</div></div>
 	Fill in the missing expressions to complete an alternative definition
-	of {\lstinline[mathescape=true]$f$}, which uses
+	of <kbd>f</kbd>, which uses
 	
 	  
 	  
 	    neither 
-	    {\lstinline[mathescape=true]$const$} nor
-	    {\lstinline[mathescape=true]$let$} nor
+	    <kbd>const</kbd> nor
+	    <kbd>let</kbd> nor
 	    internal
 	    function declarations:
 	  
 	
 
-	
-\begin{JavaScript}
+	<div class='snippet' id='javascript_78_6_div'><div class='pre-prettyprint'><pre class='prettyprint no-eval'>
 function f(x) {
     return (
         (is_even, is_odd) => 
@@ -683,94 +689,7 @@ function f(x) {
            n === 0 ? false : ev(??, ??, ??) 
       );
 }
-\end{JavaScript}
-
-      }
-\end{enumerate}
-
-  
-    
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-(n => (fact => fact(fact, n))
-      ( (ft, k) => k === 1
-                   ? 1
-                   : k * ft(ft, k - 1) 
-      )
-)
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=BQOwBAvAfGwGYEMDGAXSNGvslAaMIAlIQFBjkXCxx5gDWh69kEEYAjGRdz7wPwcuvYdwBczAFRga8WnTABaDoyEVSpYOwAMhANxA}{\usebox\lstbox}!*/
-(10);
-
-\end{JavaScriptClickable}
-
-
-    
-\begin{enumerate}[a.]
-\item{
-	Check (by evaluating the expression) that this really does compute
-	factorials.  Devise an analogous expression for computing Fibonacci
-	numbers.
-      }
-\item{
-	Consider the following
-	
-	function,
-	which includes mutually recursive internal definitions:
-	
-\begin{lrbox}{\lstbox}
-\begin{JavaScriptClickable}
-function f(x) {
-    function is_even(n) {
-        return n === 0
-               ? true
-               : is_odd(n - 1);
-    }
-\end{JavaScriptClickable}
-\end{lrbox}
-\begin{JavaScriptClickable}
-/*!\href{https://sourceacademy.nus.edu.sg/playground#chap=4&prgrm=GYVwdgxgLglg9mABMAFADwJSIN4ChEHLjTxIwDOA+gKYBu1YKYWehbiATtVCB0kgF4hiAAz52EwgH5EUDiGrjJEgFyIKlOABMtTRAFpEARgwBuJYgC+F0JFgJ1VbbuY4LbLjz6JBwscskZYABDABtyRQDVRxp6RiRDE3M2aw9uXjIqOgZ0M1xLIA}{\usebox\lstbox}!*/
-    function is_odd(n) {
-        return n === 0
-               ? false
-               : is_even(n - 1);
-    }
-    return is_even(x);
-}
-
-\end{JavaScriptClickable}
-
-
-	Fill in the missing expressions to complete an alternative definition
-	of {\lstinline[mathescape=true]$f$}, which uses
-	
-	  
-	  
-	    neither 
-	    {\lstinline[mathescape=true]$const$} nor
-	    {\lstinline[mathescape=true]$let$} nor
-	    internal
-	    function declarations:
-	  
-	
-
-	
-\begin{JavaScript}
-function f(x) {
-    return (
-        (is_even, is_odd) => 
-           is_even(is_even, is_odd, x)
-      )
-      ( (ev, od, n) =>
-           n === 0 ? true : od(??, ??, ??),
-        (ev, od, n) =>
-           n === 0 ? false : ev(??, ??, ??) 
-      );
-}
-\end{JavaScript}
-
+</pre></div></div>
       }
 \end{enumerate}
 
@@ -779,10 +698,10 @@ function f(x) {
 
   
 <hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>Wanting
+<a class='footnote-number' id='footnote-1' href='#footnote-link-1'>[1] </a><FOOTNOTE>Wanting
     programs to not depend on this evaluation mechanism is the reason for the
     <QUOTE>management is not responsible</QUOTE> remark in
-    footnote~\ref{foot:management} of chapter~1.
+    footnote \ref{foot:management} of chapter 1.
     
       
       
@@ -791,7 +710,7 @@ function f(x) {
 	body, and thus the discussion might seem moot.
 	However, this mechanism is only applied to function declarations
 	and not to
-	{\lstinline[mathescape=true]$const$}
+	<kbd>const</kbd>
 	declarations.
   
   
@@ -799,8 +718,13 @@ function f(x) {
   
       
     
-    </FOOTNOTE></div><hr><div class='footnote'>
-<a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>The
+    </FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-2' href='#footnote-link-2'>[2] </a><FOOTNOTE>We can view function
+    declaration statements as a combination of
+    constant declaration statements and function definition expressions,
+    as explained in section \ref{sec:lambda}, and thus the
+    same technique applies to function declaration statements.</FOOTNOTE></div><div class='footnote'>
+<a class='footnote-number' id='footnote-3' href='#footnote-link-3'>[3] </a><FOOTNOTE>The
     
     designers of JavaScript
     
@@ -810,7 +734,7 @@ function f(x) {
     implement a general, efficient mechanism that does what Eva requires.
     In the absence of such a mechanism, it is better to generate an error
     in the difficult cases of simultaneous definitions (Alyssa's notion)
-    than to produce an incorrect answer (as Ben would have it).</FOOTNOTE></div><hr><div class='footnote'>
+    than to produce an incorrect answer (as Ben would have it).</FOOTNOTE></div><div class='footnote'>
 <a class='footnote-number' id='footnote-4' href='#footnote-link-4'>[4] </a><FOOTNOTE>This example illustrates a programming
     trick for formulating recursive
     
@@ -818,9 +742,9 @@ function f(x) {
     without using
     
     
-	{\lstinline[mathescape=true]$const$},
-	{\lstinline[mathescape=true]$let$} or
-	{\lstinline[mathescape=true]$function$}.
+	<kbd>const</kbd>,
+	<kbd>let</kbd> or
+	<kbd>function</kbd>.
     
     The
     
@@ -829,8 +753,15 @@ function f(x) {
     be used to give a <QUOTE>pure
     $\lambda$-calculus</QUOTE> implementation of
     
-    recursion.  (See Stoy 1977 for details on the
+    recursion.  (See <CITATION>Stoy 1977</CITATION> for details on the
     lambda calculus, and
-    Gabriel 1988 for an exposition of the
+    <CITATION>Gabriel 1988</CITATION> for an exposition of the
     $Y$ operator in Scheme.)</FOOTNOTE></div>
-</SUBSECTION>
+</SUBSECTION><div class='nav'>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section1/subsection5.html'>&lt; Previous</a>
+</button><div style='flex-grow: 1;'></div>
+<button type='button' class='btn btn-secondary' style='background-color: #fff;'>
+<a class='scroll-next' href='/Users/xinyue/Documents/nus/y1s2/CP3108/sicp.js_test/html/chapter4/section1/subsection7.html'>Next &gt;</a>
+</button></div><div class='chapter_sign'>
+4.1.6  Internal Declarations</div>	<div class='next-page'></div></div>

@@ -5,7 +5,7 @@ import {
   missingExampleWarning,
   repeatedNameWarning
 } from "./warnings.js";
-import { recursiveProcessText, processText } from '../parseXML';
+import { chapterIndex, recursiveProcessText, processText } from '../parseXML';
 import recursiveProcessPureText from "./recursiveProcessPureText";
 
 const snippetStore = {};
@@ -71,10 +71,12 @@ export const processSnippet = (node, writeTo) => {
     }
 
     if (node.getAttribute("EVAL") === "no") {
-      writeTo.push("\n\\begin{JavaScript}\n");
+      writeTo.push("<pre class='prettyprint no-eval'>\n");
       writeTo.push(codeStr);
-      writeTo.push("\n\\end{JavaScript}\n");
+      writeTo.push("\n</pre>");
     } else {
+
+      writeTo.push("<pre class='prettyprint' title='Evaluate Javascript expression'");
 
     	let reqStr = '';
     	const snippetName = node.getElementsByTagName("NAME")[0];
@@ -123,7 +125,7 @@ export const processSnippet = (node, writeTo) => {
       const compressed = lzString.compressToEncodedURIComponent(
         reqStr + codeStr + exampleStr
       );
-      const chap = "4";
+      const chap = chapterIndex.substring(0,1);
       const ext = "";
       const url =
         sourceAcademyURL +
@@ -151,6 +153,8 @@ export const processSnippet = (node, writeTo) => {
       } else {
         writeTo.push("\n\n\\href{" + url + "}{\\usebox\\lstbox}")
       }
+
+      writeTo.push("\n</pre>");
       writeTo.push("\n\n");
     }
   }

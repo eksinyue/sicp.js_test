@@ -5,8 +5,9 @@ import path from "path";
 import xpath from "xpath";
 import { DOMParser as dom } from "xmldom";
 
-import { switchParseFunctions, parseXML } from './parseXML';
-//import { setupSnippets } from './processingFunctions/processSnippet';
+import { parseXML } from './parseXML';
+import { generateTOC } from './generateTOC';
+import { setupSnippets } from './processingFunctions/processSnippet';
 import { preamble, ending } from './htmlContent';
 
 const inputDir = path.join(__dirname, "../xml");
@@ -15,6 +16,10 @@ const outputDir = path.join(__dirname, "../html");
 const readdir = util.promisify(fs.readdir);
 const open = util.promisify(fs.open);
 const readFile = util.promisify(fs.readFile);
+
+export let allFilepath = [];
+export let tableOfContent = {};
+export const outputDirectory = outputDir;
 
 /*
 const latexmkrcContent = `$pdflatex = "xelatex %O %S";
@@ -33,7 +38,7 @@ const ensureDirectoryExists = (path, cb) => {
   });
 };
 
-async function xmlToHtml(filepath, filename, isSetupSnippet) {
+async function xmlToHtml(filepath, filename, option) {
   const fullFilepath = path.join(inputDir, filepath, filename);
   const fileToRead = await open(fullFilepath, "r")
   // if (err) {
@@ -46,54 +51,74 @@ async function xmlToHtml(filepath, filename, isSetupSnippet) {
   //   return;
   // }
   const doc = new dom().parseFromString(data);
+  const addToTOC = [];
   const writeTo = [];
-  /*
-  if (isSetupSnippet) {
+  const relativeFilePath = path.join(filepath, filename.replace(/\.xml$/, "") + ".html");
+
+  if (option == "generateTOC") {
+
+    generateTOC(doc, addToTOC, relativeFilePath);
+    tableOfContent[relativeFilePath] = addToTOC;
+    //console.log(tableOfContent);
+    return;
+
+  } else if (option == "setupSnippet") {
+
     setupSnippets(doc.documentElement);
     return;
-  }
-  */
-  console.log("parsing: " + path.join(filepath, filename));
-  // parsing over here
-  parseXML(doc, writeTo, path.join(filepath, filename));
 
-  ensureDirectoryExists(path.join(outputDir, filepath), err => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    const outputFile = path.join(
-      outputDir,
-      filepath,
-      filename.replace(/\.xml$/, "") + ".html"
-    );
-    const stream = fs.createWriteStream(outputFile);
-    stream.once("open", fd => {
-      stream.write(writeTo.join(""));
-      stream.end();
+  } else if (option == "parseXML"){
+    
+    console.log("parsing: " + relativeFilePath);
+    allFilepath = allFilepath.sort();
+    //console.log(allFilepath.sort());
+    //console.log(allFilepath.sort().slice(50));
+    
+    // parsing over here
+    parseXML(doc, writeTo, relativeFilePath);
+
+    ensureDirectoryExists(path.join(outputDir, filepath), err => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      const outputFile = path.join(
+        outputDir,
+        filepath,
+        filename.replace(/\.xml$/, "") + ".html"
+      );
+      const stream = fs.createWriteStream(outputFile);
+      stream.once("open", fd => {
+        stream.write(writeTo.join(""));
+        stream.end();
+      });
     });
-  });
+  }
 };
 
-async function recursiveXmlToHtml(filepath, isSetupSnippet) {
+async function recursiveXmlToHtml(filepath, option) {
   let files;
   const fullPath = path.join(inputDir, filepath);
   files = await readdir(fullPath);
   const promises = [];
   files.forEach(file => {
     if (file.match(/\.xml$/)) {
-      //console.log(file + " being processed");
+      //console.log(path.join(filepath, file) +  " being processed");
+      if (option == "generateTOC") {
+        allFilepath.push(path.join(outputDir, filepath, file.replace(/\.xml$/, "") + ".html"));
+      };
       promises.push(
-        xmlToHtml(filepath, file, isSetupSnippet)
+        xmlToHtml(filepath, file, option)
       );
     } else if (fs.lstatSync(path.join(fullPath, file)).isDirectory()) {
       promises.push(
-        recursiveXmlToHtml(path.join(filepath, file), isSetupSnippet)
+        recursiveXmlToHtml(path.join(filepath, file), option)
       );
     }
   });
   await Promise.all(promises);
 };
+
 
 const createMainHtml = () => {
   const chaptersFound = [];
@@ -130,16 +155,19 @@ const createMainHtml = () => {
 };
 
 async function main() {
+  /*
   const type = process.argv[2];
   if (type) {
     switchParseFunctions(type);
   }
+  */
   createMainHtml();
-  console.log("setup snippets");
-  
-  await recursiveXmlToHtml("", true);
+  console.log("generate table of content\n")
+  await recursiveXmlToHtml("", "generateTOC");
+  console.log("setup snippets\n");
+  await recursiveXmlToHtml("", "setupSnippet");
   console.log("setup snippets done\n");
-  recursiveXmlToHtml("", false);
+  recursiveXmlToHtml("", "parseXML");
   
 };
 
