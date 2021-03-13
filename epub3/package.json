@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "lz-string": "^1.4.4",
-    "xmldom": "^0.1.27",
+    "xmldom": "^0.5.0",
     "xpath": "0.0.27"
   },
   "devDependencies": {
